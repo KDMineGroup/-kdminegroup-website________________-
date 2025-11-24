@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <title>سرویس های کاویان | محیط تخصصی گزارش، تحلیل بازار، قیمت و مقالات</title>
+  <title>مهندسی و تجهیزات معدنی | کاتالوگ جامع، مشخصات فنی و برآورد هزینه</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="index,follow">
-  <meta name="description" content="محیط تخصصی شامل گزارش‌های مهندسی، تحلیل بازار، قیمت‌ها و مقالات علمی برای کاربران ویژه." />
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet" />
+  <meta name="description" content="کاتالوگ جامع تجهیزات معدنی، مشخصات فنی، برآورد هزینه و راهنمای انتخاب تجهیزات برای پروژه‌های معدنی." />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800&family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet" />
   
   <style>
       :root {
-          --gjs-t-color-primary: #2B6CB0;
-          --gjs-t-color-secondary: #2563eb;
-          --gjs-t-color-success: #16a34a;
+          --primary-color: #2B6CB0;
+          --secondary-color: #2563eb;
+          --success-color: #16a34a;
+          --warning-color: #ea580c;
+          --accent-color: #8B5E3C;
       }
 
       * {
@@ -33,1477 +35,1519 @@
       }
 
       /* Header */
-      .header-navbar {
+      .main-header {
           width: 100%;
-          background-color: rgba(255, 255, 255, 0.8);
-          backdrop-filter: blur(4px);
+          background-color: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(10px);
           border-bottom: 1px solid #e5e7eb;
           position: sticky;
           top: 0;
-          z-index: 50;
+          z-index: 100;
+          box-shadow: 0 1px 3px rgba(0,0,0,0.05);
       }
 
-      .navbar-container {
+      .header-container {
           max-width: 80rem;
           margin: 0 auto;
           padding: 1rem 1.5rem;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          gap: 1.5rem;
       }
 
-      .brand-icon {
-          width: 2rem;
-          height: 2rem;
-      }
-
-      .brand-name {
-          font-size: 1.25rem;
-          font-weight: 700;
-          color: #111827;
-      }
-
-      .navbar-menu {
+      .logo-section {
           display: flex;
           align-items: center;
           gap: 1rem;
       }
 
-      .nav-item-active {
-          padding: 0.5rem 0.75rem;
-          border-radius: 0.375rem;
-          font-weight: 500;
-          color: white;
-          background-color: var(--gjs-t-color-secondary);
-          text-decoration: none;
-          transition: all 0.3s;
+      .logo-img {
+          width: 3rem;
+          height: 3rem;
+          border-radius: 0.75rem;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       }
 
-      .nav-item-active:hover {
-          outline: 2px solid #93c5fd;
+      .logo-text-group {
+          display: flex;
+          flex-direction: column;
       }
 
-      .login-text {
+      .logo-title {
+          font-size: 1.375rem;
+          font-weight: 800;
+          color: #111827;
+          line-height: 1.2;
+      }
+
+      .logo-subtitle {
           font-size: 0.875rem;
-          color: var(--gjs-t-color-secondary);
-          font-weight: 700;
+          color: #6b7280;
+          font-weight: 500;
       }
 
-      /* Hero Section */
-      .hero-section {
-          position: relative;
-          overflow: hidden;
-          width: 100%;
-          background: linear-gradient(to bottom right, #f1efea, transparent);
-          border-bottom: 1px solid #e5e7eb;
-          background-color: #fbfaf8;
-      }
-
-      .hero-container {
-          max-width: 80rem;
-          margin: 0 auto;
-          padding: 3rem 1.5rem;
+      .navigation {
           display: flex;
           align-items: center;
-          justify-content: space-between;
           gap: 2rem;
       }
 
-      .hero-content {
-          max-width: 48rem;
-          flex: 1;
-      }
-
-      .hero-title {
-          font-size: 2.5rem;
-          font-weight: 800;
-          color: rgba(164, 176, 180, 1);
-          margin-bottom: 1rem;
-      }
-
-      .hero-subtitle {
-          font-size: 1.125rem;
+      .nav-item {
           color: #374151;
-          margin-bottom: 1.5rem;
-          max-width: 42rem;
-      }
-
-      .hero-actions {
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-          margin-top: 1.5rem;
-      }
-
-      .hero-cta {
-          padding: 0.625rem 1.25rem;
-          font-size: 0.875rem;
-          font-weight: 500;
-          background-color: var(--gjs-t-color-secondary);
-          color: white;
-          border-radius: 0.75rem;
           text-decoration: none;
+          font-weight: 600;
+          font-size: 1rem;
+          transition: all 0.3s;
+          position: relative;
+      }
+
+      .nav-item:hover {
+          color: var(--secondary-color);
+      }
+
+      .nav-item::after {
+          content: '';
+          position: absolute;
+          bottom: -0.5rem;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background-color: var(--secondary-color);
+          transition: width 0.3s;
+      }
+
+      .nav-item:hover::after {
+          width: 100%;
+      }
+
+      .nav-item-current {
+          color: var(--secondary-color);
+          font-weight: 700;
+      }
+
+      .nav-item-current::after {
+          width: 100%;
+      }
+
+      /* Hero Section */
+      .hero-area {
+          width: 100%;
+          background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+          border-bottom: 1px solid #e5e7eb;
+          padding: 4rem 0;
+          position: relative;
+          overflow: hidden;
+      }
+
+      .hero-area::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 40%;
+          height: 100%;
+          background: linear-gradient(to left, rgba(37, 99, 235, 0.05), transparent);
+          pointer-events: none;
+      }
+
+      .hero-wrapper {
+          max-width: 80rem;
+          margin: 0 auto;
+          padding: 0 1.5rem;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 4rem;
+          align-items: center;
+          position: relative;
+          z-index: 1;
+      }
+
+      .hero-content {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+      }
+
+      .hero-badge {
           display: inline-flex;
           align-items: center;
           gap: 0.5rem;
-          transition: all 0.3s;
-      }
-
-      .hero-cta:hover {
-          background-color: #245fa4;
-          outline: 2px solid #93c5fd;
-      }
-
-      .hero-secondary {
-          padding: 0.625rem 1.25rem;
+          padding: 0.5rem 1rem;
+          background-color: rgba(37, 99, 235, 0.1);
+          border-radius: 9999px;
+          width: fit-content;
           font-size: 0.875rem;
-          font-weight: 500;
-          border-radius: 0.5rem;
-          border: 1px solid #d1d5db;
-          color: #1e293b;
-          text-decoration: none;
-          transition: all 0.3s;
+          font-weight: 600;
+          color: var(--secondary-color);
       }
 
-      .hero-secondary:hover {
-          background-color: #f8fafc;
-          outline: 2px solid #cbd5e1;
+      .hero-main-title {
+          font-size: 3rem;
+          font-weight: 900;
+          color: #111827;
+          line-height: 1.1;
       }
 
-      .hero-visual {
-          width: 460px;
+      .hero-subtitle {
+          font-size: 1.25rem;
+          color: #4b5563;
+          line-height: 1.7;
       }
 
-      .hero-image-wrapper {
-          border: 1px solid #e5e7eb;
-          background-color: white;
-          overflow: hidden;
-          border-radius: 0.75rem;
-      }
-
-      .hero-image {
-          width: 100%;
-          height: 360px;
-          object-fit: cover;
-          border-radius: 0.75rem;
-      }
-
-      .hero-stats {
+      .hero-button-group {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
           margin-top: 1rem;
+      }
+
+      .btn-hero-primary {
+          padding: 1rem 2rem;
+          background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+          color: white;
+          border-radius: 0.75rem;
+          text-decoration: none;
+          font-weight: 700;
+          font-size: 1.125rem;
+          transition: all 0.3s;
+          box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+      }
+
+      .btn-hero-primary:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+      }
+
+      .btn-hero-secondary {
+          padding: 1rem 2rem;
+          border: 2px solid #d1d5db;
+          color: #374151;
+          border-radius: 0.75rem;
+          text-decoration: none;
+          font-weight: 700;
+          font-size: 1.125rem;
+          transition: all 0.3s;
+          background: white;
+      }
+
+      .btn-hero-secondary:hover {
+          border-color: var(--secondary-color);
+          color: var(--secondary-color);
+          background-color: rgba(37, 99, 235, 0.05);
+      }
+
+      .hero-image-section {
+          position: relative;
+      }
+
+      .hero-main-image {
+          width: 100%;
+          height: 400px;
+          object-fit: cover;
+          border-radius: 1.5rem;
+          box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+          border: 1px solid #e5e7eb;
+      }
+
+      .hero-stats-overlay {
+          position: absolute;
+          bottom: 1.5rem;
+          left: 1.5rem;
+          right: 1.5rem;
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(10px);
+          border-radius: 1rem;
+          padding: 1.25rem;
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 0.75rem;
+          gap: 1rem;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.1);
       }
 
-      .stat-card {
-          border: 1px solid #e5e7eb;
-          background-color: white;
-          padding: 1rem;
-          border-radius: 0.75rem;
+      .stat-box {
+          text-align: center;
+      }
+
+      .stat-number {
+          font-size: 1.5rem;
+          font-weight: 800;
+          color: var(--secondary-color);
       }
 
       .stat-label {
-          font-size: 0.875rem;
-          color: #4b5563;
-      }
-
-      .stat-value {
-          font-size: 1.125rem;
-          font-weight: 600;
+          font-size: 0.75rem;
+          color: #6b7280;
           margin-top: 0.25rem;
-          color: #111827;
       }
 
-      /* Reports Section */
-      .reports-section {
+      /* Equipment Categories */
+      .categories-section {
           width: 100%;
-          padding: 3rem 0;
+          padding: 4rem 0;
+          background-color: white;
       }
 
-      .section-container {
-          max-width: 72rem;
+      .container {
+          max-width: 80rem;
           margin: 0 auto;
           padding: 0 1.5rem;
       }
 
-      .section-header {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 1.5rem;
-          margin-bottom: 1.5rem;
-      }
-
-      .section-title-group {
-          flex: 1;
-      }
-
-      .gjs-t-h2 {
-          font-size: 2rem;
-          font-weight: 700;
-          color: #111827;
+      .section-head {
           text-align: center;
+          margin-bottom: 3rem;
       }
 
-      .section-subtitle {
-          margin-top: 0.5rem;
-          color: #334155;
-      }
-
-      .section-actions {
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-      }
-
-      .filter-button {
-          padding: 0.5rem 0.75rem;
-          border-radius: 0.5rem;
-          border: 1px solid #d1d5db;
-          color: #374151;
-          background: white;
-          cursor: pointer;
-          transition: all 0.3s;
-      }
-
-      .filter-button:hover {
-          background-color: #f8fafc;
-          border-color: var(--gjs-t-color-secondary);
-          color: var(--gjs-t-color-secondary);
-      }
-
-      .reports-grid {
-          margin-top: 2rem;
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 1.5rem;
-      }
-
-      .report-card {
-          border: 1px solid #e5e7eb;
-          background-color: white;
-          overflow: hidden;
-          border-radius: 0.75rem;
-          display: flex;
-          flex-direction: column;
-          transition: all 0.3s;
-      }
-
-      .report-card:hover {
-          box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      }
-
-      .report-image {
-          width: 100%;
-          height: 180px;
-          object-fit: cover;
-      }
-
-      .report-content {
-          padding: 1rem;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          gap: 0.75rem;
-      }
-
-      .report-title {
-          font-size: 1.125rem;
-          font-weight: 600;
-          color: #0f172a;
-      }
-
-      .report-summary {
-          color: #334155;
-          font-size: 0.875rem;
-      }
-
-      .report-tags {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-      }
-
-      .tag {
-          padding: 0.25rem 0.5rem;
-          font-size: 0.75rem;
-          border-radius: 9999px;
-          background-color: #faf5ff;
-          color: #7e22ce;
-          border: 1px solid #e9d5ff;
-      }
-
-      .report-actions {
-          margin-top: auto;
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-      }
-
-      .report-view {
-          padding: 0.5rem 1rem;
-          font-size: 0.875rem;
-          background-color: var(--gjs-t-color-secondary);
-          color: white;
-          border-radius: 0.5rem;
-          text-decoration: none;
-          transition: all 0.3s;
-      }
-
-      .report-view:hover {
-          background-color: #245fa4;
-          outline: 2px solid #93c5fd;
-      }
-
-      .report-download {
-          padding: 0.5rem 1rem;
-          font-size: 0.875rem;
-          border-radius: 0.5rem;
-          border: 1px solid #d1d5db;
-          color: #1e293b;
-          background: white;
-          cursor: pointer;
-          transition: all 0.3s;
-      }
-
-      .report-download:hover {
-          background-color: #f8fafc;
-          outline: 2px solid #cbd5e1;
-      }
-
-      /* Market Analysis Section */
-      .market-analysis-section {
-          width: 100%;
-          padding: 3rem 0;
-          background-color: white;
-          border-top: 1px solid #e5e7eb;
-      }
-
-      .charts-grid {
-          margin-top: 2rem;
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 1.5rem;
-      }
-
-      .chart-card {
-          border: 1px solid #e5e7eb;
-          background-color: #fbfaf8;
-          overflow: hidden;
-          border-radius: 1rem;
-          padding: 1rem;
-      }
-
-      .chart-header {
-          padding: 1rem;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
+      .section-title-main {
+          font-size: 2.5rem;
+          font-weight: 900;
+          color: #111827;
           margin-bottom: 0.75rem;
       }
 
-      .chart-title-group {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-      }
-
-      .chart-icon {
-          width: 1.25rem;
-          height: 1.25rem;
-      }
-
-      .chart-title {
-          font-weight: 500;
-          color: #111827;
-      }
-
-      .chart-meta {
-          font-size: 0.75rem;
-          color: #64748b;
-      }
-
-      .chart-image {
-          width: 100%;
-          height: 220px;
-          object-fit: cover;
-          border-radius: 0.75rem;
-      }
-
-      /* Prices Section */
-      .prices-section {
-          width: 100%;
-          padding: 3rem 0;
-      }
-
-      .prices-panel {
-          margin-top: 2rem;
-          border: 1px solid #e5e7eb;
-          background-color: white;
-          border-radius: 0.75rem;
-          overflow: hidden;
-      }
-
-      .prices-header {
-          padding: 0.75rem 1rem;
-          background-color: #f8fafc;
-          border-bottom: 1px solid #e5e7eb;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-      }
-
-      .prices-title-group {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-      }
-
-      .prices-icon {
-          width: 1.25rem;
-          height: 1.25rem;
-      }
-
-      .prices-title {
-          font-weight: 500;
-          color: #0f172a;
-      }
-
-      .prices-update {
-          font-size: 0.75rem;
-          color: #64748b;
-      }
-
-      .table-wrapper {
-          overflow-x: auto;
-      }
-
-      .prices-table {
-          min-width: 100%;
-          text-align: right;
-      }
-
-      .table-head {
-          background-color: white;
-      }
-
-      .table-head-cell {
-          padding: 0.75rem 1rem;
-          font-size: 0.875rem;
-          font-weight: 500;
-          color: #0f172a;
-          border-bottom: 1px solid #e5e7eb;
-      }
-
-      .table-body tr {
-          border-bottom: 1px solid #f3f4f6;
-      }
-
-      .table-row:hover {
-          background-color: #f8fafc;
-      }
-
-      .table-cell {
-          padding: 0.75rem 1rem;
-      }
-
-      .status-chip {
-          padding: 0.25rem 0.5rem;
-          font-size: 0.75rem;
-          border-radius: 0.375rem;
-          background-color: #f0fdf4;
-          color: #15803d;
-      }
-
-      .prices-footer {
-          padding: 0.75rem 1rem;
-          background-color: #f8fafc;
-          border-top: 1px solid #e5e7eb;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-      }
-
-      .disclaimer {
-          font-size: 0.75rem;
-          color: #64748b;
-      }
-
-      .prices-cta {
-          padding: 0.5rem 1rem;
-          font-size: 0.875rem;
-          background-color: var(--gjs-t-color-secondary);
-          color: white;
-          border-radius: 0.5rem;
-          text-decoration: none;
-          transition: all 0.3s;
-      }
-
-      .prices-cta:hover {
-          background-color: #245fa4;
-          outline: 2px solid #93c5fd;
-      }
-
-      /* Articles Section */
-      .articles-section {
-          width: 100%;
-          padding: 3rem 0;
-          background-color: white;
-          border-top: 1px solid #e5e7eb;
-      }
-
-      .section-link {
-          padding: 0.5rem 1rem;
-          border-radius: 0.5rem;
-          border: 1px solid #d1d5db;
-          color: #1e293b;
-          text-decoration: none;
-          transition: all 0.3s;
-      }
-
-      .section-link:hover {
-          background-color: #f8fafc;
-          outline: 2px solid #cbd5e1;
-      }
-
-      .articles-grid {
-          margin-top: 2rem;
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 1.5rem;
-      }
-
-      .article-card {
-          border: 1px solid #e5e7eb;
-          background-color: white;
-          overflow: hidden;
-          border-radius: 0.75rem;
-      }
-
-      .article-image {
-          width: 100%;
-          height: 160px;
-          object-fit: cover;
-      }
-
-      .article-content {
-          padding: 1rem;
-          display: flex;
-          flex-direction: column;
-          gap: 0.75rem;
-          flex: 1;
-      }
-
-      .article-title {
+      .section-desc {
           font-size: 1.125rem;
-          font-weight: 600;
-          color: #0f172a;
-      }
-
-      .article-summary {
-          color: #334155;
-          font-size: 0.875rem;
-      }
-
-      .article-meta {
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-          font-size: 0.75rem;
           color: #6b7280;
-          margin-top: 0.5rem;
-      }
-
-      .author {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-      }
-
-      .author-avatar {
-          width: 1.5rem;
-          height: 1.5rem;
-          border-radius: 9999px;
-          object-fit: cover;
-      }
-
-      .author-name {
-          font-size: 0.75rem;
-          color: #334155;
-      }
-
-      .reading-time {
-          font-size: 0.75rem;
-          color: #64748b;
-      }
-
-      /* Membership Section */
-      .membership-section {
-          width: 100%;
-          padding: 3rem 0;
-      }
-
-      .membership-wrapper {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 2rem;
-      }
-
-      .membership-info-card {
-          border: 1px solid #e5e7eb;
-          background-color: white;
-          padding: 1.5rem;
-          border-radius: 0.75rem;
-      }
-
-      .info-header {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-      }
-
-      .info-icon {
-          width: 1.25rem;
-          height: 1.25rem;
-      }
-
-      .info-title {
-          font-size: 1.125rem;
-          font-weight: 600;
-          color: #0f172a;
-      }
-
-      .info-description {
-          margin-top: 0.5rem;
-          color: #334155;
-      }
-
-      .benefits-list {
-          margin-top: 1rem;
-          display: flex;
-          flex-direction: column;
-          gap: 0.75rem;
-      }
-
-      .benefit-item {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-      }
-
-      .benefit-icon {
-          width: 1.25rem;
-          height: 1.25rem;
-      }
-
-      .benefit-text {
-          color: #1e293b;
-      }
-
-      .support-line {
-          margin-top: 1.5rem;
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          font-size: 0.875rem;
-          color: #475569;
-      }
-
-      .support-icon {
-          width: 1.25rem;
-          height: 1.25rem;
-      }
-
-      .membership-form-card {
-          border: 1px solid #e5e7eb;
-          background-color: white;
-          padding: 1.5rem;
-          border-radius: 0.75rem;
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
-      }
-
-      .form-header {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-      }
-
-      .form-icon {
-          width: 1.25rem;
-          height: 1.25rem;
-      }
-
-      .form-title {
-          font-size: 1.125rem;
-          font-weight: 600;
-          color: #0f172a;
-      }
-
-      .form-field {
-          display: flex;
-          flex-direction: column;
-          gap: 0.5rem;
-      }
-
-      .field-label {
-          font-size: 0.875rem;
-          color: #334155;
-      }
-
-      .field-input {
-          padding: 0.5rem 0.75rem;
-          border-radius: 0.5rem;
-          border: 1px solid #d1d5db;
-      }
-
-      .field-input:focus {
-          border-color: #2b6cb0;
-          outline: none;
-          box-shadow: 0 0 0 2px rgba(37,99,235,0.2);
-      }
-
-      .form-extras {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-      }
-
-      .remember-label {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          cursor: pointer;
-      }
-
-      .remember-checkbox {
-          width: 1rem;
-          height: 1rem;
-          border-radius: 0.25rem;
-      }
-
-      .remember-text {
-          font-size: 0.875rem;
-          color: #334155;
-      }
-
-      .forgot-link {
-          font-size: 0.875rem;
-          color: var(--gjs-t-color-secondary);
-          text-decoration: none;
-      }
-
-      .forgot-link:hover {
-          text-decoration: underline;
-      }
-
-      .submit-button {
-          padding: 0.625rem 1.25rem;
-          font-size: 0.875rem;
-          font-weight: 500;
-          background-color: var(--gjs-t-color-secondary);
-          color: white;
-          border-radius: 0.5rem;
-          border: none;
-          cursor: pointer;
-          transition: all 0.3s;
-      }
-
-      .submit-button:hover {
-          background-color: #245fa4;
-          outline: 2px solid var(--gjs-t-color-secondary);
-      }
-
-      .secondary-button {
-          padding: 0.625rem 1.25rem;
-          font-size: 0.875rem;
-          font-weight: 500;
-          border-radius: 0.5rem;
-          border: 1px solid #d1d5db;
-          color: #1e293b;
-          background: white;
-          cursor: pointer;
-          transition: all 0.3s;
-      }
-
-      .secondary-button:hover {
-          background-color: #f8fafc;
-          outline: 2px solid #cbd5e1;
-      }
-
-      .form-actions {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 0.75rem;
-          padding-top: 0.5rem;
-      }
-
-      .privacy-note {
-          font-size: 0.875rem;
-          color: #4b5563;
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-      }
-
-      /* Footer */
-      .footer {
-          width: 100%;
-          background-color: white;
-          border-top: 1px solid #e5e7eb;
-      }
-
-      .footer-container {
-          max-width: 80rem;
+          max-width: 48rem;
           margin: 0 auto;
-          padding: 2.5rem 1.5rem;
+      }
+
+      .categories-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
           gap: 1.5rem;
       }
 
-      .footer-brand {
+      .category-card {
+          border: 1px solid #e5e7eb;
+          border-radius: 1rem;
+          padding: 1.5rem;
+          background: white;
+          transition: all 0.3s;
+          cursor: pointer;
+          text-align: center;
+      }
+
+      .category-card:hover {
+          box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+          transform: translateY(-5px);
+          border-color: var(--secondary-color);
+      }
+
+      .category-icon-box {
+          width: 4rem;
+          height: 4rem;
+          margin: 0 auto 1rem;
+          border-radius: 1rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+      }
+
+      .category-icon {
+          width: 2.5rem;
+          height: 2.5rem;
+      }
+
+      .category-name {
+          font-size: 1.125rem;
+          font-weight: 700;
+          color: #111827;
+          margin-bottom: 0.5rem;
+      }
+
+      .category-count {
+          font-size: 0.875rem;
+          color: #6b7280;
+      }
+
+      /* Equipment Catalog */
+      .catalog-section {
+          width: 100%;
+          padding: 4rem 0;
+          background: linear-gradient(to bottom, #fafaf9, white);
+      }
+
+      .catalog-filters {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 2rem;
+          padding: 1.5rem;
+          background: white;
+          border-radius: 1rem;
+          border: 1px solid #e5e7eb;
+      }
+
+      .filter-group {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+      }
+
+      .filter-label {
+          font-weight: 600;
+          color: #374151;
+      }
+
+      .filter-select {
+          padding: 0.625rem 1rem;
+          border: 1px solid #d1d5db;
+          border-radius: 0.5rem;
+          font-size: 0.875rem;
+          min-width: 150px;
+      }
+
+      .filter-select:focus {
+          outline: 2px solid var(--secondary-color);
+          border-color: var(--secondary-color);
+      }
+
+      .search-box {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.625rem 1rem;
+          border: 1px solid #d1d5db;
+          border-radius: 0.5rem;
+          background: white;
+      }
+
+      .search-icon {
+          width: 1.25rem;
+          height: 1.25rem;
+      }
+
+      .search-input {
+          border: none;
+          outline: none;
+          font-size: 0.875rem;
+          min-width: 250px;
+      }
+
+      .equipment-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 2rem;
+      }
+
+      .equipment-card {
+          border: 1px solid #e5e7eb;
+          border-radius: 1rem;
+          overflow: hidden;
+          background: white;
+          transition: all 0.3s;
+      }
+
+      .equipment-card:hover {
+          box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+          transform: translateY(-5px);
+      }
+
+      .equipment-image-wrapper {
+          position: relative;
+          height: 220px;
+          overflow: hidden;
+          background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+      }
+
+      .equipment-image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.3s;
+      }
+
+      .equipment-card:hover .equipment-image {
+          transform: scale(1.08);
+      }
+
+      .equipment-tag {
+          position: absolute;
+          top: 1rem;
+          right: 1rem;
+          padding: 0.375rem 0.875rem;
+          background: rgba(255, 255, 255, 0.95);
+          border-radius: 0.5rem;
+          font-size: 0.75rem;
+          font-weight: 700;
+          color: var(--accent-color);
+          box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      }
+
+      .equipment-body {
+          padding: 1.5rem;
+      }
+
+      .equipment-title {
+          font-size: 1.25rem;
+          font-weight: 800;
+          color: #111827;
+          margin-bottom: 0.75rem;
+      }
+
+      .equipment-specs {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+          margin-bottom: 1rem;
+      }
+
+      .spec-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          font-size: 0.875rem;
+      }
+
+      .spec-label {
+          color: #6b7280;
+          display: flex;
+          align-items: center;
+          gap: 0.375rem;
+      }
+
+      .spec-icon {
+          width: 1rem;
+          height: 1rem;
+      }
+
+      .spec-value {
+          font-weight: 600;
+          color: #111827;
+      }
+
+      .equipment-footer {
+          padding: 1rem 1.5rem;
+          border-top: 1px solid #f3f4f6;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+      }
+
+      .equipment-price {
+          font-size: 1.25rem;
+          font-weight: 800;
+          color: var(--secondary-color);
+      }
+
+      .equipment-price-label {
+          font-size: 0.75rem;
+          color: #6b7280;
+          display: block;
+          margin-top: 0.125rem;
+      }
+
+      .btn-details {
+          padding: 0.625rem 1.25rem;
+          background-color: var(--secondary-color);
+          color: white;
+          border-radius: 0.5rem;
+          text-decoration: none;
+          font-weight: 600;
+          font-size: 0.875rem;
+          transition: all 0.3s;
+      }
+
+      .btn-details:hover {
+          background-color: var(--primary-color);
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+      }
+
+      /* Cost Estimation Tool */
+      .estimation-section {
+          width: 100%;
+          padding: 4rem 0;
+          background: linear-gradient(135deg, #f1efea, #fafaf9);
+      }
+
+      .estimation-wrapper {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 2rem;
+      }
+
+      .estimation-form-card {
+          border: 1px solid #e5e7eb;
+          border-radius: 1.5rem;
+          padding: 2rem;
+          background: white;
+          box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+      }
+
+      .form-title {
+          font-size: 1.5rem;
+          font-weight: 800;
+          color: #111827;
+          margin-bottom: 1.5rem;
           display: flex;
           align-items: center;
           gap: 0.75rem;
-          margin-bottom: 0.75rem;
-          flex-direction: column;
       }
 
-      .footer-brand-row {
+      .form-icon {
+          width: 2rem;
+          height: 2rem;
+      }
+
+      .form-group {
+          margin-bottom: 1.5rem;
+      }
+
+      .form-label {
+          display: block;
+          font-weight: 600;
+          color: #374151;
+          margin-bottom: 0.5rem;
+          font-size: 0.875rem;
+      }
+
+      .form-control {
+          width: 100%;
+          padding: 0.75rem 1rem;
+          border: 1px solid #d1d5db;
+          border-radius: 0.5rem;
+          font-size: 1rem;
+          transition: all 0.3s;
+      }
+
+      .form-control:focus {
+          outline: none;
+          border-color: var(--secondary-color);
+          box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+      }
+
+      .btn-calculate {
+          width: 100%;
+          padding: 1rem;
+          background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+          color: white;
+          border: none;
+          border-radius: 0.75rem;
+          font-weight: 700;
+          font-size: 1.125rem;
+          cursor: pointer;
+          transition: all 0.3s;
+      }
+
+      .btn-calculate:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+      }
+
+      .estimation-result-card {
+          border: 1px solid #e5e7eb;
+          border-radius: 1.5rem;
+          padding: 2rem;
+          background: white;
+          box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+      }
+
+      .result-title {
+          font-size: 1.5rem;
+          font-weight: 800;
+          color: #111827;
+          margin-bottom: 1.5rem;
+      }
+
+      .result-summary {
+          padding: 1.5rem;
+          background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+          border-radius: 1rem;
+          margin-bottom: 1.5rem;
+      }
+
+      .total-cost {
+          font-size: 2.5rem;
+          font-weight: 900;
+          color: var(--secondary-color);
+          text-align: center;
+      }
+
+      .total-label {
+          text-align: center;
+          color: #374151;
+          font-weight: 600;
+          margin-top: 0.5rem;
+      }
+
+      .cost-breakdown {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+      }
+
+      .breakdown-item {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 1rem;
+          background: #fafaf9;
+          border-radius: 0.75rem;
+      }
+
+      .breakdown-label {
+          font-weight: 600;
+          color: #374151;
+      }
+
+      .breakdown-value {
+          font-size: 1.125rem;
+          font-weight: 700;
+          color: #111827;
+      }
+
+      .download-report-btn {
+          width: 100%;
+          padding: 1rem;
+          background-color: white;
+          color: var(--secondary-color);
+          border: 2px solid var(--secondary-color);
+          border-radius: 0.75rem;
+          font-weight: 700;
+          font-size: 1rem;
+          cursor: pointer;
+          transition: all 0.3s;
+          margin-top: 1.5rem;
+      }
+
+      .download-report-btn:hover {
+          background-color: var(--secondary-color);
+          color: white;
+      }
+
+      /* Technical Resources */
+      .resources-section {
+          width: 100%;
+          padding: 4rem 0;
+          background-color: white;
+      }
+
+      .resources-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 2rem;
+      }
+
+      .resource-card {
+          border: 1px solid #e5e7eb;
+          border-radius: 1rem;
+          padding: 2rem;
+          background: linear-gradient(to bottom, white, #fafaf9);
+          transition: all 0.3s;
+      }
+
+      .resource-card:hover {
+          box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+          transform: translateY(-5px);
+      }
+
+      .resource-icon-wrapper {
+          width: 4rem;
+          height: 4rem;
+          border-radius: 1rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: linear-gradient(135deg, #fef3c7, #fde68a);
+          margin-bottom: 1.5rem;
+      }
+
+      .resource-icon {
+          width: 2.5rem;
+          height: 2.5rem;
+      }
+
+      .resource-title {
+          font-size: 1.25rem;
+          font-weight: 800;
+          color: #111827;
+          margin-bottom: 0.75rem;
+      }
+
+      .resource-description {
+          color: #4b5563;
+          font-size: 0.875rem;
+          line-height: 1.6;
+          margin-bottom: 1.5rem;
+      }
+
+      .resource-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          color: var(--secondary-color);
+          text-decoration: none;
+          font-weight: 700;
+          font-size: 0.875rem;
+      }
+
+      .resource-link:hover {
+          text-decoration: underline;
+      }
+
+      /* CTA Section */
+      .cta-section {
+          width: 100%;
+          padding: 4rem 0;
+          background: linear-gradient(135deg, var(--accent-color), #6b4423);
+          color: white;
+      }
+
+      .cta-content {
+          max-width: 60rem;
+          margin: 0 auto;
+          text-align: center;
+          padding: 0 1.5rem;
+      }
+
+      .cta-title {
+          font-size: 2.5rem;
+          font-weight: 900;
+          margin-bottom: 1rem;
+      }
+
+      .cta-description {
+          font-size: 1.25rem;
+          margin-bottom: 2rem;
+          opacity: 0.95;
+      }
+
+      .cta-buttons {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 1rem;
+      }
+
+      .btn-cta-white {
+          padding: 1rem 2rem;
+          background-color: white;
+          color: var(--accent-color);
+          border-radius: 0.75rem;
+          text-decoration: none;
+          font-weight: 700;
+          font-size: 1.125rem;
+          transition: all 0.3s;
+      }
+
+      .btn-cta-white:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      }
+
+      .btn-cta-outline {
+          padding: 1rem 2rem;
+          border: 2px solid white;
+          color: white;
+          border-radius: 0.75rem;
+          text-decoration: none;
+          font-weight: 700;
+          font-size: 1.125rem;
+          transition: all 0.3s;
+      }
+
+      .btn-cta-outline:hover {
+          background-color: white;
+          color: var(--accent-color);
+      }
+
+      /* Footer */
+      .main-footer {
+          width: 100%;
+          background-color: #111827;
+          color: #e5e7eb;
+          padding: 3rem 0 1.5rem;
+      }
+
+      .footer-content {
+          max-width: 80rem;
+          margin: 0 auto;
+          padding: 0 1.5rem;
+      }
+
+      .footer-main {
+          display: grid;
+          grid-template-columns: 2fr 1fr 1fr 1fr;
+          gap: 3rem;
+          margin-bottom: 2.5rem;
+      }
+
+      .footer-brand-section {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+      }
+
+      .footer-logo-group {
           display: flex;
           align-items: center;
           gap: 0.75rem;
       }
 
       .footer-logo {
-          width: 2rem;
-          height: 2rem;
+          width: 2.5rem;
+          height: 2.5rem;
       }
 
-      .footer-brand-desc {
+      .footer-brand-name {
+          font-size: 1.25rem;
+          font-weight: 800;
+          color: white;
+      }
+
+      .footer-description {
           font-size: 0.875rem;
-          color: #334155;
-          text-align: center;
+          line-height: 1.7;
+          color: #d1d5db;
       }
 
-      .footer-social {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          flex-direction: column;
+      .footer-column-heading {
+          font-size: 1.125rem;
+          font-weight: 800;
+          color: white;
+          margin-bottom: 1rem;
       }
 
-      .social-link {
-          border-radius: 0.75rem;
-          padding: 0.5rem;
-          border: 1px solid #e5e7eb;
-          text-decoration: none;
-          transition: all 0.3s;
-      }
-
-      .social-link:hover {
-          border-color: var(--gjs-t-color-secondary);
-          outline: 1px solid #93c5fd;
-      }
-
-      .social-icon {
-          width: 1.25rem;
-          height: 1.25rem;
-      }
-
-      .footer-links {
+      .footer-link-list {
           display: flex;
           flex-direction: column;
-          gap: 0.5rem;
-      }
-
-      .footer-heading {
-          color: #111827;
-          font-weight: 600;
-          margin-bottom: 0.5rem;
+          gap: 0.625rem;
       }
 
       .footer-link-item {
-          color: #334155;
+          color: #d1d5db;
           text-decoration: none;
           font-size: 0.875rem;
           transition: color 0.3s;
       }
 
       .footer-link-item:hover {
-          text-decoration: underline;
-          color: var(--gjs-t-color-secondary);
-      }
-
-      .footer-contact {
-          display: flex;
-          flex-direction: column;
-          gap: 0.5rem;
-      }
-
-      .footer-contact-row {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-      }
-
-      .footer-contact-icon {
-          width: 1.25rem;
-          height: 1.25rem;
-      }
-
-      .footer-contact-text {
-          font-size: 0.875rem;
-          color: #334155;
-      }
-
-      .footer-newsletter {
-          display: flex;
-          flex-direction: column;
-          gap: 0.75rem;
-      }
-
-      .footer-newsletter-desc {
-          font-size: 0.875rem;
-          color: #374151;
-      }
-
-      .footer-newsletter-form {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-      }
-
-      .footer-newsletter-label {
-          position: absolute;
-          width: 1px;
-          height: 1px;
-          padding: 0;
-          margin: -1px;
-          overflow: hidden;
-          clip: rect(0, 0, 0, 0);
-          white-space: nowrap;
-          border-width: 0;
-      }
-
-      .footer-newsletter-input {
-          flex: 1;
-          border-radius: 0.75rem;
-          border: 1px solid #d1d5db;
-          padding: 0.5rem 0.75rem;
-      }
-
-      .footer-newsletter-input:focus {
-          outline: none;
-          border-color: var(--gjs-t-color-secondary);
-      }
-
-      .footer-newsletter-button {
-          padding: 0.5rem 1rem;
-          font-size: 0.875rem;
-          background-color: var(--gjs-t-color-secondary);
           color: white;
-          border-radius: 0.75rem;
-          border: none;
-          cursor: pointer;
-          transition: all 0.3s;
+          text-decoration: underline;
       }
 
-      .footer-newsletter-button:hover {
-          filter: brightness(1.1);
+      .footer-divider {
+          border-top: 1px solid #374151;
+          margin: 2rem 0;
       }
 
-      .footer-bottom {
-          border-top: 1px solid #e5e7eb;
-          padding: 1rem 0;
-      }
-
-      .footer-bottom-container {
-          max-width: 80rem;
-          margin: 0 auto;
-          padding: 0 1.5rem;
+      .footer-bottom-row {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          font-size: 0.75rem;
-          color: #64748b;
       }
 
-      .footer-copy {
-          font-size: 0.75rem;
-          color: #64748b;
+      .footer-copyright-text {
+          font-size: 0.875rem;
+          color: #9ca3af;
       }
 
-      .footer-legal {
+      .footer-social-links {
           display: flex;
           align-items: center;
           gap: 1rem;
       }
 
-      .legal-link {
-          font-size: 0.75rem;
-          color: #64748b;
-          text-decoration: none;
+      .social-link-btn {
+          width: 2.5rem;
+          height: 2.5rem;
+          border-radius: 0.5rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: #374151;
+          transition: all 0.3s;
       }
 
-      .legal-link:hover {
-          text-decoration: underline;
+      .social-link-btn:hover {
+          background-color: var(--secondary-color);
+          transform: translateY(-3px);
       }
 
-      /* Responsive */
+      .social-icon-img {
+          width: 1.25rem;
+          height: 1.25rem;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1200px) {
+          .categories-grid {
+              grid-template-columns: repeat(3, 1fr);
+          }
+          .equipment-grid {
+              grid-template-columns: repeat(2, 1fr);
+          }
+      }
+
       @media (max-width: 992px) {
-          .hero-container {
-              flex-direction: column;
+          .hero-wrapper {
+              grid-template-columns: 1fr;
               gap: 2rem;
           }
-          .hero-visual {
-              width: 100%;
+          .hero-main-title {
+              font-size: 2.5rem;
           }
-          .section-header {
-              flex-direction: column;
-          }
-          .reports-grid,
-          .charts-grid,
-          .articles-grid {
+          .categories-grid {
               grid-template-columns: repeat(2, 1fr);
           }
-          .membership-wrapper {
+          .estimation-wrapper {
               grid-template-columns: 1fr;
           }
-          .footer-container {
+          .footer-main {
               grid-template-columns: repeat(2, 1fr);
-          }
-          .footer-bottom-container {
-              flex-direction: column;
-              gap: 0.75rem;
           }
       }
 
-      @media (max-width: 480px) {
-          .reports-grid,
-          .charts-grid,
-          .articles-grid,
-          .footer-container {
+      @media (max-width: 768px) {
+          .navigation {
+              display: none;
+          }
+          .categories-grid,
+          .equipment-grid,
+          .resources-grid {
               grid-template-columns: 1fr;
+          }
+          .catalog-filters {
+              flex-direction: column;
+              gap: 1rem;
+          }
+          .filter-group {
+              width: 100%;
+              flex-direction: column;
+          }
+          .filter-select,
+          .search-input {
+              width: 100%;
+          }
+          .cta-buttons {
+              flex-direction: column;
+          }
+          .btn-cta-white,
+          .btn-cta-outline {
+              width: 100%;
+          }
+          .footer-main {
+              grid-template-columns: 1fr;
+          }
+          .footer-bottom-row {
+              flex-direction: column;
+              gap: 1rem;
           }
       }
   </style>
 </head>
 
 <body>
-  <header class="header-navbar">
-      <div class="navbar-container">
-          <span class="login-text">ورود کاربران ویژه</span>
-          <nav class="navbar-menu"></nav>
-          <div class="navbar-actions"></div>
-          <a href="./services.html" class="nav-item-active">خدمات ویژه</a>
-          <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="لوگو کاویان" class="brand-icon" />
-          <span class="brand-name">کاویان توسعه معدن</span>
+  <header class="main-header">
+      <div class="header-container">
+          <div class="logo-section">
+              <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/79888338-f5e2-4189-80b6-67a28b61af48__kavian3dgeometriclogo.svg" alt="لوگو کاویان" class="logo-img" />
+              <div class="logo-text-group">
+                  <span class="logo-title">کاویان توسعه معدن</span>
+                  <span class="logo-subtitle">مهندسی و تجهیزات</span>
+              </div>
+          </div>
+          <nav class="navigation">
+              <a href="./index.html" class="nav-item">خانه</a>
+              <a href="./services.html" class="nav-item">خدمات</a>
+              <a href="./news.html" class="nav-item">اخبار</a>
+              <a href="./equipment.html" class="nav-item nav-item-current">تجهیزات</a>
+          </nav>
       </div>
   </header>
 
-  <section class="hero-section">
-      <div class="hero-container">
+  <section class="hero-area">
+      <div class="hero-wrapper">
           <div class="hero-content">
-              <h1 class="hero-title">سرویس‌های تخصصی ما</h1>
+              <div class="hero-badge">
+                  <img src="https://api.iconify.design/lucide-wrench.svg?color=%232563eb" alt="" style="width:1rem;height:1rem;" />
+                  کاتالوگ جامع تجهیزات
+              </div>
+              <h1 class="hero-main-title">مهندسی و تجهیزات معدنی</h1>
               <p class="hero-subtitle">
-                  محیط تخصصی شامل گزارش‌های مهندسی، تحلیل بازار، پنل قیمت‌ها و مقالات علمی برای کاربران ویژه. با طراحی حرفه‌ای و داده‌های به‌روز برای تصمیم‌سازی در صنعت معدن.
+                  کاتالوگ کامل تجهیزات معدنی با مشخصات فنی دقیق، برآورد هزینه و راهنمای انتخاب برای پروژه‌های استخراج، حمل‌ونقل و فرآوری مواد معدنی.
               </p>
-              <div class="hero-actions">
-                  <a href="#membership" class="hero-cta">دسترسی کاربران ویژه</a>
-                  <a href="#reports" class="hero-secondary">مشاهده گزارش‌ها</a>
-              </div>
-          </div>
-          <div class="hero-visual">
-              <div class="hero-image-wrapper">
-                  <img src="https://app.grapesjs.com/api/assets/random-image?query=معدن%20صنعت&w=1200&h=800" alt="تصویر صنعتی معدن" class="hero-image" />
-              </div>
-              <div class="hero-stats">
-                  <div class="stat-card">
-                      <div class="stat-label">گزارش‌های فعال</div>
-                      <div class="stat-value">128</div>
-                  </div>
-                  <div class="stat-card">
-                      <div class="stat-label">تحلیل‌های بازار</div>
-                      <div class="stat-value">76</div>
-                  </div>
-                  <div class="stat-card">
-                      <div class="stat-label">مقالات علمی</div>
-                      <div class="stat-value">54</div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </section>
-
-  <section id="reports" class="reports-section">
-      <h2 class="gjs-t-h2">گزارش‌های مهندسی معدن</h2>
-      <div class="section-container">
-          <div class="section-header">
-              <div class="section-title-group">
-                  <p class="section-subtitle">تحلیل‌های فنی، مدل‌سازی زمین‌شناسی، برنامه‌ریزی استخراج و ارزیابی اقتصادی پروژه‌ها.</p>
-              </div>
-              <div class="section-actions">
-                  <button type="button" class="filter-button">همه</button>
-                  <button type="button" class="filter-button">ژئومتری معدن</button>
-                  <button type="button" class="filter-button">اقتصاد و مالی</button>
-              </div>
-          </div>
-          <div class="reports-grid">
-              <article class="report-card">
-                  <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/079b3b0e-470c-4ebe-b655-5f2109e9b98d__5f4036ef-77ee-45c7-b8de-a49dbbafc22b-scaled.jpg" alt="گزارش مهندسی معدن" class="report-image" />
-                  <div class="report-content">
-                      <h3 class="report-title">بهینه‌سازی حفاری و انفجار در توده‌های سخت</h3>
-                      <p class="report-summary">ارزیابی پارامترهای انفجار، مدل‌سازی امواج شوک و تحلیل شکستگی با هدف افزایش راندمان برداشت.</p>
-                      <div class="report-tags">
-                          <span class="tag">فنی</span>
-                          <span class="tag">تحلیل</span>
-                      </div>
-                      <div class="report-actions">
-                          <a href="#membership" class="report-view">مشاهده</a>
-                          <button type="button" class="report-download">دانلود</button>
-                      </div>
-                  </div>
-              </article>
-
-              <article class="report-card">
-                  <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/4d0ee00f-e055-4999-8e52-e78ba30853db__567a457c-54c5-4f93-9e81-5908205df1ad-scaled.jpg" alt="تحلیل ذخایر معدنی" class="report-image" />
-                  <div class="report-content">
-                      <h3 class="report-title">مدل‌سازی سه‌بعدی ذخایر با داده‌های حفاری</h3>
-                      <p class="report-summary">یکپارچه‌سازی لاگ‌های حفاری و ژئوفیزیک با کریگینگ و سیمولاسیون شرطی برای تعیین مرزهای اقتصادی.</p>
-                      <div class="report-tags">
-                          <span class="tag">ژئومتری معدن</span>
-                          <span class="tag">داده‌محور</span>
-                      </div>
-                      <div class="report-actions">
-                          <a href="#membership" class="report-view">مشاهده</a>
-                          <button type="button" class="report-download">دانلود</button>
-                      </div>
-                  </div>
-              </article>
-
-              <article class="report-card">
-                  <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/c1a61449-b2d7-403a-b6bf-57f1b9d07486__circular-mining.jpg" alt="اقتصاد معدن" class="report-image" />
-                  <div class="report-content">
-                      <h3 class="report-title">تحلیل حساسیت اقتصادی پروژه‌های استخراج</h3>
-                      <p class="report-summary">مدلسازی سناریوهای قیمت، هزینه سرمایه و بهره‌وری برای ارزیابی NPV و IRR پروژه‌ها.</p>
-                      <div class="report-tags">
-                          <span class="tag">اقتصاد</span>
-                          <span class="tag">تحلیل مالی</span>
-                      </div>
-                      <div class="report-actions">
-                          <a href="#membership" class="report-view">مشاهده</a>
-                          <button type="button" class="report-download">دانلود</button>
-                      </div>
-                  </div>
-              </article>
-          </div>
-      </div>
-  </section>
-
-  <section class="market-analysis-section">
-      <div class="section-container">
-          <div class="section-header">
-              <div class="section-title-group">
-                  <h2 class="gjs-t-h2">تحلیل بازار محصولات معدنی</h2>
-                  <p class="section-subtitle">نمودارهای روند قیمت، حجم معاملات و همبستگی‌ها برای مواد اولیه کلیدی.</p>
-              </div>
-              <div class="section-actions">
-                  <button type="button" class="filter-button">سنگ‌آهن</button>
-                  <button type="button" class="filter-button">مس</button>
-                  <button type="button" class="filter-button">زغال‌سنگ</button>
-              </div>
-          </div>
-          <div class="charts-grid">
-              <div class="chart-card">
-                  <div class="chart-header">
-                      <div class="chart-title-group">
-                          <img src="https://api.iconify.design/lucide-trending-up.svg?color=%23111827" alt="روند" class="chart-icon" />
-                          <span class="chart-title">روند قیمت ماهانه</span>
-                      </div>
-                      <span class="chart-meta">به‌روزرسانی روزانه</span>
-                  </div>
-                  <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/1d795bce-b09d-475c-b58d-df59d7b19a2e__1734356398640.jpeg" alt="نمودار قیمت ماهانه" loading="lazy" class="chart-image" />
-              </div>
-
-              <div class="chart-card">
-                  <div class="chart-header">
-                      <div class="chart-title-group">
-                          <img src="https://api.iconify.design/lucide-bar-chart-3.svg?color=%23111827" alt="ستونی" class="chart-icon" />
-                          <span class="chart-title">حجم معاملات هفتگی</span>
-                      </div>
-                      <span class="chart-meta">منبع: بازار جهانی</span>
-                  </div>
-                  <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/45efe0eb-46fe-4509-bcb6-445881e1bd58__the-average-global-household-electricity-cost-to-mine-1-v0-pb62ud5rp3kb1.webp" alt="حجم معاملات هفتگی" loading="lazy" class="chart-image" />
-              </div>
-
-              <div class="chart-card">
-                  <div class="chart-header">
-                      <div class="chart-title-group">
-                          <img src="https://api.iconify.design/lucide-network.svg?color=%23111827" alt="همبستگی" class="chart-icon" />
-                          <span class="chart-title">نقشه همبستگی مواد</span>
-                      </div>
-                      <span class="chart-meta">بازه: ۱۲ ماهه</span>
-                  </div>
-                  <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/261f7495-6af9-4aae-b34b-49de4ba7b5d0__reimaginecircular-economy.jpg" alt="نقشه همبستگی مواد" loading="lazy" class="chart-image" />
-              </div>
-          </div>
-      </div>
-  </section>
-
-  <section class="prices-section">
-      <div class="section-container">
-          <div class="section-header">
-              <div class="section-title-group">
-                  <h2 class="gjs-t-h2">پنل قیمت‌های به‌روز</h2>
-                  <p class="section-subtitle">قیمت تجهیزات، مواد و شاخص‌های کلیدی با تغییرات روزانه و وضعیت بازار.</p>
-              </div>
-              <div class="section-actions">
-                  <button type="button" class="filter-button">مواد اولیه</button>
-                  <button type="button" class="filter-button">تجهیزات</button>
-                  <button type="button" class="filter-button">شاخص‌ها</button>
-              </div>
-          </div>
-          <div class="prices-panel">
-              <div class="prices-header">
-                  <div class="prices-title-group">
-                      <img src="https://api.iconify.design/lucide-dollar-sign.svg?color=%23111827" alt="قیمت" class="prices-icon" />
-                      <span class="prices-title">جدول قیمت‌ها</span>
-                  </div>
-                  <span class="prices-update">آخرین بروزرسانی: امروز</span>
-              </div>
-              <div class="table-wrapper">
-                  <table class="prices-table">
-                      <thead class="table-head">
-                          <tr>
-                              <th class="table-head-cell">کالا</th>
-                              <th class="table-head-cell">قیمت (USD)</th>
-                              <th class="table-head-cell">تغییر</th>
-                              <th class="table-head-cell">وضعیت</th>
-                          </tr>
-                      </thead>
-                      <tbody class="table-body">
-                          <tr class="table-row">
-                              <td class="table-cell">کنسانتره سنگ‌آهن ۶۵%</td>
-                              <td class="table-cell">118.40</td>
-                              <td class="table-cell">+1.8%</td>
-                              <td class="table-cell">
-                                  <span class="status-chip">صعودی</span>
-                              </td>
-                          </tr>
-                          <tr class="table-row">
-                              <td class="table-cell">کاتد مس Grade A</td>
-                              <td class="table-cell">8340.00</td>
-                              <td class="table-cell">-0.6%</td>
-                              <td class="table-cell">
-                                  <span class="status-chip">نزولی</span>
-                              </td>
-                          </tr>
-                          <tr class="table-row">
-                              <td class="table-cell">زغال‌سنگ حرارتی ۵۵۰۰ kcal</td>
-                              <td class="table-cell">94.20</td>
-                              <td class="table-cell">+0.3%</td>
-                              <td class="table-cell">
-                                  <span class="status-chip">باثبات</span>
-                              </td>
-                          </tr>
-                          <tr class="table-row">
-                              <td class="table-cell">فولاد میلگرد ۱۲</td>
-                              <td class="table-cell">670.00</td>
-                              <td class="table-cell">+0.9%</td>
-                              <td class="table-cell">
-                                  <span class="status-chip">صعودی</span>
-                              </td>
-                          </tr>
-                      </tbody>
-                  </table>
-              </div>
-              <div class="prices-footer">
-                  <span class="disclaimer">قیمت‌ها مرجع بازار جهانی و میانگین معاملات روزانه هستند.</span>
-                  <a href="#membership" class="prices-cta">دسترسی کامل</a>
-              </div>
-          </div>
-      </div>
-  </section>
-
-  <section class="articles-section">
-      <div class="section-container">
-          <div class="section-header">
-              <div class="section-title-group">
-                  <h2 class="gjs-t-h2">مقالات علمی و پژوهشی</h2>
-                  <p class="section-subtitle">گزیده‌ای از پژوهش‌های کاربردی در حوزه معدن، فرآوری و ژئوفیزیک.</p>
-              </div>
-              <a href="#membership" class="section-link">دسترسی به کل آرشیو</a>
-          </div>
-          <div class="articles-grid">
-              <article class="article-card">
-                  <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/3df9d10a-30a3-4eee-9e9d-5079a3cc2c52__mj111914.jpg" alt="مقاله علمی معدن" loading="lazy" class="article-image" />
-                  <div class="article-content">
-                      <h3 class="article-title">ارزیابی روش‌های فلوتاسیون برای کنسانتره مس</h3>
-                      <p class="article-summary">تأثیر کلکتورها و تنظیم‌کننده‌ها بر بازیابی و خلوص محصول در مدارهای صنعتی.</p>
-                      <div class="article-meta">
-                          <div class="author">
-                              <img src="https://app.grapesjs.com/api/assets/random-image?query=پژوهشگر&w=200&h=200" alt="نویسنده" loading="lazy" class="author-avatar" />
-                              <span class="author-name">دکتر موسوی</span>
-                          </div>
-                          <span class="reading-time">۱۲ دقیقه مطالعه</span>
-                      </div>
-                  </div>
-              </article>
-
-              <article class="article-card">
-                  <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/4d0ee00f-e055-4999-8e52-e78ba30853db__567a457c-54c5-4f93-9e81-5908205df1ad-scaled.jpg" alt="جئوفیزیک کاربردی" loading="lazy" class="article-image" />
-                  <div class="article-content">
-                      <h3 class="article-title">تحلیل وارون‌سازی داده‌های IP و مقاومت‌ویژه</h3>
-                      <p class="article-summary">الگوریتم‌های وارون‌سازی و تأثیر نویز بر دقت مدل هدف در اکتشاف کانسارهای سولفیدی.</p>
-                      <div class="article-meta">
-                          <div class="author">
-                              <img src="https://app.grapesjs.com/api/assets/random-image?query=مقاله%20نویس&w=200&h=200" alt="نویسنده" loading="lazy" class="author-avatar" />
-                              <span class="author-name">م. رسولی</span>
-                          </div>
-                          <span class="reading-time">۹ دقیقه مطالعه</span>
-                      </div>
-                  </div>
-              </article>
-
-              <article class="article-card">
-                  <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7de85266-8ace-43fe-8f37-dde9cb09294e__1740561185445.jpeg" alt="فرآوری مواد" loading="lazy" class="article-image" />
-                  <div class="article-content">
-                      <h3 class="article-title">طراحی مدار خردایش با روش‌های داده‌محور</h3>
-                      <p class="article-summary">بهینه‌سازی پارامترهای عملیاتی با الگوریتم‌های یادگیری ماشین و تحلیل بهره‌وری.</p>
-                      <div class="article-meta">
-                          <div class="author">
-                              <img src="https://app.grapesjs.com/api/assets/random-image?query=پاژوهش&w=200&h=200" alt="نویسنده" loading="lazy" class="author-avatar" />
-                              <span class="author-name">س. اکبری</span>
-                          </div>
-                          <span class="reading-time">۱۰ دقیقه مطالعه</span>
-                      </div>
-                  </div>
-              </article>
-          </div>
-      </div>
-  </section>
-
-  <section id="membership" class="membership-section">
-      <div class="section-container">
-          <div class="membership-wrapper">
-              <div class="membership-info-card">
-                  <div class="info-header">
-                      <img src="https://api.iconify.design/lucide-shield-check.svg?color=%23111827" alt="ویژه" class="info-icon" />
-                      <h3 class="info-title">دسترسی کاربران ویژه</h3>
-                  </div>
-                  <p class="info-description">با عضویت ویژه به گزارش‌های کامل، نمودارهای تعاملی بازار و آرشیو کامل مقالات دسترسی داشته باشید.</p>
-                  <ul class="benefits-list">
-                      <li class="benefit-item">
-                          <img src="https://api.iconify.design/lucide-file-search.svg?color=%238B5E3C" alt="گزارش کامل" class="benefit-icon" />
-                          <span class="benefit-text">گزارش‌های فنی با ضمیمه داده و نمودار</span>
-                      </li>
-                      <li class="benefit-item">
-                          <img src="https://api.iconify.design/lucide-activity.svg?color=%232B6CB0" alt="نمودار" class="benefit-icon" />
-                          <span class="benefit-text">نمودارهای به‌روز و تحلیل‌های بازار</span>
-                      </li>
-                      <li class="benefit-item">
-                          <img src="https://api.iconify.design/lucide-book-open.svg?color=%2316A34A" alt="مقالات" class="benefit-icon" />
-                          <span class="benefit-text">دسترسی به آرشیو مقالات علمی</span>
-                      </li>
-                  </ul>
-                  <div class="support-line">
-                      <img src="https://api.iconify.design/lucide-life-buoy.svg?color=%232B6CB0" alt="پشتیبانی" class="support-icon" />
-                      <span>پشتیبانی اختصاصی برای اعضا</span>
-                  </div>
-              </div>
-              <form method="get" aria-labelledby="membership-title" class="membership-form-card">
-                  <div class="form-header">
-                      <img src="https://api.iconify.design/lucide-user-plus.svg?color=%23111827" alt="ثبت‌نام" class="form-icon" />
-                      <h3 id="membership-title" class="form-title">ورود / ثبت‌نام اعضای ویژه</h3>
-                  </div>
-                  <div class="form-field">
-                      <label for="email" class="field-label">ایمیل</label>
-                      <input type="email" id="email" name="email" placeholder="example@domain.com" required class="field-input" />
-                  </div>
-                  <div class="form-field">
-                      <label for="password" class="field-label">رمز عبور</label>
-                      <input type="password" id="password" name="password" placeholder="••••••••" required class="field-input" />
-                  </div>
-                  <div class="form-extras">
-                      <label class="remember-label">
-                          <input type="checkbox" name="remember" aria-label="مرا به خاطر بسپار" class="remember-checkbox" />
-                          <span class="remember-text">مرا به خاطر بسپار</span>
-                      </label>
-                      <a href="#" class="forgot-link">فراموشی رمز</a>
-                  </div>
-                  <div class="form-actions">
-                      <button type="submit" class="submit-button">ورود / ثبت‌نام</button>
-                      <button type="button" class="secondary-button">مشاهده نمونه محتوا</button>
-                  </div>
-                  <p class="privacy-note">با ثبت‌نام، شرایط استفاده و سیاست حفظ حریم خصوصی را می‌پذیرید.</p>
-              </form>
-          </div>
-      </div>
-  </section>
-
-  <footer class="footer">
-      <div class="footer-container">
-          <div class="footer-brand">
-              <div class="footer-brand-row">
-                  <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="لوگو" class="footer-logo" />
-              </div>
-              <p class="footer-brand-desc">پلتفرم تخصصی گزارش‌های مهندسی، تحلیل بازار و داده‌های قیمت برای تصمیم‌سازی در صنعت معدن.</p>
-              <div class="footer-social">
-                  <a href="#" class="social-link">
-                      <img src="https://api.iconify.design/lucide-linkedin.svg?color=%232B6CB0" alt="LinkedIn" class="social-icon" />
+              <div class="hero-button-group">
+                  <a href="#catalog" class="btn-hero-primary">
+                      <img src="https://api.iconify.design/lucide-list.svg?color=white" alt="" style="width:1.25rem;height:1.25rem;" />
+                      مشاهده کاتالوگ
                   </a>
-                  <a href="#" class="social-link">
-                      <img src="https://api.iconify.design/lucide-twitter.svg?color=%232B6CB0" alt="X" class="social-icon" />
-                  </a>
+                  <a href="#estimation" class="btn-hero-secondary">برآورد هزینه</a>
               </div>
           </div>
-          <div class="footer-links">
-              <h4 class="footer-heading">لینک‌های مهم</h4>
-              <a href="./index.html" class="footer-link-item">کاویان توسعه معدن</a>
-              <a href="./services.html" class="footer-link-item">سرویس‌های کاویان</a>
-              <a href="#reports" class="footer-link-item">گزارش‌های مهندسی</a>
-              <a href="#membership" class="footer-link-item">ورود کاربران ویژه</a>
-          </div>
-          <div class="footer-contact">
-              <h4 class="footer-heading">ارتباط با ما</h4>
-              <div class="footer-contact-row">
-                  <img src="https://api.iconify.design/lucide-phone.svg?color=%23111827" alt="تلفن" class="footer-contact-icon" />
-                  <span class="footer-contact-text">+98 21 1234 5678</span>
-              </div>
-              <div class="footer-contact-row">
-                  <img src="https://api.iconify.design/lucide-mail.svg?color=%23111827" alt="ایمیل" class="footer-contact-icon" />
-                  <span class="footer-contact-text">info@kavyan-mining.ir</span>
-              </div>
-              <div class="footer-contact-row">
-                  <img src="https://api.iconify.design/lucide-map-pin.svg?color=%23111827" alt="آدرس" class="footer-contact-icon" />
-                  <span class="footer-contact-text">تهران، بلوار صنعت، پلاک ۲۴</span>
+          <div class="hero-image-section">
+              <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/079b3b0e-470c-4ebe-b655-5f2109e9b98d__5f4036ef-77ee-45c7-b8de-a49dbbafc22b-scaled.jpg" alt="تجهیزات معدنی" class="hero-main-image" />
+              <div class="hero-stats-overlay">
+                  <div class="stat-box">
+                      <div class="stat-number">350+</div>
+                      <div class="stat-label">تجهیزات</div>
+                  </div>
+                  <div class="stat-box">
+                      <div class="stat-number">45</div>
+                      <div class="stat-label">دسته‌بندی</div>
+                  </div>
+                  <div class="stat-box">
+                      <div class="stat-number">24/7</div>
+                      <div class="stat-label">پشتیبانی</div>
+                  </div>
               </div>
           </div>
-          <div class="footer-newsletter">
-              <h4 class="footer-heading">خبرنامه تخصصی</h4>
-              <p class="footer-newsletter-desc">آخرین تحلیل‌ها و گزارش‌ها را در 
-                <form method="get" class="footer-newsletter-form">
-                <label for="newsletter-email" class="footer-newsletter-label">ایمیل</label>
-                <input type="email" id="newsletter-email" placeholder="ایمیل شما" class="footer-newsletter-input" />
-                <button type="submit" class="footer-newsletter-button">اشتراک</button>
-           </form>
-            </div>
-         </div>
-<div class="footer-bottom">
-<div class="footer-bottom-container">
-<span class="footer-copy">© 2025 کاویان معدن. تمامی حقوق محفوظ است.</span>
-<div class="footer-legal">
-<a href="#" class="legal-link">حریم خصوصی</a>
-<a href="#" class="legal-link">شرایط استفاده</a>
-</div>
-</div>
-</div>
-</footer>
+      </div>
+  </section>
 
-</body>
-</html>
+  <section class="categories-section">
+      <div class="container">
+          <div class="section-head">
+              <h2 class="section-title-main">دسته‌بندی تجهیزات</h2>
+              <p class="section-desc">انتخاب تجهیزات مناسب بر اساس نیاز پروژه و فرآیند معدنی</p>
+          </div>
+          <div class="categories-grid">
+              <div class="category-card">
+                  <div class="category-icon-box">
+                      <img src="https://api.iconify.design/lucide-hammer.svg?color=%232563eb" alt="حفاری" class="category-icon" />
+                  </div>
+                  <h3 class="category-name">حفاری و انفجار</h3>
+                  <p class="category-count">42 تجهیز</p>
+              </div>
+
+              <div class="category-card">
+                  <div class="category-icon-box">
+                      <img src="https://api.iconify.design/lucide-truck.svg?color=%232563eb" alt="حمل" class="category-icon" />
+                  </div>
+                  <h3 class="category-name">حمل‌ونقل</h3>
+                  <p class="category-count">68 تجهیز</p>
+              </div>
+
+              <div class="category-card">
+                  <div class="category-icon-box">
+                      <img src="https://api.iconify.design/lucide-cog.svg?color=%232563eb" alt="خردایش" class="category-icon" />
+                  </div>
+                  <h3 class="category-name">خردایش و آسیاب</h3>
+                  <p class="category-count">54 تجهیز</p>
+              </div>
+
+              <div class="category-card">
+                  <div class="category-icon-box">
+                      <img src="https://api.iconify.design/lucide-droplets.svg?color=%232563eb" alt="فرآوری" class="category-icon" />
+                  </div>
+                  <h3 class="category-name">فرآوری مواد</h3>
+                  <p class="category-count">37 تجهیز</p>
+              </div>
+
+              <div class="category-card">
+                  <div class="category-icon-box">
+                      <img src="https://api.iconify.design/lucide-zap.svg?color=%232563eb" alt="برق" class="category-icon" />
+                  </div>
+                  <h3 class="category-name">تأسیسات برقی</h3>
+                  <p class="category-count">29 تجهیز</p>
+              </div>
+
+              <div class="category-card">
+                  <div class="category-icon-box">
+                      <img src="https://api.iconify.design/lucide-wind.svg?color=%232563eb" alt="تهویه" class="category-icon" />
+                  </div>
+                  <h3 class="category-name">تهویه و ایمنی</h3>
+                  <p class="category-count">31 تجهیز</p>
+              </div>
+
+              <div class="category-card">
+                  <div class="category-icon-box">
+                      <img src="https://api.iconify.design/lucide-gauge.svg?color=%232563eb" alt="کنترل" class="category-icon" />
+                  </div>
+                  <h3 class="category-name">ابزار دقیق و کنترل</h3>
+                  <p class="category-count">45 تجهیز</p>
+              </div>
+
+              <div class="category-card">
+                  <div class="category-icon-box">
+                      <img src="https://api.iconify.design/lucide-wrench.svg?color=%232563eb" alt="نگهداری" class="category-icon" />
+                  </div>
+                  <h3 class="category-name">نگهداری و تعمیر</h3>
+                  <p class="category-count">44 تجهیز</p>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <section id="catalog" class="catalog-section">
+      <div class="container">
+          <div class="section-head">
+              <h2 class="section-title-main">کاتالوگ تجهیزات</h2>
+              <p class="section-desc">مشخصات فنی، قیمت و اطلاعات کامل تجهیزات معدنی</p>
+          </div>
+
+          <div class="catalog-filters">
+              <div class="filter-group">
+                  <span class="filter-label">دسته‌بندی:</span>
+                  <select class="filter-select">
+                      <option>همه دسته‌ها</option>
+                      <option>حفاری و انفجار</option>
+                      <option>حمل‌ونقل</option>
+                      <option>خردایش و آسیاب</option>
+                      <option>فرآوری مواد</option>
+                  </select>
+              </div>
+              <div class="search-box">
+                  <img src="https://api.iconify.design/lucide-search.svg?color=%236b7280" alt="جستجو" class="search-icon" />
+                  <input type="text" placeholder="جستجوی تجهیزات..." class="search-input" />
+              </div>
+          </div>
+
+          <div class="equipment-grid">
+              <article class="equipment-card">
+                  <div class="equipment-image-wrapper">
+                      <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/079b3b0e-470c-4ebe-b655-5f2109e9b98d__5f4036ef-77ee-45c7-b8de-a49dbbafc22b-scaled.jpg" alt="دریل هیدرولیک" class="equipment-image" />
+                      <span class="equipment-tag">حفاری</span>
+                  </div>
+                  <div class="equipment-body">
+                      <h3 class="equipment-title">دریل هیدرولیک DTH سنگین</h3>
+                      <div class="equipment-specs">
+                          <div class="spec-row">
+                              <span class="spec-label">
+                                  <img src="https://api.iconify.design/lucide-gauge.svg?color=%236b7280" alt="" class="spec-icon" />
+                                  قطر حفاری
+                              </span>
+                              <span class="spec-value">152-254 mm</span>
+                          </div>
+                          <div class="spec-row">
+                              <span class="spec-label">
+                                  <img src="https://api.iconify.design/lucide-zap.svg?color=%236b7280" alt="" class="spec-icon" />
+                                  قدرت
+                              </span>
+                              <span class="spec-value">350 HP</span>
+                          </div>
+                          <div class="spec-row">
+                              <span class="spec-label">
+                                  <img src="https://api.iconify.design/lucide-ruler.svg?color=%236b7280" alt="" class="spec-icon" />
+                                  عمق حفاری
+                              </span>
+                              <span class="spec-value">تا 45 متر</span>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="equipment-footer">
+                      <div>
+                          <div class="equipment-price">$485,000</div>
+                          <span class="equipment-price-label">قیمت تقریبی</span>
+                      </div>
+                      <a href="#" class="btn-details">جزئیات</a>
+                  </div>
+              </article>
+
+              <article class="equipment-card">
+                  <div class="equipment-image-wrapper">
+                      <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/4d0ee00f-e055-4999-8e52-e78ba30853db__567a457c-54c5-4f93-9e81-5908205df1ad-scaled.jpg" alt="کامیون معدنی" class="equipment-image" />
+                      <span class="equipment-tag">حمل‌ونقل</span>
+                  </div>
+                  <div class="equipment-body">
+                      <h3 class="equipment-title">کامیون معدنی سنگین 100 تن</h3>
+                      <div class="equipment-specs">
+                          <div class="spec-row">
+                              <span class="spec-label">
+                                  <img src="https://api.iconify.design/lucide-weight.svg?color=%236b7280" alt="" class="spec-icon" />
+                                  ظرفیت بار
+                              </span>
+                              <span class="spec-value">100 تن</span>
+                          </div>
+                          <div class="spec-row">
+                              <span class="spec-label">
+                                  <img src="https://api.iconify.design/lucide-zap.svg?color=%236b7280" alt="" class="spec-icon" />
+                                  قدرت موتور
+                              </span>
+                              <span class="spec-value">2500 HP</span>
+                          </div>
+                          <div class="spec-row">
+                              <span class="spec-label">
+                                  <img src="https://api.iconify.design/lucide-fuel.svg?color=%236b7280" alt="" class="spec-icon" />
+                                  مصرف سوخت
+                              </span>
+                              <span class="spec-value">180 L/h</span>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="equipment-footer">
+                      <div>
+                          <div class="equipment-price">$2,850,000</div>
+                          <span class="equipment-price-label">قیمت تقریبی</span>
+                      </div>
+                      <a href="#" class="btn-details">جزئیات</a>
+                  </div>
+              </article>
+
+              <article class="equipment-card">
+                  <div class="equipment-image-wrapper">
+                      <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/3df9d10a-30a3-4eee-9e9d-5079a3cc2c52__mj111914.jpg" alt="سنگ‌شکن فکی" class="equipment-image" />
+                      <span class="equipment-tag">خردایش</span>
+                  </div>
+                  <div class="equipment-body">
+                      <h3 class="equipment-title">سنگ‌شکن فکی C-150</h3>
+                      <div class="equipment-specs">
+                          <div class="spec-row">
+                              <span class="spec-label">
+                                  <img src="https://api.iconify.design/lucide-maximize.svg?color=%236b7280" alt="" class="spec-icon" />
+                                  دهانه ورودی
+                              </span>
+                              <span class="spec-value">1500×1300 mm</span>
+                          </div>
+                          <div class="spec-row">
+                              <span class="spec-label">
+                                  <img src="https://api.iconify.design/lucide-activity.svg?color=%236b7280" alt="" class="spec-icon" />
+                                  ظرفیت
+                              </span>
+                              <span class="spec-value">800-1200 t/h</span>
+                          </div>
+                          <div class="spec-row">
+                              <span class="spec-label">
+                                  <img src="https://api.iconify.design/lucide-zap.svg?color=%236b7280" alt="" class="spec-icon" />
+                                  قدرت
+                              </span>
+                              <span class="spec-value">280 kW</span>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="equipment-footer">
+                      <div>
+                          <div class="equipment-price">$620,000</div>
+                          <span class="equipment-price-label">قیمت تقریبی</span>
+                      </div>
+                      <a href="#" class="btn-details">جزئیات</a>
+                  </div>
+              </article>
+
+              <article class="equipment-card">
+                  <div class="equipment-image-wrapper">
+                      <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7de85266-8ace-43fe-8f37-dde9cb09294e__1740561185445.jpeg" alt="آسیاب گلوله‌ای" class="equipment-image" />
+                      <span class="equipment-tag">آسیاب</span>
+                  </div>
+                  <div class="equipment-body">
+                      <h3 class="equipment-title">آسیاب گلوله‌ای 5.5×8.5 متر</h3>
+                      <div class="equipment-specs">
+                          <div class="spec-row">
+                              <span class="spec-label">
+                                  <img src="https://api.iconify.design/lucide-circle.svg?color=%236b7280" alt="" class="spec-icon" />
+                                  قطر × طول
+                              </span>
+                              <span class="spec-value">5.5×8.5 m</span>
+                          </div>
+                          <div class="spec-row">
+                              <span class="spec-label">
+                                  <img src="https://api.iconify.design/lucide-activity.svg?color=%236b7280" alt="" class="spec-icon" />
+                                  ظرفیت
+                              </span>
+                              <span class="spec-value">180-220 t/h</span>
+                          </div>
+                          <div class="spec-row">
+                              <span class="spec-label">
+                                  <img src="https://api.iconify.design/lucide-zap.svg?color=%236b7280" alt="" class="spec-icon" />
+                                  قدرت
+                              </span>
+                              <span class="spec-value">4500 kW</span>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="equipment-footer">
+                      <div>
+                          <div class="equipment-price">$3,200,000</div>
+                          <span class="equipment-price-label">قیمت تقریبی</span>
+                      </div>
+                      <a href="#" class="btn-details">جزئیات</a>
+                  </div>
+              </article>
+
+              <article class="equipment-card">
+                  <div class="equipment-image-wrapper">
+                      <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/261f7495-6af9-4aae-b34b-49de4ba7b5d0__reimaginecircular-economy.jpg" alt="سل فلوتاسیون" class="equipment-image" />
+                      <span class="equipment-tag">فرآوری</span>
+                  </div>
+                  <div class="equipment-body">
+                      <h3 class="equipment-title">سل فلوتاسیون 50 متر مکعب</h3>
+                      <div class="equipment-specs">
+                          <div class="spec-row">
+                              <span class="spec-label">
+                                  <img src="https://api.iconify.design/lucide-box.svg?color=%236b7280" alt="" class="spec-icon" />
+                                  حجم
+                              </span>
+                              <span class="spec-value">50 m³</span>
+                          </div>
+                          <div class="spec-row">
+                              <span class="spec-label">
+                                  <img src="https://api.iconify.design/lucide-droplets.svg?color=%236b7280" alt="" class="spec-icon" />
+                                  نوع
+                              </span>
+                              <span class="spec-value">مکانیکی</span>
+                          </div>
+                          <div class="spec-row">
+                              <span class="spec-label">
+                                  <img src="https://api.iconify.design/lucide-zap.svg?color=%236b7280" alt="" class="spec-icon" />
+                                  قدرت
+                              </span>
+                              <span class="spec-value">75 kW</span>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="equipment-footer">
+                      <div>
+                          <div class="equipment-price">$185,000</div>
+                          <span class="equipment-price-label">قیمت تقریبی</span>
+                      </div>
+                      <a href="#" class="btn-details">جزئیات</a>
+                  </div>
+              </article>
+
+              <article class="equipment-card">
+                  <div class="equipment-image-wrapper">
+                      <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/c1a61449-b2d7-403a-b6bf-57f1b9d07486__circular-mining.jpg" alt="نوار نقاله" class="equipment-image" />
+                      <span class="equipment-tag">حمل‌ونقل</span>
+                  </div>
+                  <div class="equipment-body">
+                      <h3 class="equipment-title">نوار نقاله B-1400</h3>
+                      <div class="equipment-specs">
+                          <div class="spec-row">
+                              <span class="spec-label">
+                                  <img src="https://api.iconify.design/lucide-ruler.svg?color=%236b7280" alt="" class="spec-icon" />
+                                  عرض نوار
+                              </span>
+                              <span class="spec-value">1400 mm</span>
+                          </div>
+                          <div class="spec-row">
+                              <span class="spec-label">
+                                  <img src="https://api.iconify.design/lucide-activity.svg?color=%236b7280" alt="" class="spec-icon" />
+                                  ظرفیت
+                              </span>
+                              <span class="spec-value">2000 t/h</span>
+                          </div>
+                          <div class="spec-row">
+                              <span class="spec-label">
+                                  <img src="https://api.iconify.design/lucide-gauge-circle.svg?color=%236b7280" alt="" class="spec-icon" />
+                                  سرعت
+                              </span>
+                              <span class="spec-value">3.15 m/s</span>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="equipment-footer">
+                      <div>
+                          <div class="equipment-price">$95,000</div>
+                          <span class="equipment-price-label">قیمت هر 100 متر</span>
+                      </div>
+                      <a href="#" class="btn-details">جزئیات</a>
+                  </div>
+              </article>
+          </div>
+      </div>
+  </section>
+
+  <section id="estimation" class="estimation-section">
+      <div class="container">
+          <div class="section-head">
+              <h2 class="section-title-main">ابزار برآورد هزینه</h2>
+              <p class="section-desc">محاسبه تقریبی هزینه تجهیزات بر اساس نیاز پروژه</p>
+          </div>
+
+          <div class="estimation-wrapper">
+              <div class="estimation-form-card">
+                  <h3 class="form-title">
+                      <img src="https://api.iconify.design/lucide-calculator.svg?color=%23111827" alt="محاسبه" class="form-icon" />
+                      مشخصات پروژه
+                  </h3>
+                  <form>
+                      <div class="form-group">
+                          <label for="project-type" class="form-label">نوع پروژه</label>
+                          <select id="project-type" class="form-control">
+                              <option>معدن روباز</option>
+                              <option>معدن زیرزمینی</option>
+                              <option>کارخانه فرآوری</option>
+                              <option>پروژه ترکیبی</option>
+                          </select>
+                      </div>
+
+                      <div class="form-group">
+                          <label for="capacity" class="form-label">ظرفیت تولید (تن در روز)</label>
+                          <input type="number" id="capacity" class="form-control" placeholder="مثال: 5000" />
+                      </div>
+
+                      <div class="form-group">
+                          <label for="material" class="form-label">نوع ماده معدنی</label>
+                          <select id="material" class="form-control">
+                              <option>سنگ‌آهن</option>
+                              <option>مس</option>
+                              <option>طلا</option>
+                              <option>زغال‌سنگ</option>
+                              <option>سنگ‌آهک</option>
+                          </select>
+                      </div>
+
+                      <div class="form-group">
+                          <label for="equipment-level" class="form-label">سطح تجهیزات</label>
+                          <select id="equipment-level" class="form-control">
+                              <option>استاندارد</option>
+                              <option>پیشرفته</option>
+                              <option>پریمیوم</option>
+                          </select>
+                      </div>
+
+                      <button type="button" class="btn-calculate">محاسبه هزینه</button>
+                  </form>
+              </div>
+
+              <div class="estimation-result-card">
+                  <h3 class="result-title">نتیجه برآورد</h3>
+                  <div class="result-summary">
+                      <div class="total-cost">$12,450,000</div>
+                      <div class="total-label">برآورد کل هزینه تجهیزات</div>
+                  </div>
+
+                  <div class="cost-breakdown">
+                      <div class="breakdown-item">
+                          <span class="breakdown-label">حفاری و انفجار</span>
+                          <span class="breakdown-value">$2,850,000</span>
+                      </div>
+                      <div class="breakdown-item">
+                          <span class="breakdown-label">حمل‌ونقل</span>
+                          <span class="breakdown-value">$4,200,000</span>
+                      </div>
+                      <div class="breakdown-item">
+                          <span class="breakdown-label">خردایش و آسیاب</span>
+                          <span class="breakdown-value">$3,600,000</span>
+                      </div>
+                      <div class="breakdown-item">
+                          <span class="breakdown-label">فرآوری</span>
+                          <span class="breakdown-value">$1,200,000</span>
+                      </div>
+                      <div class="breakdown-item">
+                          <span class="breakdown-label">تجهیزات جانبی</span>
+                          <span class="breakdown-value">$600,000</span>
+                      </div>
+                  </div>
+
+                  <button type="button" class="download-report-btn">دانلود گزارش کامل PDF</button>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <section class="resources-section">
+      <div class="container">
+          <div class="section-head">
+              <h2 class="section-title-main">منابع فنی و راهنماها</h2>
+              <p class="section-desc">دسترسی به اسناد فنی، کاتالوگ‌ها و راهنمای نصب و راه‌اندازی</p>
+          </div>
+
+          <div class="resources-grid">
+              <div class="resource-card">
+                  <div class="resource-icon-wrapper">
+                      <img src="https://api.iconify.design/lucide-file-text.svg?color=%23ea580c" alt="کاتالوگ" class="resource-icon" />
+                  </div>
+                  <h3 class="resource-title">کاتالوگ‌های فنی</h3>
+                  <p class="resource-description">
+                      دانلود کاتالوگ‌های کامل تجهیزات شامل مشخصات فنی دقیق، نمودارها، ابعاد و جزئیات عملکردی.
+                  </p>
+                  <a href="#" class="resource-link">
+                      دانلود کاتالوگ‌ها
+                      <img src="https://api.
