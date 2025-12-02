@@ -1,1635 +1,621 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
-<head>
-<title>شرکت مهندسی معدن | ارزیابی منابع، بهینه‌سازی و تجهیزات معدنی</title>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="robots" content="index,follow">
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800&display=swap" rel="stylesheet" />
-<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800&display=swap" rel="stylesheet" />
 
-<style>
-    :root {
-        --gjs-t-color-primary: #2B6CB0;
-        --gjs-t-color-secondary: #2563eb;
-    }
-
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    html {
-        scroll-behavior: smooth;
-    }
-
-    body {
-        font-family: 'Vazirmatn', 'Rubik', sans-serif;
-        line-height: 1.6;
-        color: #1f2937;
-        -webkit-font-smoothing: antialiased;
-    }
-
-    /* Header */
-    .header-wrapper {
-        position: sticky;
-        top: 0;
-        z-index: 40;
-        background-color: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(8px);
-        border-bottom: 1px solid #e7e5e4;
-    }
-
-    .header-container {
-        max-width: 80rem;
-        margin: 0 auto;
-        padding: 1rem 1.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .brand-link {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        text-decoration: none;
-    }
-
-    .brand-logo {
-        width: 2.75rem;
-        height: 2.75rem;
-        border-radius: 0.5rem;
-        object-fit: cover;
-    }
-
-    .brand-text-block {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .brand-name {
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: #111827;
-    }
-
-    .brand-tagline {
-        font-size: 0.875rem;
-        color: #78716c;
-    }
-
-    .primary-nav {
-        display: flex;
-        align-items: center;
-        gap: 1.25rem;
-        font-size: 15px;
-    }
-
-    .nav-link {
-        color: inherit;
-        text-decoration: none;
-        padding: 0.25rem;
-        border-radius: 0.375rem;
-        transition: color 0.3s;
-    }
-
-    .nav-link:hover {
-        color: var(--gjs-t-color-primary);
-    }
-
-    .primary-cta-button {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.5rem 1rem;
-        background-color: var(--gjs-t-color-secondary);
-        color: white;
-        border-radius: 0.75rem;
-        text-decoration: none;
-        font-weight: 600;
-        transition: all 0.3s;
-    }
-
-    .primary-cta-button:hover {
-        background-color: var(--gjs-t-color-primary);
-    }
-
-    .icon-mail {
-        width: 1.25rem;
-        height: 1.25rem;
-    }
-
-    .lang-switcher {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        border-radius: 0.5rem;
-        border: 1px solid #e5e7eb;
-        padding: 0.25rem 0.5rem;
-        background-color: #fff;
-    }
-
-    .lang-switcher-btn {
-        font-size: 14px;
-        border: none;
-        background: none;
-        border-radius: 0.375rem;
-        padding: 0.25rem 0.5rem;
-        color: var(--gjs-t-color-secondary);
-        cursor: pointer;
-    }
-
-    .lang-switcher-btn[aria-current="true"] {
-        background-color: #dbeafe;
-        color: #1e3a8a;
-    }
-
-    .lang-divider {
-        width: 1px;
-        height: 1rem;
-        background-color: #e5e7eb;
-    }
-
-    /* Hero Section */
-    .hero-section {
-        position: relative;
-        overflow: hidden;
-        background: linear-gradient(to bottom right, #f1efea, transparent);
-        border-bottom: 1px solid #e7e5e4;
-    }
-
-    .hero-background {
-        position: absolute;
-        inset: 0;
-    }
-
-    .hero-background-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .hero-gradient-overlay {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(to left, rgba(0,0,0,0.55), rgba(0,0,0,0.35), transparent);
-    }
-
-    .hero-container {
-        position: relative;
-        max-width: 80rem;
-        margin: 0 auto;
-        padding: 3rem 1.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 2rem;
-    }
-
-    .hero-content {
-        max-width: 48rem;
-        flex: 1;
-    }
-
-    .hero-title {
-        font-size: 2.5rem;
-        font-weight: 800;
-        color: white;
-        margin-bottom: 1rem;
-        line-height: 1.2;
-    }
-
-    .hero-subtitle {
-        font-size: 1.125rem;
-        color: #d3dbdd;
-        margin-bottom: 1.5rem;
-    }
-
-    .hero-actions {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        margin-top: 1.5rem;
-    }
-
-    .hero-primary-button {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.75rem 1.25rem;
-        background-color: var(--gjs-t-color-secondary);
-        color: white;
-        border-radius: 0.75rem;
-        text-decoration: none;
-        font-weight: 600;
-        transition: all 0.3s;
-    }
-
-    .hero-primary-button:hover {
-        background-color: var(--gjs-t-color-primary);
-    }
-
-    .hero-secondary-button {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.75rem 1.25rem;
-        border: 1px solid #d1d5db;
-        color: var(--gjs-t-color-secondary);
-        border-radius: 0.75rem;
-        text-decoration: none;
-        transition: all 0.3s;
-    }
-
-    .hero-secondary-button:hover {
-        background-color: rgba(255,255,255,0.1);
-        border-color: var(--gjs-t-color-secondary);
-    }
-
-    .hero-bullets {
-        margin-top: 2.5rem;
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-        color: rgba(245,245,244,0.9);
-    }
-
-    .hero-bullet-item {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    /* Services Section */
-    .services-section {
-        background-color: white;
-        border-top: 1px solid #e7e5e4;
-    }
-
-    .services-container {
-        max-width: 80rem;
-        margin: 0 auto;
-        padding: 4rem 1.5rem;
-    }
-
-    .services-header-row {
-        margin-bottom: 2.5rem;
-        display: flex;
-        align-items: flex-end;
-        justify-content: space-between;
-        gap: 1.5rem;
-    }
-
-    .services-title {
-        font-size: 2rem;
-        font-weight: 800;
-        color: #111827;
-    }
-
-    .services-subtitle {
-        color: #57534e;
-        margin-top: 0.5rem;
-    }
-
-    .services-cta-link {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.25rem 0.5rem;
-        border-radius: 0.375rem;
-        text-decoration: none;
-        color: inherit;
-        transition: color 0.3s;
-    }
-
-    .services-cta-link:hover {
-        color: var(--gjs-t-color-primary);
-    }
-
-    .services-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.5rem;
-    }
-
-    .service-card {
-        border: 1px solid #e5e7eb;
-        background-color: white;
-        border-radius: 1rem;
-        padding: 1.25rem;
-        transition: all 0.3s;
-    }
-
-    .service-card:hover {
-        border-color: var(--gjs-t-color-secondary);
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    }
-
-    .service-card-header {
-        display: flex;
-        align-items: flex-start;
-        gap: 1rem;
-    }
-
-    .service-icon {
-        width: 1.5rem;
-        height: 1.5rem;
-    }
-
-    .service-title {
-        font-size: 1.125rem;
-        font-weight: 600;
-        color: #111827;
-    }
-
-    .service-description {
-        color: #374151;
-        font-size: 0.875rem;
-        margin-top: 0.25rem;
-    }
-
-    .service-bullets {
-        margin-top: 1rem;
-        font-size: 0.875rem;
-        color: #44403c;
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-
-    .service-bullet-item {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    /* About Section */
-    .about-section {
-        background: linear-gradient(to left, #fafaf9, transparent);
-        border-top: 1px solid #e7e5e4;
-        border-bottom: 1px solid #e7e5e4;
-    }
-
-    .about-container {
-        max-width: 80rem;
-        margin: 0 auto;
-        padding: 4rem 1.5rem;
-    }
-
-    .about-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2.5rem;
-    }
-
-    .about-text-column {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    .about-title {
-        font-size: 2rem;
-        font-weight: 800;
-        margin-bottom: 0.75rem;
-    }
-
-    .about-paragraph {
-        color: #44403c;
-        margin-bottom: 1rem;
-    }
-
-    .about-bullets-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-        font-size: 0.875rem;
-    }
-
-    .about-bullet-item {
-        display: flex;
-        align-items: flex-start;
-        gap: 0.75rem;
-        padding: 0.75rem;
-        border-radius: 0.5rem;
-        border: 1px solid #e7e5e4;
-        background-color: white;
-    }
-
-    .about-bullet-item:hover {
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    .bullet-title {
-        font-weight: 500;
-    }
-
-    .bullet-desc {
-        color: #57534e;
-        margin-top: 0.25rem;
-    }
-
-    .about-media-column {
-        position: relative;
-    }
-
-    .about-media-wrapper {
-        aspect-ratio: 4/3;
-        border-radius: 0.75rem;
-        overflow: hidden;
-    }
-
-    .about-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .about-stat-card {
-        position: absolute;
-        bottom: -1.5rem;
-        left: -1.5rem;
-        background-color: white;
-        border-radius: 0.75rem;
-        padding: 1rem;
-        border: 1px solid #e7e5e4;
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    .stat-label {
-        font-size: 0.875rem;
-        color: #4b5563;
-    }
-
-    .stat-value {
-        font-size: 1.125rem;
-        font-weight: 600;
-        color: #111827;
-        margin-top: 0.25rem;
-    }
-
-    /* Projects Section */
-    .projects-section {
-        background-color: white;
-        border-top: 1px solid #e7e5e4;
-    }
-
-    .projects-container {
-        max-width: 80rem;
-        margin: 0 auto;
-        padding: 4rem 1.5rem;
-    }
-
-    .projects-header {
-        margin-bottom: 1rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .projects-title {
-        font-size: 1.125rem;
-        font-weight: 600;
-        color: #111827;
-    }
-
-    .projects-subtitle {
-        color: #57534e;
-        margin-top: 0.5rem;
-    }
-
-    .projects-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.5rem;
-    }
-
-    .project-card {
-        border: 1px solid #e7e5e4;
-        border-radius: 1rem;
-        overflow: hidden;
-        background-color: white;
-        transition: all 0.3s;
-    }
-
-    .project-card:hover {
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    }
-
-    .project-media {
-        position: relative;
-        height: 14rem;
-    }
-
-    .project-image {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-    }
-
-    .project-badge {
-        position: absolute;
-        top: 0.75rem;
-        right: 0.75rem;
-        background-color: rgba(255,255,255,0.9);
-        font-size: 12px;
-        padding: 0.25rem 0.5rem;
-        border-radius: 0.375rem;
-        border: 1px solid #e7e5e4;
-    }
-
-    .project-content {
-        padding: 1rem;
-    }
-
-    .project-title {
-        font-weight: 700;
-    }
-
-    .project-description {
-        color: #57534e;
-        font-size: 0.875rem;
-        margin-top: 0.25rem;
-    }
-
-    .project-meta {
-        margin-top: 0.75rem;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-size: 0.75rem;
-        color: #78716c;
-    }
-
-    /* CTA Strip */
-    .cta-strip-section {
-        background-color: #fafaf9;
-        border-top: 1px solid #e7e5e4;
-        border-bottom: 1px solid #e7e5e4;
-    }
-
-    .cta-strip-container {
-        max-width: 80rem;
-        margin: 0 auto;
-        padding: 2.5rem 1.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1.5rem;
-    }
-
-    .cta-strip-title {
-        font-size: 1.25rem;
-        font-weight: 800;
-        margin-bottom: 0.25rem;
-    }
-
-    .cta-strip-subtitle {
-        color: #57534e;
-    }
-
-    .cta-strip-actions {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-    }
-
-    .cta-strip-button {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.5rem 1rem;
-        background-color: var(--gjs-t-color-secondary);
-        color: white;
-        border-radius: 0.75rem;
-        text-decoration: none;
-        font-weight: 600;
-        transition: all 0.3s;
-    }
-
-    .cta-strip-button:hover {
-        background-color: var(--gjs-t-color-primary);
-    }
-
-    .cta-strip-outline-button {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.5rem 1rem;
-        border: 1px solid #d6d3d1;
-        border-radius: 0.75rem;
-        text-decoration: none;
-        color: inherit;
-        transition: all 0.3s;
-    }
-
-    .cta-strip-outline-button:hover {
-        border-color: var(--gjs-t-color-secondary);
-        color: var(--gjs-t-color-secondary);
-    }
-
-    /* Contact Section */
-    .contact-section {
-        background-color: white;
-    }
-
-    .contact-container {
-        max-width: 80rem;
-        margin: 0 auto;
-        padding: 4rem 1.5rem;
-    }
-
-    .contact-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2.5rem;
-    }
-
-    .contact-form-card {
-        border: 1px solid #e5e7eb;
-        border-radius: 1rem;
-        padding: 1.5rem;
-        background-color: #fafaf9;
-    }
-
-    .contact-form-title {
-        font-size: 2rem;
-        font-weight: 800;
-        margin-bottom: 0.5rem;
-    }
-
-    .contact-form-subtitle {
-        color: #57534e;
-        margin-bottom: 1.5rem;
-    }
-
-    .contact-form {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-    }
-
-    .form-row {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.5rem;
-    }
-
-    .form-label {
-        display: block;
-        font-size: 0.875rem;
-        font-weight: 500;
-        color: #1f2937;
-        margin-bottom: 0.25rem;
-    }
-
-    .form-input-text,
-    .form-input-email,
-    .form-input-tel,
-    .form-textarea {
-        width: 100%;
-        border-radius: 0.75rem;
-        border: 1px solid #d1d5db;
-        background-color: white;
-        padding: 0.75rem 1rem;
-        transition: all 0.3s;
-    }
-
-    .form-input-text:focus,
-    .form-input-email:focus,
-    .form-input-tel:focus,
-    .form-textarea:focus {
-        outline: none;
-        border-color: var(--gjs-t-color-secondary);
-        box-shadow: 0 0 0 2px rgba(37,99,235,0.2);
-    }
-
-    .custom-select-wrapper {
-        position: relative;
-    }
-
-    .form-select {
-        appearance: none;
-        width: 100%;
-        border-radius: 0.75rem;
-        border: 1px solid #d1d5db;
-        background-color: white;
-        padding: 0.75rem 1rem;
-        transition: all 0.3s;
-    }
-
-    .form-select:focus {
-        outline: none;
-        border-color: var(--gjs-t-color-secondary);
-        box-shadow: 0 0 0 2px rgba(37,99,235,0.2);
-    }
-
-    .select-icon {
-        pointer-events: none;
-        position: absolute;
-        left: 0.75rem;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 1rem;
-        height: 1rem;
-    }
-
-    .form-consent {
-        display: flex;
-        align-items: flex-start;
-        gap: 0.75rem;
-    }
-
-    .form-checkbox {
-        margin-top: 0.25rem;
-        height: 1rem;
-        width: 1rem;
-        border-radius: 0.25rem;
-    }
-
-    .form-checkbox-label {
-        font-size: 0.875rem;
-        color: #44403c;
-    }
-
-    .form-actions {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 0.75rem;
-        padding-top: 0.5rem;
-    }
-
-    .submit-button {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.5rem 1.25rem;
-        background-color: var(--gjs-t-color-secondary);
-        color: white;
-        border-radius: 0.75rem;
-        border: none;
-        cursor: pointer;
-        font-weight: 600;
-        transition: all 0.3s;
-    }
-
-    .submit-button:hover {
-        background-color: var(--gjs-t-color-primary);
-    }
-
-    .form-note {
-        font-size: 0.75rem;
-        color: #78716c;
-    }
-
-    .contact-info-column {
-        display: flex;
-        flex-direction: column;
-        gap: 1.25rem;
-    }
-
-    .contact-card {
-        border: 1px solid #e5e7eb;
-        border-radius: 1rem;
-        padding: 1.5rem;
-        background-color: white;
-    }
-
-    .contact-card-title {
-        font-size: 1.125rem;
-        font-weight: 700;
-        margin-bottom: 0.75rem;
-    }
-
-    .contact-list {
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-    }
-
-    .contact-item {
-        display: flex;
-        align-items: flex-start;
-        gap: 0.75rem;
-        font-size: 0.875rem;
-        color: #374151;
-        text-decoration: none;
-    }
-
-    .contact-text {
-        font-size: 0.875rem;
-    }
-
-    .working-hours-card {
-        border: 1px solid #e5e7eb;
-        border-radius: 1rem;
-        padding: 1.5rem;
-        background-color: white;
-    }
-
-    .working-hours-title {
-        font-size: 1.125rem;
-        font-weight: 700;
-        margin-bottom: 0.75rem;
-    }
-
-    .working-hours-list {
-        font-size: 0.875rem;
-        color: #44403c;
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-
-    .working-hours-item {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .contact-map-card {
-        position: relative;
-        overflow: hidden;
-        border-radius: 1rem;
-    }
-
-    .contact-map-image {
-        width: 100%;
-        height: 14rem;
-        object-fit: cover;
-    }
-
-    .contact-map-overlay {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(to top, rgba(0,0,0,0.2), transparent);
-        pointer-events: none;
-    }
-
-    /* Footer */
-    .footer-wrapper {
-        background: linear-gradient(to left, #0f2a4f, transparent);
-        color: white;
-        border-top: 1px solid rgba(231,229,228,0.2);
-    }
-
-    .footer-grid {
-        max-width: 80rem;
-        margin: 0 auto;
-        padding: 3rem 1.5rem;
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 2rem;
-    }
-
-    .footer-brand {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.75rem;
-        margin-bottom: 0.75rem;
-    }
-
-    .footer-logo {
-        width: 2rem;
-        height: 2rem;
-        border-radius: 0.5rem;
-        object-fit: cover;
-    }
-
-    .footer-brand-name {
-        font-size: 1.125rem;
-        font-weight: 600;
-        color: #0f172a;
-    }
-
-    .footer-brand-desc {
-        font-size: 0.875rem;
-        color: #334155;
-    }
-
-    .footer-links-title,
-    .footer-services-title,
-    .footer-newsletter-title {
-        font-weight: 700;
-        margin-bottom: 0.75rem;
-    }
-
-    .footer-links-list,
-    .footer-services-list {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-        font-size: 0.875rem;
-        color: #e7e5e4;
-    }
-
-    .footer-link {
-        color: inherit;
-        text-decoration: none;
-        border-radius: 0.125rem;
-        transition: color 0.3s;
-    }
-
-    .footer-link:hover {
-        color: var(--gjs-t-color-secondary);
-        text-decoration: underline;
-    }
-
-    .footer-service-item {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .footer-newsletter-form {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .footer-newsletter-input {
-        flex: 1;
-        border-radius: 0.75rem;
-        border: 1px solid #d1d5db;
-        background-color: rgba(255,255,255,0.1);
-        padding: 0.5rem 0.75rem;
-        color: white;
-    }
-
-    .footer-newsletter-input::placeholder {
-        color: rgba(231,229,228,0.7);
-    }
-
-    .footer-newsletter-input:focus {
-        outline: none;
-        border-color: var(--gjs-t-color-secondary);
-    }
-
-    .footer-newsletter-button {
-        padding: 0.5rem 1rem;
-        background-color: var(--gjs-t-color-secondary);
-        color: white;
-        border-radius: 0.75rem;
-        border: none;
-        cursor: pointer;
-        font-size: 0.875rem;
-        font-weight: 600;
-        transition: all 0.3s;
-    }
-
-    .footer-newsletter-button:hover {
-        filter: brightness(1.1);
-    }
-
-    .footer-social-row {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        margin-top: 1rem;
-    }
-
-    .footer-social-link {
-        padding: 0.5rem;
-        border-radius: 0.5rem;
-        border: 1px solid rgba(255,255,255,0.3);
-        text-decoration: none;
-        transition: all 0.3s;
-    }
-
-    .footer-social-link:hover {
-        background-color: rgba(255,255,255,0.1);
-    }
-
-    .footer-bottom-bar {
-        border-top: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .footer-bottom-container {
-        max-width: 80rem;
-        margin: 0 auto;
-        padding: 1rem 1.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        font-size: 0.75rem;
-        color: #e7e5e4;
-    }
-
-    .footer-bottom-links {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-    }
-
-    .footer-bottom-link {
-        color: inherit;
-        text-decoration: none;
-        transition: color 0.3s;
-    }
-
-    .footer-bottom-link:hover {
-        color: white;
-    }
-
-    /* Responsive */
-    @media (max-width: 992px) {
-        .services-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-        .about-grid {
-            grid-template-columns: 1fr;
-        }
-        .projects-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-        .contact-grid {
-            grid-template-columns: 1fr;
-        }
-        .footer-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-        .hero-container {
-            flex-direction: column;
-        }
-        .form-row {
-            grid-template-columns: repeat(2, 1fr);
-        }
-        .cta-strip-container {
-            flex-direction: column;
-            align-items: flex-start;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .services-grid,
-        .projects-grid,
-        .footer-grid,
-        .form-row {
-            grid-template-columns: 1fr;
-        }
-        .about-bullets-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-</style>
-</head>
-
-<body>
-<header class="header-wrapper">
-    <div class="header-container">
-        <a href="./index.html" class="brand-link">
-            <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="لوگوی شرکت" class="brand-logo" />
-            <div class="brand-text-block">
-                <span class="brand-name">کاویان توسعه معدن</span>
-                <span class="brand-tagline">دانش، فناوری و ارزش‌آفرینی در زنجیره فلزات</span>
-            </div>
+  <head>
+    <title>شرکت مهندسی معدن | ارزیابی منابع، بهینه‌سازی و تجهیزات معدنی</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index,follow">
+    <meta name="generator" content="GrapesJS Studio">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800&amp;display=swap" rel="stylesheet" />
+  </head>
+
+  <body id="isfk" class="gjs-t-body body-wrapper">
+    <header id="iv8us" class="header-wrapper">
+      <div id="ig1vu" class="header-container">
+        <a href="./index.html" id="iswdi" class="brand-link">
+          <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="لوگوی شرکت مهندسی معدن" id="ijqkq" class="brand-logo" />
+          <div id="ihoc9" class="brand-text-block">
+            <span id="i8oed" class="brand-name">کاویان توسعه معدن </span>
+            <span id="iq6vb" class="brand-tagline">دانش، فناوری و ارزش‌آفرینی در زنجیره فلزات</span>
+          </div>
         </a>
-        <nav class="primary-nav">
-            <a href="./index.html" class="nav-link">خانه</a>
-            <a href="./services.html" class="nav-link">خدمات</a>
-            <a href="./news.html" class="nav-link">اخبار و روندها</a>
-            <a href="./technical-resources.html" class="nav-link">منابع فنی</a>
-            <a href="./equipment.html" class="nav-link">تجهیزات</a>
-            <a href="#contact" class="primary-cta-button">
-                <img src="https://api.iconify.design/lucide-mail.svg?color=white" alt="" class="icon-mail" />
-                درخواست مشاوره
-            </a>
-            <div data-js="lang-switcher" class="lang-switcher">
-                <button type="button" data-lang="fa" aria-current="true" class="lang-switcher-btn">FA</button>
-                <span aria-hidden="true" class="lang-divider"></span>
-                <button type="button" data-lang="en" class="lang-switcher-btn">EN</button>
-            </div>
+        <nav id="il47m" class="primary-nav">
+          <a href="./index.html" id="iqd35do" class="gjs-t-link nav-link">خانه</a>
+          <a href="./-.html" id="imhv8ey" class="gjs-t-link nav-link">خدمات</a>
+          <a href="./-.html" id="iuo7vu7" class="gjs-t-link nav-link">اخبار و روندها</a>
+          <a href="./-.html" id="i34pnot" class="gjs-t-link nav-link">تجهیزات</a>
+          <a href="#contact" id="ipyml" class="gjs-t-button primary-cta-button">
+            <img src="https://api.iconify.design/lucide-mail.svg?color=white" alt="" id="i3lmrm6" class="icon-mail" />
+            درخواست مشاوره
+          </a>
+          <div data-js="lang-switcher" id="itbpi6c" class="lang-switcher">
+            <button type="button" data-lang="fa" aria-current="true" id="i8egvyf" class="lang-switcher-btn">FA</button>
+            <span aria-hidden="true" id="i8760lj" class="lang-divider"></span>
+            <button type="button" data-lang="en" id="i1fma7o" class="lang-switcher-btn">EN</button>
+          </div>
         </nav>
-    </div>
-</header>
-
-<main>
-    <section class="hero-section">
-        <div class="hero-background">
-            <img src="https://app.grapesjs.com/api/assets/random-image?query=mining%20pit%20aerial&w=1600&h=700" alt="نمای هوایی معدن روباز" class="hero-background-image" />
-            <div class="hero-gradient-overlay"></div>
+      </div>
+    </header>
+    <main id="ii7wo">
+      <section class="hero-section" id="i49z1">
+        <div class="hero-background" id="if20g">
+          <img src="https://app.grapesjs.com/api/assets/random-image?query=mining%20pit%20aerial&amp;w=1600&amp;h=700" alt="نمای هوایی معدن روباز" class="hero-background-image" id="ix6x5" />
+          <div class="hero-gradient-overlay" id="ivtwh"></div>
         </div>
-        <div class="hero-container">
-            <div class="hero-content">
-                <h1 class="hero-title">مهندسی هوشمند در معدن و زنجیره ارزش فلزات</h1>
-                <p class="hero-subtitle">
-                    از ارزیابی منابع تا بهینه‌سازی تولید و اقتصاد پروژه، با تکیه بر دانش روز، فناوری‌های نوین و مدیریت ریسک، مسیر خلق ارزش پایدار را همراه شما طی می‌کنیم.
-                </p>
-                <div class="hero-actions">
-                    <a href="#services" class="hero-primary-button">
-                        <img src="https://api.iconify.design/lucide-compass.svg?color=white" alt="" />
-                        مشاهده خدمات
-                    </a>
-                    <a href="#projects" class="hero-secondary-button">
-                        <img src="https://api.iconify.design/lucide-folder-kanban.svg?color=white" alt="" />
-                        نمونه‌کارها
-                    </a>
-                </div>
-                <div class="hero-bullets">
-                    <div class="hero-bullet-item">
-                        <img src="https://api.iconify.design/lucide-badge-check.svg?color=white" alt="" />
-                        <span>استانداردهای بین‌المللی گزارش منابع</span>
-                    </div>
-                    <div class="hero-bullet-item">
-                        <img src="https://api.iconify.design/lucide-cpu.svg?color=white" alt="" />
-                        <span>مدل‌سازی و شبیه‌سازی پیشرفته</span>
-                    </div>
-                </div>
+        <div id="igcnf" class="hero-container">
+          <div class="hero-content" id="i2yr9">
+            <h1 id="imypk" class="gjs-t-h1 hero-title">مهندسی هوشمند در معدن و زنجیره ارزش فلزات</h1>
+            <p id="ioivb" class="hero-subtitle">
+              از ارزیابی منابع تا بهینه‌سازی تولید و اقتصاد پروژه، با تکیه بر دانش روز، فناوری‌های نوین و مدیریت ریسک، مسیر خلق ارزش پایدار را همراه شما طی می‌کنیم.
+            </p>
+            <div id="inxth" class="hero-actions">
+              <a href="#services" id="isy0o" class="gjs-t-button hero-primary-button">
+                <img src="https://api.iconify.design/lucide-compass.svg?color=white" alt="" class="icon-compass" id="id1ni" />
+                مشاهده خدمات
+              </a>
+              <a href="#projects" id="iqw7i" class="hero-secondary-button">
+                <img src="https://api.iconify.design/lucide-folder-kanban.svg?color=white" alt="" class="icon-folder" id="im8td" />
+                نمونه‌کارها
+              </a>
             </div>
-        </div>
-    </section>
-
-    <section id="services" class="services-section">
-        <div class="services-container">
-            <div class="services-header-row">
-                <div>
-                    <h2 class="services-title">حوزه‌های خدمات</h2>
-                    <p class="services-subtitle">مشاوره‌های مهندسی و مالی از ابتدا تا انتهای زنجیره ارزش فلزات</p>
-                </div>
-                <a href="#contact" class="services-cta-link">
-                    <img src="https://api.iconify.design/lucide-headset.svg?color=%232B6CB0" alt="" />
-                    گفت‌وگوی تخصصی
-                </a>
-            </div>
-            <div class="services-grid">
-                <article class="service-card">
-                    <div class="service-card-header">
-                        <img src="https://api.iconify.design/lucide-geo.svg?color=%238B5E3C" alt="" class="service-icon" />
-                        <div>
-                            <h3 class="service-title">ارزیابی منابع معدنی</h3>
-                            <p class="service-description">اکتشاف، تخمین ذخیره، گزارش‌گری مطابق با JORC/NI 43-101 و تحلیل عدم‌قطعیت.</p>
-                        </div>
-                    </div>
-                    <ul class="service-bullets">
-                        <li class="service-bullet-item">
-                            <img src="https://api.iconify.design/lucide-check.svg?color=%2322C55E" alt="" />
-                            نمونه‌برداری و QA/QC
-                        </li>
-                        <li class="service-bullet-item">
-                            <img src="https://api.iconify.design/lucide-check.svg?color=%2322C55E" alt="" />
-                            مدل بلوکی و ژئواساتیک
-                        </li>
-                    </ul>
-                </article>
-
-                <article class="service-card">
-                    <div class="service-card-header">
-                        <img src="https://api.iconify.design/lucide-cog.svg?color=%238B5E3C" alt="" class="service-icon" />
-                        <div>
-                            <h3 class="service-title">بهینه‌سازی مهندسی و زنجیره ارزش</h3>
-                            <p class="service-description">طراحی معدن، برنامه‌ریزی تولید، بهینه‌سازی حمل‌ونقل تا کارخانه و مدیریت موجودی.</p>
-                        </div>
-                    </div>
-                    <ul class="service-bullets">
-                        <li class="service-bullet-item">
-                            <img src="https://api.iconify.design/lucide-check.svg?color=%2322C55E" alt="" />
-                            شبیه‌سازی جریان مواد
-                        </li>
-                        <li class="service-bullet-item">
-                            <img src="https://api.iconify.design/lucide-check.svg?color=%2322C55E" alt="" />
-                            بهینه‌سازی ناوگان و انرژی
-                        </li>
-                    </ul>
-                </article>
-
-                <article class="service-card">
-                    <div class="service-card-header">
-                        <img src="https://api.iconify.design/lucide-wallet.svg?color=%238B5E3C" alt="" class="service-icon" />
-                        <div>
-                            <h3 class="service-title">ارزیابی اقتصادی پروژه‌های معدنی</h3>
-                            <p class="service-description">مدل مالی، تحلیل حساسیت، سناریونویسی قیمت و طراحی قراردادهای فروش.</p>
-                        </div>
-                    </div>
-                    <ul class="service-bullets">
-                        <li class="service-bullet-item">
-                            <img src="https://api.iconify.design/lucide-check.svg?color=%2322C55E" alt="" />
-                            NPV/IRR و ریسک‌سنجی
-                        </li>
-                        <li class="service-bullet-item">
-                            <img src="https://api.iconify.design/lucide-check.svg?color=%2322C55E" alt="" />
-                            اقتصاد چرخشی و پایداری
-                        </li>
-                    </ul>
-                </article>
-
-                <article class="service-card">
-                    <div class="service-card-header">
-                        <img src="https://api.iconify.design/lucide-leaf.svg?color=%238B5E3C" alt="" class="service-icon" />
-                        <div>
-                            <h3 class="service-title">بهینه‌سازی و پایداری تولید</h3>
-                            <p class="service-description">به‌کارگیری روش‌های نوین برای افزایش بهره‌وری، کاهش هزینه و کنترل اثرات محیط‌زیستی.</p>
-                        </div>
-                    </div>
-                    <ul class="service-bullets">
-                        <li class="service-bullet-item">
-                            <img src="https://api.iconify.design/lucide-check.svg?color=%2322C55E" alt="" />
-                            بهینه‌سازی مدار خردایش/فلوتاسیون
-                        </li>
-                        <li class="service-bullet-item">
-                            <img src="https://api.iconify.design/lucide-check.svg?color=%2322C55E" alt="" />
-                            پایش انرژی و آب
-                        </li>
-                    </ul>
-                </article>
-
-                <article class="service-card">
-                    <div class="service-card-header">
-                        <img src="https://api.iconify.design/lucide-laptop.svg?color=%238B5E3C" alt="" class="service-icon" />
-                        <div>
-                            <h3 class="service-title">انتقال دانش و فناوری‌های به‌روز</h3>
-                            <p class="service-description">آموزش‌های تخصصی، پیاده‌سازی نرم‌افزارهای معدنی و هوش مصنوعی در عملیات.</p>
-                        </div>
-                    </div>
-                    <ul class="service-bullets">
-                        <li class="service-bullet-item">
-                            <img src="https://api.iconify.design/lucide-check.svg?color=%2322C55E" alt="" />
-                            بومی‌سازی فناوری
-                        </li>
-                        <li class="service-bullet-item">
-                            <img src="https://api.iconify.design/lucide-check.svg?color=%2322C55E" alt="" />
-                            کارگاه و منتورینگ
-                        </li>
-                    </ul>
-                </article>
-
-                <article class="service-card">
-                    <div class="service-card-header">
-                        <img src="https://api.iconify.design/lucide-shield-check.svg?color=%238B5E3C" alt="" class="service-icon" />
-                        <div>
-                            <h3 class="service-title">مدیریت ریسک سرمایه‌گذاری</h3>
-                            <p class="service-description">چارچوب‌های ریسک، پوشش نوسان قیمت و پایش شاخص‌های کلیدی عملکرد.</p>
-                        </div>
-                    </div>
-                    <ul class="service-bullets">
-                        <li class="service-bullet-item">
-                            <img src="https://api.iconify.design/lucide-check.svg?color=%2322C55E" alt="" />
-                            ERM و سنجه‌های کمی
-                        </li>
-                        <li class="service-bullet-item">
-                            <img src="https://api.iconify.design/lucide-check.svg?color=%2322C55E" alt="" />
-                            کنترل پروژه و حاکمیت
-                        </li>
-                    </ul>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <section id="about" class="about-section">
-        <div class="about-container">
-            <div class="about-grid">
-                <div class="about-text-column">
-                    <h2 class="about-title">چرا کاویان؟</h2>
-                    <p class="about-paragraph">ما با ترکیب تجربه صنعت، داده‌محوری و فناوری‌های نوین، راهکارهایی ارائه می‌دهیم که منجر به افزایش بهره‌وری، کاهش ریسک و خلق ارزش اقتصادی و محیط‌زیستی در معادن و کارخانه‌های فرآوری می‌شود.</p>
-                    <ul class="about-bullets-grid">
-                        <li class="about-bullet-item">
-                            <img src="https://api.iconify.design/lucide-line-chart.svg?color=%232B6CB0" alt="" />
-                            <div>
-                                <p class="bullet-title">داده‌محور و شفاف</p>
-                                <p class="bullet-desc">گزارش‌های تحلیلی با داشبوردهای قابل‌رهگیری.</p>
-                            </div>
-                        </li>
-                        <li class="about-bullet-item">
-                            <img src="https://api.iconify.design/lucide-factory.svg?color=%232B6CB0" alt="" />
-                            <div>
-                                <p class="bullet-title">یکپارچگی معدن تا کارخانه</p>
-                                <p class="bullet-desc">همسویی اهداف استخراج، حمل و فرآوری.</p>
-                            </div>
-                        </li>
-                        <li class="about-bullet-item">
-                            <img src="https://api.iconify.design/lucide-graduation-cap.svg?color=%232B6CB0" alt="" />
-                            <div>
-                                <p class="bullet-title">انتقال دانش</p>
-                                <p class="bullet-desc">آموزش و استقرار پایدار در تیم‌های شما.</p>
-                            </div>
-                        </li>
-                        <li class="about-bullet-item">
-                            <img src="https://api.iconify.design/lucide-shield.svg?color=%232B6CB0" alt="" />
-                            <div>
-                                <p class="bullet-title">مدیریت ریسک حرفه‌ای</p>
-                                <p class="bullet-desc">چارچوب‌های نوین برای تصمیم‌گیری مطمئن.</p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="about-media-column">
-                    <div class="about-media-wrapper">
-                        <img src="https://app.grapesjs.com/api/assets/random-image?query=mining%20equipment%20haul%20truck&w=1200&h=900" alt="ماشین‌آلات معدنی" loading="lazy" class="about-image" />
-                    </div>
-                    <div class="about-stat-card">
-                        <img src="https://api.iconify.design/lucide-trophy.svg?color=%238B5E3C" alt="" />
-                        <div>
-                            <p class="stat-label">بیش از</p>
-                            <p class="stat-value">۵۰ پروژه موفق</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects" class="projects-section">
-        <div class="projects-container">
-            <div class="projects-header">
-                <h2 class="projects-title">پروژه‌ها و نمونه‌کارها</h2>
-                <p class="projects-subtitle">گزیده‌ای از پروژه‌های ارزیابی ذخیره، طراحی معدن و بهینه‌سازی فرآوری</p>
-            </div>
-            <div class="projects-grid">
-                <article class="project-card">
-                    <div class="project-media">
-                        <img src="https://app.grapesjs.com/api/assets/random-image?query=open%20pit%20mine%20bench&w=900&h=500" alt="طراحی معدن روباز" loading="lazy" class="project-image" />
-                        <span class="project-badge">طراحی معدن</span>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">طراحی نهایی و زمان‌بندی تولید مس</h3>
-                        <p class="project-description">بهینه‌سازی پله‌ها، رمپ‌ها و سیکل بارگیری/حمل با کاهش ۸٪ هزینه عملیاتی.</p>
-                        <div class="project-meta">
-                            <img src="https://api.iconify.design/lucide-map-pin.svg?color=%236B7280" alt="" />
-                            جنوب غرب ایران
-                        </div>
-                    </div>
-                </article>
-
-                <article class="project-card">
-                    <div class="project-media">
-                        <img src="https://app.grapesjs.com/api/assets/random-image?query=processing%20plant%20mineral&w=900&h=500" alt="بهینه‌سازی کارخانه" loading="lazy" class="project-image" />
-                        <span class="project-badge">بهینه‌سازی فرآوری</span>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">بهبود مدار خردایش و فلوتاسیون</h3>
-                        <p class="project-description">افزایش ۴.۵٪ بازیابی و کاهش ۶٪ مصرف انرژی با شبیه‌سازی و کنترل پیش‌بین.</p>
-                        <div class="project-meta">
-                            <img src="https://api.iconify.design/lucide-map-pin.svg?color=%236B7280" alt="" />
-                            مرکز ایران
-                        </div>
-                    </div>
-                </article>
-
-                <article class="project-card">
-                    <div class="project-media">
-                        <img src="https://app.grapesjs.com/api/assets/random-image?query=geology%20core%20samples&w=900&h=500" alt="ارزیابی منابع" loading="lazy" class="project-image" />
-                        <span class="project-badge">ارزیابی ذخیره</span>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">گزارش منابع طبق استاندارد JORC</h3>
-                        <p class="project-description">برنامه‌ریزی نمونه‌برداری، QA/QC و مدل بلوکی با اعتبارسنجی چندگانه.</p>
-                        <div class="project-meta">
-                            <img src="https://api.iconify.design/lucide-map-pin.svg?color=%236B7280" alt="" />
-                            شمال شرق ایران
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <section class="cta-strip-section">
-        <div class="cta-strip-container">
-            <div>
-                <h3 class="cta-strip-title">برای شروع همکاری آماده‌اید؟</h3>
-                <p class="cta-strip-subtitle">مشاوره‌های مهندسی و مالی از ابتدا تا انتهای زنجیره ارزش را از ما بخواهید.</p>
-            </div>
-            <div class="cta-strip-actions">
-                <a href="#contact" class="cta-strip-button">
-                    <img src="https://api.iconify.design/lucide-phone.svg?color=white" alt="" />
-                    ارتباط با ما
-                </a>
-                <a href="#services" class="cta-strip-outline-button">
-                    <img src="https://api.iconify.design/lucide-list-tree.svg?color=%232B6CB0" alt="" />
-                    جزئیات خدمات
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="contact-section">
-        <div class="contact-container">
-            <div class="contact-grid">
-                <div class="contact-form-card">
-                    <h2 class="contact-form-title">درخواست مشاوره</h2>
-                    <p class="contact-form-subtitle">فرم زیر را تکمیل کنید تا تیم ما در کوتاه‌ترین زمان ممکن با شما ارتباط بگیرد.</p>
-                    <form method="post" action="#" class="contact-form">
-                        <div class="form-row">
-                            <div>
-                                <label for="name" class="form-label">نام و نام خانوادگی</label>
-                                <input type="text" id="name" name="name" required placeholder="مثال: علی مرادی" class="form-input-text" />
-                            </div>
-                            <div>
-                                <label for="company" class="form-label">نام شرکت</label>
-                                <input type="text" id="company" name="company" placeholder="مثال: توسعه معادن پارس" class="form-input-text" />
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div>
-                                <label for="email" class="form-label">ایمیل</label>
-                                <input type="email" id="email" name="email" required placeholder="example@company.com" class="form-input-email" />
-                            </div>
-                            <div>
-                                <label for="phone" class="form-label">شماره تماس</label>
-                                <input type="tel" id="phone" name="phone" placeholder="09xxxxxxxxx" class="form-input-tel" />
-                            </div>
-                        </div>
-                        <div>
-                            <label for="service" class="form-label">حوزه موردنیاز</label>
-                            <div class="custom-select-wrapper">
-                                <select id="service" name="service" class="form-select">
-                                    <option>ارزیابی منابع معدنی</option>
-                                    <option>بهینه‌سازی مهندسی و زنجیره ارزش</option>
-                                    <option>ارزیابی اقتصادی پروژه</option>
-                                    <option>پایداری و HSE</option>
-                                    <option>انتقال دانش و فناوری</option>
-                                    <option>مدیریت ریسک سرمایه‌گذاری</option>
-                                </select>
-                                <img src="https://api.iconify.design/lucide-chevron-down.svg?color=%236B7280" alt="" class="select-icon" />
-                            </div>
-                        </div>
-                        <div>
-                            <label for="message" class="form-label">توضیحات</label>
-                            <textarea id="message" name="message" rows="4" placeholder="مختصر درباره پروژه، زمان‌بندی و اهداف بنویسید..." class="form-textarea"></textarea>
-                        </div>
-                        <div class="form-consent">
-                            <input type="checkbox" id="consent" name="consent" class="form-checkbox" />
-                            <label for="consent" class="form-checkbox-label">با ذخیره‌سازی اطلاعات برای پیگیری موافقم.</label>
-                        </div>
-                        <div class="form-actions">
-                            <button type="submit" class="submit-button">
-                                <img src="https://api.iconify.design/lucide-send.svg?color=white" alt="" />
-                                ارسال درخواست
-                            </button>
-                            <span class="form-note">میانگین زمان پاسخ: کمتر از ۲۴ ساعت کاری</span>
-                        </div>
-                    </form>
-                </div>
-                <aside class="contact-info-column">
-                    <div class="contact-card">
-                        <h3 class="contact-card-title">راه‌های ارتباطی</h3>
-                        <div class="contact-list">
-                            <a href="tel:+982112345678" class="contact-item">
-                                <img src="https://api.iconify.design/lucide-phone.svg?color=%231F2937" alt="" />
-                                <span>+98 21 1234 5678</span>
-                            </a>
-                            <a href="mailto:info@mining-eng.com" class="contact-item">
-                                <img src="https://api.iconify.design/lucide-mail.svg?color=%231F2937" alt="" />
-                                <span>info@kdmine.com</span>
-                            </a>
-                            <div class="contact-item">
-                                <img src="https://api.iconify.design/lucide-map-pin.svg?color=%231F2937" alt="" />
-                                <span class="contact-text">تهران، خیابان ولیعصر، برج فناوری معدن، طبقه ۶</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="working-hours-card">
-                        <h3 class="working-hours-title">ساعات پاسخگویی</h3>
-                        <ul class="working-hours-list">
-                            <li class="working-hours-item">
-                                <span>شنبه تا چهارشنبه</span>
-                                <span>۹:۰۰ - ۱۷:۰۰</span>
-                            </li>
-                            <li class="working-hours-item">
-                                <span>پنجشنبه</span>
-                                <span>۹:۰۰ - ۱۳:۰۰</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="contact-map-card">
-                        <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/9d959ccc-b434-463b-96ad-eca65607ad44__best-financial-innovations-2024-scaled.jpg" alt="نقشه موقعیت" loading="lazy" class="contact-map-image" />
-                          <div class="contact-map-overlay"></div>
-                      </div>
-                  </aside>
+            <div class="hero-bullets" id="i3g4b">
+              <div class="hero-bullet-item" id="ioaas">
+                <img src="https://api.iconify.design/lucide-badge-check.svg?color=white" alt="" class="icon-check" id="irj71" />
+                <span id="i36nf">استانداردهای بین‌المللی گزارش منابع</span>
               </div>
-        </div> 
-  </section> 
-</main>
-<footer class="footer-wrapper">
-    <div class="footer-grid">
-        <div>
-            <div class="footer-brand">
-                <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/79888338-f5e2-4189-80b6-67a28b61af48__kavian3dgeometriclogo.svg" alt="لوگو" class="footer-logo" />
-                <span class="footer-brand-name">کاویان توسعه معدن</span>
+              <div class="hero-bullet-item" id="it01b">
+                <img src="https://api.iconify.design/lucide-cpu.svg?color=white" alt="" class="icon-cpu" id="i4gnd" />
+                <span id="iuckg">مدل‌سازی و شبیه‌سازی پیشرفته</span>
+              </div>
             </div>
-            <p class="footer-brand-desc">راهکارهای مهندسی، مالی و فناورانه برای استخراج، فرآوری و زنجیره ارزش فلزات.</p>
+          </div>
         </div>
-        <div>
-            <h4 class="footer-links-title">لینک‌های مهم</h4>
-            <ul class="footer-links-list">
-                <li><a href="./services.html" class="footer-link">خدمات</a></li>
-                <li><a href="./news.html" class="footer-link">اخبار و روندها</a></li>
-                <li><a href="./technical-resources.html" class="footer-link">منابع فنی</a></li>
-                <li><a href="#about" class="footer-link">درباره ما</a></li>
-                <li><a href="#contact" class="footer-link">تماس با ما</a></li>
-            </ul>
-        </div>
-        <div>
-            <h4 class="footer-services-title">خدمات کلیدی</h4>
-            <ul class="footer-services-list">
-                <li class="footer-service-item">
-                    <img src="https://api.iconify.design/lucide-geo.svg?color=white" alt="" />
-                    ارزیابی منابع معدنی
-                </li>
-                <li class="footer-service-item">
-                    <img src="https://api.iconify.design/lucide-cog.svg?color=white" alt="" />
-                    بهینه‌سازی مهندسی
-                </li>
-                <li class="footer-service-item">
-                    <img src="https://api.iconify.design/lucide-wallet.svg?color=white" alt="" />
-                    مدل‌سازی اقتصادی
-                </li>
-                <li class="footer-service-item">
-                    <img src="https://api.iconify.design/lucide-shield-check.svg?color=white" alt="" />
-                    مدیریت ریسک
-                </li>
-            </ul>
-        </div>
-        <div>
-            <h4 class="footer-newsletter-title">خبرنامه تخصصی معدن</h4>
-            <form method="post" action="#" class="footer-newsletter-form">
-                <input type="email" name="newsletter" placeholder="ایمیل شما" class="footer-newsletter-input" />
-                <button type="submit" class="footer-newsletter-button">عضویت</button>
-            </form>
-            <div class="footer-social-row">
-                <a href="#" aria-label="LinkedIn" class="footer-social-link">
-                    <img src="https://api.iconify.design/lucide-linkedin.svg?color=white" alt="" />
-                </a>
-                <a href="#" aria-label="Twitter" class="footer-social-link">
-                    <img src="https://api.iconify.design/lucide-twitter.svg?color=white" alt="" />
-                </a>
-                <a href="#" aria-label="Instagram" class="footer-social-link">
-                    <img src="https://api.iconify.design/lucide-instagram.svg?color=white" alt="" />
-                </a>
+      </section>
+      <section id="services" class="services-section">
+        <div id="ionwy" class="services-container">
+          <div id="iejof" class="services-header-row">
+            <div id="iae6i">
+              <h2 id="iz8hq" class="gjs-t-h2 services-title">حوزه‌های خدمات</h2>
+              <p class="services-subtitle" id="ikg1o">مشاوره‌های مهندسی و مالی از ابتدا تا انتهای زنجیره ارزش فلزات</p>
             </div>
+            <a href="#contact" class="gjs-t-link services-cta-link" id="int1m">
+              <img src="https://api.iconify.design/lucide-headset.svg?color=%232B6CB0" alt="" class="icon-headset" id="iavod" />
+              گفت‌وگوی تخصصی
+            </a>
+          </div>
+          <div class="services-grid" id="ig081">
+            <article class="gjs-t-border service-card" id="i7vrh">
+              <div class="service-card-header" id="iatp5">
+                <img src="https://api.iconify.design/lucide-geo.svg?color=%238B5E3C" alt="" class="service-icon" id="imfq4" />
+                <div id="ipk96">
+                  <h3 class="service-title" id="i194c">ارزیابی منابع معدنی</h3>
+                  <p class="service-description" id="i85as">اکتشاف، تخمین ذخیره، گزارش‌گری مطابق با JORC/NI 43-101 و تحلیل عدم‌قطعیت.</p>
+                </div>
+              </div>
+              <ul class="service-bullets" id="ilpk7">
+                <li class="service-bullet-item" id="ihkgi">
+                  <img src="https://api.iconify.design/lucide-check.svg?color=%2322C55E" alt="" class="icon-small-check" id="itpxk" />نمونه‌برداری و QA/QC
+                </li>
+                <li class="service-bullet-item" id="iyi51">
+                  <img src="https://api.iconify.design/lucide-check.svg?color=%2322C55E" alt="" class="icon-small-check" id="ispp3" />مدل بلوکی و ژئواساتیک
+                </li>
+              </ul>
+            </article>
+            <article class="gjs-t-border service-card" id="ivvul">
+              <div class="service-card-header" id="izep6">
+                <img src="https://api.iconify.design/lucide-cog.svg?color=%238B5E3C" alt="" class="service-icon" id="i6yru" />
+                <div id="iqwvf">
+                  <h3 class="service-title" id="i27yi">بهینه‌سازی مهندسی و زنجیره ارزش</h3>
+                  <p class="service-description" id="ir8l8n">طراحی معدن، برنامه‌ریزی تولید، بهینه‌سازی حمل‌ونقل تا کارخانه و مدیریت موجودی.</p>
+                </div>
+              </div>
+              <ul class="service-bullets" id="i2c189">
+                <li class="service-bullet-item" id="i9vt5h">
+                  <img src="https://api.iconify.design/lucide-check.svg?color=%2322C55E" alt="" class="icon-small-check" id="in88vc" />شبیه‌سازی جریان مواد
+                </li>
+                <li class="service-bullet-item" id="iybu78">
+                  <img src="https://api.iconify.design/lucide-check.svg?color=%2322C55E" alt="" class="icon-small-check" id="ik9cz5" />بهینه‌سازی ناوگان و انرژی
+                </li>
+              </ul>
+            </article>
+            <article id="i68xfl" class="gjs-t-border service-card">
+              <div class="service-card-header" id="ifpbqo">
+                <img src="https://api.iconify.design/lucide-wallet.svg?color=%238B5E3C" alt="" class="service-icon" id="iusvam" />
+                <div id="iw3npj">
+                  <h3 class="service-title" id="ij5lpx">ارزیابی اقتصادی پروژه‌های معدنی</h3>
+                  <p class="service-description" id="ivvnkq">مدل مالی، تحلیل حساسیت، سناریونویسی قیمت و طراحی قراردادهای فروش.</p>
+                </div>
+              </div>
+              <ul class="service-bullets" id="iw8t0s">
+                <li class="service-bullet-item" id="in6fx5">
+                  <img src="https://api.iconify.design/lucide-check.svg?color=%2322C55E" alt="" class="icon-small-check" id="i4fjww" />NPV/IRR و ریسک‌سنجی
+                </li>
+                <li class="service-bullet-item" id="ix804h">
+                  <img src="https://api.iconify.design/lucide-check.svg?color=%2322C55E" alt="" class="icon-small-check" id="iqb0uj" />اقتصاد چرخشی و پایداری
+                </li>
+              </ul>
+            </article>
+            <article class="gjs-t-border service-card" id="ishmn7">
+              <div class="service-card-header" id="ivw0pv">
+                <img src="https://api.iconify.design/lucide-leaf.svg?color=%238B5E3C" alt="" class="service-icon" id="idww8j" />
+                <div id="iufu7t">
+                  <h3 class="service-title" id="i6f0gi">بهینه‌سازی و پایداری تولید</h3>
+                  <p class="service-description" id="iduj7a">به‌کارگیری روش‌های نوین برای افزایش بهره‌وری، کاهش هزینه و کنترل اثرات محیط‌زیستی.</p>
+                </div>
+              </div>
+              <ul class="service-bullets" id="ifvsvt">
+                <li class="service-bullet-item" id="ifhuew">
+                  <img src="https://api.iconify.design/lucide-check.svg?color=%2322C55E" alt="" class="icon-small-check" id="i59nal" />بهینه‌سازی مدار خردایش/فلوتاسیون
+                </li>
+                <li class="service-bullet-item" id="ik6gb7">
+                  <img src="https://api.iconify.design/lucide-check.svg?color=%2322C55E" alt="" class="icon-small-check" id="ivkpcl" />پایش انرژی و آب
+                </li>
+              </ul>
+            </article>
+            <article class="gjs-t-border service-card" id="imt5ph">
+              <div class="service-card-header" id="i1b44m">
+                <img src="https://api.iconify.design/lucide-laptop.svg?color=%238B5E3C" alt="" class="service-icon" id="ivg1vf" />
+                <div id="ishsy8">
+                  <h3 class="service-title" id="i0yz0s">انتقال دانش و فناوری‌های به‌روز</h3>
+                  <p class="service-description" id="imos3y">آموزش‌های تخصصی، پیاده‌سازی نرم‌افزارهای معدنی و هوش مصنوعی در عملیات.</p>
+                </div>
+              </div>
+              <ul class="service-bullets" id="iicq0f">
+                <li class="service-bullet-item" id="ix6ceh">
+                  <img src="https://api.iconify.design/lucide-check.svg?color=%2322C55E" alt="" class="icon-small-check" id="i0zuwa" />بومی‌سازی فناوری
+                </li>
+                <li class="service-bullet-item" id="idldd6">
+                  <img src="https://api.iconify.design/lucide-check.svg?color=%2322C55E" alt="" class="icon-small-check" id="ivwndy" />کارگاه و منتورینگ
+                </li>
+              </ul>
+            </article>
+            <article class="gjs-t-border service-card" id="id9l7b">
+              <div class="service-card-header" id="i7mnrl">
+                <img src="https://api.iconify.design/lucide-shield-check.svg?color=%238B5E3C" alt="" class="service-icon" id="i32kvk" />
+                <div id="i37028">
+                  <h3 class="service-title" id="iycr7u">مدیریت ریسک سرمایه‌گذاری</h3>
+                  <p class="service-description" id="iqux5b">چارچوب‌های ریسک، پوشش نوسان قیمت و پایش شاخص‌های کلیدی عملکرد.</p>
+                </div>
+              </div>
+              <ul class="service-bullets" id="ildkjd">
+                <li class="service-bullet-item" id="ib6tbw">
+                  <img src="https://api.iconify.design/lucide-check.svg?color=%2322C55E" alt="" class="icon-small-check" id="i84152" />ERM و سنجه‌های کمی
+                </li>
+                <li class="service-bullet-item" id="ix0tyv">
+                  <img src="https://api.iconify.design/lucide-check.svg?color=%2322C55E" alt="" class="icon-small-check" id="ipq5j1" />کنترل پروژه و حاکمیت
+                </li>
+              </ul>
+            </article>
+          </div>
         </div>
-    </div>
-    <div class="footer-bottom-bar">
-        <div class="footer-bottom-container">
-            <span>© ۱۴۰۴ کاویان توسعه معدن. همه حقوق محفوظ است.</span>
-            <div class="footer-bottom-links">
-                <a href="#" class="footer-bottom-link">حریم خصوصی</a>
-                <a href="#" class="footer-bottom-link">شرایط استفاده</a>
+      </section>
+      <section id="about" class="about-section">
+        <div id="i9m8tm" class="about-container">
+          <div class="about-grid" id="izdajk">
+            <div class="about-text-column" id="i4g2rm">
+              <h2 id="i1frrm" class="gjs-t-h2 about-title">چرا کاویان؟</h2>
+              <p id="isulcg" class="about-paragraph">ما با ترکیب تجربه صنعت، داده‌محوری و فناوری‌های نوین، راهکارهایی ارائه می‌دهیم که منجر به افزایش بهره‌وری، کاهش ریسک و خلق ارزش اقتصادی و محیط‌زیستی در معادن و کارخانه‌های فرآوری می‌شود.</p>
+              <ul class="about-bullets-grid" id="i3z5w2">
+                <li class="about-bullet-item" id="idwylr">
+                  <img src="https://api.iconify.design/lucide-line-chart.svg?color=%232B6CB0" alt="" class="icon-metric" id="imq06w" />
+                  <div id="ilry5n">
+                    <p class="bullet-title" id="i5ce08">داده‌محور و شفاف</p>
+                    <p id="iueicw" class="bullet-desc">گزارش‌های تحلیلی با داشبوردهای قابل‌رهگیری.</p>
+                  </div>
+                </li>
+                <li class="about-bullet-item" id="im1l34">
+                  <img src="https://api.iconify.design/lucide-factory.svg?color=%232B6CB0" alt="" class="icon-factory" id="i289iv" />
+                  <div id="igb96q">
+                    <p class="bullet-title" id="il09id">یکپارچگی معدن تا کارخانه</p>
+                    <p id="i5refx" class="bullet-desc">همسویی اهداف استخراج، حمل و فرآوری.</p>
+                  </div>
+                </li>
+                <li class="about-bullet-item" id="i6iquo">
+                  <img src="https://api.iconify.design/lucide-graduation-cap.svg?color=%232B6CB0" alt="" class="icon-cap" id="i4s2se" />
+                  <div id="ifnp0l">
+                    <p class="bullet-title" id="ivjmey">انتقال دانش</p>
+                    <p id="il2tdb" class="bullet-desc">آموزش و استقرار پایدار در تیم‌های شما.</p>
+                  </div>
+                </li>
+                <li class="about-bullet-item" id="iqg38d">
+                  <img src="https://api.iconify.design/lucide-shield.svg?color=%232B6CB0" alt="" class="icon-shield" id="i67ut4" />
+                  <div id="ib4tr4">
+                    <p class="bullet-title" id="ikgz4n">مدیریت ریسک حرفه‌ای</p>
+                    <p id="ilzymj" class="bullet-desc">چارچوب‌های نوین برای تصمیم‌گیری مطمئن.</p>
+                  </div>
+                </li>
+              </ul>
             </div>
+            <div class="about-media-column" id="iambmj">
+              <div class="about-media-wrapper" id="ia2orl">
+                <img src="https://app.grapesjs.com/api/assets/random-image?query=mining%20equipment%20haul%20truck&amp;w=1200&amp;h=900" alt="ماشین‌آلات معدنی در حال کار" loading="lazy" id="icwi7c" class="about-image" />
+              </div>
+              <div class="about-stat-card" id="i924xg">
+                <img src="https://api.iconify.design/lucide-trophy.svg?color=%238B5E3C" alt="" class="icon-trophy" id="iye4kk" />
+                <div id="imxzj8">
+                  <p class="stat-label" id="iq6gnh">بیش از</p>
+                  <p class="stat-value" id="ili8ns">۵۰ پروژه موفق</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
-</footer>
-
-<script>
-    // Language Switcher
-    (function() {
+      </section>
+      <section id="projects" class="projects-section">
+        <div class="projects-container" id="iuhgt2">
+          <div class="projects-header" id="inbg08">
+            <h2 class="gjs-t-h2 projects-title" id="i7bztc">پروژه‌ها و نمونه‌کارها</h2>
+            <p class="projects-subtitle" id="ibw3go">گزیده‌ای از پروژه‌های ارزیابی ذخیره، طراحی معدن و بهینه‌سازی فرآوری</p>
+          </div>
+          <div class="projects-grid" id="iefqct">
+            <article class="group project-card" id="iuspbh">
+              <div class="project-media" id="isqttu">
+                <img src="https://app.grapesjs.com/api/assets/random-image?query=open%20pit%20mine%20bench&amp;w=900&amp;h=500" alt="طراحی معدن روباز و برنامه‌ریزی تولید" loading="lazy" class="project-image" id="i7n2ag" />
+                <span class="project-badge" id="ioqaa4">طراحی معدن</span>
+              </div>
+              <div class="project-content" id="iqx46m">
+                <h3 class="project-title" id="ia8p5w">طراحی نهایی و زمان‌بندی تولید مس</h3>
+                <p id="i1yy1i" class="project-description">بهینه‌سازی پله‌ها، رمپ‌ها و سیکل بارگیری/حمل با کاهش ۸٪ هزینه عملیاتی.</p>
+                <div class="project-meta" id="ica5bv">
+                  <img src="https://api.iconify.design/lucide-map-pin.svg?color=%236B7280" alt="" class="icon-pin" id="idq8o2" />
+                  جنوب غرب ایران
+                </div>
+              </div>
+            </article>
+            <article class="group project-card" id="ikf0qg">
+              <div class="project-media" id="ibd3j4">
+                <img src="https://app.grapesjs.com/api/assets/random-image?query=processing%20plant%20mineral&amp;w=900&amp;h=500" alt="بهینه‌سازی کارخانه فرآوری" loading="lazy" class="project-image" id="iknnj2" />
+                <span class="project-badge" id="ib7pzb">بهینه‌سازی فرآوری</span>
+              </div>
+              <div class="project-content" id="iwd20n">
+                <h3 class="project-title" id="iq3q11">بهبود مدار خردایش و فلوتاسیون</h3>
+                <p id="iqn96f" class="project-description">افزایش ۴.۵٪ بازیابی و کاهش ۶٪ مصرف انرژی با شبیه‌سازی و کنترل پیش‌بین.</p>
+                <div class="project-meta" id="ifo8y7">
+                  <img src="https://api.iconify.design/lucide-map-pin.svg?color=%236B7280" alt="" class="icon-pin" id="ievwh6" />
+                  مرکز ایران
+                </div>
+              </div>
+            </article>
+            <article class="group project-card" id="itet1x">
+              <div class="project-media" id="ijnltl">
+                <img src="https://app.grapesjs.com/api/assets/random-image?query=geology%20core%20samples&amp;w=900&amp;h=500" alt="ارزیابی منابع و مغزه‌گیری" loading="lazy" class="project-image" id="iw126a" />
+                <span class="project-badge" id="idcm0v">ارزیابی ذخیره</span>
+              </div>
+              <div class="project-content" id="ibz4o1">
+                <h3 class="project-title" id="izdhi8">گزارش منابع طبق استاندارد JORC</h3>
+                <p id="irb3sp" class="project-description">برنامه‌ریزی نمونه‌برداری، QA/QC و مدل بلوکی با اعتبارسنجی چندگانه.</p>
+                <div class="project-meta" id="iv926f">
+                  <img src="https://api.iconify.design/lucide-map-pin.svg?color=%236B7280" alt="" class="icon-pin" id="i980m5" />
+                  شمال شرق ایران
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="cta-strip-section" id="ipx347">
+        <div class="cta-strip-container" id="ib6ecm">
+          <div id="ix1413">
+            <h3 id="itawvq" class="cta-strip-title">برای شروع همکاری آماده‌اید؟</h3>
+            <p id="ihhkfl" class="cta-strip-subtitle">مشاوره‌های مهندسی و مالی از ابتدا تا انتهای زنجیره ارزش را از ما بخواهید.</p>
+          </div>
+          <div class="cta-strip-actions" id="izoeth">
+            <a href="#contact" class="gjs-t-button cta-strip-button" id="ixgdbi">
+              <img src="https://api.iconify.design/lucide-phone.svg?color=white" alt="" class="icon-phone" id="i2jmbm" />
+              ارتباط با ما
+            </a>
+            <a href="#services" class="cta-strip-outline-button" id="iywwfm">
+              <img src="https://api.iconify.design/lucide-list-tree.svg?color=%232B6CB0" alt="" class="icon-list" id="i616li" />
+              جزئیات خدمات
+            </a>
+          </div>
+        </div>
+      </section>
+      <section id="contact" class="contact-section">
+        <div id="iykw9i" class="contact-container">
+          <div class="contact-grid" id="iqlx0p">
+            <div class="gjs-t-border contact-form-card" id="in3mtu">
+              <h2 class="gjs-t-h2 contact-form-title" id="irfn2e">درخواست مشاوره</h2>
+              <p id="ij87ap" class="contact-form-subtitle">فرم زیر را تکمیل کنید تا تیم ما در کوتاه‌ترین زمان ممکن با شما ارتباط بگیرد.</p>
+              <form method="post" action="#" class="contact-form" id="i90hzt">
+                <div class="form-row" id="id36q7">
+                  <div id="irmvoi">
+                    <label for="name" class="form-label" id="ipj514">نام و نام خانوادگی</label>
+                    <input type="text" id="name" name="name" required placeholder="مثال: علی مرادی" class="form-input-text" />
+                  </div>
+                  <div id="i3pryt">
+                    <label for="company" class="form-label" id="i9wqa9">نام شرکت</label>
+                    <input type="text" id="company" name="company" placeholder="مثال: توسعه معادن پارس" class="form-input-text" />
+                  </div>
+                </div>
+                <div class="form-row" id="ijjoef">
+                  <div id="id8jdo">
+                    <label for="email" class="form-label" id="igrnhq">ایمیل</label>
+                    <input type="email" id="email" name="email" required placeholder="example@company.com" class="form-input-email" />
+                  </div>
+                  <div id="iut37u">
+                    <label for="phone" class="form-label" id="ig4gq8">شماره تماس</label>
+                    <input type="tel" id="phone" name="phone" placeholder="09xxxxxxxxx" class="form-input-tel" />
+                  </div>
+                </div>
+                <div id="ibeo9f">
+                  <label for="service" class="form-label" id="iszyi9">حوزه موردنیاز</label>
+                  <div class="custom-select-wrapper" id="ibmqkg">
+                    <select type="text" id="service" name="service" class="form-select">
+                      <option id="ierqq8">ارزیابی منابع معدنی</option>
+                      <option id="isyp8l">بهینه‌سازی مهندسی و زنجیره ارزش</option>
+                      <option id="iqd1oi">ارزیابی اقتصادی پروژه</option>
+                      <option id="in0k4i">پایداری و HSE</option>
+                      <option id="i26jc6">انتقال دانش و فناوری</option>
+                      <option id="iv1qvw">مدیریت ریسک سرمایه‌گذاری</option>
+                    </select>
+                    <img src="https://api.iconify.design/lucide-chevron-down.svg?color=%236B7280" alt="" class="select-icon" id="i1exdk" />
+                  </div>
+                </div>
+                <div id="ikps2b">
+                  <label for="message" class="form-label" id="il4fh4">توضیحات</label>
+                  <textarea id="message" name="message" rows="4" placeholder="مختصر درباره پروژه، زمان‌بندی و اهداف بنویسید..." class="form-textarea"></textarea>
+                </div>
+                <div class="form-consent" id="ini2pf">
+                  <input type="checkbox" id="consent" name="consent" class="form-checkbox" />
+                  <label for="consent" class="form-checkbox-label" id="ia3v5t">با ذخیره‌سازی اطلاعات برای پیگیری موافقم.</label>
+                </div>
+                <div class="form-actions" id="i9fxeu">
+                  <button type="submit" class="gjs-t-button submit-button" id="iodebl">
+                    <img src="https://api.iconify.design/lucide-send.svg?color=white" alt="" class="icon-send" id="ij4x6k" />
+                    ارسال درخواست
+                  </button>
+                  <span class="form-note" id="iptuqh">میانگین زمان پاسخ: کمتر از ۲۴ ساعت کاری</span>
+                </div>
+              </form>
+            </div>
+            <aside id="ivfcof" class="contact-info-column">
+              <div class="gjs-t-border contact-card" id="iq51zf">
+                <h3 class="contact-card-title" id="ikvs0p">راه‌های ارتباطی</h3>
+                <div class="contact-list" id="irjbyn">
+                  <a href="tel:+982112345678" class="contact-item" id="ioydm2">
+                    <img src="https://api.iconify.design/lucide-phone.svg?color=%231F2937" alt="" class="icon-phone" id="i8ii7k" />
+                    <span id="itv43v">+98 21 1234 5678</span>
+                  </a>
+                  <a href="mailto:info@mining-eng.com" class="contact-item" id="itxuyl">
+                    <img src="https://api.iconify.design/lucide-mail.svg?color=%231F2937" alt="" class="icon-mail" id="ikg09f" />
+                    <span id="ixfopb">info@kdmine.com</span>
+                  </a>
+                  <div class="contact-item" id="i6fg5s">
+                    <img src="https://api.iconify.design/lucide-map-pin.svg?color=%231F2937" alt="" class="icon-address" id="izxakl" />
+                    <span class="contact-text" id="iani8f">تهران، خیابان ولیعصر، برج فناوری معدن، طبقه ۶</span>
+                  </div>
+                </div>
+              </div>
+              <div class="gjs-t-border working-hours-card" id="ifmxkv">
+                <h3 id="ibn7vu" class="working-hours-title">ساعات پاسخگویی</h3>
+                <ul class="working-hours-list" id="ibqs3z">
+                  <li class="working-hours-item" id="i1n2lb">
+                    <span id="iq2pvz">شنبه تا چهارشنبه</span>
+                    <span id="iy7o0g">۹:۰۰ - ۱۷:۰۰</span>
+                  </li>
+                  <li class="working-hours-item" id="i8sbsc">
+                    <span id="i8ytfo">پنجشنبه</span>
+                    <span id="izkbxg">۹:۰۰ - ۱۳:۰۰</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="contact-map-card" id="iniwvg">
+                <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/9d959ccc-b434-463b-96ad-eca65607ad44__best-financial-innovations-2024-scaled.jpg" alt="نقشه موقعیت شرکت" loading="lazy" id="il8ibl" class="contact-map-image" />
+                <div class="contact-map-overlay" id="ijxqim"></div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer-wrapper" id="ibmi8t">
+      <div class="footer-grid" id="ilwk8j">
+        <div id="iz0wle">
+          <div class="footer-brand" id="i1yw8l">
+            <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/79888338-f5e2-4189-80b6-67a28b61af48__kavian3dgeometriclogo.svg" alt="لوگوی شرکت" id="if731i" class="footer-logo" />
+            <span id="ia1ldv" class="footer-brand-name">کاویان توسعه معدن </span>
+          </div>
+          <p id="iv8qkn" class="footer-brand-desc">راهکارهای مهندسی، مالی و فناورانه برای استخراج، فرآوری و زنجیره ارزش فلزات.</p>
+        </div>
+        <div id="iro3ua">
+          <h4 class="footer-links-title" id="izzb42">لینک‌های مهم</h4>
+          <ul id="i2xhjs" class="footer-links-list">
+            <li id="ihhdqz1">
+              <a href="./-.html" id="inn6v7" class="footer-link">خدمات</a>
+            </li>
+            <li id="ix8cpzj">
+              <a href="./-.html" id="i7eaok" class="footer-link">اخبار و روندها</a>
+            </li>
+            <li id="i6g00gx">
+              <a href="#about" id="i2b5qf" class="footer-link">درباره ما</a>
+            </li>
+            <li id="i1pkatc">
+              <a href="#contact" id="iabfbd" class="footer-link">تماس با ما</a>
+            </li>
+          </ul>
+        </div>
+        <div id="ic1unc">
+          <h4 class="footer-services-title" id="iexwk8">خدمات کلیدی</h4>
+          <ul class="footer-services-list" id="i33zdb">
+            <li class="footer-service-item" id="ib6vgn">
+              <img src="https://api.iconify.design/lucide-geo.svg?color=white" alt="" class="footer-icon" id="i30yag" />ارزیابی منابع معدنی
+            </li>
+            <li class="footer-service-item" id="ivuk23">
+              <img src="https://api.iconify.design/lucide-cog.svg?color=white" alt="" class="footer-icon" id="ifokx1" />بهینه‌سازی مهندسی
+            </li>
+            <li class="footer-service-item" id="iicmrh">
+              <img src="https://api.iconify.design/lucide-wallet.svg?color=white" alt="" class="footer-icon" id="iguq76" />مدل‌سازی اقتصادی
+            </li>
+            <li class="footer-service-item" id="iumj0z">
+              <img src="https://api.iconify.design/lucide-shield-check.svg?color=white" alt="" class="footer-icon" id="i2grvg" />مدیریت ریسک
+            </li>
+          </ul>
+        </div>
+        <div id="ifv07u">
+          <h4 class="footer-newsletter-title" id="id68n6">خبرنامه تخصصی معدن</h4>
+          <form method="post" action="#" class="footer-newsletter-form" id="iyt466">
+            <label for="newsletter" class="footer-newsletter-label" id="imulgs">ایمیل</label>
+            <input type="email" id="newsletter" name="newsletter" placeholder="ایمیل شما" class="footer-newsletter-input" />
+            <button type="submit" class="gjs-t-button footer-newsletter-button" id="ivlz4l">عضویت</button>
+          </form>
+          <div class="footer-social-row" id="ileass">
+            <a href="#" aria-label="LinkedIn" class="footer-social-link" id="im80pi">
+              <img src="https://api.iconify.design/lucide-linkedin.svg?color=white" alt="" class="footer-social-icon" id="i941qk" />
+            </a>
+            <a href="#" aria-label="Twitter" class="footer-social-link" id="iuih9s">
+              <img src="https://api.iconify.design/lucide-twitter.svg?color=white" alt="" class="footer-social-icon" id="i32g4j" />
+            </a>
+            <a href="#" aria-label="Instagram" class="footer-social-link" id="iki134">
+              <img src="https://api.iconify.design/lucide-instagram.svg?color=white" alt="" class="footer-social-icon" id="i6gdc9" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom-bar" id="i1d8bp">
+        <div id="inbb5v" class="footer-bottom-container">
+          <span id="iz417i">© ۱۴۰۴ مهندسی معدن آرا. همه حقوق محفوظ است.</span>
+          <div id="ipo6bi" class="footer-bottom-links">
+            <a href="./index.html" id="iv8m08x" class="footer-bottom-link">حریم خصوصی</a>
+            <a href="./index.html" id="ii56jqz" class="footer-bottom-link">شرایط استفاده</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script data-scope="lang-switcher" id="ie9750l">
+      (function() {
         const root = document.querySelector('[data-js="lang-switcher"]');
         if (!root) return;
         const btnFa = root.querySelector('[data-lang="fa"]');
         const btnEn = root.querySelector('[data-lang="en"]');
         const STORAGE_KEY = 'site-lang';
 
+        function getCurrentUrl() {
+          return window.location.href;
+        }
+
+        function getLangFromSearch(urlObj) {
+          const q = urlObj.searchParams.get('lang');
+          if (q === 'en') return 'en';
+          if (q === 'fa') return 'fa';
+          return null;
+        }
+
+        function getStoredLang() {
+          try {
+            return localStorage.getItem(STORAGE_KEY) || null;
+          } catch (e) {
+            return null;
+          }
+        }
+
+        function storeLang(lang) {
+          try {
+            localStorage.setItem(STORAGE_KEY, lang);
+          } catch (e) {}
+        }
+
         function getLang() {
-            const url = new URL(window.location.href);
-            const fromSearch = url.searchParams.get('lang');
-            if (fromSearch === 'en') return 'en';
-            try {
-                const stored = localStorage.getItem(STORAGE_KEY);
-                return stored === 'en' ? 'en' : 'fa';
-            } catch (e) {
-                return 'fa';
-            }
+          const url = new URL(getCurrentUrl(), window.location.origin);
+          const fromSearch = getLangFromSearch(url);
+          if (fromSearch) return fromSearch;
+          const fromStore = getStoredLang();
+          return fromStore === 'en' ? 'en' : 'fa';
         }
 
         function setActive(lang) {
-            btnFa.setAttribute('aria-current', lang === 'fa' ? 'true' : 'false');
-            btnEn.setAttribute('aria-current', lang === 'en' ? 'true' : 'false');
-            const htmlEl = document.documentElement;
-            if (lang === 'en') {
-                htmlEl.setAttribute('lang', 'en');
-                htmlEl.setAttribute('dir', 'ltr');
-            } else {
-                htmlEl.setAttribute('lang', 'fa');
-                htmlEl.setAttribute('dir', 'rtl');
-            }
+          btnFa.setAttribute('aria-current', lang === 'fa' ? 'true' : 'false');
+          btnEn.setAttribute('aria-current', lang === 'en' ? 'true' : 'false');
+          const htmlEl = document.documentElement;
+          const bodyEl = document.body;
+          if (lang === 'en') {
+            htmlEl.setAttribute('lang', 'en');
+            htmlEl.setAttribute('dir', 'ltr');
+            bodyEl.setAttribute('dir', 'ltr');
+          } else {
+            htmlEl.setAttribute('lang', 'fa');
+            htmlEl.setAttribute('dir', 'rtl');
+            bodyEl.setAttribute('dir', 'rtl');
+          }
+        }
+
+        function buildUrlWithLang(baseHref, lang) {
+          const targetUrl = new URL(baseHref, window.location.origin);
+          // Preserve existing search params and hash from href itself
+          if (lang === 'en') {
+            targetUrl.searchParams.set('lang', 'en');
+          } else {
+            targetUrl.searchParams.delete('lang');
+          }
+          return targetUrl.toString();
         }
 
         function switchLang(to) {
-            const url = new URL(window.location.href);
-            if (to === 'en') {
-                url.searchParams.set('lang', 'en');
-                try { localStorage.setItem(STORAGE_KEY, 'en'); } catch (e) {}
-            } else {
-                url.searchParams.delete('lang');
-                try { localStorage.setItem(STORAGE_KEY, 'fa'); } catch (e) {}
-            }
-            window.location.href = url.toString();
+          const url = new URL(getCurrentUrl(), window.location.origin);
+          // Preserve current hash and other params
+          if (to === 'en') {
+            url.searchParams.set('lang', 'en');
+            storeLang('en');
+          } else {
+            url.searchParams.delete('lang');
+            storeLang('fa');
+          }
+          window.location.href = url.toString();
         }
 
+        function enhanceLinks() {
+          const currentLang = getLang();
+          const anchors = document.querySelectorAll('a[href]');
+          anchors.forEach(a => {
+            const href = a.getAttribute('href');
+            if (!href) return;
+
+            // In-page anchors: keep same page and preserve lang
+            if (href.startsWith('#')) {
+              a.addEventListener('click', function(ev) {
+                ev.preventDefault();
+                const url = new URL(window.location.href);
+                if (currentLang === 'en') {
+                  url.searchParams.set('lang', 'en');
+                  storeLang('en');
+                } else {
+                  url.searchParams.delete('lang');
+                  storeLang('fa');
+                }
+                url.hash = href;
+                window.location.href = url.toString();
+              });
+              return;
+            }
+
+            // Same-origin or converted page links
+            try {
+              const u = new URL(href, window.location.origin);
+              if (u.origin === window.location.origin) {
+                a.addEventListener('click', function(ev) {
+                  ev.preventDefault();
+                  const target = buildUrlWithLang(href, currentLang);
+                  window.location.href = target;
+                });
+              }
+            } catch (e) {
+              // ignore parsing errors
+            }
+          });
+        }
+
+        // Initialize language from URL or storage, then reflect state
         const initLang = getLang();
+        storeLang(initLang);
         setActive(initLang);
+        enhanceLinks();
 
         btnFa.addEventListener('click', () => switchLang('fa'));
         btnEn.addEventListener('click', () => switchLang('en'));
-    })();
-</script>
+      })();
+    </script>
+  </body>
 
-</body>
 </html>
