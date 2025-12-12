@@ -1,2132 +1,2276 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>کاویان توسعه معدن | مهندسی هوشمند معدن و فلزات</title>
-  <meta name="description" content="کاویان توسعه معدن - مهندسی هوشمند در معدن و زنجیره ارزش فلزات با استانداردهای بین‌المللی JORC و NI 43-101">
-  <meta name="keywords" content="معدن، مهندسی معدن، JORC، NI 43-101، ارزیابی منابع، بهینه‌سازی تولید">
-  
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg">
-  
-  <style>
-      :root {
-          /* Enhanced Color Palette */
-          --primary: #1A202C;
-          --primary-light: #2D3748;
-          --secondary: #2563EB;
-          --secondary-light: #3B82F6;
-          --secondary-dark: #1D4ED8;
-          --accent: #B45309;
-          --accent-light: #D97706;
-          --success: #059669;
-          --warning: #D97706;
-          --error: #DC2626;
-          
-          /* Background Colors */
-          --bg-primary: #FFFFFF;
-          --bg-secondary: #F8FAFC;
-          --bg-tertiary: #F1F5F9;
-          --bg-dark: #0F172A;
-          --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-          
-          /* Text Colors */
-          --text-primary: #1A202C;
-          --text-secondary: #4A5568;
-          --text-light: #718096;
-          --text-white: #FFFFFF;
-          
-          /* Border & Shadow */
-          --border-light: #E2E8F0;
-          --border-medium: #CBD5E0;
-          --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-          --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06);
-          --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.05);
-          --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04);
-          
-          /* Spacing & Layout */
-          --spacing-xs: 0.25rem;
-          --spacing-sm: 0.5rem;
-          --spacing-md: 1rem;
-          --spacing-lg: 1.5rem;
-          --spacing-xl: 2rem;
-          --spacing-2xl: 3rem;
-          
-          /* Border Radius */
-          --radius-sm: 0.375rem;
-          --radius-md: 0.5rem;
-          --radius-lg: 0.75rem;
-          --radius-xl: 1rem;
-          --radius-full: 9999px;
-          
-          /* Transitions */
-          --transition-fast: 0.15s ease-out;
-          --transition-normal: 0.3s ease-out;
-          --transition-slow: 0.5s ease-out;
-      }
-
-      /* Reset & Base Styles */
-      * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-      }
-
-      html {
-          scroll-behavior: smooth;
-          font-size: 16px;
-      }
-
-      body {
-          font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-          line-height: 1.7;
-          color: var(--text-primary);
-          background: var(--bg-primary);
-          direction: rtl;
-          overflow-x: hidden;
-      }
-
-      img {
-          max-width: 100%;
-          height: auto;
-          display: block;
-      }
-
-      a {
-          text-decoration: none;
-          color: inherit;
-          transition: var(--transition-fast);
-      }
-
-      button {
-          font-family: inherit;
-          cursor: pointer;
-          border: none;
-          background: none;
-          transition: var(--transition-fast);
-      }
-
-      /* Utility Classes */
-      .container {
-          max-width: 1280px;
-          margin: 0 auto;
-          padding: 0 var(--spacing-lg);
-      }
-
-      .text-center { text-align: center; }
-      .text-right { text-align: right; }
-      .text-left { text-align: left; }
-
-      /* Enhanced Button Styles */
-      .btn {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          gap: var(--spacing-sm);
-          padding: var(--spacing-md) var(--spacing-xl);
-          border-radius: var(--radius-lg);
-          font-weight: 600;
-          font-size: 0.9375rem;
-          text-align: center;
-          transition: var(--transition-normal);
-          position: relative;
-          overflow: hidden;
-          white-space: nowrap;
-          user-select: none;
-      }
-
-      .btn::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: -100%;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-          transition: var(--transition-slow);
-      }
-
-      .btn:hover::before {
-          left: 100%;
-      }
-
-      .btn-primary {
-          background: var(--secondary);
-          color: var(--text-white);
-          box-shadow: var(--shadow-md);
-      }
-
-      .btn-primary:hover {
-          background: var(--secondary-dark);
-          transform: translateY(-2px);
-          box-shadow: var(--shadow-lg);
-      }
-
-      .btn-secondary {
-          background: transparent;
-          color: var(--secondary);
-          border: 2px solid var(--border-light);
-      }
-
-      .btn-secondary:hover {
-          border-color: var(--secondary);
-          background: rgba(37, 99, 235, 0.05);
-          transform: translateY(-1px);
-      }
-
-      .btn-white {
-          background: var(--bg-primary);
-          color: var(--secondary);
-          box-shadow: var(--shadow-md);
-      }
-
-      .btn-white:hover {
-          background: var(--bg-secondary);
-          transform: translateY(-2px);
-      }
-
-      .btn-outline-white {
-          background: transparent;
-          color: var(--text-white);
-          border: 2px solid rgba(255,255,255,0.3);
-      }
-
-      .btn-outline-white:hover {
-          background: rgba(255,255,255,0.1);
-          border-color: rgba(255,255,255,0.6);
-      }
-
-      /* Enhanced Header */
-      .header {
-          background: rgba(255, 255, 255, 0.95);
-          backdrop-filter: blur(20px);
-          border-bottom: 1px solid var(--border-light);
-          position: sticky;
-          top: 0;
-          z-index: 1000;
-          transition: var(--transition-normal);
-      }
-
-      .header.scrolled {
-          background: rgba(255, 255, 255, 0.98);
-          box-shadow: var(--shadow-md);
-      }
-
-      .header-container {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: var(--spacing-lg);
-          min-height: 80px;
-      }
-
-      .brand {
-          display: flex;
-          align-items: center;
-          gap: var(--spacing-md);
-          transition: var(--transition-normal);
-      }
-
-      .brand:hover {
-          transform: scale(1.02);
-      }
-
-      .brand-logo {
-          width: 3.5rem;
-          height: 3.5rem;
-          transition: var(--transition-normal);
-      }
-
-      .brand-name {
-          font-size: 1.375rem;
-          font-weight: 800;
-          color: var(--primary);
-          line-height: 1.2;
-      }
-
-      .brand-tagline {
-          font-size: 0.8125rem;
-          color: var(--text-light);
-          font-weight: 500;
-      }
-
-      .nav {
-          display: flex;
-          align-items: center;
-          gap: var(--spacing-xl);
-      }
-
-      .nav-link {
-          color: var(--text-primary);
-          font-weight: 500;
-          padding: var(--spacing-sm) var(--spacing-md);
-          border-radius: var(--radius-md);
-          position: relative;
-          transition: var(--transition-fast);
-      }
-
-      .nav-link::after {
-          content: '';
-          position: absolute;
-          bottom: -2px;
-          left: 50%;
-          width: 0;
-          height: 2px;
-          background: var(--secondary);
-          transition: var(--transition-normal);
-          transform: translateX(-50%);
-      }
-
-      .nav-link:hover {
-          color: var(--secondary);
-          background: rgba(37, 99, 235, 0.05);
-      }
-
-      .nav-link:hover::after {
-          width: 80%;
-      }
-
-      .nav-link.active {
-          color: var(--secondary);
-          background: rgba(37, 99, 235, 0.1);
-      }
-
-      .lang-switcher {
-          display: flex;
-          gap: var(--spacing-xs);
-          padding: var(--spacing-xs);
-          background: var(--bg-tertiary);
-          border-radius: var(--radius-full);
-          box-shadow: var(--shadow-sm);
-      }
-
-      .lang-btn {
-          padding: var(--spacing-sm) var(--spacing-md);
-          border-radius: var(--radius-full);
-          font-size: 0.875rem;
-          font-weight: 600;
-          color: var(--text-light);
-          transition: var(--transition-fast);
-      }
-
-      .lang-btn[aria-current="true"] {
-          background: var(--bg-primary);
-          color: var(--secondary);
-          box-shadow: var(--shadow-sm);
-      }
-
-      /* Mobile Menu */
-      .mobile-menu-btn {
-          display: none;
-          flex-direction: column;
-          gap: 4px;
-          padding: var(--spacing-sm);
-          background: none;
-          border: none;
-          cursor: pointer;
-      }
-
-      .mobile-menu-btn span {
-          width: 24px;
-          height: 2px;
-          background: var(--primary);
-          transition: var(--transition-fast);
-      }
-
-      /* Enhanced Hero Section */
-      .hero {
-          background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-          padding: var(--spacing-2xl) 0;
-          position: relative;
-          overflow: hidden;
-      }
-
-      .hero::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23000" opacity="0.02"/><circle cx="75" cy="75" r="1" fill="%23000" opacity="0.02"/><circle cx="50" cy="10" r="1" fill="%23000" opacity="0.02"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-          pointer-events: none;
-      }
-
-      .hero-container {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: var(--spacing-2xl);
-          align-items: center;
-          position: relative;
-          z-index: 1;
-      }
-
-      .hero h1 {
-          font-size: clamp(2rem, 4vw, 3rem);
-          font-weight: 900;
-          color: var(--primary);
-          margin-bottom: var(--spacing-lg);
-          line-height: 1.2;
-          background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-      }
-
-      .hero-subtitle {
-          font-size: 1.1875rem;
-          color: var(--text-secondary);
-          margin-bottom: var(--spacing-xl);
-          line-height: 1.8;
-          font-weight: 400;
-      }
-
-      .hero-actions {
-          display: flex;
-          gap: var(--spacing-lg);
-          flex-wrap: wrap;
-          margin-bottom: var(--spacing-xl);
-      }
-
-      .hero-bullets {
-          display: flex;
-          gap: var(--spacing-xl);
-          flex-wrap: wrap;
-      }
-
-      .hero-bullet {
-          display: flex;
-          align-items: center;
-          gap: var(--spacing-sm);
-          font-size: 0.9375rem;
-          color: var(--text-secondary);
-          font-weight: 500;
-      }
-
-      .hero-image {
-          width: 100%;
-          height: 450px;
-          object-fit: cover;
-          border-radius: var(--radius-xl);
-          box-shadow: var(--shadow-xl);
-          transition: var(--transition-slow);
-      }
-
-      .hero-image:hover {
-          transform: scale(1.02);
-      }
-
-      /* Enhanced Services Section */
-      .services {
-          padding: var(--spacing-2xl) 0;
-          background: var(--bg-primary);
-      }
-
-      .section-header {
-          text-align: center;
-          margin-bottom: var(--spacing-2xl);
-      }
-
-      .section-header h2 {
-          font-size: clamp(1.75rem, 3vw, 2.5rem);
-          font-weight: 800;
-          color: var(--primary);
-          margin-bottom: var(--spacing-md);
-      }
-
-      .section-subtitle {
-          color: var(--text-secondary);
-          font-size: 1.1875rem;
-          font-weight: 400;
-          max-width: 600px;
-          margin: 0 auto;
-      }
-
-      .services-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-          gap: var(--spacing-xl);
-      }
-
-      .service-card {
-          background: var(--bg-primary);
-          border: 1px solid var(--border-light);
-          border-radius: var(--radius-xl);
-          padding: var(--spacing-xl);
-          transition: var(--transition-normal);
-          position: relative;
-          overflow: hidden;
-      }
-
-      .service-card::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          height: 4px;
-          background: linear-gradient(90deg, var(--secondary), var(--accent));
-          transform: scaleX(0);
-          transition: var(--transition-normal);
-      }
-
-      .service-card:hover {
-          border-color: var(--secondary);
-          box-shadow: var(--shadow-lg);
-          transform: translateY(-8px);
-      }
-
-      .service-card:hover::before {
-          transform: scaleX(1);
-      }
-
-      .service-header {
-          display: flex;
-          gap: var(--spacing-lg);
-          margin-bottom: var(--spacing-lg);
-          align-items: flex-start;
-      }
-
-      .service-icon {
-          width: 3rem;
-          height: 3rem;
-          padding: var(--spacing-sm);
-          background: linear-gradient(135deg, rgba(185, 83, 9, 0.1), rgba(217, 119, 6, 0.1));
-          border-radius: var(--radius-lg);
-          flex-shrink: 0;
-      }
-
-      .service-title {
-          font-size: 1.25rem;
-          font-weight: 700;
-          color: var(--primary);
-          margin-bottom: var(--spacing-sm);
-          line-height: 1.3;
-      }
-
-      .service-description {
-          color: var(--text-secondary);
-          font-size: 1rem;
-          line-height: 1.6;
-      }
-
-      .service-features {
-          list-style: none;
-          margin-top: var(--spacing-lg);
-      }
-
-      .service-feature {
-          display: flex;
-          align-items: center;
-          gap: var(--spacing-sm);
-          padding: var(--spacing-sm) 0;
-          color: var(--text-secondary);
-          font-size: 0.9375rem;
-          font-weight: 500;
-      }
-
-      /* Enhanced About Section */
-      .about {
-          padding: var(--spacing-2xl) 0;
-          background: var(--bg-secondary);
-      }
-
-      .about-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: var(--spacing-2xl);
-          align-items: center;
-      }
-
-      .about h2 {
-          font-size: clamp(1.75rem, 3vw, 2.25rem);
-          font-weight: 800;
-          color: var(--primary);
-          margin-bottom: var(--spacing-lg);
-      }
-
-      .about-text {
-          color: var(--text-secondary);
-          margin-bottom: var(--spacing-xl);
-          line-height: 1.8;
-          font-size: 1.0625rem;
-      }
-
-      .about-features {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: var(--spacing-lg);
-      }
-
-      .about-feature {
-          display: flex;
-          gap: var(--spacing-lg);
-          align-items: flex-start;
-      }
-
-      .about-feature-icon {
-          width: 2.5rem;
-          height: 2.5rem;
-          color: var(--secondary);
-          flex-shrink: 0;
-      }
-
-      .about-feature h4 {
-          font-size: 1.0625rem;
-          font-weight: 700;
-          color: var(--primary);
-          margin-bottom: var(--spacing-xs);
-      }
-
-      .about-feature p {
-          font-size: 0.9375rem;
-          color: var(--text-secondary);
-          line-height: 1.5;
-      }
-
-      .about-image {
-          width: 100%;
-          height: 550px;
-          object-fit: cover;
-          border-radius: var(--radius-xl);
-          box-shadow: var(--shadow-xl);
-          transition: var(--transition-slow);
-      }
-
-      .about-image:hover {
-          transform: scale(1.02);
-      }
-
-      /* Enhanced Projects Section */
-      .projects {
-          padding: var(--spacing-2xl) 0;
-          background: var(--bg-primary);
-      }
-
-      .projects-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-          gap: var(--spacing-xl);
-      }
-
-      .project-card {
-          background: var(--bg-primary);
-          border: 1px solid var(--border-light);
-          border-radius: var(--radius-xl);
-          overflow: hidden;
-          transition: var(--transition-normal);
-          position: relative;
-      }
-
-      .project-card:hover {
-          box-shadow: var(--shadow-xl);
-          transform: translateY(-8px);
-      }
-
-      .project-image {
-          width: 100%;
-          height: 280px;
-          object-fit: cover;
-          transition: var(--transition-slow);
-      }
-
-      .project-card:hover .project-image {
-          transform: scale(1.05);
-      }
-
-      .project-badge {
-          position: absolute;
-          top: var(--spacing-lg);
-          right: var(--spacing-lg);
-          background: rgba(37, 99, 235, 0.9);
-          color: var(--text-white);
-          padding: var(--spacing-sm) var(--spacing-md);
-          border-radius: var(--radius-full);
-          font-size: 0.8125rem;
-          font-weight: 600;
-          backdrop-filter: blur(10px);
-      }
-
-      .project-content {
-          padding: var(--spacing-xl);
-      }
-
-      .project-title {
-          font-size: 1.25rem;
-          font-weight: 700;
-          color: var(--primary);
-          margin-bottom: var(--spacing-sm);
-          line-height: 1.3;
-      }
-
-      .project-description {
-          color: var(--text-secondary);
-          font-size: 1rem;
-          margin-bottom: var(--spacing-lg);
-          line-height: 1.6;
-      }
-
-      .project-meta {
-          display: flex;
-          align-items: center;
-          gap: var(--spacing-sm);
-          color: var(--text-light);
-          font-size: 0.9375rem;
-          font-weight: 500;
-      }
-
-      /* Enhanced CTA Section */
-      .cta {
-          background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
-          padding: var(--spacing-2xl) 0;
-          color: var(--text-white);
-          position: relative;
-          overflow: hidden;
-      }
-
-      .cta::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="%23fff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
-          pointer-events: none;
-      }
-
-      .cta-container {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          gap: var(--spacing-xl);
-          position: relative;
-          z-index: 1;
-      }
-
-      .cta h3 {
-          font-size: clamp(1.5rem, 3vw, 2rem);
-          font-weight: 800;
-          margin-bottom: var(--spacing-sm);
-      }
-
-      .cta p {
-          font-size: 1.1875rem;
-          opacity: 0.9;
-          font-weight: 400;
-      }
-
-      .cta-actions {
-          display: flex;
-          gap: var(--spacing-lg);
-          flex-shrink: 0;
-      }
-
-      /* Enhanced Contact Section */
-      .contact {
-          padding: var(--spacing-2xl) 0;
-          background: var(--bg-secondary);
-      }
-
-      .contact-grid {
-          display: grid;
-          grid-template-columns: 2fr 1fr;
-          gap: var(--spacing-2xl);
-      }
-
-      .contact-form {
-          background: var(--bg-primary);
-          border: 1px solid var(--border-light);
-          border-radius: var(--radius-xl);
-          padding: var(--spacing-2xl);
-          box-shadow: var(--shadow-md);
-      }
-
-      .contact-form h2 {
-          font-size: 1.75rem;
-          font-weight: 800;
-          color: var(--primary);
-          margin-bottom: var(--spacing-sm);
-      }
-
-      .contact-form-subtitle {
-          color: var(--text-secondary);
-          margin-bottom: var(--spacing-xl);
-          line-height: 1.6;
-      }
-
-      .form-row {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: var(--spacing-lg);
-          margin-bottom: var(--spacing-lg);
-      }
-
-      .form-group {
-          display: flex;
-          flex-direction: column;
-          gap: var(--spacing-sm);
-      }
-
-      .form-label {
-          font-weight: 600;
-          color: var(--primary);
-          font-size: 0.9375rem;
-      }
-
-      .form-input, .form-select, .form-textarea {
-          padding: var(--spacing-md);
-          border: 2px solid var(--border-light);
-          border-radius: var(--radius-lg);
-          font-family: inherit;
-          font-size: 1rem;
-          transition: var(--transition-fast);
-          background: var(--bg-primary);
-      }
-
-      .form-input:focus, .form-select:focus, .form-textarea:focus {
-          outline: none;
-          border-color: var(--secondary);
-          box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-      }
-
-      .form-textarea {
-          resize: vertical;
-          min-height: 140px;
-      }
-
-      .form-checkbox-group {
-          display: flex;
-          align-items: flex-start;
-          gap: var(--spacing-sm);
-          margin: var(--spacing-lg) 0;
-      }
-
-      .form-checkbox {
-          width: 1.25rem;
-          height: 1.25rem;
-          accent-color: var(--secondary);
-          margin-top: 2px;
-      }
-
-      .form-submit {
-          width: 100%;
-          padding: var(--spacing-lg);
-          background: var(--secondary);
-          color: var(--text-white);
-          border: none;
-          border-radius: var(--radius-lg);
-          font-weight: 700;
-          font-size: 1.0625rem;
-          cursor: pointer;
-          transition: var(--transition-normal);
-      }
-
-      .form-submit:hover {
-          background: var(--secondary-dark);
-          transform: translateY(-2px);
-          box-shadow: var(--shadow-lg);
-      }
-
-      .form-note {
-          text-align: center;
-          color: var(--text-light);
-          font-size: 0.875rem;
-          margin-top: var(--spacing-lg);
-      }
-
-      .contact-info {
-          display: flex;
-          flex-direction: column;
-          gap: var(--spacing-lg);
-      }
-
-      .contact-card {
-          background: var(--bg-primary);
-          border: 1px solid var(--border-light);
-          border-radius: var(--radius-xl);
-          padding: var(--spacing-xl);
-          box-shadow: var(--shadow-sm);
-      }
-
-      .contact-card h3 {
-          font-size: 1.25rem;
-          font-weight: 700;
-          color: var(--primary);
-          margin-bottom: var(--spacing-lg);
-      }
-
-      .contact-item {
-          display: flex;
-          align-items: center;
-          gap: var(--spacing-lg);
-          padding: var(--spacing-lg) 0;
-      }
-
-      .contact-item:not(:last-child) {
-          border-bottom: 1px solid var(--border-light);
-      }
-
-      .contact-hours {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: var(--spacing-sm) 0;
-          font-size: 0.9375rem;
-      }
-
-      /* Enhanced Footer */
-      .footer {
-          background: var(--bg-dark);
-          color: var(--text-white);
-          padding: var(--spacing-2xl) 0 var(--spacing-lg);
-      }
-
-      .footer-grid {
-          display: grid;
-          grid-template-columns: 2fr 1fr 1fr 1.5fr;
-          gap: var(--spacing-2xl);
-          margin-bottom: var(--spacing-xl);
-      }
-
-      .footer-brand {
-          display: flex;
-          flex-direction: column;
-          gap: var(--spacing-lg);
-      }
-
-      .footer-brand-header {
-          display: flex;
-          align-items: center;
-          gap: var(--spacing-lg);
-      }
-
-      .footer-logo {
-          width: 3rem;
-          height: 3rem;
-      }
-
-      .footer-brand-name {
-          font-size: 1.375rem;
-          font-weight: 800;
-      }
-
-      .footer-description {
-          opacity: 0.8;
-          line-height: 1.7;
-          font-size: 1rem;
-      }
-
-      .footer-section h4 {
-          font-size: 1.1875rem;
-          font-weight: 700;
-          margin-bottom: var(--spacing-lg);
-      }
-
-      .footer-links {
-          list-style: none;
-          display: flex;
-          flex-direction: column;
-          gap: var(--spacing-sm);
-      }
-
-      .footer-link {
-          opacity: 0.8;
-          transition: var(--transition-fast);
-          font-size: 0.9375rem;
-      }
-
-      .footer-link:hover {
-          opacity: 1;
-          color: var(--secondary-light);
-          transform: translateX(-4px);
-      }
-
-      .footer-services {
-          list-style: none;
-          display: flex;
-          flex-direction: column;
-          gap: var(--spacing-sm);
-      }
-
-      .footer-service {
-          display: flex;
-          align-items: center;
-          gap: var(--spacing-sm);
-          opacity: 0.8;
-          font-size: 0.9375rem;
-          transition: var(--transition-fast);
-      }
-
-      .footer-service:hover {
-          opacity: 1;
-          transform: translateX(-4px);
-      }
-
-      .footer-newsletter p {
-          opacity: 0.8;
-          margin-bottom: var(--spacing-lg);
-          line-height: 1.6;
-      }
-
-      .newsletter-form {
-          display: flex;
-          gap: var(--spacing-sm);
-      }
-
-      .newsletter-input {
-          flex: 1;
-          padding: var(--spacing-md);
-          border: 1px solid rgba(255,255,255,0.2);
-          border-radius: var(--radius-lg);
-          background: rgba(255,255,255,0.1);
-          color: var(--text-white);
-          font-family: inherit;
-          transition: var(--transition-fast);
-      }
-
-      .newsletter-input::placeholder {
-          color: rgba(255,255,255,0.6);
-      }
-
-      .newsletter-input:focus {
-          outline: none;
-          border-color: rgba(255,255,255,0.4);
-          background: rgba(255,255,255,0.15);
-      }
-
-      .newsletter-btn {
-          padding: var(--spacing-md) var(--spacing-lg);
-          background: var(--bg-primary);
-          color: var(--secondary);
-          border-radius: var(--radius-lg);
-          font-weight: 700;
-          transition: var(--transition-fast);
-          white-space: nowrap;
-      }
-
-      .newsletter-btn:hover {
-          background: var(--bg-secondary);
-          transform: translateY(-1px);
-      }
-
-      .footer-social {
-          display: flex;
-          gap: var(--spacing-lg);
-          margin-top: var(--spacing-lg);
-      }
-
-      .social-link {
-          width: 3rem;
-          height: 3rem;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background: rgba(255,255,255,0.1);
-          border-radius: var(--radius-lg);
-          transition: var(--transition-normal);
-      }
-
-      .social-link:hover {
-          background: rgba(255,255,255,0.2);
-          transform: translateY(-2px);
-      }
-
-      .footer-bottom {
-          border-top: 1px solid rgba(255,255,255,0.1);
-          padding-top: var(--spacing-lg);
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          opacity: 0.8;
-          font-size: 0.9375rem;
-      }
-
-      .footer-legal {
-          display: flex;
-          gap: var(--spacing-xl);
-      }
-
-      .footer-legal a:hover {
-          color: var(--secondary-light);
-      }
-
-      /* Responsive Design */
-      @media (max-width: 1024px) {
-          .hero-container,
-          .about-grid,
-          .contact-grid {
-              grid-template-columns: 1fr;
-              gap: var(--spacing-xl);
-          }
-          
-          .projects-grid {
-              grid-template-columns: repeat(2, 1fr);
-          }
-          
-          .footer-grid {
-              grid-template-columns: repeat(2, 1fr);
-          }
-          
-          .cta-container {
-              flex-direction: column;
-              text-align: center;
-              gap: var(--spacing-xl);
-          }
-          
-          .about-features {
-              grid-template-columns: 1fr;
-          }
-      }
-
-      @media (max-width: 768px) {
-          .container {
-              padding: 0 var(--spacing-md);
-          }
-          
-          .nav {
-              display: none;
-          }
-          
-          .mobile-menu-btn {
-              display: flex;
-          }
-          
-          .services-grid,
-          .projects-grid {
-              grid-template-columns: 1fr;
-          }
-          
-          .form-row {
-              grid-template-columns: 1fr;
-          }
-          
-          .footer-grid {
-              grid-template-columns: 1fr;
-          }
-          
-          .hero-actions {
-              flex-direction: column;
-              align-items: stretch;
-          }
-          
-          .hero-bullets {
-              flex-direction: column;
-              gap: var(--spacing-md);
-          }
-          
-          .footer-bottom {
-              flex-direction: column;
-              gap: var(--spacing-md);
-              text-align: center;
-          }
-          
-          .cta-actions {
-              flex-direction: column;
-              width: 100%;
-          }
-      }
-
-      @media (max-width: 480px) {
-          .hero {
-              padding: var(--spacing-xl) 0;
-          }
-          
-          .services,
-          .about,
-          .projects,
-          .contact {
-              padding: var(--spacing-xl) 0;
-          }
-          
-          .brand-name {
-              font-size: 1.125rem;
-          }
-          
-          .brand-tagline {
-              font-size: 0.75rem;
-          }
-          
-          .service-header {
-              flex-direction: column;
-              gap: var(--spacing-md);
-          }
-      }
-
-      /* Animation */
-      @keyframes fadeInUp {
-          from {
-              opacity: 0;
-              transform: translateY(30px);
-          }
-          to {
-              opacity: 1;
-              transform: translateY(0);
-          }
-      }
-
-      .service-card,
-      .project-card {
-          animation: fadeInUp 0.6s ease-out;
-      }
-
-      .service-card:nth-child(2) { animation-delay: 0.1s; }
-      .service-card:nth-child(3) { animation-delay: 0.2s; }
-      .service-card:nth-child(4) { animation-delay: 0.3s; }
-      .service-card:nth-child(5) { animation-delay: 0.4s; }
-      .service-card:nth-child(6) { animation-delay: 0.5s; }
-
-      /* Loading Animation */
-      @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.5; }
-      }
-
-      .loading {
-          animation: pulse 2s infinite;
-      }
-
-      /* Print Styles */
-      @media print {
-          .header,
-          .footer,
-          .cta,
-          .contact {
-              display: none;
-          }
-          
-          .hero,
-          .services,
-          .about,
-          .projects {
-              break-inside: avoid;
-          }
-      }
-
-      /* Dark Mode Support */
-      @media (prefers-color-scheme: dark) {
-          :root {
-              --bg-primary: #1A202C;
-              --bg-secondary: #2D3748;
-              --text-primary: #F7FAFC;
-              --text-secondary: #E2E8F0;
-              --border-light: #4A5568;
-          }
-      }
-
-      /* Reduced Motion */
-      @media (prefers-reduced-motion: reduce) {
-          * {
-              animation-duration: 0.01ms !important;
-              animation-iteration-count: 1 !important;
-              transition-duration: 0.01ms !important;
-          }
-      }
-
-      /* High Contrast */
-      @media (prefers-contrast: high) {
-          :root {
-              --border-light: #000000;
-              --text-light: #000000;
-          }
-      }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>کاویان توسعه معدن | مهندسی هوشمند معدن و فلزات</title>
+<meta name="description" content="کاویان توسعه معدن - مهندسی هوشمند در معدن و زنجیره ارزش فلزات با استانداردهای بین‌المللی JORC و NI 43-101">
+<meta name="keywords" content="معدن، مهندسی معدن، JORC، NI 43-101، ارزیابی منابع، بهینه‌سازی تولید">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg">
+
+<style>
+    :root {
+        /* Enhanced Color Palette */
+        --primary: #1A202C;
+        --primary-light: #2D3748;
+        --secondary: #2563EB;
+        --secondary-light: #3B82F6;
+        --secondary-dark: #1D4ED8;
+        --accent: #B45309;
+        --accent-light: #D97706;
+        --success: #059669;
+        --warning: #D97706;
+        --error: #DC2626;
+        
+        /* Background Colors */
+        --bg-primary: #FFFFFF;
+        --bg-secondary: #F8FAFC;
+        --bg-tertiary: #F1F5F9;
+        --bg-dark: #0F172A;
+        --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        
+        /* Text Colors */
+        --text-primary: #1A202C;
+        --text-secondary: #4A5568;
+        --text-light: #718096;
+        --text-white: #FFFFFF;
+        
+        /* Border & Shadow */
+        --border-light: #E2E8F0;
+        --border-medium: #CBD5E0;
+        --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+        --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06);
+        --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.05);
+        --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04);
+        
+        /* Spacing & Layout */
+        --spacing-xs: 0.25rem;
+        --spacing-sm: 0.5rem;
+        --spacing-md: 1rem;
+        --spacing-lg: 1.5rem;
+        --spacing-xl: 2rem;
+        --spacing-2xl: 3rem;
+        
+        /* Border Radius */
+        --radius-sm: 0.375rem;
+        --radius-md: 0.5rem;
+        --radius-lg: 0.75rem;
+        --radius-xl: 1rem;
+        --radius-full: 9999px;
+        
+        /* Transitions */
+        --transition-fast: 0.15s ease-out;
+        --transition-normal: 0.3s ease-out;
+        --transition-slow: 0.5s ease-out;
+    }
+
+    /* Reset & Base Styles */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+        font-size: 16px;
+    }
+
+    body {
+        font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        line-height: 1.7;
+        color: var(--text-primary);
+        background: var(--bg-primary);
+        direction: rtl;
+        overflow-x: hidden;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+        transition: var(--transition-fast);
+    }
+
+    button {
+        font-family: inherit;
+        cursor: pointer;
+        border: none;
+        background: none;
+        transition: var(--transition-fast);
+    }
+
+    /* Utility Classes */
+    .container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 var(--spacing-lg);
+    }
+
+    .text-center { text-align: center; }
+    .text-right { text-align: right; }
+    .text-left { text-align: left; }
+
+    /* Enhanced Button Styles */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--spacing-sm);
+        padding: var(--spacing-md) var(--spacing-xl);
+        border-radius: var(--radius-lg);
+        font-weight: 600;
+        font-size: 0.9375rem;
+        text-align: center;
+        transition: var(--transition-normal);
+        position: relative;
+        overflow: hidden;
+        white-space: nowrap;
+        user-select: none;
+    }
+
+    .btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        transition: var(--transition-slow);
+    }
+
+    .btn:hover::before {
+        left: 100%;
+    }
+
+    .btn-primary {
+        background: var(--secondary);
+        color: var(--text-white);
+        box-shadow: var(--shadow-md);
+    }
+
+    .btn-primary:hover {
+        background: var(--secondary-dark);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .btn-secondary {
+        background: transparent;
+        color: var(--secondary);
+        border: 2px solid var(--border-light);
+    }
+
+    .btn-secondary:hover {
+        border-color: var(--secondary);
+        background: rgba(37, 99, 235, 0.05);
+        transform: translateY(-1px);
+    }
+
+    .btn-white {
+        background: var(--bg-primary);
+        color: var(--secondary);
+        box-shadow: var(--shadow-md);
+    }
+
+    .btn-white:hover {
+        background: var(--bg-secondary);
+        transform: translateY(-2px);
+    }
+
+    .btn-outline-white {
+        background: transparent;
+        color: var(--text-white);
+        border: 2px solid rgba(255,255,255,0.3);
+    }
+
+    .btn-outline-white:hover {
+        background: rgba(255,255,255,0.1);
+        border-color: rgba(255,255,255,0.6);
+    }
+
+    /* Enhanced Header */
+    .header {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border-light);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        transition: var(--transition-normal);
+    }
+
+    .header.scrolled {
+        background: rgba(255, 255, 255, 0.98);
+        box-shadow: var(--shadow-md);
+    }
+
+    .header-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: var(--spacing-lg);
+        min-height: 80px;
+    }
+
+    .brand {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-md);
+        transition: var(--transition-normal);
+    }
+
+    .brand:hover {
+        transform: scale(1.02);
+    }
+
+    .brand-logo {
+        width: 3.5rem;
+        height: 3.5rem;
+        transition: var(--transition-normal);
+    }
+
+    .brand-name {
+        font-size: 1.375rem;
+        font-weight: 800;
+        color: var(--primary);
+        line-height: 1.2;
+    }
+
+    .brand-tagline {
+        font-size: 0.8125rem;
+        color: var(--text-light);
+        font-weight: 500;
+    }
+
+    .nav {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-xl);
+    }
+
+    .nav-link {
+        color: var(--text-primary);
+        font-weight: 500;
+        padding: var(--spacing-sm) var(--spacing-md);
+        border-radius: var(--radius-md);
+        position: relative;
+        transition: var(--transition-fast);
+    }
+
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background: var(--secondary);
+        transition: var(--transition-normal);
+        transform: translateX(-50%);
+    }
+
+    .nav-link:hover {
+        color: var(--secondary);
+        background: rgba(37, 99, 235, 0.05);
+    }
+
+    .nav-link:hover::after {
+        width: 80%;
+    }
+
+    .nav-link.active {
+        color: var(--secondary);
+        background: rgba(37, 99, 235, 0.1);
+    }
+
+    .lang-switcher {
+        display: flex;
+        gap: var(--spacing-xs);
+        padding: var(--spacing-xs);
+        background: var(--bg-tertiary);
+        border-radius: var(--radius-full);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .lang-btn {
+        padding: var(--spacing-sm) var(--spacing-md);
+        border-radius: var(--radius-full);
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--text-light);
+        transition: var(--transition-fast);
+    }
+
+    .lang-btn[aria-current="true"] {
+        background: var(--bg-primary);
+        color: var(--secondary);
+        box-shadow: var(--shadow-sm);
+    }
+
+    /* Mobile Menu */
+    .mobile-menu-btn {
+        display: none;
+        flex-direction: column;
+        gap: 4px;
+        padding: var(--spacing-sm);
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .mobile-menu-btn span {
+        width: 24px;
+        height: 2px;
+        background: var(--primary);
+        transition: var(--transition-fast);
+    }
+
+    /* Enhanced Hero Section */
+    .hero {
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        padding: var(--spacing-2xl) 0;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23000" opacity="0.02"/><circle cx="75" cy="75" r="1" fill="%23000" opacity="0.02"/><circle cx="50" cy="10" r="1" fill="%23000" opacity="0.02"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+        pointer-events: none;
+    }
+
+    .hero-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-2xl);
+        align-items: center;
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero h1 {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 900;
+        color: var(--primary);
+        margin-bottom: var(--spacing-lg);
+        line-height: 1.2;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1875rem;
+        color: var(--text-secondary);
+        margin-bottom: var(--spacing-xl);
+        line-height: 1.8;
+        font-weight: 400;
+    }
+
+    .hero-actions {
+        display: flex;
+        gap: var(--spacing-lg);
+        flex-wrap: wrap;
+        margin-bottom: var(--spacing-xl);
+    }
+
+    .hero-bullets {
+        display: flex;
+        gap: var(--spacing-xl);
+        flex-wrap: wrap;
+    }
+
+    .hero-bullet {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        font-size: 0.9375rem;
+        color: var(--text-secondary);
+        font-weight: 500;
+    }
+
+    .hero-image {
+        width: 100%;
+        height: 450px;
+        object-fit: cover;
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow-xl);
+        transition: var(--transition-slow);
+    }
+
+    .hero-image:hover {
+        transform: scale(1.02);
+    }
+
+    /* Enhanced Services Section */
+    .services {
+        padding: var(--spacing-2xl) 0;
+        background: var(--bg-primary);
+    }
+
+    .section-header {
+        text-align: center;
+        margin-bottom: var(--spacing-2xl);
+    }
+
+    .section-header h2 {
+        font-size: clamp(1.75rem, 3vw, 2.5rem);
+        font-weight: 800;
+        color: var(--primary);
+        margin-bottom: var(--spacing-md);
+    }
+
+    .section-subtitle {
+        color: var(--text-secondary);
+        font-size: 1.1875rem;
+        font-weight: 400;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: var(--spacing-xl);
+    }
+
+    .service-card {
+        background: var(--bg-primary);
+        border: 1px solid var(--border-light);
+        border-radius: var(--radius-xl);
+        padding: var(--spacing-xl);
+        transition: var(--transition-normal);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .service-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--secondary), var(--accent));
+        transform: scaleX(0);
+        transition: var(--transition-normal);
+    }
+
+    .service-card:hover {
+        border-color: var(--secondary);
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-8px);
+    }
+
+    .service-card:hover::before {
+        transform: scaleX(1);
+    }
+
+    .service-header {
+        display: flex;
+        gap: var(--spacing-lg);
+        margin-bottom: var(--spacing-lg);
+        align-items: flex-start;
+    }
+
+    .service-icon {
+        width: 3rem;
+        height: 3rem;
+        padding: var(--spacing-sm);
+        background: linear-gradient(135deg, rgba(185, 83, 9, 0.1), rgba(217, 119, 6, 0.1));
+        border-radius: var(--radius-lg);
+        flex-shrink: 0;
+    }
+
+    .service-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: var(--spacing-sm);
+        line-height: 1.3;
+    }
+
+    .service-description {
+        color: var(--text-secondary);
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    .service-features {
+        list-style: none;
+        margin-top: var(--spacing-lg);
+    }
+
+    .service-feature {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        padding: var(--spacing-sm) 0;
+        color: var(--text-secondary);
+        font-size: 0.9375rem;
+        font-weight: 500;
+    }
+
+    /* Enhanced About Section */
+    .about {
+        padding: var(--spacing-2xl) 0;
+        background: var(--bg-secondary);
+    }
+
+    .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-2xl);
+        align-items: center;
+    }
+
+    .about h2 {
+        font-size: clamp(1.75rem, 3vw, 2.25rem);
+        font-weight: 800;
+        color: var(--primary);
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .about-text {
+        color: var(--text-secondary);
+        margin-bottom: var(--spacing-xl);
+        line-height: 1.8;
+        font-size: 1.0625rem;
+    }
+
+    .about-features {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-lg);
+    }
+
+    .about-feature {
+        display: flex;
+        gap: var(--spacing-lg);
+        align-items: flex-start;
+    }
+
+    .about-feature-icon {
+        width: 2.5rem;
+        height: 2.5rem;
+        color: var(--secondary);
+        flex-shrink: 0;
+    }
+
+    .about-feature h4 {
+        font-size: 1.0625rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .about-feature p {
+        font-size: 0.9375rem;
+        color: var(--text-secondary);
+        line-height: 1.5;
+    }
+
+    .about-image {
+        width: 100%;
+        height: 550px;
+        object-fit: cover;
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow-xl);
+        transition: var(--transition-slow);
+    }
+
+    .about-image:hover {
+        transform: scale(1.02);
+    }
+
+    /* Enhanced Projects Section */
+    .projects {
+        padding: var(--spacing-2xl) 0;
+        background: var(--bg-primary);
+    }
+
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: var(--spacing-xl);
+    }
+
+    .project-card {
+        background: var(--bg-primary);
+        border: 1px solid var(--border-light);
+        border-radius: var(--radius-xl);
+        overflow: hidden;
+        transition: var(--transition-normal);
+        position: relative;
+    }
+
+    .project-card:hover {
+        box-shadow: var(--shadow-xl);
+        transform: translateY(-8px);
+    }
+
+    .project-image {
+        width: 100%;
+        height: 280px;
+        object-fit: cover;
+        transition: var(--transition-slow);
+    }
+
+    .project-card:hover .project-image {
+        transform: scale(1.05);
+    }
+
+    .project-badge {
+        position: absolute;
+        top: var(--spacing-lg);
+        right: var(--spacing-lg);
+        background: rgba(37, 99, 235, 0.9);
+        color: var(--text-white);
+        padding: var(--spacing-sm) var(--spacing-md);
+        border-radius: var(--radius-full);
+        font-size: 0.8125rem;
+        font-weight: 600;
+        backdrop-filter: blur(10px);
+    }
+
+    .project-content {
+        padding: var(--spacing-xl);
+    }
+
+    .project-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: var(--spacing-sm);
+        line-height: 1.3;
+    }
+
+    .project-description {
+        color: var(--text-secondary);
+        font-size: 1rem;
+        margin-bottom: var(--spacing-lg);
+        line-height: 1.6;
+    }
+
+    .project-meta {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        color: var(--text-light);
+        font-size: 0.9375rem;
+        font-weight: 500;
+    }
+
+    /* Enhanced CTA Section */
+    .cta {
+        background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
+        padding: var(--spacing-2xl) 0;
+        color: var(--text-white);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .cta::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="%23fff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+        pointer-events: none;
+    }
+
+    .cta-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: var(--spacing-xl);
+        position: relative;
+        z-index: 1;
+    }
+
+    .cta h3 {
+        font-size: clamp(1.5rem, 3vw, 2rem);
+        font-weight: 800;
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .cta p {
+        font-size: 1.1875rem;
+        opacity: 0.9;
+        font-weight: 400;
+    }
+
+    .cta-actions {
+        display: flex;
+        gap: var(--spacing-lg);
+        flex-shrink: 0;
+    }
+
+    /* Enhanced Contact Section */
+    .contact {
+        padding: var(--spacing-2xl) 0;
+        background: var(--bg-secondary);
+    }
+
+    .contact-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: var(--spacing-2xl);
+    }
+
+    .contact-form {
+        background: var(--bg-primary);
+        border: 1px solid var(--border-light);
+        border-radius: var(--radius-xl);
+        padding: var(--spacing-2xl);
+        box-shadow: var(--shadow-md);
+    }
+
+    .contact-form h2 {
+        font-size: 1.75rem;
+        font-weight: 800;
+        color: var(--primary);
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .contact-form-subtitle {
+        color: var(--text-secondary);
+        margin-bottom: var(--spacing-xl);
+        line-height: 1.6;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-lg);
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .form-group.full-width {
+        grid-column: span 2;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: var(--primary);
+        font-size: 0.9375rem;
+    }
+
+    .form-input, .form-select, .form-textarea {
+        padding: var(--spacing-md);
+        border: 2px solid var(--border-light);
+        border-radius: var(--radius-lg);
+        font-family: inherit;
+        font-size: 1rem;
+        transition: var(--transition-fast);
+        background: var(--bg-primary);
+    }
+
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+        outline: none;
+        border-color: var(--secondary);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .form-textarea {
+        resize: vertical;
+        min-height: 140px;
+    }
+
+    .form-checkbox-group {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+        margin: var(--spacing-lg) 0;
+    }
+
+    .form-checkbox {
+        width: 1.25rem;
+        height: 1.25rem;
+        accent-color: var(--secondary);
+        margin-top: 2px;
+    }
+
+    .form-submit {
+        width: 100%;
+        padding: var(--spacing-lg);
+        background: var(--secondary);
+        color: var(--text-white);
+        border: none;
+        border-radius: var(--radius-lg);
+        font-weight: 700;
+        font-size: 1.0625rem;
+        cursor: pointer;
+        transition: var(--transition-normal);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--spacing-sm);
+    }
+
+    .form-submit:hover {
+        background: var(--secondary-dark);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .form-submit:disabled {
+        background: #9CA3AF;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .form-note {
+        text-align: center;
+        color: var(--text-light);
+        font-size: 0.875rem;
+        margin-top: var(--spacing-lg);
+    }
+
+    .contact-info {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-lg);
+    }
+
+    .contact-card {
+        background: var(--bg-primary);
+        border: 1px solid var(--border-light);
+        border-radius: var(--radius-xl);
+        padding: var(--spacing-xl);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .contact-card h3 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .contact-item {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-lg);
+        padding: var(--spacing-lg) 0;
+    }
+
+    .contact-item:not(:last-child) {
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .contact-hours {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--spacing-sm) 0;
+        font-size: 0.9375rem;
+    }
+
+    /* Alert Styles */
+    .alert {
+        padding: var(--spacing-md);
+        border-radius: var(--radius-lg);
+        margin-bottom: var(--spacing-lg);
+        font-weight: 600;
+        display: none;
+    }
+
+    .alert-success {
+        background: #D1FAE5;
+        color: var(--success);
+        border: 1px solid #A7F3D0;
+    }
+
+    .alert-error {
+        background: #FEE2E2;
+        color: var(--error);
+        border: 1px solid #FECACA;
+    }
+
+    /* Loading Animation */
+    .loading {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid #ffffff40;
+        border-top: 3px solid #ffffff;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    /* Enhanced Footer */
+    .footer {
+        background: var(--bg-dark);
+        color: var(--text-white);
+        padding: var(--spacing-2xl) 0 var(--spacing-lg);
+    }
+
+    .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1.5fr;
+        gap: var(--spacing-2xl);
+        margin-bottom: var(--spacing-xl);
+    }
+
+    .footer-brand {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-lg);
+    }
+
+    .footer-brand-header {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-lg);
+    }
+
+    .footer-logo {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    .footer-brand-name {
+        font-size: 1.375rem;
+        font-weight: 800;
+    }
+
+    .footer-description {
+        opacity: 0.8;
+        line-height: 1.7;
+        font-size: 1rem;
+    }
+
+    .footer-section h4 {
+        font-size: 1.1875rem;
+        font-weight: 700;
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .footer-links {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .footer-link {
+        opacity: 0.8;
+        transition: var(--transition-fast);
+        font-size: 0.9375rem;
+    }
+
+    .footer-link:hover {
+        opacity: 1;
+        color: var(--secondary-light);
+        transform: translateX(-4px);
+    }
+
+    .footer-services {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .footer-service {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        opacity: 0.8;
+        font-size: 0.9375rem;
+        transition: var(--transition-fast);
+    }
+
+    .footer-service:hover {
+        opacity: 1;
+        transform: translateX(-4px);
+    }
+
+    .footer-newsletter p {
+        opacity: 0.8;
+        margin-bottom: var(--spacing-lg);
+        line-height: 1.6;
+    }
+
+    .newsletter-form {
+        display: flex;
+        gap: var(--spacing-sm);
+    }
+
+    .newsletter-input {
+        flex: 1;
+        padding: var(--spacing-md);
+        border: 1px solid rgba(255,255,255,0.2);
+        border-radius: var(--radius-lg);
+        background: rgba(255,255,255,0.1);
+        color: var(--text-white);
+        font-family: inherit;
+        transition: var(--transition-fast);
+    }
+
+    .newsletter-input::placeholder {
+        color: rgba(255,255,255,0.6);
+    }
+
+    .newsletter-input:focus {
+        outline: none;
+        border-color: rgba(255,255,255,0.4);
+        background: rgba(255,255,255,0.15);
+    }
+
+    .newsletter-btn {
+        padding: var(--spacing-md) var(--spacing-lg);
+        background: var(--bg-primary);
+        color: var(--secondary);
+        border-radius: var(--radius-lg);
+        font-weight: 700;
+        transition: var(--transition-fast);
+        white-space: nowrap;
+    }
+
+    .newsletter-btn:hover {
+        background: var(--bg-secondary);
+        transform: translateY(-1px);
+    }
+
+    .footer-social {
+        display: flex;
+        gap: var(--spacing-lg);
+        margin-top: var(--spacing-lg);
+    }
+
+    .social-link {
+        width: 3rem;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255,255,255,0.1);
+        border-radius: var(--radius-lg);
+        transition: var(--transition-normal);
+    }
+
+    .social-link:hover {
+        background: rgba(255,255,255,0.2);
+        transform: translateY(-2px);
+    }
+
+    .footer-bottom {
+        border-top: 1px solid rgba(255,255,255,0.1);
+        padding-top: var(--spacing-lg);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        opacity: 0.8;
+        font-size: 0.9375rem;
+    }
+
+    .footer-legal {
+        display: flex;
+        gap: var(--spacing-xl);
+    }
+
+    .footer-legal a:hover {
+        color: var(--secondary-light);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+        .hero-container,
+        .about-grid,
+        .contact-grid {
+            grid-template-columns: 1fr;
+            gap: var(--spacing-xl);
+        }
+        
+        .projects-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .footer-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .cta-container {
+            flex-direction: column;
+            text-align: center;
+            gap: var(--spacing-xl);
+        }
+        
+        .about-features {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            padding: 0 var(--spacing-md);
+        }
+        
+        .nav {
+            display: none;
+        }
+        
+        .mobile-menu-btn {
+            display: flex;
+        }
+        
+        .services-grid,
+        .projects-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .form-row {
+            grid-template-columns: 1fr;
+        }
+
+        .form-group.full-width {
+            grid-column: span 1;
+        }
+        
+        .footer-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .hero-actions {
+            flex-direction: column;
+            align-items: stretch;
+        }
+        
+        .hero-bullets {
+            flex-direction: column;
+            gap: var(--spacing-md);
+        }
+        
+        .footer-bottom {
+            flex-direction: column;
+            gap: var(--spacing-md);
+            text-align: center;
+        }
+        
+        .cta-actions {
+            flex-direction: column;
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .hero {
+            padding: var(--spacing-xl) 0;
+        }
+        
+        .services,
+        .about,
+        .projects,
+        .contact {
+            padding: var(--spacing-xl) 0;
+        }
+        
+        .brand-name {
+            font-size: 1.125rem;
+        }
+        
+        .brand-tagline {
+            font-size: 0.75rem;
+        }
+        
+        .service-header {
+            flex-direction: column;
+            gap: var(--spacing-md);
+        }
+    }
+
+    /* Animation */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .service-card,
+    .project-card {
+        animation: fadeInUp 0.6s ease-out;
+    }
+
+    .service-card:nth-child(2) { animation-delay: 0.1s; }
+    .service-card:nth-child(3) { animation-delay: 0.2s; }
+    .service-card:nth-child(4) { animation-delay: 0.3s; }
+    .service-card:nth-child(5) { animation-delay: 0.4s; }
+    .service-card:nth-child(6) { animation-delay: 0.5s; }
+
+    /* Loading Animation */
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+    }
+
+    .loading {
+        animation: pulse 2s infinite;
+    }
+
+    /* Print Styles */
+    @media print {
+        .header,
+        .footer,
+        .cta,
+        .contact {
+            display: none;
+        }
+        
+        .hero,
+        .services,
+        .about,
+        .projects {
+            break-inside: avoid;
+        }
+    }
+
+    /* Dark Mode Support */
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --bg-primary: #1A202C;
+            --bg-secondary: #2D3748;
+            --text-primary: #F7FAFC;
+            --text-secondary: #E2E8F0;
+            --border-light: #4A5568;
+        }
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+        * {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+
+    /* High Contrast */
+    @media (prefers-contrast: high) {
+        :root {
+            --border-light: #000000;
+            --text-light: #000000;
+        }
+    }
+</style>
 </head>
 <body>
-  <header class="header" id="header">
-      <div class="container header-container">
-          <a href="./index.html" class="brand">
-              <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="لوگو کاویان توسعه معدن" class="brand-logo">
-              <div>
-                  <div class="brand-name">کاویان توسعه معدن</div>
-                  <div class="brand-tagline">دانش، فناوری و ارزش‌آفرینی در زنجیره فلزات</div>
-              </div>
-          </a>
-          <nav class="nav" id="nav">
-              <a href="./index.html" class="nav-link active">خانه</a>
-              <a href="./about.html" class="nav-link">درباره ما</a>
-              <a href="./services.html" class="nav-link">خدمات</a>
-              <a href="./portfolio.html" class="nav-link">نمونه کارها</a>
-              <a href="./news.html" class="nav-link">اخبار و روندها</a>
-              <a href="./equipment.html" class="nav-link">تجهیزات</a>
-              <a href="./technical-resources.html" class="nav-link">منابع فنی</a>
-              <a href="./contact.html" class="btn btn-primary">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                      <polyline points="22,6 12,13 2,6"/>
-                  </svg>
-                  درخواست مشاوره
-              </a>
-              <div class="lang-switcher">
-                  <button class="lang-btn" data-lang="fa" aria-current="true">FA</button>
-                  <span style="color: var(--text-light);">|</span>
-                  <button class="lang-btn" data-lang="en">EN</button>
-              </div>
-          </nav>
-          <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="منوی موبایل">
-              <span></span>
-              <span></span>
-              <span></span>
-          </button>
-      </div>
-  </header>
+<header class="header" id="header">
+    <div class="container header-container">
+        <a href="./index.html" class="brand">
+            <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="لوگو کاویان توسعه معدن" class="brand-logo">
+            <div>
+                <div class="brand-name">کاویان توسعه معدن</div>
+                <div class="brand-tagline">دانش، فناوری و ارزش‌آفرینی در زنجیره فلزات</div>
+            </div>
+        </a>
+        <nav class="nav" id="nav">
+            <a href="./index.html" class="nav-link active">خانه</a>
+            <a href="./about.html" class="nav-link">درباره ما</a>
+            <a href="./services.html" class="nav-link">خدمات</a>
+            <a href="./portfolio.html" class="nav-link">نمونه کارها</a>
+            <a href="./news.html" class="nav-link">اخبار و روندها</a>
+            <a href="./equipment.html" class="nav-link">تجهیزات</a>
+            <a href="./technical-resources.html" class="nav-link">منابع فنی</a>
+            <a href="#contact" class="btn btn-primary">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                    <polyline points="22,6 12,13 2,6"/>
+                </svg>
+                درخواست مشاوره
+            </a>
+            <div class="lang-switcher">
+                <button class="lang-btn" data-lang="fa" aria-current="true">FA</button>
+                <span style="color: var(--text-light);">|</span>
+                <button class="lang-btn" data-lang="en">EN</button>
+            </div>
+        </nav>
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="منوی موبایل">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+</header>
 
-  <main>
-      <section class="hero">
-          <div class="container">
-              <div class="hero-container">
-                  <div>
-                      <h1>مهندسی هوشمند در معدن و زنجیره ارزش فلزات</h1>
-                      <p class="hero-subtitle">از ارزیابی منابع تا بهینه‌سازی تولید و اقتصاد پروژه، با تکیه بر دانش روز، فناوری‌های نوین و مدیریت ریسک، مسیر خلق ارزش پایدار را همراه شما طی می‌کنیم.</p>
-                      <div class="hero-actions">
-                          <a href="#services" class="btn btn-primary">
-                              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                  <circle cx="12" cy="12" r="10"/>
-                                  <polygon points="16.24,7.76 14.12,14.12 7.76,16.24 9.88,9.88 16.24,7.76"/>
-                              </svg>
-                              مشاهده خدمات
-                          </a>
-                          <a href="#projects" class="btn btn-secondary">
-                              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                  <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
-                                  <path d="M8 11h8m-8 4h6"/>
-                              </svg>
-                              نمونه‌کارها
-                          </a>
-                      </div>
-                      <div class="hero-bullets">
-                          <div class="hero-bullet">
-                              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                  <path d="M9 12l2 2 4-4"/>
-                                  <path d="M21 12c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1z"/>
-                                  <path d="M3 12c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1z"/>
-                                  <path d="M12 21c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1z"/>
-                                  <path d="M12 3c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1z"/>
-                              </svg>
-                              <span>استانداردهای بین‌المللی گزارش منابع</span>
-                          </div>
-                          <div class="hero-bullet">
-                              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                  <rect x="4" y="4" width="16" height="16" rx="2"/>
-                                  <rect x="9" y="9" width="6" height="6"/>
-                                  <path d="M9 1v6m6-6v6M1 9h6m10 0h6"/>
-                              </svg>
-                              <span>مدل‌سازی و شبیه‌سازی پیشرفته</span>
-                          </div>
-                      </div>
-                  </div>
-                  <div>
-                      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop&crop=center" alt="معدن روباز با تجهیزات مدرن" class="hero-image loading">
-                  </div>
-              </div>
-          </div>
-      </section>
+<main>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-container">
+                <div>
+                    <h1>مهندسی هوشمند در معدن و زنجیره ارزش فلزات</h1>
+                    <p class="hero-subtitle">از ارزیابی منابع تا بهینه‌سازی تولید و اقتصاد پروژه، با تکیه بر دانش روز، فناوری‌های نوین و مدیریت ریسک، مسیر خلق ارزش پایدار را همراه شما طی می‌کنیم.</p>
+                    <div class="hero-actions">
+                        <a href="#services" class="btn btn-primary">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polygon points="16.24,7.76 14.12,14.12 7.76,16.24 9.88,9.88 16.24,7.76"/>
+                            </svg>
+                            مشاهده خدمات
+                        </a>
+                        <a href="#projects" class="btn btn-secondary">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                                <path d="M8 11h8m-8 4h6"/>
+                            </svg>
+                            نمونه‌کارها
+                        </a>
+                    </div>
+                    <div class="hero-bullets">
+                        <div class="hero-bullet">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 12l2 2 4-4"/>
+                                <path d="M21 12c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1z"/>
+                                <path d="M3 12c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1z"/>
+                                <path d="M12 21c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1z"/>
+                                <path d="M12 3c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1z"/>
+                            </svg>
+                            <span>استانداردهای بین‌المللی گزارش منابع</span>
+                        </div>
+                        <div class="hero-bullet">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="4" y="4" width="16" height="16" rx="2"/>
+                                <rect x="9" y="9" width="6" height="6"/>
+                                <path d="M9 1v6m6-6v6M1 9h6m10 0h6"/>
+                            </svg>
+                            <span>مدل‌سازی و شبیه‌سازی پیشرفته</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop&crop=center" alt="معدن روباز با تجهیزات مدرن" class="hero-image loading">
+                </div>
+            </div>
+        </div>
+    </section>
 
-      <section id="services" class="services">
-          <div class="container">
-              <div class="section-header">
-                  <h2>حوزه‌های خدمات</h2>
-                  <p class="section-subtitle">مشاوره‌های مهندسی و مالی جامع از ابتدا تا انتهای زنجیره ارزش فلزات با استانداردهای بین‌المللی</p>
-              </div>
-              <div class="services-grid">
-                  <article class="service-card">
-                      <div class="service-header">
-                          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                              <circle cx="12" cy="10" r="3"/>
-                          </svg>
-                          <div>
-                              <h3 class="service-title">ارزیابی منابع معدنی</h3>
-                              <p class="service-description">اکتشاف، تخمین ذخیره، گزارش‌گری مطابق با JORC/NI 43-101 و تحلیل عدم‌قطعیت با دقت بالا.</p>
-                          </div>
-                      </div>
-                      <ul class="service-features">
-                          <li class="service-feature">
-                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                  <polyline points="20,6 9,17 4,12"/>
-                              </svg>
-                              نمونه‌برداری و QA/QC
-                          </li>
-                          <li class="service-feature">
-                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                  <polyline points="20,6 9,17 4,12"/>
-                              </svg>
-                              مدل بلوکی و ژئواستاتیک
-                          </li>
-                      </ul>
-                  </article>
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>حوزه‌های خدمات</h2>
+                <p class="section-subtitle">مشاوره‌های مهندسی و مالی جامع از ابتدا تا انتهای زنجیره ارزش فلزات با استانداردهای بین‌المللی</p>
+            </div>
+            <div class="services-grid">
+                <article class="service-card">
+                    <div class="service-header">
+                        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                        <div>
+                            <h3 class="service-title">ارزیابی منابع معدنی</h3>
+                            <p class="service-description">اکتشاف، تخمین ذخیره، گزارش‌گری مطابق با JORC/NI 43-101 و تحلیل عدم‌قطعیت با دقت بالا.</p>
+                        </div>
+                    </div>
+                    <ul class="service-features">
+                        <li class="service-feature">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20,6 9,17 4,12"/>
+                            </svg>
+                            نمونه‌برداری و QA/QC
+                        </li>
+                        <li class="service-feature">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20,6 9,17 4,12"/>
+                            </svg>
+                            مدل بلوکی و ژئواستاتیک
+                        </li>
+                    </ul>
+                </article>
 
-                  <article class="service-card">
-                      <div class="service-header">
-                          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <circle cx="12" cy="12" r="3"/>
-                              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-                          </svg>
-                          <div>
-                              <h3 class="service-title">بهینه‌سازی مهندسی و زنجیره ارزش</h3>
-                              <p class="service-description">طراحی معدن، برنامه‌ریزی تولید، بهینه‌سازی حمل‌ونقل تا کارخانه و مدیریت موجودی.</p>
-                          </div>
-                      </div>
-                      <ul class="service-features">
-                          <li class="service-feature">
-                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                  <polyline points="20,6 9,17 4,12"/>
-                              </svg>
-                              شبیه‌سازی جریان مواد
-                          </li>
-                          <li class="service-feature">
-                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                  <polyline points="20,6 9,17 4,12"/>
-                              </svg>
-                              بهینه‌سازی ناوگان و انرژی
-                          </li>
-                      </ul>
-                  </article>
+                <article class="service-card">
+                    <div class="service-header">
+                        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                        </svg>
+                        <div>
+                            <h3 class="service-title">بهینه‌سازی مهندسی و زنجیره ارزش</h3>
+                            <p class="service-description">طراحی معدن، برنامه‌ریزی تولید، بهینه‌سازی حمل‌ونقل تا کارخانه و مدیریت موجودی.</p>
+                        </div>
+                    </div>
+                    <ul class="service-features">
+                        <li class="service-feature">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20,6 9,17 4,12"/>
+                            </svg>
+                            شبیه‌سازی جریان مواد
+                        </li>
+                        <li class="service-feature">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20,6 9,17 4,12"/>
+                            </svg>
+                            بهینه‌سازی ناوگان و انرژی
+                        </li>
+                    </ul>
+                </article>
 
-                  <article class="service-card">
-                      <div class="service-header">
-                          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/>
-                              <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/>
-                          </svg>
-                          <div>
-                              <h3 class="service-title">ارزیابی اقتصادی پروژه‌های معدنی</h3>
-                              <p class="service-description">مدل مالی، تحلیل حساسیت، سناریونویسی قیمت و طراحی قراردادهای فروش.</p>
-                          </div>
-                      </div>
-                      <ul class="service-features">
-                          <li class="service-feature">
-                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                  <polyline points="20,6 9,17 4,12"/>
-                              </svg>
-                              NPV/IRR و ریسک‌سنجی
-                          </li>
-                          <li class="service-feature">
-                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                  <polyline points="20,6 9,17 4,12"/>
-                              </svg>
-                              اقتصاد چرخشی و پایداری
-                          </li>
-                      </ul>
-                  </article>
+                <article class="service-card">
+                    <div class="service-header">
+                        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/>
+                            <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/>
+                        </svg>
+                        <div>
+                            <h3 class="service-title">ارزیابی اقتصادی پروژه‌های معدنی</h3>
+                            <p class="service-description">مدل مالی، تحلیل حساسیت، سناریونویسی قیمت و طراحی قراردادهای فروش.</p>
+                        </div>
+                    </div>
+                    <ul class="service-features">
+                        <li class="service-feature">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20,6 9,17 4,12"/>
+                            </svg>
+                            NPV/IRR و ریسک‌سنجی
+                        </li>
+                        <li class="service-feature">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20,6 9,17 4,12"/>
+                            </svg>
+                            اقتصاد چرخشی و پایداری
+                        </li>
+                    </ul>
+                </article>
 
-                  <article class="service-card">
-                      <div class="service-header">
-                          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <path d="M7 20h10"/>
-                              <path d="M12 16v4"/>
-                              <path d="M17 4v6a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1z"/>
-                              <path d="M21 15v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-1"/>
-                          </svg>
-                          <div>
-                              <h3 class="service-title">بهینه‌سازی و پایداری تولید</h3>
-                              <p class="service-description">به‌کارگیری روش‌های نوین برای افزایش بهره‌وری، کاهش هزینه و کنترل اثرات محیط‌زیستی.</p>
-                          </div>
-                      </div>
-                      <ul class="service-features">
-                          <li class="service-feature">
-                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                  <polyline points="20,6 9,17 4,12"/>
-                              </svg>
-                              بهینه‌سازی مدار خردایش/فلوتاسیون
-                          </li>
-                          <li class="service-feature">
-                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                  <polyline points="20,6 9,17 4,12"/>
-                              </svg>
-                              پایش انرژی و آب
-                          </li>
-                      </ul>
-                  </article>
+                <article class="service-card">
+                    <div class="service-header">
+                        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 20h10"/>
+                            <path d="M12 16v4"/>
+                            <path d="M17 4v6a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1z"/>
+                            <path d="M21 15v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-1"/>
+                        </svg>
+                        <div>
+                            <h3 class="service-title">بهینه‌سازی و پایداری تولید</h3>
+                            <p class="service-description">به‌کارگیری روش‌های نوین برای افزایش بهره‌وری، کاهش هزینه و کنترل اثرات محیط‌زیستی.</p>
+                        </div>
+                    </div>
+                    <ul class="service-features">
+                        <li class="service-feature">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20,6 9,17 4,12"/>
+                            </svg>
+                            بهینه‌سازی مدار خردایش/فلوتاسیون
+                        </li>
+                        <li class="service-feature">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20,6 9,17 4,12"/>
+                            </svg>
+                            پایش انرژی و آب
+                        </li>
+                    </ul>
+                </article>
 
-                  <article class="service-card">
-                      <div class="service-header">
-                          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
-                              <line x1="8" y1="21" x2="16" y2="21"/>
-                              <line x1="12" y1="17" x2="12" y2="21"/>
-                          </svg>
-                          <div>
-                              <h3 class="service-title">انتقال دانش و فناوری‌های به‌روز</h3>
-                              <p class="service-description">آموزش‌های تخصصی، پیاده‌سازی نرم‌افزارهای معدنی و هوش مصنوعی در عملیات.</p>
-                          </div>
-                      </div>
-                      <ul class="service-features">
-                          <li class="service-feature">
-                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                  <polyline points="20,6 9,17 4,12"/>
-                              </svg>
-                              بومی‌سازی فناوری
-                          </li>
-                          <li class="service-feature">
-                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                  <polyline points="20,6 9,17 4,12"/>
-                              </svg>
-                              کارگاه و منتورینگ
-                          </li>
-                      </ul>
-                  </article>
+                <article class="service-card">
+                    <div class="service-header">
+                        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                            <line x1="8" y1="21" x2="16" y2="21"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                        </svg>
+                        <div>
+                            <h3 class="service-title">انتقال دانش و فناوری‌های به‌روز</h3>
+                            <p class="service-description">آموزش‌های تخصصی، پیاده‌سازی نرم‌افزارهای معدنی و هوش مصنوعی در عملیات.</p>
+                        </div>
+                    </div>
+                    <ul class="service-features">
+                        <li class="service-feature">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20,6 9,17 4,12"/>
+                            </svg>
+                            بومی‌سازی فناوری
+                        </li>
+                        <li class="service-feature">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20,6 9,17 4,12"/>
+                            </svg>
+                            کارگاه و منتورینگ
+                        </li>
+                    </ul>
+                </article>
 
-                  <article class="service-card">
-                      <div class="service-header">
-                          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <path d="M9 12l2 2 4-4"/>
-                              <path d="M21 12c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1z"/>
-                              <path d="M3 12c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1z"/>
-                              <path d="M12 21c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1z"/>
-                              <path d="M12 3c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1z"/>
-                          </svg>
-                          <div>
-                              <h3 class="service-title">مدیریت ریسک سرمایه‌گذاری</h3>
-                              <p class="service-description">چارچوب‌های ریسک، پوشش نوسان قیمت و پایش شاخص‌های کلیدی عملکرد.</p>
-                          </div>
-                      </div>
-                      <ul class="service-features">
-                          <li class="service-feature">
-                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                  <polyline points="20,6 9,17 4,12"/>
-                              </svg>
-                              ERM و سنجه‌های کمی
-                          </li>
-                          <li class="service-feature">
-                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                  <polyline points="20,6 9,17 4,12"/>
-                              </svg>
-                              کنترل پروژه و حاکمیت
-                          </li>
-                      </ul>
-                  </article>
-              </div>
-          </div>
-      </section>
+                <article class="service-card">
+                    <div class="service-header">
+                        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 12l2 2 4-4"/>
+                            <path d="M3 12c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1z"/>
+                            <path d="M12 21c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1z"/>
+                            <path d="M12 3c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1z"/>
+                        </svg>
+                        <div>
+                            <h3 class="service-title">مدیریت ریسک سرمایه‌گذاری</h3>
+                            <p class="service-description">چارچوب‌های ریسک، پوشش نوسان قیمت و پایش شاخص‌های کلیدی عملکرد.</p>
+                        </div>
+                    </div>
+                    <ul class="service-features">
+                        <li class="service-feature">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20,6 9,17 4,12"/>
+                            </svg>
+                            ERM و سنجه‌های کمی
+                        </li>
+                        <li class="service-feature">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20,6 9,17 4,12"/>
+                            </svg>
+                            کنترل پروژه و حاکمیت
+                        </li>
+                    </ul>
+                </article>
+            </div>
+        </div>
+    </section>
 
-      <section id="about" class="about">
-          <div class="container">
-              <div class="about-grid">
-                  <div>
-                      <h2>چرا کاویان؟</h2>
-                      <p class="about-text">ما با ترکیب تجربه عمیق صنعت، رویکرد داده‌محور و فناوری‌های پیشرفته، راهکارهایی نوآورانه ارائه می‌دهیم که منجر به افزایش قابل توجه بهره‌وری، کاهش ریسک‌های عملیاتی و خلق ارزش اقتصادی و محیط‌زیستی پایدار در معادن و کارخانه‌های فرآوری می‌شود.</p>
-                      <div class="about-features">
-                          <div class="about-feature">
-                              <svg class="about-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                  <path d="M3 3v18h18"/>
-                                  <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/>
-                              </svg>
-                              <div>
-                                  <h4>داده‌محور و شفاف</h4>
-                                  <p>گزارش‌های تحلیلی جامع با داشبوردهای تعاملی و قابل‌رهگیری در زمان واقعی.</p>
-                              </div>
-                          </div>
-                          <div class="about-feature">
-                              <svg class="about-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                  <path d="M9 21V9l-5-4L9 1l4 4 4-4 5 4v12"/>
-                                  <path d="M9 21h10v-4H9"/>
-                                  <path d="M9 17h10v-4H9"/>
-                              </svg>
-                              <div>
-                                  <h4>یکپارچگی معدن تا کارخانه</h4>
-                                  <p>همسویی کامل اهداف استخراج، حمل‌ونقل و فرآوری برای بهینه‌سازی کل زنجیره.</p>
-                              </div>
-                          </div>
-                          <div class="about-feature">
-                              <svg class="about-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                  <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-                                  <path d="M6 12v5c3 3 9 3 12 0v-5"/>
-                              </svg>
-                              <div>
-                                  <h4>انتقال دانش</h4>
-                                  <p>آموزش تخصصی و استقرار پایدار دانش فنی در تیم‌های داخلی سازمان.</p>
-                              </div>
-                          </div>
-                          <div class="about-feature">
-                              <svg class="about-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                  <circle cx="12" cy="12" r="10"/>
-                                  <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
-                                  <line x1="9" y1="9" x2="9.01" y2="9"/>
-                                  <line x1="15" y1="9" x2="15.01" y2="9"/>
-                              </svg>
-                              <div>
-                                  <h4>استانداردهای جهانی</h4>
-                                  <p>مطابقت کامل با JORC، NI 43-101، AACE و سایر استانداردهای بین‌المللی.</p>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div>
-                      <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&h=600&fit=crop&crop=center" alt="تیم مهندسی کاویان در حال بررسی نقشه‌های معدن" class="about-image loading">
-                  </div>
-              </div>
-          </div>
-      </section>
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-grid">
+                <div>
+                    <h2>چرا کاویان؟</h2>
+                    <p class="about-text">ما با ترکیب تجربه عمیق صنعت، رویکرد داده‌محور و فناوری‌های پیشرفته، راهکارهایی نوآورانه ارائه می‌دهیم که منجر به افزایش قابل توجه بهره‌وری، کاهش ریسک‌های عملیاتی و خلق ارزش اقتصادی و محیط‌زیستی پایدار در معادن و کارخانه‌های فرآوری می‌شود.</p>
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <svg class="about-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 3v18h18"/>
+                                <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/>
+                            </svg>
+                            <div>
+                                <h4>داده‌محور و شفاف</h4>
+                                <p>گزارش‌های تحلیلی جامع با داشبوردهای تعاملی و قابل‌رهگیری در زمان واقعی.</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <svg class="about-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 21V9l-5-4L9 1l4 4 4-4 5 4v12"/>
+                                <path d="M9 21h10v-4H9"/>
+                                <path d="M9 17h10v-4H9"/>
+                            </svg>
+                            <div>
+                                <h4>یکپارچگی معدن تا کارخانه</h4>
+                                <p>همسویی کامل اهداف استخراج، حمل‌ونقل و فرآوری برای بهینه‌سازی کل زنجیره.</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <svg class="about-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                                <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                            </svg>
+                            <div>
+                                <h4>انتقال دانش</h4>
+                                <p>آموزش تخصصی و استقرار پایدار دانش فنی در تیم‌های داخلی سازمان.</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <svg class="about-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                                <line x1="9" y1="9" x2="9.01" y2="9"/>
+                                <line x1="15" y1="9" x2="15.01" y2="9"/>
+                            </svg>
+                            <div>
+                                <h4>استانداردهای جهانی</h4>
+                                <p>مطابقت کامل با JORC، NI 43-101، AACE و سایر استانداردهای بین‌المللی.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&h=600&fit=crop&crop=center" alt="تیم مهندسی کاویان در حال بررسی نقشه‌های معدن" class="about-image loading">
+                </div>
+            </div>
+        </div>
+    </section>
 
-      <section id="projects" class="projects">
-          <div class="container">
-              <div class="section-header">
-                  <h2>نمونه‌کارها</h2>
-                  <p class="section-subtitle">پروژه‌های موفق و تأثیرگذار در حوزه معدن و فرآوری مواد معدنی با نتایج قابل اندازه‌گیری</p>
-              </div>
-              <div class="projects-grid">
-                  <article class="project-card">
-                      <div style="position: relative; overflow: hidden;">
-                          <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=400&fit=crop&crop=center" alt="پروژه بهینه‌سازی معدن مس" class="project-image loading">
-                          <span class="project-badge">معدن مس</span>
-                      </div>
-                      <div class="project-content">
-                          <h3 class="project-title">بهینه‌سازی زنجیره ارزش معدن مس</h3>
-                          <p class="project-description">افزایش ۱۵٪ بهره‌وری با یکپارچه‌سازی برنامه‌ریزی معدن و کارخانه و بهینه‌سازی مسیرهای حمل‌ونقل</p>
-                          <div class="project-meta">
-                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                                  <circle cx="12" cy="10" r="3"/>
-                              </svg>
-                              <span>ایران</span>
-                          </div>
-                      </div>
-                  </article>
+    <section id="projects" class="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2>نمونه‌کارها</h2>
+                <p class="section-subtitle">پروژه‌های موفق و تأثیرگذار در حوزه معدن و فرآوری مواد معدنی با نتایج قابل اندازه‌گیری</p>
+            </div>
+            <div class="projects-grid">
+                <article class="project-card">
+                    <div style="position: relative; overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=400&fit=crop&crop=center" alt="پروژه بهینه‌سازی معدن مس" class="project-image loading">
+                        <span class="project-badge">معدن مس</span>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">بهینه‌سازی زنجیره ارزش معدن مس</h3>
+                        <p class="project-description">افزایش ۱۵٪ بهره‌وری با یکپارچه‌سازی برنامه‌ریزی معدن و کارخانه و بهینه‌سازی مسیرهای حمل‌ونقل</p>
+                        <div class="project-meta">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                            <span>ایران</span>
+                        </div>
+                    </div>
+                </article>
 
-                  <article class="project-card">
-                      <div style="position: relative; overflow: hidden;">
-                          <img src="https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=600&h=400&fit=crop&crop=center" alt="پروژه ارزیابی سنگ‌آهن" class="project-image loading">
-                          <span class="project-badge">سنگ‌آهن</span>
-                      </div>
-                      <div class="project-content">
-                          <h3 class="project-title">ارزیابی اقتصادی پروژه سنگ‌آهن</h3>
-                          <p class="project-description">مطالعه امکان‌سنجی جامع مطابق استاندارد JORC و طراحی ساختار تامین مالی بهینه پروژه</p>
-                          <div class="project-meta">
-                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                                  <circle cx="12" cy="10" r="3"/>
-                              </svg>
-                              <span>ایران</span>
-                          </div>
-                      </div>
-                  </article>
+                <article class="project-card">
+                    <div style="position: relative; overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=600&h=400&fit=crop&crop=center" alt="پروژه ارزیابی سنگ‌آهن" class="project-image loading">
+                        <span class="project-badge">سنگ‌آهن</span>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">ارزیابی اقتصادی پروژه سنگ‌آهن</h3>
+                        <p class="project-description">مطالعه امکان‌سنجی جامع مطابق استاندارد JORC و طراحی ساختار تامین مالی بهینه پروژه</p>
+                        <div class="project-meta">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                            <span>ایران</span>
+                        </div>
+                    </div>
+                </article>
 
-                  <article class="project-card">
-                      <div style="position: relative; overflow: hidden;">
-                          <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&h=400&fit=crop&crop=center" alt="پروژه بهینه‌سازی فرآوری طلا" class="project-image loading">
-                          <span class="project-badge">طلا</span>
-                      </div>
-                      <div class="project-content">
-                          <h3 class="project-title">بهینه‌سازی مدار فرآوری طلا</h3>
-                          <p class="project-description">افزایش ۸٪ بازیافت با بهینه‌سازی مدار خردایش و شناورسازی و کاهش مصرف انرژی</p>
-                          <div class="project-meta">
-                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                                  <circle cx="12" cy="10" r="3"/>
-                              </svg>
-                              <span>ایران</span>
-                          </div>
-                      </div>
-                  </article>
-              </div>
-              <div style="text-align: center; margin-top: var(--spacing-2xl);">
-                  <a href="./portfolio.html" class="btn btn-secondary">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                          <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
-                          <path d="M8 11h8m-8 4h6"/>
-                      </svg>
-                      مشاهده همه پروژه‌ها
-                  </a>
-              </div>
-          </div>
-      </section>
+                <article class="project-card">
+                    <div style="position: relative; overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&h=400&fit=crop&crop=center" alt="پروژه بهینه‌سازی فرآوری طلا" class="project-image loading">
+                        <span class="project-badge">طلا</span>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">بهینه‌سازی مدار فرآوری طلا</h3>
+                        <p class="project-description">افزایش ۸٪ بازیافت با بهینه‌سازی مدار خردایش و شناورسازی و کاهش مصرف انرژی</p>
+                        <div class="project-meta">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                            <span>ایران</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div style="text-align: center; margin-top: var(--spacing-2xl);">
+                <a href="./portfolio.html" class="btn btn-secondary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                        <path d="M8 11h8m-8 4h6"/>
+                    </svg>
+                    مشاهده همه پروژه‌ها
+                </a>
+            </div>
+        </div>
+    </section>
 
-      <section class="cta">
-          <div class="container">
-              <div class="cta-container">
-                  <div>
-                      <h3>آماده شروع پروژه بعدی هستید؟</h3>
-                      <p>با تیم متخصص کاویان مشاوره رایگان دریافت کنید و از تجربه ۱۰+ سال در صنعت معدن بهره‌مند شوید</p>
-                  </div>
-                  <div class="cta-actions">
-                      <a href="./contact.html" class="btn btn-white">
-                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                          </svg>
-                          تماس با ما
-                      </a>
-                      <a href="./services.html" class="btn btn-outline-white">
-                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <path d="M9 11H5a2 2 0 0 0-2 2v3c0 1.1.9 2 2 2h4m6-6h4a2 2 0 0 1 2 2v3c0 1.1-.9 2-2 2h-4m-6 0V9a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2z"/>
-                          </svg>
-                          مشاهده خدمات
-                      </a>
-                  </div>
-              </div>
-          </div>
-      </section>
+    <section class="cta">
+        <div class="container">
+            <div class="cta-container">
+                <div>
+                    <h3>آماده شروع پروژه بعدی هستید؟</h3>
+                    <p>با تیم متخصص کاویان مشاوره رایگان دریافت کنید و از تجربه ۱۰+ سال در صنعت معدن بهره‌مند شوید</p>
+                </div>
+                <div class="cta-actions">
+                    <a href="#contact" class="btn btn-white">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                        </svg>
+                        تماس با ما
+                    </a>
+                    <a href="./services.html" class="btn btn-outline-white">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 11H5a2 2 0 0 0-2 2v3c0 1.1.9 2 2 2h4m6-6h4a2 2 0 0 1 2 2v3c0 1.1-.9 2-2 2h-4m-6 0V9a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2z"/>
+                        </svg>
+                        مشاهده خدمات
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      <section id="contact" class="contact">
-          <div class="container">
-              <div class="contact-grid">
-                  <div class="contact-form">
-                      <h2>درخواست مشاوره</h2>
-                      <p class="contact-form-subtitle">فرم زیر را تکمیل کنید تا کارشناسان مجرب ما در اسرع وقت با شما تماس بگیرند و مشاوره تخصصی ارائه دهند</p>
-                      <form id="contact-form" novalidate>
-                          <div class="form-row">
-                              <div class="form-group">
-                                  <label class="form-label" for="fullname">نام و نام خانوادگی *</label>
-                                  <input type="text" id="fullname" name="fullname" class="form-input" placeholder="نام کامل خود را وارد کنید" required>
-                              </div>
-                              <div class="form-group">
-                                  <label class="form-label" for="phone">شماره تماس *</label>
-                                  <input type="tel" id="phone" name="phone" class="form-input" placeholder="09XX XXX XXXX" required>
-                              </div>
-                          </div>
-                          <div class="form-row">
-                              <div class="form-group">
-                                  <label class="form-label" for="email">ایمیل *</label>
-                                  <input type="email" id="email" name="email" class="form-input" placeholder="email@example.com" required>
-                              </div>
-                              <div class="form-group">
-                                  <label class="form-label" for="service">نوع خدمت مورد نیاز *</label>
-                                  <select id="service" name="service" class="form-select" required>
-                                      <option value="">انتخاب کنید</option>
-                                      <option value="resource">ارزیابی منابع معدنی</option>
-                                      <option value="optimization">بهینه‌سازی مهندسی</option>
-                                      <option value="economic">ارزیابی اقتصادی</option>
-                                      <option value="production">بهینه‌سازی تولید</option>
-                                      <option value="training">آموزش و انتقال دانش</option>
-                                      <option value="risk">مدیریت ریسک</option>
-                                  </select>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="form-label" for="description">توضیحات پروژه</label>
-                              <textarea id="description" name="description" class="form-textarea" placeholder="لطفاً جزئیات پروژه، اهداف، محدودیت‌ها و نیازهای خاص خود را شرح دهید..."></textarea>
-                          </div>
-                          <div class="form-checkbox-group">
-                              <input type="checkbox" id="privacy" name="privacy" class="form-checkbox" required>
-                              <label for="privacy">قوانین و مقررات حریم خصوصی را مطالعه کرده و می‌پذیرم *</label>
-                          </div>
-                          <button type="submit" class="form-submit">
-                              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                  <line x1="22" y1="2" x2="11" y2="13"/>
-                                  <polygon points="22,2 15,22 11,13 2,9 22,2"/>
-                              </svg>
-                              ارسال درخواست
-                          </button>
-                          <p class="form-note">
-                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                  <circle cx="12" cy="12" r="10"/>
-                                  <polyline points="12,6 12,12 16,14"/>
-                              </svg>
-                              معمولاً ظرف ۲۴ ساعت پاسخ می‌دهیم
-                          </p>
-                      </form>
-                  </div>
-                  <div class="contact-info">
-                      <div class="contact-card">
-                          <h3>اطلاعات تماس</h3>
-                          <div class="contact-item">
-                              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                                  <polyline points="22,6 12,13 2,6"/>
-                              </svg>
-                              <div>
-                                  <div style="font-weight:600; color: var(--primary);">ایمیل</div>
-                                  <div style="color:var(--text-secondary);font-size:0.9375rem; margin-top: 4px;">info@kdmine.com</div>
-                              </div>
-                          </div>
-                          <div class="contact-item">
-                              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                                  <circle cx="12" cy="10" r="3"/>
-                              </svg>
-                              <div>
-                                  <div style="font-weight:600; color: var(--primary);">آدرس</div>
-                                  <div style="color:var(--text-secondary);font-size:0.9375rem; margin-top: 4px;">تهران، یوسف آباد، خیابان جمالزاده</div>
-                              </div>
-                          </div>
-                          <div class="contact-item">
-                              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                              </svg>
-                              <div>
-                                  <div style="font-weight:600; color: var(--primary);">تلفن</div>
-                                  <div style="color:var(--text-secondary);font-size:0.9375rem; margin-top: 4px;">۰۲۱-۸۸۷۷۶۶۵۵</div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="contact-card">
-                          <h3>ساعات کاری</h3>
-                          <div class="contact-hours">
-                              <span style="color: var(--text-secondary);">شنبه تا چهارشنبه</span>
-                              <span style="font-weight:600; color: var(--primary);">۸:۰۰ - ۱۷:۰۰</span>
-                          </div>
-                          <div class="contact-hours">
-                              <span style="color: var(--text-secondary);">پنج‌شنبه</span>
-                              <span style="font-weight:600; color: var(--primary);">۸:۰۰ - ۱۳:۰۰</span>
-                          </div>
-                          <div class="contact-hours">
-                              <span style="color: var(--text-secondary);">جمعه</span>
-                              <span style="font-weight:600; color: var(--error);">تعطیل</span>
-                          </div>
-                          <div style="margin-top: var(--spacing-lg); padding-top: var(--spacing-lg); border-top: 1px solid var(--border-light);">
-                              <div style="display: flex; align-items: center; gap: var(--spacing-sm); color: var(--text-secondary); font-size: 0.875rem;">
-                                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                      <circle cx="12" cy="12" r="10"/>
-                                      <polyline points="12,6 12,12 16,14"/>
-                                  </svg>
-                                  <span>پاسخگویی تلفنی در ساعات کاری</span>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </section>
-  </main>
+    <!-- Enhanced Contact Section with EmailJS -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-form">
+                    <h2>درخواست مشاوره رایگان</h2>
+                    <p class="contact-form-subtitle">فرم زیر را تکمیل کنید تا کارشناسان مجرب ما در اسرع وقت با شما تماس بگیرند و مشاوره تخصصی ارائه دهند</p>
+                    
+                    <div id="alert" class="alert"></div>
+                    
+                    <form id="contact-form" novalidate>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="from_name">نام و نام خانوادگی *</label>
+                                <input type="text" id="from_name" name="from_name" class="form-input" placeholder="نام کامل خود را وارد کنید" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="company">نام شرکت/سازمان</label>
+                                <input type="text" id="company" name="company" class="form-input" placeholder="نام شرکت یا سازمان">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="phone">شماره تماس *</label>
+                                <input type="tel" id="phone" name="phone" class="form-input" placeholder="09XX XXX XXXX" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="from_email">ایمیل *</label>
+                                <input type="email" id="from_email" name="from_email" class="form-input" placeholder="email@example.com" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="service">نوع خدمت مورد نیاز *</label>
+                                <select id="service" name="service" class="form-select" required>
+                                    <option value="">انتخاب کنید</option>
+                                    <option value="ارزیابی منابع معدنی">ارزیابی منابع معدنی</option>
+                                    <option value="بهینه‌سازی مهندسی">بهینه‌سازی مهندسی</option>
+                                    <option value="ارزیابی اقتصادی">ارزیابی اقتصادی</option>
+                                    <option value="بهینه‌سازی تولید">بهینه‌سازی تولید</option>
+                                    <option value="آموزش و انتقال دانش">آموزش و انتقال دانش</option>
+                                    <option value="مدیریت ریسک">مدیریت ریسک</option>
+                                    <option value="مطالعه امکان‌سنجی">مطالعه امکان‌سنجی</option>
+                                    <option value="مشاوره عمومی">مشاوره عمومی</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="budget">بودجه تقریبی پروژه</label>
+                                <select id="budget" name="budget" class="form-select">
+                                    <option value="">انتخاب کنید</option>
+                                    <option value="کمتر از ۱۰۰ میلیون تومان">کمتر از ۱۰۰ میلیون تومان</option>
+                                    <option value="۱۰۰ تا ۵۰۰ میلیون تومان">۱۰۰ تا ۵۰۰ میلیون تومان</option>
+                                    <option value="۵۰۰ میلیون تا ۱ میلیارد تومان">۵۰۰ میلیون تا ۱ میلیارد تومان</option>
+                                    <option value="بیش از ۱ میلیارد تومان">بیش از ۱ میلیارد تومان</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="timeline">زمان‌بندی مورد نظر</label>
+                            <select id="timeline" name="timeline" class="form-select">
+                                <option value="">انتخاب کنید</option>
+                                <option value="فوری (کمتر از ۱ ماه)">فوری (کمتر از ۱ ماه)</option>
+                                <option value="کوتاه‌مدت (۱-۳ ماه)">کوتاه‌مدت (۱-۳ ماه)</option>
+                                <option value="متوسط (۳-۶ ماه)">متوسط (۳-۶ ماه)</option>
+                                <option value="بلندمدت (بیش از ۶ ماه)">بلندمدت (بیش از ۶ ماه)</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <label class="form-label" for="message">توضیحات پروژه *</label>
+                            <textarea id="message" name="message" class="form-textarea" placeholder="لطفاً جزئیات پروژه، اهداف، محدودیت‌ها و نیازهای خاص خود را شرح دهید..." required></textarea>
+                        </div>
+                        <div class="form-checkbox-group">
+                            <input type="checkbox" id="privacy" name="privacy" class="form-checkbox" required>
+                            <label for="privacy">قوانین و مقررات حریم خصوصی را مطالعه کرده و می‌پذیرم *</label>
+                        </div>
+                        <button type="submit" class="form-submit">
+                            <span id="submit-text">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="22" y1="2" x2="11" y2="13"/>
+                                    <polygon points="22,2 15,22 11,13 2,9 22,2"/>
+                                </svg>
+                                ارسال درخواست
+                            </span>
+                            <span id="submit-loading" class="loading" style="display: none;"></span>
+                        </button>
+                        <p class="form-note">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12,6 12,12 16,14"/>
+                            </svg>
+                            معمولاً ظرف ۲۴ ساعت پاسخ می‌دهیم
+                        </p>
+                    </form>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <h3>اطلاعات تماس</h3>
+                        <div class="contact-item">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                            <div>
+                                <div style="font-weight:600; color: var(--primary);">ایمیل</div>
+                                <div style="color:var(--text-secondary);font-size:0.9375rem; margin-top: 4px;">info@kdmine.com</div>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                            <div>
+                                <div style="font-weight:600; color: var(--primary);">آدرس</div>
+                                <div style="color:var(--text-secondary);font-size:0.9375rem; margin-top: 4px;">تهران، یوسف آباد، خیابان جمالزاده</div>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                            </svg>
+                            <div>
+                                <div style="font-weight:600; color: var(--primary);">تلفن</div>
+                                <div style="color:var(--text-secondary);font-size:0.9375rem; margin-top: 4px;">۰۲۱-۸۸۷۷۶۶۵۵</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <h3>ساعات کاری</h3>
+                        <div class="contact-hours">
+                            <span style="color: var(--text-secondary);">شنبه تا چهارشنبه</span>
+                            <span style="font-weight:600; color: var(--primary);">۸:۰۰ - ۱۷:۰۰</span>
+                        </div>
+                        <div class="contact-hours">
+                            <span style="color: var(--text-secondary);">پنج‌شنبه</span>
+                            <span style="font-weight:600; color: var(--primary);">۸:۰۰ - ۱۳:۰۰</span>
+                        </div>
+                        <div class="contact-hours">
+                            <span style="color: var(--text-secondary);">جمعه</span>
+                            <span style="font-weight:600; color: var(--error);">تعطیل</span>
+                        </div>
+                        <div style="margin-top: var(--spacing-lg); padding-top: var(--spacing-lg); border-top: 1px solid var(--border-light);">
+                            <div style="display: flex; align-items: center; gap: var(--spacing-sm); color: var(--text-secondary); font-size: 0.875rem;">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <polyline points="12,6 12,12 16,14"/>
+                                </svg>
+                                <span>پاسخگویی تلفنی در ساعات کاری</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
 
-  <footer class="footer">
-      <div class="container">
-          <div class="footer-grid">
-              <div class="footer-brand">
-                  <div class="footer-brand-header">
-                      <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="لوگو کاویان توسعه معدن" class="footer-logo">
-                      <div class="footer-brand-name">کاویان توسعه معدن</div>
-                  </div>
-                  <p class="footer-description">مهندسی هوشمند در معدن و زنجیره ارزش فلزات با تکیه بر دانش روز، فناوری‌های نوین و مدیریت ریسک. ارائه‌دهنده راهکارهای جامع از اکتشاف تا فرآوری.</p>
-                  <div class="footer-social">
-                      <a href="#" class="social-link" aria-label="LinkedIn" title="LinkedIn">
-                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                              <rect x="2" y="9" width="4" height="12"/>
-                              <circle cx="4" cy="4" r="2"/>
-                          </svg>
-                      </a>
-                      <a href="#" class="social-link" aria-label="Twitter" title="Twitter">
-                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
-                          </svg>
-                      </a>
-                      <a href="#" class="social-link" aria-label="Instagram" title="Instagram">
-                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-                          </svg>
-                      </a>
-                      <a href="#" class="social-link" aria-label="Telegram" title="Telegram">
-                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <line x1="22" y1="2" x2="11" y2="13"/>
-                              <polygon points="22,2 15,22 11,13 2,9 22,2"/>
-                          </svg>
-                      </a>
-                  </div>
-              </div>
-              <div class="footer-section">
-                  <h4>دسترسی سریع</h4>
-                  <ul class="footer-links">
-                      <li><a href="./index.html" class="footer-link">خانه</a></li>
-                      <li><a href="./about.html" class="footer-link">درباره ما</a></li>
-                      <li><a href="./services.html" class="footer-link">خدمات</a></li>
-                      <li><a href="./portfolio.html" class="footer-link">نمونه کارها</a></li>
-                      <li><a href="./news.html" class="footer-link">اخبار و روندها</a></li>
-                      <li><a href="./equipment.html" class="footer-link">تجهیزات</a></li>
-                      <li><a href="./technical-resources.html" class="footer-link">منابع فنی</a></li>
-                      <li><a href="./contact.html" class="footer-link">تماس با ما</a></li>
-                  </ul>
-              </div>
-              <div class="footer-section">
-                  <h4>خدمات تخصصی</h4>
-                  <ul class="footer-services">
-                      <li class="footer-service">
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <polyline points="9,18 15,12 9,6"/>
-                          </svg>
-                          <span>ارزیابی منابع معدنی</span>
-                      </li>
-                      <li class="footer-service">
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <polyline points="9,18 15,12 9,6"/>
-                          </svg>
-                          <span>بهینه‌سازی مهندسی</span>
-                      </li>
-                      <li class="footer-service">
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <polyline points="9,18 15,12 9,6"/>
-                          </svg>
-                          <span>ارزیابی اقتصادی</span>
-                      </li>
-                      <li class="footer-service">
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <polyline points="9,18 15,12 9,6"/>
-                          </svg>
-                          <span>مدیریت ریسک</span>
-                      </li>
-                      <li class="footer-service">
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <polyline points="9,18 15,12 9,6"/>
-                          </svg>
-                          <span>آموزش و مشاوره</span>
-                      </li>
-                  </ul>
-              </div>
-              <div class="footer-newsletter">
-                  <h4>خبرنامه</h4>
-                  <p>از آخرین اخبار، روندهای صنعت معدن و نوآوری‌های فناوری مطلع شوید</p>
-                  <form class="newsletter-form" id="newsletter-form">
-                      <input type="email" class="newsletter-input" placeholder="ایمیل شما" required aria-label="ایمیل برای خبرنامه">
-                      <button type="submit" class="newsletter-btn">
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <line x1="22" y1="2" x2="11" y2="13"/>
-                              <polygon points="22,2 15,22 11,13 2,9 22,2"/>
-                          </svg>
-                          عضویت
-                      </button>
-                  </form>
-              </div>
-          </div>
-          <div class="footer-bottom">
-              <div>© ۱۴۰۳ کاویان توسعه معدن. تمامی حقوق محفوظ است.</div>
-              <div class="footer-legal">
-                  <a href="./privacy.html">حریم خصوصی</a>
-                  <a href="./terms.html">شرایط استفاده</a>
-                  <a href="./sitemap.html">نقشه سایت</a>
-              </div>
-          </div>
-      </div>
-  </footer>
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="footer-brand-header">
+                    <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="لوگو کاویان توسعه معدن" class="footer-logo">
+                    <div class="footer-brand-name">کاویان توسعه معدن</div>
+                </div>
+                <p class="footer-description">مهندسی هوشمند در معدن و زنجیره ارزش فلزات با تکیه بر دانش روز، فناوری‌های نوین و مدیریت ریسک. ارائه‌دهنده راهکارهای جامع از اکتشاف تا فرآوری.</p>
+                <div class="footer-social">
+                    <a href="#" class="social-link" aria-label="LinkedIn" title="LinkedIn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                            <rect x="2" y="9" width="4" height="12"/>
+                            <circle cx="4" cy="4" r="2"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Twitter" title="Twitter">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Instagram" title="Instagram">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Telegram" title="Telegram">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="22" y1="2" x2="11" y2="13"/>
+                            <polygon points="22,2 15,22 11,13 2,9 22,2"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>دسترسی سریع</h4>
+                <ul class="footer-links">
+                    <li><a href="./index.html" class="footer-link">خانه</a></li>
+                    <li><a href="./about.html" class="footer-link">درباره ما</a></li>
+                    <li><a href="./services.html" class="footer-link">خدمات</a></li>
+                    <li><a href="./portfolio.html" class="footer-link">نمونه کارها</a></li>
+                    <li><a href="./news.html" class="footer-link">اخبار و روندها</a></li>
+                    <li><a href="./equipment.html" class="footer-link">تجهیزات</a></li>
+                    <li><a href="./technical-resources.html" class="footer-link">منابع فنی</a></li>
+                    <li><a href="#contact" class="footer-link">تماس با ما</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>خدمات تخصصی</h4>
+                <ul class="footer-services">
+                    <li class="footer-service">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9,18 15,12 9,6"/>
+                        </svg>
+                        <span>ارزیابی منابع معدنی</span>
+                    </li>
+                    <li class="footer-service">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9,18 15,12 9,6"/>
+                        </svg>
+                        <span>بهینه‌سازی مهندسی</span>
+                    </li>
+                    <li class="footer-service">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9,18 15,12 9,6"/>
+                        </svg>
+                        <span>ارزیابی اقتصادی</span>
+                    </li>
+                    <li class="footer-service">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9,18 15,12 9,6"/>
+                        </svg>
+                        <span>مدیریت ریسک</span>
+                    </li>
+                    <li class="footer-service">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9,18 15,12 9,6"/>
+                        </svg>
+                        <span>آموزش و مشاوره</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-newsletter">
+                <h4>خبرنامه</h4>
+                <p>از آخرین اخبار، روندهای صنعت معدن و نوآوری‌های فناوری مطلع شوید</p>
+                <form class="newsletter-form" id="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="ایمیل شما" required aria-label="ایمیل برای خبرنامه">
+                    <button type="submit" class="newsletter-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="22" y1="2" x2="11" y2="13"/>
+                            <polygon points="22,2 15,22 11,13 2,9 22,2"/>
+                        </svg>
+                        عضویت
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>© ۱۴۰۳ کاویان توسعه معدن. تمامی حقوق محفوظ است.</div>
+            <div class="footer-legal">
+                <a href="./privacy.html">حریم خصوصی</a>
+                <a href="./terms.html">شرایط استفاده</a>
+                <a href="./sitemap.html">نقشه سایت</a>
+            </div>
+        </div>
+    </div>
+</footer>
 
-  <!-- JavaScript -->
-  <script>
-      // Header scroll effect
-      const header = document.getElementById('header');
-      let lastScrollY = window.scrollY;
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
-      window.addEventListener('scroll', () => {
-          if (window.scrollY > 100) {
-              header.classList.add('scrolled');
-          } else {
-              header.classList.remove('scrolled');
-          }
-      });
+<!-- JavaScript -->
+<script>
+    // EmailJS Configuration
+    const EMAIL_CONFIG = {
+        publicKey: 'u3dfoUdeOTtWSAjk_',
+        serviceId: 'service_kiv8uen',
+        templateId: 'template_bow4qhm'
+    };
 
-      // Smooth scrolling for anchor links
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-          anchor.addEventListener('click', function (e) {
-              e.preventDefault();
-              const target = document.querySelector(this.getAttribute('href'));
-              if (target) {
-                  target.scrollIntoView({
-                      behavior: 'smooth',
-                      block: 'start'
-                  });
-              }
-          });
-      });
+    // Initialize EmailJS
+    emailjs.init(EMAIL_CONFIG.publicKey);
 
-      // Form validation and submission
-      const contactForm = document.getElementById('contact-form');
-      const newsletterForm = document.getElementById('newsletter-form');
+    // Header scroll effect
+    const header = document.getElementById('header');
+    let lastScrollY = window.scrollY;
 
-      if (contactForm) {
-          contactForm.addEventListener('submit', function(e) {
-              e.preventDefault();
-              
-              // Basic validation
-              const requiredFields = this.querySelectorAll('[required]');
-              let isValid = true;
-              
-              requiredFields.forEach(field => {
-                  if (!field.value.trim()) {
-                      isValid = false;
-                      field.style.borderColor = 'var(--error)';
-                  } else {
-                      field.style.borderColor = 'var(--border-light)';
-                  }
-              });
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
 
-              // Email validation
-              const email = this.querySelector('#email');
-              const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-              if (email && !emailRegex.test(email.value)) {
-                  isValid = false;
-                  email.style.borderColor = 'var(--error)';
-              }
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
 
-              // Phone validation
-              const phone = this.querySelector('#phone');
-              const phoneRegex = /^09\d{9}$/;
-              if (phone && !phoneRegex.test(phone.value.replace(/\s/g, ''))) {
-                  isValid = false;
-                  phone.style.borderColor = 'var(--error)';
-              }
+    // Enhanced Contact Form with EmailJS
+    const contactForm = document.getElementById('contact-form');
 
-              if (isValid) {
-                  // Simulate form submission
-                  const submitBtn = this.querySelector('.form-submit');
-                  const originalText = submitBtn.innerHTML;
-                  
-                  submitBtn.innerHTML = `
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                          <path d="M21 12a9 9 0 11-6.219-8.56"/>
-                      </svg>
-                      در حال ارسال...
-                  `;
-                  submitBtn.disabled = true;
+    if (contactForm) {
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('.form-submit');
+            const submitText = document.getElementById('submit-text');
+            const submitLoading = document.getElementById('submit-loading');
+            
+            // Show loading state
+            submitText.style.display = 'none';
+            submitLoading.style.display = 'inline-block';
+            submitBtn.disabled = true;
+            
+            try {
+                // Collect form data
+                const formData = new FormData(this);
+                const data = Object.fromEntries(formData.entries());
+                
+                // Add date
+                data.date = new Date().toLocaleString('fa-IR', {
+                    timeZone: 'Asia/Tehran'
+                });
+                
+                // Basic validation
+                const requiredFields = ['from_name', 'phone', 'from_email', 'service', 'message'];
+                let isValid = true;
+                
+                requiredFields.forEach(field => {
+                    const input = this.querySelector(`[name="${field}"]`);
+                    if (!input.value.trim()) {
+                        isValid = false;
+                        input.style.borderColor = 'var(--error)';
+                    } else {
+                        input.style.borderColor = 'var(--border-light)';
+                    }
+                });
 
-                  setTimeout(() => {
-                      submitBtn.innerHTML = `
-                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <polyline points="20,6 9,17 4,12"/>
-                          </svg>
-                          ارسال شد!
-                      `;
-                      
-                      setTimeout(() => {
-                          submitBtn.innerHTML = originalText;
-                          submitBtn.disabled = false;
-                          this.reset();
-                      }, 2000);
-                  }, 1500);
-              } else {
-                  // Show error message
-                  alert('لطفاً تمامی فیلدهای اجباری را به درستی پر کنید.');
-              }
-          });
-      }
+                // Email validation
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(data.from_email)) {
+                    isValid = false;
+                    this.querySelector('#from_email').style.borderColor = 'var(--error)';
+                }
 
-      if (newsletterForm) {
-          newsletterForm.addEventListener('submit', function(e) {
-              e.preventDefault();
-              
-              const email = this.querySelector('.newsletter-input');
-              const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-              
-              if (emailRegex.test(email.value)) {
-                  const btn = this.querySelector('.newsletter-btn');
-                  const originalHTML = btn.innerHTML;
-                  
-                  btn.innerHTML = `
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                          <polyline points="20,6 9,17 4,12"/>
-                      </svg>
-                      ثبت شد
-                  `;
-                  
-                  setTimeout(() => {
-                      btn.innerHTML = originalHTML;
-                      email.value = '';
-                  }, 2000);
-              } else {
-                  email.style.borderColor = 'var(--error)';
-                  setTimeout(() => {
-                      email.style.borderColor = 'rgba(255,255,255,0.2)';
-                  }, 2000);
-              }
-          });
-      }
+                // Phone validation
+                const phoneRegex = /^09\d{9}$/;
+                if (!phoneRegex.test(data.phone.replace(/\s/g, ''))) {
+                    isValid = false;
+                    this.querySelector('#phone').style.borderColor = 'var(--error)';
+                }
 
-      // Language switcher
-      document.querySelectorAll('.lang-btn').forEach(btn => {
-          btn.addEventListener('click', function() {
-              document.querySelectorAll('.lang-btn').forEach(b => b.removeAttribute('aria-current'));
-              this.setAttribute('aria-current', 'true');
-          });
-      });
+                // Privacy checkbox validation
+                if (!this.querySelector('#privacy').checked) {
+                    isValid = false;
+                    showAlert('error', 'لطفاً قوانین حریم خصوصی را بپذیرید.');
+                    return;
+                }
 
-      // Mobile menu toggle
-      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-      const nav = document.getElementById('nav');
+                if (!isValid) {
+                    showAlert('error', 'لطفاً تمامی فیلدهای اجباری را به درستی پر کنید.');
+                    return;
+                }
+                
+                // Send email via EmailJS
+                await emailjs.send(
+                    EMAIL_CONFIG.serviceId,
+                    EMAIL_CONFIG.templateId,
+                    data
+                );
+                
+                // Save to localStorage (optional)
+                const submissions = JSON.parse(localStorage.getItem('contactSubmissions') || '[]');
+                submissions.unshift({...data, id: Date.now()});
+                localStorage.setItem('contactSubmissions', JSON.stringify(submissions));
+                
+                // Show success message
+                showAlert('success', '✅ درخواست شما با موفقیت ثبت و ارسال شد! تیم ما به زودی با شما تماس خواهد گرفت.');
+                
+                // Reset form
+                this.reset();
+                
+            } catch (error) {
+                console.error('خطا در ارسال:', error);
+                showAlert('error', '❌ خطا در ارسال درخواست. لطفاً دوباره تلاش کنید یا مستقیماً با ما تماس بگیرید.');
+            } finally {
+                // Reset button state
+                submitText.style.display = 'inline';
+                submitLoading.style.display = 'none';
+                submitBtn.disabled = false;
+            }
+        });
+    }
 
-      if (mobileMenuBtn && nav) {
-          mobileMenuBtn.addEventListener('click', function() {
-              nav.classList.toggle('active');
-              this.classList.toggle('active');
-          });
-      }
+    // Newsletter form
+    const newsletterForm = document.getElementById('newsletter-form');
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = this.querySelector('.newsletter-input');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (emailRegex.test(email.value)) {
+                const btn = this.querySelector('.newsletter-btn');
+                const originalHTML = btn.innerHTML;
+                
+                btn.innerHTML = `
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20,6 9,17 4,12"/>
+                    </svg>
+                    ثبت شد
+                `;
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalHTML;
+                    email.value = '';
+                }, 2000);
+            } else {
+                email.style.borderColor = 'var(--error)';
+                setTimeout(() => {
+                    email.style.borderColor = 'rgba(255,255,255,0.2)';
+                }, 2000);
+            }
+        });
+    }
 
-      // Lazy loading for images
-      const images = document.querySelectorAll('img.loading');
-      const imageObserver = new IntersectionObserver((entries, observer) => {
-          entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                  const img = entry.target;
-                  img.classList.remove('loading');
-                  observer.unobserve(img);
-              }
-          });
-      });
+    // Show alert function
+    function showAlert(type, message) {
+        const alert = document.getElementById('alert');
+        alert.className = `alert alert-${type}`;
+        alert.textContent = message;
+        alert.style.display = 'block';
+        
+        // Scroll to alert
+        alert.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        setTimeout(() => {
+            alert.style.display = 'none';
+        }, 8000);
+    }
 
-      images.forEach(img => imageObserver.observe(img));
+    // Language switcher
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.lang-btn').forEach(b => b.removeAttribute('aria-current'));
+            this.setAttribute('aria-current', 'true');
+        });
+    });
 
-      // Performance optimization
-      window.addEventListener('load', () => {
-          // Remove loading states
-          document.querySelectorAll('.loading').forEach(el => {
-              el.classList.remove('loading');
-          });
-      });
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const nav = document.getElementById('nav');
 
-      // Accessibility improvements
-      document.addEventListener('keydown', function(e) {
-          if (e.key === 'Tab') {
-              document.body.classList.add('keyboard-navigation');
-          }
-      });
+    if (mobileMenuBtn && nav) {
+        mobileMenuBtn.addEventListener('click', function() {
+            nav.classList.toggle('active');
+            this.classList.toggle('active');
+        });
+    }
 
-      document.addEventListener('mousedown', function() {
-          document.body.classList.remove('keyboard-navigation');
-      });
+    // Lazy loading for images
+    const images = document.querySelectorAll('img.loading');
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.classList.remove('loading');
+                observer.unobserve(img);
+            }
+        });
+    });
 
-      // Animation on scroll
-      const observerOptions = {
-          threshold: 0.1,
-          rootMargin: '0px 0px -50px 0px'
-      };
+    images.forEach(img => imageObserver.observe(img));
 
-      const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                  entry.target.style.opacity = '1';
-                  entry.target.style.transform = 'translateY(0)';
-              }
-          });
-      }, observerOptions);
+    // Performance optimization
+    window.addEventListener('load', () => {
+        // Remove loading states
+        document.querySelectorAll('.loading').forEach(el => {
+            el.classList.remove('loading');
+        });
+    });
 
-      // Observe service and project cards
-      document.querySelectorAll('.service-card, .project-card').forEach(card => {
-          card.style.opacity = '0';
-          card.style.transform = 'translateY(30px)';
-          card.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-          observer.observe(card);
-      });
-  </script>
+    // Accessibility improvements
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Tab') {
+            document.body.classList.add('keyboard-navigation');
+        }
+    });
 
-  <!-- Schema.org structured data -->
-  <script type="application/ld+json">
-  {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "کاویان توسعه معدن",
-      "alternateName": "Kavian Mine Development",
-      "url": "https://kdmine.com",
-      "logo": "https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg",
-      "description": "مهندسی هوشمند در معدن و زنجیره ارزش فلزات",
-      "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "یوسف آباد، خیابان جمالزاده",
-          "addressLocality": "تهران",
-          "addressCountry": "IR"
-      },
-      "contactPoint": {
-          "@type": "ContactPoint",
-          "telephone": "+98-21-88776655",
-          "contactType": "customer service",
-          "email": "info@kdmine.com"
-      },
-      "sameAs": [
-          "https://linkedin.com/company/kavian-mine-development",
-          "https://twitter.com/kavianmine"
-      ]
-  }
-  </script>
+    document.addEventListener('mousedown', function() {
+        document.body.classList.remove('keyboard-navigation');
+    });
+
+    // Animation on scroll
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    // Observe service and project cards
+    document.querySelectorAll('.service-card, .project-card').forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+        observer.observe(card);
+    });
+</script>
+
+<!-- Schema.org structured data -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "کاویان توسعه معدن",
+    "alternateName": "Kavian Mine Development",
+    "url": "https://kdmine.com",
+    "logo": "https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg",
+    "description": "مهندسی هوشمند در معدن و زنجیره ارزش فلزات",
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "یوسف آباد، خیابان جمالزاده",
+        "addressLocality": "تهران",
+        "addressCountry": "IR"
+    },
+    "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+98-21-88776655",
+        "contactType": "customer service",
+        "email": "info@kdmine.com"
+    },
+    "sameAs": [
+        "https://linkedin.com/company/kavian-mine-development",
+        "https://twitter.com/kavianmine"
+    ]
+}
+</script>
 </body>
 </html>
