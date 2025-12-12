@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ورود به سیستم | کاویان توسعه معدن</title>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg">
+  
+  <style>
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+      }
+
+      body {
+          font-family: 'Vazirmatn', sans-serif;
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          min-height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 20px;
+          direction: rtl;
+      }
+
+      .login-container {
+          background: white;
+          border-radius: 20px;
+          box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+          overflow: hidden;
+          max-width: 900px;
+          width: 100%;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          min-height: 600px;
+      }
+
+      .login-form {
+          padding: 60px 40px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+      }
+
+      .login-header {
+          text-align: center;
+          margin-bottom: 40px;
+      }
+
+      .login-header img {
+          width: 80px;
+          height: 80px;
+          margin-bottom: 20px;
+      }
+
+      .login-header h1 {
+          font-size: 2rem;
+          font-weight: 800;
+          color: #1a202c;
+          margin-bottom: 10px;
+      }
+
+      .login-header p {
+          color: #6b7280;
+          font-size: 1rem;
+      }
+
+      .form-group {
+          margin-bottom: 25px;
+      }
+
+      .form-label {
+          display: block;
+          margin-bottom: 8px;
+          font-weight: 600;
+          color: #374151;
+      }
+
+      .form-input {
+          width: 100%;
+          padding: 15px;
+          border: 2px solid #e5e7eb;
+          border-radius: 12px;
+          font-family: inherit;
+          font-size: 1rem;
+          transition: all 0.3s;
+          background: #f9fafb;
+      }
+
+      .form-input:focus {
+          outline: none;
+          border-color: #2563eb;
+          background: white;
+          box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+      }
+
+      .remember-forgot {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 30px;
+      }
+
+      .remember-group {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+      }
+
+      .remember-group input[type="checkbox"] {
+          width: 18px;
+          height: 18px;
+          accent-color: #2563eb;
+      }
+
+      .forgot-link {
+          color: #2563eb;
+          text-decoration: none;
+          font-weight: 600;
+          font-size: 0.875rem;
+      }
+
+      .forgot-link:hover {
+          color: #1d4ed8;
+      }
+
+      .login-btn {
+          width: 100%;
+          background: linear-gradient(135deg, #2563eb, #1d4ed8);
+          color: white;
+          border: none;
+          padding: 18px;
+          border-radius: 12px;
+          font-size: 1.1rem;
+          font-weight: 700;
+          cursor: pointer;
+          transition: all 0.3s;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+      }
+
+      .login-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 10px 30px rgba(37,99,235,0.3);
+      }
+
+      .login-btn:disabled {
+          opacity: 0.7;
+          cursor: not-allowed;
+          transform: none;
+      }
+
+      .divider {
+          text-align: center;
+          margin: 30px 0;
+          position: relative;
+          color: #6b7280;
+      }
+
+      .divider::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 0;
+          right: 0;
+          height: 1px;
+          background: #e5e7eb;
+      }
+
+      .divider span {
+          background: white;
+          padding: 0 15px;
+      }
+
+      .signup-link {
+          text-align: center;
+          color: #6b7280;
+      }
+
+      .signup-link a {
+          color: #2563eb;
+          text-decoration: none;
+          font-weight: 600;
+      }
+
+      .signup-link a:hover {
+          color: #1d4ed8;
+      }
+
+      .login-sidebar {
+          background: linear-gradient(135deg, #2563eb, #1d4ed8);
+          color: white;
+          padding: 60px 40px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          position: relative;
+          overflow: hidden;
+      }
+
+      .login-sidebar::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="%23fff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+          pointer-events: none;
+      }
+
+      .sidebar-content {
+          position: relative;
+          z-index: 1;
+      }
+
+      .sidebar-title {
+          font-size: 2rem;
+          font-weight: 800;
+          margin-bottom: 20px;
+      }
+
+      .sidebar-description {
+          font-size: 1.1rem;
+          line-height: 1.7;
+          opacity: 0.9;
+          margin-bottom: 30px;
+      }
+
+      .demo-accounts {
+          background: rgba(255,255,255,0.1);
+          border-radius: 12px;
+          padding: 20px;
+          margin-bottom: 30px;
+      }
+
+      .demo-accounts h3 {
+          font-size: 1.25rem;
+          font-weight: 700;
+          margin-bottom: 15px;
+      }
+
+      .demo-account {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 10px 0;
+          border-bottom: 1px solid rgba(255,255,255,0.1);
+      }
+
+      .demo-account:last-child {
+          border-bottom: none;
+      }
+
+      .demo-level {
+          font-weight: 600;
+      }
+
+      .demo-credentials {
+          font-family: monospace;
+          font-size: 0.875rem;
+          opacity: 0.8;
+      }
+
+      .features-list {
+          list-style: none;
+      }
+
+      .features-list li {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-bottom: 10px;
+          opacity: 0.9;
+      }
+
+      .features-list li::before {
+          content: "✓";
+          background: rgba(255,255,255,0.2);
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: bold;
+      }
+
+      .alert {
+          padding: 15px;
+          border-radius: 12px;
+          margin-bottom: 20px;
+          font-weight: 600;
+          display: none;
+      }
+
+      .alert-success {
+          background: #d1fae5;
+          color: #065f46;
+          border: 2px solid #10b981;
+      }
+
+      .alert-error {
+          background: #fee2e2;
+          color: #991b1b;
+          border: 2px solid #ef4444;
+      }
+
+      .loading {
+          width: 20px;
+          height: 20px;
+          border: 3px solid #ffffff40;
+          border-top: 3px solid #ffffff;
+          border-radius: 50%;
+          animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+      }
+
+      .back-link {
+          position: absolute;
+          top: 20px;
+          left: 20px;
+          color: rgba(255,255,255,0.8);
+          text-decoration: none;
+          font-weight: 600;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          transition: all 0.3s;
+      }
+
+      .back-link:hover {
+          color: white;
+          transform: translateX(-5px);
+      }
+
+      @media (max-width: 768px) {
+          .login-container {
+              grid-template-columns: 1fr;
+              max-width: 500px;
+          }
+
+          .login-sidebar {
+              order: -1;
+              padding: 40px 30px;
+          }
+
+          .login-form {
+              padding: 40px 30px;
+          }
+
+          .sidebar-title {
+              font-size: 1.5rem;
+          }
+
+          .demo-accounts {
+              display: none;
+          }
+      }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+      <!-- فرم ورود -->
+      <div class="login-form">
+          <div class="login-header">
+              <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="کاویان">
+              <h1>ورود به سیستم</h1>
+              <p>به منابع فنی کاویان دسترسی پیدا کنید</p>
+          </div>
+
+          <div id="alert" class="alert"></div>
+
+          <form id="login-form">
+              <div class="form-group">
+                  <label class="form-label" for="username">نام کاربری</label>
+                  <input type="text" id="username" name="username" class="form-input" placeholder="نام کاربری خود را وارد کنید" required>
+              </div>
+
+              <div class="form-group">
+                  <label class="form-label" for="password">رمز عبور</label>
+                  <input type="password" id="password" name="password" class="form-input" placeholder="رمز عبور خود را وارد کنید" required>
+              </div>
+
+              <div class="remember-forgot">
+                  <div class="remember-group">
+                      <input type="checkbox" id="remember" name="remember">
+                      <label for="remember">مرا به خاطر بسپار</label>
+                  </div>
+                  <a href="#" class="forgot-link">فراموشی رمز عبور؟</a>
+              </div>
+
+              <button type="submit" class="login-btn" id="login-btn">
+                  <span id="login-text">ورود</span>
+                  <span id="login-loading" class="loading" style="display: none;"></span>
+              </button>
+          </form>
+
+          <div class="divider">
+              <span>یا</span>
+          </div>
+
+          <div class="signup-link">
+              <p>حساب کاربری ندارید؟ <a href="./request-membership.html">درخواست عضویت</a></p>
+          </div>
+      </div>
+
+      <!-- نوار کناری -->
+      <div class="login-sidebar">
+          <a href="./index.html" class="back-link">
+              ← بازگشت به صفحه اصلی
+          </a>
+          
+          <div class="sidebar-content">
+              <h2 class="sidebar-title">منابع فنی پیشرفته</h2>
+              <p class="sidebar-description">
+                  دسترسی به کامل‌ترین مجموعه ابزارها، راهنماها و منابع فنی در حوزه مهندسی معدن و فرآوری مواد معدنی
+              </p>
+
+              <div class="demo-accounts">
+                  <h3>🔑 حساب‌های آزمایشی:</h3>
+                  <div class="demo-account">
+                      <span class="demo-level">مشاهده‌گر</span>
+                      <span class="demo-credentials">view_2024 / Kv8mR3nP</span>
+                  </div>
+                  <div class="demo-account">
+                      <span class="demo-level">تحلیلگر</span>
+                      <span class="demo-credentials">anl_2024 / An7xQ5wE</span>
+                  </div>
+                  <div class="demo-account">
+                      <span class="demo-level">مهندس</span>
+                      <span class="demo-credentials">eng_2024 / Eg9mT4rY</span>
+                  </div>
+                  <div class="demo-account">
+                      <span class="demo-level">مدیر پروژه</span>
+                      <span class="demo-credentials">mgr_2024 / Mg6nX8sD</span>
+                  </div>
+              </div>
+
+              <ul class="features-list">
+                  <li>ابزارهای تخصصی محاسبات معدنی</li>
+                  <li>راهنماهای فنی و استانداردها</li>
+                  <li>نرم‌افزارهای تحلیلی</li>
+                  <li>گزارش‌های تخصصی</li>
+                  <li>پشتیبانی فنی</li>
+              </ul>
+          </div>
+      </div>
+  </div>
+
+  <script>
+      // حساب‌های آزمایشی
+      const DEMO_ACCOUNTS = {
+          'view_2024': {
+              password: 'Kv8mR3nP',
+              fullName: 'کاربر مشاهده‌گر',
+              accessLevel: 'viewer',
+              permissions: ['view_basic', 'download_public']
+          },
+          'anl_2024': {
+              password: 'An7xQ5wE',
+              fullName: 'کاربر تحلیلگر',
+              accessLevel: 'analyst',
+              permissions: ['view_basic', 'view_analysis', 'download_reports', 'use_calculators']
+          },
+          'eng_2024': {
+              password: 'Eg9mT4rY',
+              fullName: 'کاربر مهندس',
+              accessLevel: 'engineer',
+              permissions: ['view_basic', 'view_analysis', 'view_engineering', 'download_all', 'use_advanced_tools']
+          },
+          'mgr_2024': {
+              password: 'Mg6nX8sD',
+              fullName: 'کاربر مدیر پروژه',
+              accessLevel: 'manager',
+              permissions: ['view_all', 'download_all', 'use_all_tools', 'project_management']
+          }
+      };
+
+      // مدیریت فرم ورود
+      document.getElementById('login-form').addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          const username = document.getElementById('username').value.trim();
+          const password = document.getElementById('password').value.trim();
+          const remember = document.getElementById('remember').checked;
+          
+          const loginBtn = document.getElementById('login-btn');
+          const loginText = document.getElementById('login-text');
+          const loginLoading = document.getElementById('login-loading');
+          
+          // نمایش loading
+          loginText.style.display = 'none';
+          loginLoading.style.display = 'inline-block';
+          loginBtn.disabled = true;
+          
+          setTimeout(() => {
+              if (authenticateUser(username, password, remember)) {
+                  showAlert('success', '✅ ورود موفقیت‌آمیز! در حال انتقال...');
+                  setTimeout(() => {
+                      window.location.href = './technical-resources-dashboard.html';
+                  }, 1500);
+              } else {
+                  showAlert('error', '❌ نام کاربری یا رمز عبور اشتباه است.');
+                  
+                  // بازگردانی وضعیت دکمه
+                  loginText.style.display = 'inline';
+                  loginLoading.style.display = 'none';
+                  loginBtn.disabled = false;
+              }
+          }, 1000);
+      });
+
+      // احراز هویت کاربر
+      function authenticateUser(username, password, remember) {
+          // بررسی حساب‌های آزمایشی
+          if (DEMO_ACCOUNTS[username] && DEMO_ACCOUNTS[username].password === password) {
+              const userData = {
+                  username,
+                  ...DEMO_ACCOUNTS[username],
+                  loginTime: new Date().toISOString(),
+                  isDemoAccount: true
+              };
+              
+              // ذخیره اطلاعات ورود
+              const storage = remember ? localStorage : sessionStorage;
+              storage.setItem('technicalLogin', JSON.stringify(userData));
+              
+              return true;
+          }
+          
+          // بررسی کاربران تأیید شده
+          const approvedUsers = JSON.parse(localStorage.getItem('approvedUsers') || '[]');
+          const user = approvedUsers.find(u => u.username === username && u.password === password && u.isActive);
+          
+          if (user) {
+              const userData = {
+                  username: user.username,
+                  fullName: `${user.firstName} ${user.lastName}`,
+                  email: user.email,
+                  accessLevel: user.accessLevel,
+                  permissions: user.permissions,
+                  loginTime: new Date().toISOString(),
+                  isDemoAccount: false
+              };
+              
+              // ذخیره اطلاعات ورود
+              const storage = remember ? localStorage : sessionStorage;
+              storage.setItem('technicalLogin', JSON.stringify(userData));
+              
+              // به‌روزرسانی آخرین ورود
+              user.lastLogin = new Date().toISOString();
+              const updatedUsers = approvedUsers.map(u => u.username === username ? user : u);
+              localStorage.setItem('approvedUsers', JSON.stringify(updatedUsers));
+              
+              return true;
+          }
+          
+          return false;
+      }
+
+      // نمایش پیام
+      function showAlert(type, message) {
+          const alert = document.getElementById('alert');
+          alert.className = `alert alert-${type}`;
+          alert.textContent = message;
+          alert.style.display = 'block';
+          
+          setTimeout(() => {
+              alert.style.display = 'none';
+          }, 5000);
+      }
+
+      // بررسی ورود قبلی
+      document.addEventListener('DOMContentLoaded', function() {
+          const savedLogin = localStorage.getItem('technicalLogin') || 
+                            sessionStorage.getItem('technicalLogin');
+          
+          if (savedLogin) {
+              try {
+                  const loginData = JSON.parse(savedLogin);
+                  const loginTime = new Date(loginData.loginTime);
+                  const now = new Date();
+                  const hoursDiff = (now - loginTime) / (1000 * 60 * 60);
+                  
+                  // اگر کمتر از 24 ساعت گذشته باشد، مستقیماً به داشبورد برود
+                  if (hoursDiff < 24) {
+                      showAlert('success', '✅ شما قبلاً وارد شده‌اید. در حال انتقال...');
+                      setTimeout(() => {
+                          window.location.href = './technical-resources-dashboard.html';
+                      }, 1500);
+                      return;
+                  }
+              } catch (error) {
+                  // در صورت خطا، اطلاعات ورود را پاک کن
+                  localStorage.removeItem('technicalLogin');
+                  sessionStorage.removeItem('technicalLogin');
+              }
+          }
+          
+          console.log('🔐 صفحه ورود آماده است');
+      });
+
+      // کلیک روی حساب‌های آزمایشی برای پر کردن خودکار
+      document.querySelectorAll('.demo-account').forEach(account => {
+          account.addEventListener('click', function() {
+              const credentials = this.querySelector('.demo-credentials').textContent.split(' / ');
+              document.getElementById('username').value = credentials[0];
+              document.getElementById('password').value = credentials[1];
+              
+              // انیمیشن کوتاه برای نشان دادن پر شدن فیلدها
+              const inputs = [document.getElementById('username'), document.getElementById('password')];
+              inputs.forEach(input => {
+                  input.style.background = '#eff6ff';
+                  setTimeout(() => {
+                      input.style.background = '#f9fafb';
+                  }, 500);
+              });
+          });
+      });
+  </script>
+</body>
+</html>
