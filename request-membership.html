@@ -478,7 +478,7 @@
   <!-- EmailJS SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script>
-      // تنظیمات EmailJS با اطلاعات واقعی
+      // تنظیمات EmailJS با اطلاعات واقعی و متغیرهای صحیح
       const EMAIL_CONFIG = {
           publicKey: 'u3dfoUdeOTtWSAjk_',
           serviceId: 'service_kiv8uen',
@@ -527,29 +527,27 @@
                   return;
               }
               
-              // آماده‌سازی داده‌های ایمیل
+              // آماده‌سازی داده‌های ایمیل با متغیرهای صحیح
               const emailData = {
-                  // فلگ‌های کنترل template
-                  if_membership_request: true,
-                  if_approval: false,
-                  if_rejection: false,
-                  
-                  // اطلاعات درخواست
+                  // متغیرهای اصلی که در template استفاده می‌شوند
+                  user_name: `${data.firstName} ${data.lastName}`,
+                  user_email: data.email,
+                  user_phone: data.phone,
+                  user_company: data.company,
+                  user_position: data.position || 'مشخص نشده',
+                  user_experience: data.experience || 'مشخص نشده',
+                  user_project_type: data.projectType || 'مشخص نشده',
+                  user_access_level: getAccessLevelLabel(data.accessLevel),
+                  user_purpose: data.purpose,
+                  user_additional_info: data.additionalInfo || 'ندارد',
                   request_id: requestId,
-                  from_name: `${data.firstName} ${data.lastName}`,
-                  from_email: data.email,
-                  phone: data.phone,
-                  company: data.company,
-                  position: data.position || 'مشخص نشده',
-                  experience: data.experience || 'مشخص نشده',
-                  project_type: data.projectType || 'مشخص نشده',
-                  access_level: getAccessLevelLabel(data.accessLevel),
-                  purpose: data.purpose,
-                  additional_info: data.additionalInfo || 'ندارد',
                   submission_date: new Date().toLocaleDateString('fa-IR'),
                   
-                  // ایمیل مدیر برای اطلاع‌رسانی
-                  to_email: 'admin@kdmine.com'
+                  // متغیرهای کنترل template
+                  message_type: 'membership_request',
+                  
+                  // ایمیل مقصد (برای اطلاع‌رسانی به ادمین)
+                  reply_to: data.email
               };
               
               // ارسال ایمیل
