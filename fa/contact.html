@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تماس با ما - Kavian Development Mine</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; }
+        .language-switcher { position: fixed; top: 20px; left: 20px; z-index: 2000; display: flex; gap: 10px; background: white; padding: 10px; border-radius: 50px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .lang-btn { padding: 8px 16px; border: 2px solid #e2e8f0; background: white; border-radius: 25px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: all 0.3s; text-decoration: none; color: #64748b; display: flex; align-items: center; gap: 6px; }
+        .lang-btn:hover { border-color: #2563eb; color: #2563eb; transform: translateY(-2px); }
+        .lang-btn.active { background: #2563eb; color: white; border-color: #2563eb; }
+        header { background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); color: white; padding: 1rem 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        nav { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
+        .logo { display: flex; align-items: center; gap: 15px; font-size: 1.5rem; font-weight: bold; }
+        .logo img { height: 50px; width: auto; }
+        .nav-links { display: flex; list-style: none; gap: 2rem; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: #60a5fa; }
+        .hero { background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); color: white; padding: 120px 2rem 80px; text-align: center; }
+        .hero h1 { font-size: 3rem; margin-bottom: 1.5rem; }
+        .hero p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.95; }
+        .content { max-width: 1200px; margin: 0 auto; padding: 60px 2rem; }
+        .section { margin-bottom: 4rem; }
+        .section h2 { color: #1e3a8a; font-size: 2rem; margin-bottom: 1.5rem; }
+        .section p { color: #666; line-height: 1.8; margin-bottom: 1rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .card { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); transition: transform 0.3s; }
+        .card:hover { transform: translateY(-5px); }
+        .card h3 { color: #2563eb; margin-bottom: 1rem; font-size: 1.5rem; }
+        .card p { color: #666; }
+        .btn { display: inline-block; padding: 12px 30px; background: #2563eb; color: white; text-decoration: none; border-radius: 50px; font-weight: 600; transition: all 0.3s; margin-top: 1rem; }
+        .btn:hover { background: #1e3a8a; transform: translateY(-2px); }
+        footer { background: #1e293b; color: white; padding: 3rem 2rem 1rem; margin-top: 4rem; }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
+        .footer-section h3 { margin-bottom: 1rem; color: #60a5fa; }
+        .footer-section ul { list-style: none; }
+        .footer-section a { color: #cbd5e1; text-decoration: none; display: block; margin-bottom: 0.5rem; }
+        .footer-section a:hover { color: white; }
+        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid #334155; color: #94a3b8; }
+        form { max-width: 600px; margin: 2rem auto; }
+        .form-group { margin-bottom: 1.5rem; }
+        label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: #1e3a8a; }
+        input, textarea, select { width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s; }
+        input:focus, textarea:focus, select:focus { outline: none; border-color: #2563eb; }
+        textarea { min-height: 150px; resize: vertical; }
+        button[type="submit"] { width: 100%; padding: 15px; background: #2563eb; color: white; border: none; border-radius: 50px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        button[type="submit"]:hover { background: #1e3a8a; transform: translateY(-2px); }
+        @media (max-width: 768px) { .nav-links { display: none; } .hero h1 { font-size: 2rem; } .grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="language-switcher">
+        <a href="../en/contact.html" class="lang-btn ">
+            <span>🇬🇧</span>
+            <span>EN</span>
+        </a>
+        <a href="../fa/contact.html" class="lang-btn active">
+            <span>🇮🇷</span>
+            <span>FA</span>
+        </a>
+    </div>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Logo">
+                <span>Kavian Development Mine</span>
+            </div>
+            <ul class="nav-links"><li><a href="index.html">خانه</a></li>
+                <li><a href="about.html">درباره ما</a></li>
+                <li><a href="services.html">خدمات</a></li>
+                <li><a href="portfolio.html">نمونه کارها</a></li>
+                <li><a href="blog.html">وبلاگ</a></li>
+                <li><a href="news.html">اخبار</a></li>
+                <li><a href="technical-resources.html">منابع فنی</a></li>
+                <li><a href="contact.html">تماس با ما</a></li></ul>
+        </nav>
+    </header>
+    <section class="hero">
+        <h1>با ما در تماس باشید</h1>
+        <p>ما اینجا هستیم تا کمک کنیم</p>
+    </section>
+    <div class="content">
+<section class="section">
+    <h2>اطلاعات تماس</h2>
+    <p>📧 ایمیل: info@kdmine.com</p>
+    <p>📞 تلفن: +98 21 1234 5678</p>
+    <p>📍 آدرس: تهران، ایران</p>
+</section>
+<section class="section">
+    <h2>پیام خود را برای ما ارسال کنید</h2>
+    <form>
+        <div class="form-group"><label>نام:</label><input type="text" required></div>
+        <div class="form-group"><label>ایمیل:</label><input type="email" required></div>
+        <div class="form-group"><label>موضوع:</label><input type="text" required></div>
+        <div class="form-group"><label>پیام:</label><textarea required></textarea></div>
+        <button type="submit">ارسال پیام</button>
+    </form>
+</section></div>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>شرکت</h3>
+                <ul>
+                    <li><a href="about.html">درباره ما</a></li>
+                    <li><a href="portfolio.html">نمونه کارها</a></li>
+                    <li><a href="contact.html">تماس با ما</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>خدمات</h3>
+                <ul>
+                    <li><a href="services/equipment-selection.html">انتخاب تجهیزات</a></li>
+                    <li><a href="services/economic-analysis.html">تحلیل اقتصادی</a></li>
+                    <li><a href="services/plant-design.html">طراحی کارخانه</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>تماس</h3>
+                <ul>
+                    <li>📧 info@kdmine.com</li>
+                    <li>📞 +98 21 1234 5678</li>
+                    <li>📍 تهران، ایران</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Kavian Development Mine. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
