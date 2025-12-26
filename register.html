@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ثبت‌نام | کاویان توسعه معدن</title>
+    <meta name="description" content="ثبت‌نام در سیستم کاویان توسعه معدن">
+    <link rel="icon" type="image/svg+xml" href="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg">
+    
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function(){
+            emailjs.init({
+                publicKey: "YOUR_PUBLIC_KEY",
+            });
+        })();
+    </script>
+    
+    <style>
+        @font-face {
+            font-family: 'B Nazanin';
+            src: local('B Nazanin'), local('BNazanin');
+            font-display: swap;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'B Nazanin', Tahoma, sans-serif;
+            line-height: 1.8;
+            color: #1a202c;
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            background: white;
+            padding: 5px;
+        }
+        
+        .logo-text h2 {
+            font-size: 1.4rem;
+            margin-bottom: 2px;
+        }
+        
+        .logo-text p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.05rem;
+            font-weight: 600;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+        
+        /* Register Container */
+        .register-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 40px;
+        }
+        
+        .register-box {
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 600px;
+            width: 100%;
+            padding: 50px;
+        }
+        
+        .register-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .register-header h1 {
+            font-size: 2.5rem;
+            color: #1a202c;
+            margin-bottom: 10px;
+        }
+        
+        .register-header p {
+            font-size: 1.1rem;
+            color: #4a5568;
+        }
+        
+        /* Form Styles */
+        .register-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group label {
+            margin-bottom: 8px;
+            color: #1a202c;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: white;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        
+        .checkbox-group label {
+            margin: 0;
+            font-weight: normal;
+            cursor: pointer;
+        }
+        
+        .checkbox-group a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .checkbox-group a:hover {
+            text-decoration: underline;
+        }
+        
+        .submit-btn {
+            padding: 18px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.15rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .form-message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+        }
+        
+        .form-message.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 2px solid #059669;
+        }
+        
+        .form-message.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 2px solid #dc2626;
+        }
+        
+        .login-link {
+            text-align: center;
+            margin-top: 25px;
+            color: #4a5568;
+            font-size: 1rem;
+        }
+        
+        .login-link a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Footer */
+        .footer {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .register-container {
+                padding: 40px 25px;
+            }
+            
+            .register-box {
+                padding: 35px 25px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .register-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Logo">
+                <div class="logo-text">
+                    <h2>کاویان توسعه معدن</h2>
+                    <p>Kavian Development Mine</p>
+                </div>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="index.html">خانه</a></li>
+                <li><a href="about.html">درباره ما</a></li>
+                <li><a href="services.html">خدمات</a></li>
+                <li><a href="contact.html">تماس با ما</a></li>
+            </ul>
+            
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+    
+    <!-- Register Container -->
+    <div class="register-container">
+        <div class="register-box">
+            <div class="register-header">
+                <h1>ثبت‌نام</h1>
+                <p>برای دسترسی به خدمات ویژه ثبت‌نام کنید</p>
+            </div>
+            
+            <form class="register-form" id="registerForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>نام *</label>
+                        <input type="text" name="first_name" required placeholder="نام خود را وارد کنید">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>نام خانوادگی *</label>
+                        <input type="text" name="last_name" required placeholder="نام خانوادگی خود را وارد کنید">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>ایمیل *</label>
+                    <input type="email" name="from_email" required placeholder="example@email.com">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>تلفن همراه *</label>
+                        <input type="tel" name="phone" required placeholder="09123456789">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>شرکت/سازمان</label>
+                        <input type="text" name="company" placeholder="نام شرکت یا سازمان">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>زمینه فعالیت *</label>
+                    <select name="industry" required>
+                        <option value="">انتخاب کنید</option>
+                        <option value="معدن مس">معدن مس</option>
+                        <option value="معدن طلا">معدن طلا</option>
+                        <option value="معدن سنگ آهن">معدن سنگ آهن</option>
+                        <option value="معدن سرب و روی">معدن سرب و روی</option>
+                        <option value="کارخانه فرآوری">کارخانه فرآوری</option>
+                        <option value="مشاوره">مشاوره</option>
+                        <option value="پیمانکاری">پیمانکاری</option>
+                        <option value="سایر">سایر</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>خدمات مورد نیاز</label>
+                    <select name="service" required>
+                        <option value="">انتخاب کنید</option>
+                        <option value="انتخاب تجهیزات">انتخاب و اندازه‌گذاری تجهیزات</option>
+                        <option value="تحلیل اقتصادی">تحلیل اقتصادی و سناریوپردازی</option>
+                        <option value="بهینه‌سازی">بهینه‌سازی تکنولوژی</option>
+                        <option value="طراحی کارخانه">طراحی کارخانه فرآوری</option>
+                        <option value="تحلیل ریسک">تحلیل ریسک</option>
+                        <option value="مشاوره عمومی">مشاوره عمومی</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>توضیحات (اختیاری)</label>
+                    <textarea name="message" placeholder="توضیحات بیشتر در مورد نیازهای خود..."></textarea>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">
+                        <a href="#">شرایط و قوانین</a> را مطالعه کرده و می‌پذیرم
+                    </label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="newsletter" name="newsletter">
+                    <label for="newsletter">
+                        عضویت در خبرنامه و دریافت اخبار و مقالات
+                    </label>
+                </div>
+                
+                <button type="submit" class="submit-btn">ثبت‌نام</button>
+                
+                <div class="form-message" id="formMessage"></div>
+            </form>
+            
+            <div class="login-link">
+                قبلاً ثبت‌نام کرده‌اید؟ <a href="#">ورود به سیستم</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2025 کاویان توسعه معدن. تمامی حقوق محفوظ است.</p>
+    </footer>
+    
+    <script>
+        // EmailJS Form Submission
+        document.getElementById('registerForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const submitBtn = this.querySelector('.submit-btn');
+            const formMessage = document.getElementById('formMessage');
+            
+            // Check if terms are accepted
+            const termsCheckbox = document.getElementById('terms');
+            if (!termsCheckbox.checked) {
+                formMessage.className = 'form-message error';
+                formMessage.textContent = '✗ لطفاً شرایط و قوانین را بپذیرید.';
+                formMessage.style.display = 'block';
+                return;
+            }
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'در حال ثبت‌نام...';
+            
+            // Prepare template parameters
+            const templateParams = {
+                from_name: this.first_name.value + ' ' + this.last_name.value,
+                from_email: this.from_email.value,
+                phone: this.phone.value,
+                company: this.company.value || 'ندارد',
+                industry: this.industry.value,
+                service: this.service.value,
+                message: this.message.value || 'ندارد',
+                newsletter: document.getElementById('newsletter').checked ? 'بله' : 'خیر'
+            };
+            
+            // EmailJS send
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+                .then(function() {
+                    formMessage.className = 'form-message success';
+                    formMessage.textContent = '✓ ثبت‌نام شما با موفقیت انجام شد! به زودی با شما تماس خواهیم گرفت.';
+                    formMessage.style.display = 'block';
+                    document.getElementById('registerForm').reset();
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'ثبت‌نام';
+                    
+                    // Redirect after 3 seconds
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 3000);
+                }, function(error) {
+                    formMessage.className = 'form-message error';
+                    formMessage.textContent = '✗ خطا در ثبت‌نام. لطفاً دوباره تلاش کنید یا با ما تماس بگیرید.';
+                    formMessage.style.display = 'block';
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'ثبت‌نام';
+                    console.log('FAILED...', error);
+                });
+        });
+    </script>
+</body>
+</html>
