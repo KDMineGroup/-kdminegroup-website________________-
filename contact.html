@@ -1,663 +1,133 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تماس با ما | کاویان توسعه معدن</title>
-    <meta name="description" content="برای مشاوره رایگان و دریافت اطلاعات بیشتر با ما تماس بگیرید">
-    <link rel="icon" type="image/svg+xml" href="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg">
-    
-    <!-- EmailJS SDK -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script type="text/javascript">
-        (function(){
-            emailjs.init({
-                publicKey: "YOUR_PUBLIC_KEY",
-            });
-        })();
-    </script>
-    
+    <title>Contact Us - Kavian Development Mine</title>
     <style>
-        @font-face {
-            font-family: 'B Nazanin';
-            src: local('B Nazanin'), local('BNazanin');
-            font-display: swap;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'B Nazanin', Tahoma, sans-serif;
-            line-height: 1.8;
-            color: #1a202c;
-            background: #ffffff;
-        }
-        
-        /* Navigation */
-        .navbar {
-            background: linear-gradient(135deg, #1e3a8a, #2563eb);
-            padding: 20px 0;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            color: white;
-            text-decoration: none;
-        }
-        
-        .logo img {
-            width: 50px;
-            height: 50px;
-            border-radius: 10px;
-            background: white;
-            padding: 5px;
-        }
-        
-        .logo-text h2 {
-            font-size: 1.4rem;
-            margin-bottom: 2px;
-        }
-        
-        .logo-text p {
-            font-size: 0.85rem;
-            opacity: 0.9;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-        
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.05rem;
-            font-weight: 600;
-            transition: opacity 0.3s;
-        }
-        
-        .nav-links a:hover {
-            opacity: 0.8;
-        }
-        
-        .nav-cta {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .btn-nav {
-            padding: 10px 25px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s;
-            font-size: 0.95rem;
-        }
-        
-        .btn-primary {
-            background: white;
-            color: #2563eb;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255,255,255,0.3);
-        }
-        
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-        }
-        
-        .btn-secondary:hover {
-            background: white;
-            color: #2563eb;
-        }
-        
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.8rem;
-            cursor: pointer;
-        }
-        
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, rgba(30, 58, 138, 0.95), rgba(37, 99, 235, 0.95)),
-                        url('https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=1920&q=80') center/cover;
-            color: white;
-            padding: 120px 40px 100px;
-            text-align: center;
-            position: relative;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(30, 58, 138, 0.85), rgba(37, 99, 235, 0.75));
-            z-index: 1;
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-        
-        .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-        
-        .hero p {
-            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
-            opacity: 0.95;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        /* Contact Section */
-        .contact-section {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 100px 40px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-        }
-        
-        .contact-info h2 {
-            font-size: 2.5rem;
-            color: #1a202c;
-            margin-bottom: 20px;
-        }
-        
-        .contact-info > p {
-            font-size: 1.15rem;
-            color: #4a5568;
-            margin-bottom: 40px;
-            line-height: 1.8;
-        }
-        
-        .contact-details {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
-        
-        .contact-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 20px;
-            padding: 25px;
-            background: #f8fafc;
-            border-radius: 15px;
-            transition: all 0.3s;
-        }
-        
-        .contact-item:hover {
-            background: #e0f2fe;
-            transform: translateX(-5px);
-        }
-        
-        .contact-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #2563eb, #60a5fa);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            color: white;
-            flex-shrink: 0;
-        }
-        
-        .contact-text h4 {
-            font-size: 1.2rem;
-            color: #1a202c;
-            margin-bottom: 8px;
-        }
-        
-        .contact-text p {
-            color: #4a5568;
-            font-size: 1.05rem;
-            margin: 0;
-            line-height: 1.6;
-        }
-        
-        .contact-text a {
-            color: #2563eb;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .contact-text a:hover {
-            color: #1d4ed8;
-        }
-        
-        /* Contact Form */
-        .contact-form {
-            background: #f8fafc;
-            padding: 45px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        
-        .form-group {
-            margin-bottom: 25px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 10px;
-            color: #1a202c;
-            font-weight: bold;
-            font-size: 1.05rem;
-        }
-        
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            font-family: inherit;
-            font-size: 1rem;
-            transition: all 0.3s;
-            background: white;
-        }
-        
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #2563eb;
-            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
-        }
-        
-        .form-group textarea {
-            resize: vertical;
-            min-height: 150px;
-        }
-        
-        .submit-btn {
-            width: 100%;
-            padding: 18px;
-            background: linear-gradient(135deg, #2563eb, #1d4ed8);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.15rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-family: inherit;
-        }
-        
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
-        }
-        
-        .submit-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        .form-message {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-            font-weight: bold;
-            display: none;
-        }
-        
-        .form-message.success {
-            background: #d1fae5;
-            color: #065f46;
-            border: 2px solid #059669;
-        }
-        
-        .form-message.error {
-            background: #fee2e2;
-            color: #991b1b;
-            border: 2px solid #dc2626;
-        }
-        
-        /* Map Section */
-        .map-section {
-            background: #f8fafc;
-            padding: 100px 40px;
-        }
-        
-        .map-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .map-container h2 {
-            font-size: 2.5rem;
-            color: #1a202c;
-            margin-bottom: 40px;
-            text-align: center;
-        }
-        
-        .map-frame {
-            width: 100%;
-            height: 450px;
-            border-radius: 20px;
-            border: none;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        
-        /* Footer */
-        .footer {
-            background: #1a202c;
-            color: white;
-            padding: 60px 40px 30px;
-        }
-        
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-        
-        .footer-section h3 {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-        }
-        
-        .footer-section p,
-        .footer-section a {
-            color: #cbd5e0;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 10px;
-            font-size: 0.95rem;
-        }
-        
-        .footer-section a:hover {
-            color: white;
-        }
-        
-        .footer-bottom {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding-top: 30px;
-            border-top: 1px solid #2d3748;
-            text-align: center;
-            color: #cbd5e0;
-            font-size: 0.9rem;
-        }
-        
-        @media (max-width: 768px) {
-            .nav-links, .nav-cta {
-                display: none;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .contact-section {
-                grid-template-columns: 1fr;
-            }
-            
-            .hero {
-                padding: 100px 25px 80px;
-            }
-            
-            .contact-section,
-            .map-section {
-                padding: 80px 25px;
-            }
-            
-            .contact-form {
-                padding: 30px 25px;
-            }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; }
+        .language-switcher { position: fixed; top: 20px; right: 20px; z-index: 2000; display: flex; gap: 10px; background: white; padding: 10px; border-radius: 50px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .lang-btn { padding: 8px 16px; border: 2px solid #e2e8f0; background: white; border-radius: 25px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: all 0.3s; text-decoration: none; color: #64748b; display: flex; align-items: center; gap: 6px; }
+        .lang-btn:hover { border-color: #2563eb; color: #2563eb; transform: translateY(-2px); }
+        .lang-btn.active { background: #2563eb; color: white; border-color: #2563eb; }
+        header { background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); color: white; padding: 1rem 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        nav { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
+        .logo { display: flex; align-items: center; gap: 15px; font-size: 1.5rem; font-weight: bold; }
+        .logo img { height: 50px; width: auto; }
+        .nav-links { display: flex; list-style: none; gap: 2rem; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: #60a5fa; }
+        .hero { background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); color: white; padding: 120px 2rem 80px; text-align: center; }
+        .hero h1 { font-size: 3rem; margin-bottom: 1.5rem; }
+        .hero p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.95; }
+        .content { max-width: 1200px; margin: 0 auto; padding: 60px 2rem; }
+        .section { margin-bottom: 4rem; }
+        .section h2 { color: #1e3a8a; font-size: 2rem; margin-bottom: 1.5rem; }
+        .section p { color: #666; line-height: 1.8; margin-bottom: 1rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .card { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); transition: transform 0.3s; }
+        .card:hover { transform: translateY(-5px); }
+        .card h3 { color: #2563eb; margin-bottom: 1rem; font-size: 1.5rem; }
+        .card p { color: #666; }
+        .btn { display: inline-block; padding: 12px 30px; background: #2563eb; color: white; text-decoration: none; border-radius: 50px; font-weight: 600; transition: all 0.3s; margin-top: 1rem; }
+        .btn:hover { background: #1e3a8a; transform: translateY(-2px); }
+        footer { background: #1e293b; color: white; padding: 3rem 2rem 1rem; margin-top: 4rem; }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
+        .footer-section h3 { margin-bottom: 1rem; color: #60a5fa; }
+        .footer-section ul { list-style: none; }
+        .footer-section a { color: #cbd5e1; text-decoration: none; display: block; margin-bottom: 0.5rem; }
+        .footer-section a:hover { color: white; }
+        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid #334155; color: #94a3b8; }
+        form { max-width: 600px; margin: 2rem auto; }
+        .form-group { margin-bottom: 1.5rem; }
+        label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: #1e3a8a; }
+        input, textarea, select { width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s; }
+        input:focus, textarea:focus, select:focus { outline: none; border-color: #2563eb; }
+        textarea { min-height: 150px; resize: vertical; }
+        button[type="submit"] { width: 100%; padding: 15px; background: #2563eb; color: white; border: none; border-radius: 50px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        button[type="submit"]:hover { background: #1e3a8a; transform: translateY(-2px); }
+        @media (max-width: 768px) { .nav-links { display: none; } .hero h1 { font-size: 2rem; } .grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
+    <div class="language-switcher">
+        <a href="../en/contact.html" class="lang-btn active">
+            <span>🇬🇧</span>
+            <span>EN</span>
+        </a>
+        <a href="../fa/contact.html" class="lang-btn ">
+            <span>🇮🇷</span>
+            <span>FA</span>
+        </a>
+    </div>
+    <header>
+        <nav>
+            <div class="logo">
                 <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Logo">
-                <div class="logo-text">
-                    <h2>کاویان توسعه معدن</h2>
-                    <p>Kavian Development Mine</p>
-                </div>
-            </a>
-            
-            <ul class="nav-links">
-                <li><a href="index.html">خانه</a></li>
-                <li><a href="about.html">درباره ما</a></li>
-                <li><a href="services.html">خدمات</a></li>
-                <li><a href="portfolio.html">نمونه کارها</a></li>
-                <li><a href="blog.html">وبلاگ</a></li>
-            </ul>
-            
-            <div class="nav-cta">
-                <a href="register.html" class="btn-nav btn-primary">ثبت‌نام</a>
-                <a href="contact.html" class="btn-nav btn-secondary">تماس با ما</a>
+                <span>Kavian Development Mine</span>
             </div>
-            
-            <button class="mobile-menu-btn">☰</button>
-        </div>
-    </nav>
-    
-    <!-- Hero Section -->
+            <ul class="nav-links"><li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="news.html">News</a></li>
+                <li><a href="technical-resources.html">Resources</a></li>
+                <li><a href="contact.html">Contact</a></li></ul>
+        </nav>
+    </header>
     <section class="hero">
-        <div class="hero-content">
-            <h1>تماس با ما</h1>
-            <p>برای مشاوره رایگان و دریافت اطلاعات بیشتر با ما در تماس باشید</p>
-        </div>
+        <h1>Get In Touch</h1>
+        <p>We're Here to Help</p>
     </section>
-    
-    <!-- Contact Section -->
-    <section class="contact-section">
-        <div class="contact-info">
-            <h2>اطلاعات تماس</h2>
-            <p>تیم ما آماده پاسخگویی به سوالات و ارائه مشاوره تخصصی به شما است</p>
-            
-            <div class="contact-details">
-                <div class="contact-item">
-                    <div class="contact-icon">📧</div>
-                    <div class="contact-text">
-                        <h4>ایمیل</h4>
-                        <p><a href="mailto:info@kdmine.com">info@kdmine.com</a></p>
-                        <p><a href="mailto:support@kdmine.com">support@kdmine.com</a></p>
-                    </div>
-                </div>
-                
-                <div class="contact-item">
-                    <div class="contact-icon">📞</div>
-                    <div class="contact-text">
-                        <h4>تلفن</h4>
-                        <p>دفتر مرکزی: <a href="tel:+982112345678">021-1234 5678</a></p>
-                        <p>پشتیبانی: <a href="tel:+982187654321">021-8765 4321</a></p>
-                    </div>
-                </div>
-                
-                <div class="contact-item">
-                    <div class="contact-icon">📍</div>
-                    <div class="contact-text">
-                        <h4>آدرس</h4>
-                        <p>تهران، خیابان ولیعصر، پلاک 1234</p>
-                        <p>کد پستی: 1234567890</p>
-                    </div>
-                </div>
-                
-                <div class="contact-item">
-                    <div class="contact-icon">⏰</div>
-                    <div class="contact-text">
-                        <h4>ساعات کاری</h4>
-                        <p>شنبه تا چهارشنبه: 8:00 - 17:00</p>
-                        <p>پنجشنبه: 8:00 - 13:00</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <form class="contact-form" id="contactForm">
-            <div class="form-group">
-                <label>نام و نام خانوادگی *</label>
-                <input type="text" name="from_name" required placeholder="نام کامل خود را وارد کنید">
-            </div>
-            
-            <div class="form-group">
-                <label>ایمیل *</label>
-                <input type="email" name="from_email" required placeholder="example@email.com">
-            </div>
-            
-            <div class="form-group">
-                <label>تلفن *</label>
-                <input type="tel" name="phone" required placeholder="09123456789">
-            </div>
-            
-            <div class="form-group">
-                <label>موضوع *</label>
-                <select name="subject" required>
-                    <option value="">انتخاب کنید</option>
-                    <option value="مشاوره فنی">مشاوره فنی</option>
-                    <option value="درخواست قیمت">درخواست قیمت</option>
-                    <option value="همکاری">همکاری</option>
-                    <option value="پشتیبانی">پشتیبانی</option>
-                    <option value="سایر">سایر</option>
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label>پیام *</label>
-                <textarea name="message" required placeholder="پیام خود را اینجا بنویسید..."></textarea>
-            </div>
-            
-            <button type="submit" class="submit-btn">ارسال پیام</button>
-            
-            <div class="form-message" id="formMessage"></div>
-        </form>
-    </section>
-    
-    <!-- Map Section -->
-    <section class="map-section">
-        <div class="map-container">
-            <h2>موقعیت ما روی نقشه</h2>
-            <iframe 
-                class="map-frame"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d207782.72051699846!2d51.18916793359373!3d35.69439489999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f8e00491ff3dcd9%3A0xf0b3697c567024bc!2sTehran%2C%20Iran!5e0!3m2!1sen!2s!4v1234567890123!5m2!1sen!2s"
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-        </div>
-    </section>
-    
-    <!-- Footer -->
-    <footer class="footer">
+    <div class="content">
+<section class="section">
+    <h2>Contact Information</h2>
+    <p>📧 Email: info@kdmine.com</p>
+    <p>📞 Phone: +98 21 1234 5678</p>
+    <p>📍 Address: Tehran, Iran</p>
+</section>
+<section class="section">
+    <h2>Send Us a Message</h2>
+    <form>
+        <div class="form-group"><label>Name:</label><input type="text" required></div>
+        <div class="form-group"><label>Email:</label><input type="email" required></div>
+        <div class="form-group"><label>Subject:</label><input type="text" required></div>
+        <div class="form-group"><label>Message:</label><textarea required></textarea></div>
+        <button type="submit">Send Message</button>
+    </form>
+</section></div>
+    <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <h3>کاویان توسعه معدن</h3>
-                <p>مشاور تخصصی در زمینه مهندسی تجهیزات معدنی و اقتصاد معدن</p>
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
             </div>
-            
             <div class="footer-section">
-                <h3>دسترسی سریع</h3>
-                <a href="index.html">خانه</a>
-                <a href="about.html">درباره ما</a>
-                <a href="services.html">خدمات</a>
-                <a href="portfolio.html">نمونه کارها</a>
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="services/equipment-selection.html">Equipment Selection</a></li>
+                    <li><a href="services/economic-analysis.html">Economic Analysis</a></li>
+                    <li><a href="services/plant-design.html">Plant Design</a></li>
+                </ul>
             </div>
-            
             <div class="footer-section">
-                <h3>خدمات</h3>
-                <a href="equipment-selection.html">انتخاب تجهیزات</a>
-                <a href="economic-analysis.html">تحلیل اقتصادی</a>
-                <a href="risk-analysis.html">تحلیل ریسک</a>
-            </div>
-            
-            <div class="footer-section">
-                <h3>تماس با ما</h3>
-                <p>📧 info@kdmine.com</p>
-                <p>📞 +98 21 1234 5678</p>
-                <p>📍 تهران، ایران</p>
+                <h3>Contact</h3>
+                <ul>
+                    <li>📧 info@kdmine.com</li>
+                    <li>📞 +98 21 1234 5678</li>
+                    <li>📍 Tehran, Iran</li>
+                </ul>
             </div>
         </div>
-        
         <div class="footer-bottom">
-            <p>© 2025 کاویان توسعه معدن. تمامی حقوق محفوظ است.</p>
+            <p>&copy; 2025 Kavian Development Mine. All rights reserved.</p>
         </div>
     </footer>
-    
-    <script>
-        // EmailJS Form Submission
-        document.getElementById('contactForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            const submitBtn = this.querySelector('.submit-btn');
-            const formMessage = document.getElementById('formMessage');
-            
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'در حال ارسال...';
-            
-            // EmailJS send
-            emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
-                .then(function() {
-                    formMessage.className = 'form-message success';
-                    formMessage.textContent = '✓ پیام شما با موفقیت ارسال شد! به زودی با شما تماس خواهیم گرفت.';
-                    formMessage.style.display = 'block';
-                    document.getElementById('contactForm').reset();
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'ارسال پیام';
-                    
-                    // Hide message after 5 seconds
-                    setTimeout(() => {
-                        formMessage.style.display = 'none';
-                    }, 5000);
-                }, function(error) {
-                    formMessage.className = 'form-message error';
-                    formMessage.textContent = '✗ خطا در ارسال پیام. لطفاً دوباره تلاش کنید یا با ما تماس بگیرید.';
-                    formMessage.style.display = 'block';
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'ارسال پیام';
-                    console.log('FAILED...', error);
-                });
-        });
-    </script>
 </body>
 </html>

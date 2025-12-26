@@ -1,725 +1,127 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>خدمات | کاویان توسعه معدن</title>
-    <meta name="description" content="خدمات تخصصی مشاوره معدنی شامل انتخاب تجهیزات، تحلیل اقتصادی و مدیریت پروژه">
-    <link rel="icon" type="image/svg+xml" href="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg">
-    
+    <title>Services - Kavian Development Mine</title>
     <style>
-        @font-face {
-            font-family: 'B Nazanin';
-            src: local('B Nazanin'), local('BNazanin');
-            font-display: swap;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'B Nazanin', Tahoma, sans-serif;
-            line-height: 1.8;
-            color: #1a202c;
-            background: #ffffff;
-        }
-        
-        /* Navigation */
-        .navbar {
-            background: linear-gradient(135deg, #1e3a8a, #2563eb);
-            padding: 20px 0;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            color: white;
-            text-decoration: none;
-        }
-        
-        .logo img {
-            width: 50px;
-            height: 50px;
-            border-radius: 10px;
-            background: white;
-            padding: 5px;
-        }
-        
-        .logo-text h2 {
-            font-size: 1.4rem;
-            margin-bottom: 2px;
-        }
-        
-        .logo-text p {
-            font-size: 0.85rem;
-            opacity: 0.9;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-        
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.05rem;
-            font-weight: 600;
-            transition: opacity 0.3s;
-        }
-        
-        .nav-links a:hover {
-            opacity: 0.8;
-        }
-        
-        .nav-cta {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .btn-nav {
-            padding: 10px 25px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s;
-            font-size: 0.95rem;
-        }
-        
-        .btn-primary {
-            background: white;
-            color: #2563eb;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255,255,255,0.3);
-        }
-        
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-        }
-        
-        .btn-secondary:hover {
-            background: white;
-            color: #2563eb;
-        }
-        
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.8rem;
-            cursor: pointer;
-        }
-        
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, rgba(30, 58, 138, 0.95), rgba(37, 99, 235, 0.95)),
-                        url('https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=1920&q=80') center/cover;
-            color: white;
-            padding: 120px 40px 100px;
-            text-align: center;
-            position: relative;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(30, 58, 138, 0.85), rgba(37, 99, 235, 0.75));
-            z-index: 1;
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-        
-        .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-        
-        .hero p {
-            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
-            opacity: 0.95;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        /* Services Grid */
-        .services-section {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 100px 40px;
-        }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
-        }
-        
-        .service-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-            border: 3px solid transparent;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-            border-color: #2563eb;
-        }
-        
-        .service-image {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-        }
-        
-        .service-content {
-            padding: 35px;
-        }
-        
-        .service-badge {
-            display: inline-block;
-            padding: 8px 20px;
-            background: linear-gradient(135deg, #2563eb, #1d4ed8);
-            color: white;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-        
-        .service-card h3 {
-            font-size: 1.7rem;
-            color: #1a202c;
-            margin-bottom: 15px;
-            line-height: 1.3;
-        }
-        
-        .service-card p {
-            color: #4a5568;
-            font-size: 1.05rem;
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
-        
-        .service-features {
-            list-style: none;
-            padding: 0;
-            margin-bottom: 25px;
-        }
-        
-        .service-features li {
-            padding: 10px 0;
-            padding-right: 30px;
-            position: relative;
-            color: #4a5568;
-            font-size: 1rem;
-        }
-        
-        .service-features li::before {
-            content: '✓';
-            position: absolute;
-            right: 0;
-            color: #059669;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-        
-        .service-link {
-            display: inline-block;
-            padding: 14px 35px;
-            background: linear-gradient(135deg, #2563eb, #1d4ed8);
-            color: white;
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: bold;
-            font-size: 1.05rem;
-            transition: all 0.3s;
-        }
-        
-        .service-link:hover {
-            transform: translateX(-5px);
-            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
-        }
-        
-        /* Process Section */
-        .process-section {
-            background: #f8fafc;
-            padding: 100px 40px;
-        }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 70px;
-        }
-        
-        .section-header h2 {
-            font-size: clamp(2rem, 4vw, 2.8rem);
-            color: #1a202c;
-            margin-bottom: 15px;
-        }
-        
-        .section-header p {
-            font-size: clamp(1rem, 2vw, 1.2rem);
-            color: #4a5568;
-        }
-        
-        .process-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-        
-        .process-step {
-            background: white;
-            padding: 40px 30px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            position: relative;
-        }
-        
-        .step-number {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #2563eb, #60a5fa);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: white;
-            margin: 0 auto 20px;
-            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
-        }
-        
-        .process-step h3 {
-            font-size: 1.3rem;
-            color: #1a202c;
-            margin-bottom: 12px;
-        }
-        
-        .process-step p {
-            color: #4a5568;
-            font-size: 1rem;
-            line-height: 1.7;
-        }
-        
-        /* CTA Section */
-        .cta-section {
-            background: linear-gradient(135deg, rgba(30, 58, 138, 0.95), rgba(37, 99, 235, 0.95)),
-                        url('https://images.unsplash.com/photo-1552664730-d307ca884978?w=1920&q=80') center/cover;
-            color: white;
-            padding: 100px 40px;
-            text-align: center;
-            position: relative;
-        }
-        
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(30, 58, 138, 0.9), rgba(37, 99, 235, 0.8));
-            z-index: 1;
-        }
-        
-        .cta-content {
-            position: relative;
-            z-index: 2;
-        }
-        
-        .cta-content h2 {
-            font-size: clamp(2rem, 4vw, 2.8rem);
-            margin-bottom: 20px;
-        }
-        
-        .cta-content p {
-            font-size: clamp(1rem, 2vw, 1.3rem);
-            margin-bottom: 40px;
-            opacity: 0.95;
-        }
-        
-        .btn-cta {
-            padding: 18px 40px;
-            background: white;
-            color: #2563eb;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-            display: inline-block;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-        
-        .btn-cta:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-        }
-        
-        /* Footer */
-        .footer {
-            background: #1a202c;
-            color: white;
-            padding: 60px 40px 30px;
-        }
-        
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-        
-        .footer-section h3 {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-        }
-        
-        .footer-section p,
-        .footer-section a {
-            color: #cbd5e0;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 10px;
-            font-size: 0.95rem;
-        }
-        
-        .footer-section a:hover {
-            color: white;
-        }
-        
-        .footer-bottom {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding-top: 30px;
-            border-top: 1px solid #2d3748;
-            text-align: center;
-            color: #cbd5e0;
-            font-size: 0.9rem;
-        }
-        
-        @media (max-width: 768px) {
-            .nav-links, .nav-cta {
-                display: none;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .hero {
-                padding: 100px 25px 80px;
-            }
-            
-            .services-section,
-            .process-section,
-            .cta-section {
-                padding: 80px 25px;
-            }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; }
+        .language-switcher { position: fixed; top: 20px; right: 20px; z-index: 2000; display: flex; gap: 10px; background: white; padding: 10px; border-radius: 50px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .lang-btn { padding: 8px 16px; border: 2px solid #e2e8f0; background: white; border-radius: 25px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: all 0.3s; text-decoration: none; color: #64748b; display: flex; align-items: center; gap: 6px; }
+        .lang-btn:hover { border-color: #2563eb; color: #2563eb; transform: translateY(-2px); }
+        .lang-btn.active { background: #2563eb; color: white; border-color: #2563eb; }
+        header { background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); color: white; padding: 1rem 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        nav { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
+        .logo { display: flex; align-items: center; gap: 15px; font-size: 1.5rem; font-weight: bold; }
+        .logo img { height: 50px; width: auto; }
+        .nav-links { display: flex; list-style: none; gap: 2rem; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: #60a5fa; }
+        .hero { background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); color: white; padding: 120px 2rem 80px; text-align: center; }
+        .hero h1 { font-size: 3rem; margin-bottom: 1.5rem; }
+        .hero p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.95; }
+        .content { max-width: 1200px; margin: 0 auto; padding: 60px 2rem; }
+        .section { margin-bottom: 4rem; }
+        .section h2 { color: #1e3a8a; font-size: 2rem; margin-bottom: 1.5rem; }
+        .section p { color: #666; line-height: 1.8; margin-bottom: 1rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .card { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); transition: transform 0.3s; }
+        .card:hover { transform: translateY(-5px); }
+        .card h3 { color: #2563eb; margin-bottom: 1rem; font-size: 1.5rem; }
+        .card p { color: #666; }
+        .btn { display: inline-block; padding: 12px 30px; background: #2563eb; color: white; text-decoration: none; border-radius: 50px; font-weight: 600; transition: all 0.3s; margin-top: 1rem; }
+        .btn:hover { background: #1e3a8a; transform: translateY(-2px); }
+        footer { background: #1e293b; color: white; padding: 3rem 2rem 1rem; margin-top: 4rem; }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
+        .footer-section h3 { margin-bottom: 1rem; color: #60a5fa; }
+        .footer-section ul { list-style: none; }
+        .footer-section a { color: #cbd5e1; text-decoration: none; display: block; margin-bottom: 0.5rem; }
+        .footer-section a:hover { color: white; }
+        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid #334155; color: #94a3b8; }
+        form { max-width: 600px; margin: 2rem auto; }
+        .form-group { margin-bottom: 1.5rem; }
+        label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: #1e3a8a; }
+        input, textarea, select { width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s; }
+        input:focus, textarea:focus, select:focus { outline: none; border-color: #2563eb; }
+        textarea { min-height: 150px; resize: vertical; }
+        button[type="submit"] { width: 100%; padding: 15px; background: #2563eb; color: white; border: none; border-radius: 50px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        button[type="submit"]:hover { background: #1e3a8a; transform: translateY(-2px); }
+        @media (max-width: 768px) { .nav-links { display: none; } .hero h1 { font-size: 2rem; } .grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
+    <div class="language-switcher">
+        <a href="../en/services.html" class="lang-btn active">
+            <span>🇬🇧</span>
+            <span>EN</span>
+        </a>
+        <a href="../fa/services.html" class="lang-btn ">
+            <span>🇮🇷</span>
+            <span>FA</span>
+        </a>
+    </div>
+    <header>
+        <nav>
+            <div class="logo">
                 <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Logo">
-                <div class="logo-text">
-                    <h2>کاویان توسعه معدن</h2>
-                    <p>Kavian Development Mine</p>
-                </div>
-            </a>
-            
-            <ul class="nav-links">
-                <li><a href="index.html">خانه</a></li>
-                <li><a href="about.html">درباره ما</a></li>
-                <li><a href="services.html">خدمات</a></li>
-                <li><a href="portfolio.html">نمونه کارها</a></li>
-                <li><a href="blog.html">وبلاگ</a></li>
-            </ul>
-            
-            <div class="nav-cta">
-                <a href="register.html" class="btn-nav btn-primary">ثبت‌نام</a>
-                <a href="contact.html" class="btn-nav btn-secondary">تماس با ما</a>
+                <span>Kavian Development Mine</span>
             </div>
-            
-            <button class="mobile-menu-btn">☰</button>
-        </div>
-    </nav>
-    
-    <!-- Hero Section -->
+            <ul class="nav-links"><li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="news.html">News</a></li>
+                <li><a href="technical-resources.html">Resources</a></li>
+                <li><a href="contact.html">Contact</a></li></ul>
+        </nav>
+    </header>
     <section class="hero">
-        <div class="hero-content">
-            <h1>خدمات تخصصی ما</h1>
-            <p>راهکارهای جامع برای موفقیت پروژه‌های معدنی شما</p>
-        </div>
+        <h1>Our Services</h1>
+        <p>Comprehensive Mining Engineering Solutions</p>
     </section>
-    
-    <!-- Services Section -->
-    <section class="services-section">
-        <div class="services-grid">
-            <!-- Service 1 -->
-            <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1581094271901-8022df4466f9?w=800&q=80" alt="انتخاب تجهیزات" class="service-image">
-                <div class="service-content">
-                    <span class="service-badge">خدمات فنی</span>
-                    <h3>انتخاب و اندازه‌گذاری تجهیزات</h3>
-                    <p>انتخاب بهینه تجهیزات معدنی و فرآوری با توجه به شرایط خاص پروژه و تحلیل فنی-اقتصادی</p>
-                    <ul class="service-features">
-                        <li>انتخاب سنگ‌شکن‌ها و آسیاب‌ها</li>
-                        <li>تجهیزات فلوتاسیون و جداسازی</li>
-                        <li>سیستم‌های حمل‌ونقل و انتقال</li>
-                        <li>محاسبات ظرفیت و توان</li>
-                    </ul>
-                    <a href="equipment-selection.html" class="service-link">اطلاعات بیشتر ←</a>
-                </div>
-            </div>
-            
-            <!-- Service 2 -->
-            <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&q=80" alt="کارخانجات تغلیظ" class="service-image">
-                <div class="service-content">
-                    <span class="service-badge">طراحی و مهندسی</span>
-                    <h3>کارخانجات تغلیظ شیمیایی</h3>
-                    <p>طراحی و بهینه‌سازی کارخانجات تغلیظ مواد معدنی با روش‌های شیمیایی و فیزیکی</p>
-                    <ul class="service-features">
-                        <li>طراحی مدار فلوتاسیون</li>
-                        <li>سیستم‌های لیچینگ</li>
-                        <li>فرآیندهای جداسازی</li>
-                        <li>بهینه‌سازی بازیابی</li>
-                    </ul>
-                    <a href="concentration-plants.html" class="service-link">اطلاعات بیشتر ←</a>
-                </div>
-            </div>
-            
-            <!-- Service 3 -->
-            <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800&q=80" alt="سیستم‌های لیچینگ" class="service-image">
-                <div class="service-content">
-                    <span class="service-badge">فرآیندهای شیمیایی</span>
-                    <h3>سیستم‌های لیچینگ و تصفیه</h3>
-                    <p>طراحی و اجرای سیستم‌های لیچینگ و تصفیه محلول‌های معدنی</p>
-                    <ul class="service-features">
-                        <li>لیچینگ هیپ و تانک</li>
-                        <li>استخراج با حلال</li>
-                        <li>الکتروویننگ</li>
-                        <li>تصفیه پساب</li>
-                    </ul>
-                    <a href="leaching-systems.html" class="service-link">اطلاعات بیشتر ←</a>
-                </div>
-            </div>
-            
-            <!-- Service 4 -->
-            <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1581092918484-8313e1f7e8c7?w=800&q=80" alt="تولید اسید" class="service-image">
-                <div class="service-content">
-                    <span class="service-badge">صنایع شیمیایی</span>
-                    <h3>تولید اسید سولفوریک و فسفریک</h3>
-                    <p>طراحی واحدهای تولید اسید برای صنایع معدنی و شیمیایی</p>
-                    <ul class="service-features">
-                        <li>واحد تولید اسید سولفوریک</li>
-                        <li>واحد تولید اسید فسفریک</li>
-                        <li>سیستم‌های کنترل آلودگی</li>
-                        <li>بازیافت گرما</li>
-                    </ul>
-                    <a href="acid-production.html" class="service-link">اطلاعات بیشتر ←</a>
-                </div>
-            </div>
-            
-            <!-- Service 5 -->
-            <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80" alt="بهینه‌سازی" class="service-image">
-                <div class="service-content">
-                    <span class="service-badge">بهبود عملکرد</span>
-                    <h3>بهینه‌سازی تکنولوژی و ظرفیت</h3>
-                    <p>افزایش ظرفیت و بهبود عملکرد واحدهای تولیدی موجود</p>
-                    <ul class="service-features">
-                        <li>تحلیل گلوگاه‌ها</li>
-                        <li>افزایش بازیابی</li>
-                        <li>کاهش هزینه‌های عملیاتی</li>
-                        <li>ارتقای تکنولوژی</li>
-                    </ul>
-                    <a href="technology-optimization.html" class="service-link">اطلاعات بیشتر ←</a>
-                </div>
-            </div>
-            
-            <!-- Service 6 -->
-            <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&q=80" alt="تامین‌کنندگان" class="service-image">
-                <div class="service-content">
-                    <span class="service-badge">شبکه تامین</span>
-                    <h3>معرفی تامین‌کنندگان</h3>
-                    <p>ارتباط با تامین‌کنندگان معتبر تجهیزات و خدمات معدنی</p>
-                    <ul class="service-features">
-                        <li>سازندگان تجهیزات</li>
-                        <li>پیمانکاران EPC</li>
-                        <li>تامین‌کنندگان مواد شیمیایی</li>
-                        <li>ارزیابی و انتخاب</li>
-                    </ul>
-                    <a href="vendor-partnerships.html" class="service-link">اطلاعات بیشتر ←</a>
-                </div>
-            </div>
-            
-            <!-- Service 7 -->
-            <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80" alt="تحلیل اقتصادی" class="service-image">
-                <div class="service-content">
-                    <span class="service-badge">تحلیل مالی</span>
-                    <h3>تحلیل اقتصادی و سناریوپردازی</h3>
-                    <p>تحلیل اقتصادی جامع و سناریوپردازی برای تصمیم‌گیری بهینه</p>
-                    <ul class="service-features">
-                        <li>محاسبه NPV و IRR</li>
-                        <li>تحلیل حساسیت</li>
-                        <li>برآورد CAPEX و OPEX</li>
-                        <li>مدل‌سازی مالی</li>
-                    </ul>
-                    <a href="economic-analysis.html" class="service-link">اطلاعات بیشتر ←</a>
-                </div>
-            </div>
-            
-            <!-- Service 8 -->
-            <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80" alt="تحلیل ریسک" class="service-image">
-                <div class="service-content">
-                    <span class="service-badge">مدیریت ریسک</span>
-                    <h3>تحلیل ریسک</h3>
-                    <p>شناسایی و ارزیابی ریسک‌های فنی، اقتصادی و عملیاتی</p>
-                    <ul class="service-features">
-                        <li>شناسایی ریسک‌ها</li>
-                        <li>ارزیابی کمی و کیفی</li>
-                        <li>برنامه کاهش ریسک</li>
-                        <li>شبیه‌سازی مونت کارلو</li>
-                    </ul>
-                    <a href="risk-analysis.html" class="service-link">اطلاعات بیشتر ←</a>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Process Section -->
-    <section class="process-section">
-        <div class="section-header">
-            <h2>فرآیند کاری ما</h2>
-            <p>مراحل ارائه خدمات از ابتدا تا انتها</p>
-        </div>
-        
-        <div class="process-grid">
-            <div class="process-step">
-                <div class="step-number">1</div>
-                <h3>مشاوره اولیه</h3>
-                <p>بررسی نیازها و اهداف پروژه</p>
-            </div>
-            
-            <div class="process-step">
-                <div class="step-number">2</div>
-                <h3>تحلیل و طراحی</h3>
-                <p>تحلیل فنی و طراحی راهکار</p>
-            </div>
-            
-            <div class="process-step">
-                <div class="step-number">3</div>
-                <h3>ارائه پیشنهاد</h3>
-                <p>تهیه و ارائه گزارش جامع</p>
-            </div>
-            
-            <div class="process-step">
-                <div class="step-number">4</div>
-                <h3>اجرا و نظارت</h3>
-                <p>پیاده‌سازی و پشتیبانی</p>
-            </div>
-        </div>
-    </section>
-    
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="cta-content">
-            <h2>آماده شروع پروژه خود هستید؟</h2>
-            <p>برای مشاوره رایگان و دریافت پیشنهاد با ما تماس بگیرید</p>
-            <a href="contact.html" class="btn-cta">درخواست مشاوره رایگان</a>
-        </div>
-    </section>
-    
-    <!-- Footer -->
-    <footer class="footer">
+    <div class="content">
+<section class="section">
+    <h2>What We Offer</h2>
+    <div class="grid">
+        <div class="card"><h3>Equipment Selection</h3><p>Optimal equipment selection for mining operations</p><a href="services/equipment-selection.html" class="btn">Details</a></div>
+        <div class="card"><h3>Economic Analysis</h3><p>Financial modeling and feasibility studies</p><a href="services/economic-analysis.html" class="btn">Details</a></div>
+        <div class="card"><h3>Risk Analysis</h3><p>Comprehensive risk assessment and mitigation</p><a href="services/risk-analysis.html" class="btn">Details</a></div>
+        <div class="card"><h3>Technology Optimization</h3><p>Process optimization and efficiency improvement</p><a href="services/technology-optimization.html" class="btn">Details</a></div>
+        <div class="card"><h3>Plant Design</h3><p>Complete plant design and engineering</p><a href="services/plant-design.html" class="btn">Details</a></div>
+        <div class="card"><h3>Feasibility Studies</h3><p>Detailed technical and economic feasibility</p><a href="services/feasibility-studies.html" class="btn">Details</a></div>
+    </div>
+</section></div>
+    <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <h3>کاویان توسعه معدن</h3>
-                <p>مشاور تخصصی در زمینه مهندسی تجهیزات معدنی و اقتصاد معدن</p>
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
             </div>
-            
             <div class="footer-section">
-                <h3>دسترسی سریع</h3>
-                <a href="index.html">خانه</a>
-                <a href="about.html">درباره ما</a>
-                <a href="services.html">خدمات</a>
-                <a href="portfolio.html">نمونه کارها</a>
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="services/equipment-selection.html">Equipment Selection</a></li>
+                    <li><a href="services/economic-analysis.html">Economic Analysis</a></li>
+                    <li><a href="services/plant-design.html">Plant Design</a></li>
+                </ul>
             </div>
-            
             <div class="footer-section">
-                <h3>خدمات</h3>
-                <a href="equipment-selection.html">انتخاب تجهیزات</a>
-                <a href="economic-analysis.html">تحلیل اقتصادی</a>
-                <a href="risk-analysis.html">تحلیل ریسک</a>
-            </div>
-            
-            <div class="footer-section">
-                <h3>تماس با ما</h3>
-                <p>📧 info@kdmine.com</p>
-                <p>📞 +98 21 1234 5678</p>
-                <p>📍 تهران، ایران</p>
+                <h3>Contact</h3>
+                <ul>
+                    <li>📧 info@kdmine.com</li>
+                    <li>📞 +98 21 1234 5678</li>
+                    <li>📍 Tehran, Iran</li>
+                </ul>
             </div>
         </div>
-        
         <div class="footer-bottom">
-            <p>© 2025 کاویان توسعه معدن. تمامی حقوق محفوظ است.</p>
+            <p>&copy; 2025 Kavian Development Mine. All rights reserved.</p>
         </div>
     </footer>
 </body>
