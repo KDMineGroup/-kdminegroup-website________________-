@@ -1,1325 +1,663 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>تماس با ما | کاویان توسعه معدن</title>
-  <meta name="description" content="تماس با کاویان توسعه معدن - دریافت مشاوره رایگان، درخواست خدمات و ارتباط با متخصصان مهندسی معدن">
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/svg+xml" href="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg">
-  
-  <style>
-      :root {
-          --primary: #1A202C;
-          --primary-light: #2D3748;
-          --secondary: #2563EB;
-          --secondary-light: #3B82F6;
-          --secondary-dark: #1D4ED8;
-          --accent: #B45309;
-          --accent-light: #D97706;
-          --success: #059669;
-          --warning: #D97706;
-          --error: #DC2626;
-          --bg-primary: #FFFFFF;
-          --bg-secondary: #F8FAFC;
-          --bg-tertiary: #F1F5F9;
-          --bg-dark: #0F172A;
-          --text-primary: #1A202C;
-          --text-secondary: #4A5568;
-          --text-light: #718096;
-          --text-white: #FFFFFF;
-          --border-light: #E2E8F0;
-          --border-medium: #CBD5E0;
-          --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-          --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06);
-          --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.05);
-          --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04);
-          --spacing-xs: 0.25rem;
-          --spacing-sm: 0.5rem;
-          --spacing-md: 1rem;
-          --spacing-lg: 1.5rem;
-          --spacing-xl: 2rem;
-          --spacing-2xl: 3rem;
-          --radius-sm: 0.375rem;
-          --radius-md: 0.5rem;
-          --radius-lg: 0.75rem;
-          --radius-xl: 1rem;
-          --radius-full: 9999px;
-          --transition-fast: 0.15s ease-out;
-          --transition-normal: 0.3s ease-out;
-          --transition-slow: 0.5s ease-out;
-      }
-
-      * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-      }
-
-      html {
-          scroll-behavior: smooth;
-          font-size: 16px;
-      }
-
-      body {
-          font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-          line-height: 1.7;
-          color: var(--text-primary);
-          background: var(--bg-primary);
-          direction: rtl;
-          overflow-x: hidden;
-      }
-
-      img {
-          max-width: 100%;
-          height: auto;
-          display: block;
-      }
-
-      a {
-          text-decoration: none;
-          color: inherit;
-          transition: var(--transition-fast);
-      }
-
-      button {
-          font-family: inherit;
-          cursor: pointer;
-          border: none;
-          background: none;
-          transition: var(--transition-fast);
-      }
-
-      .container {
-          max-width: 1280px;
-          margin: 0 auto;
-          padding: 0 var(--spacing-lg);
-      }
-
-      .btn {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          gap: var(--spacing-sm);
-          padding: var(--spacing-md) var(--spacing-xl);
-          border-radius: var(--radius-lg);
-          font-weight: 600;
-          font-size: 0.9375rem;
-          text-align: center;
-          transition: var(--transition-normal);
-          position: relative;
-          overflow: hidden;
-          white-space: nowrap;
-          user-select: none;
-      }
-
-      .btn-primary {
-          background: var(--secondary);
-          color: var(--text-white);
-          box-shadow: var(--shadow-md);
-      }
-
-      .btn-primary:hover {
-          background: var(--secondary-dark);
-          transform: translateY(-2px);
-          box-shadow: var(--shadow-lg);
-      }
-
-      /* Header */
-      .header {
-          background: rgba(255, 255, 255, 0.95);
-          backdrop-filter: blur(20px);
-          border-bottom: 1px solid var(--border-light);
-          position: sticky;
-          top: 0;
-          z-index: 1000;
-          transition: var(--transition-normal);
-      }
-
-      .header-container {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: var(--spacing-lg);
-          min-height: 80px;
-      }
-
-      .brand {
-          display: flex;
-          align-items: center;
-          gap: var(--spacing-md);
-          transition: var(--transition-normal);
-      }
-
-      .brand-logo {
-          width: 3.5rem;
-          height: 3.5rem;
-          transition: var(--transition-normal);
-      }
-
-      .brand-name {
-          font-size: 1.375rem;
-          font-weight: 800;
-          color: var(--primary);
-          line-height: 1.2;
-      }
-
-      .brand-tagline {
-          font-size: 0.8125rem;
-          color: var(--text-light);
-          font-weight: 500;
-      }
-
-      .nav {
-          display: flex;
-          align-items: center;
-          gap: var(--spacing-xl);
-      }
-
-      .nav-link {
-          color: var(--text-primary);
-          font-weight: 500;
-          padding: var(--spacing-sm) var(--spacing-md);
-          border-radius: var(--radius-md);
-          position: relative;
-          transition: var(--transition-fast);
-      }
-
-      .nav-link:hover {
-          color: var(--secondary);
-          background: rgba(37, 99, 235, 0.05);
-      }
-
-      .nav-link.active {
-          color: var(--secondary);
-          background: rgba(37, 99, 235, 0.1);
-      }
-
-      /* Hero Section */
-      .hero {
-          background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-          padding: var(--spacing-2xl) 0;
-          position: relative;
-          overflow: hidden;
-      }
-
-      .hero-container {
-          text-align: center;
-          max-width: 800px;
-          margin: 0 auto;
-      }
-
-      .hero h1 {
-          font-size: clamp(2rem, 4vw, 3rem);
-          font-weight: 900;
-          color: var(--primary);
-          margin-bottom: var(--spacing-lg);
-          line-height: 1.2;
-      }
-
-      .hero-subtitle {
-          font-size: 1.1875rem;
-          color: var(--text-secondary);
-          margin-bottom: var(--spacing-xl);
-          line-height: 1.8;
-      }
-
-      /* Contact Methods */
-      .contact-methods {
-          padding: var(--spacing-2xl) 0;
-          background: var(--bg-secondary);
-      }
-
-      .methods-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: var(--spacing-xl);
-      }
-
-      .method-card {
-          background: var(--bg-primary);
-          border: 1px solid var(--border-light);
-          border-radius: var(--radius-xl);
-          padding: var(--spacing-xl);
-          text-align: center;
-          transition: var(--transition-normal);
-      }
-
-      .method-card:hover {
-          transform: translateY(-4px);
-          box-shadow: var(--shadow-lg);
-          border-color: var(--secondary);
-      }
-
-      .method-icon {
-          width: 4rem;
-          height: 4rem;
-          background: linear-gradient(135deg, var(--secondary), var(--secondary-light));
-          border-radius: var(--radius-full);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin: 0 auto var(--spacing-lg);
-          color: var(--text-white);
-      }
-
-      .method-title {
-          font-size: 1.25rem;
-          font-weight: 700;
-          color: var(--primary);
-          margin-bottom: var(--spacing-sm);
-      }
-
-      .method-description {
-          color: var(--text-secondary);
-          margin-bottom: var(--spacing-lg);
-          line-height: 1.6;
-      }
-
-      .method-info {
-          font-size: 1.0625rem;
-          font-weight: 600;
-          color: var(--secondary);
-      }
-
-      /* Contact Form Section */
-      .contact-form-section {
-          padding: var(--spacing-2xl) 0;
-      }
-
-      .form-container {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: var(--spacing-2xl);
-          align-items: start;
-      }
-
-      .form-content {
-          background: var(--bg-primary);
-          border: 1px solid var(--border-light);
-          border-radius: var(--radius-xl);
-          padding: var(--spacing-2xl);
-          box-shadow: var(--shadow-md);
-      }
-
-      .form-header {
-          margin-bottom: var(--spacing-xl);
-      }
-
-      .form-header h2 {
-          font-size: 1.875rem;
-          font-weight: 800;
-          color: var(--primary);
-          margin-bottom: var(--spacing-sm);
-      }
-
-      .form-subtitle {
-          color: var(--text-secondary);
-          line-height: 1.6;
-      }
-
-      .form-row {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: var(--spacing-lg);
-          margin-bottom: var(--spacing-lg);
-      }
-
-      .form-group {
-          display: flex;
-          flex-direction: column;
-          gap: var(--spacing-sm);
-      }
-
-      .form-label {
-          font-weight: 600;
-          color: var(--primary);
-          font-size: 0.9375rem;
-      }
-
-      .form-input, .form-select, .form-textarea {
-          padding: var(--spacing-md);
-          border: 2px solid var(--border-light);
-          border-radius: var(--radius-lg);
-          font-family: inherit;
-          font-size: 1rem;
-          transition: var(--transition-fast);
-          background: var(--bg-primary);
-      }
-
-      .form-input:focus, .form-select:focus, .form-textarea:focus {
-          outline: none;
-          border-color: var(--secondary);
-          box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-      }
-
-      .form-textarea {
-          resize: vertical;
-          min-height: 140px;
-      }
-
-      .form-checkbox-group {
-          display: flex;
-          align-items: flex-start;
-          gap: var(--spacing-sm);
-          margin: var(--spacing-lg) 0;
-      }
-
-      .form-checkbox {
-          width: 1.25rem;
-          height: 1.25rem;
-          accent-color: var(--secondary);
-          margin-top: 2px;
-      }
-
-      .form-submit {
-          width: 100%;
-          padding: var(--spacing-lg);
-          background: var(--secondary);
-          color: var(--text-white);
-          border: none;
-          border-radius: var(--radius-lg);
-          font-weight: 700;
-          font-size: 1.0625rem;
-          cursor: pointer;
-          transition: var(--transition-normal);
-      }
-
-      .form-submit:hover {
-          background: var(--secondary-dark);
-          transform: translateY(-2px);
-          box-shadow: var(--shadow-lg);
-      }
-
-      .form-note {
-          text-align: center;
-          color: var(--text-light);
-          font-size: 0.875rem;
-          margin-top: var(--spacing-lg);
-      }
-
-      /* Contact Info */
-      .contact-info {
-          display: flex;
-          flex-direction: column;
-          gap: var(--spacing-lg);
-      }
-
-      .info-card {
-          background: var(--bg-primary);
-          border: 1px solid var(--border-light);
-          border-radius: var(--radius-xl);
-          padding: var(--spacing-xl);
-          box-shadow: var(--shadow-sm);
-      }
-
-      .info-card h3 {
-          font-size: 1.25rem;
-          font-weight: 700;
-          color: var(--primary);
-          margin-bottom: var(--spacing-lg);
-      }
-
-      .info-item {
-          display: flex;
-          align-items: center;
-          gap: var(--spacing-lg);
-          padding: var(--spacing-lg) 0;
-      }
-
-      .info-item:not(:last-child) {
-          border-bottom: 1px solid var(--border-light);
-      }
-
-      .info-icon {
-          width: 2.5rem;
-          height: 2.5rem;
-          background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(59, 130, 246, 0.1));
-          border-radius: var(--radius-lg);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: var(--secondary);
-          flex-shrink: 0;
-      }
-
-      .info-content h4 {
-          font-weight: 600;
-          color: var(--primary);
-          margin-bottom: var(--spacing-xs);
-      }
-
-      .info-content p {
-          color: var(--text-secondary);
-          font-size: 0.9375rem;
-      }
-
-      /* Working Hours */
-      .hours-list {
-          list-style: none;
-      }
-
-      .hours-item {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: var(--spacing-sm) 0;
-          font-size: 0.9375rem;
-      }
-
-      .hours-item:not(:last-child) {
-          border-bottom: 1px solid var(--border-light);
-      }
-
-      .hours-day {
-          color: var(--text-secondary);
-      }
-
-      .hours-time {
-          font-weight: 600;
-          color: var(--primary);
-      }
-
-      .hours-closed {
-          color: var(--error);
-          font-weight: 600;
-      }
-
-      /* Map Section */
-      .map-section {
-          padding: var(--spacing-2xl) 0;
-          background: var(--bg-secondary);
-      }
-
-      .map-container {
-          background: var(--bg-primary);
-          border: 1px solid var(--border-light);
-          border-radius: var(--radius-xl);
-          overflow: hidden;
-          box-shadow: var(--shadow-md);
-      }
-
-      .map-placeholder {
-          width: 100%;
-          height: 400px;
-          background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-direction: column;
-          gap: var(--spacing-lg);
-          color: var(--text-light);
-      }
-
-      .map-icon {
-          width: 4rem;
-          height: 4rem;
-          opacity: 0.5;
-      }
-
-      /* FAQ Section */
-      .faq-section {
-          padding: var(--spacing-2xl) 0;
-      }
-
-      .faq-header {
-          text-align: center;
-          margin-bottom: var(--spacing-2xl);
-      }
-
-      .faq-header h2 {
-          font-size: clamp(1.75rem, 3vw, 2.5rem);
-          font-weight: 800;
-          color: var(--primary);
-          margin-bottom: var(--spacing-md);
-      }
-
-      .faq-subtitle {
-          color: var(--text-secondary);
-          font-size: 1.1875rem;
-          max-width: 600px;
-          margin: 0 auto;
-      }
-
-      .faq-list {
-          max-width: 800px;
-          margin: 0 auto;
-      }
-
-      .faq-item {
-          background: var(--bg-primary);
-          border: 1px solid var(--border-light);
-          border-radius: var(--radius-lg);
-          margin-bottom: var(--spacing-md);
-          overflow: hidden;
-          transition: var(--transition-normal);
-      }
-
-      .faq-item:hover {
-          box-shadow: var(--shadow-md);
-      }
-
-      .faq-question {
-          width: 100%;
-          padding: var(--spacing-xl);
-          background: none;
-          border: none;
-          text-align: right;
-          font-size: 1.125rem;
-          font-weight: 600;
-          color: var(--primary);
-          cursor: pointer;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          transition: var(--transition-fast);
-      }
-
-      .faq-question:hover {
-          background: var(--bg-secondary);
-      }
-
-      .faq-icon {
-          transition: var(--transition-fast);
-      }
-
-      .faq-item.active .faq-icon {
-          transform: rotate(180deg);
-      }
-
-      .faq-answer {
-          padding: 0 var(--spacing-xl) var(--spacing-xl);
-          color: var(--text-secondary);
-          line-height: 1.7;
-          display: none;
-      }
-
-      .faq-item.active .faq-answer {
-          display: block;
-      }
-
-      /* Footer */
-      .footer {
-          background: var(--bg-dark);
-          color: var(--text-white);
-          padding: var(--spacing-2xl) 0 var(--spacing-lg);
-      }
-
-      .footer-content {
-          text-align: center;
-      }
-
-      .footer-brand {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: var(--spacing-lg);
-          margin-bottom: var(--spacing-lg);
-      }
-
-      .footer-logo {
-          width: 3rem;
-          height: 3rem;
-      }
-
-      .footer-brand-name {
-          font-size: 1.375rem;
-          font-weight: 800;
-      }
-
-      .footer-links {
-          display: flex;
-          justify-content: center;
-          gap: var(--spacing-xl);
-          margin-bottom: var(--spacing-lg);
-          flex-wrap: wrap;
-      }
-
-      .footer-link {
-          opacity: 0.8;
-          transition: var(--transition-fast);
-          font-weight: 500;
-      }
-
-      .footer-link:hover {
-          opacity: 1;
-          color: var(--secondary-light);
-      }
-
-      .footer-bottom {
-          border-top: 1px solid rgba(255,255,255,0.1);
-          padding-top: var(--spacing-lg);
-          opacity: 0.8;
-          font-size: 0.9375rem;
-      }
-
-      /* Responsive */
-      @media (max-width: 1024px) {
-          .form-container {
-              grid-template-columns: 1fr;
-          }
-      }
-
-      @media (max-width: 768px) {
-          .container {
-              padding: 0 var(--spacing-md);
-          }
-          
-          .nav {
-              display: none;
-          }
-          
-          .methods-grid {
-              grid-template-columns: 1fr;
-          }
-          
-          .form-row {
-              grid-template-columns: 1fr;
-          }
-          
-          .footer-links {
-              flex-direction: column;
-              gap: var(--spacing-md);
-          }
-      }
-
-      /* Success/Error States */
-      .form-success {
-          background: var(--success);
-          color: var(--text-white);
-          padding: var(--spacing-lg);
-          border-radius: var(--radius-lg);
-          text-align: center;
-          margin-bottom: var(--spacing-lg);
-          display: none;
-      }
-
-      .form-error {
-          background: var(--error);
-          color: var(--text-white);
-          padding: var(--spacing-lg);
-          border-radius: var(--radius-lg);
-          text-align: center;
-          margin-bottom: var(--spacing-lg);
-          display: none;
-      }
-
-      .input-error {
-          border-color: var(--error) !important;
-      }
-
-      .input-success {
-          border-color: var(--success) !important;
-      }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تماس با ما | کاویان توسعه معدن</title>
+    <meta name="description" content="برای مشاوره رایگان و دریافت اطلاعات بیشتر با ما تماس بگیرید">
+    <link rel="icon" type="image/svg+xml" href="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg">
+    
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function(){
+            emailjs.init({
+                publicKey: "YOUR_PUBLIC_KEY",
+            });
+        })();
+    </script>
+    
+    <style>
+        @font-face {
+            font-family: 'B Nazanin';
+            src: local('B Nazanin'), local('BNazanin');
+            font-display: swap;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'B Nazanin', Tahoma, sans-serif;
+            line-height: 1.8;
+            color: #1a202c;
+            background: #ffffff;
+        }
+        
+        /* Navigation */
+        .navbar {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            background: white;
+            padding: 5px;
+        }
+        
+        .logo-text h2 {
+            font-size: 1.4rem;
+            margin-bottom: 2px;
+        }
+        
+        .logo-text p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.05rem;
+            font-weight: 600;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        
+        .nav-cta {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn-nav {
+            padding: 10px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+        
+        .btn-primary {
+            background: white;
+            color: #2563eb;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255,255,255,0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: #2563eb;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.95), rgba(37, 99, 235, 0.95)),
+                        url('https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=1920&q=80') center/cover;
+            color: white;
+            padding: 120px 40px 100px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.85), rgba(37, 99, 235, 0.75));
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .hero p {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+        
+        .contact-info h2 {
+            font-size: 2.5rem;
+            color: #1a202c;
+            margin-bottom: 20px;
+        }
+        
+        .contact-info > p {
+            font-size: 1.15rem;
+            color: #4a5568;
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+        
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 25px;
+            background: #f8fafc;
+            border-radius: 15px;
+            transition: all 0.3s;
+        }
+        
+        .contact-item:hover {
+            background: #e0f2fe;
+            transform: translateX(-5px);
+        }
+        
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #2563eb, #60a5fa);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .contact-text h4 {
+            font-size: 1.2rem;
+            color: #1a202c;
+            margin-bottom: 8px;
+        }
+        
+        .contact-text p {
+            color: #4a5568;
+            font-size: 1.05rem;
+            margin: 0;
+            line-height: 1.6;
+        }
+        
+        .contact-text a {
+            color: #2563eb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .contact-text a:hover {
+            color: #1d4ed8;
+        }
+        
+        /* Contact Form */
+        .contact-form {
+            background: #f8fafc;
+            padding: 45px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: #1a202c;
+            font-weight: bold;
+            font-size: 1.05rem;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: white;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.15rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .form-message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+        }
+        
+        .form-message.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 2px solid #059669;
+        }
+        
+        .form-message.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 2px solid #dc2626;
+        }
+        
+        /* Map Section */
+        .map-section {
+            background: #f8fafc;
+            padding: 100px 40px;
+        }
+        
+        .map-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .map-container h2 {
+            font-size: 2.5rem;
+            color: #1a202c;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .map-frame {
+            width: 100%;
+            height: 450px;
+            border-radius: 20px;
+            border: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        /* Footer */
+        .footer {
+            background: #1a202c;
+            color: white;
+            padding: 60px 40px 30px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+        
+        .footer-section p,
+        .footer-section a {
+            color: #cbd5e0;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 30px;
+            border-top: 1px solid #2d3748;
+            text-align: center;
+            color: #cbd5e0;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links, .nav-cta {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .contact-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero {
+                padding: 100px 25px 80px;
+            }
+            
+            .contact-section,
+            .map-section {
+                padding: 80px 25px;
+            }
+            
+            .contact-form {
+                padding: 30px 25px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header class="header">
-      <div class="container header-container">
-          <a href="./index.html" class="brand">
-              <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="لوگو کاویان توسعه معدن" class="brand-logo">
-              <div>
-                  <div class="brand-name">کاویان توسعه معدن</div>
-                  <div class="brand-tagline">دانش، فناوری و ارزش‌آفرینی در زنجیره فلزات</div>
-              </div>
-          </a>
-          <nav class="nav">
-              <a href="./index.html" class="nav-link">خانه</a>
-              <a href="./about.html" class="nav-link">درباره ما</a>
-              <a href="./services.html" class="nav-link">خدمات</a>
-              <a href="./portfolio.html" class="nav-link">نمونه کارها</a>
-              <a href="./news.html" class="nav-link">اخبار و روندها</a>
-              <a href="./equipment.html" class="nav-link">تجهیزات</a>
-              <a href="./technical-resources.html" class="nav-link">منابع فنی</a>
-              <a href="./contact.html" class="nav-link active">تماس با ما</a>
-          </nav>
-      </div>
-  </header>
-
-  <main>
-      <section class="hero">
-          <div class="container">
-              <div class="hero-container">
-                  <h1>تماس با ما</h1>
-                  <p class="hero-subtitle">آماده پاسخگویی به سوالات شما و ارائه مشاوره تخصصی در زمینه مهندسی معدن و زنجیره ارزش فلزات هستیم</p>
-              </div>
-          </div>
-      </section>
-
-      <section class="contact-methods">
-          <div class="container">
-              <div class="methods-grid">
-                  <div class="method-card">
-                      <div class="method-icon">
-                          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                          </svg>
-                      </div>
-                      <h3 class="method-title">تماس تلفنی</h3>
-                      <p class="method-description">برای دریافت مشاوره فوری و پاسخ سریع به سوالات خود</p>
-                      <div class="method-info">۰۲۱-۸۸۷۷۶۶۵۵</div>
-                  </div>
-
-                  <div class="method-card">
-                      <div class="method-icon">
-                          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                              <polyline points="22,6 12,13 2,6"/>
-                          </svg>
-                      </div>
-                      <h3 class="method-title">ایمیل</h3>
-                      <p class="method-description">برای ارسال درخواست‌های تفصیلی و دریافت پیشنهادات</p>
-                      <div class="method-info">info@kdmine.com</div>
-                  </div>
-
-                  <div class="method-card">
-                      <div class="method-icon">
-                          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                              <circle cx="12" cy="10" r="3"/>
-                          </svg>
-                      </div>
-                      <h3 class="method-title">آدرس دفتر</h3>
-                      <p class="method-description">برای ملاقات حضوری و جلسات کاری</p>
-                      <div class="method-info">تهران، یوسف آباد، خیابان جمالزاده</div>
-                  </div>
-
-                  <div class="method-card">
-                      <div class="method-icon">
-                          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <line x1="22" y1="2" x2="11" y2="13"/>
-                              <polygon points="22,2 15,22 11,13 2,9 22,2"/>
-                          </svg>
-                      </div>
-                      <h3 class="method-title">تلگرام</h3>
-                      <p class="method-description">برای ارتباط سریع و دریافت اخبار و اطلاعیه‌ها</p>
-                      <div class="method-info">@KavianMine</div>
-                  </div>
-              </div>
-          </div>
-      </section>
-
-      <section class="contact-form-section">
-          <div class="container">
-              <div class="form-container">
-                  <div class="form-content">
-                      <div class="form-header">
-                          <h2>درخواست مشاوره رایگان</h2>
-                          <p class="form-subtitle">فرم زیر را تکمیل کنید تا کارشناسان مجرب ما در اسرع وقت با شما تماس بگیرند و مشاوره تخصصی ارائه دهند</p>
-                      </div>
-
-                      <div class="form-success" id="form-success">
-                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; margin-left: 8px;">
-                              <path d="M9 12l2 2 4-4"/>
-                              <path d="M21 12c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1z"/>
-                              <path d="M3 12c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1z"/>
-                              <path d="M12 21c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1z"/>
-                              <path d="M12 3c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1z"/>
-                          </svg>
-                          پیام شما با موفقیت ارسال شد. به زودی با شما تماس خواهیم گرفت.
-                      </div>
-
-                      <div class="form-error" id="form-error">
-                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; margin-left: 8px;">
-                              <circle cx="12" cy="12" r="10"/>
-                              <line x1="15" y1="9" x2="9" y2="15"/>
-                              <line x1="9" y1="9" x2="15" y2="15"/>
-                          </svg>
-                          خطا در ارسال پیام. لطفاً دوباره تلاش کنید.
-                      </div>
-
-                      <form id="contact-form" novalidate>
-                          <div class="form-row">
-                              <div class="form-group">
-                                  <label class="form-label" for="fullname">نام و نام خانوادگی *</label>
-                                  <input type="text" id="fullname" name="fullname" class="form-input" placeholder="نام کامل خود را وارد کنید" required>
-                              </div>
-                              <div class="form-group">
-                                  <label class="form-label" for="company">نام شرکت/سازمان</label>
-                                  <input type="text" id="company" name="company" class="form-input" placeholder="نام شرکت یا سازمان">
-                              </div>
-                          </div>
-                          
-                          <div class="form-row">
-                              <div class="form-group">
-                                  <label class="form-label" for="phone">شماره تماس *</label>
-                                  <input type="tel" id="phone" name="phone" class="form-input" placeholder="09XX XXX XXXX" required>
-                              </div>
-                              <div class="form-group">
-                                  <label class="form-label" for="email">ایمیل *</label>
-                                  <input type="email" id="email" name="email" class="form-input" placeholder="email@example.com" required>
-                              </div>
-                          </div>
-
-                          <div class="form-row">
-                              <div class="form-group">
-                                  <label class="form-label" for="service">نوع خدمت مورد نیاز *</label>
-                                  <select id="service" name="service" class="form-select" required>
-                                      <option value="">انتخاب کنید</option>
-                                      <option value="resource-evaluation">ارزیابی منابع معدنی</option>
-                                      <option value="engineering-optimization">بهینه‌سازی مهندسی</option>
-                                      <option value="economic-evaluation">ارزیابی اقتصادی</option>
-                                      <option value="production-optimization">بهینه‌سازی تولید</option>
-                                      <option value="training">آموزش و انتقال دانش</option>
-                                      <option value="risk-management">مدیریت ریسک</option>
-                                      <option value="feasibility-study">مطالعه امکان‌سنجی</option>
-                                      <option value="consulting">مشاوره عمومی</option>
-                                  </select>
-                              </div>
-                              <div class="form-group">
-                                  <label class="form-label" for="budget">بودجه تقریبی پروژه</label>
-                                  <select id="budget" name="budget" class="form-select">
-                                      <option value="">انتخاب کنید</option>
-                                      <option value="under-100m">کمتر از ۱۰۰ میلیون تومان</option>
-                                      <option value="100m-500m">۱۰۰ تا ۵۰۰ میلیون تومان</option>
-                                      <option value="500m-1b">۵۰۰ میلیون تا ۱ میلیارد تومان</option>
-                                      <option value="over-1b">بیش از ۱ میلیارد تومان</option>
-                                  </select>
-                              </div>
-                          </div>
-
-                          <div class="form-group">
-                              <label class="form-label" for="description">توضیحات پروژه *</label>
-                              <textarea id="description" name="description" class="form-textarea" placeholder="لطفاً جزئیات پروژه، اهداف، محدودیت‌ها، زمان‌بندی مورد نظر و سایر نیازهای خاص خود را به تفصیل شرح دهید..." required></textarea>
-                          </div>
-
-                          <div class="form-row">
-                              <div class="form-group">
-                                  <label class="form-label" for="timeline">زمان‌بندی مورد نظر</label>
-                                  <select id="timeline" name="timeline" class="form-select">
-                                      <option value="">انتخاب کنید</option>
-                                      <option value="urgent">فوری (کمتر از ۱ ماه)</option>
-                                      <option value="short">کوتاه‌مدت (۱-۳ ماه)</option>
-                                      <option value="medium">متوسط (۳-۶ ماه)</option>
-                                      <option value="long">بلندمدت (بیش از ۶ ماه)</option>
-                                  </select>
-                              </div>
-                              <div class="form-group">
-                                  <label class="form-label" for="contact-preference">روش تماس مرجح</label>
-                                  <select id="contact-preference" name="contact-preference" class="form-select">
-                                      <option value="">انتخاب کنید</option>
-                                      <option value="phone">تماس تلفنی</option>
-                                      <option value="email">ایمیل</option>
-                                      <option value="meeting">جلسه حضوری</option>
-                                      <option value="video-call">ویدیو کال</option>
-                                  </select>
-                              </div>
-                          </div>
-
-                          <div class="form-checkbox-group">
-                              <input type="checkbox" id="privacy" name="privacy" class="form-checkbox" required>
-                              <label for="privacy">قوانین و مقررات حریم خصوصی را مطالعه کرده و می‌پذیرم *</label>
-                          </div>
-
-                          <div class="form-checkbox-group">
-                              <input type="checkbox" id="newsletter" name="newsletter" class="form-checkbox">
-                              <label for="newsletter">مایل به دریافت خبرنامه و اطلاعیه‌های کاویان توسعه معدن هستم</label>
-                          </div>
-
-                          <button type="submit" class="form-submit">
-                              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                  <line x1="22" y1="2" x2="11" y2="13"/>
-                                  <polygon points="22,2 15,22 11,13 2,9 22,2"/>
-                              </svg>
-                              ارسال درخواست
-                          </button>
-                          
-                          <p class="form-note">
-                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                  <circle cx="12" cy="12" r="10"/>
-                                  <polyline points="12,6 12,12 16,14"/>
-                              </svg>
-                              معمولاً ظرف ۲۴ ساعت پاسخ می‌دهیم
-                          </p>
-                      </form>
-                  </div>
-
-                  <div class="contact-info">
-                      <div class="info-card">
-                          <h3>اطلاعات تماس</h3>
-                          <div class="info-item">
-                              <div class="info-icon">
-                                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                                  </svg>
-                              </div>
-                              <div class="info-content">
-                                  <h4>تلفن دفتر مرکزی</h4>
-                                  <p>۰۲۱-۸۸۷۷۶۶۵۵</p>
-                              </div>
-                          </div>
-                          
-                          <div class="info-item">
-                              <div class="info-icon">
-                                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                                      <polyline points="22,6 12,13 2,6"/>
-                                  </svg>
-                              </div>
-                              <div class="info-content">
-                                  <h4>ایمیل</h4>
-                                  <p>info@kdmine.com</p>
-                              </div>
-                          </div>
-                          
-                          <div class="info-item">
-                              <div class="info-icon">
-                                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                                      <circle cx="12" cy="10" r="3"/>
-                                  </svg>
-                              </div>
-                              <div class="info-content">
-                                  <h4>آدرس</h4>
-                                  <p>تهران، یوسف آباد، خیابان جمالزاده، پلاک ۱۲۳</p>
-                              </div>
-                          </div>
-                          
-                          <div class="info-item">
-                              <div class="info-icon">
-                                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                      <path d="M9 11H5a2 2 0 0 0-2 2v3c0 1.1.9 2 2 2h4m6-6h4a2 2 0 0 1 2 2v3c0 1.1-.9 2-2 2h-4m-6 0V9a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2z"/>
-                                  </svg>
-                              </div>
-                              <div class="info-content">
-                                  <h4>فکس</h4>
-                                  <p>۰۲۱-۸۸۷۷۶۶۵۶</p>
-                              </div>
-                          </div>
-                      </div>
-
-                      <div class="info-card">
-                          <h3>ساعات کاری</h3>
-                          <ul class="hours-list">
-                              <li class="hours-item">
-                                  <span class="hours-day">شنبه تا چهارشنبه</span>
-                                  <span class="hours-time">۸:۰۰ - ۱۷:۰۰</span>
-                              </li>
-                              <li class="hours-item">
-                                  <span class="hours-day">پنج‌شنبه</span>
-                                  <span class="hours-time">۸:۰۰ - ۱۳:۰۰</span>
-                              </li>
-                              <li class="hours-item">
-                                  <span class="hours-day">جمعه</span>
-                                  <span class="hours-closed">تعطیل</span>
-                              </li>
-                          </ul>
-                          <div style="margin-top: var(--spacing-lg); padding-top: var(--spacing-lg); border-top: 1px solid var(--border-light);">
-                              <div style="display: flex; align-items: center; gap: var(--spacing-sm); color: var(--text-secondary); font-size: 0.875rem;">
-                                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                      <circle cx="12" cy="12" r="10"/>
-                                      <polyline points="12,6 12,12 16,14"/>
-                                  </svg>
-                                  <span>پاسخگویی تلفنی در ساعات کاری</span>
-                              </div>
-                              <div style="display: flex; align-items: center; gap: var(--spacing-sm); color: var(--text-secondary); font-size: 0.875rem; margin-top: var(--spacing-sm);">
-                                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                                      <polyline points="22,6 12,13 2,6"/>
-                                  </svg>
-                                  <span>پاسخ ایمیل ظرف ۲۴ ساعت</span>
-                              </div>
-                          </div>
-                      </div>
-
-                      <div class="info-card">
-                          <h3>شبکه‌های اجتماعی</h3>
-                          <div style="display: flex; gap: var(--spacing-lg); justify-content: center; margin-top: var(--spacing-lg);">
-                              <a href="#" style="display: flex; align-items: center; justify-content: center; width: 3rem; height: 3rem; background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(59, 130, 246, 0.1)); border-radius: var(--radius-lg); color: var(--secondary); transition: var(--transition-normal);" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
-                                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                                      <rect x="2" y="9" width="4" height="12"/>
-                                      <circle cx="4" cy="4" r="2"/>
-                                  </svg>
-                              </a>
-                              <a href="#" style="display: flex; align-items: center; justify-content: center; width: 3rem; height: 3rem; background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(59, 130, 246, 0.1)); border-radius: var(--radius-lg); color: var(--secondary); transition: var(--transition-normal);" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
-                                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                      <line x1="22" y1="2" x2="11" y2="13"/>
-                                      <polygon points="22,2 15,22 11,13 2,9 22,2"/>
-                                  </svg>
-                              </a>
-                              <a href="#" style="display: flex; align-items: center; justify-content: center; width: 3rem; height: 3rem; background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(59, 130, 246, 0.1)); border-radius: var(--radius-lg); color: var(--secondary); transition: var(--transition-normal);" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
-                                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                                      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-                                  </svg>
-                              </a>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </section>
-
-      <section class="map-section">
-          <div class="container">
-              <div class="map-container">
-                  <div class="map-placeholder">
-                      <svg class="map-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                          <circle cx="12" cy="10" r="3"/>
-                      </svg>
-                      <div>
-                          <h4 style="font-size: 1.25rem; font-weight: 700; margin-bottom: var(--spacing-sm);">موقعیت دفتر مرکزی</h4>
-                          <p>تهران، یوسف آباد، خیابان جمالزاده</p>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </section>
-
-      <section class="faq-section">
-          <div class="container">
-              <div class="faq-header">
-                  <h2>سوالات متداول</h2>
-                  <p class="faq-subtitle">پاسخ سوالات رایج درباره خدمات و نحوه همکاری با کاویان توسعه معدن</p>
-              </div>
-              
-              <div class="faq-list">
-                  <div class="faq-item">
-                      <button class="faq-question">
-                          <span>چه نوع خدماتی ارائه می‌دهید؟</span>
-                          <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <polyline points="6,9 12,15 18,9"/>
-                          </svg>
-                      </button>
-                      <div class="faq-answer">
-                          ما خدمات جامعی در زمینه مهندسی معدن ارائه می‌دهیم شامل: ارزیابی منابع معدنی، بهینه‌سازی عملیات، ارزیابی اقتصادی پروژه‌ها، مطالعات امکان‌سنجی، مدیریت ریسک، آموزش و انتقال دانش، و مشاوره‌های تخصصی در تمامی مراحل زنجیره ارزش معدن.
-                      </div>
-                  </div>
-
-                  <div class="faq-item">
-                      <button class="faq-question">
-                          <span>مدت زمان انجام پروژه‌ها چقدر است؟</span>
-                          <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <polyline points="6,9 12,15 18,9"/>
-                          </svg>
-                      </button>
-                      <div class="faq-answer">
-                          مدت زمان انجام پروژه‌ها بسته به پیچیدگی و حجم کار متفاوت است. پروژه‌های کوچک ممکن است ۱-۳ ماه، پروژه‌های متوسط ۳-۶ ماه و پروژه‌های بزرگ و پیچیده تا ۲۴ ماه زمان ببرند. پس از بررسی اولیه، زمان‌بندی دقیق ارائه می‌شود.
-                      </div>
-                  </div>
-
-                  <div class="faq-item">
-                      <button class="faq-question">
-                          <span>آیا مطابق با استانداردهای بین‌المللی کار می‌کنید؟</span>
-                          <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <polyline points="6,9 12,15 18,9"/>
-                          </svg>
-                      </button>
-                      <div class="faq-answer">
-                          بله، تمامی خدمات ما مطابق با استانداردهای بین‌المللی از جمله JORC، NI 43-101، AACE و سایر استانداردهای معتبر صنعت معدن انجام می‌شود. تیم ما دارای گواهینامه‌های لازم و تجربه کار با این استانداردها است.
-                      </div>
-                  </div>
-
-                  <div class="faq-item">
-                      <button class="faq-question">
-                          <span>هزینه خدمات چگونه محاسبه می‌شود؟</span>
-                          <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <polyline points="6,9 12,15 18,9"/>
-                          </svg>
-                      </button>
-                      <div class="faq-answer">
-                          هزینه‌ها بر اساس حجم کار، پیچیدگی پروژه، زمان‌بندی و نوع خدمات مورد نیاز محاسبه می‌شود. پس از دریافت اطلاعات اولیه پروژه، پیشنهاد قیمت تفصیلی ارائه می‌دهیم. مشاوره اولیه رایگان است.
-                      </div>
-                  </div>
-
-                  <div class="faq-item">
-                      <button class="faq-question">
-                          <span>آیا خدمات آموزشی نیز ارائه می‌دهید؟</span>
-                          <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <polyline points="6,9 12,15 18,9"/>
-                          </svg>
-                      </button>
-                      <div class="faq-answer">
-                          بله، ما دوره‌های آموزشی تخصصی در زمینه‌های مختلف مهندسی معدن، کار با نرم‌افزارهای تخصصی، استانداردهای بین‌المللی و فناوری‌های نوین برگزار می‌کنیم. این دوره‌ها به صورت حضوری، مجازی یا ترکیبی قابل ارائه است.
-                      </div>
-                  </div>
-
-                  <div class="faq-item">
-                      <button class="faq-question">
-                          <span>چگونه می‌توانم با شما همکاری کنم؟</span>
-                          <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <polyline points="6,9 12,15 18,9"/>
-                          </svg>
-                      </button>
-                      <div class="faq-answer">
-                          می‌توانید از طریق فرم تماس، تلفن، ایمیل یا مراجعه حضوری به دفتر ما درخواست خود را ارسال کنید. پس از دریافت درخواست، جلسه مشاوره اولیه رایگان تنظیم می‌شود و سپس پیشنهاد تفصیلی ارائه خواهد شد.
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </section>
-  </main>
-
-  <footer class="footer">
-      <div class="container">
-          <div class="footer-content">
-              <div class="footer-brand">
-                  <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="لوگو کاویان توسعه معدن" class="footer-logo">
-                  <div class="footer-brand-name">کاویان توسعه معدن</div>
-              </div>
-              
-              <div class="footer-links">
-                  <a href="./index.html" class="footer-link">خانه</a>
-                  <a href="./about.html" class="footer-link">درباره ما</a>
-                  <a href="./services.html" class="footer-link">خدمات</a>
-                  <a href="./portfolio.html" class="footer-link">نمونه کارها</a>
-                  <a href="./news.html" class="footer-link">اخبار</a>
-                  <a href="./equipment.html" class="footer-link">تجهیزات</a>
-                  <a href="./technical-resources.html" class="footer-link">منابع فنی</a>
-                  <a href="./contact.html" class="footer-link">تماس با ما</a>
-              </div>
-              
-              <div class="footer-bottom">
-                  <div>© ۱۴۰۳ کاویان توسعه معدن. تمامی حقوق محفوظ است.</div>
-              </div>
-          </div>
-      </div>
-  </footer>
-
-  <script>
-      // Form validation and submission
-      const contactForm = document.getElementById('contact-form');
-      const formSuccess = document.getElementById('form-success');
-      const formError = document.getElementById('form-error');
-
-      if (contactForm) {
-          contactForm.addEventListener('submit', function(e) {
-              e.preventDefault();
-              
-              // Reset previous states
-              formSuccess.style.display = 'none';
-              formError.style.display = 'none';
-              
-              // Basic validation
-              const requiredFields = this.querySelectorAll('[required]');
-              let isValid = true;
-              
-              requiredFields.forEach(field => {
-                  field.classList.remove('input-error', 'input-success');
-                  if (!field.value.trim()) {
-                      isValid = false;
-                      field.classList.add('input-error');
-                  } else {
-                      field.classList.add('input-success');
-                  }
-              });
-
-              // Email validation
-              const email = this.querySelector('#email');
-              const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-              if (email && email.value && !emailRegex.test(email.value)) {
-                  isValid = false;
-                  email.classList.remove('input-success');
-                  email.classList.add('input-error');
-              }
-
-              // Phone validation
-              const phone = this.querySelector('#phone');
-              const phoneRegex = /^09\d{9}$/;
-              if (phone && phone.value && !phoneRegex.test(phone.value.replace(/\s/g, ''))) {
-                  isValid = false;
-                  phone.classList.remove('input-success');
-                  phone.classList.add('input-error');
-              }
-
-              if (isValid) {
-                  // Simulate form submission
-                  const submitBtn = this.querySelector('.form-submit');
-                  const originalText = submitBtn.innerHTML;
-                  
-                  submitBtn.innerHTML = `
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                          <path d="M21 12a9 9 0 11-6.219-8.56"/>
-                      </svg>
-                      در حال ارسال...
-                  `;
-                  submitBtn.disabled = true;
-
-                  setTimeout(() => {
-                      formSuccess.style.display = 'block';
-                      submitBtn.innerHTML = originalText;
-                      submitBtn.disabled = false;
-                      this.reset();
-                      
-                      // Remove validation classes
-                      this.querySelectorAll('.input-error, .input-success').forEach(field => {
-                          field.classList.remove('input-error', 'input-success');
-                      });
-                      
-                      // Scroll to success message
-                      formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                  }, 2000);
-              } else {
-                  formError.style.display = 'block';
-                  formError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-              }
-          });
-      }
-
-      // FAQ functionality
-      const faqItems = document.querySelectorAll('.faq-item');
-      
-      faqItems.forEach(item => {
-          const question = item.querySelector('.faq-question');
-          
-          question.addEventListener('click', () => {
-              const isActive = item.classList.contains('active');
-              
-              // Close all other items
-              faqItems.forEach(otherItem => {
-                  if (otherItem !== item) {
-                      otherItem.classList.remove('active');
-                  }
-              });
-              
-              // Toggle current item
-              if (isActive) {
-                  item.classList.remove('active');
-              } else {
-                  item.classList.add('active');
-              }
-          });
-      });
-
-      // Smooth scrolling for anchor links
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-          anchor.addEventListener('click', function (e) {
-              e.preventDefault();
-              const target = document.querySelector(this.getAttribute('href'));
-              if (target) {
-                  target.scrollIntoView({
-                      behavior: 'smooth',
-                      block: 'start'
-                  });
-              }
-          });
-      });
-
-      // Form field focus effects
-      const formInputs = document.querySelectorAll('.form-input, .form-select, .form-textarea');
-      
-      formInputs.forEach(input => {
-          input.addEventListener('focus', function() {
-              this.parentElement.style.transform = 'translateY(-2px)';
-          });
-          
-          input.addEventListener('blur', function() {
-              this.parentElement.style.transform = 'translateY(0)';
-          });
-      });
-
-      // Auto-hide success/error messages after 5 seconds
-      setTimeout(() => {
-          if (formSuccess.style.display === 'block') {
-              formSuccess.style.display = 'none';
-          }
-          if (formError.style.display === 'block') {
-              formError.style.display = 'none';
-          }
-      }, 5000);
-  </script>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Logo">
+                <div class="logo-text">
+                    <h2>کاویان توسعه معدن</h2>
+                    <p>Kavian Development Mine</p>
+                </div>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="index.html">خانه</a></li>
+                <li><a href="about.html">درباره ما</a></li>
+                <li><a href="services.html">خدمات</a></li>
+                <li><a href="portfolio.html">نمونه کارها</a></li>
+                <li><a href="blog.html">وبلاگ</a></li>
+            </ul>
+            
+            <div class="nav-cta">
+                <a href="register.html" class="btn-nav btn-primary">ثبت‌نام</a>
+                <a href="contact.html" class="btn-nav btn-secondary">تماس با ما</a>
+            </div>
+            
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>تماس با ما</h1>
+            <p>برای مشاوره رایگان و دریافت اطلاعات بیشتر با ما در تماس باشید</p>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="contact-info">
+            <h2>اطلاعات تماس</h2>
+            <p>تیم ما آماده پاسخگویی به سوالات و ارائه مشاوره تخصصی به شما است</p>
+            
+            <div class="contact-details">
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <div class="contact-text">
+                        <h4>ایمیل</h4>
+                        <p><a href="mailto:info@kdmine.com">info@kdmine.com</a></p>
+                        <p><a href="mailto:support@kdmine.com">support@kdmine.com</a></p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">📞</div>
+                    <div class="contact-text">
+                        <h4>تلفن</h4>
+                        <p>دفتر مرکزی: <a href="tel:+982112345678">021-1234 5678</a></p>
+                        <p>پشتیبانی: <a href="tel:+982187654321">021-8765 4321</a></p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-text">
+                        <h4>آدرس</h4>
+                        <p>تهران، خیابان ولیعصر، پلاک 1234</p>
+                        <p>کد پستی: 1234567890</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">⏰</div>
+                    <div class="contact-text">
+                        <h4>ساعات کاری</h4>
+                        <p>شنبه تا چهارشنبه: 8:00 - 17:00</p>
+                        <p>پنجشنبه: 8:00 - 13:00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <form class="contact-form" id="contactForm">
+            <div class="form-group">
+                <label>نام و نام خانوادگی *</label>
+                <input type="text" name="from_name" required placeholder="نام کامل خود را وارد کنید">
+            </div>
+            
+            <div class="form-group">
+                <label>ایمیل *</label>
+                <input type="email" name="from_email" required placeholder="example@email.com">
+            </div>
+            
+            <div class="form-group">
+                <label>تلفن *</label>
+                <input type="tel" name="phone" required placeholder="09123456789">
+            </div>
+            
+            <div class="form-group">
+                <label>موضوع *</label>
+                <select name="subject" required>
+                    <option value="">انتخاب کنید</option>
+                    <option value="مشاوره فنی">مشاوره فنی</option>
+                    <option value="درخواست قیمت">درخواست قیمت</option>
+                    <option value="همکاری">همکاری</option>
+                    <option value="پشتیبانی">پشتیبانی</option>
+                    <option value="سایر">سایر</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>پیام *</label>
+                <textarea name="message" required placeholder="پیام خود را اینجا بنویسید..."></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn">ارسال پیام</button>
+            
+            <div class="form-message" id="formMessage"></div>
+        </form>
+    </section>
+    
+    <!-- Map Section -->
+    <section class="map-section">
+        <div class="map-container">
+            <h2>موقعیت ما روی نقشه</h2>
+            <iframe 
+                class="map-frame"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d207782.72051699846!2d51.18916793359373!3d35.69439489999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f8e00491ff3dcd9%3A0xf0b3697c567024bc!2sTehran%2C%20Iran!5e0!3m2!1sen!2s!4v1234567890123!5m2!1sen!2s"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>کاویان توسعه معدن</h3>
+                <p>مشاور تخصصی در زمینه مهندسی تجهیزات معدنی و اقتصاد معدن</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>دسترسی سریع</h3>
+                <a href="index.html">خانه</a>
+                <a href="about.html">درباره ما</a>
+                <a href="services.html">خدمات</a>
+                <a href="portfolio.html">نمونه کارها</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>خدمات</h3>
+                <a href="equipment-selection.html">انتخاب تجهیزات</a>
+                <a href="economic-analysis.html">تحلیل اقتصادی</a>
+                <a href="risk-analysis.html">تحلیل ریسک</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>تماس با ما</h3>
+                <p>📧 info@kdmine.com</p>
+                <p>📞 +98 21 1234 5678</p>
+                <p>📍 تهران، ایران</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2025 کاویان توسعه معدن. تمامی حقوق محفوظ است.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // EmailJS Form Submission
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const submitBtn = this.querySelector('.submit-btn');
+            const formMessage = document.getElementById('formMessage');
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'در حال ارسال...';
+            
+            // EmailJS send
+            emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+                .then(function() {
+                    formMessage.className = 'form-message success';
+                    formMessage.textContent = '✓ پیام شما با موفقیت ارسال شد! به زودی با شما تماس خواهیم گرفت.';
+                    formMessage.style.display = 'block';
+                    document.getElementById('contactForm').reset();
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'ارسال پیام';
+                    
+                    // Hide message after 5 seconds
+                    setTimeout(() => {
+                        formMessage.style.display = 'none';
+                    }, 5000);
+                }, function(error) {
+                    formMessage.className = 'form-message error';
+                    formMessage.textContent = '✗ خطا در ارسال پیام. لطفاً دوباره تلاش کنید یا با ما تماس بگیرید.';
+                    formMessage.style.display = 'block';
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'ارسال پیام';
+                    console.log('FAILED...', error);
+                });
+        });
+    </script>
 </body>
 </html>
