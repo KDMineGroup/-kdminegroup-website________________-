@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>انتخاب و اندازه‌گذاری تجهیزات | کاویان توسعه معدن</title>
-    <meta name="description" content="خدمات تخصصی انتخاب و اندازه‌گذاری تجهیزات معدنی و فرآوری">
+    <title>تحلیل اقتصادی و سناریوپردازی | کاویان توسعه معدن</title>
+    <meta name="description" content="خدمات تخصصی تحلیل اقتصادی، ارزیابی مالی و سناریوپردازی پروژه‌های معدنی">
     <link rel="icon" type="image/svg+xml" href="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg">
     
     <!-- EmailJS SDK -->
@@ -147,7 +147,7 @@
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, rgba(30, 58, 138, 0.95), rgba(37, 99, 235, 0.95)),
-                        url('https://images.unsplash.com/photo-1581094271901-8022df4466f9?w=1920&q=80') center/cover;
+                        url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1920&q=80') center/cover;
             color: white;
             padding: 120px 40px 100px;
             text-align: center;
@@ -253,8 +253,27 @@
             margin-bottom: 20px;
         }
         
-        /* Equipment Categories */
-        .categories-section {
+        .highlight-box {
+            background: #f0f9ff;
+            border-right: 5px solid #2563eb;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        
+        .highlight-box h4 {
+            color: #1e40af;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .highlight-box p {
+            color: #1e40af;
+            font-size: 1.05rem;
+        }
+        
+        /* Services Grid */
+        .services-section {
             background: #f8fafc;
             padding: 100px 40px;
         }
@@ -275,7 +294,7 @@
             color: #4a5568;
         }
         
-        .categories-grid {
+        .services-grid {
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
@@ -283,138 +302,118 @@
             gap: 35px;
         }
         
-        .category-card {
+        .service-card {
             background: white;
             border-radius: 20px;
-            overflow: hidden;
+            padding: 40px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             transition: all 0.3s;
             border: 3px solid transparent;
         }
         
-        .category-card:hover {
+        .service-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 50px rgba(0,0,0,0.15);
             border-color: #2563eb;
         }
         
-        .category-image {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-        }
-        
-        .category-content {
-            padding: 30px;
-        }
-        
-        .category-icon {
-            width: 70px;
-            height: 70px;
+        .service-icon {
+            width: 80px;
+            height: 80px;
             background: linear-gradient(135deg, #2563eb, #60a5fa);
-            border-radius: 15px;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: white;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
         }
         
-        .category-card h3 {
-            font-size: 1.5rem;
+        .service-card h3 {
+            font-size: 1.6rem;
             color: #1a202c;
             margin-bottom: 15px;
         }
         
-        .category-card p {
+        .service-card p {
             color: #4a5568;
             font-size: 1.05rem;
             line-height: 1.8;
             margin-bottom: 20px;
         }
         
-        .equipment-list {
+        .service-features {
             list-style: none;
             padding: 0;
-            margin-bottom: 20px;
         }
         
-        .equipment-list li {
-            padding: 8px 0;
-            padding-right: 25px;
+        .service-features li {
+            padding: 10px 0;
+            padding-right: 30px;
             position: relative;
             color: #4a5568;
-            font-size: 0.95rem;
+            font-size: 1rem;
         }
         
-        .equipment-list li::before {
+        .service-features li::before {
             content: '✓';
             position: absolute;
             right: 0;
             color: #059669;
             font-weight: bold;
+            font-size: 1.2rem;
         }
         
-        /* Process Section */
-        .process-section {
+        /* Indicators Section */
+        .indicators-section {
             max-width: 1200px;
             margin: 0 auto;
             padding: 100px 40px;
         }
         
-        .process-grid {
+        .indicators-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
             margin-top: 60px;
         }
         
-        .process-step {
-            background: white;
-            padding: 40px 30px;
+        .indicator-card {
+            background: linear-gradient(135deg, #f8fafc, #e0f2fe);
+            padding: 35px;
             border-radius: 15px;
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            position: relative;
+            border: 2px solid #bae6fd;
             transition: all 0.3s;
         }
         
-        .process-step:hover {
+        .indicator-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-color: #2563eb;
         }
         
-        .step-number {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #2563eb, #60a5fa);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: white;
-            margin: 0 auto 20px;
-            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+        .indicator-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
         }
         
-        .process-step h3 {
-            font-size: 1.3rem;
+        .indicator-card h3 {
+            font-size: 1.4rem;
             color: #1a202c;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         
-        .process-step p {
+        .indicator-card p {
             color: #4a5568;
             font-size: 1rem;
             line-height: 1.7;
         }
         
-        /* Benefits Section */
-        .benefits-section {
+        /* Process Section */
+        .process-section {
             background: linear-gradient(135deg, rgba(30, 58, 138, 0.95), rgba(37, 99, 235, 0.95)),
                         url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1920&q=80') center/cover;
             color: white;
@@ -422,7 +421,7 @@
             position: relative;
         }
         
-        .benefits-section::before {
+        .process-section::before {
             content: '';
             position: absolute;
             top: 0;
@@ -433,48 +432,138 @@
             z-index: 1;
         }
         
-        .benefits-content {
+        .process-content {
             position: relative;
             z-index: 2;
             max-width: 1200px;
             margin: 0 auto;
         }
         
-        .benefits-grid {
+        .process-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 35px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
             margin-top: 60px;
         }
         
-        .benefit-card {
+        .process-step {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
-            padding: 35px;
+            padding: 40px 30px;
             border-radius: 15px;
+            text-align: center;
             border: 2px solid rgba(255, 255, 255, 0.2);
             transition: all 0.3s;
         }
         
-        .benefit-card:hover {
+        .process-step:hover {
             background: rgba(255, 255, 255, 0.15);
             transform: translateY(-5px);
         }
         
-        .benefit-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: white;
+            color: #2563eb;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
         
-        .benefit-card h3 {
-            font-size: 1.4rem;
+        .process-step h3 {
+            font-size: 1.3rem;
             margin-bottom: 12px;
         }
         
-        .benefit-card p {
-            font-size: 1.05rem;
+        .process-step p {
+            font-size: 1rem;
             opacity: 0.95;
             line-height: 1.7;
+        }
+        
+        /* Case Study Section */
+        .case-study-section {
+            background: #f8fafc;
+            padding: 100px 40px;
+        }
+        
+        .case-study-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .case-study-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-top: 60px;
+        }
+        
+        .case-study-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+        
+        .case-study-content {
+            padding: 50px;
+        }
+        
+        .case-study-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .case-study-content h3 {
+            font-size: 2rem;
+            color: #1a202c;
+            margin-bottom: 20px;
+        }
+        
+        .case-study-content p {
+            font-size: 1.1rem;
+            color: #4a5568;
+            line-height: 1.9;
+            margin-bottom: 30px;
+        }
+        
+        .case-study-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            padding: 30px;
+            background: #f8fafc;
+            border-radius: 15px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2563eb;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            color: #4a5568;
         }
         
         /* CTA Section */
@@ -622,9 +711,10 @@
             }
             
             .overview-section,
-            .categories-section,
+            .services-section,
+            .indicators-section,
             .process-section,
-            .benefits-section,
+            .case-study-section,
             .cta-section {
                 padding: 80px 25px;
             }
@@ -639,6 +729,10 @@
             
             .cta-form input {
                 width: 100%;
+            }
+            
+            .case-study-content {
+                padding: 30px 25px;
             }
         }
     </style>
@@ -675,216 +769,238 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>انتخاب و اندازه‌گذاری تجهیزات</h1>
-            <p>انتخاب بهینه تجهیزات معدنی و فرآوری با توجه به شرایط خاص پروژه و تحلیل فنی-اقتصادی جامع</p>
+            <h1>تحلیل اقتصادی و سناریوپردازی</h1>
+            <p>ارزیابی جامع اقتصادی پروژه‌های معدنی با استفاده از روش‌های پیشرفته و سناریوهای مختلف</p>
             <div class="hero-cta">
                 <a href="#contact" class="btn-hero btn-hero-primary">درخواست مشاوره</a>
-                <a href="#categories" class="btn-hero btn-hero-secondary">مشاهده تجهیزات</a>
+                <a href="#services" class="btn-hero btn-hero-secondary">خدمات ما</a>
             </div>
         </div>
     </section>
     
     <!-- Overview Section -->
     <section class="overview-section">
-        <img src="https://images.unsplash.com/photo-1581094271901-8022df4466f9?w=800&q=80" alt="تجهیزات معدنی" class="overview-image">
-        
         <div class="overview-content">
-            <h2>چرا انتخاب صحیح تجهیزات مهم است؟</h2>
+            <h2>اهمیت تحلیل اقتصادی در پروژه‌های معدنی</h2>
             <p>
-                انتخاب تجهیزات مناسب یکی از مهم‌ترین تصمیمات در پروژه‌های معدنی است که تأثیر مستقیم بر هزینه‌های سرمایه‌گذاری، هزینه‌های عملیاتی و بازدهی کلی پروژه دارد.
+                تحلیل اقتصادی دقیق یکی از مهم‌ترین عوامل موفقیت پروژه‌های معدنی است. این تحلیل به سرمایه‌گذاران و تصمیم‌گیرندگان کمک می‌کند تا با اطمینان بیشتری در مورد سرمایه‌گذاری تصمیم بگیرند.
             </p>
             <p>
-                تیم متخصص ما با بهره‌گیری از تجربه گسترده و دانش فنی روز، بهترین تجهیزات را متناسب با شرایط خاص پروژه شما انتخاب و اندازه‌گذاری می‌کند.
+                ما با استفاده از جدیدترین روش‌ها و نرم‌افزارهای تحلیل مالی، ارزیابی جامعی از جنبه‌های اقتصادی پروژه شما ارائه می‌دهیم.
             </p>
-            <p>
-                ما از جدیدترین نرم‌افزارها و روش‌های محاسباتی برای تضمین دقت و کارایی بهینه استفاده می‌کنیم.
-            </p>
+            <div class="highlight-box">
+                <h4>💡 نکته مهم</h4>
+                <p>تحلیل حساسیت و سناریوپردازی به شما کمک می‌کند تا ریسک‌های مالی را شناسایی و مدیریت کنید.</p>
+            </div>
+        </div>
+        
+        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80" alt="تحلیل اقتصادی" class="overview-image">
+    </section>
+    
+    <!-- Services Section -->
+    <section class="services-section" id="services">
+        <div class="section-header">
+            <h2>خدمات تحلیل اقتصادی</h2>
+            <p>طیف گسترده‌ای از خدمات ارزیابی مالی</p>
+        </div>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">💰</div>
+                <h3>برآورد CAPEX</h3>
+                <p>برآورد دقیق هزینه‌های سرمایه‌گذاری اولیه</p>
+                <ul class="service-features">
+                    <li>هزینه تجهیزات</li>
+                    <li>هزینه ساخت و نصب</li>
+                    <li>هزینه‌های غیرمستقیم</li>
+                    <li>سرمایه در گردش</li>
+                </ul>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">📊</div>
+                <h3>برآورد OPEX</h3>
+                <p>محاسبه هزینه‌های عملیاتی سالانه</p>
+                <ul class="service-features">
+                    <li>هزینه نیروی انسانی</li>
+                    <li>هزینه مواد مصرفی</li>
+                    <li>هزینه انرژی</li>
+                    <li>هزینه نگهداری و تعمیرات</li>
+                </ul>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">📈</div>
+                <h3>تحلیل NPV و IRR</h3>
+                <p>محاسبه شاخص‌های اقتصادی کلیدی</p>
+                <ul class="service-features">
+                    <li>ارزش خالص فعلی (NPV)</li>
+                    <li>نرخ بازده داخلی (IRR)</li>
+                    <li>دوره بازگشت سرمایه</li>
+                    <li>نسبت سود به هزینه</li>
+                </ul>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🎯</div>
+                <h3>تحلیل حساسیت</h3>
+                <p>بررسی تأثیر تغییر پارامترها</p>
+                <ul class="service-features">
+                    <li>تحلیل قیمت محصول</li>
+                    <li>تحلیل هزینه‌ها</li>
+                    <li>تحلیل نرخ ارز</li>
+                    <li>تحلیل ظرفیت تولید</li>
+                </ul>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🔮</div>
+                <h3>سناریوپردازی</h3>
+                <p>ارزیابی سناریوهای مختلف</p>
+                <ul class="service-features">
+                    <li>سناریوی خوش‌بینانه</li>
+                    <li>سناریوی واقع‌بینانه</li>
+                    <li>سناریوی بدبینانه</li>
+                    <li>شبیه‌سازی مونت کارلو</li>
+                </ul>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">💼</div>
+                <h3>مدل‌سازی مالی</h3>
+                <p>ساخت مدل‌های مالی جامع</p>
+                <ul class="service-features">
+                    <li>جریان نقدی</li>
+                    <li>صورت سود و زیان</li>
+                    <li>ترازنامه</li>
+                    <li>نمودارهای تحلیلی</li>
+                </ul>
+            </div>
         </div>
     </section>
     
-    <!-- Equipment Categories -->
-    <section class="categories-section" id="categories">
+    <!-- Indicators Section -->
+    <section class="indicators-section">
         <div class="section-header">
-            <h2>دسته‌بندی تجهیزات</h2>
-            <p>طیف گسترده‌ای از تجهیزات معدنی و فرآوری</p>
+            <h2>شاخص‌های اقتصادی کلیدی</h2>
+            <p>معیارهای مهم در ارزیابی پروژه‌های معدنی</p>
         </div>
         
-        <div class="categories-grid">
-            <!-- Crushing Equipment -->
-            <div class="category-card">
-                <img src="https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?w=600&q=80" alt="تجهیزات خردایش" class="category-image">
-                <div class="category-content">
-                    <div class="category-icon">🔨</div>
-                    <h3>تجهیزات خردایش</h3>
-                    <p>انتخاب و اندازه‌گذاری سنگ‌شکن‌های مختلف</p>
-                    <ul class="equipment-list">
-                        <li>سنگ‌شکن فکی (Jaw Crusher)</li>
-                        <li>سنگ‌شکن مخروطی (Cone Crusher)</li>
-                        <li>سنگ‌شکن ضربه‌ای (Impact Crusher)</li>
-                        <li>سنگ‌شکن چکشی (Hammer Crusher)</li>
-                    </ul>
-                </div>
+        <div class="indicators-grid">
+            <div class="indicator-card">
+                <div class="indicator-icon">💵</div>
+                <h3>NPV</h3>
+                <p>ارزش خالص فعلی - معیار اصلی سودآوری پروژه با در نظر گرفتن ارزش زمانی پول</p>
             </div>
             
-            <!-- Grinding Equipment -->
-            <div class="category-card">
-                <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&q=80" alt="تجهیزات آسیاب" class="category-image">
-                <div class="category-content">
-                    <div class="category-icon">⚙️</div>
-                    <h3>تجهیزات آسیاب</h3>
-                    <p>آسیاب‌های مختلف برای خردایش ثانویه</p>
-                    <ul class="equipment-list">
-                        <li>آسیاب گلوله‌ای (Ball Mill)</li>
-                        <li>آسیاب SAG</li>
-                        <li>آسیاب میله‌ای (Rod Mill)</li>
-                        <li>آسیاب عمودی (Vertical Mill)</li>
-                    </ul>
-                </div>
+            <div class="indicator-card">
+                <div class="indicator-icon">📊</div>
+                <h3>IRR</h3>
+                <p>نرخ بازده داخلی - نرخ تنزیلی که NPV را صفر می‌کند و معیار بازدهی سرمایه‌گذاری است</p>
             </div>
             
-            <!-- Separation Equipment -->
-            <div class="category-card">
-                <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=600&q=80" alt="تجهیزات جداسازی" class="category-image">
-                <div class="category-content">
-                    <div class="category-icon">🔬</div>
-                    <h3>تجهیزات جداسازی</h3>
-                    <p>سیستم‌های فلوتاسیون و جداسازی</p>
-                    <ul class="equipment-list">
-                        <li>سلول‌های فلوتاسیون</li>
-                        <li>جداکننده‌های مغناطیسی</li>
-                        <li>جداکننده‌های الکترواستاتیک</li>
-                        <li>میزهای تکان‌دهنده</li>
-                    </ul>
-                </div>
+            <div class="indicator-card">
+                <div class="indicator-icon">⏱️</div>
+                <h3>Payback Period</h3>
+                <p>دوره بازگشت سرمایه - زمان لازم برای جبران سرمایه‌گذاری اولیه</p>
             </div>
             
-            <!-- Screening Equipment -->
-            <div class="category-card">
-                <img src="https://images.unsplash.com/photo-1581092918484-8313e1f7e8c7?w=600&q=80" alt="تجهیزات غربالگری" class="category-image">
-                <div class="category-content">
-                    <div class="category-icon">📊</div>
-                    <h3>تجهیزات غربالگری</h3>
-                    <p>غربال‌ها و دستگاه‌های طبقه‌بندی</p>
-                    <ul class="equipment-list">
-                        <li>غربال ارتعاشی</li>
-                        <li>غربال گردان</li>
-                        <li>هیدروسیکلون</li>
-                        <li>طبقه‌بند مارپیچی</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <!-- Conveying Equipment -->
-            <div class="category-card">
-                <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=600&q=80" alt="تجهیزات انتقال" class="category-image">
-                <div class="category-content">
-                    <div class="category-icon">🚚</div>
-                    <h3>تجهیزات انتقال</h3>
-                    <p>سیستم‌های حمل‌ونقل مواد</p>
-                    <ul class="equipment-list">
-                        <li>نوار نقاله (Belt Conveyor)</li>
-                        <li>پمپ‌های لجن</li>
-                        <li>بالابرهای سطلی</li>
-                        <li>حلزونی انتقال</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <!-- Dewatering Equipment -->
-            <div class="category-card">
-                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80" alt="تجهیزات آبگیری" class="category-image">
-                <div class="category-content">
-                    <div class="category-icon">💧</div>
-                    <h3>تجهیزات آبگیری</h3>
-                    <p>سیستم‌های آبگیری و خشک‌کردن</p>
-                    <ul class="equipment-list">
-                        <li>فیلتر پرس</li>
-                        <li>غلیظ‌کننده (Thickener)</li>
-                        <li>سانتریفیوژ</li>
-                        <li>فیلتر خلاء</li>
-                    </ul>
-                </div>
+            <div class="indicator-card">
+                <div class="indicator-icon">📉</div>
+                <h3>Break-even</h3>
+                <p>نقطه سربه‌سر - حداقل قیمت یا ظرفیت تولید برای جبران هزینه‌ها</p>
             </div>
         </div>
     </section>
     
     <!-- Process Section -->
     <section class="process-section">
-        <div class="section-header">
-            <h2>فرآیند انتخاب تجهیزات</h2>
-            <p>مراحل کاری ما برای انتخاب بهینه</p>
-        </div>
-        
-        <div class="process-grid">
-            <div class="process-step">
-                <div class="step-number">1</div>
-                <h3>تحلیل نیازمندی‌ها</h3>
-                <p>بررسی دقیق شرایط پروژه، نوع ماده معدنی و ظرفیت مورد نیاز</p>
+        <div class="process-content">
+            <div class="section-header">
+                <h2>فرآیند تحلیل اقتصادی</h2>
+                <p>مراحل کاری ما برای ارزیابی جامع</p>
             </div>
             
-            <div class="process-step">
-                <div class="step-number">2</div>
-                <h3>محاسبات فنی</h3>
-                <p>انجام محاسبات دقیق ظرفیت، توان و ابعاد تجهیزات</p>
-            </div>
-            
-            <div class="process-step">
-                <div class="step-number">3</div>
-                <h3>بررسی گزینه‌ها</h3>
-                <p>مقایسه تجهیزات مختلف و انتخاب بهترین گزینه</p>
-            </div>
-            
-            <div class="process-step">
-                <div class="step-number">4</div>
-                <h3>تحلیل اقتصادی</h3>
-                <p>بررسی هزینه‌های سرمایه‌گذاری و عملیاتی</p>
-            </div>
-            
-            <div class="process-step">
-                <div class="step-number">5</div>
-                <h3>ارائه گزارش</h3>
-                <p>تهیه گزارش جامع با توصیه‌های فنی و اقتصادی</p>
-            </div>
-            
-            <div class="process-step">
-                <div class="step-number">6</div>
-                <h3>پشتیبانی</h3>
-                <p>پشتیبانی در مراحل خرید و نصب تجهیزات</p>
+            <div class="process-grid">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3>جمع‌آوری داده‌ها</h3>
+                    <p>دریافت اطلاعات فنی، مالی و بازار</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3>برآورد هزینه‌ها</h3>
+                    <p>محاسبه CAPEX و OPEX</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3>پیش‌بینی درآمد</h3>
+                    <p>برآورد درآمدهای سالانه</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3>مدل‌سازی مالی</h3>
+                    <p>ساخت مدل جریان نقدی</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <h3>تحلیل حساسیت</h3>
+                    <p>بررسی تأثیر پارامترها</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">6</div>
+                    <h3>ارائه گزارش</h3>
+                    <p>تهیه گزارش جامع و توصیه‌ها</p>
+                </div>
             </div>
         </div>
     </section>
     
-    <!-- Benefits Section -->
-    <section class="benefits-section">
-        <div class="benefits-content">
+    <!-- Case Study Section -->
+    <section class="case-study-section">
+        <div class="case-study-container">
             <div class="section-header">
-                <h2>مزایای همکاری با ما</h2>
-                <p>چرا ما را برای انتخاب تجهیزات انتخاب کنید؟</p>
+                <h2>نمونه پروژه</h2>
+                <p>مطالعه موردی از پروژه‌های انجام شده</p>
             </div>
             
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <div class="benefit-icon">🎯</div>
-                    <h3>دقت بالا</h3>
-                    <p>استفاده از جدیدترین نرم‌افزارها و روش‌های محاسباتی</p>
-                </div>
-                
-                <div class="benefit-card">
-                    <div class="benefit-icon">💰</div>
-                    <h3>صرفه‌جویی</h3>
-                    <p>کاهش هزینه‌های سرمایه‌گذاری و عملیاتی</p>
-                </div>
-                
-                <div class="benefit-card">
-                    <div class="benefit-icon">⚡</div>
-                    <h3>بهره‌وری بالا</h3>
-                    <p>افزایش راندمان و کارایی تجهیزات</p>
-                </div>
-                
-                <div class="benefit-card">
-                    <div class="benefit-icon">🔧</div>
-                    <h3>تجربه گسترده</h3>
-                    <p>بیش از 15 سال تجربه در پروژه‌های مختلف</p>
+            <div class="case-study-card">
+                <img src="https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?w=1200&q=80" alt="پروژه معدن مس" class="case-study-image">
+                <div class="case-study-content">
+                    <span class="case-study-badge">⭐ پروژه موفق</span>
+                    <h3>تحلیل اقتصادی معدن مس با ظرفیت 18 میلیون تن</h3>
+                    <p>
+                        در این پروژه، تحلیل اقتصادی جامعی برای توسعه معدن مس با ظرفیت 18 میلیون تن در سال انجام شد. 
+                        تحلیل شامل برآورد دقیق CAPEX (450 میلیون دلار) و OPEX (12 دلار به ازای هر تن)، 
+                        محاسبه شاخص‌های اقتصادی و تحلیل حساسیت نسبت به قیمت مس و نرخ ارز بود.
+                    </p>
+                    <div class="case-study-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">$450M</span>
+                            <span class="stat-label">CAPEX</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">$12/t</span>
+                            <span class="stat-label">OPEX</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">$320M</span>
+                            <span class="stat-label">NPV</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">18.5%</span>
+                            <span class="stat-label">IRR</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">6.2 سال</span>
+                            <span class="stat-label">دوره بازگشت</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -893,13 +1009,13 @@
     <!-- CTA Section -->
     <section class="cta-section" id="contact">
         <div class="cta-container">
-            <h2>آماده شروع پروژه خود هستید؟</h2>
-            <p>برای مشاوره رایگان و دریافت پیشنهاد اطلاعات خود را وارد کنید</p>
+            <h2>آماده ارزیابی پروژه خود هستید؟</h2>
+            <p>برای دریافت تحلیل اقتصادی رایگان اطلاعات خود را وارد کنید</p>
             <form class="cta-form" id="ctaForm">
                 <input type="text" name="from_name" placeholder="نام و نام خانوادگی" required>
                 <input type="email" name="from_email" placeholder="ایمیل" required>
                 <input type="tel" name="phone" placeholder="تلفن" required>
-                <button type="submit">درخواست مشاوره</button>
+                <button type="submit">درخواست تحلیل رایگان</button>
             </form>
             <div class="cta-message" id="ctaMessage"></div>
         </div>
@@ -956,24 +1072,24 @@
                 from_name: this.from_name.value,
                 from_email: this.from_email.value,
                 phone: this.phone.value,
-                subject: 'درخواست مشاوره - انتخاب تجهیزات',
-                message: 'درخواست مشاوره برای خدمات انتخاب و اندازه‌گذاری تجهیزات'
+                subject: 'درخواست تحلیل اقتصادی رایگان',
+                message: 'درخواست تحلیل اقتصادی و سناریوپردازی پروژه معدنی'
             };
             
             emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
                 .then(function() {
                     message.className = 'cta-message success';
-                    message.textContent = '✓ درخواست شما ثبت شد! به زودی با شما تماس خواهیم گرفت.';
+                    message.textContent = '✓ درخواست شما ثبت شد! کارشناسان ما به زودی با شما تماس خواهند گرفت.';
                     message.style.display = 'block';
                     document.getElementById('ctaForm').reset();
                     submitBtn.disabled = false;
-                    submitBtn.textContent = 'درخواست مشاوره';
+                    submitBtn.textContent = 'درخواست تحلیل رایگان';
                 }, function(error) {
                     message.className = 'cta-message error';
                     message.textContent = '✗ خطا در ارسال. لطفاً دوباره تلاش کنید.';
                     message.style.display = 'block';
                     submitBtn.disabled = false;
-                    submitBtn.textContent = 'درخواست مشاوره';
+                    submitBtn.textContent = 'درخواست تحلیل رایگان';
                     console.log('FAILED...', error);
                 });
         });

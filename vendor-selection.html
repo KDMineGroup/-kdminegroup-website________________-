@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>انتخاب و اندازه‌گذاری تجهیزات | کاویان توسعه معدن</title>
-    <meta name="description" content="خدمات تخصصی انتخاب و اندازه‌گذاری تجهیزات معدنی و فرآوری">
+    <title>انتخاب تأمین‌کننده | کاویان توسعه معدن</title>
+    <meta name="description" content="خدمات تخصصی انتخاب و ارزیابی تأمین‌کنندگان تجهیزات معدنی">
     <link rel="icon" type="image/svg+xml" href="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg">
     
     <!-- EmailJS SDK -->
@@ -147,7 +147,7 @@
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, rgba(30, 58, 138, 0.95), rgba(37, 99, 235, 0.95)),
-                        url('https://images.unsplash.com/photo-1581094271901-8022df4466f9?w=1920&q=80') center/cover;
+                        url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1920&q=80') center/cover;
             color: white;
             padding: 120px 40px 100px;
             text-align: center;
@@ -253,8 +253,27 @@
             margin-bottom: 20px;
         }
         
-        /* Equipment Categories */
-        .categories-section {
+        .success-box {
+            background: #d1fae5;
+            border-right: 5px solid #059669;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        
+        .success-box h4 {
+            color: #065f46;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .success-box p {
+            color: #065f46;
+            font-size: 1.05rem;
+        }
+        
+        /* Criteria Section */
+        .criteria-section {
             background: #f8fafc;
             padding: 100px 40px;
         }
@@ -275,7 +294,7 @@
             color: #4a5568;
         }
         
-        .categories-grid {
+        .criteria-grid {
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
@@ -283,65 +302,53 @@
             gap: 35px;
         }
         
-        .category-card {
+        .criteria-card {
             background: white;
             border-radius: 20px;
-            overflow: hidden;
+            padding: 40px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             transition: all 0.3s;
-            border: 3px solid transparent;
+            border-top: 5px solid #2563eb;
         }
         
-        .category-card:hover {
+        .criteria-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-            border-color: #2563eb;
         }
         
-        .category-image {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-        }
-        
-        .category-content {
-            padding: 30px;
-        }
-        
-        .category-icon {
-            width: 70px;
-            height: 70px;
+        .criteria-icon {
+            width: 80px;
+            height: 80px;
             background: linear-gradient(135deg, #2563eb, #60a5fa);
-            border-radius: 15px;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: white;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
         }
         
-        .category-card h3 {
+        .criteria-card h3 {
             font-size: 1.5rem;
             color: #1a202c;
             margin-bottom: 15px;
         }
         
-        .category-card p {
+        .criteria-card p {
             color: #4a5568;
             font-size: 1.05rem;
             line-height: 1.8;
             margin-bottom: 20px;
         }
         
-        .equipment-list {
+        .criteria-list {
             list-style: none;
             padding: 0;
-            margin-bottom: 20px;
         }
         
-        .equipment-list li {
+        .criteria-list li {
             padding: 8px 0;
             padding-right: 25px;
             position: relative;
@@ -349,7 +356,7 @@
             font-size: 0.95rem;
         }
         
-        .equipment-list li::before {
+        .criteria-list li::before {
             content: '✓';
             position: absolute;
             right: 0;
@@ -364,29 +371,45 @@
             padding: 100px 40px;
         }
         
-        .process-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+        .process-timeline {
             margin-top: 60px;
-        }
-        
-        .process-step {
-            background: white;
-            padding: 40px 30px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             position: relative;
-            transition: all 0.3s;
         }
         
-        .process-step:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        .process-timeline::before {
+            content: '';
+            position: absolute;
+            right: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #2563eb, #60a5fa);
         }
         
-        .step-number {
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 80px;
+            align-items: center;
+        }
+        
+        .timeline-item:nth-child(even) {
+            direction: ltr;
+        }
+        
+        .timeline-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .timeline-number {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
             width: 60px;
             height: 60px;
             background: linear-gradient(135deg, #2563eb, #60a5fa);
@@ -394,35 +417,51 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: bold;
             color: white;
-            margin: 0 auto 20px;
-            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+            box-shadow: 0 0 0 8px #ffffff;
+            z-index: 10;
         }
         
-        .process-step h3 {
-            font-size: 1.3rem;
+        .timeline-item:nth-child(odd) .timeline-number {
+            left: calc(100% + 20px);
+        }
+        
+        .timeline-item:nth-child(even) .timeline-number {
+            right: calc(100% + 20px);
+        }
+        
+        .timeline-content h3 {
+            font-size: 1.6rem;
             color: #1a202c;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
         }
         
-        .process-step p {
+        .timeline-content p {
             color: #4a5568;
-            font-size: 1rem;
-            line-height: 1.7;
+            font-size: 1.05rem;
+            line-height: 1.8;
         }
         
-        /* Benefits Section */
-        .benefits-section {
+        .timeline-image {
+            width: 100%;
+            height: 300px;
+            border-radius: 20px;
+            object-fit: cover;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        /* Vendors Section */
+        .vendors-section {
             background: linear-gradient(135deg, rgba(30, 58, 138, 0.95), rgba(37, 99, 235, 0.95)),
-                        url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1920&q=80') center/cover;
+                        url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80') center/cover;
             color: white;
             padding: 100px 40px;
             position: relative;
         }
         
-        .benefits-section::before {
+        .vendors-section::before {
             content: '';
             position: absolute;
             top: 0;
@@ -433,11 +472,64 @@
             z-index: 1;
         }
         
-        .benefits-content {
+        .vendors-content {
             position: relative;
             z-index: 2;
             max-width: 1200px;
             margin: 0 auto;
+        }
+        
+        .vendors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .vendor-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 35px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s;
+        }
+        
+        .vendor-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+        }
+        
+        .vendor-logo {
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .vendor-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+        
+        .vendor-card p {
+            font-size: 1rem;
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+        
+        /* Benefits Section */
+        .benefits-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 40px;
         }
         
         .benefits-grid {
@@ -448,38 +540,40 @@
         }
         
         .benefit-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 35px;
-            border-radius: 15px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            background: linear-gradient(135deg, #f8fafc, #e0f2fe);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px solid #bae6fd;
             transition: all 0.3s;
         }
         
         .benefit-card:hover {
-            background: rgba(255, 255, 255, 0.15);
             transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-color: #2563eb;
         }
         
         .benefit-icon {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 20px;
         }
         
         .benefit-card h3 {
             font-size: 1.4rem;
+            color: #1a202c;
             margin-bottom: 12px;
         }
         
         .benefit-card p {
+            color: #4a5568;
             font-size: 1.05rem;
-            opacity: 0.95;
             line-height: 1.7;
         }
         
         /* CTA Section */
         .cta-section {
-            background: white;
+            background: #f8fafc;
             padding: 100px 40px;
         }
         
@@ -613,8 +707,23 @@
                 display: block;
             }
             
-            .overview-section {
+            .overview-section,
+            .timeline-item {
                 grid-template-columns: 1fr;
+            }
+            
+            .timeline-item:nth-child(even) {
+                direction: rtl;
+            }
+            
+            .process-timeline::before {
+                right: 20px;
+            }
+            
+            .timeline-item:nth-child(odd) .timeline-number,
+            .timeline-item:nth-child(even) .timeline-number {
+                right: 0;
+                left: auto;
             }
             
             .hero {
@@ -622,8 +731,9 @@
             }
             
             .overview-section,
-            .categories-section,
+            .criteria-section,
             .process-section,
+            .vendors-section,
             .benefits-section,
             .cta-section {
                 padding: 80px 25px;
@@ -675,135 +785,120 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>انتخاب و اندازه‌گذاری تجهیزات</h1>
-            <p>انتخاب بهینه تجهیزات معدنی و فرآوری با توجه به شرایط خاص پروژه و تحلیل فنی-اقتصادی جامع</p>
+            <h1>انتخاب و ارزیابی تأمین‌کننده</h1>
+            <p>انتخاب بهترین تأمین‌کنندگان تجهیزات معدنی با رویکرد علمی و تجربه‌محور</p>
             <div class="hero-cta">
                 <a href="#contact" class="btn-hero btn-hero-primary">درخواست مشاوره</a>
-                <a href="#categories" class="btn-hero btn-hero-secondary">مشاهده تجهیزات</a>
+                <a href="#criteria" class="btn-hero btn-hero-secondary">معیارهای انتخاب</a>
             </div>
         </div>
     </section>
     
     <!-- Overview Section -->
     <section class="overview-section">
-        <img src="https://images.unsplash.com/photo-1581094271901-8022df4466f9?w=800&q=80" alt="تجهیزات معدنی" class="overview-image">
-        
         <div class="overview-content">
-            <h2>چرا انتخاب صحیح تجهیزات مهم است؟</h2>
+            <h2>چرا انتخاب تأمین‌کننده مهم است؟</h2>
             <p>
-                انتخاب تجهیزات مناسب یکی از مهم‌ترین تصمیمات در پروژه‌های معدنی است که تأثیر مستقیم بر هزینه‌های سرمایه‌گذاری، هزینه‌های عملیاتی و بازدهی کلی پروژه دارد.
+                انتخاب تأمین‌کننده مناسب یکی از تصمیمات کلیدی در پروژه‌های معدنی است که تأثیر مستقیم 
+                بر کیفیت تجهیزات، هزینه‌ها، زمان تحویل و خدمات پس از فروش دارد.
             </p>
             <p>
-                تیم متخصص ما با بهره‌گیری از تجربه گسترده و دانش فنی روز، بهترین تجهیزات را متناسب با شرایط خاص پروژه شما انتخاب و اندازه‌گذاری می‌کند.
+                ما با شناخت عمیق از بازار جهانی تجهیزات معدنی و ارتباط با تأمین‌کنندگان معتبر، 
+                بهترین گزینه‌ها را برای پروژه شما شناسایی و ارزیابی می‌کنیم.
             </p>
-            <p>
-                ما از جدیدترین نرم‌افزارها و روش‌های محاسباتی برای تضمین دقت و کارایی بهینه استفاده می‌کنیم.
-            </p>
+            <div class="success-box">
+                <h4>✓ تجربه موفق</h4>
+                <p>ما در بیش از 50 پروژه به انتخاب بهترین تأمین‌کنندگان کمک کرده‌ایم که منجر به صرفه‌جویی میلیون‌ها دلاری شده است.</p>
+            </div>
         </div>
+        
+        <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800&q=80" alt="انتخاب تأمین‌کننده" class="overview-image">
     </section>
     
-    <!-- Equipment Categories -->
-    <section class="categories-section" id="categories">
+    <!-- Criteria Section -->
+    <section class="criteria-section" id="criteria">
         <div class="section-header">
-            <h2>دسته‌بندی تجهیزات</h2>
-            <p>طیف گسترده‌ای از تجهیزات معدنی و فرآوری</p>
+            <h2>معیارهای انتخاب تأمین‌کننده</h2>
+            <p>پارامترهای کلیدی در ارزیابی تأمین‌کنندگان</p>
         </div>
         
-        <div class="categories-grid">
-            <!-- Crushing Equipment -->
-            <div class="category-card">
-                <img src="https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?w=600&q=80" alt="تجهیزات خردایش" class="category-image">
-                <div class="category-content">
-                    <div class="category-icon">🔨</div>
-                    <h3>تجهیزات خردایش</h3>
-                    <p>انتخاب و اندازه‌گذاری سنگ‌شکن‌های مختلف</p>
-                    <ul class="equipment-list">
-                        <li>سنگ‌شکن فکی (Jaw Crusher)</li>
-                        <li>سنگ‌شکن مخروطی (Cone Crusher)</li>
-                        <li>سنگ‌شکن ضربه‌ای (Impact Crusher)</li>
-                        <li>سنگ‌شکن چکشی (Hammer Crusher)</li>
-                    </ul>
-                </div>
+        <div class="criteria-grid">
+            <div class="criteria-card">
+                <div class="criteria-icon">🏆</div>
+                <h3>کیفیت و تکنولوژی</h3>
+                <p>ارزیابی کیفیت محصولات و سطح تکنولوژی</p>
+                <ul class="criteria-list">
+                    <li>استانداردهای کیفیت</li>
+                    <li>گواهینامه‌های بین‌المللی</li>
+                    <li>سطح تکنولوژی</li>
+                    <li>نوآوری و R&D</li>
+                    <li>عمر مفید تجهیزات</li>
+                </ul>
             </div>
             
-            <!-- Grinding Equipment -->
-            <div class="category-card">
-                <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&q=80" alt="تجهیزات آسیاب" class="category-image">
-                <div class="category-content">
-                    <div class="category-icon">⚙️</div>
-                    <h3>تجهیزات آسیاب</h3>
-                    <p>آسیاب‌های مختلف برای خردایش ثانویه</p>
-                    <ul class="equipment-list">
-                        <li>آسیاب گلوله‌ای (Ball Mill)</li>
-                        <li>آسیاب SAG</li>
-                        <li>آسیاب میله‌ای (Rod Mill)</li>
-                        <li>آسیاب عمودی (Vertical Mill)</li>
-                    </ul>
-                </div>
+            <div class="criteria-card">
+                <div class="criteria-icon">💰</div>
+                <h3>قیمت و شرایط مالی</h3>
+                <p>بررسی قیمت و شرایط پرداخت</p>
+                <ul class="criteria-list">
+                    <li>رقابتی بودن قیمت</li>
+                    <li>شرایط پرداخت</li>
+                    <li>تخفیفات حجمی</li>
+                    <li>هزینه حمل و نقل</li>
+                    <li>هزینه‌های پنهان</li>
+                </ul>
             </div>
             
-            <!-- Separation Equipment -->
-            <div class="category-card">
-                <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=600&q=80" alt="تجهیزات جداسازی" class="category-image">
-                <div class="category-content">
-                    <div class="category-icon">🔬</div>
-                    <h3>تجهیزات جداسازی</h3>
-                    <p>سیستم‌های فلوتاسیون و جداسازی</p>
-                    <ul class="equipment-list">
-                        <li>سلول‌های فلوتاسیون</li>
-                        <li>جداکننده‌های مغناطیسی</li>
-                        <li>جداکننده‌های الکترواستاتیک</li>
-                        <li>میزهای تکان‌دهنده</li>
-                    </ul>
-                </div>
+            <div class="criteria-card">
+                <div class="criteria-icon">⏱️</div>
+                <h3>زمان تحویل</h3>
+                <p>توانایی تحویل به موقع تجهیزات</p>
+                <ul class="criteria-list">
+                    <li>زمان ساخت</li>
+                    <li>سابقه تحویل به موقع</li>
+                    <li>انعطاف‌پذیری زمانی</li>
+                    <li>مدیریت زنجیره تأمین</li>
+                    <li>موجودی انبار</li>
+                </ul>
             </div>
             
-            <!-- Screening Equipment -->
-            <div class="category-card">
-                <img src="https://images.unsplash.com/photo-1581092918484-8313e1f7e8c7?w=600&q=80" alt="تجهیزات غربالگری" class="category-image">
-                <div class="category-content">
-                    <div class="category-icon">📊</div>
-                    <h3>تجهیزات غربالگری</h3>
-                    <p>غربال‌ها و دستگاه‌های طبقه‌بندی</p>
-                    <ul class="equipment-list">
-                        <li>غربال ارتعاشی</li>
-                        <li>غربال گردان</li>
-                        <li>هیدروسیکلون</li>
-                        <li>طبقه‌بند مارپیچی</li>
-                    </ul>
-                </div>
+            <div class="criteria-card">
+                <div class="criteria-icon">🔧</div>
+                <h3>خدمات پس از فروش</h3>
+                <p>پشتیبانی و خدمات نگهداری</p>
+                <ul class="criteria-list">
+                    <li>گارانتی و ضمانت</li>
+                    <li>خدمات نصب و راه‌اندازی</li>
+                    <li>آموزش پرسنل</li>
+                    <li>قطعات یدکی</li>
+                    <li>پشتیبانی فنی</li>
+                </ul>
             </div>
             
-            <!-- Conveying Equipment -->
-            <div class="category-card">
-                <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=600&q=80" alt="تجهیزات انتقال" class="category-image">
-                <div class="category-content">
-                    <div class="category-icon">🚚</div>
-                    <h3>تجهیزات انتقال</h3>
-                    <p>سیستم‌های حمل‌ونقل مواد</p>
-                    <ul class="equipment-list">
-                        <li>نوار نقاله (Belt Conveyor)</li>
-                        <li>پمپ‌های لجن</li>
-                        <li>بالابرهای سطلی</li>
-                        <li>حلزونی انتقال</li>
-                    </ul>
-                </div>
+            <div class="criteria-card">
+                <div class="criteria-icon">📊</div>
+                <h3>تجربه و سابقه</h3>
+                <p>بررسی سوابق و تجربیات قبلی</p>
+                <ul class="criteria-list">
+                    <li>سابقه فعالیت</li>
+                    <li>پروژه‌های مشابه</li>
+                    <li>رفرنس‌های معتبر</li>
+                    <li>شهرت در صنعت</li>
+                    <li>نرخ رضایت مشتریان</li>
+                </ul>
             </div>
             
-            <!-- Dewatering Equipment -->
-            <div class="category-card">
-                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80" alt="تجهیزات آبگیری" class="category-image">
-                <div class="category-content">
-                    <div class="category-icon">💧</div>
-                    <h3>تجهیزات آبگیری</h3>
-                    <p>سیستم‌های آبگیری و خشک‌کردن</p>
-                    <ul class="equipment-list">
-                        <li>فیلتر پرس</li>
-                        <li>غلیظ‌کننده (Thickener)</li>
-                        <li>سانتریفیوژ</li>
-                        <li>فیلتر خلاء</li>
-                    </ul>
-                </div>
+            <div class="criteria-card">
+                <div class="criteria-icon">🌍</div>
+                <h3>ثبات مالی و سازمانی</h3>
+                <p>پایداری و قابلیت اطمینان</p>
+                <ul class="criteria-list">
+                    <li>وضعیت مالی</li>
+                    <li>ساختار سازمانی</li>
+                    <li>ظرفیت تولید</li>
+                    <li>زنجیره تأمین</li>
+                    <li>مدیریت ریسک</li>
+                </ul>
             </div>
         </div>
     </section>
@@ -811,81 +906,175 @@
     <!-- Process Section -->
     <section class="process-section">
         <div class="section-header">
-            <h2>فرآیند انتخاب تجهیزات</h2>
-            <p>مراحل کاری ما برای انتخاب بهینه</p>
+            <h2>فرآیند انتخاب تأمین‌کننده</h2>
+            <p>مراحل علمی و سیستماتیک انتخاب</p>
         </div>
         
-        <div class="process-grid">
-            <div class="process-step">
-                <div class="step-number">1</div>
-                <h3>تحلیل نیازمندی‌ها</h3>
-                <p>بررسی دقیق شرایط پروژه، نوع ماده معدنی و ظرفیت مورد نیاز</p>
+        <div class="process-timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-number">1</div>
+                    <h3>تعریف نیازمندی‌ها</h3>
+                    <p>مشخص کردن دقیق نیازها، مشخصات فنی، کیفیت مورد انتظار، بودجه و زمان‌بندی پروژه</p>
+                </div>
+                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=80" alt="تعریف نیازمندی‌ها" class="timeline-image">
             </div>
             
-            <div class="process-step">
-                <div class="step-number">2</div>
-                <h3>محاسبات فنی</h3>
-                <p>انجام محاسبات دقیق ظرفیت، توان و ابعاد تجهیزات</p>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-number">2</div>
+                    <h3>شناسایی تأمین‌کنندگان</h3>
+                    <p>جستجو و شناسایی تأمین‌کنندگان بالقوه از بازارهای داخلی و بین‌المللی</p>
+                </div>
+                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80" alt="شناسایی تأمین‌کنندگان" class="timeline-image">
             </div>
             
-            <div class="process-step">
-                <div class="step-number">3</div>
-                <h3>بررسی گزینه‌ها</h3>
-                <p>مقایسه تجهیزات مختلف و انتخاب بهترین گزینه</p>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-number">3</div>
+                    <h3>ارزیابی اولیه</h3>
+                    <p>بررسی اولیه تأمین‌کنندگان بر اساس معیارهای کلیدی و حذف گزینه‌های نامناسب</p>
+                </div>
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80" alt="ارزیابی اولیه" class="timeline-image">
             </div>
             
-            <div class="process-step">
-                <div class="step-number">4</div>
-                <h3>تحلیل اقتصادی</h3>
-                <p>بررسی هزینه‌های سرمایه‌گذاری و عملیاتی</p>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-number">4</div>
+                    <h3>درخواست پیشنهاد (RFQ)</h3>
+                    <p>ارسال درخواست رسمی پیشنهاد قیمت و مشخصات فنی به تأمین‌کنندگان منتخب</p>
+                </div>
+                <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=80" alt="درخواست پیشنهاد" class="timeline-image">
             </div>
             
-            <div class="process-step">
-                <div class="step-number">5</div>
-                <h3>ارائه گزارش</h3>
-                <p>تهیه گزارش جامع با توصیه‌های فنی و اقتصادی</p>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-number">5</div>
+                    <h3>ارزیابی تفصیلی</h3>
+                    <p>تحلیل جامع پیشنهادات، مقایسه فنی و اقتصادی و امتیازدهی بر اساس معیارها</p>
+                </div>
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80" alt="ارزیابی تفصیلی" class="timeline-image">
             </div>
             
-            <div class="process-step">
-                <div class="step-number">6</div>
-                <h3>پشتیبانی</h3>
-                <p>پشتیبانی در مراحل خرید و نصب تجهیزات</p>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-number">6</div>
+                    <h3>بازدید و ممیزی</h3>
+                    <p>بازدید از کارخانه تولیدکننده، بررسی سیستم کیفیت و مشاهده پروژه‌های مشابه</p>
+                </div>
+                <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=600&q=80" alt="بازدید و ممیزی" class="timeline-image">
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-number">7</div>
+                    <h3>مذاکره نهایی</h3>
+                    <p>مذاکره در مورد قیمت، شرایط پرداخت، زمان تحویل و شرایط قرارداد</p>
+                </div>
+                <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=600&q=80" alt="مذاکره نهایی" class="timeline-image">
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-number">8</div>
+                    <h3>انتخاب و قرارداد</h3>
+                    <p>انتخاب نهایی تأمین‌کننده و تنظیم قرارداد جامع با تمام جزئیات</p>
+                </div>
+                <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=80" alt="انتخاب و قرارداد" class="timeline-image">
+            </div>
+        </div>
+    </section>
+    
+    <!-- Vendors Section -->
+    <section class="vendors-section">
+        <div class="vendors-content">
+            <div class="section-header">
+                <h2>تأمین‌کنندگان معتبر جهانی</h2>
+                <p>ارتباط با برندهای برتر صنعت معدن</p>
+            </div>
+            
+            <div class="vendors-grid">
+                <div class="vendor-card">
+                    <div class="vendor-logo">🏭</div>
+                    <h3>Metso Outotec</h3>
+                    <p>تجهیزات خردایش و آسیاب</p>
+                </div>
+                
+                <div class="vendor-card">
+                    <div class="vendor-logo">⚙️</div>
+                    <h3>FLSmidth</h3>
+                    <p>تجهیزات فرآوری کامل</p>
+                </div>
+                
+                <div class="vendor-card">
+                    <div class="vendor-logo">🔨</div>
+                    <h3>Sandvik</h3>
+                    <p>سنگ‌شکن و غربال</p>
+                </div>
+                
+                <div class="vendor-card">
+                    <div class="vendor-logo">💎</div>
+                    <h3>Weir Minerals</h3>
+                    <p>پمپ و هیدروسیکلون</p>
+                </div>
+                
+                <div class="vendor-card">
+                    <div class="vendor-logo">🌀</div>
+                    <h3>Outotec</h3>
+                    <p>فلوتاسیون و فیلتراسیون</p>
+                </div>
+                
+                <div class="vendor-card">
+                    <div class="vendor-logo">⚡</div>
+                    <h3>ABB</h3>
+                    <p>سیستم‌های برق و اتوماسیون</p>
+                </div>
             </div>
         </div>
     </section>
     
     <!-- Benefits Section -->
     <section class="benefits-section">
-        <div class="benefits-content">
-            <div class="section-header">
-                <h2>مزایای همکاری با ما</h2>
-                <p>چرا ما را برای انتخاب تجهیزات انتخاب کنید؟</p>
+        <div class="section-header">
+            <h2>مزایای استفاده از خدمات ما</h2>
+            <p>چرا ما را برای انتخاب تأمین‌کننده انتخاب کنید؟</p>
+        </div>
+        
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">🎯</div>
+                <h3>انتخاب بهینه</h3>
+                <p>انتخاب بهترین تأمین‌کننده بر اساس معیارهای علمی</p>
             </div>
             
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <div class="benefit-icon">🎯</div>
-                    <h3>دقت بالا</h3>
-                    <p>استفاده از جدیدترین نرم‌افزارها و روش‌های محاسباتی</p>
-                </div>
-                
-                <div class="benefit-card">
-                    <div class="benefit-icon">💰</div>
-                    <h3>صرفه‌جویی</h3>
-                    <p>کاهش هزینه‌های سرمایه‌گذاری و عملیاتی</p>
-                </div>
-                
-                <div class="benefit-card">
-                    <div class="benefit-icon">⚡</div>
-                    <h3>بهره‌وری بالا</h3>
-                    <p>افزایش راندمان و کارایی تجهیزات</p>
-                </div>
-                
-                <div class="benefit-card">
-                    <div class="benefit-icon">🔧</div>
-                    <h3>تجربه گسترده</h3>
-                    <p>بیش از 15 سال تجربه در پروژه‌های مختلف</p>
-                </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">💰</div>
+                <h3>صرفه‌جویی هزینه</h3>
+                <p>کاهش هزینه‌ها از طریق مذاکره حرفه‌ای</p>
+            </div>
+            
+            <div class="benefit-card">
+                <div class="benefit-icon">⏱️</div>
+                <h3>صرفه‌جویی زمان</h3>
+                <p>کاهش زمان فرآیند انتخاب با تجربه و شبکه ما</p>
+            </div>
+            
+            <div class="benefit-card">
+                <div class="benefit-icon">🛡️</div>
+                <h3>کاهش ریسک</h3>
+                <p>کاهش ریسک انتخاب اشتباه تأمین‌کننده</p>
+            </div>
+            
+            <div class="benefit-card">
+                <div class="benefit-icon">🌍</div>
+                <h3>دسترسی جهانی</h3>
+                <p>ارتباط با بهترین تأمین‌کنندگان جهان</p>
+            </div>
+            
+            <div class="benefit-card">
+                <div class="benefit-icon">📊</div>
+                <h3>گزارش جامع</h3>
+                <p>ارائه گزارش تفصیلی از فرآیند ارزیابی</p>
             </div>
         </div>
     </section>
@@ -893,13 +1082,13 @@
     <!-- CTA Section -->
     <section class="cta-section" id="contact">
         <div class="cta-container">
-            <h2>آماده شروع پروژه خود هستید؟</h2>
-            <p>برای مشاوره رایگان و دریافت پیشنهاد اطلاعات خود را وارد کنید</p>
+            <h2>بهترین تأمین‌کننده را انتخاب کنید</h2>
+            <p>برای مشاوره رایگان و کمک در انتخاب تأمین‌کننده اطلاعات خود را وارد کنید</p>
             <form class="cta-form" id="ctaForm">
                 <input type="text" name="from_name" placeholder="نام و نام خانوادگی" required>
                 <input type="email" name="from_email" placeholder="ایمیل" required>
                 <input type="tel" name="phone" placeholder="تلفن" required>
-                <button type="submit">درخواست مشاوره</button>
+                <button type="submit">درخواست مشاوره رایگان</button>
             </form>
             <div class="cta-message" id="ctaMessage"></div>
         </div>
@@ -956,24 +1145,24 @@
                 from_name: this.from_name.value,
                 from_email: this.from_email.value,
                 phone: this.phone.value,
-                subject: 'درخواست مشاوره - انتخاب تجهیزات',
-                message: 'درخواست مشاوره برای خدمات انتخاب و اندازه‌گذاری تجهیزات'
+                subject: 'درخواست مشاوره انتخاب تأمین‌کننده',
+                message: 'درخواست مشاوره برای انتخاب و ارزیابی تأمین‌کنندگان تجهیزات معدنی'
             };
             
             emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
                 .then(function() {
                     message.className = 'cta-message success';
-                    message.textContent = '✓ درخواست شما ثبت شد! به زودی با شما تماس خواهیم گرفت.';
+                    message.textContent = '✓ درخواست شما ثبت شد! کارشناسان ما به زودی با شما تماس خواهند گرفت.';
                     message.style.display = 'block';
                     document.getElementById('ctaForm').reset();
                     submitBtn.disabled = false;
-                    submitBtn.textContent = 'درخواست مشاوره';
+                    submitBtn.textContent = 'درخواست مشاوره رایگان';
                 }, function(error) {
                     message.className = 'cta-message error';
                     message.textContent = '✗ خطا در ارسال. لطفاً دوباره تلاش کنید.';
                     message.style.display = 'block';
                     submitBtn.disabled = false;
-                    submitBtn.textContent = 'درخواست مشاوره';
+                    submitBtn.textContent = 'درخواست مشاوره رایگان';
                     console.log('FAILED...', error);
                 });
         });
