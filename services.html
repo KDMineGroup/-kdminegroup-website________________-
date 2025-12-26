@@ -4,414 +4,722 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>خدمات | کاویان توسعه معدن</title>
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <meta name="description" content="خدمات تخصصی مشاوره معدنی شامل انتخاب تجهیزات، تحلیل اقتصادی و مدیریت پروژه">
+    <link rel="icon" type="image/svg+xml" href="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg">
+    
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Vazirmatn', sans-serif; line-height: 1.6; color: #1F2937; background: #FAFAF9; direction: rtl; }
-        img { max-width: 100%; display: block; }
-        a { text-decoration: none; color: inherit; }
-        button { font-family: inherit; cursor: pointer; border: none; background: none; }
-        
-        :root {
-            --primary: #1F2937; --secondary: #2B6CB0; --accent: #8B5E3C; --success: #16A34A;
-            --bg: #FAFAF9; --border: #E5E7EB; --text-light: #6B7280;
-            --spacing: 1rem; --radius: 0.75rem; --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        @font-face {
+            font-family: 'B Nazanin';
+            src: local('B Nazanin'), local('BNazanin');
+            font-display: swap;
         }
         
-        .container { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
-        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.25rem; border-radius: var(--radius); font-weight: 500; transition: all 0.3s; }
-        .btn-primary { background: var(--secondary); color: white; }
-        .btn-primary:hover { background: #245FA0; transform: translateY(-2px); box-shadow: var(--shadow); }
-        
-        .header { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; }
-        .header-container { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.5rem; }
-        .brand { display: flex; align-items: center; gap: 0.75rem; }
-        .brand-logo { width: 3rem; height: 3rem; }
-        .brand-name { font-size: 1.25rem; font-weight: 700; color: var(--primary); }
-        .brand-tagline { font-size: 0.75rem; color: var(--text-light); }
-        .nav { display: flex; align-items: center; gap: 1.5rem; }
-        .nav-link { color: var(--primary); font-weight: 500; padding: 0.5rem 1rem; border-radius: 0.5rem; transition: all 0.2s; }
-        .nav-link:hover { color: var(--secondary); background: rgba(43,108,176,0.05); }
-        .lang-switcher { display: flex; gap: 0.25rem; padding: 0.25rem; background: #F3F4F6; border-radius: 0.5rem; }
-        .lang-btn { padding: 0.25rem 0.75rem; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 500; color: var(--text-light); }
-        .lang-btn[aria-current="true"] { background: white; color: var(--secondary); box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05); }
-        
-        .page-header { background: linear-gradient(135deg, #F1EFEA 0%, rgba(241,239,234,0) 100%); padding: 3rem 0; text-align: center; }
-        .page-header h1 { font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem; }
-        .page-header p { font-size: 1.125rem; color: var(--text-light); max-width: 800px; margin: 0 auto; }
-        
-        .services-detail { padding: 3rem 0; background: white; }
-        .service-detail-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; margin-bottom: 2rem; }
-        .service-detail-header { display: flex; gap: 1.5rem; align-items: start; margin-bottom: 1.5rem; }
-        .service-detail-icon { width: 4rem; height: 4rem; padding: 1rem; background: rgba(139,94,60,0.1); border-radius: var(--radius); flex-shrink: 0; }
-        .service-detail-title { font-size: 1.75rem; color: var(--primary); margin-bottom: 0.5rem; }
-        .service-detail-subtitle { color: var(--text-light); font-size: 1.125rem; }
-        .service-detail-description { color: var(--text-light); line-height: 1.8; margin-bottom: 1.5rem; }
-        .service-detail-features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1.5rem; }
-        .service-feature-item { display: flex; gap: 1rem; padding: 1rem; background: var(--bg); border-radius: var(--radius); }
-        .service-feature-icon { width: 2.5rem; height: 2.5rem; color: var(--secondary); flex-shrink: 0; }
-        .service-feature-title { font-weight: 600; color: var(--primary); margin-bottom: 0.25rem; }
-        .service-feature-text { font-size: 0.875rem; color: var(--text-light); }
-        .service-deliverables { margin-top: 1.5rem; }
-        .service-deliverables h4 { font-size: 1.125rem; color: var(--primary); margin-bottom: 1rem; }
-        .deliverable-list { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
-        .deliverable-item { display: flex; align-items: center; gap: 0.5rem; color: var(--text-light); }
-        
-        .cta { background: linear-gradient(135deg, var(--secondary) 0%, #1E5A8E 100%); padding: 3rem 0; color: white; }
-        .cta-container { display: flex; justify-content: space-between; align-items: center; gap: 2rem; }
-        .cta h3 { font-size: 1.75rem; margin-bottom: 0.5rem; }
-        .cta p { font-size: 1.125rem; opacity: 0.9; margin: 0; }
-        .btn-white { background: white; color: var(--secondary); }
-        .btn-white:hover { background: #F3F4F6; }
-        
-        .footer { background: var(--primary); color: white; padding: 3rem 0 1rem; }
-        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 2rem; margin-bottom: 2rem; }
-        .footer-brand { display: flex; flex-direction: column; gap: 1rem; }
-        .footer-brand-header { display: flex; align-items: center; gap: 1rem; }
-        .footer-logo { width: 2.5rem; height: 2.5rem; }
-        .footer-brand-name { font-size: 1.25rem; font-weight: 700; }
-        .footer-description { opacity: 0.8; line-height: 1.6; }
-        .footer-section h4 { font-size: 1.125rem; margin-bottom: 1rem; }
-        .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-        .footer-link { opacity: 0.8; transition: opacity 0.2s; }
-        .footer-link:hover { opacity: 1; text-decoration: underline; }
-        .footer-services { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-        .footer-service { display: flex; align-items: center; gap: 0.5rem; opacity: 0.8; font-size: 0.9375rem; }
-        .footer-newsletter p { opacity: 0.8; margin-bottom: 1rem; }
-        .newsletter-form { display: flex; gap: 0.5rem; }
-        .newsletter-input { flex: 1; padding: 0.75rem; border: 1px solid rgba(255,255,255,0.2); border-radius: var(--radius); background: rgba(255,255,255,0.1); color: white; font-family: inherit; }
-        .newsletter-input::placeholder { color: rgba(255,255,255,0.6); }
-        .newsletter-btn { padding: 0.75rem 1.25rem; background: white; color: var(--secondary); border-radius: var(--radius); font-weight: 600; transition: all 0.2s; }
-        .newsletter-btn:hover { background: #F3F4F6; }
-        .footer-social { display: flex; gap: 1rem; margin-top: 1rem; }
-        .social-link { width: 2.5rem; height: 2.5rem; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 0.5rem; transition: all 0.2s; }
-        .social-link:hover { background: rgba(255,255,255,0.2); }
-        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem; display: flex; justify-content: space-between; align-items: center; opacity: 0.8; font-size: 0.875rem; }
-        .footer-legal { display: flex; gap: 1.5rem; }
-        
-        @media (max-width: 1024px) {
-            .service-detail-features, .deliverable-list { grid-template-columns: 1fr; }
-            .footer-grid { grid-template-columns: repeat(2, 1fr); }
-            .cta-container { flex-direction: column; text-align: center; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
+        
+        body {
+            font-family: 'B Nazanin', Tahoma, sans-serif;
+            line-height: 1.8;
+            color: #1a202c;
+            background: #ffffff;
+        }
+        
+        /* Navigation */
+        .navbar {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            background: white;
+            padding: 5px;
+        }
+        
+        .logo-text h2 {
+            font-size: 1.4rem;
+            margin-bottom: 2px;
+        }
+        
+        .logo-text p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.05rem;
+            font-weight: 600;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        
+        .nav-cta {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn-nav {
+            padding: 10px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+        
+        .btn-primary {
+            background: white;
+            color: #2563eb;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255,255,255,0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: #2563eb;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.95), rgba(37, 99, 235, 0.95)),
+                        url('https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=1920&q=80') center/cover;
+            color: white;
+            padding: 120px 40px 100px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.85), rgba(37, 99, 235, 0.75));
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .hero p {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Services Grid */
+        .services-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 40px;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            border: 3px solid transparent;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            border-color: #2563eb;
+        }
+        
+        .service-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .service-content {
+            padding: 35px;
+        }
+        
+        .service-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .service-card h3 {
+            font-size: 1.7rem;
+            color: #1a202c;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+        
+        .service-card p {
+            color: #4a5568;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .service-features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 25px;
+        }
+        
+        .service-features li {
+            padding: 10px 0;
+            padding-right: 30px;
+            position: relative;
+            color: #4a5568;
+            font-size: 1rem;
+        }
+        
+        .service-features li::before {
+            content: '✓';
+            position: absolute;
+            right: 0;
+            color: #059669;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .service-link {
+            display: inline-block;
+            padding: 14px 35px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1.05rem;
+            transition: all 0.3s;
+        }
+        
+        .service-link:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+        }
+        
+        /* Process Section */
+        .process-section {
+            background: #f8fafc;
+            padding: 100px 40px;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+        
+        .section-header h2 {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            color: #1a202c;
+            margin-bottom: 15px;
+        }
+        
+        .section-header p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: #4a5568;
+        }
+        
+        .process-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .process-step {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #2563eb, #60a5fa);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+        }
+        
+        .process-step h3 {
+            font-size: 1.3rem;
+            color: #1a202c;
+            margin-bottom: 12px;
+        }
+        
+        .process-step p {
+            color: #4a5568;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.95), rgba(37, 99, 235, 0.95)),
+                        url('https://images.unsplash.com/photo-1552664730-d307ca884978?w=1920&q=80') center/cover;
+            color: white;
+            padding: 100px 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.9), rgba(37, 99, 235, 0.8));
+            z-index: 1;
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cta-content h2 {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            margin-bottom: 20px;
+        }
+        
+        .cta-content p {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+        
+        .btn-cta {
+            padding: 18px 40px;
+            background: white;
+            color: #2563eb;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            display: inline-block;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .btn-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+        
+        /* Footer */
+        .footer {
+            background: #1a202c;
+            color: white;
+            padding: 60px 40px 30px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+        
+        .footer-section p,
+        .footer-section a {
+            color: #cbd5e0;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 30px;
+            border-top: 1px solid #2d3748;
+            text-align: center;
+            color: #cbd5e0;
+            font-size: 0.9rem;
+        }
+        
         @media (max-width: 768px) {
-            .nav { display: none; }
-            .service-detail-header { flex-direction: column; }
-            .footer-grid { grid-template-columns: 1fr; }
+            .nav-links, .nav-cta {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero {
+                padding: 100px 25px 80px;
+            }
+            
+            .services-section,
+            .process-section,
+            .cta-section {
+                padding: 80px 25px;
+            }
         }
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="container header-container">
-            <a href="./index.html" class="brand">
-                <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="لوگو" class="brand-logo">
-                <div>
-                    <div class="brand-name">کاویان توسعه معدن</div>
-                    <div class="brand-tagline">دانش، فناوری و ارزش‌آفرینی در زنجیره فلزات</div>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Logo">
+                <div class="logo-text">
+                    <h2>کاویان توسعه معدن</h2>
+                    <p>Kavian Development Mine</p>
                 </div>
             </a>
-            <nav class="nav">
-                <a href="./index.html" class="nav-link">خانه</a>
-                <a href="./services.html" class="nav-link">خدمات</a>
-                <a href="./news.html" class="nav-link">اخبار و روندها</a>
-                <a href="./equipment.html" class="nav-link">تجهیزات</a>
-                <a href="./index.html#contact" class="btn btn-primary">
-                    <img src="https://api.iconify.design/lucide-mail.svg?color=white" alt="" style="width:1.25rem;height:1.25rem">
-                    درخواست مشاوره
-                </a>
-                <div class="lang-switcher">
-                    <button class="lang-btn" data-lang="fa" aria-current="true">FA</button>
-                    <span>|</span>
-                    <button class="lang-btn" data-lang="en">EN</button>
-                </div>
-            </nav>
+            
+            <ul class="nav-links">
+                <li><a href="index.html">خانه</a></li>
+                <li><a href="about.html">درباره ما</a></li>
+                <li><a href="services.html">خدمات</a></li>
+                <li><a href="portfolio.html">نمونه کارها</a></li>
+                <li><a href="blog.html">وبلاگ</a></li>
+            </ul>
+            
+            <div class="nav-cta">
+                <a href="register.html" class="btn-nav btn-primary">ثبت‌نام</a>
+                <a href="contact.html" class="btn-nav btn-secondary">تماس با ما</a>
+            </div>
+            
+            <button class="mobile-menu-btn">☰</button>
         </div>
-    </header>
-
-    <section class="page-header">
-        <div class="container">
-            <h1>خدمات تخصصی کاویان</h1>
-            <p>راهکارهای جامع مهندسی و مشاوره‌ای از اکتشاف تا بهره‌برداری و بهینه‌سازی</p>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>خدمات تخصصی ما</h1>
+            <p>راهکارهای جامع برای موفقیت پروژه‌های معدنی شما</p>
         </div>
     </section>
-
-    <section class="services-detail">
-        <div class="container">
-            <div class="service-detail-card">
-                <div class="service-detail-header">
-                    <img src="https://api.iconify.design/lucide-geo.svg?color=%238B5E3C" alt="" class="service-detail-icon">
-                    <div>
-                        <h2 class="service-detail-title">ارزیابی منابع معدنی</h2>
-                        <p class="service-detail-subtitle">تخمین ذخیره و گزارش‌گری مطابق استانداردهای بین‌المللی</p>
-                    </div>
-                </div>
-                <p class="service-detail-description">ارزیابی دقیق منابع معدنی با استفاده از روش‌های پیشرفته ژئواستاتیک، مدل‌سازی سه‌بعدی و تحلیل عدم‌قطعیت. گزارش‌های ما مطابق با استانداردهای JORC و NI 43-101 تهیه می‌شود و برای ارائه به سرمایه‌گذاران، بانک‌ها و نهادهای نظارتی قابل استفاده است.</p>
-                <div class="service-detail-features">
-                    <div class="service-feature-item">
-                        <img src="https://api.iconify.design/lucide-database.svg?color=%232B6CB0" alt="" class="service-feature-icon">
-                        <div>
-                            <div class="service-feature-title">مدیریت داده‌های اکتشافی</div>
-                            <p class="service-feature-text">سازماندهی، اعتبارسنجی و تحلیل داده‌های حفاری، نمونه‌برداری و آزمایشگاهی</p>
-                        </div>
-                    </div>
-                    <div class="service-feature-item">
-                        <img src="https://api.iconify.design/lucide-box.svg?color=%232B6CB0" alt="" class="service-feature-icon">
-                        <div>
-                            <div class="service-feature-title">مدل‌سازی بلوکی</div>
-                            <p class="service-feature-text">ساخت مدل‌های سه‌بعدی با روش‌های کریجینگ، شبیه‌سازی و تخمین عیار</p>
-                        </div>
-                    </div>
-                    <div class="service-feature-item">
-                        <img src="https://api.iconify.design/lucide-file-text.svg?color=%232B6CB0" alt="" class="service-feature-icon">
-                        <div>
-                            <div class="service-feature-title">گزارش‌گری استاندارد</div>
-                            <p class="service-feature-text">تهیه گزارش‌های تخصصی مطابق JORC، NI 43-101 و SAMREC</p>
-                        </div>
-                    </div>
-                    <div class="service-feature-item">
-                        <img src="https://api.iconify.design/lucide-trending-up.svg?color=%232B6CB0" alt="" class="service-feature-icon">
-                        <div>
-                            <div class="service-feature-title">تحلیل عدم‌قطعیت</div>
-                            <p class="service-feature-text">ارزیابی ریسک و عدم‌قطعیت با روش‌های آماری و شبیه‌سازی مونت‌کارلو</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="service-deliverables">
-                    <h4>خروجی‌های قابل تحویل:</h4>
-                    <ul class="deliverable-list">
-                        <li class="deliverable-item">
-                            <img src="https://api.iconify.design/lucide-check-circle.svg?color=%2316A34A" alt="" style="width:1.25rem;height:1.25rem">
-                            <span>گزارش تخمین منابع و ذخایر</span>
-                        </li>
-                        <li class="deliverable-item">
-                            <img src="https://api.iconify.design/lucide-check-circle.svg?color=%2316A34A" alt="" style="width:1.25rem;height:1.25rem">
-                            <span>مدل بلوکی سه‌بعدی</span>
-                        </li>
-                        <li class="deliverable-item">
-                            <img src="https://api.iconify.design/lucide-check-circle.svg?color=%2316A34A" alt="" style="width:1.25rem;height:1.25rem">
-                            <span>پایگاه داده اکتشافی</span>
-                        </li>
-                        <li class="deliverable-item">
-                            <img src="https://api.iconify.design/lucide-check-circle.svg?color=%2316A34A" alt="" style="width:1.25rem;height:1.25rem">
-                            <span>تحلیل حساسیت و ریسک</span>
-                        </li>
+    
+    <!-- Services Section -->
+    <section class="services-section">
+        <div class="services-grid">
+            <!-- Service 1 -->
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1581094271901-8022df4466f9?w=800&q=80" alt="انتخاب تجهیزات" class="service-image">
+                <div class="service-content">
+                    <span class="service-badge">خدمات فنی</span>
+                    <h3>انتخاب و اندازه‌گذاری تجهیزات</h3>
+                    <p>انتخاب بهینه تجهیزات معدنی و فرآوری با توجه به شرایط خاص پروژه و تحلیل فنی-اقتصادی</p>
+                    <ul class="service-features">
+                        <li>انتخاب سنگ‌شکن‌ها و آسیاب‌ها</li>
+                        <li>تجهیزات فلوتاسیون و جداسازی</li>
+                        <li>سیستم‌های حمل‌ونقل و انتقال</li>
+                        <li>محاسبات ظرفیت و توان</li>
                     </ul>
+                    <a href="equipment-selection.html" class="service-link">اطلاعات بیشتر ←</a>
                 </div>
             </div>
-
-            <div class="service-detail-card">
-                <div class="service-detail-header">
-                    <img src="https://api.iconify.design/lucide-cog.svg?color=%238B5E3C" alt="" class="service-detail-icon">
-                    <div>
-                        <h2 class="service-detail-title">بهینه‌سازی مهندسی و زنجیره ارزش</h2>
-                        <p class="service-detail-subtitle">طراحی معدن، برنامه‌ریزی تولید و بهینه‌سازی عملیات</p>
-                    </div>
-                </div>
-                <p class="service-detail-description">بهینه‌سازی جامع زنجیره ارزش از معدن تا کارخانه با هدف افزایش بهره‌وری، کاهش هزینه‌ها و بهبود کیفیت محصول. ما از نرم‌افزارهای پیشرفته و تکنیک‌های بهینه‌سازی ریاضی برای طراحی و برنامه‌ریزی استفاده می‌کنیم.</p>
-                <div class="service-detail-features">
-                    <div class="service-feature-item">
-                        <img src="https://api.iconify.design/lucide-mountain.svg?color=%232B6CB0" alt="" class="service-feature-icon">
-                        <div>
-                            <div class="service-feature-title">طراحی معدن</div>
-                            <p class="service-feature-text">طراحی بهینه حفره نهایی، تعیین نسبت باطله‌برداری و برنامه‌ریزی مراحل استخراج</p>
-                        </div>
-                    </div>
-                    <div class="service-feature-item">
-                        <img src="https://api.iconify.design/lucide-truck.svg?color=%232B6CB0" alt="" class="service-feature-icon">
-                        <div>
-                            <div class="service-feature-title">بهینه‌سازی ناوگان</div>
-                            <p class="service-feature-text">انتخاب و اندازه‌گیری ناوگان حمل‌ونقل، برنامه‌ریزی مسیر و کاهش هزینه‌های عملیاتی</p>
-                        </div>
-                    </div>
-                    <div class="service-feature-item">
-                        <img src="https://api.iconify.design/lucide-calendar.svg?color=%232B6CB0" alt="" class="service-feature-icon">
-                        <div>
-                            <div class="service-feature-title">برنامه‌ریزی تولید</div>
-                            <p class="service-feature-text">برنامه‌ریزی بلندمدت و کوتاه‌مدت با در نظر گرفتن محدودیت‌های عملیاتی و مالی</p>
-                        </div>
-                    </div>
-                    <div class="service-feature-item">
-                        <img src="https://api.iconify.design/lucide-layers.svg?color=%232B6CB0" alt="" class="service-feature-icon">
-                        <div>
-                            <div class="service-feature-title">مدیریت موجودی</div>
-                            <p class="service-feature-text">بهینه‌سازی استراتژی انبارش، مخلوط‌سازی و تأمین خوراک کارخانه</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="service-deliverables">
-                    <h4>خروجی‌های قابل تحویل:</h4>
-                    <ul class="deliverable-list">
-                        <li class="deliverable-item">
-                            <img src="https://api.iconify.design/lucide-check-circle.svg?color=%2316A34A" alt="" style="width:1.25rem;height:1.25rem">
-                            <span>طرح معدن بهینه</span>
-                        </li>
-                        <li class="deliverable-item">
-                            <img src="https://api.iconify.design/lucide-check-circle.svg?color=%2316A34A" alt="" style="width:1.25rem;height:1.25rem">
-                            <span>برنامه تولید سالانه و ماهانه</span>
-                        </li>
-                        <li class="deliverable-item">
-                            <img src="https://api.iconify.design/lucide-check-circle.svg?color=%2316A34A" alt="" style="width:1.25rem;height:1.25rem">
-                            <span>مدل شبیه‌سازی عملیات</span>
-                        </li>
-                        <li class="deliverable-item">
-                            <img src="https://api.iconify.design/lucide-check-circle.svg?color=%2316A34A" alt="" style="width:1.25rem;height:1.25rem">
-                            <span>گزارش بهینه‌سازی هزینه‌ها</span>
-                        </li>
+            
+            <!-- Service 2 -->
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&q=80" alt="کارخانجات تغلیظ" class="service-image">
+                <div class="service-content">
+                    <span class="service-badge">طراحی و مهندسی</span>
+                    <h3>کارخانجات تغلیظ شیمیایی</h3>
+                    <p>طراحی و بهینه‌سازی کارخانجات تغلیظ مواد معدنی با روش‌های شیمیایی و فیزیکی</p>
+                    <ul class="service-features">
+                        <li>طراحی مدار فلوتاسیون</li>
+                        <li>سیستم‌های لیچینگ</li>
+                        <li>فرآیندهای جداسازی</li>
+                        <li>بهینه‌سازی بازیابی</li>
                     </ul>
+                    <a href="concentration-plants.html" class="service-link">اطلاعات بیشتر ←</a>
                 </div>
             </div>
-
-            <div class="service-detail-card">
-                <div class="service-detail-header">
-                    <img src="https://api.iconify.design/lucide-wallet.svg?color=%238B5E3C" alt="" class="service-detail-icon">
-                    <div>
-                        <h2 class="service-detail-title">ارزیابی اقتصادی پروژه‌های معدنی</h2>
-                        <p class="service-detail-subtitle">مدل‌سازی مالی و تحلیل سرمایه‌گذاری</p>
-                    </div>
-                </div>
-                <p class="service-detail-description">ارزیابی جامع اقتصادی پروژه‌های معدنی با ساخت مدل‌های مالی پیشرفته، تحلیل حساسیت، سناریونویسی و ارزیابی ریسک. مدل‌های ما شامل تمامی جنبه‌های مالی از سرمایه‌گذاری اولیه تا بازگشت سرمایه و ارزش خالص فعلی است.</p>
-                <div class="service-detail-features">
-                    <div class="service-feature-item">
-                        <img src="https://api.iconify.design/lucide-calculator.svg?color=%232B6CB0" alt="" class="service-feature-icon">
-                        <div>
-                            <div class="service-feature-title">مدل‌سازی مالی</div>
-                            <p class="service-feature-text">ساخت مدل‌های مالی جامع با محاسبه NPV، IRR، دوره بازگشت سرمایه</p>
-                        </div>
-                    </div>
-                    <div class="service-feature-item">
-                        <img src="https://api.iconify.design/lucide-line-chart.svg?color=%232B6CB0" alt="" class="service-feature-icon">
-                        <div>
-                            <div class="service-feature-title">تحلیل حساسیت</div>
-                            <p class="service-feature-text">بررسی تأثیر تغییرات پارامترهای کلیدی بر سودآوری پروژه</p>
-                        </div>
-                    </div>
-                    <div class="service-feature-item">
-                        <img src="https://api.iconify.design/lucide-trending-up.svg?color=%232B6CB0" alt="" class="service-feature-icon">
-                        <div>
-                            <div class="service-feature-title">پیش‌بینی قیمت</div>
-                            <p class="service-feature-text">تحلیل روندهای بازار و پیش‌بینی قیمت کالاها در بلندمدت</p>
-                        </div>
-                    </div>
-                    <div class="service-feature-item">
-                        <img src="https://api.iconify.design/lucide-shield.svg?color=%232B6CB0" alt="" class="service-feature-icon">
-                        <div>
-                            <div class="service-feature-title">مدیریت ریسک مالی</div>
-                            <p class="service-feature-text">شناسایی، ارزیابی و کاهش ریسک‌های مالی پروژه</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="service-deliverables">
-                    <h4>خروجی‌های قابل تحویل:</h4>
-                    <ul class="deliverable-list">
-                        <li class="deliverable-item">
-                            <img src="https://api.iconify.design/lucide-check-circle.svg?color=%2316A34A" alt="" style="width:1.25rem;height:1.25rem">
-                            <span>مدل مالی جامع (Excel)</span>
-                        </li>
-                        <li class="deliverable-item">
-                            <img src="https://api.iconify.design/lucide-check-circle.svg?color=%2316A34A" alt="" style="width:1.25rem;height:1.25rem">
-                            <span>گزارش امکان‌سنجی اقتصادی</span>
-                        </li>
-                        <li class="deliverable-item">
-                            <img src="https://api.iconify.design/lucide-check-circle.svg?color=%2316A34A" alt="" style="width:1.25rem;height:1.25rem">
-                            <span>تحلیل سناریوهای مختلف</span>
-                        </li>
-                        <li class="deliverable-item">
-                            <img src="https://api.iconify.design/lucide-check-circle.svg?color=%2316A34A" alt="" style="width:1.25rem;height:1.25rem">
-                            <span>ارزیابی ریسک و عدم‌قطعیت</span>
-                        </li>
+            
+            <!-- Service 3 -->
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800&q=80" alt="سیستم‌های لیچینگ" class="service-image">
+                <div class="service-content">
+                    <span class="service-badge">فرآیندهای شیمیایی</span>
+                    <h3>سیستم‌های لیچینگ و تصفیه</h3>
+                    <p>طراحی و اجرای سیستم‌های لیچینگ و تصفیه محلول‌های معدنی</p>
+                    <ul class="service-features">
+                        <li>لیچینگ هیپ و تانک</li>
+                        <li>استخراج با حلال</li>
+                        <li>الکتروویننگ</li>
+                        <li>تصفیه پساب</li>
                     </ul>
+                    <a href="leaching-systems.html" class="service-link">اطلاعات بیشتر ←</a>
+                </div>
+            </div>
+            
+            <!-- Service 4 -->
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1581092918484-8313e1f7e8c7?w=800&q=80" alt="تولید اسید" class="service-image">
+                <div class="service-content">
+                    <span class="service-badge">صنایع شیمیایی</span>
+                    <h3>تولید اسید سولفوریک و فسفریک</h3>
+                    <p>طراحی واحدهای تولید اسید برای صنایع معدنی و شیمیایی</p>
+                    <ul class="service-features">
+                        <li>واحد تولید اسید سولفوریک</li>
+                        <li>واحد تولید اسید فسفریک</li>
+                        <li>سیستم‌های کنترل آلودگی</li>
+                        <li>بازیافت گرما</li>
+                    </ul>
+                    <a href="acid-production.html" class="service-link">اطلاعات بیشتر ←</a>
+                </div>
+            </div>
+            
+            <!-- Service 5 -->
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80" alt="بهینه‌سازی" class="service-image">
+                <div class="service-content">
+                    <span class="service-badge">بهبود عملکرد</span>
+                    <h3>بهینه‌سازی تکنولوژی و ظرفیت</h3>
+                    <p>افزایش ظرفیت و بهبود عملکرد واحدهای تولیدی موجود</p>
+                    <ul class="service-features">
+                        <li>تحلیل گلوگاه‌ها</li>
+                        <li>افزایش بازیابی</li>
+                        <li>کاهش هزینه‌های عملیاتی</li>
+                        <li>ارتقای تکنولوژی</li>
+                    </ul>
+                    <a href="technology-optimization.html" class="service-link">اطلاعات بیشتر ←</a>
+                </div>
+            </div>
+            
+            <!-- Service 6 -->
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&q=80" alt="تامین‌کنندگان" class="service-image">
+                <div class="service-content">
+                    <span class="service-badge">شبکه تامین</span>
+                    <h3>معرفی تامین‌کنندگان</h3>
+                    <p>ارتباط با تامین‌کنندگان معتبر تجهیزات و خدمات معدنی</p>
+                    <ul class="service-features">
+                        <li>سازندگان تجهیزات</li>
+                        <li>پیمانکاران EPC</li>
+                        <li>تامین‌کنندگان مواد شیمیایی</li>
+                        <li>ارزیابی و انتخاب</li>
+                    </ul>
+                    <a href="vendor-partnerships.html" class="service-link">اطلاعات بیشتر ←</a>
+                </div>
+            </div>
+            
+            <!-- Service 7 -->
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80" alt="تحلیل اقتصادی" class="service-image">
+                <div class="service-content">
+                    <span class="service-badge">تحلیل مالی</span>
+                    <h3>تحلیل اقتصادی و سناریوپردازی</h3>
+                    <p>تحلیل اقتصادی جامع و سناریوپردازی برای تصمیم‌گیری بهینه</p>
+                    <ul class="service-features">
+                        <li>محاسبه NPV و IRR</li>
+                        <li>تحلیل حساسیت</li>
+                        <li>برآورد CAPEX و OPEX</li>
+                        <li>مدل‌سازی مالی</li>
+                    </ul>
+                    <a href="economic-analysis.html" class="service-link">اطلاعات بیشتر ←</a>
+                </div>
+            </div>
+            
+            <!-- Service 8 -->
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80" alt="تحلیل ریسک" class="service-image">
+                <div class="service-content">
+                    <span class="service-badge">مدیریت ریسک</span>
+                    <h3>تحلیل ریسک</h3>
+                    <p>شناسایی و ارزیابی ریسک‌های فنی، اقتصادی و عملیاتی</p>
+                    <ul class="service-features">
+                        <li>شناسایی ریسک‌ها</li>
+                        <li>ارزیابی کمی و کیفی</li>
+                        <li>برنامه کاهش ریسک</li>
+                        <li>شبیه‌سازی مونت کارلو</li>
+                    </ul>
+                    <a href="risk-analysis.html" class="service-link">اطلاعات بیشتر ←</a>
                 </div>
             </div>
         </div>
     </section>
-
-    <section class="cta">
-        <div class="container">
-            <div class="cta-container">
-                <div>
-                    <h3>نیاز به مشاوره تخصصی دارید؟</h3>
-                    <p>با کارشناسان ما تماس بگیرید و راهکار مناسب پروژه خود را دریافت کنید</p>
-                </div>
-                <div>
-                    <a href="./index.html#contact" class="btn btn-white">
-                        <img src="https://api.iconify.design/lucide-phone.svg?color=%232B6CB0" alt="" style="width:1.25rem;height:1.25rem">
-                        درخواست مشاوره رایگان
-                    </a>
-                </div>
+    
+    <!-- Process Section -->
+    <section class="process-section">
+        <div class="section-header">
+            <h2>فرآیند کاری ما</h2>
+            <p>مراحل ارائه خدمات از ابتدا تا انتها</p>
+        </div>
+        
+        <div class="process-grid">
+            <div class="process-step">
+                <div class="step-number">1</div>
+                <h3>مشاوره اولیه</h3>
+                <p>بررسی نیازها و اهداف پروژه</p>
+            </div>
+            
+            <div class="process-step">
+                <div class="step-number">2</div>
+                <h3>تحلیل و طراحی</h3>
+                <p>تحلیل فنی و طراحی راهکار</p>
+            </div>
+            
+            <div class="process-step">
+                <div class="step-number">3</div>
+                <h3>ارائه پیشنهاد</h3>
+                <p>تهیه و ارائه گزارش جامع</p>
+            </div>
+            
+            <div class="process-step">
+                <div class="step-number">4</div>
+                <h3>اجرا و نظارت</h3>
+                <p>پیاده‌سازی و پشتیبانی</p>
             </div>
         </div>
     </section>
-
+    
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>آماده شروع پروژه خود هستید؟</h2>
+            <p>برای مشاوره رایگان و دریافت پیشنهاد با ما تماس بگیرید</p>
+            <a href="contact.html" class="btn-cta">درخواست مشاوره رایگان</a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <div class="footer-brand-header">
-                        <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="لوگو" class="footer-logo">
-                        <div class="footer-brand-name">کاویان توسعه معدن</div>
-                    </div>
-                    <p class="footer-description">مهندسی هوشمند در معدن و زنجیره ارزش فلزات با تکیه بر دانش روز، فناوری‌های نوین و مدیریت ریسک</p>
-                    <div class="footer-social">
-                        <a href="#" class="social-link" aria-label="LinkedIn">
-                            <img src="https://api.iconify.design/lucide-linkedin.svg?color=white" alt="" style="width:1.25rem;height:1.25rem">
-                        </a>
-                        <a href="#" class="social-link" aria-label="Twitter">
-                            <img src="https://api.iconify.design/lucide-twitter.svg?color=white" alt="" style="width:1.25rem;height:1.25rem">
-                        </a>
-                        <a href="#" class="social-link" aria-label="Instagram">
-                            <img src="https://api.iconify.design/lucide-instagram.svg?color=white" alt="" style="width:1.25rem;height:1.25rem">
-                        </a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h4>دسترسی سریع</h4>
-                    <ul class="footer-links">
-                        <li><a href="./index.html" class="footer-link">خانه</a></li>
-                        <li><a href="./services.html" class="footer-link">خدمات</a></li>
-                        <li><a href="./news.html" class="footer-link">اخبار و روندها</a></li>
-                        <li><a href="./equipment.html" class="footer-link">تجهیزات</a></li>
-                        <li><a href="./index.html#contact" class="footer-link">تماس با ما</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>خدمات</h4>
-                    <ul class="footer-services">
-                        <li class="footer-service">
-                            <img src="https://api.iconify.design/lucide-chevron-left.svg?color=white" alt="" style="width:1rem;height:1rem">
-                            <span>ارزیابی منابع</span>
-                        </li>
-                        <li class="footer-service">
-                            <img src="https://api.iconify.design/lucide-chevron-left.svg?color=white" alt="" style="width:1rem;height:1rem">
-                            <span>بهینه‌سازی مهندسی</span>
-                        </li>
-                        <li class="footer-service">
-                            <img src="https://api.iconify.design/lucide-chevron-left.svg?color=white" alt="" style="width:1rem;height:1rem">
-                            <span>ارزیابی اقتصادی</span>
-                        </li>
-                        <li class="footer-service">
-                            <img src="https://api.iconify.design/lucide-chevron-left.svg?color=white" alt="" style="width:1rem;height:1rem">
-                            <span>مدیریت ریسک</span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="footer-newsletter">
-                    <h4>خبرنامه</h4>
-                    <p>از آخرین اخبار و روندهای صنعت معدن مطلع شوید</p>
-                    <form class="newsletter-form">
-                        <input type="email" class="newsletter-input" placeholder="ایمیل شما" required>
-                        <button type="submit" class="newsletter-btn">عضویت</button>
-                    </form>
-                </div>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>کاویان توسعه معدن</h3>
+                <p>مشاور تخصصی در زمینه مهندسی تجهیزات معدنی و اقتصاد معدن</p>
             </div>
-            <div class="footer-bottom">
-                <div>© ۲۰۲۵ کاویان توسعه معدن. تمامی حقوق محفوظ است.</div>
-                <div class="footer-legal">
-                    <a href="#">حریم خصوصی</a>
-                    <a href="#">شرایط استفاده</a>
-                </div>
+            
+            <div class="footer-section">
+                <h3>دسترسی سریع</h3>
+                <a href="index.html">خانه</a>
+                <a href="about.html">درباره ما</a>
+                <a href="services.html">خدمات</a>
+                <a href="portfolio.html">نمونه کارها</a>
             </div>
+            
+            <div class="footer-section">
+                <h3>خدمات</h3>
+                <a href="equipment-selection.html">انتخاب تجهیزات</a>
+                <a href="economic-analysis.html">تحلیل اقتصادی</a>
+                <a href="risk-analysis.html">تحلیل ریسک</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>تماس با ما</h3>
+                <p>📧 info@kdmine.com</p>
+                <p>📞 +98 21 1234 5678</p>
+                <p>📍 تهران، ایران</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2025 کاویان توسعه معدن. تمامی حقوق محفوظ است.</p>
         </div>
     </footer>
 </body>
