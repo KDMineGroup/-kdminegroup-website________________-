@@ -4,9 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>وبلاگ | کاویان توسعه معدن</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <meta name="description" content="مقالات و اخبار تخصصی صنعت معدن و فرآوری مواد معدنی">
+    <link rel="icon" type="image/svg+xml" href="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg">
+    
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function(){
+            emailjs.init({
+                publicKey: "YOUR_PUBLIC_KEY",
+            });
+        })();
+    </script>
+    
     <style>
+        @font-face {
+            font-family: 'B Nazanin';
+            src: local('B Nazanin'), local('BNazanin');
+            font-display: swap;
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -14,814 +31,819 @@
         }
         
         body {
-            font-family: 'Vazirmatn', Tahoma, Arial, sans-serif;
-            direction: rtl;
-            background: #f5f7fa;
-            color: #2c3e50;
+            font-family: 'B Nazanin', Tahoma, sans-serif;
             line-height: 1.8;
+            color: #1a202c;
+            background: #f8fafc;
         }
         
-        /* Header */
-        header {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
+        /* Navigation */
+        .navbar {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
             padding: 20px 0;
-            box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
         }
         
-        .header-container {
-            max-width: 1400px;
+        .nav-container {
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 30px;
+            padding: 0 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         
         .logo {
-            font-size: 28px;
-            font-weight: bold;
             display: flex;
             align-items: center;
-            gap: 12px;
-            text-decoration: none;
+            gap: 15px;
             color: white;
+            text-decoration: none;
         }
         
-        nav ul {
-            list-style: none;
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            background: white;
+            padding: 5px;
+        }
+        
+        .logo-text h2 {
+            font-size: 1.4rem;
+            margin-bottom: 2px;
+        }
+        
+        .logo-text p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+        
+        .nav-links {
             display: flex;
-            gap: 25px;
+            gap: 30px;
+            list-style: none;
         }
         
-        nav a {
+        .nav-links a {
             color: white;
             text-decoration: none;
-            font-size: 16px;
-            transition: all 0.3s;
-            padding: 8px 15px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        
+        .nav-cta {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn-nav {
+            padding: 10px 25px;
             border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            font-size: 0.95rem;
         }
         
-        nav a:hover {
-            background: rgba(255,255,255,0.15);
+        .btn-primary {
+            background: white;
+            color: #2563eb;
         }
         
-        /* Hero */
-        .blog-hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255,255,255,0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
             color: white;
-            padding: 100px 30px;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: #2563eb;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.95), rgba(37, 99, 235, 0.95)),
+                        url('https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1920&q=80') center/cover;
+            color: white;
+            padding: 120px 40px 100px;
             text-align: center;
             position: relative;
-            overflow: hidden;
         }
         
-        .blog-hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-        }
-        
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        .blog-hero-content {
-            position: relative;
-            z-index: 1;
-        }
-        
-        .blog-hero h1 {
-            font-size: 52px;
-            margin-bottom: 20px;
-        }
-        
-        .blog-hero p {
-            font-size: 20px;
-            opacity: 0.95;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        
-        /* Container */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 60px 30px;
-        }
-        
-        /* Search & Filter */
-        .blog-controls {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            margin-bottom: 50px;
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-        
-        .search-box {
-            flex: 1;
-            min-width: 300px;
-            position: relative;
-        }
-        
-        .search-box input {
-            width: 100%;
-            padding: 15px 50px 15px 20px;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            font-family: 'Vazirmatn', Tahoma;
-            font-size: 15px;
-            transition: all 0.3s;
-        }
-        
-        .search-box input:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 4px rgba(102,126,234,0.1);
-        }
-        
-        .search-icon {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #999;
-            font-size: 18px;
-        }
-        
-        .filter-buttons {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        
-        .filter-btn {
-            padding: 12px 25px;
-            background: #f5f7fa;
-            border: 2px solid transparent;
-            border-radius: 25px;
-            cursor: pointer;
-            font-family: 'Vazirmatn', Tahoma;
-            font-size: 14px;
-            font-weight: 600;
-            transition: all 0.3s;
-            color: #666;
-        }
-        
-        .filter-btn:hover,
-        .filter-btn.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-color: transparent;
-        }
-        
-        /* Blog Grid */
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-            gap: 35px;
-        }
-        
-        .blog-card {
-            background: white;
-            border-radius: 25px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            transition: all 0.4s;
-            cursor: pointer;
-        }
-        
-        .blog-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-        }
-        
-        .blog-image {
-            width: 100%;
-            height: 250px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 80px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .blog-image::after {
+        .hero::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.5) 100%);
-        }
-        
-        .blog-category {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            padding: 8px 20px;
-            background: rgba(255,255,255,0.95);
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
-            color: #667eea;
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.85), rgba(37, 99, 235, 0.75));
             z-index: 1;
         }
         
-        .blog-content {
-            padding: 30px;
+        .hero-content {
+            position: relative;
+            z-index: 2;
         }
         
-        .blog-meta {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 15px;
-            font-size: 13px;
-            color: #999;
-        }
-        
-        .blog-meta span {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        
-        .blog-title {
-            font-size: 22px;
-            color: #1e3c72;
-            margin-bottom: 15px;
-            font-weight: 700;
-            line-height: 1.4;
-        }
-        
-        .blog-excerpt {
-            font-size: 15px;
-            color: #666;
-            line-height: 1.7;
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
             margin-bottom: 20px;
+            font-weight: bold;
         }
         
-        .blog-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 20px;
-            border-top: 1px solid #f0f0f0;
+        .hero p {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
         }
         
-        .blog-author {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .author-avatar {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 18px;
-        }
-        
-        .author-info h4 {
-            font-size: 14px;
-            color: #1e3c72;
-            margin-bottom: 2px;
-        }
-        
-        .author-info p {
-            font-size: 12px;
-            color: #999;
-        }
-        
-        .read-more {
-            color: #667eea;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s;
-        }
-        
-        .blog-card:hover .read-more {
-            gap: 15px;
+        /* Blog Container */
+        .blog-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 40px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 50px;
         }
         
         /* Featured Post */
         .featured-post {
             background: white;
-            border-radius: 25px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             margin-bottom: 50px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
         }
         
         .featured-image {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 120px;
-            position: relative;
-        }
-        
-        .featured-badge {
-            position: absolute;
-            top: 30px;
-            right: 30px;
-            padding: 12px 30px;
-            background: rgba(255,255,255,0.95);
-            border-radius: 25px;
-            font-size: 14px;
-            font-weight: 700;
-            color: #667eea;
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
         }
         
         .featured-content {
-            padding: 50px 50px 50px 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            padding: 40px;
         }
         
-        .featured-category {
+        .featured-badge {
             display: inline-block;
             padding: 8px 20px;
-            background: rgba(102,126,234,0.1);
-            color: #667eea;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 700;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: bold;
             margin-bottom: 20px;
         }
         
         .featured-content h2 {
-            font-size: 36px;
-            color: #1e3c72;
-            margin-bottom: 20px;
+            font-size: 2.2rem;
+            color: #1a202c;
+            margin-bottom: 15px;
             line-height: 1.3;
         }
         
+        .post-meta {
+            display: flex;
+            gap: 25px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            color: #4a5568;
+        }
+        
         .featured-content p {
-            font-size: 17px;
-            color: #666;
-            line-height: 1.8;
-            margin-bottom: 30px;
+            color: #4a5568;
+            font-size: 1.1rem;
+            line-height: 1.9;
+            margin-bottom: 25px;
         }
         
-        .featured-meta {
-            display: flex;
-            gap: 30px;
-            margin-bottom: 30px;
-            font-size: 14px;
-            color: #999;
+        .read-more {
+            display: inline-block;
+            padding: 14px 35px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: all 0.3s;
         }
         
-        .featured-meta span {
+        .read-more:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+        }
+        
+        /* Blog Posts */
+        .blog-posts {
             display: flex;
+            flex-direction: column;
+            gap: 35px;
+        }
+        
+        .blog-post {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 25px;
+        }
+        
+        .blog-post:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .post-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .post-content {
+            padding: 25px 25px 25px 0;
+        }
+        
+        .post-category {
+            display: inline-block;
+            padding: 5px 12px;
+            background: #dbeafe;
+            color: #1e40af;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        
+        .post-content h3 {
+            font-size: 1.4rem;
+            color: #1a202c;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .post-content p {
+            color: #4a5568;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 35px;
+        }
+        
+        .sidebar-widget {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar-widget h3 {
+            font-size: 1.4rem;
+            color: #1a202c;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #2563eb;
+        }
+        
+        /* Categories */
+        .categories-list {
+            list-style: none;
+        }
+        
+        .categories-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .categories-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .categories-list a {
+            color: #4a5568;
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 8px;
+            transition: color 0.3s;
         }
         
-        .read-article-btn {
-            padding: 16px 35px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .categories-list a:hover {
+            color: #2563eb;
+        }
+        
+        .category-count {
+            background: #f1f5f9;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+        
+        /* Recent Posts */
+        .recent-posts-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .recent-post-item {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .recent-post-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        
+        .recent-post-info h4 {
+            font-size: 1rem;
+            color: #1a202c;
+            margin-bottom: 5px;
+            line-height: 1.4;
+        }
+        
+        .recent-post-info a {
+            color: #1a202c;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .recent-post-info a:hover {
+            color: #2563eb;
+        }
+        
+        .recent-post-date {
+            font-size: 0.85rem;
+            color: #4a5568;
+        }
+        
+        /* Newsletter */
+        .newsletter-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .newsletter-form input {
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .newsletter-form input:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        .newsletter-btn {
+            padding: 12px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
             color: white;
             border: none;
-            border-radius: 12px;
-            font-family: 'Vazirmatn', Tahoma;
-            font-size: 16px;
-            font-weight: 700;
+            border-radius: 8px;
+            font-family: inherit;
+            font-weight: bold;
+            font-size: 1rem;
             cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
             transition: all 0.3s;
-            align-self: flex-start;
         }
         
-        .read-article-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(102,126,234,0.4);
+        .newsletter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
         }
         
-        /* Pagination */
-        .pagination {
+        .newsletter-message {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+        }
+        
+        .newsletter-message.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 2px solid #059669;
+        }
+        
+        .newsletter-message.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 2px solid #dc2626;
+        }
+        
+        /* Tags */
+        .tags-list {
             display: flex;
-            justify-content: center;
+            flex-wrap: wrap;
             gap: 10px;
-            margin-top: 60px;
         }
         
-        .page-btn {
-            width: 45px;
-            height: 45px;
-            background: white;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            cursor: pointer;
-            font-family: 'Vazirmatn', Tahoma;
-            font-size: 15px;
-            font-weight: 600;
+        .tag {
+            padding: 8px 18px;
+            background: #f1f5f9;
+            color: #4a5568;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9rem;
             transition: all 0.3s;
-            color: #666;
         }
         
-        .page-btn:hover,
-        .page-btn.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .tag:hover {
+            background: #2563eb;
             color: white;
-            border-color: transparent;
         }
         
         /* Footer */
-        footer {
-            background: #1e3c72;
+        .footer {
+            background: #1a202c;
             color: white;
-            padding: 40px 30px;
+            padding: 60px 40px 30px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+        
+        .footer-section p,
+        .footer-section a {
+            color: #cbd5e0;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 30px;
+            border-top: 1px solid #2d3748;
             text-align: center;
-            margin-top: 60px;
+            color: #cbd5e0;
+            font-size: 0.9rem;
         }
         
-        footer p {
-            opacity: 0.9;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .blog-hero h1 {
-                font-size: 36px;
-            }
-            
-            .blog-grid {
+        @media (max-width: 968px) {
+            .blog-container {
                 grid-template-columns: 1fr;
             }
             
-            .featured-post {
+            .blog-post {
                 grid-template-columns: 1fr;
             }
             
-            .featured-content {
-                padding: 40px 30px;
-            }
-            
-            .blog-controls {
-                flex-direction: column;
-            }
-            
-            .search-box {
+            .post-image {
                 width: 100%;
+                height: 250px;
             }
             
-            nav ul {
-                flex-direction: column;
-                gap: 10px;
+            .post-content {
+                padding: 25px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links, .nav-cta {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero {
+                padding: 100px 25px 80px;
+            }
+            
+            .blog-container {
+                padding: 60px 25px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="header-container">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
             <a href="index.html" class="logo">
-                <span>⛏️</span>
-                <span>کاویان توسعه معدن</span>
+                <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Logo">
+                <div class="logo-text">
+                    <h2>کاویان توسعه معدن</h2>
+                    <p>Kavian Development Mine</p>
+                </div>
             </a>
-            <nav>
-                <ul>
-                    <li><a href="index.html">خانه</a></li>
-                    <li><a href="index.html#services">خدمات</a></li>
-                    <li><a href="index.html#projects">پروژه‌ها</a></li>
-                    <li><a href="blog.html">بلاگ</a></li>
-                    <li><a href="auth.html">ورود/ثبت‌نام</a></li>
-                </ul>
-            </nav>
+            
+            <ul class="nav-links">
+                <li><a href="index.html">خانه</a></li>
+                <li><a href="about.html">درباره ما</a></li>
+                <li><a href="services.html">خدمات</a></li>
+                <li><a href="portfolio.html">نمونه کارها</a></li>
+                <li><a href="blog.html">وبلاگ</a></li>
+            </ul>
+            
+            <div class="nav-cta">
+                <a href="register.html" class="btn-nav btn-primary">ثبت‌نام</a>
+                <a href="contact.html" class="btn-nav btn-secondary">تماس با ما</a>
+            </div>
+            
+            <button class="mobile-menu-btn">☰</button>
         </div>
-    </header>
+    </nav>
     
-    <!-- Hero -->
-    <section class="blog-hero">
-        <div class="blog-hero-content">
-            <h1>📰 وبلاگ کاویان</h1>
-            <p>آخرین اخبار، مقالات تخصصی و تحلیل‌های صنعت معدن</p>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>وبلاگ و مقالات</h1>
+            <p>آخرین اخبار، مقالات و تحلیل‌های تخصصی صنعت معدن</p>
         </div>
     </section>
     
-    <!-- Main Content -->
-    <div class="container">
-        <!-- Search & Filter -->
-        <div class="blog-controls">
-            <div class="search-box">
-                <input type="text" placeholder="جستجو در مقالات..." onkeyup="searchBlogs(this.value)">
-                <i class="fas fa-search search-icon"></i>
+    <!-- Blog Container -->
+    <div class="blog-container">
+        <!-- Main Content -->
+        <main>
+            <!-- Featured Post -->
+            <article class="featured-post">
+                <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=1200&q=80" alt="آینده صنعت معدن" class="featured-image">
+                <div class="featured-content">
+                    <span class="featured-badge">⭐ مقاله ویژه</span>
+                    <h2>آینده صنعت معدن: فناوری‌های نوین و چالش‌های پیش رو</h2>
+                    <div class="post-meta">
+                        <span>👤 دکتر احمد رضایی</span>
+                        <span>📅 25 دی 1403</span>
+                        <span>⏱ 15 دقیقه مطالعه</span>
+                    </div>
+                    <p>
+                        صنعت معدن در دهه آینده با تحولات عظیمی روبرو خواهد شد. از هوش مصنوعی و اتوماسیون تا معدنکاری پایدار و کاهش اثرات زیست‌محیطی، فناوری‌های نوین در حال تغییر چهره این صنعت هستند. در این مقاله به بررسی جامع این تحولات و چالش‌های پیش روی صنعت معدن می‌پردازیم.
+                    </p>
+                    <a href="#" class="read-more">ادامه مطلب ←</a>
+                </div>
+            </article>
+            
+            <!-- Blog Posts -->
+            <div class="blog-posts">
+                <!-- Post 1 -->
+                <article class="blog-post">
+                    <img src="https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?w=400&q=80" alt="بهینه‌سازی مصرف انرژی" class="post-image">
+                    <div class="post-content">
+                        <span class="post-category">بهینه‌سازی</span>
+                        <h3>بهینه‌سازی مصرف انرژی در کارخانجات فرآوری</h3>
+                        <div class="post-meta">
+                            <span>📅 20 دی 1403</span>
+                            <span>⏱ 8 دقیقه</span>
+                        </div>
+                        <p>روش‌های کاهش مصرف انرژی و افزایش بهره‌وری در کارخانجات فرآوری مواد معدنی</p>
+                        <a href="#" class="read-more">ادامه مطلب ←</a>
+                    </div>
+                </article>
+                
+                <!-- Post 2 -->
+                <article class="blog-post">
+                    <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=400&q=80" alt="تحلیل اقتصادی پروژه‌های معدنی" class="post-image">
+                    <div class="post-content">
+                        <span class="post-category">اقتصاد معدن</span>
+                        <h3>روش‌های تحلیل اقتصادی پروژه‌های معدنی</h3>
+                        <div class="post-meta">
+                            <span>📅 15 دی 1403</span>
+                            <span>⏱ 12 دقیقه</span>
+                        </div>
+                        <p>آشنایی با شاخص‌های اقتصادی NPV، IRR و روش‌های ارزیابی پروژه‌های معدنی</p>
+                        <a href="#" class="read-more">ادامه مطلب ←</a>
+                    </div>
+                </article>
+                
+                <!-- Post 3 -->
+                <article class="blog-post">
+                    <img src="https://images.unsplash.com/photo-1581094271901-8022df4466f9?w=400&q=80" alt="انتخاب تجهیزات" class="post-image">
+                    <div class="post-content">
+                        <span class="post-category">تجهیزات</span>
+                        <h3>معیارهای انتخاب سنگ‌شکن‌ها در پروژه‌های معدنی</h3>
+                        <div class="post-meta">
+                            <span>📅 10 دی 1403</span>
+                            <span>⏱ 10 دقیقه</span>
+                        </div>
+                        <p>راهنمای جامع انتخاب سنگ‌شکن مناسب بر اساس نوع سنگ، ظرفیت و شرایط پروژه</p>
+                        <a href="#" class="read-more">ادامه مطلب ←</a>
+                    </div>
+                </article>
+                
+                <!-- Post 4 -->
+                <article class="blog-post">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&q=80" alt="مدیریت ریسک" class="post-image">
+                    <div class="post-content">
+                        <span class="post-category">مدیریت ریسک</span>
+                        <h3>مدیریت ریسک در پروژه‌های معدنی بزرگ</h3>
+                        <div class="post-meta">
+                            <span>📅 5 دی 1403</span>
+                            <span>⏱ 15 دقیقه</span>
+                        </div>
+                        <p>شناسایی، ارزیابی و مدیریت ریسک‌های فنی، مالی و عملیاتی در پروژه‌های معدنی</p>
+                        <a href="#" class="read-more">ادامه مطلب ←</a>
+                    </div>
+                </article>
             </div>
-            <div class="filter-buttons">
-                <button class="filter-btn active" onclick="filterBlogs('all')">همه</button>
-                <button class="filter-btn" onclick="filterBlogs('news')">اخبار</button>
-                <button class="filter-btn" onclick="filterBlogs('technical')">مقالات فنی</button>
-                <button class="filter-btn" onclick="filterBlogs('analysis')">تحلیل بازار</button>
-                <button class="filter-btn" onclick="filterBlogs('guide')">راهنما</button>
-            </div>
-        </div>
+        </main>
         
-        <!-- Featured Post -->
-        <div class="featured-post">
-            <div class="featured-image">
-                🏆
-                <div class="featured-badge">⭐ ویژه</div>
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <!-- Categories Widget -->
+            <div class="sidebar-widget">
+                <h3>دسته‌بندی‌ها</h3>
+                <ul class="categories-list">
+                    <li><a href="#">تجهیزات معدنی <span class="category-count">24</span></a></li>
+                    <li><a href="#">اقتصاد معدن <span class="category-count">18</span></a></li>
+                    <li><a href="#">بهینه‌سازی <span class="category-count">15</span></a></li>
+                    <li><a href="#">فناوری‌های نوین <span class="category-count">12</span></a></li>
+                    <li><a href="#">مدیریت پروژه <span class="category-count">10</span></a></li>
+                    <li><a href="#">محیط زیست <span class="category-count">8</span></a></li>
+                </ul>
             </div>
-            <div class="featured-content">
-                <span class="featured-category">مقاله فنی</span>
-                <h2>آینده صنعت معدن ایران: فرصت‌ها و چالش‌ها</h2>
-                <p>
-                    بررسی جامع وضعیت فعلی صنعت معدن ایران، پتانسیل‌های موجود، 
-                    چالش‌های پیش رو و راهکارهای پیشنهادی برای توسعه پایدار این صنعت استراتژیک
-                </p>
-                <div class="featured-meta">
-                    <span><i class="fas fa-user"></i> دکتر احمد محمدی</span>
-                    <span><i class="fas fa-calendar"></i> ۱۵ آذر ۱۴۰۳</span>
-                    <span><i class="fas fa-clock"></i> ۱۲ دقیقه مطالعه</span>
-                </div>
-                <button class="read-article-btn">
-                    <span>مطالعه مقاله</span>
-                    <i class="fas fa-arrow-left"></i>
-                </button>
-            </div>
-        </div>
-        
-        <!-- Blog Grid -->
-        <div class="blog-grid">
-            <!-- Blog Post 1 -->
-            <div class="blog-card" data-category="news">
-                <div class="blog-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                    📊
-                    <div class="blog-category">اخبار</div>
-                </div>
-                <div class="blog-content">
-                    <div class="blog-meta">
-                        <span><i class="fas fa-calendar"></i> ۱۲ آذر ۱۴۰۳</span>
-                        <span><i class="fas fa-clock"></i> ۵ دقیقه</span>
-                    </div>
-                    <h3 class="blog-title">افزایش ۲۵ درصدی تولید مس در سال جاری</h3>
-                    <p class="blog-excerpt">
-                        بر اساس آمار منتشر شده، تولید مس کشور در سال جاری نسبت به سال گذشته 
-                        رشد قابل توجهی داشته است...
-                    </p>
-                    <div class="blog-footer">
-                        <div class="blog-author">
-                            <div class="author-avatar">👤</div>
-                            <div class="author-info">
-                                <h4>علی رضایی</h4>
-                                <p>تحلیلگر بازار</p>
-                            </div>
+            
+            <!-- Recent Posts Widget -->
+            <div class="sidebar-widget">
+                <h3>مقالات اخیر</h3>
+                <div class="recent-posts-list">
+                    <div class="recent-post-item">
+                        <img src="https://images.unsplash.com/photo-1581092918484-8313e1f7e8c7?w=200&q=80" alt="Post" class="recent-post-image">
+                        <div class="recent-post-info">
+                            <h4><a href="#">تکنولوژی‌های جدید در فلوتاسیون</a></h4>
+                            <span class="recent-post-date">22 دی 1403</span>
                         </div>
-                        <a href="#" class="read-more">
-                            <span>ادامه مطلب</span>
-                            <i class="fas fa-arrow-left"></i>
-                        </a>
+                    </div>
+                    
+                    <div class="recent-post-item">
+                        <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=200&q=80" alt="Post" class="recent-post-image">
+                        <div class="recent-post-info">
+                            <h4><a href="#">کاهش هزینه‌های عملیاتی معادن</a></h4>
+                            <span class="recent-post-date">18 دی 1403</span>
+                        </div>
+                    </div>
+                    
+                    <div class="recent-post-item">
+                        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=200&q=80" alt="Post" class="recent-post-image">
+                        <div class="recent-post-info">
+                            <h4><a href="#">استانداردهای AACE در برآورد هزینه</a></h4>
+                            <span class="recent-post-date">12 دی 1403</span>
+                        </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Blog Post 2 -->
-            <div class="blog-card" data-category="technical">
-                <div class="blog-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-                    ⚙️
-                    <div class="blog-category">مقاله فنی</div>
-                </div>
-                <div class="blog-content">
-                    <div class="blog-meta">
-                        <span><i class="fas fa-calendar"></i> ۱۰ آذر ۱۴۰۳</span>
-                        <span><i class="fas fa-clock"></i> ۸ دقیقه</span>
-                    </div>
-                    <h3 class="blog-title">تکنولوژی‌های نوین در فرآوری مواد معدنی</h3>
-                    <p class="blog-excerpt">
-                        معرفی جدیدترین روش‌ها و تکنولوژی‌های مورد استفاده در صنعت فرآوری 
-                        و تاثیر آنها بر افزایش بازیابی...
-                    </p>
-                    <div class="blog-footer">
-                        <div class="blog-author">
-                            <div class="author-avatar">👤</div>
-                            <div class="author-info">
-                                <h4>دکتر سارا احمدی</h4>
-                                <p>مهندس فرآوری</p>
-                            </div>
-                        </div>
-                        <a href="#" class="read-more">
-                            <span>ادامه مطلب</span>
-                            <i class="fas fa-arrow-left"></i>
-                        </a>
-                    </div>
-                </div>
+            <!-- Newsletter Widget -->
+            <div class="sidebar-widget">
+                <h3>خبرنامه</h3>
+                <p style="color: #4a5568; margin-bottom: 20px; font-size: 0.95rem;">برای دریافت آخرین مقالات و اخبار عضو خبرنامه شوید</p>
+                <form class="newsletter-form" id="newsletterForm">
+                    <input type="text" name="from_name" placeholder="نام شما" required>
+                    <input type="email" name="from_email" placeholder="ایمیل شما" required>
+                    <button type="submit" class="newsletter-btn">عضویت در خبرنامه</button>
+                    <div class="newsletter-message" id="newsletterMessage"></div>
+                </form>
             </div>
             
-            <!-- Blog Post 3 -->
-            <div class="blog-card" data-category="analysis">
-                <div class="blog-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
-                    📈
-                    <div class="blog-category">تحلیل بازار</div>
-                </div>
-                <div class="blog-content">
-                    <div class="blog-meta">
-                        <span><i class="fas fa-calendar"></i> ۸ آذر ۱۴۰۳</span>
-                        <span><i class="fas fa-clock"></i> ۶ دقیقه</span>
-                    </div>
-                    <h3 class="blog-title">پیش‌بینی قیمت فلزات در سال ۲۰۲۵</h3>
-                    <p class="blog-excerpt">
-                        تحلیل روند قیمت فلزات پایه در بازارهای جهانی و عوامل موثر بر 
-                        نوسانات قیمت در سال آینده...
-                    </p>
-                    <div class="blog-footer">
-                        <div class="blog-author">
-                            <div class="author-avatar">👤</div>
-                            <div class="author-info">
-                                <h4>محمد کریمی</h4>
-                                <p>کارشناس اقتصادی</p>
-                            </div>
-                        </div>
-                        <a href="#" class="read-more">
-                            <span>ادامه مطلب</span>
-                            <i class="fas fa-arrow-left"></i>
-                        </a>
-                    </div>
+            <!-- Tags Widget -->
+            <div class="sidebar-widget">
+                <h3>برچسب‌ها</h3>
+                <div class="tags-list">
+                    <a href="#" class="tag">سنگ‌شکن</a>
+                    <a href="#" class="tag">آسیاب</a>
+                    <a href="#" class="tag">فلوتاسیون</a>
+                    <a href="#" class="tag">NPV</a>
+                    <a href="#" class="tag">IRR</a>
+                    <a href="#" class="tag">CAPEX</a>
+                    <a href="#" class="tag">OPEX</a>
+                    <a href="#" class="tag">بهینه‌سازی</a>
+                    <a href="#" class="tag">اتوماسیون</a>
                 </div>
             </div>
-            
-            <!-- Blog Post 4 -->
-            <div class="blog-card" data-category="guide">
-                <div class="blog-image" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
-                    📚
-                    <div class="blog-category">راهنما</div>
-                </div>
-                <div class="blog-content">
-                    <div class="blog-meta">
-                        <span><i class="fas fa-calendar"></i> ۵ آذر ۱۴۰۳</span>
-                        <span><i class="fas fa-clock"></i> ۱۰ دقیقه</span>
-                    </div>
-                    <h3 class="blog-title">راهنمای جامع انتخاب تجهیزات معدنی</h3>
-                    <p class="blog-excerpt">
-                        نکات کلیدی و معیارهای مهم در انتخاب تجهیزات مناسب برای عملیات 
-                        معدنی با توجه به شرایط...
-                    </p>
-                    <div class="blog-footer">
-                        <div class="blog-author">
-                            <div class="author-avatar">👤</div>
-                            <div class="author-info">
-                                <h4>مهندس رضا نوری</h4>
-                                <p>مشاور تجهیزات</p>
-                            </div>
-                        </div>
-                        <a href="#" class="read-more">
-                            <span>ادامه مطلب</span>
-                            <i class="fas fa-arrow-left"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Blog Post 5 -->
-            <div class="blog-card" data-category="news">
-                <div class="blog-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
-                    🌍
-                    <div class="blog-category">اخبار</div>
-                </div>
-                <div class="blog-content">
-                    <div class="blog-meta">
-                        <span><i class="fas fa-calendar"></i> ۳ آذر ۱۴۰۳</span>
-                        <span><i class="fas fa-clock"></i> ۴ دقیقه</span>
-                    </div>
-                    <h3 class="blog-title">قرارداد همکاری با شرکت معدنی استرالیایی</h3>
-                    <p class="blog-excerpt">
-                        انعقاد قرارداد همکاری استراتژیک با یکی از بزرگترین شرکت‌های 
-                        معدنی استرالیا برای انتقال تکنولوژی...
-                    </p>
-                    <div class="blog-footer">
-                        <div class="blog-author">
-                            <div class="author-avatar">👤</div>
-                            <div class="author-info">
-                                <h4>فاطمه حسینی</h4>
-                                <p>خبرنگار</p>
-                            </div>
-                        </div>
-                        <a href="#" class="read-more">
-                            <span>ادامه مطلب</span>
-                            <i class="fas fa-arrow-left"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Blog Post 6 -->
-            <div class="blog-card" data-category="technical">
-                <div class="blog-image" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
-                    🔬
-                    <div class="blog-category">مقاله فنی</div>
-                </div>
-                <div class="blog-content">
-                    <div class="blog-meta">
-                        <span><i class="fas fa-calendar"></i> ۱ آذر ۱۴۰۳</span>
-                        <span><i class="fas fa-clock"></i> ۷ دقیقه</span>
-                    </div>
-                    <h3 class="blog-title">کاربرد هوش مصنوعی در اکتشافات معدنی</h3>
-                    <p class="blog-excerpt">
-                        بررسی نقش و کاربردهای هوش مصنوعی و یادگیری ماشین در بهبود 
-                        فرآیندهای اکتشاف و شناسایی...
-                    </p>
-                    <div class="blog-footer">
-                        <div class="blog-author">
-                            <div class="author-avatar">👤</div>
-                            <div class="author-info">
-                                <h4>دکتر امیر صادقی</h4>
-                                <p>متخصص AI</p>
-                            </div>
-                        </div>
-                        <a href="#" class="read-more">
-                            <span>ادامه مطلب</span>
-                            <i class="fas fa-arrow-left"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Pagination -->
-        <div class="pagination">
-            <button class="page-btn"><i class="fas fa-angle-right"></i></button>
-            <button class="page-btn active">۱</button>
-            <button class="page-btn">۲</button>
-            <button class="page-btn">۳</button>
-            <button class="page-btn">۴</button>
-            <button class="page-btn"><i class="fas fa-angle-left"></i></button>
-        </div>
+        </aside>
     </div>
     
     <!-- Footer -->
-    <footer>
-        <p>© ۱۴۰۳ کاویان توسعه معدن. تمامی حقوق محفوظ است.</p>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>کاویان توسعه معدن</h3>
+                <p>مشاور تخصصی در زمینه مهندسی تجهیزات معدنی و اقتصاد معدن</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>دسترسی سریع</h3>
+                <a href="index.html">خانه</a>
+                <a href="about.html">درباره ما</a>
+                <a href="services.html">خدمات</a>
+                <a href="portfolio.html">نمونه کارها</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>خدمات</h3>
+                <a href="equipment-selection.html">انتخاب تجهیزات</a>
+                <a href="economic-analysis.html">تحلیل اقتصادی</a>
+                <a href="risk-analysis.html">تحلیل ریسک</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>تماس با ما</h3>
+                <p>📧 info@kdmine.com</p>
+                <p>📞 +98 21 1234 5678</p>
+                <p>📍 تهران، ایران</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2025 کاویان توسعه معدن. تمامی حقوق محفوظ است.</p>
+        </div>
     </footer>
     
     <script>
-        // Filter blogs by category
-        function filterBlogs(category) {
-            const cards = document.querySelectorAll('.blog-card');
-            const buttons = document.querySelectorAll('.filter-btn');
+        // Newsletter Form Submission
+        document.getElementById('newsletterForm').addEventListener('submit', function(event) {
+            event.preventDefault();
             
-            // Update active button
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            const submitBtn = this.querySelector('.newsletter-btn');
+            const message = document.getElementById('newsletterMessage');
             
-            // Filter cards
-            cards.forEach(card => {
-                if (category === 'all' || card.dataset.category === category) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-        
-        // Search blogs
-        function searchBlogs(query) {
-            const cards = document.querySelectorAll('.blog-card');
-            const searchTerm = query.toLowerCase();
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'در حال ارسال...';
             
-            cards.forEach(card => {
-                const title = card.querySelector('.blog-title').textContent.toLowerCase();
-                const excerpt = card.querySelector('.blog-excerpt').textContent.toLowerCase();
-                
-                if (title.includes(searchTerm) || excerpt.includes(searchTerm)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
+            emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+                .then(function() {
+                    message.className = 'newsletter-message success';
+                    message.textContent = '✓ عضویت شما با موفقیت ثبت شد!';
+                    message.style.display = 'block';
+                    document.getElementById('newsletterForm').reset();
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'عضویت در خبرنامه';
+                }, function(error) {
+                    message.className = 'newsletter-message error';
+                    message.textContent = '✗ خطا در ثبت عضویت. لطفاً دوباره تلاش کنید.';
+                    message.style.display = 'block';
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'عضویت در خبرنامه';
+                    console.log('FAILED...', error);
+                });
+        });
     </script>
 </body>
 </html>
