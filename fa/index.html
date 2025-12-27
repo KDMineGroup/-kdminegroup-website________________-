@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>کاویان توسعه معدن | مهندسی و اقتصاد تجهیزات معدنی</title>
+    <meta name="description" content="متخصص در انتخاب تجهیزات بهینه، کارخانجات تغلیظ، سیستم‌های لیچینگ و تحلیل اقتصادی پروژه‌های معدنی">
+    <meta name="keywords" content="تجهیزات معدنی، انتخاب تجهیزات، کارخانه تغلیظ، لیچینگ، اسید سولفوریک، تحلیل اقتصادی معدن">
+    <link rel="icon" type="image/svg+xml" href="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg">
+    
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
+    <style>
+        @font-face {
+            font-family: 'B Nazanin';
+            src: local('B Nazanin'), local('BNazanin');
+            font-display: swap;
+        }
+        
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #2563eb;
+            --accent: #3b82f6;
+            --success: #059669;
+            --text-dark: #1a202c;
+            --text-light: #4a5568;
+            --bg-light: #f8fafc;
+            --border: #e2e8f0;
+            --white: #ffffff;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+        
+        body {
+            font-family: 'B Nazanin', Tahoma, Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-dark);
+            background: var(--white);
+            direction: rtl;
+            overflow-x: hidden;
+        }
+        
+        body[dir="ltr"] {
+            font-family: 'Times New Roman', Times, serif;
+            direction: ltr;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        /* Language Toggle */
+        .lang-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: var(--white);
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: var(--shadow-lg);
+            cursor: pointer;
+            font-weight: bold;
+            transition: var(--transition);
+            border: 2px solid var(--border);
+        }
+        
+        .lang-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            border-color: var(--secondary);
+        }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-md);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-img {
+            width: 55px;
+            height: 55px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .logo-text h1 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            font-weight: bold;
+            margin-bottom: 3px;
+        }
+        
+        .logo-text p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .nav-link {
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            position: relative;
+            padding: 8px 0;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            transition: width 0.3s;
+            border-radius: 2px;
+        }
+        
+        .nav-link:hover {
+            color: var(--secondary);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .btn-get-started {
+            background: linear-gradient(135deg, var(--secondary), #1d4ed8);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+        
+        .btn-get-started:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+        }
+        
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 10px;
+        }
+        
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-dark);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%);
+            padding: 100px 40px 80px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .hero-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+            line-height: 1.3;
+        }
+        
+        .hero p {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            margin-bottom: 35px;
+            opacity: 0.95;
+            max-width: 850px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-hero {
+            padding: 14px 35px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.05rem;
+            transition: var(--transition);
+            box-shadow: var(--shadow-lg);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background: white;
+            color: var(--secondary);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255,255,255,0.3);
+        }
+        
+        .btn-secondary {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+            backdrop-filter: blur(10px);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-3px);
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 80px 40px;
+            background: var(--bg-light);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-header h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .section-header p {
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .services-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+        
+        .service-card {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid var(--border);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--secondary);
+        }
+        
+        .service-icon {
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .service-card h3 {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .service-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 18px;
+            font-size: 0.95rem;
+        }
+        
+        .service-link {
+            color: var(--secondary);
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+        
+        .service-link:hover {
+            gap: 10px;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 40px;
+            background: white;
+        }
+        
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 35px;
+            margin-top: 50px;
+        }
+        
+        .feature-item {
+            text-align: center;
+            padding: 25px;
+        }
+        
+        .feature-icon {
+            width: 75px;
+            height: 75px;
+            background: linear-gradient(135deg, #f0f9ff, #dbeafe);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            margin: 0 auto 18px;
+            color: var(--secondary);
+        }
+        
+        .feature-item h3 {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .feature-item p {
+            color: var(--text-light);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 80px 40px;
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            text-align: center;
+            color: white;
+        }
+        
+        .cta h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 18px;
+            font-weight: bold;
+        }
+        
+        .cta p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            margin-bottom: 35px;
+            opacity: 0.95;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 60px 40px 25px;
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            margin-bottom: 35px;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 18px;
+            font-weight: bold;
+        }
+        
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255,255,255,0.8);
+            line-height: 2;
+            display: block;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+            padding-right: 5px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .header-content {
+                padding: 15px 25px;
+            }
+            
+            .nav-menu {
+                gap: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: calc(100vh - 80px);
+                background: white;
+                flex-direction: column;
+                padding: 30px;
+                box-shadow: var(--shadow-lg);
+                transition: right 0.3s ease;
+                align-items: flex-start;
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .hero {
+                padding: 80px 25px 60px;
+            }
+            
+            .services,
+            .features,
+            .cta {
+                padding: 60px 25px;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Loading Spinner */
+        .spinner {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.8s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Toggle -->
+    <div class="lang-toggle" onclick="toggleLanguage()">
+        <span id="lang-text">EN | English</span>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Logo" class="logo-img">
+                <div class="logo-text">
+                    <h1 data-fa="کاویان توسعه معدن" data-en="Kavian Development Mine">کاویان توسعه معدن</h1>
+                    <p data-fa="مهندسی و اقتصاد تجهیزات معدنی" data-en="Mining Equipment Engineering & Economics">مهندسی و اقتصاد تجهیزات معدنی</p>
+                </div>
+            </div>
+            
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <nav class="nav-menu" id="navMenu">
+                <a href="#services" class="nav-link" data-fa="خدمات" data-en="Services">خدمات</a>
+                <a href="about.html" class="nav-link" data-fa="درباره ما" data-en="About">درباره ما</a>
+                <a href="portfolio.html" class="nav-link" data-fa="نمونه کارها" data-en="Portfolio">نمونه کارها</a>
+                <a href="technical-resources.html" class="nav-link" data-fa="منابع فنی" data-en="Resources">منابع فنی</a>
+                <a href="contact.html" class="nav-link" data-fa="تماس" data-en="Contact">تماس</a>
+                <a href="register.html" class="btn-get-started" data-fa="شروع کنید ←" data-en="Get Started →">شروع کنید ←</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 data-fa="انتخاب و بهینه‌سازی تجهیزات معدنی" data-en="Mining Equipment Selection & Optimization">انتخاب و بهینه‌سازی تجهیزات معدنی</h1>
+            <p data-fa="متخصص در انتخاب تجهیزات بهینه، طراحی کارخانجات تغلیظ شیمیایی، سیستم‌های لیچینگ، ذوب و تصفیه، و تولید اسید سولفوریک و فسفریک" 
+               data-en="Expert in optimal equipment selection, chemical concentration plant design, leaching systems, smelting & refining, and sulfuric & phosphoric acid production">
+               متخصص در انتخاب تجهیزات بهینه، طراحی کارخانجات تغلیظ شیمیایی، سیستم‌های لیچینگ، ذوب و تصفیه، و تولید اسید سولفوریک و فسفریک
+            </p>
+            <div class="hero-buttons">
+                <a href="register.html" class="btn-hero btn-primary" data-fa="ثبت‌نام رایگان" data-en="Free Registration">ثبت‌نام رایگان</a>
+                <a href="#services" class="btn-hero btn-secondary" data-fa="مشاهده خدمات" data-en="View Services">مشاهده خدمات</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="section-header">
+            <h2 data-fa="خدمات تخصصی ما" data-en="Our Specialized Services">خدمات تخصصی ما</h2>
+            <p data-fa="راهکارهای جامع مهندسی و اقتصادی برای صنایع معدنی و فرآوری" data-en="Comprehensive engineering and economic solutions">راهکارهای جامع مهندسی و اقتصادی برای صنایع معدنی و فرآوری</p>
+        </div>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">⚙️</div>
+                <h3 data-fa="انتخاب و اندازه‌گذاری تجهیزات" data-en="Equipment Selection & Sizing">انتخاب و اندازه‌گذاری تجهیزات</h3>
+                <p data-fa="انتخاب بهینه تجهیزات معادن و کارخانجات تغلیظ با تحلیل فنی-اقتصادی جامع" data-en="Optimal equipment selection with comprehensive analysis">انتخاب بهینه تجهیزات معادن و کارخانجات تغلیظ با تحلیل فنی-اقتصادی جامع</p>
+                <a href="services/equipment-selection.html" class="service-link" data-fa="اطلاعات بیشتر ←" data-en="Learn More →">اطلاعات بیشتر ←</a>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🏭</div>
+                <h3 data-fa="کارخانجات تغلیظ شیمیایی" data-en="Chemical Concentration Plants">کارخانجات تغلیظ شیمیایی</h3>
+                <p data-fa="طراحی و بهینه‌سازی کارخانجات تغلیظ، فلوتاسیون و فرآیندهای جداسازی" data-en="Design and optimization of concentration plants">طراحی و بهینه‌سازی کارخانجات تغلیظ، فلوتاسیون و فرآیندهای جداسازی</p>
+                <a href="services/concentration-plants.html" class="service-link" data-fa="اطلاعات بیشتر ←" data-en="Learn More →">اطلاعات بیشتر ←</a>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🧪</div>
+                <h3 data-fa="سیستم‌های لیچینگ و تصفیه" data-en="Leaching & Refining Systems">سیستم‌های لیچینگ و تصفیه</h3>
+                <p data-fa="طراحی سیستم‌های لیچینگ، ذوب و تصفیه برای استخراج فلزات با بازدهی بالا" data-en="High-efficiency leaching and refining systems">طراحی سیستم‌های لیچینگ، ذوب و تصفیه برای استخراج فلزات با بازدهی بالا</p>
+                <a href="services/leaching-systems.html" class="service-link" data-fa="اطلاعات بیشتر ←" data-en="Learn More →">اطلاعات بیشتر ←</a>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">⚗️</div>
+                <h3 data-fa="تولید اسید سولفوریک و فسفریک" data-en="Sulfuric & Phosphoric Acid">تولید اسید سولفوریک و فسفریک</h3>
+                <p data-fa="طراحی و بهینه‌سازی واحدهای تولید اسید با تکنولوژی‌های پیشرفته" data-en="Advanced acid production unit design">طراحی و بهینه‌سازی واحدهای تولید اسید با تکنولوژی‌های پیشرفته</p>
+                <a href="services/acid-production.html" class="service-link" data-fa="اطلاعات بیشتر ←" data-en="Learn More →">اطلاعات بیشتر ←</a>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">📊</div>
+                <h3 data-fa="بهینه‌سازی تکنولوژی و ظرفیت" data-en="Technology & Capacity Optimization">بهینه‌سازی تکنولوژی و ظرفیت</h3>
+                <p data-fa="انتخاب تکنولوژی بهینه و تعیین ظرفیت اقتصادی خطوط تولید" data-en="Optimal technology and capacity selection">انتخاب تکنولوژی بهینه و تعیین ظرفیت اقتصادی خطوط تولید</p>
+                <a href="services/technology-optimization.html" class="service-link" data-fa="اطلاعات بیشتر ←" data-en="Learn More →">اطلاعات بیشتر ←</a>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🤝</div>
+                <h3 data-fa="معرفی تامین‌کنندگان" data-en="Vendor Partnerships">معرفی تامین‌کنندگان</h3>
+                <p data-fa="معرفی تامین‌کنندگان معتبر تجهیزات و برقراری قراردادهای همکاری" data-en="Reputable vendor introduction">معرفی تامین‌کنندگان معتبر تجهیزات و برقراری قراردادهای همکاری</p>
+                <a href="services/vendor-partnerships.html" class="service-link" data-fa="اطلاعات بیشتر ←" data-en="Learn More →">اطلاعات بیشتر ←</a>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">💰</div>
+                <h3 data-fa="تحلیل اقتصادی و سناریوپردازی" data-en="Economic Analysis">تحلیل اقتصادی و سناریوپردازی</h3>
+                <p data-fa="تحلیل اقتصادی جامع و سناریوپردازی برای انتخاب بهترین گزینه سرمایه‌گذاری" data-en="Comprehensive economic analysis">تحلیل اقتصادی جامع و سناریوپردازی برای انتخاب بهترین گزینه سرمایه‌گذاری</p>
+                <a href="services/economic-analysis.html" class="service-link" data-fa="اطلاعات بیشتر ←" data-en="Learn More →">اطلاعات بیشتر ←</a>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">⚠️</div>
+                <h3 data-fa="تحلیل ریسک" data-en="Risk Analysis">تحلیل ریسک</h3>
+                <p data-fa="شناسایی و ارزیابی ریسک‌های فنی، اقتصادی و عملیاتی پروژه‌ها" data-en="Technical and economic risk assessment">شناسایی و ارزیابی ریسک‌های فنی، اقتصادی و عملیاتی پروژه‌ها</p>
+                <a href="services/risk-analysis.html" class="service-link" data-fa="اطلاعات بیشتر ←" data-en="Learn More →">اطلاعات بیشتر ←</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="section-header">
+            <h2 data-fa="چرا کاویان؟" data-en="Why Kavian?">چرا کاویان؟</h2>
+            <p data-fa="مزایای همکاری با ما" data-en="Benefits of working with us">مزایای همکاری با ما</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-item">
+                <div class="feature-icon">🌍</div>
+                <h3 data-fa="تجربه بین‌المللی" data-en="International Experience">تجربه بین‌المللی</h3>
+                <p data-fa="مطالعات موردی و تجربیات مشابه از پروژه‌های خارجی" data-en="International project case studies">مطالعات موردی و تجربیات مشابه از پروژه‌های خارجی</p>
+            </div>
+            
+            <div class="feature-item">
+                <div class="feature-icon">🎯</div>
+                <h3 data-fa="تخصص عمیق" data-en="Deep Expertise">تخصص عمیق</h3>
+                <p data-fa="متخصصان با تجربه در مهندسی و اقتصاد معدن" data-en="Experienced mining specialists">متخصصان با تجربه در مهندسی و اقتصاد معدن</p>
+            </div>
+            
+            <div class="feature-item">
+                <div class="feature-icon">📈</div>
+                <h3 data-fa="رویکرد داده‌محور" data-en="Data-Driven">رویکرد داده‌محور</h3>
+                <p data-fa="تصمیم‌گیری مبتنی بر داده و تحلیل‌های دقیق" data-en="Data-based decision making">تصمیم‌گیری مبتنی بر داده و تحلیل‌های دقیق</p>
+            </div>
+            
+            <div class="feature-item">
+                <div class="feature-icon">🔧</div>
+                <h3 data-fa="ابزارهای محاسباتی" data-en="Calculation Tools">ابزارهای محاسباتی</h3>
+                <p data-fa="دسترسی به ابزارهای پیشرفته محاسباتی و پایگاه داده" data-en="Advanced calculation tools">دسترسی به ابزارهای پیشرفته محاسباتی و پایگاه داده</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <h2 data-fa="آماده شروع هستید؟" data-en="Ready to Get Started?">آماده شروع هستید؟</h2>
+        <p data-fa="همین امروز ثبت‌نام کنید و به منابع فنی و ابزارهای تخصصی دسترسی پیدا کنید" data-en="Register today and get access to resources">همین امروز ثبت‌نام کنید و به منابع فنی و ابزارهای تخصصی دسترسی پیدا کنید</p>
+        <a href="register.html" class="btn-hero btn-primary" data-fa="ثبت‌نام رایگان" data-en="Free Registration">ثبت‌نام رایگان</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 data-fa="درباره کاویان" data-en="About Kavian">درباره کاویان</h3>
+                <p data-fa="کاویان توسعه معدن، ارائه‌دهنده خدمات مهندسی و اقتصادی تجهیزات معدنی با رویکرد بین‌المللی" data-en="Mining equipment engineering services">کاویان توسعه معدن، ارائه‌دهنده خدمات مهندسی و اقتصادی تجهیزات معدنی با رویکرد بین‌المللی</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3 data-fa="خدمات" data-en="Services">خدمات</h3>
+                <a href="services/equipment-selection.html" data-fa="انتخاب تجهیزات" data-en="Equipment Selection">انتخاب تجهیزات</a>
+                <a href="services/concentration-plants.html" data-fa="کارخانجات تغلیظ" data-en="Concentration Plants">کارخانجات تغلیظ</a>
+                <a href="services/economic-analysis.html" data-fa="تحلیل اقتصادی" data-en="Economic Analysis">تحلیل اقتصادی</a>
+                <a href="services/risk-analysis.html" data-fa="تحلیل ریسک" data-en="Risk Analysis">تحلیل ریسک</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3 data-fa="منابع" data-en="Resources">منابع</h3>
+                <a href="technical-resources.html" data-fa="منابع فنی" data-en="Technical Resources">منابع فنی</a>
+                <a href="portfolio.html" data-fa="نمونه کارها" data-en="Portfolio">نمونه کارها</a>
+                <a href="blog.html" data-fa="وبلاگ" data-en="Blog">وبلاگ</a>
+                <a href="news.html" data-fa="اخبار" data-en="News">اخبار</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3 data-fa="تماس با ما" data-en="Contact">تماس با ما</h3>
+                <p data-fa="ایمیل: info@kdmine.com" data-en="Email: info@kdmine.com">ایمیل: info@kdmine.com</p>
+                <p data-fa="تلفن: +98 21 1234 5678" data-en="Phone: +98 21 1234 5678">تلفن: +98 21 1234 5678</p>
+                <a href="contact.html" data-fa="فرم تماس" data-en="Contact Form">فرم تماس</a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p data-fa="© 2025 کاویان توسعه معدن. تمامی حقوق محفوظ است." data-en="© 2025 Kavian Development Mine. All rights reserved.">© 2025 کاویان توسعه معدن. تمامی حقوق محفوظ است.</p>
+        </div>
+    </footer>
+
+    <script>
+        // EmailJS Initialization
+        emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS public key
+        
+        let currentLang = 'fa';
+        
+        function toggleLanguage() {
+            currentLang = currentLang === 'fa' ? 'en' : 'fa';
+            const body = document.body;
+            const langText = document.getElementById('lang-text');
+            
+            if (currentLang === 'en') {
+                body.setAttribute('dir', 'ltr');
+                body.style.fontFamily = "'Times New Roman', Times, serif";
+                langText.textContent = 'FA | فارسی';
+            } else {
+                body.setAttribute('dir', 'rtl');
+                body.style.fontFamily = "'B Nazanin', Tahoma, Arial, sans-serif";
+                langText.textContent = 'EN | English';
+            }
+            
+            // Update all translatable elements
+            document.querySelectorAll('[data-fa][data-en]').forEach(el => {
+                el.textContent = el.getAttribute('data-' + currentLang);
+            });
+        }
+        
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const navMenu = document.getElementById('navMenu');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+                navMenu.classList.remove('active');
+            }
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    document.getElementById('navMenu').classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
