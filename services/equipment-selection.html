@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipment Selection - Kavian Development Mine</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #1e3a8a;
+            --secondary-blue: #2563eb;
+            --accent-gold: #f59e0b;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+        }
+        body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-dark); overflow-x: hidden; }
+        body.rtl { font-family: 'Vazirmatn', sans-serif; direction: rtl; }
+        
+        .language-switcher { position: fixed; top: 20px; right: 20px; z-index: 3000; background: white; border-radius: 50px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); padding: 8px; display: flex; gap: 8px; }
+        body.rtl .language-switcher { right: auto; left: 20px; }
+        .lang-btn { padding: 10px 20px; border: 2px solid transparent; background: transparent; border-radius: 25px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: all 0.3s; display: flex; align-items: center; gap: 8px; color: var(--text-light); }
+        .lang-btn:hover { background: var(--light-bg); color: var(--secondary-blue); }
+        .lang-btn.active { background: var(--secondary-blue); color: white; border-color: var(--secondary-blue); }
+        
+        header { background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%); color: white; padding: 1rem 0; position: sticky; top: 0; z-index: 2000; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        nav { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
+        .logo { display: flex; align-items: center; gap: 15px; font-size: 1.5rem; font-weight: 700; text-decoration: none; color: white; }
+        .logo img { height: 55px; width: auto; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2)); }
+        .nav-links { display: flex; list-style: none; gap: 2.5rem; align-items: center; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 500; transition: all 0.3s; position: relative; padding: 5px 0; }
+        .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--accent-gold); transition: width 0.3s; }
+        .nav-links a:hover::after { width: 100%; }
+        
+        .breadcrumb { max-width: 1400px; margin: 30px auto; padding: 0 2rem; display: flex; align-items: center; gap: 10px; color: var(--text-light); font-size: 0.95rem; }
+        .breadcrumb a { color: var(--secondary-blue); text-decoration: none; transition: color 0.3s; }
+        .breadcrumb a:hover { color: var(--accent-gold); }
+        
+        .service-hero { background: linear-gradient(135deg, rgba(30, 58, 138, 0.95) 0%, rgba(37, 99, 235, 0.95) 100%), url('https://images.unsplash.com/photo-1581094271901-8022df4466f9?w=1920') center/cover; color: white; padding: 100px 2rem 80px; }
+        .hero-content { max-width: 1200px; margin: 0 auto; }
+        .service-category { display: inline-block; padding: 8px 20px; background: var(--accent-gold); border-radius: 25px; font-weight: 600; font-size: 0.9rem; margin-bottom: 20px; }
+        .service-hero h1 { font-size: 3.5rem; margin-bottom: 25px; font-weight: 700; text-shadow: 2px 2px 8px rgba(0,0,0,0.3); }
+        .service-hero p { font-size: 1.3rem; opacity: 0.95; line-height: 1.8; }
+        
+        .service-content { max-width: 1400px; margin: 80px auto; padding: 0 2rem; display: grid; grid-template-columns: 1fr 350px; gap: 4rem; }
+        
+        .main-content { }
+        .content-section { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); margin-bottom: 40px; }
+        .section-title { font-size: 2rem; color: var(--primary-blue); margin-bottom: 25px; }
+        .content-section p { color: var(--text-light); line-height: 1.9; font-size: 1.05rem; margin-bottom: 20px; }
+        .content-section ul { margin-left: 25px; color: var(--text-light); line-height: 2; }
+        body.rtl .content-section ul { margin-left: 0; margin-right: 25px; }
+        .content-section li { margin-bottom: 12px; }
+        
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 30px; }
+        .feature-card { background: var(--light-bg); padding: 30px; border-radius: 15px; transition: all 0.3s; }
+        .feature-card:hover { background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transform: translateY(-5px); }
+        .feature-icon { width: 60px; height: 60px; background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); border-radius: 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.8rem; margin-bottom: 20px; }
+        .feature-card h4 { color: var(--primary-blue); font-size: 1.3rem; margin-bottom: 12px; }
+        .feature-card p { color: var(--text-light); line-height: 1.7; font-size: 0.95rem; }
+        
+        .process-steps { display: grid; gap: 2rem; margin-top: 30px; }
+        .step-card { background: white; border-left: 5px solid var(--secondary-blue); padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); display: flex; gap: 25px; align-items: start; }
+        body.rtl .step-card { border-left: none; border-right: 5px solid var(--secondary-blue); }
+        .step-number { width: 50px; height: 50px; background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: 700; flex-shrink: 0; }
+        .step-content h4 { color: var(--primary-blue); font-size: 1.3rem; margin-bottom: 10px; }
+        .step-content p { color: var(--text-light); line-height: 1.8; }
+        
+        .case-study { background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue)); color: white; padding: 40px; border-radius: 20px; margin-top: 30px; }
+        .case-study h4 { font-size: 1.6rem; margin-bottom: 15px; }
+        .case-study p { opacity: 0.95; line-height: 1.8; margin-bottom: 20px; }
+        .case-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 2rem; margin-top: 25px; }
+        .stat-item { text-align: center; }
+        .stat-value { font-size: 2.5rem; font-weight: 700; color: var(--accent-gold); margin-bottom: 5px; }
+        .stat-label { font-size: 0.9rem; opacity: 0.9; }
+        
+        .sidebar { }
+        .sidebar-widget { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); margin-bottom: 25px; }
+        .widget-title { font-size: 1.4rem; color: var(--primary-blue); margin-bottom: 20px; padding-bottom: 15px; border-bottom: 3px solid var(--accent-gold); }
+        
+        .contact-form { }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; color: var(--text-dark); font-weight: 600; margin-bottom: 8px; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px 15px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 1rem; transition: all 0.3s; font-family: inherit; }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: var(--secondary-blue); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+        .btn-submit { width: 100%; padding: 15px; background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); color: white; border: none; border-radius: 50px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.3s; }
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3); }
+        
+        .related-services { list-style: none; }
+        .related-services li { margin-bottom: 15px; }
+        .related-services a { display: flex; align-items: center; gap: 12px; padding: 12px 15px; background: var(--light-bg); border-radius: 10px; color: var(--text-dark); text-decoration: none; transition: all 0.3s; }
+        .related-services a:hover { background: var(--secondary-blue); color: white; transform: translateX(5px); }
+        body.rtl .related-services a:hover { transform: translateX(-5px); }
+        .related-services i { color: var(--secondary-blue); transition: color 0.3s; }
+        .related-services a:hover i { color: white; }
+        
+        .download-resources { }
+        .resource-item { display: flex; align-items: center; gap: 15px; padding: 15px; background: var(--light-bg); border-radius: 10px; margin-bottom: 15px; transition: all 0.3s; cursor: pointer; }
+        .resource-item:hover { background: white; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+        .resource-icon { width: 50px; height: 50px; background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.3rem; }
+        .resource-info h5 { color: var(--primary-blue); font-size: 0.95rem; margin-bottom: 5px; }
+        .resource-info p { color: var(--text-light); font-size: 0.8rem; }
+        
+        footer { background: var(--dark-bg); color: white; padding: 60px 2rem 30px; margin-top: 80px; }
+        .footer-content { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 40px; }
+        .footer-section h3 { color: var(--accent-gold); margin-bottom: 20px; font-size: 1.3rem; }
+        .footer-section ul { list-style: none; }
+        .footer-section a { color: #cbd5e1; text-decoration: none; display: block; margin-bottom: 12px; transition: all 0.3s; }
+        .footer-section a:hover { color: var(--accent-gold); padding-left: 5px; }
+        body.rtl .footer-section a:hover { padding-left: 0; padding-right: 5px; }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); color: #94a3b8; }
+        
+        @media (max-width: 1200px) {
+            .service-content { grid-template-columns: 1fr; }
+            .sidebar { max-width: 600px; margin: 0 auto; }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .service-hero h1 { font-size: 2.5rem; }
+            .features-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switcher">
+        <button class="lang-btn active" onclick="switchLanguage('en')">
+            <span>🇬🇧</span><span>EN</span>
+        </button>
+        <button class="lang-btn" onclick="switchLanguage('fa')">
+            <span>🇮🇷</span><span>FA</span>
+        </button>
+    </div>
+
+    <header>
+        <nav>
+            <a href="../index.html" class="logo">
+                <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Logo">
+                <span data-en="Kavian Development Mine" data-fa="کاویان توسعه معدن">Kavian Development Mine</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="../index.html" data-en="Home" data-fa="خانه">Home</a></li>
+                <li><a href="../about.html" data-en="About" data-fa="درباره ما">About</a></li>
+                <li><a href="../services.html" data-en="Services" data-fa="خدمات">Services</a></li>
+                <li><a href="../portfolio.html" data-en="Portfolio" data-fa="نمونه کارها">Portfolio</a></li>
+                <li><a href="../blog.html" data-en="Blog" data-fa="وبلاگ">Blog</a></li>
+                <li><a href="../news.html" data-en="News" data-fa="اخبار">News</a></li>
+                <li><a href="../technical-resources.html" data-en="Resources" data-fa="منابع فنی">Resources</a></li>
+                <li><a href="../contact.html" data-en="Contact" data-fa="تماس">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="breadcrumb">
+        <a href="../index.html" data-en="Home" data-fa="خانه">Home</a>
+        <i class="fas fa-chevron-right"></i>
+        <a href="../services.html" data-en="Services" data-fa="خدمات">Services</a>
+        <i class="fas fa-chevron-right"></i>
+        <span data-en="Equipment Selection" data-fa="انتخاب تجهیزات">Equipment Selection</span>
+    </div>
+
+    <section class="service-hero">
+        <div class="hero-content">
+            <span class="service-category" data-en="CONSULTING SERVICE" data-fa="خدمات مشاوره">CONSULTING SERVICE</span>
+            <h1 data-en="Equipment Selection & Sizing" data-fa="انتخاب و اندازه‌گیری تجهیزات">Equipment Selection & Sizing</h1>
+            <p data-en="Expert guidance in selecting optimal mining and processing equipment based on ore characteristics, production targets, and budget constraints. Our comprehensive approach ensures maximum efficiency and return on investment." data-fa="راهنمایی تخصصی در انتخاب بهینه تجهیزات معدنی و فرآوری بر اساس ویژگی‌های سنگ معدن، اهداف تولید و محدودیت‌های بودجه. رویکرد جامع ما حداکثر کارایی و بازده سرمایه را تضمین می‌کند.">Expert guidance in selecting optimal mining and processing equipment based on ore characteristics, production targets, and budget constraints. Our comprehensive approach ensures maximum efficiency and return on investment.</p>
+        </div>
+    </section>
+
+    <div class="service-content">
+        <main class="main-content">
+            <div class="content-section">
+                <h2 class="section-title" data-en="Overview" data-fa="نمای کلی">Overview</h2>
+                <p data-en="Equipment selection is one of the most critical decisions in mining project development. The right equipment can significantly impact operational efficiency, production capacity, and overall project economics. Our equipment selection service provides comprehensive analysis and recommendations to ensure you choose the optimal equipment for your specific application." data-fa="انتخاب تجهیزات یکی از مهم‌ترین تصمیمات در توسعه پروژه معدنی است. تجهیزات مناسب می‌تواند به طور قابل توجهی بر کارایی عملیاتی، ظرفیت تولید و اقتصاد کلی پروژه تأثیر بگذارد. خدمات انتخاب تجهیزات ما تحلیل و توصیه‌های جامع را برای اطمینان از انتخاب تجهیزات بهینه برای کاربرد خاص شما ارائه می‌دهد.">Equipment selection is one of the most critical decisions in mining project development. The right equipment can significantly impact operational efficiency, production capacity, and overall project economics. Our equipment selection service provides comprehensive analysis and recommendations to ensure you choose the optimal equipment for your specific application.</p>
+                
+                <p data-en="We consider multiple factors including ore characteristics, throughput requirements, energy efficiency, maintenance requirements, capital costs, and operating costs. Our team has extensive experience with all major equipment manufacturers and can provide unbiased recommendations based on your specific needs." data-fa="ما عوامل متعددی از جمله ویژگی‌های سنگ معدن، نیازهای توان عملیاتی، کارایی انرژی، نیازهای نگهداری، هزینه‌های سرمایه‌ای و هزینه‌های عملیاتی را در نظر می‌گیریم. تیم ما تجربه گسترده‌ای با همه تولیدکنندگان اصلی تجهیزات دارد و می‌تواند توصیه‌های بی‌طرفانه بر اساس نیازهای خاص شما ارائه دهد.">We consider multiple factors including ore characteristics, throughput requirements, energy efficiency, maintenance requirements, capital costs, and operating costs. Our team has extensive experience with all major equipment manufacturers and can provide unbiased recommendations based on your specific needs.</p>
+            </div>
+            
+            <div class="content-section">
+                <h2 class="section-title" data-en="Key Features" data-fa="ویژگی‌های کلیدی">Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h4 data-en="Capacity Analysis" data-fa="تحلیل ظرفیت">Capacity Analysis</h4>
+                        <p data-en="Detailed equipment sizing calculations based on throughput requirements and ore characteristics." data-fa="محاسبات دقیق اندازه‌گیری تجهیزات بر اساس نیازهای توان عملیاتی و ویژگی‌های سنگ معدن.">Detailed equipment sizing calculations based on throughput requirements and ore characteristics.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">💰</div>
+                        <h4 data-en="Cost Comparison" data-fa="مقایسه هزینه">Cost Comparison</h4>
+                        <p data-en="Comprehensive CAPEX and OPEX analysis for different equipment options." data-fa="تحلیل جامع CAPEX و OPEX برای گزینه‌های مختلف تجهیزات.">Comprehensive CAPEX and OPEX analysis for different equipment options.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🏭</div>
+                        <h4 data-en="Vendor Evaluation" data-fa="ارزیابی تامین‌کننده">Vendor Evaluation</h4>
+                        <p data-en="Objective assessment of equipment suppliers based on quality, reliability, and support." data-fa="ارزیابی عینی تامین‌کنندگان تجهیزات بر اساس کیفیت، قابلیت اطمینان و پشتیبانی.">Objective assessment of equipment suppliers based on quality, reliability, and support.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h4 data-en="Energy Efficiency" data-fa="کارایی انرژی">Energy Efficiency</h4>
+                        <p data-en="Analysis of power consumption and recommendations for energy-efficient solutions." data-fa="تحلیل مصرف برق و توصیه‌ها برای راهکارهای کارآمد انرژی.">Analysis of power consumption and recommendations for energy-efficient solutions.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🔧</div>
+                        <h4 data-en="Maintenance Planning" data-fa="برنامه‌ریزی نگهداری">Maintenance Planning</h4>
+                        <p data-en="Evaluation of maintenance requirements and spare parts availability." data-fa="ارزیابی نیازهای نگهداری و در دسترس بودن قطعات یدکی.">Evaluation of maintenance requirements and spare parts availability.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">📈</div>
+                        <h4 data-en="Performance Prediction" data-fa="پیش‌بینی عملکرد">Performance Prediction</h4>
+                        <p data-en="Simulation and modeling to predict equipment performance under various conditions." data-fa="شبیه‌سازی و مدل‌سازی برای پیش‌بینی عملکرد تجهیزات در شرایط مختلف.">Simulation and modeling to predict equipment performance under various conditions.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-section">
+                <h2 class="section-title" data-en="Our Process" data-fa="فرآیند ما">Our Process</h2>
+                <div class="process-steps">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4 data-en="Requirements Analysis" data-fa="تحلیل نیازمندی‌ها">Requirements Analysis</h4>
+                            <p data-en="We begin by thoroughly understanding your project requirements, including production targets, ore characteristics, site conditions, and budget constraints." data-fa="ما با درک کامل نیازمندی‌های پروژه شما از جمله اهداف تولید، ویژگی‌های سنگ معدن، شرایط سایت و محدودیت‌های بودجه شروع می‌کنیم.">We begin by thoroughly understanding your project requirements, including production targets, ore characteristics, site conditions, and budget constraints.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4 data-en="Equipment Sizing" data-fa="اندازه‌گیری تجهیزات">Equipment Sizing</h4>
+                            <p data-en="Using industry-standard calculation methods and our proprietary tools, we determine the optimal equipment sizes for your application." data-fa="با استفاده از روش‌های محاسباتی استاندارد صنعت و ابزارهای اختصاصی ما، اندازه‌های بهینه تجهیزات را برای کاربرد شما تعیین می‌کنیم.">Using industry-standard calculation methods and our proprietary tools, we determine the optimal equipment sizes for your application.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4 data-en="Options Evaluation" data-fa="ارزیابی گزینه‌ها">Options Evaluation</h4>
+                            <p data-en="We evaluate multiple equipment options from different manufacturers, comparing technical specifications, costs, and performance characteristics." data-fa="ما چندین گزینه تجهیزات از تولیدکنندگان مختلف را ارزیابی می‌کنیم و مشخصات فنی، هزینه‌ها و ویژگی‌های عملکرد را مقایسه می‌کنیم.">We evaluate multiple equipment options from different manufacturers, comparing technical specifications, costs, and performance characteristics.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4 data-en="Recommendation Report" data-fa="گزارش توصیه">Recommendation Report</h4>
+                            <p data-en="We deliver a comprehensive report with our recommendations, including technical justification, cost analysis, and implementation considerations." data-fa="ما یک گزارش جامع با توصیه‌های خود از جمله توجیه فنی، تحلیل هزینه و ملاحظات اجرا ارائه می‌دهیم.">We deliver a comprehensive report with our recommendations, including technical justification, cost analysis, and implementation considerations.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="case-study">
+                <h4 data-en="Case Study: Sarcheshmeh Copper Concentrator" data-fa="مطالعه موردی: کنسانتره مس سرچشمه">Case Study: Sarcheshmeh Copper Concentrator</h4>
+                <p data-en="We provided comprehensive equipment selection services for a 50,000 TPD copper concentrator project. Our recommendations resulted in 15% lower capital costs compared to the initial design while maintaining the same production capacity and recovery rates." data-fa="ما خدمات جامع انتخاب تجهیزات را برای یک پروژه کنسانتره مس 50000 تن در روز ارائه دادیم. توصیه‌های ما منجر به 15٪ کاهش هزینه‌های سرمایه‌ای در مقایسه با طراحی اولیه شد و در عین حال همان ظرفیت تولید و نرخ بازیابی را حفظ کرد.">We provided comprehensive equipment selection services for a 50,000 TPD copper concentrator project. Our recommendations resulted in 15% lower capital costs compared to the initial design while maintaining the same production capacity and recovery rates.</p>
+                
+                <div class="case-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">50K</div>
+                        <div class="stat-label" data-en="TPD Capacity" data-fa="ظرفیت تن/روز">TPD Capacity</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">15%</div>
+                        <div class="stat-label" data-en="Cost Savings" data-fa="صرفه‌جویی هزینه">Cost Savings</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">$85M</div>
+                        <div class="stat-label" data-en="Project Value" data-fa="ارزش پروژه">Project Value</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">12</div>
+                        <div class="stat-label" data-en="Months Duration" data-fa="مدت زمان ماه">Months Duration</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <aside class="sidebar">
+            <div class="sidebar-widget">
+                <h3 class="widget-title" data-en="Request Quote" data-fa="درخواست قیمت">Request Quote</h3>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label data-en="Full Name" data-fa="نام کامل">Full Name</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label data-en="Email" data-fa="ایمیل">Email</label>
+                        <input type="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label data-en="Company" data-fa="شرکت">Company</label>
+                        <input type="text">
+                    </div>
+                    <div class="form-group">
+                        <label data-en="Project Type" data-fa="نوع پروژه">Project Type</label>
+                        <select>
+                            <option data-en="Crushing Equipment" data-fa="تجهیزات خردایش">Crushing Equipment</option>
+                            <option data-en="Grinding Equipment" data-fa="تجهیزات آسیاب">Grinding Equipment</option>
+                            <option data-en="Flotation Equipment" data-fa="تجهیزات فلوتاسیون">Flotation Equipment</option>
+                            <option data-en="Complete Plant" data-fa="کارخانه کامل">Complete Plant</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label data-en="Message" data-fa="پیام">Message</label>
+                        <textarea></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit" data-en="Submit Request" data-fa="ارسال درخواست">Submit Request</button>
+                </form>
+            </div>
+            
+            <div class="sidebar-widget">
+                <h3 class="widget-title" data-en="Related Services" data-fa="خدمات مرتبط">Related Services</h3>
+                <ul class="related-services">
+                    <li><a href="economic-analysis.html"><i class="fas fa-chart-line"></i><span data-en="Economic Analysis" data-fa="تحلیل اقتصادی">Economic Analysis</span></a></li>
+                    <li><a href="plant-design.html"><i class="fas fa-drafting-compass"></i><span data-en="Plant Design" data-fa="طراحی کارخانه">Plant Design</span></a></li>
+                    <li><a href="feasibility-studies.html"><i class="fas fa-file-alt"></i><span data-en="Feasibility Studies" data-fa="مطالعات امکان‌سنجی">Feasibility Studies</span></a></li>
+                    <li><a href="vendor-selection.html"><i class="fas fa-handshake"></i><span data-en="Vendor Selection" data-fa="انتخاب تامین‌کننده">Vendor Selection</span></a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-widget">
+                <h3 class="widget-title" data-en="Download Resources" data-fa="دانلود منابع">Download Resources</h3>
+                <div class="download-resources">
+                    <div class="resource-item">
+                        <div class="resource-icon"><i class="fas fa-file-pdf"></i></div>
+                        <div class="resource-info">
+                            <h5 data-en="Equipment Selection Guide" data-fa="راهنمای انتخاب تجهیزات">Equipment Selection Guide</h5>
+                            <p data-en="PDF • 2.5 MB" data-fa="PDF • 2.5 مگابایت">PDF • 2.5 MB</p>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-item">
+                        <div class="resource-icon"><i class="fas fa-file-excel"></i></div>
+                        <div class="resource-info">
+                            <h5 data-en="Sizing Calculator" data-fa="ماشین‌حساب اندازه‌گیری">Sizing Calculator</h5>
+                            <p data-en="XLSX • 1.2 MB" data-fa="XLSX • 1.2 مگابایت">XLSX • 1.2 MB</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 data-en="Company" data-fa="شرکت">Company</h3>
+                <ul>
+                    <li><a href="../about.html" data-en="About Us" data-fa="درباره ما">About Us</a></li>
+                    <li><a href="../portfolio.html" data-en="Portfolio" data-fa="نمونه کارها">Portfolio</a></li>
+                    <li><a href="../contact.html" data-en="Contact" data-fa="تماس با ما">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 data-en="Services" data-fa="خدمات">Services</h3>
+                <ul>
+                    <li><a href="equipment-selection.html" data-en="Equipment Selection" data-fa="انتخاب تجهیزات">Equipment Selection</a></li>
+                    <li><a href="economic-analysis.html" data-en="Economic Analysis" data-fa="تحلیل اقتصادی">Economic Analysis</a></li>
+                    <li><a href="plant-design.html" data-en="Plant Design" data-fa="طراحی کارخانه">Plant Design</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 data-en="Contact" data-fa="تماس">Contact</h3>
+                <ul>
+                    <li>📧 info@kdmine.com</li>
+                    <li>📞 +98 21 1234 5678</li>
+                    <li>📍 Tehran, Iran</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-en="&copy; 2025 Kavian Development Mine. All rights reserved." data-fa="© 2025 کاویان توسعه معدن. تمامی حقوق محفوظ است.">&copy; 2025 Kavian Development Mine. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function switchLanguage(lang) {
+            const body = document.body;
+            const elements = document.querySelectorAll('[data-en][data-fa]');
+            const langButtons = document.querySelectorAll('.lang-btn');
+            
+            if (lang === 'fa') { body.classList.add('rtl'); } 
+            else { body.classList.remove('rtl'); }
+            
+            langButtons.forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.lang-btn').classList.add('active');
+            
+            elements.forEach(el => {
+                el.innerHTML = el.getAttribute('data-' + lang);
+            });
+            
+            localStorage.setItem('preferredLanguage', lang);
+        }
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferredLanguage') || 'en';
+            if (savedLang === 'fa') {
+                document.querySelector('.lang-btn:last-child').click();
+            }
+        });
+        
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Form submitted! In production, this would send via EmailJS.');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Economic Analysis - Kavian Development Mine</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #1e3a8a;
+            --secondary-blue: #2563eb;
+            --accent-gold: #f59e0b;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+        }
+        body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-dark); overflow-x: hidden; }
+        body.rtl { font-family: 'Vazirmatn', sans-serif; direction: rtl; }
+        
+        .language-switcher { position: fixed; top: 20px; right: 20px; z-index: 3000; background: white; border-radius: 50px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); padding: 8px; display: flex; gap: 8px; }
+        body.rtl .language-switcher { right: auto; left: 20px; }
+        .lang-btn { padding: 10px 20px; border: 2px solid transparent; background: transparent; border-radius: 25px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: all 0.3s; display: flex; align-items: center; gap: 8px; color: var(--text-light); }
+        .lang-btn:hover { background: var(--light-bg); color: var(--secondary-blue); }
+        .lang-btn.active { background: var(--secondary-blue); color: white; border-color: var(--secondary-blue); }
+        
+        header { background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%); color: white; padding: 1rem 0; position: sticky; top: 0; z-index: 2000; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        nav { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
+        .logo { display: flex; align-items: center; gap: 15px; font-size: 1.5rem; font-weight: 700; text-decoration: none; color: white; }
+        .logo img { height: 55px; width: auto; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2)); }
+        .nav-links { display: flex; list-style: none; gap: 2.5rem; align-items: center; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 500; transition: all 0.3s; position: relative; padding: 5px 0; }
+        .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--accent-gold); transition: width 0.3s; }
+        .nav-links a:hover::after { width: 100%; }
+        
+        .breadcrumb { max-width: 1400px; margin: 30px auto; padding: 0 2rem; display: flex; align-items: center; gap: 10px; color: var(--text-light); font-size: 0.95rem; }
+        .breadcrumb a { color: var(--secondary-blue); text-decoration: none; transition: color 0.3s; }
+        .breadcrumb a:hover { color: var(--accent-gold); }
+        
+        .service-hero { background: linear-gradient(135deg, rgba(30, 58, 138, 0.95) 0%, rgba(37, 99, 235, 0.95) 100%), url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1920') center/cover; color: white; padding: 100px 2rem 80px; }
+        .hero-content { max-width: 1200px; margin: 0 auto; }
+        .service-category { display: inline-block; padding: 8px 20px; background: var(--accent-gold); border-radius: 25px; font-weight: 600; font-size: 0.9rem; margin-bottom: 20px; }
+        .service-hero h1 { font-size: 3.5rem; margin-bottom: 25px; font-weight: 700; text-shadow: 2px 2px 8px rgba(0,0,0,0.3); }
+        .service-hero p { font-size: 1.3rem; opacity: 0.95; line-height: 1.8; }
+        
+        .service-content { max-width: 1400px; margin: 80px auto; padding: 0 2rem; display: grid; grid-template-columns: 1fr 350px; gap: 4rem; }
+        
+        .main-content { }
+        .content-section { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); margin-bottom: 40px; }
+        .section-title { font-size: 2rem; color: var(--primary-blue); margin-bottom: 25px; }
+        .content-section p { color: var(--text-light); line-height: 1.9; font-size: 1.05rem; margin-bottom: 20px; }
+        
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 30px; }
+        .feature-card { background: var(--light-bg); padding: 30px; border-radius: 15px; transition: all 0.3s; }
+        .feature-card:hover { background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transform: translateY(-5px); }
+        .feature-icon { width: 60px; height: 60px; background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); border-radius: 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.8rem; margin-bottom: 20px; }
+        .feature-card h4 { color: var(--primary-blue); font-size: 1.3rem; margin-bottom: 12px; }
+        .feature-card p { color: var(--text-light); line-height: 1.7; font-size: 0.95rem; }
+        
+        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 30px; }
+        .metric-card { background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); color: white; padding: 30px; border-radius: 15px; text-align: center; }
+        .metric-value { font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
+        .metric-label { font-size: 1rem; opacity: 0.95; }
+        
+        .sidebar { }
+        .sidebar-widget { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); margin-bottom: 25px; }
+        .widget-title { font-size: 1.4rem; color: var(--primary-blue); margin-bottom: 20px; padding-bottom: 15px; border-bottom: 3px solid var(--accent-gold); }
+        
+        .contact-form { }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; color: var(--text-dark); font-weight: 600; margin-bottom: 8px; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px 15px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 1rem; transition: all 0.3s; font-family: inherit; }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: var(--secondary-blue); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+        .btn-submit { width: 100%; padding: 15px; background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); color: white; border: none; border-radius: 50px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.3s; }
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3); }
+        
+        .related-services { list-style: none; }
+        .related-services li { margin-bottom: 15px; }
+        .related-services a { display: flex; align-items: center; gap: 12px; padding: 12px 15px; background: var(--light-bg); border-radius: 10px; color: var(--text-dark); text-decoration: none; transition: all 0.3s; }
+        .related-services a:hover { background: var(--secondary-blue); color: white; transform: translateX(5px); }
+        body.rtl .related-services a:hover { transform: translateX(-5px); }
+        .related-services i { color: var(--secondary-blue); transition: color 0.3s; }
+        .related-services a:hover i { color: white; }
+        
+        footer { background: var(--dark-bg); color: white; padding: 60px 2rem 30px; margin-top: 80px; }
+        .footer-content { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 40px; }
+        .footer-section h3 { color: var(--accent-gold); margin-bottom: 20px; font-size: 1.3rem; }
+        .footer-section ul { list-style: none; }
+        .footer-section a { color: #cbd5e1; text-decoration: none; display: block; margin-bottom: 12px; transition: all 0.3s; }
+        .footer-section a:hover { color: var(--accent-gold); padding-left: 5px; }
+        body.rtl .footer-section a:hover { padding-left: 0; padding-right: 5px; }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); color: #94a3b8; }
+        
+        @media (max-width: 1200px) {
+            .service-content { grid-template-columns: 1fr; }
+            .sidebar { max-width: 600px; margin: 0 auto; }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .service-hero h1 { font-size: 2.5rem; }
+            .features-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switcher">
+        <button class="lang-btn active" onclick="switchLanguage('en')">
+            <span>🇬🇧</span><span>EN</span>
+        </button>
+        <button class="lang-btn" onclick="switchLanguage('fa')">
+            <span>🇮🇷</span><span>FA</span>
+        </button>
+    </div>
+
+    <header>
+        <nav>
+            <a href="../index.html" class="logo">
+                <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Logo">
+                <span data-en="Kavian Development Mine" data-fa="کاویان توسعه معدن">Kavian Development Mine</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="../index.html" data-en="Home" data-fa="خانه">Home</a></li>
+                <li><a href="../about.html" data-en="About" data-fa="درباره ما">About</a></li>
+                <li><a href="../services.html" data-en="Services" data-fa="خدمات">Services</a></li>
+                <li><a href="../portfolio.html" data-en="Portfolio" data-fa="نمونه کارها">Portfolio</a></li>
+                <li><a href="../blog.html" data-en="Blog" data-fa="وبلاگ">Blog</a></li>
+                <li><a href="../news.html" data-en="News" data-fa="اخبار">News</a></li>
+                <li><a href="../technical-resources.html" data-en="Resources" data-fa="منابع فنی">Resources</a></li>
+                <li><a href="../contact.html" data-en="Contact" data-fa="تماس">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="breadcrumb">
+        <a href="../index.html" data-en="Home" data-fa="خانه">Home</a>
+        <i class="fas fa-chevron-right"></i>
+        <a href="../services.html" data-en="Services" data-fa="خدمات">Services</a>
+        <i class="fas fa-chevron-right"></i>
+        <span data-en="Economic Analysis" data-fa="تحلیل اقتصادی">Economic Analysis</span>
+    </div>
+
+    <section class="service-hero">
+        <div class="hero-content">
+            <span class="service-category" data-en="FINANCIAL SERVICE" data-fa="خدمات مالی">FINANCIAL SERVICE</span>
+            <h1 data-en="Economic Analysis & Financial Modeling" data-fa="تحلیل اقتصادی و مدل‌سازی مالی">Economic Analysis & Financial Modeling</h1>
+            <p data-en="Comprehensive economic evaluation services including NPV analysis, cash flow modeling, sensitivity analysis, and risk assessment to support investment decisions for mining projects." data-fa="خدمات ارزیابی اقتصادی جامع از جمله تحلیل NPV، مدل‌سازی جریان نقدی، تحلیل حساسیت و ارزیابی ریسک برای پشتیبانی از تصمیمات سرمایه‌گذاری پروژه‌های معدنی.">Comprehensive economic evaluation services including NPV analysis, cash flow modeling, sensitivity analysis, and risk assessment to support investment decisions for mining projects.</p>
+        </div>
+    </section>
+
+    <div class="service-content">
+        <main class="main-content">
+            <div class="content-section">
+                <h2 class="section-title" data-en="Overview" data-fa="نمای کلی">Overview</h2>
+                <p data-en="Sound economic analysis is fundamental to successful mining project development. Our economic analysis services provide investors and project developers with the financial insights needed to make informed decisions. We employ industry-standard methodologies and best practices to deliver accurate, reliable financial models." data-fa="تحلیل اقتصادی صحیح برای توسعه موفق پروژه معدنی اساسی است. خدمات تحلیل اقتصادی ما به سرمایه‌گذاران و توسعه‌دهندگان پروژه بینش‌های مالی مورد نیاز برای تصمیم‌گیری آگاهانه را ارائه می‌دهد. ما از روش‌های استاندارد صنعت و بهترین شیوه‌ها برای ارائه مدل‌های مالی دقیق و قابل اعتماد استفاده می‌کنیم.">Sound economic analysis is fundamental to successful mining project development. Our economic analysis services provide investors and project developers with the financial insights needed to make informed decisions. We employ industry-standard methodologies and best practices to deliver accurate, reliable financial models.</p>
+                
+                <p data-en="Our team has extensive experience in mining economics, having evaluated projects ranging from small exploration ventures to multi-billion dollar operations. We understand the unique challenges of mining project economics including commodity price volatility, capital intensity, and long development timelines." data-fa="تیم ما تجربه گسترده‌ای در اقتصاد معدن دارد و پروژه‌هایی از سرمایه‌گذاری‌های کوچک اکتشافی تا عملیات چند میلیارد دلاری را ارزیابی کرده است. ما چالش‌های منحصر به فرد اقتصاد پروژه معدنی از جمله نوسان قیمت کالا، شدت سرمایه و جدول زمانی توسعه طولانی را درک می‌کنیم.">Our team has extensive experience in mining economics, having evaluated projects ranging from small exploration ventures to multi-billion dollar operations. We understand the unique challenges of mining project economics including commodity price volatility, capital intensity, and long development timelines.</p>
+            </div>
+            
+            <div class="content-section">
+                <h2 class="section-title" data-en="Key Services" data-fa="خدمات کلیدی">Key Services</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">💰</div>
+                        <h4 data-en="NPV & IRR Analysis" data-fa="تحلیل NPV و IRR">NPV & IRR Analysis</h4>
+                        <p data-en="Calculate Net Present Value and Internal Rate of Return using appropriate discount rates and project parameters." data-fa="محاسبه ارزش خالص فعلی و نرخ بازده داخلی با استفاده از نرخ تنزیل و پارامترهای مناسب پروژه.">Calculate Net Present Value and Internal Rate of Return using appropriate discount rates and project parameters.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h4 data-en="Cash Flow Modeling" data-fa="مدل‌سازی جریان نقدی">Cash Flow Modeling</h4>
+                        <p data-en="Detailed cash flow projections including revenue, operating costs, capital expenditures, and financing." data-fa="پیش‌بینی‌های دقیق جریان نقدی از جمله درآمد، هزینه‌های عملیاتی، هزینه‌های سرمایه‌ای و تامین مالی.">Detailed cash flow projections including revenue, operating costs, capital expenditures, and financing.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">📈</div>
+                        <h4 data-en="Sensitivity Analysis" data-fa="تحلیل حساسیت">Sensitivity Analysis</h4>
+                        <p data-en="Evaluate project sensitivity to key variables including commodity prices, operating costs, and production rates." data-fa="ارزیابی حساسیت پروژه به متغیرهای کلیدی از جمله قیمت کالا، هزینه‌های عملیاتی و نرخ تولید.">Evaluate project sensitivity to key variables including commodity prices, operating costs, and production rates.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">⚠️</div>
+                        <h4 data-en="Risk Assessment" data-fa="ارزیابی ریسک">Risk Assessment</h4>
+                        <p data-en="Identify and quantify project risks using Monte Carlo simulation and scenario analysis." data-fa="شناسایی و کمی‌سازی ریسک‌های پروژه با استفاده از شبیه‌سازی مونت کارلو و تحلیل سناریو.">Identify and quantify project risks using Monte Carlo simulation and scenario analysis.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🏦</div>
+                        <h4 data-en="Financing Structure" data-fa="ساختار تامین مالی">Financing Structure</h4>
+                        <p data-en="Optimize debt-equity ratios and evaluate different financing options for project development." data-fa="بهینه‌سازی نسبت بدهی به حقوق صاحبان سهام و ارزیابی گزینه‌های مختلف تامین مالی برای توسعه پروژه.">Optimize debt-equity ratios and evaluate different financing options for project development.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">📉</div>
+                        <h4 data-en="Breakeven Analysis" data-fa="تحلیل سربه‌سر">Breakeven Analysis</h4>
+                        <p data-en="Determine breakeven commodity prices and production levels for project viability." data-fa="تعیین قیمت‌های سربه‌سر کالا و سطوح تولید برای قابلیت اجرای پروژه.">Determine breakeven commodity prices and production levels for project viability.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-section">
+                <h2 class="section-title" data-en="Economic Metrics We Analyze" data-fa="معیارهای اقتصادی که تحلیل می‌کنیم">Economic Metrics We Analyze</h2>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value">NPV</div>
+                        <div class="metric-label" data-en="Net Present Value" data-fa="ارزش خالص فعلی">Net Present Value</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">IRR</div>
+                        <div class="metric-label" data-en="Internal Rate of Return" data-fa="نرخ بازده داخلی">Internal Rate of Return</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">PBP</div>
+                        <div class="metric-label" data-en="Payback Period" data-fa="دوره بازگشت سرمایه">Payback Period</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">ROI</div>
+                        <div class="metric-label" data-en="Return on Investment" data-fa="بازده سرمایه‌گذاری">Return on Investment</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <aside class="sidebar">
+            <div class="sidebar-widget">
+                <h3 class="widget-title" data-en="Request Analysis" data-fa="درخواست تحلیل">Request Analysis</h3>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label data-en="Full Name" data-fa="نام کامل">Full Name</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label data-en="Email" data-fa="ایمیل">Email</label>
+                        <input type="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label data-en="Company" data-fa="شرکت">Company</label>
+                        <input type="text">
+                    </div>
+                    <div class="form-group">
+                        <label data-en="Project Type" data-fa="نوع پروژه">Project Type</label>
+                        <select>
+                            <option data-en="Feasibility Study" data-fa="مطالعه امکان‌سنجی">Feasibility Study</option>
+                            <option data-en="Pre-Feasibility" data-fa="پیش‌امکان‌سنجی">Pre-Feasibility</option>
+                            <option data-en="Scoping Study" data-fa="مطالعه محدوده">Scoping Study</option>
+                            <option data-en="Investment Analysis" data-fa="تحلیل سرمایه‌گذاری">Investment Analysis</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label data-en="Message" data-fa="پیام">Message</label>
+                        <textarea></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit" data-en="Submit Request" data-fa="ارسال درخواست">Submit Request</button>
+                </form>
+            </div>
+            
+            <div class="sidebar-widget">
+                <h3 class="widget-title" data-en="Related Services" data-fa="خدمات مرتبط">Related Services</h3>
+                <ul class="related-services">
+                    <li><a href="feasibility-studies.html"><i class="fas fa-file-alt"></i><span data-en="Feasibility Studies" data-fa="مطالعات امکان‌سنجی">Feasibility Studies</span></a></li>
+                    <li><a href="cost-estimation.html"><i class="fas fa-calculator"></i><span data-en="Cost Estimation" data-fa="برآورد هزینه">Cost Estimation</span></a></li>
+                    <li><a href="equipment-selection.html"><i class="fas fa-cogs"></i><span data-en="Equipment Selection" data-fa="انتخاب تجهیزات">Equipment Selection</span></a></li>
+                    <li><a href="plant-design.html"><i class="fas fa-drafting-compass"></i><span data-en="Plant Design" data-fa="طراحی کارخانه">Plant Design</span></a></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 data-en="Company" data-fa="شرکت">Company</h3>
+                <ul>
+                    <li><a href="../about.html" data-en="About Us" data-fa="درباره ما">About Us</a></li>
+                    <li><a href="../portfolio.html" data-en="Portfolio" data-fa="نمونه کارها">Portfolio</a></li>
+                    <li><a href="../contact.html" data-en="Contact" data-fa="تماس با ما">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 data-en="Services" data-fa="خدمات">Services</h3>
+                <ul>
+                    <li><a href="equipment-selection.html" data-en="Equipment Selection" data-fa="انتخاب تجهیزات">Equipment Selection</a></li>
+                    <li><a href="economic-analysis.html" data-en="Economic Analysis" data-fa="تحلیل اقتصادی">Economic Analysis</a></li>
+                    <li><a href="plant-design.html" data-en="Plant Design" data-fa="طراحی کارخانه">Plant Design</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 data-en="Contact" data-fa="تماس">Contact</h3>
+                <ul>
+                    <li>📧 info@kdmine.com</li>
+                    <li>📞 +98 21 1234 5678</li>
+                    <li>📍 Tehran, Iran</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-en="&copy; 2025 Kavian Development Mine. All rights reserved." data-fa="© 2025 کاویان توسعه معدن. تمامی حقوق محفوظ است.">&copy; 2025 Kavian Development Mine. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function switchLanguage(lang) {
+            const body = document.body;
+            const elements = document.querySelectorAll('[data-en][data-fa]');
+            const langButtons = document.querySelectorAll('.lang-btn');
+            
+            if (lang === 'fa') { body.classList.add('rtl'); } 
+            else { body.classList.remove('rtl'); }
+            
+            langButtons.forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.lang-btn').classList.add('active');
+            
+            elements.forEach(el => {
+                el.innerHTML = el.getAttribute('data-' + lang);
+            });
+            
+            localStorage.setItem('preferredLanguage', lang);
+        }
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferredLanguage') || 'en';
+            if (savedLang === 'fa') {
+                document.querySelector('.lang-btn:last-child').click();
+            }
+        });
+        
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Form submitted! In production, this would send via EmailJS.');
+        });
+    </script>
+</body>
+</html>
