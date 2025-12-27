@@ -1,609 +1,504 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ثبت‌نام | کاویان توسعه معدن</title>
-  <link rel="icon" type="image/svg+xml" href="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg">
-  
-  <!-- EmailJS SDK -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  
-  <style>
-      @font-face {
-          font-family: 'B Nazanin';
-          src: local('B Nazanin'), local('BNazanin');
-          font-display: swap;
-      }
-      
-      * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-      }
-      
-      body {
-          font-family: 'B Nazanin', Tahoma, sans-serif;
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-          min-height: 100vh;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 20px;
-          direction: rtl;
-      }
-      
-      .registration-container {
-          background: white;
-          border-radius: 20px;
-          box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-          max-width: 650px;
-          width: 100%;
-          overflow: hidden;
-          animation: slideUp 0.5s ease;
-      }
-      
-      @keyframes slideUp {
-          from {
-              opacity: 0;
-              transform: translateY(30px);
-          }
-          to {
-              opacity: 1;
-              transform: translateY(0);
-          }
-      }
-      
-      .registration-header {
-          background: linear-gradient(135deg, #2563eb, #1d4ed8);
-          color: white;
-          padding: 35px;
-          text-align: center;
-      }
-      
-      .registration-header img {
-          width: 75px;
-          height: 75px;
-          margin: 0 auto 18px;
-          border-radius: 15px;
-          background: white;
-          padding: 10px;
-      }
-      
-      .registration-header h1 {
-          font-size: 1.9rem;
-          margin-bottom: 8px;
-      }
-      
-      .registration-header p {
-          opacity: 0.9;
-          font-size: 1.05rem;
-      }
-      
-      .registration-form {
-          padding: 35px;
-      }
-      
-      .form-group {
-          margin-bottom: 22px;
-      }
-      
-      .form-group label {
-          display: block;
-          margin-bottom: 7px;
-          color: #1a202c;
-          font-weight: bold;
-          font-size: 1rem;
-      }
-      
-      .form-group label .required {
-          color: #dc2626;
-      }
-      
-      .form-group input,
-      .form-group select,
-      .form-group textarea {
-          width: 100%;
-          padding: 13px;
-          border: 2px solid #e2e8f0;
-          border-radius: 10px;
-          font-family: inherit;
-          font-size: 0.95rem;
-          transition: all 0.3s;
-      }
-      
-      .form-group input:focus,
-      .form-group select:focus,
-      .form-group textarea:focus {
-          outline: none;
-          border-color: #2563eb;
-          box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-      }
-      
-      .form-group textarea {
-          resize: vertical;
-          min-height: 90px;
-      }
-      
-      .form-row {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 18px;
-      }
-      
-      .access-level-info {
-          background: #f0f9ff;
-          border: 2px solid #bfdbfe;
-          border-radius: 10px;
-          padding: 18px;
-          margin-bottom: 22px;
-          display: none;
-      }
-      
-      .access-level-info.show {
-          display: block;
-      }
-      
-      .access-level-info h3 {
-          color: #1e40af;
-          margin-bottom: 12px;
-          font-size: 1.1rem;
-      }
-      
-      .access-level-info ul {
-          list-style: none;
-          padding-right: 0;
-      }
-      
-      .access-level-info li {
-          padding: 7px 0;
-          padding-right: 22px;
-          position: relative;
-          color: #1e40af;
-          font-size: 0.9rem;
-      }
-      
-      .access-level-info li::before {
-          content: '✓';
-          position: absolute;
-          right: 0;
-          color: #059669;
-          font-weight: bold;
-      }
-      
-      .checkbox-group {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          margin-bottom: 18px;
-      }
-      
-      .checkbox-group input[type="checkbox"] {
-          width: auto;
-          cursor: pointer;
-      }
-      
-      .checkbox-group label {
-          margin: 0;
-          cursor: pointer;
-          font-weight: normal;
-          font-size: 0.95rem;
-      }
-      
-      .checkbox-group a {
-          color: #2563eb;
-          font-weight: bold;
-      }
-      
-      .submit-btn {
-          width: 100%;
-          padding: 15px;
-          background: linear-gradient(135deg, #2563eb, #1d4ed8);
-          color: white;
-          border: none;
-          border-radius: 10px;
-          font-size: 1.15rem;
-          font-weight: bold;
-          cursor: pointer;
-          transition: all 0.3s;
-          font-family: inherit;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 10px;
-      }
-      
-      .submit-btn:hover:not(:disabled) {
-          transform: translateY(-2px);
-          box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
-      }
-      
-      .submit-btn:disabled {
-          background: #cbd5e0;
-          cursor: not-allowed;
-      }
-      
-      .login-link {
-          text-align: center;
-          margin-top: 18px;
-          color: #4a5568;
-          font-size: 0.95rem;
-      }
-      
-      .login-link a {
-          color: #2563eb;
-          font-weight: bold;
-      }
-      
-      .message {
-          padding: 18px;
-          border-radius: 10px;
-          margin-bottom: 18px;
-          display: none;
-          font-size: 0.95rem;
-      }
-      
-      .message.show {
-          display: block;
-          animation: slideDown 0.3s ease;
-      }
-      
-      @keyframes slideDown {
-          from {
-              opacity: 0;
-              transform: translateY(-10px);
-          }
-          to {
-              opacity: 1;
-              transform: translateY(0);
-          }
-      }
-      
-      .success-message {
-          background: #d1fae5;
-          border: 2px solid #059669;
-          color: #065f46;
-      }
-      
-      .error-message {
-          background: #fee2e2;
-          border: 2px solid #dc2626;
-          color: #991b1b;
-      }
-      
-      .spinner {
-          display: inline-block;
-          width: 18px;
-          height: 18px;
-          border: 3px solid rgba(255,255,255,0.3);
-          border-radius: 50%;
-          border-top-color: white;
-          animation: spin 0.8s linear infinite;
-      }
-      
-      @keyframes spin {
-          to { transform: rotate(360deg); }
-      }
-      
-      @media (max-width: 768px) {
-          .form-row {
-              grid-template-columns: 1fr;
-          }
-          
-          .registration-header {
-              padding: 28px 22px;
-          }
-          
-          .registration-form {
-              padding: 28px 22px;
-          }
-      }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ثبت‌نام | کاویان توسعه معدن</title>
+    <meta name="description" content="ثبت‌نام در سیستم کاویان توسعه معدن">
+    <link rel="icon" type="image/svg+xml" href="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg">
+    
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function(){
+            emailjs.init({
+                publicKey: "YOUR_PUBLIC_KEY",
+            });
+        })();
+    </script>
+    
+    <style>
+        @font-face {
+            font-family: 'B Nazanin';
+            src: local('B Nazanin'), local('BNazanin');
+            font-display: swap;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'B Nazanin', Tahoma, sans-serif;
+            line-height: 1.8;
+            color: #1a202c;
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            background: white;
+            padding: 5px;
+        }
+        
+        .logo-text h2 {
+            font-size: 1.4rem;
+            margin-bottom: 2px;
+        }
+        
+        .logo-text p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.05rem;
+            font-weight: 600;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+        
+        /* Register Container */
+        .register-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 40px;
+        }
+        
+        .register-box {
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 600px;
+            width: 100%;
+            padding: 50px;
+        }
+        
+        .register-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .register-header h1 {
+            font-size: 2.5rem;
+            color: #1a202c;
+            margin-bottom: 10px;
+        }
+        
+        .register-header p {
+            font-size: 1.1rem;
+            color: #4a5568;
+        }
+        
+        /* Form Styles */
+        .register-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group label {
+            margin-bottom: 8px;
+            color: #1a202c;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: white;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        
+        .checkbox-group label {
+            margin: 0;
+            font-weight: normal;
+            cursor: pointer;
+        }
+        
+        .checkbox-group a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .checkbox-group a:hover {
+            text-decoration: underline;
+        }
+        
+        .submit-btn {
+            padding: 18px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.15rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .form-message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+        }
+        
+        .form-message.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 2px solid #059669;
+        }
+        
+        .form-message.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 2px solid #dc2626;
+        }
+        
+        .login-link {
+            text-align: center;
+            margin-top: 25px;
+            color: #4a5568;
+            font-size: 1rem;
+        }
+        
+        .login-link a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Footer */
+        .footer {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .register-container {
+                padding: 40px 25px;
+            }
+            
+            .register-box {
+                padding: 35px 25px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .register-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="registration-container">
-      <div class="registration-header">
-          <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Logo">
-          <h1>ثبت‌نام در کاویان</h1>
-          <p>دسترسی به منابع فنی و ابزارهای تخصصی</p>
-      </div>
-      
-      <form class="registration-form" id="registrationForm">
-          <div class="success-message message" id="successMessage">
-              <strong>✓ ثبت‌نام موفق!</strong><br>
-              درخواست شما با موفقیت ارسال شد. پس از تایید مدیر، اطلاعات ورود به ایمیل شما ارسال خواهد شد.
-          </div>
-          
-          <div class="error-message message" id="errorMessage">
-              <strong>✗ خطا!</strong><br>
-              <span id="errorText">لطفاً تمام فیلدهای الزامی را پر کنید.</span>
-          </div>
-          
-          <div class="form-row">
-              <div class="form-group">
-                  <label>نام <span class="required">*</span></label>
-                  <input type="text" name="firstName" id="firstName" required placeholder="نام خود را وارد کنید">
-              </div>
-              
-              <div class="form-group">
-                  <label>نام خانوادگی <span class="required">*</span></label>
-                  <input type="text" name="lastName" id="lastName" required placeholder="نام خانوادگی">
-              </div>
-          </div>
-          
-          <div class="form-group">
-              <label>ایمیل <span class="required">*</span></label>
-              <input type="email" name="email" id="email" required placeholder="example@email.com">
-          </div>
-          
-          <div class="form-row">
-              <div class="form-group">
-                  <label>شماره تماس <span class="required">*</span></label>
-                  <input type="tel" name="phone" id="phone" required placeholder="09123456789">
-              </div>
-              
-              <div class="form-group">
-                  <label>شرکت/سازمان</label>
-                  <input type="text" name="company" id="company" placeholder="نام شرکت">
-              </div>
-          </div>
-          
-          <div class="form-group">
-              <label>سمت شغلی <span class="required">*</span></label>
-              <select name="position" id="position" required>
-                  <option value="">انتخاب کنید</option>
-                  <option value="mining-engineer">مهندس معدن</option>
-                  <option value="process-engineer">مهندس فرآیند</option>
-                  <option value="project-manager">مدیر پروژه</option>
-                  <option value="consultant">مشاور</option>
-                  <option value="researcher">محقق/دانشجو</option>
-                  <option value="executive">مدیر اجرایی</option>
-                  <option value="other">سایر</option>
-              </select>
-          </div>
-          
-          <div class="form-group">
-              <label>حوزه تخصصی <span class="required">*</span></label>
-              <select name="expertise" id="expertise" required>
-                  <option value="">انتخاب کنید</option>
-                  <option value="equipment-selection">انتخاب تجهیزات</option>
-                  <option value="concentration">کارخانجات تغلیظ</option>
-                  <option value="leaching">لیچینگ و تصفیه</option>
-                  <option value="acid-production">تولید اسید</option>
-                  <option value="economic-analysis">تحلیل اقتصادی</option>
-                  <option value="risk-analysis">تحلیل ریسک</option>
-                  <option value="other">سایر</option>
-              </select>
-          </div>
-          
-          <div class="form-group">
-              <label>سطح دسترسی درخواستی <span class="required">*</span></label>
-              <select name="accessLevel" id="accessLevel" required>
-                  <option value="">انتخاب کنید</option>
-                  <option value="basic">پایه (رایگان)</option>
-                  <option value="premium">پریمیوم (اشتراک)</option>
-               </select>
-           </div>
-        <div class="access-level-info" id="accessInfo">
-            <h3>امکانات سطح دسترسی انتخابی:</h3>
-            <ul id="accessFeatures"></ul>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Logo">
+                <div class="logo-text">
+                    <h2>کاویان توسعه معدن</h2>
+                    <p>Kavian Development Mine</p>
+                </div>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="index.html">خانه</a></li>
+                <li><a href="about.html">درباره ما</a></li>
+                <li><a href="services.html">خدمات</a></li>
+                <li><a href="contact.html">تماس با ما</a></li>
+            </ul>
+            
+            <button class="mobile-menu-btn">☰</button>
         </div>
-        
-        <div class="form-group">
-            <label>توضیحات (اختیاری)</label>
-            <textarea name="description" id="description" placeholder="در صورت نیاز، توضیحات بیشتری در مورد نیاز خود بنویسید..."></textarea>
-        </div>
-        
-        <div class="checkbox-group">
-            <input type="checkbox" id="terms" name="terms" required>
-            <label for="terms">
-                <a href="terms.html" target="_blank">شرایط و قوانین</a> را مطالعه کرده و می‌پذیرم
-            </label>
-        </div>
-        
-        <button type="submit" class="submit-btn" id="submitBtn">
-            <span id="btnText">ارسال درخواست ثبت‌نام</span>
-        </button>
-        
-        <div class="login-link">
-            قبلاً ثبت‌نام کرده‌اید؟ <a href="technical-login.html">ورود به سیستم</a>
-        </div>
-    </form>
-</div>
-
-<script>
-    // EmailJS Configuration - REPLACE WITH YOUR CREDENTIALS
-    emailjs.init("YOUR_PUBLIC_KEY"); // Your EmailJS Public Key
-    const SERVICE_ID = "YOUR_SERVICE_ID"; // Your Service ID
-    const TEMPLATE_REGISTRATION = "template_registration"; // Admin notification template
-    const TEMPLATE_CONFIRMATION = "template_confirmation"; // User confirmation template
+    </nav>
     
-    const accessLevels = {
-        basic: [
-            'دسترسی به ماشین‌حساب‌های پایه',
-            'مشاهده مقالات عمومی',
-            'دسترسی به استانداردهای عمومی',
-            'دریافت خبرنامه هفتگی'
-        ],
-        premium: [
-            'تمام امکانات سطح پایه',
-            'دسترسی به پایگاه داده کامل تجهیزات',
-            'ماشین‌حساب‌های پیشرفته',
-            'مطالعات موردی بین‌المللی',
-            'مدل‌های اقتصادی و تحلیل ریسک',
-            'اطلاعات تماس تامین‌کنندگان',
-            'پشتیبانی اختصاصی'
-        ]
-    };
+    <!-- Register Container -->
+    <div class="register-container">
+        <div class="register-box">
+            <div class="register-header">
+                <h1>ثبت‌نام</h1>
+                <p>برای دسترسی به خدمات ویژه ثبت‌نام کنید</p>
+            </div>
+            
+            <form class="register-form" id="registerForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>نام *</label>
+                        <input type="text" name="first_name" required placeholder="نام خود را وارد کنید">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>نام خانوادگی *</label>
+                        <input type="text" name="last_name" required placeholder="نام خانوادگی خود را وارد کنید">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>ایمیل *</label>
+                    <input type="email" name="from_email" required placeholder="example@email.com">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>تلفن همراه *</label>
+                        <input type="tel" name="phone" required placeholder="09123456789">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>شرکت/سازمان</label>
+                        <input type="text" name="company" placeholder="نام شرکت یا سازمان">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>زمینه فعالیت *</label>
+                    <select name="industry" required>
+                        <option value="">انتخاب کنید</option>
+                        <option value="معدن مس">معدن مس</option>
+                        <option value="معدن طلا">معدن طلا</option>
+                        <option value="معدن سنگ آهن">معدن سنگ آهن</option>
+                        <option value="معدن سرب و روی">معدن سرب و روی</option>
+                        <option value="کارخانه فرآوری">کارخانه فرآوری</option>
+                        <option value="مشاوره">مشاوره</option>
+                        <option value="پیمانکاری">پیمانکاری</option>
+                        <option value="سایر">سایر</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>خدمات مورد نیاز</label>
+                    <select name="service" required>
+                        <option value="">انتخاب کنید</option>
+                        <option value="انتخاب تجهیزات">انتخاب و اندازه‌گذاری تجهیزات</option>
+                        <option value="تحلیل اقتصادی">تحلیل اقتصادی و سناریوپردازی</option>
+                        <option value="بهینه‌سازی">بهینه‌سازی تکنولوژی</option>
+                        <option value="طراحی کارخانه">طراحی کارخانه فرآوری</option>
+                        <option value="تحلیل ریسک">تحلیل ریسک</option>
+                        <option value="مشاوره عمومی">مشاوره عمومی</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>توضیحات (اختیاری)</label>
+                    <textarea name="message" placeholder="توضیحات بیشتر در مورد نیازهای خود..."></textarea>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">
+                        <a href="#">شرایط و قوانین</a> را مطالعه کرده و می‌پذیرم
+                    </label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="newsletter" name="newsletter">
+                    <label for="newsletter">
+                        عضویت در خبرنامه و دریافت اخبار و مقالات
+                    </label>
+                </div>
+                
+                <button type="submit" class="submit-btn">ثبت‌نام</button>
+                
+                <div class="form-message" id="formMessage"></div>
+            </form>
+            
+            <div class="login-link">
+                قبلاً ثبت‌نام کرده‌اید؟ <a href="#">ورود به سیستم</a>
+            </div>
+        </div>
+    </div>
     
-    // Show access level features
-    document.getElementById('accessLevel').addEventListener('change', function() {
-        const level = this.value;
-        const accessInfo = document.getElementById('accessInfo');
-        const accessFeatures = document.getElementById('accessFeatures');
-        
-        if (level && accessLevels[level]) {
-            accessFeatures.innerHTML = accessLevels[level]
-                .map(feature => `<li>${feature}</li>`)
-                .join('');
-            accessInfo.classList.add('show');
-        } else {
-            accessInfo.classList.remove('show');
-        }
-    });
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2025 کاویان توسعه معدن. تمامی حقوق محفوظ است.</p>
+    </footer>
     
-    // Form submission
-    document.getElementById('registrationForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
-        // Get form data
-        const formData = {
-            firstName: document.getElementById('firstName').value.trim(),
-            lastName: document.getElementById('lastName').value.trim(),
-            email: document.getElementById('email').value.trim(),
-            phone: document.getElementById('phone').value.trim(),
-            company: document.getElementById('company').value.trim() || 'نامشخص',
-            position: document.getElementById('position').value,
-            expertise: document.getElementById('expertise').value,
-            accessLevel: document.getElementById('accessLevel').value,
-            description: document.getElementById('description').value.trim() || 'بدون توضیحات'
-        };
-        
-        // Validate
-        if (!formData.firstName || !formData.lastName || !formData.email || !formData.phone || 
-            !formData.position || !formData.expertise || !formData.accessLevel) {
-            showError('لطفاً تمام فیلدهای الزامی را پر کنید.');
-            return;
-        }
-        
-        // Email validation
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(formData.email)) {
-            showError('لطفاً یک ایمیل معتبر وارد کنید.');
-            return;
-        }
-        
-        // Phone validation (Iranian format)
-        const phoneRegex = /^09\d{9}$/;
-        if (!phoneRegex.test(formData.phone.replace(/\s/g, ''))) {
-            showError('لطفاً شماره تلفن همراه معتبر وارد کنید (مثال: 09123456789)');
-            return;
-        }
-        
-        // Hide messages
-        hideMessages();
-        
-        // Disable button and show loading
-        const submitBtn = document.getElementById('submitBtn');
-        const btnText = document.getElementById('btnText');
-        submitBtn.disabled = true;
-        btnText.innerHTML = '<span class="spinner"></span> در حال ارسال...';
-        
-        try {
-            // Prepare template parameters for admin notification
-            const adminParams = {
-                from_name: `${formData.firstName} ${formData.lastName}`,
-                user_email: formData.email,
-                phone: formData.phone,
-                company: formData.company,
-                position: getPositionLabel(formData.position),
-                expertise: getExpertiseLabel(formData.expertise),
-                access_level: formData.accessLevel === 'premium' ? 'پریمیوم' : 'پایه',
-                message: formData.description,
-                to_email: 'admin@kdmine.com' // Admin email
+    <script>
+        // EmailJS Form Submission
+        document.getElementById('registerForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const submitBtn = this.querySelector('.submit-btn');
+            const formMessage = document.getElementById('formMessage');
+            
+            // Check if terms are accepted
+            const termsCheckbox = document.getElementById('terms');
+            if (!termsCheckbox.checked) {
+                formMessage.className = 'form-message error';
+                formMessage.textContent = '✗ لطفاً شرایط و قوانین را بپذیرید.';
+                formMessage.style.display = 'block';
+                return;
+            }
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'در حال ثبت‌نام...';
+            
+            // Prepare template parameters
+            const templateParams = {
+                from_name: this.first_name.value + ' ' + this.last_name.value,
+                from_email: this.from_email.value,
+                phone: this.phone.value,
+                company: this.company.value || 'ندارد',
+                industry: this.industry.value,
+                service: this.service.value,
+                message: this.message.value || 'ندارد',
+                newsletter: document.getElementById('newsletter').checked ? 'بله' : 'خیر'
             };
             
-            // Send email to admin
-            const adminResponse = await emailjs.send(SERVICE_ID, TEMPLATE_REGISTRATION, adminParams);
-            console.log('Admin notification sent:', adminResponse);
-            
-            // Prepare template parameters for user confirmation
-            const userParams = {
-                from_name: `${formData.firstName} ${formData.lastName}`,
-                to_email: formData.email,
-                user_email: formData.email
-            };
-            
-            // Send confirmation email to user
-            const userResponse = await emailjs.send(SERVICE_ID, TEMPLATE_CONFIRMATION, userParams);
-            console.log('User confirmation sent:', userResponse);
-            
-            // Store in localStorage (temporary storage until admin approves)
-            const registrations = JSON.parse(localStorage.getItem('registrations') || '[]');
-            registrations.push({
-                ...formData,
-                id: Date.now(),
-                status: 'pending',
-                submittedAt: new Date().toISOString()
-            });
-            localStorage.setItem('registrations', JSON.stringify(registrations));
-            
-            // Show success message
-            showSuccess();
-            
-            // Reset form
-            this.reset();
-            document.getElementById('accessInfo').classList.remove('show');
-            
-            // Redirect after 3 seconds
-            setTimeout(() => {
-                window.location.href = 'index.html';
-            }, 3000);
-            
-        } catch (error) {
-            console.error('Error:', error);
-            showError('مشکلی در ارسال درخواست پیش آمد. لطفاً دوباره تلاش کنید.');
-        } finally {
-            // Re-enable button
-            submitBtn.disabled = false;
-            btnText.textContent = 'ارسال درخواست ثبت‌نام';
-        }
-    });
-    
-    function showSuccess() {
-        const successMsg = document.getElementById('successMessage');
-        successMsg.classList.add('show');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-    
-    function showError(message) {
-        const errorMsg = document.getElementById('errorMessage');
-        const errorText = document.getElementById('errorText');
-        errorText.textContent = message;
-        errorMsg.classList.add('show');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-    
-    function hideMessages() {
-        document.getElementById('successMessage').classList.remove('show');
-        document.getElementById('errorMessage').classList.remove('show');
-    }
-    
-    function getPositionLabel(value) {
-        const positions = {
-            'mining-engineer': 'مهندس معدن',
-            'process-engineer': 'مهندس فرآیند',
-            'project-manager': 'مدیر پروژه',
-            'consultant': 'مشاور',
-            'researcher': 'محقق/دانشجو',
-            'executive': 'مدیر اجرایی',
-            'other': 'سایر'
-        };
-        return positions[value] || value;
-    }
-    
-    function getExpertiseLabel(value) {
-        const expertise = {
-            'equipment-selection': 'انتخاب تجهیزات',
-            'concentration': 'کارخانجات تغلیظ',
-            'leaching': 'لیچینگ و تصفیه',
-            'acid-production': 'تولید اسید',
-            'economic-analysis': 'تحلیل اقتصادی',
-            'risk-analysis': 'تحلیل ریسک',
-            'other': 'سایر'
-        };
-        return expertise[value] || value;
-    }
-</script>
-</body> 
+            // EmailJS send
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+                .then(function() {
+                    formMessage.className = 'form-message success';
+                    formMessage.textContent = '✓ ثبت‌نام شما با موفقیت انجام شد! به زودی با شما تماس خواهیم گرفت.';
+                    formMessage.style.display = 'block';
+                    document.getElementById('registerForm').reset();
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'ثبت‌نام';
+                    
+                    // Redirect after 3 seconds
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 3000);
+                }, function(error) {
+                    formMessage.className = 'form-message error';
+                    formMessage.textContent = '✗ خطا در ثبت‌نام. لطفاً دوباره تلاش کنید یا با ما تماس بگیرید.';
+                    formMessage.style.display = 'block';
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'ثبت‌نام';
+                    console.log('FAILED...', error);
+                });
+        });
+    </script>
+</body>
 </html>
