@@ -6,7 +6,6 @@
     <title>About Us - Kavian Development Mine</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
@@ -36,51 +35,83 @@
         .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--accent-gold); transition: width 0.3s; }
         .nav-links a:hover::after { width: 100%; }
         
-        .page-hero { background: linear-gradient(135deg, rgba(30, 58, 138, 0.95) 0%, rgba(37, 99, 235, 0.95) 100%), url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=1920') center/cover; color: white; padding: 120px 2rem 80px; text-align: center; }
+        .page-hero { background: linear-gradient(135deg, rgba(30, 58, 138, 0.95) 0%, rgba(37, 99, 235, 0.95) 100%), url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920') center/cover; color: white; padding: 120px 2rem 80px; text-align: center; }
         .page-hero h1 { font-size: 3.5rem; margin-bottom: 1rem; font-weight: 700; text-shadow: 2px 2px 8px rgba(0,0,0,0.3); }
         .page-hero p { font-size: 1.3rem; opacity: 0.95; max-width: 800px; margin: 0 auto; }
         
-        .content-section { max-width: 1400px; margin: 0 auto; padding: 80px 2rem; }
-        .section-title { font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 2rem; text-align: center; }
-        .section-text { font-size: 1.1rem; color: var(--text-light); line-height: 1.9; margin-bottom: 2rem; text-align: center; max-width: 900px; margin-left: auto; margin-right: auto; }
+        .about-intro { max-width: 1200px; margin: 80px auto; padding: 0 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .intro-image { border-radius: 25px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+        .intro-image img { width: 100%; height: 100%; object-fit: cover; }
+        .intro-content h2 { font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 25px; line-height: 1.3; }
+        .intro-content p { font-size: 1.1rem; color: var(--text-light); line-height: 1.9; margin-bottom: 20px; }
+        .highlight-text { color: var(--secondary-blue); font-weight: 600; }
         
+        .mission-vision { background: var(--light-bg); padding: 80px 2rem; }
+        .mission-container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; }
+        .mission-card { background: white; padding: 45px; border-radius: 25px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); text-align: center; transition: all 0.4s; }
+        .mission-card:hover { transform: translateY(-10px); box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+        .mission-icon { width: 100px; height: 100px; background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: white; margin: 0 auto 25px; }
+        .mission-card h3 { font-size: 1.8rem; color: var(--primary-blue); margin-bottom: 20px; }
+        .mission-card p { color: var(--text-light); line-height: 1.9; font-size: 1.05rem; }
+        
+        .values-section { max-width: 1200px; margin: 80px auto; padding: 0 2rem; }
+        .section-title { text-align: center; font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 60px; }
+        .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem; }
+        .value-card { background: white; padding: 35px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); border-left: 5px solid var(--secondary-blue); transition: all 0.3s; }
+        body.rtl .value-card { border-left: none; border-right: 5px solid var(--secondary-blue); }
+        .value-card:hover { transform: translateX(10px); box-shadow: 0 15px 50px rgba(0,0,0,0.12); }
+        body.rtl .value-card:hover { transform: translateX(-10px); }
+        .value-icon { font-size: 2.5rem; margin-bottom: 20px; }
+        .value-card h4 { font-size: 1.4rem; color: var(--primary-blue); margin-bottom: 15px; }
+        .value-card p { color: var(--text-light); line-height: 1.8; }
+        
+        .team-section { background: var(--light-bg); padding: 80px 2rem; }
+        .team-container { max-width: 1400px; margin: 0 auto; }
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; }
+        .team-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.08); transition: all 0.4s; text-align: center; }
+        .team-card:hover { transform: translateY(-10px); box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+        .team-image { height: 320px; background-size: cover; background-position: center; position: relative; }
+        .team-social { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; opacity: 0; transition: opacity 0.3s; }
+        .team-card:hover .team-social { opacity: 1; }
+        .social-btn { width: 40px; height: 40px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--secondary-blue); transition: all 0.3s; }
+        .social-btn:hover { background: var(--secondary-blue); color: white; transform: scale(1.1); }
+        .team-info { padding: 30px; }
+        .team-info h4 { font-size: 1.4rem; color: var(--primary-blue); margin-bottom: 8px; }
+        .team-info p { color: var(--text-light); font-size: 0.95rem; margin-bottom: 15px; }
+        .team-expertise { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+        .expertise-tag { padding: 5px 12px; background: var(--light-bg); color: var(--secondary-blue); border-radius: 15px; font-size: 0.8rem; font-weight: 600; }
+        
+        .timeline-section { max-width: 1200px; margin: 80px auto; padding: 0 2rem; }
         .timeline { position: relative; padding: 40px 0; }
         .timeline::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, var(--secondary-blue), var(--accent-gold)); }
         body.rtl .timeline::before { left: auto; right: 50%; }
-        
-        .timeline-item { display: flex; margin-bottom: 60px; position: relative; }
+        .timeline-item { display: flex; margin-bottom: 50px; position: relative; }
         .timeline-item:nth-child(odd) { flex-direction: row; }
         .timeline-item:nth-child(even) { flex-direction: row-reverse; }
         body.rtl .timeline-item:nth-child(odd) { flex-direction: row-reverse; }
         body.rtl .timeline-item:nth-child(even) { flex-direction: row; }
-        
-        .timeline-content { width: 45%; padding: 30px; background: white; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); position: relative; }
-        .timeline-content h3 { color: var(--secondary-blue); font-size: 1.8rem; margin-bottom: 10px; }
-        .timeline-year { color: var(--accent-gold); font-weight: 700; font-size: 1.3rem; margin-bottom: 15px; }
+        .timeline-content { width: 45%; padding: 30px; background: white; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); }
+        .timeline-year { color: var(--accent-gold); font-weight: 700; font-size: 1.5rem; margin-bottom: 15px; }
+        .timeline-content h4 { color: var(--primary-blue); font-size: 1.4rem; margin-bottom: 12px; }
         .timeline-content p { color: var(--text-light); line-height: 1.8; }
-        
-        .timeline-dot { position: absolute; left: 50%; top: 30px; width: 20px; height: 20px; background: var(--accent-gold); border-radius: 50%; transform: translateX(-50%); border: 4px solid white; box-shadow: 0 0 0 4px var(--secondary-blue); }
+        .timeline-dot { position: absolute; left: 50%; top: 30px; width: 25px; height: 25px; background: var(--accent-gold); border-radius: 50%; transform: translateX(-50%); border: 5px solid white; box-shadow: 0 0 0 4px var(--secondary-blue); }
         body.rtl .timeline-dot { left: auto; right: 50%; transform: translateX(50%); }
         
-        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-top: 60px; }
-        .team-member { text-align: center; background: white; padding: 40px 30px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); transition: all 0.4s; }
-        .team-member:hover { transform: translateY(-10px); box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
-        .team-avatar { width: 150px; height: 150px; border-radius: 50%; margin: 0 auto 20px; background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); display: flex; align-items: center; justify-content: center; font-size: 3rem; color: white; }
-        .team-member h3 { color: var(--primary-blue); font-size: 1.5rem; margin-bottom: 10px; }
-        .team-role { color: var(--accent-gold); font-weight: 600; margin-bottom: 15px; }
-        .team-member p { color: var(--text-light); line-height: 1.7; }
+        .certifications { background: white; padding: 80px 2rem; }
+        .cert-container { max-width: 1200px; margin: 0 auto; }
+        .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2.5rem; }
+        .cert-card { background: var(--light-bg); padding: 35px; border-radius: 20px; text-align: center; transition: all 0.3s; }
+        .cert-card:hover { background: white; box-shadow: 0 15px 50px rgba(0,0,0,0.1); transform: translateY(-5px); }
+        .cert-logo { width: 120px; height: 120px; background: white; border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 3rem; box-shadow: 0 5px 20px rgba(0,0,0,0.08); }
+        .cert-card h4 { color: var(--primary-blue); font-size: 1.3rem; margin-bottom: 10px; }
+        .cert-card p { color: var(--text-light); font-size: 0.95rem; }
         
-        .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; margin-top: 60px; }
-        .value-card { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); text-align: center; transition: all 0.3s; border-top: 5px solid var(--secondary-blue); }
-        .value-card:hover { transform: translateY(-5px); border-top-color: var(--accent-gold); }
-        .value-icon { font-size: 3.5rem; margin-bottom: 20px; }
-        .value-card h3 { color: var(--primary-blue); font-size: 1.6rem; margin-bottom: 15px; }
-        .value-card p { color: var(--text-light); line-height: 1.8; }
-        
-        .stats-section { background: var(--dark-bg); color: white; padding: 80px 2rem; margin: 80px 0; }
-        .stats-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; text-align: center; }
-        .stat-number { font-size: 4rem; font-weight: 700; color: var(--accent-gold); margin-bottom: 10px; }
-        .stat-label { font-size: 1.2rem; opacity: 0.9; }
+        .cta-section { background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%); color: white; padding: 80px 2rem; text-align: center; }
+        .cta-section h2 { font-size: 2.8rem; margin-bottom: 20px; }
+        .cta-section p { font-size: 1.3rem; margin-bottom: 35px; opacity: 0.95; max-width: 800px; margin-left: auto; margin-right: auto; }
+        .btn { display: inline-flex; align-items: center; gap: 10px; padding: 16px 35px; border-radius: 50px; font-weight: 600; font-size: 1.05rem; text-decoration: none; transition: all 0.4s; }
+        .btn-primary { background: var(--accent-gold); color: white; box-shadow: 0 8px 24px rgba(245, 158, 11, 0.3); }
+        .btn-primary:hover { background: #d97706; transform: translateY(-3px); box-shadow: 0 12px 32px rgba(245, 158, 11, 0.4); }
         
         footer { background: var(--dark-bg); color: white; padding: 60px 2rem 30px; }
         .footer-content { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 40px; }
@@ -91,9 +122,10 @@
         body.rtl .footer-section a:hover { padding-left: 0; padding-right: 5px; }
         .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); color: #94a3b8; }
         
-        @media (max-width: 768px) {
+        @media (max-width: 968px) {
             .nav-links { display: none; }
             .page-hero h1 { font-size: 2.5rem; }
+            .about-intro { grid-template-columns: 1fr; }
             .timeline::before { left: 30px; }
             body.rtl .timeline::before { left: auto; right: 30px; }
             .timeline-item { flex-direction: column !important; }
@@ -135,79 +167,193 @@
 
     <section class="page-hero">
         <h1 data-en="About Kavian Development Mine" data-fa="درباره کاویان توسعه معدن">About Kavian Development Mine</h1>
-        <p data-en="Your Trusted Partner in Mining Engineering Excellence Since 2010" data-fa="شریک مورد اعتماد شما در تعالی مهندسی معدن از سال 2010">Your Trusted Partner in Mining Engineering Excellence Since 2010</p>
+        <p data-en="Leading the Future of Mining Engineering with Innovation and Excellence" data-fa="رهبری آینده مهندسی معدن با نوآوری و تعالی">Leading the Future of Mining Engineering with Innovation and Excellence</p>
     </section>
 
-    <section class="content-section">
-        <h2 class="section-title" data-en="Who We Are" data-fa="ما کی هستیم">Who We Are</h2>
-        <p class="section-text" data-en="Kavian Development Mine is a leading mining engineering consultancy with over 15 years of experience in the industry. We specialize in providing comprehensive solutions for mining projects worldwide, from initial feasibility studies to plant commissioning and optimization. Our team of expert engineers combines deep technical knowledge with practical experience to deliver innovative, cost-effective, and sustainable mining solutions." data-fa="کاویان توسعه معدن یک مشاوره پیشرو مهندسی معدن با بیش از 15 سال تجربه در صنعت است. ما در ارائه راهکارهای جامع برای پروژه‌های معدنی در سراسر جهان، از مطالعات امکان‌سنجی اولیه تا راه‌اندازی و بهینه‌سازی کارخانه تخصص داریم. تیم مهندسان متخصص ما دانش فنی عمیق را با تجربه عملی ترکیب می‌کند تا راهکارهای معدنی نوآورانه، مقرون‌به‌صرفه و پایدار ارائه دهد.">Kavian Development Mine is a leading mining engineering consultancy with over 15 years of experience in the industry. We specialize in providing comprehensive solutions for mining projects worldwide, from initial feasibility studies to plant commissioning and optimization. Our team of expert engineers combines deep technical knowledge with practical experience to deliver innovative, cost-effective, and sustainable mining solutions.</p>
+    <section class="about-intro">
+        <div class="intro-image">
+            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800" alt="Office">
+        </div>
+        <div class="intro-content">
+            <h2 data-en="Who We Are" data-fa="ما کی هستیم">Who We Are</h2>
+            <p data-en="Founded in 2005, Kavian Development Mine has established itself as a premier mining engineering consultancy firm, delivering world-class solutions to clients across 30 countries. With over 200 successfully completed projects and a team of 150+ expert engineers, we combine technical excellence with innovative approaches to solve the most complex mining challenges." data-fa="کاویان توسعه معدن که در سال 2005 تأسیس شد، خود را به عنوان یک شرکت مشاوره مهندسی معدن برتر معرفی کرده است که راهکارهای در سطح جهانی را به مشتریان در 30 کشور ارائه می‌دهد. با بیش از 200 پروژه تکمیل شده موفق و تیمی متشکل از بیش از 150 مهندس متخصص، ما تعالی فنی را با رویکردهای نوآورانه ترکیب می‌کنیم تا پیچیده‌ترین چالش‌های معدنی را حل کنیم.">Founded in 2005, Kavian Development Mine has established itself as a premier mining engineering consultancy firm, delivering world-class solutions to clients across 30 countries. With over 200 successfully completed projects and a team of 150+ expert engineers, we combine technical excellence with innovative approaches to solve the most complex mining challenges.</p>
+            <p data-en="Our expertise spans the entire mining value chain, from initial feasibility studies through plant design, equipment selection, and operational optimization. We are committed to sustainable mining practices and leverage cutting-edge technologies including AI-powered cost estimation and advanced process simulation." data-fa="تخصص ما کل زنجیره ارزش معدن را از مطالعات امکان‌سنجی اولیه تا طراحی کارخانه، انتخاب تجهیزات و بهینه‌سازی عملیاتی پوشش می‌دهد. ما متعهد به شیوه‌های معدنکاری پایدار هستیم و از فناوری‌های پیشرفته از جمله برآورد هزینه مبتنی بر هوش مصنوعی و شبیه‌سازی فرآیند پیشرفته استفاده می‌کنیم.">Our expertise spans the entire mining value chain, from initial feasibility studies through plant design, equipment selection, and operational optimization. We are committed to sustainable mining practices and leverage cutting-edge technologies including AI-powered cost estimation and advanced process simulation.</p>
+        </div>
     </section>
 
-    <section class="stats-section">
-        <div class="stats-grid">
-            <div class="stat-item">
-                <div class="stat-number">15+</div>
-                <div class="stat-label" data-en="Years of Experience" data-fa="سال تجربه">Years of Experience</div>
+    <section class="mission-vision">
+        <div class="mission-container">
+            <div class="mission-card">
+                <div class="mission-icon">🎯</div>
+                <h3 data-en="Our Mission" data-fa="ماموریت ما">Our Mission</h3>
+                <p data-en="To deliver innovative, sustainable, and cost-effective mining engineering solutions that maximize value for our clients while minimizing environmental impact. We strive to be the trusted partner of choice for mining companies worldwide." data-fa="ارائه راهکارهای نوآورانه، پایدار و مقرون‌به‌صرفه مهندسی معدن که ارزش را برای مشتریان ما به حداکثر می‌رساند و در عین حال تأثیرات زیست‌محیطی را به حداقل می‌رساند. ما تلاش می‌کنیم تا شریک مورد اعتماد انتخابی برای شرکت‌های معدنی در سراسر جهان باشیم.">To deliver innovative, sustainable, and cost-effective mining engineering solutions that maximize value for our clients while minimizing environmental impact. We strive to be the trusted partner of choice for mining companies worldwide.</p>
             </div>
-            <div class="stat-item">
-                <div class="stat-number">200+</div>
-                <div class="stat-label" data-en="Completed Projects" data-fa="پروژه تکمیل شده">Completed Projects</div>
+            
+            <div class="mission-card">
+                <div class="mission-icon">👁️</div>
+                <h3 data-en="Our Vision" data-fa="چشم‌انداز ما">Our Vision</h3>
+                <p data-en="To be recognized globally as the leading mining engineering consultancy, setting industry standards for technical excellence, innovation, and sustainable practices. We envision a future where mining operations are efficient, environmentally responsible, and socially beneficial." data-fa="به عنوان مشاوره مهندسی معدن پیشرو در سطح جهانی شناخته شویم و استانداردهای صنعت را برای تعالی فنی، نوآوری و شیوه‌های پایدار تعیین کنیم. ما آینده‌ای را متصور هستیم که در آن عملیات معدنی کارآمد، مسئول زیست‌محیطی و مفید اجتماعی باشد.">To be recognized globally as the leading mining engineering consultancy, setting industry standards for technical excellence, innovation, and sustainable practices. We envision a future where mining operations are efficient, environmentally responsible, and socially beneficial.</p>
             </div>
-            <div class="stat-item">
-                <div class="stat-number">50+</div>
-                <div class="stat-label" data-en="Expert Engineers" data-fa="مهندس متخصص">Expert Engineers</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">30+</div>
-                <div class="stat-label" data-en="Countries Served" data-fa="کشور خدمت‌رسانی">Countries Served</div>
+            
+            <div class="mission-card">
+                <div class="mission-icon">⭐</div>
+                <h3 data-en="Our Commitment" data-fa="تعهد ما">Our Commitment</h3>
+                <p data-en="We are committed to delivering exceptional results through continuous innovation, professional development, and unwavering dedication to quality. Our ISO 9001:2015 certification reflects our commitment to maintaining the highest standards in everything we do." data-fa="ما متعهد به ارائه نتایج استثنایی از طریق نوآوری مستمر، توسعه حرفه‌ای و تعهد تزلزل‌ناپذیر به کیفیت هستیم. گواهینامه ISO 9001:2015 ما تعهد ما به حفظ بالاترین استانداردها در هر کاری که انجام می‌دهیم را منعکس می‌کند.">We are committed to delivering exceptional results through continuous innovation, professional development, and unwavering dedication to quality. Our ISO 9001:2015 certification reflects our commitment to maintaining the highest standards in everything we do.</p>
             </div>
         </div>
     </section>
 
-    <section class="content-section">
+    <section class="values-section">
+        <h2 class="section-title" data-en="Our Core Values" data-fa="ارزش‌های اصلی ما">Our Core Values</h2>
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-icon">🏆</div>
+                <h4 data-en="Excellence" data-fa="تعالی">Excellence</h4>
+                <p data-en="We pursue excellence in every project, delivering solutions that exceed client expectations and industry standards." data-fa="ما در هر پروژه به دنبال تعالی هستیم و راهکارهایی ارائه می‌دهیم که فراتر از انتظارات مشتری و استانداردهای صنعت است.">We pursue excellence in every project, delivering solutions that exceed client expectations and industry standards.</p>
+            </div>
+            
+            <div class="value-card">
+                <div class="value-icon">💡</div>
+                <h4 data-en="Innovation" data-fa="نوآوری">Innovation</h4>
+                <p data-en="We embrace new technologies and methodologies to provide cutting-edge solutions to complex mining challenges." data-fa="ما فناوری‌ها و روش‌های جدید را می‌پذیریم تا راهکارهای پیشرفته برای چالش‌های پیچیده معدنی ارائه دهیم.">We embrace new technologies and methodologies to provide cutting-edge solutions to complex mining challenges.</p>
+            </div>
+            
+            <div class="value-card">
+                <div class="value-icon">🤝</div>
+                <h4 data-en="Integrity" data-fa="صداقت">Integrity</h4>
+                <p data-en="We conduct business with honesty, transparency, and ethical practices, building trust with clients and partners." data-fa="ما تجارت را با صداقت، شفافیت و شیوه‌های اخلاقی انجام می‌دهیم و اعتماد را با مشتریان و شرکا ایجاد می‌کنیم.">We conduct business with honesty, transparency, and ethical practices, building trust with clients and partners.</p>
+            </div>
+            
+            <div class="value-card">
+                <div class="value-icon">🌱</div>
+                <h4 data-en="Sustainability" data-fa="پایداری">Sustainability</h4>
+                <p data-en="We prioritize environmental stewardship and social responsibility in all our engineering solutions." data-fa="ما مدیریت زیست‌محیطی و مسئولیت اجتماعی را در همه راهکارهای مهندسی خود در اولویت قرار می‌دهیم.">We prioritize environmental stewardship and social responsibility in all our engineering solutions.</p>
+            </div>
+            
+            <div class="value-card">
+                <div class="value-icon">👥</div>
+                <h4 data-en="Collaboration" data-fa="همکاری">Collaboration</h4>
+                <p data-en="We foster teamwork and partnership, working closely with clients to achieve shared goals and success." data-fa="ما کار تیمی و مشارکت را تقویت می‌کنیم و از نزدیک با مشتریان برای دستیابی به اهداف و موفقیت مشترک کار می‌کنیم.">We foster teamwork and partnership, working closely with clients to achieve shared goals and success.</p>
+            </div>
+            
+            <div class="value-card">
+                <div class="value-icon">📚</div>
+                <h4 data-en="Continuous Learning" data-fa="یادگیری مستمر">Continuous Learning</h4>
+                <p data-en="We invest in our team's development, staying at the forefront of mining technology and best practices." data-fa="ما در توسعه تیم خود سرمایه‌گذاری می‌کنیم و در خط مقدم فناوری معدن و بهترین شیوه‌ها باقی می‌مانیم.">We invest in our team's development, staying at the forefront of mining technology and best practices.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="team-section">
+        <div class="team-container">
+            <h2 class="section-title" data-en="Our Leadership Team" data-fa="تیم رهبری ما">Our Leadership Team</h2>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-image" style="background-image: url('https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600');">
+                        <div class="team-social">
+                            <a href="#" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-btn"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-info">
+                        <h4 data-en="Dr. Mohammad Rezaei" data-fa="دکتر محمد رضایی">Dr. Mohammad Rezaei</h4>
+                        <p data-en="CEO & Founder" data-fa="مدیرعامل و بنیانگذار">CEO & Founder</p>
+                        <div class="team-expertise">
+                            <span class="expertise-tag" data-en="Process Engineering" data-fa="مهندسی فرآیند">Process Engineering</span>
+                            <span class="expertise-tag" data-en="20+ Years" data-fa="20+ سال">20+ Years</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card">
+                    <div class="team-image" style="background-image: url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600');">
+                        <div class="team-social">
+                            <a href="#" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-btn"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-info">
+                        <h4 data-en="Sarah Ahmadi" data-fa="سارا احمدی">Sarah Ahmadi</h4>
+                        <p data-en="Chief Technical Officer" data-fa="مدیر ارشد فنی">Chief Technical Officer</p>
+                        <div class="team-expertise">
+                            <span class="expertise-tag" data-en="Plant Design" data-fa="طراحی کارخانه">Plant Design</span>
+                            <span class="expertise-tag" data-en="15+ Years" data-fa="15+ سال">15+ Years</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card">
+                    <div class="team-image" style="background-image: url('https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600');">
+                        <div class="team-social">
+                            <a href="#" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-btn"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-info">
+                        <h4 data-en="Ali Karimi" data-fa="علی کریمی">Ali Karimi</h4>
+                        <p data-en="Director of Operations" data-fa="مدیر عملیات">Director of Operations</p>
+                        <div class="team-expertise">
+                            <span class="expertise-tag" data-en="Project Management" data-fa="مدیریت پروژه">Project Management</span>
+                            <span class="expertise-tag" data-en="18+ Years" data-fa="18+ سال">18+ Years</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card">
+                    <div class="team-image" style="background-image: url('https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600');">
+                        <div class="team-social">
+                            <a href="#" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-btn"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-info">
+                        <h4 data-en="Zahra Mohammadi" data-fa="زهرا محمدی">Zahra Mohammadi</h4>
+                        <p data-en="Head of Research & Development" data-fa="رئیس تحقیق و توسعه">Head of Research & Development</p>
+                        <div class="team-expertise">
+                            <span class="expertise-tag" data-en="Innovation" data-fa="نوآوری">Innovation</span>
+                            <span class="expertise-tag" data-en="12+ Years" data-fa="12+ سال">12+ Years</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="timeline-section">
         <h2 class="section-title" data-en="Our Journey" data-fa="سفر ما">Our Journey</h2>
         <div class="timeline">
             <div class="timeline-item">
                 <div class="timeline-content">
+                    <div class="timeline-year">2005</div>
+                    <h4 data-en="Company Founded" data-fa="تأسیس شرکت">Company Founded</h4>
+                    <p data-en="Kavian Development Mine established with a vision to revolutionize mining engineering consultancy in Iran." data-fa="کاویان توسعه معدن با چشم‌اندازی برای متحول کردن مشاوره مهندسی معدن در ایران تأسیس شد.">Kavian Development Mine established with a vision to revolutionize mining engineering consultancy in Iran.</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
                     <div class="timeline-year">2010</div>
-                    <h3 data-en="Foundation" data-fa="تاسیس">Foundation</h3>
-                    <p data-en="Kavian Development Mine was established by a team of experienced mining engineers with a vision to revolutionize mining consultancy services in the region." data-fa="کاویان توسعه معدن توسط تیمی از مهندسان معدن با تجربه با چشم‌اندازی برای متحول کردن خدمات مشاوره معدنی در منطقه تاسیس شد.">Kavian Development Mine was established by a team of experienced mining engineers with a vision to revolutionize mining consultancy services in the region.</p>
+                    <h4 data-en="First Major Project" data-fa="اولین پروژه بزرگ">First Major Project</h4>
+                    <p data-en="Completed our first major copper concentrator project, establishing our reputation for excellence." data-fa="اولین پروژه بزرگ کنسانتره مس خود را تکمیل کردیم و شهرت خود را برای تعالی ایجاد کردیم.">Completed our first major copper concentrator project, establishing our reputation for excellence.</p>
                 </div>
                 <div class="timeline-dot"></div>
             </div>
             
             <div class="timeline-item">
                 <div class="timeline-content">
-                    <div class="timeline-year">2013</div>
-                    <h3 data-en="First Major Project" data-fa="اولین پروژه بزرگ">First Major Project</h3>
-                    <p data-en="Successfully completed our first large-scale copper processing plant design, establishing our reputation for excellence in mineral processing engineering." data-fa="طراحی اولین کارخانه فرآوری مس در مقیاس بزرگ خود را با موفقیت تکمیل کردیم و شهرت خود را برای تعالی در مهندسی فرآوری مواد معدنی ایجاد کردیم.">Successfully completed our first large-scale copper processing plant design, establishing our reputation for excellence in mineral processing engineering.</p>
+                    <div class="timeline-year">2015</div>
+                    <h4 data-en="International Expansion" data-fa="گسترش بین‌المللی">International Expansion</h4>
+                    <p data-en="Expanded operations to Middle East and Central Asia, opening offices in 5 countries." data-fa="عملیات را به خاورمیانه و آسیای مرکزی گسترش دادیم و دفاتر را در 5 کشور افتتاح کردیم.">Expanded operations to Middle East and Central Asia, opening offices in 5 countries.</p>
                 </div>
                 <div class="timeline-dot"></div>
             </div>
             
             <div class="timeline-item">
                 <div class="timeline-content">
-                    <div class="timeline-year">2016</div>
-                    <h3 data-en="International Expansion" data-fa="توسعه بین‌المللی">International Expansion</h3>
-                    <p data-en="Expanded operations to serve clients across Middle East, Asia, and Africa, bringing world-class mining engineering expertise to emerging markets." data-fa="عملیات را برای خدمت به مشتریان در سراسر خاورمیانه، آسیا و آفریقا گسترش دادیم و تخصص مهندسی معدن در سطح جهانی را به بازارهای نوظهور آوردیم.">Expanded operations to serve clients across Middle East, Asia, and Africa, bringing world-class mining engineering expertise to emerging markets.</p>
-                </div>
-                <div class="timeline-dot"></div>
-            </div>
-            
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <div class="timeline-year">2019</div>
-                    <h3 data-en="Technology Integration" data-fa="یکپارچه‌سازی فناوری">Technology Integration</h3>
-                    <p data-en="Implemented advanced AI-powered cost estimation tools and 3D plant modeling systems, enhancing accuracy and efficiency in project delivery." data-fa="ابزارهای برآورد هزینه مبتنی بر هوش مصنوعی پیشرفته و سیستم‌های مدل‌سازی سه‌بعدی کارخانه را پیاده‌سازی کردیم و دقت و کارایی در تحویل پروژه را افزایش دادیم.">Implemented advanced AI-powered cost estimation tools and 3D plant modeling systems, enhancing accuracy and efficiency in project delivery.</p>
-                </div>
-                <div class="timeline-dot"></div>
-            </div>
-            
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <div class="timeline-year">2022</div>
-                    <h3 data-en="Sustainability Initiative" data-fa="ابتکار پایداری">Sustainability Initiative</h3>
-                    <p data-en="Launched our Green Mining Solutions program, focusing on environmentally responsible mining practices and renewable energy integration." data-fa="برنامه راهکارهای معدنکاری سبز خود را راه‌اندازی کردیم که بر شیوه‌های معدنکاری مسئولانه زیست‌محیطی و یکپارچه‌سازی انرژی تجدیدپذیر تمرکز دارد.">Launched our Green Mining Solutions program, focusing on environmentally responsible mining practices and renewable energy integration.</p>
+                    <div class="timeline-year">2020</div>
+                    <h4 data-en="100th Project Milestone" data-fa="نقطه عطف پروژه 100ام">100th Project Milestone</h4>
+                    <p data-en="Successfully completed our 100th project, spanning copper, gold, and iron ore operations." data-fa="پروژه 100ام خود را با موفقیت تکمیل کردیم که عملیات مس، طلا و سنگ آهن را پوشش می‌داد.">Successfully completed our 100th project, spanning copper, gold, and iron ore operations.</p>
                 </div>
                 <div class="timeline-dot"></div>
             </div>
@@ -215,86 +361,49 @@
             <div class="timeline-item">
                 <div class="timeline-content">
                     <div class="timeline-year">2025</div>
-                    <h3 data-en="Industry Leadership" data-fa="رهبری صنعت">Industry Leadership</h3>
-                    <p data-en="Recognized as one of the top mining consultancy firms in the region, with over 200 successful projects and numerous industry awards." data-fa="به عنوان یکی از برترین شرکت‌های مشاوره معدنی در منطقه شناخته شده‌ایم، با بیش از 200 پروژه موفق و جوایز متعدد صنعتی.">Recognized as one of the top mining consultancy firms in the region, with over 200 successful projects and numerous industry awards.</p>
+                    <h4 data-en="Industry Recognition" data-fa="شناخت صنعت">Industry Recognition</h4>
+                    <p data-en="Awarded 'Best Mining Consultancy 2025' and launched AI-powered cost estimation platform." data-fa="برنده جایزه 'بهترین مشاوره معدنی 2025' شدیم و پلتفرم برآورد هزینه مبتنی بر هوش مصنوعی را راه‌اندازی کردیم.">Awarded 'Best Mining Consultancy 2025' and launched AI-powered cost estimation platform.</p>
                 </div>
                 <div class="timeline-dot"></div>
             </div>
         </div>
     </section>
 
-    <section class="content-section" style="background: var(--light-bg);">
-        <h2 class="section-title" data-en="Our Values" data-fa="ارزش‌های ما">Our Values</h2>
-        <div class="values-grid">
-            <div class="value-card">
-                <div class="value-icon">🎯</div>
-                <h3 data-en="Excellence" data-fa="تعالی">Excellence</h3>
-                <p data-en="We are committed to delivering the highest quality engineering solutions, exceeding client expectations through meticulous attention to detail and continuous improvement." data-fa="ما متعهد به ارائه راهکارهای مهندسی با بالاترین کیفیت هستیم و از طریق توجه دقیق به جزئیات و بهبود مستمر، فراتر از انتظارات مشتری عمل می‌کنیم.">We are committed to delivering the highest quality engineering solutions, exceeding client expectations through meticulous attention to detail and continuous improvement.</p>
-            </div>
-            
-            <div class="value-card">
-                <div class="value-icon">💡</div>
-                <h3 data-en="Innovation" data-fa="نوآوری">Innovation</h3>
-                <p data-en="We embrace cutting-edge technologies and innovative approaches to solve complex mining challenges, staying at the forefront of industry advancements." data-fa="ما فناوری‌های پیشرفته و رویکردهای نوآورانه را برای حل چالش‌های پیچیده معدنی پذیرفته‌ایم و در خط مقدم پیشرفت‌های صنعت قرار داریم.">We embrace cutting-edge technologies and innovative approaches to solve complex mining challenges, staying at the forefront of industry advancements.</p>
-            </div>
-            
-            <div class="value-card">
-                <div class="value-icon">🤝</div>
-                <h3 data-en="Integrity" data-fa="صداقت">Integrity</h3>
-                <p data-en="We conduct business with the highest ethical standards, maintaining transparency, honesty, and accountability in all our professional relationships." data-fa="ما تجارت را با بالاترین استانداردهای اخلاقی انجام می‌دهیم و شفافیت، صداقت و پاسخگویی را در تمام روابط حرفه‌ای خود حفظ می‌کنیم.">We conduct business with the highest ethical standards, maintaining transparency, honesty, and accountability in all our professional relationships.</p>
-            </div>
-            
-            <div class="value-card">
-                <div class="value-icon">🌱</div>
-                <h3 data-en="Sustainability" data-fa="پایداری">Sustainability</h3>
-                <p data-en="We prioritize environmentally responsible practices, balancing economic viability with ecological preservation for future generations." data-fa="ما اولویت را به شیوه‌های مسئولانه زیست‌محیطی می‌دهیم و امکان‌پذیری اقتصادی را با حفاظت از محیط زیست برای نسل‌های آینده متعادل می‌کنیم.">We prioritize environmentally responsible practices, balancing economic viability with ecological preservation for future generations.</p>
-            </div>
-            
-            <div class="value-card">
-                <div class="value-icon">👥</div>
-                <h3 data-en="Collaboration" data-fa="همکاری">Collaboration</h3>
-                <p data-en="We believe in the power of teamwork, fostering strong partnerships with clients, suppliers, and stakeholders to achieve shared success." data-fa="ما به قدرت کار تیمی اعتقاد داریم و مشارکت‌های قوی با مشتریان، تامین‌کنندگان و ذینفعان را برای دستیابی به موفقیت مشترک تقویت می‌کنیم.">We believe in the power of teamwork, fostering strong partnerships with clients, suppliers, and stakeholders to achieve shared success.</p>
-            </div>
-            
-            <div class="value-card">
-                <div class="value-icon">🏆</div>
-                <h3 data-en="Quality" data-fa="کیفیت">Quality</h3>
-                <p data-en="We maintain rigorous quality control processes, ensuring accuracy, reliability, and compliance with international standards in all deliverables." data-fa="ما فرآیندهای کنترل کیفیت دقیق را حفظ می‌کنیم و دقت، قابلیت اطمینان و انطباق با استانداردهای بین‌المللی را در تمام تحویلی‌ها تضمین می‌کنیم.">We maintain rigorous quality control processes, ensuring accuracy, reliability, and compliance with international standards in all deliverables.</p>
+    <section class="certifications">
+        <div class="cert-container">
+            <h2 class="section-title" data-en="Certifications & Accreditations" data-fa="گواهینامه‌ها و اعتبارنامه‌ها">Certifications & Accreditations</h2>
+            <div class="cert-grid">
+                <div class="cert-card">
+                    <div class="cert-logo">✓</div>
+                    <h4 data-en="ISO 9001:2015" data-fa="ISO 9001:2015">ISO 9001:2015</h4>
+                    <p data-en="Quality Management Systems" data-fa="سیستم‌های مدیریت کیفیت">Quality Management Systems</p>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-logo">🌍</div>
+                    <h4 data-en="ISO 14001:2015" data-fa="ISO 14001:2015">ISO 14001:2015</h4>
+                    <p data-en="Environmental Management" data-fa="مدیریت زیست‌محیطی">Environmental Management</p>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-logo">⚠️</div>
+                    <h4 data-en="ISO 45001:2018" data-fa="ISO 45001:2018">ISO 45001:2018</h4>
+                    <p data-en="Occupational Health & Safety" data-fa="بهداشت و ایمنی شغلی">Occupational Health & Safety</p>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-logo">🏆</div>
+                    <h4 data-en="AACE Member" data-fa="عضو AACE">AACE Member</h4>
+                    <p data-en="International Association" data-fa="انجمن بین‌المللی">International Association</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="content-section">
-        <h2 class="section-title" data-en="Leadership Team" data-fa="تیم رهبری">Leadership Team</h2>
-        <div class="team-grid">
-            <div class="team-member">
-                <div class="team-avatar">👨‍💼</div>
-                <h3 data-en="Dr. Ahmad Rezaei" data-fa="دکتر احمد رضایی">Dr. Ahmad Rezaei</h3>
-                <div class="team-role" data-en="CEO & Founder" data-fa="مدیرعامل و بنیانگذار">CEO & Founder</div>
-                <p data-en="25+ years of experience in mining engineering with PhD in Mineral Processing. Led numerous large-scale mining projects across Middle East and Asia." data-fa="بیش از 25 سال تجربه در مهندسی معدن با دکترای فرآوری مواد معدنی. رهبری پروژه‌های معدنی بزرگ متعدد در خاورمیانه و آسیا.">25+ years of experience in mining engineering with PhD in Mineral Processing. Led numerous large-scale mining projects across Middle East and Asia.</p>
-            </div>
-            
-            <div class="team-member">
-                <div class="team-avatar">👩‍💼</div>
-                <h3 data-en="Eng. Sara Mohammadi" data-fa="مهندس سارا محمدی">Eng. Sara Mohammadi</h3>
-                <div class="team-role" data-en="Chief Technical Officer" data-fa="مدیر فنی ارشد">Chief Technical Officer</div>
-                <p data-en="Expert in plant design and process optimization with 18 years of experience. Specializes in copper and gold processing technologies." data-fa="متخصص در طراحی کارخانه و بهینه‌سازی فرآیند با 18 سال تجربه. تخصص در فناوری‌های فرآوری مس و طلا.">Expert in plant design and process optimization with 18 years of experience. Specializes in copper and gold processing technologies.</p>
-            </div>
-            
-            <div class="team-member">
-                <div class="team-avatar">👨‍💼</div>
-                <h3 data-en="Dr. Mehdi Karimi" data-fa="دکتر مهدی کریمی">Dr. Mehdi Karimi</h3>
-                <div class="team-role" data-en="Head of Economic Analysis" data-fa="رئیس تحلیل اقتصادی">Head of Economic Analysis</div>
-                <p data-en="PhD in Mining Economics with expertise in financial modeling and feasibility studies. Published 30+ research papers in international journals." data-fa="دکترای اقتصاد معدن با تخصص در مدل‌سازی مالی و مطالعات امکان‌سنجی. انتشار بیش از 30 مقاله تحقیقاتی در مجلات بین‌المللی.">PhD in Mining Economics with expertise in financial modeling and feasibility studies. Published 30+ research papers in international journals.</p>
-            </div>
-            
-            <div class="team-member">
-                <div class="team-avatar">👩‍💼</div>
-                <h3 data-en="Eng. Zahra Ahmadi" data-fa="مهندس زهرا احمدی">Eng. Zahra Ahmadi</h3>
-                <div class="team-role" data-en="Director of Operations" data-fa="مدیر عملیات">Director of Operations</div>
-                <p data-en="15 years of experience in project management and operations. Certified PMP and expert in AACE cost estimation standards." data-fa="15 سال تجربه در مدیریت پروژه و عملیات. دارای گواهینامه PMP و متخصص در استانداردهای برآورد هزینه AACE.">15 years of experience in project management and operations. Certified PMP and expert in AACE cost estimation standards.</p>
-            </div>
-        </div>
+    <section class="cta-section">
+        <h2 data-en="Join Us on Our Journey" data-fa="به ما در سفرمان بپیوندید">Join Us on Our Journey</h2>
+        <p data-en="Whether you're looking for expert mining consultancy or want to join our team of professionals, we'd love to hear from you." data-fa="چه به دنبال مشاوره تخصصی معدن باشید یا بخواهید به تیم متخصصان ما بپیوندید، دوست داریم از شما بشنویم.">Whether you're looking for expert mining consultancy or want to join our team of professionals, we'd love to hear from you.</p>
+        <a href="contact.html" class="btn btn-primary">
+            <span data-en="Get In Touch" data-fa="تماس بگیرید">Get In Touch</span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
     </section>
 
     <footer>
@@ -332,21 +441,13 @@
     </footer>
 
     <script>
-        // Initialize EmailJS
-        (function(){
-            emailjs.init("u3dfoUdeOTtWSAjk_");
-        })();
-        
         function switchLanguage(lang) {
             const body = document.body;
             const elements = document.querySelectorAll('[data-en][data-fa]');
             const langButtons = document.querySelectorAll('.lang-btn');
             
-            if (lang === 'fa') {
-                body.classList.add('rtl');
-            } else {
-                body.classList.remove('rtl');
-            }
+            if (lang === 'fa') { body.classList.add('rtl'); } 
+            else { body.classList.remove('rtl'); }
             
             langButtons.forEach(btn => btn.classList.remove('active'));
             event.target.closest('.lang-btn').classList.add('active');
