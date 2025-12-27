@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News & Updates - Kavian Development Mine</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #1e3a8a;
+            --secondary-blue: #2563eb;
+            --accent-gold: #f59e0b;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --success-green: #10b981;
+        }
+        body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-dark); overflow-x: hidden; }
+        body.rtl { font-family: 'Vazirmatn', sans-serif; direction: rtl; }
+        
+        .language-switcher { position: fixed; top: 20px; right: 20px; z-index: 3000; background: white; border-radius: 50px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); padding: 8px; display: flex; gap: 8px; }
+        body.rtl .language-switcher { right: auto; left: 20px; }
+        .lang-btn { padding: 10px 20px; border: 2px solid transparent; background: transparent; border-radius: 25px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: all 0.3s; display: flex; align-items: center; gap: 8px; color: var(--text-light); }
+        .lang-btn:hover { background: var(--light-bg); color: var(--secondary-blue); }
+        .lang-btn.active { background: var(--secondary-blue); color: white; border-color: var(--secondary-blue); }
+        
+        header { background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%); color: white; padding: 1rem 0; position: sticky; top: 0; z-index: 2000; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        nav { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
+        .logo { display: flex; align-items: center; gap: 15px; font-size: 1.5rem; font-weight: 700; text-decoration: none; color: white; }
+        .logo img { height: 55px; width: auto; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2)); }
+        .nav-links { display: flex; list-style: none; gap: 2.5rem; align-items: center; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 500; transition: all 0.3s; position: relative; padding: 5px 0; }
+        .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--accent-gold); transition: width 0.3s; }
+        .nav-links a:hover::after { width: 100%; }
+        
+        .page-hero { background: linear-gradient(135deg, rgba(30, 58, 138, 0.95) 0%, rgba(37, 99, 235, 0.95) 100%), url('https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1920') center/cover; color: white; padding: 120px 2rem 80px; text-align: center; }
+        .page-hero h1 { font-size: 3.5rem; margin-bottom: 1rem; font-weight: 700; text-shadow: 2px 2px 8px rgba(0,0,0,0.3); }
+        .page-hero p { font-size: 1.3rem; opacity: 0.95; max-width: 800px; margin: 0 auto; }
+        
+        .breaking-news { background: linear-gradient(135deg, #dc2626, #ef4444); color: white; padding: 20px 0; overflow: hidden; }
+        .breaking-container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; gap: 20px; }
+        .breaking-label { background: white; color: #dc2626; padding: 8px 20px; border-radius: 25px; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; }
+        .breaking-text { font-size: 1.1rem; font-weight: 500; animation: scroll 20s linear infinite; white-space: nowrap; }
+        
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        .news-container { max-width: 1400px; margin: 80px auto; padding: 0 2rem; }
+        
+        .filter-tabs { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 60px; }
+        .filter-tab { padding: 12px 30px; border: 2px solid var(--secondary-blue); background: white; color: var(--secondary-blue); border-radius: 50px; cursor: pointer; font-weight: 600; font-size: 1rem; transition: all 0.3s; }
+        .filter-tab:hover, .filter-tab.active { background: var(--secondary-blue); color: white; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3); }
+        
+        .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 3rem; margin-bottom: 60px; }
+        
+        .news-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.08); transition: all 0.4s; position: relative; }
+        .news-card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+        
+        .news-badge { position: absolute; top: 20px; right: 20px; z-index: 10; padding: 8px 20px; border-radius: 25px; font-size: 0.85rem; font-weight: 700; color: white; }
+        body.rtl .news-badge { right: auto; left: 20px; }
+        .badge-new { background: var(--success-green); }
+        .badge-announcement { background: var(--secondary-blue); }
+        .badge-award { background: var(--accent-gold); }
+        .badge-partnership { background: #8b5cf6; }
+        
+        .news-image { height: 250px; background-size: cover; background-position: center; position: relative; }
+        .news-date-overlay { position: absolute; bottom: 20px; left: 20px; background: rgba(255,255,255,0.95); padding: 15px 20px; border-radius: 15px; }
+        body.rtl .news-date-overlay { left: auto; right: 20px; }
+        .date-day { font-size: 2rem; font-weight: 700; color: var(--secondary-blue); line-height: 1; }
+        .date-month { font-size: 0.9rem; color: var(--text-light); font-weight: 600; }
+        
+        .news-content { padding: 30px; }
+        .news-category { display: inline-block; padding: 6px 15px; background: var(--light-bg); color: var(--secondary-blue); border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 15px; }
+        .news-content h3 { font-size: 1.6rem; color: var(--primary-blue); margin-bottom: 15px; line-height: 1.4; }
+        .news-content p { color: var(--text-light); line-height: 1.8; margin-bottom: 20px; }
+        
+        .news-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 20px; border-top: 2px solid var(--light-bg); }
+        .news-meta { display: flex; gap: 15px; color: var(--text-light); font-size: 0.9rem; }
+        .meta-icon { color: var(--secondary-blue); }
+        .news-link { color: var(--secondary-blue); font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 8px; transition: all 0.3s; }
+        .news-link:hover { color: var(--accent-gold); gap: 12px; }
+        
+        .timeline-section { background: var(--light-bg); padding: 80px 2rem; margin: 80px 0; }
+        .timeline-container { max-width: 1000px; margin: 0 auto; }
+        .section-title { text-align: center; font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 60px; }
+        
+        .timeline { position: relative; padding: 40px 0; }
+        .timeline::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, var(--secondary-blue), var(--accent-gold)); }
+        body.rtl .timeline::before { left: auto; right: 50%; }
+        
+        .timeline-item { display: flex; margin-bottom: 50px; position: relative; }
+        .timeline-item:nth-child(odd) { flex-direction: row; }
+        .timeline-item:nth-child(even) { flex-direction: row-reverse; }
+        body.rtl .timeline-item:nth-child(odd) { flex-direction: row-reverse; }
+        body.rtl .timeline-item:nth-child(even) { flex-direction: row; }
+        
+        .timeline-content { width: 45%; padding: 25px; background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+        .timeline-date { color: var(--accent-gold); font-weight: 700; font-size: 1.1rem; margin-bottom: 10px; }
+        .timeline-content h4 { color: var(--primary-blue); font-size: 1.3rem; margin-bottom: 10px; }
+        .timeline-content p { color: var(--text-light); line-height: 1.7; font-size: 0.95rem; }
+        
+        .timeline-dot { position: absolute; left: 50%; top: 30px; width: 20px; height: 20px; background: var(--accent-gold); border-radius: 50%; transform: translateX(-50%); border: 4px solid white; box-shadow: 0 0 0 4px var(--secondary-blue); }
+        body.rtl .timeline-dot { left: auto; right: 50%; transform: translateX(50%); }
+        
+        .press-releases { max-width: 1200px; margin: 80px auto; padding: 0 2rem; }
+        .press-list { display: grid; gap: 2rem; }
+        .press-item { background: white; padding: 35px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); display: flex; gap: 30px; align-items: center; transition: all 0.3s; }
+        .press-item:hover { transform: translateX(10px); box-shadow: 0 15px 50px rgba(0,0,0,0.12); }
+        body.rtl .press-item:hover { transform: translateX(-10px); }
+        .press-icon { width: 80px; height: 80px; background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; flex-shrink: 0; }
+        .press-content { flex: 1; }
+        .press-date { color: var(--text-light); font-size: 0.9rem; margin-bottom: 8px; }
+        .press-content h4 { color: var(--primary-blue); font-size: 1.4rem; margin-bottom: 10px; }
+        .press-content p { color: var(--text-light); line-height: 1.7; }
+        .press-download { padding: 10px 25px; background: var(--secondary-blue); color: white; border-radius: 25px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.3s; white-space: nowrap; }
+        .press-download:hover { background: var(--accent-gold); transform: scale(1.05); }
+        
+        footer { background: var(--dark-bg); color: white; padding: 60px 2rem 30px; }
+        .footer-content { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 40px; }
+        .footer-section h3 { color: var(--accent-gold); margin-bottom: 20px; font-size: 1.3rem; }
+        .footer-section ul { list-style: none; }
+        .footer-section a { color: #cbd5e1; text-decoration: none; display: block; margin-bottom: 12px; transition: all 0.3s; }
+        .footer-section a:hover { color: var(--accent-gold); padding-left: 5px; }
+        body.rtl .footer-section a:hover { padding-left: 0; padding-right: 5px; }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); color: #94a3b8; }
+        
+        @media (max-width: 968px) {
+            .nav-links { display: none; }
+            .page-hero h1 { font-size: 2.5rem; }
+            .news-grid { grid-template-columns: 1fr; }
+            .timeline::before { left: 30px; }
+            body.rtl .timeline::before { left: auto; right: 30px; }
+            .timeline-item { flex-direction: column !important; }
+            .timeline-content { width: 100%; margin-left: 60px; }
+            body.rtl .timeline-content { margin-left: 0; margin-right: 60px; }
+            .timeline-dot { left: 30px; }
+            body.rtl .timeline-dot { left: auto; right: 30px; }
+            .press-item { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switcher">
+        <button class="lang-btn active" onclick="switchLanguage('en')">
+            <span>🇬🇧</span><span>EN</span>
+        </button>
+        <button class="lang-btn" onclick="switchLanguage('fa')">
+            <span>🇮🇷</span><span>FA</span>
+        </button>
+    </div>
+
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Logo">
+                <span data-en="Kavian Development Mine" data-fa="کاویان توسعه معدن">Kavian Development Mine</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" data-en="Home" data-fa="خانه">Home</a></li>
+                <li><a href="about.html" data-en="About" data-fa="درباره ما">About</a></li>
+                <li><a href="services.html" data-en="Services" data-fa="خدمات">Services</a></li>
+                <li><a href="portfolio.html" data-en="Portfolio" data-fa="نمونه کارها">Portfolio</a></li>
+                <li><a href="blog.html" data-en="Blog" data-fa="وبلاگ">Blog</a></li>
+                <li><a href="news.html" data-en="News" data-fa="اخبار">News</a></li>
+                <li><a href="technical-resources.html" data-en="Resources" data-fa="منابع فنی">Resources</a></li>
+                <li><a href="contact.html" data-en="Contact" data-fa="تماس">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="page-hero">
+        <h1 data-en="Latest News & Updates" data-fa="آخرین اخبار و به‌روزرسانی‌ها">Latest News & Updates</h1>
+        <p data-en="Stay Informed About Our Latest Projects, Achievements, and Industry Insights" data-fa="از آخرین پروژه‌ها، دستاوردها و بینش‌های صنعتی ما مطلع شوید">Stay Informed About Our Latest Projects, Achievements, and Industry Insights</p>
+    </section>
+
+    <section class="breaking-news">
+        <div class="breaking-container">
+            <span class="breaking-label" data-en="BREAKING" data-fa="فوری">BREAKING</span>
+            <div class="breaking-text" data-en="Kavian Development Mine wins 'Best Mining Consultancy 2025' award from International Mining Association • New $120M copper project signed in Oman • Advanced AI-powered cost estimation platform launched" data-fa="کاویان توسعه معدن برنده جایزه 'بهترین مشاوره معدنی 2025' از انجمن بین‌المللی معدن • پروژه جدید 120 میلیون دلاری مس در عمان امضا شد • پلتفرم برآورد هزینه مبتنی بر هوش مصنوعی پیشرفته راه‌اندازی شد">Kavian Development Mine wins 'Best Mining Consultancy 2025' award from International Mining Association • New $120M copper project signed in Oman • Advanced AI-powered cost estimation platform launched</div>
+        </div>
+    </section>
+
+    <section class="news-container">
+        <div class="filter-tabs">
+            <button class="filter-tab active" data-category="all" data-en="All News" data-fa="همه اخبار">All News</button>
+            <button class="filter-tab" data-category="projects" data-en="Projects" data-fa="پروژه‌ها">Projects</button>
+            <button class="filter-tab" data-category="awards" data-en="Awards" data-fa="جوایز">Awards</button>
+            <button class="filter-tab" data-category="partnerships" data-en="Partnerships" data-fa="مشارکت‌ها">Partnerships</button>
+            <button class="filter-tab" data-category="announcements" data-en="Announcements" data-fa="اطلاعیه‌ها">Announcements</button>
+        </div>
+        
+        <div class="news-grid" id="newsGrid">
+            <article class="news-card" data-category="awards">
+                <span class="news-badge badge-award" data-en="AWARD" data-fa="جایزه">AWARD</span>
+                <div class="news-image" style="background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?w=800');">
+                    <div class="news-date-overlay">
+                        <div class="date-day">22</div>
+                        <div class="date-month" data-en="DEC" data-fa="دسامبر">DEC</div>
+                    </div>
+                </div>
+                <div class="news-content">
+                    <span class="news-category" data-en="Company News" data-fa="اخبار شرکت">Company News</span>
+                    <h3 data-en="Kavian Wins 'Best Mining Consultancy 2025' Award" data-fa="کاویان برنده جایزه 'بهترین مشاوره معدنی 2025'">Kavian Wins 'Best Mining Consultancy 2025' Award</h3>
+                    <p data-en="We are honored to receive the prestigious 'Best Mining Consultancy' award from the International Mining Association, recognizing our commitment to excellence and innovation in mining engineering." data-fa="ما مفتخریم که جایزه معتبر 'بهترین مشاوره معدنی' را از انجمن بین‌المللی معدن دریافت کردیم که تعهد ما به تعالی و نوآوری در مهندسی معدن را به رسمیت می‌شناسد.">We are honored to receive the prestigious 'Best Mining Consultancy' award from the International Mining Association, recognizing our commitment to excellence and innovation in mining engineering.</p>
+                    <div class="news-footer">
+                        <div class="news-meta">
+                            <span><i class="fas fa-eye meta-icon"></i> 2.5K</span>
+                            <span><i class="fas fa-comment meta-icon"></i> 48</span>
+                        </div>
+                        <a href="#" class="news-link">
+                            <span data-en="Read More" data-fa="بیشتر بخوانید">Read More</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </article>
+            
+            <article class="news-card" data-category="projects">
+                <span class="news-badge badge-new" data-en="NEW" data-fa="جدید">NEW</span>
+                <div class="news-image" style="background-image: url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800');">
+                    <div class="news-date-overlay">
+                        <div class="date-day">18</div>
+                        <div class="date-month" data-en="DEC" data-fa="دسامبر">DEC</div>
+                    </div>
+                </div>
+                <div class="news-content">
+                    <span class="news-category" data-en="New Projects" data-fa="پروژه‌های جدید">New Projects</span>
+                    <h3 data-en="$120M Copper Project Signed in Oman" data-fa="پروژه 120 میلیون دلاری مس در عمان امضا شد">$120M Copper Project Signed in Oman</h3>
+                    <p data-en="Kavian has been selected to provide complete engineering services for a new 30,000 TPD copper concentrator plant in Oman, marking our largest project in the Middle East region." data-fa="کاویان برای ارائه خدمات مهندسی کامل برای کارخانه کنسانتره مس 30000 تن در روز جدید در عمان انتخاب شده است که بزرگترین پروژه ما در منطقه خاورمیانه است.">Kavian has been selected to provide complete engineering services for a new 30,000 TPD copper concentrator plant in Oman, marking our largest project in the Middle East region.</p>
+                    <div class="news-footer">
+                        <div class="news-meta">
+                            <span><i class="fas fa-eye meta-icon"></i> 3.2K</span>
+                            <span><i class="fas fa-comment meta-icon"></i> 65</span>
+                        </div>
+                        <a href="#" class="news-link">
+                            <span data-en="Read More" data-fa="بیشتر بخوانید">Read More</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </article>
+            
+            <article class="news-card" data-category="announcements">
+                <span class="news-badge badge-announcement" data-en="LAUNCH" data-fa="راه‌اندازی">LAUNCH</span>
+                <div class="news-image" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800');">
+                    <div class="news-date-overlay">
+                        <div class="date-day">15</div>
+                        <div class="date-month" data-en="DEC" data-fa="دسامبر">DEC</div>
+                    </div>
+                </div>
+                <div class="news-content">
+                    <span class="news-category" data-en="Technology" data-fa="فناوری">Technology</span>
+                    <h3 data-en="AI-Powered Cost Estimation Platform Launched" data-fa="پلتفرم برآورد هزینه مبتنی بر هوش مصنوعی راه‌اندازی شد">AI-Powered Cost Estimation Platform Launched</h3>
+                    <p data-en="Introducing our revolutionary AI-powered cost estimation platform that reduces estimation time by 60% while improving accuracy. Now available to all clients through our web portal." data-fa="معرفی پلتفرم انقلابی برآورد هزینه مبتنی بر هوش مصنوعی ما که زمان برآورد را 60٪ کاهش می‌دهد و در عین حال دقت را بهبود می‌بخشد. اکنون از طریق پورتال وب ما برای همه مشتریان در دسترس است.">Introducing our revolutionary AI-powered cost estimation platform that reduces estimation time by 60% while improving accuracy. Now available to all clients through our web portal.</p>
+                    <div class="news-footer">
+                        <div class="news-meta">
+                            <span><i class="fas fa-eye meta-icon"></i> 4.1K</span>
+                            <span><i class="fas fa-comment meta-icon"></i> 92</span>
+                        </div>
+                        <a href="#" class="news-link">
+                            <span data-en="Read More" data-fa="بیشتر بخوانید">Read More</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </article>
+            
+            <article class="news-card" data-category="partnerships">
+                <span class="news-badge badge-partnership" data-en="PARTNERSHIP" data-fa="مشارکت">PARTNERSHIP</span>
+                <div class="news-image" style="background-image: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800');">
+                    <div class="news-date-overlay">
+                        <div class="date-day">10</div>
+                        <div class="date-month" data-en="DEC" data-fa="دسامبر">DEC</div>
+                    </div>
+                </div>
+                <div class="news-content">
+                    <span class="news-category" data-en="Partnerships" data-fa="مشارکت‌ها">Partnerships</span>
+                    <h3 data-en="Strategic Alliance with Global Mining Equipment Leader" data-fa="اتحاد استراتژیک با رهبر جهانی تجهیزات معدنی">Strategic Alliance with Global Mining Equipment Leader</h3>
+                    <p data-en="Kavian announces strategic partnership with Metso Outotec to deliver integrated solutions combining world-class equipment with expert engineering services." data-fa="کاویان مشارکت استراتژیک با متسو اوتوتک را برای ارائه راهکارهای یکپارچه ترکیب تجهیزات در سطح جهانی با خدمات مهندسی متخصص اعلام می‌کند.">Kavian announces strategic partnership with Metso Outotec to deliver integrated solutions combining world-class equipment with expert engineering services.</p>
+                    <div class="news-footer">
+                        <div class="news-meta">
+                            <span><i class="fas fa-eye meta-icon"></i> 1.8K</span>
+                            <span><i class="fas fa-comment meta-icon"></i> 34</span>
+                        </div>
+                        <a href="#" class="news-link">
+                            <span data-en="Read More" data-fa="بیشتر بخوانید">Read More</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </article>
+            
+            <article class="news-card" data-category="projects">
+                <span class="news-badge badge-new" data-en="SUCCESS" data-fa="موفقیت">SUCCESS</span>
+                <div class="news-image" style="background-image: url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800');">
+                    <div class="news-date-overlay">
+                        <div class="date-day">05</div>
+                        <div class="date-month" data-en="DEC" data-fa="دسامبر">DEC</div>
+                    </div>
+                </div>
+                <div class="news-content">
+                    <span class="news-category" data-en="Project Completion" data-fa="تکمیل پروژه">Project Completion</span>
+                    <h3 data-en="Sarcheshmeh Copper Plant Successfully Commissioned" data-fa="کارخانه مس سرچشمه با موفقیت راه‌اندازی شد">Sarcheshmeh Copper Plant Successfully Commissioned</h3>
+                    <p data-en="Our 50,000 TPD copper concentrator project in Kerman has been successfully commissioned, achieving 95% of design capacity in the first month of operation." data-fa="پروژه کنسانتره مس 50000 تن در روز ما در کرمان با موفقیت راه‌اندازی شده است و در ماه اول بهره‌برداری به 95٪ ظرفیت طراحی دست یافته است.">Our 50,000 TPD copper concentrator project in Kerman has been successfully commissioned, achieving 95% of design capacity in the first month of operation.</p>
+                    <div class="news-footer">
+                        <div class="news-meta">
+                            <span><i class="fas fa-eye meta-icon"></i> 2.9K</span>
+                            <span><i class="fas fa-comment meta-icon"></i> 57</span>
+                        </div>
+                        <a href="#" class="news-link">
+                            <span data-en="Read More" data-fa="بیشتر بخوانید">Read More</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </article>
+            
+            <article class="news-card" data-category="announcements">
+                <span class="news-badge badge-announcement" data-en="EVENT" data-fa="رویداد">EVENT</span>
+                <div class="news-image" style="background-image: url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800');">
+                    <div class="news-date-overlay">
+                        <div class="date-day">01</div>
+                        <div class="date-month" data-en="DEC" data-fa="دسامبر">DEC</div>
+                    </div>
+                </div>
+                <div class="news-content">
+                    <span class="news-category" data-en="Events" data-fa="رویدادها">Events</span>
+                    <h3 data-en="Kavian to Present at International Mining Conference 2026" data-fa="کاویان در کنفرانس بین‌المللی معدن 2026 ارائه می‌دهد">Kavian to Present at International Mining Conference 2026</h3>
+                    <p data-en="Our CEO Dr. Rezaei will deliver a keynote speech on 'Future of Sustainable Mining' at the upcoming International Mining Conference in Dubai, January 2026." data-fa="مدیرعامل ما دکتر رضایی سخنرانی کلیدی در مورد 'آینده معدنکاری پایدار' در کنفرانس بین‌المللی معدن آینده در دبی، ژانویه 2026 ارائه خواهد داد.">Our CEO Dr. Rezaei will deliver a keynote speech on 'Future of Sustainable Mining' at the upcoming International Mining Conference in Dubai, January 2026.</p>
+                    <div class="news-footer">
+                        <div class="news-meta">
+                            <span><i class="fas fa-eye meta-icon"></i> 1.5K</span>
+                            <span><i class="fas fa-comment meta-icon"></i> 28</span>
+                        </div>
+                        <a href="#" class="news-link">
+                            <span data-en="Read More" data-fa="بیشتر بخوانید">Read More</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section class="timeline-section">
+        <div class="timeline-container">
+            <h2 class="section-title" data-en="Company Milestones 2025" data-fa="نقاط عطف شرکت 2025">Company Milestones 2025</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date" data-en="January 2025" data-fa="ژانویه 2025">January 2025</div>
+                        <h4 data-en="Expanded to 5 New Countries" data-fa="گسترش به 5 کشور جدید">Expanded to 5 New Countries</h4>
+                        <p data-en="Opened new offices in UAE, Kazakhstan, Peru, Chile, and South Africa." data-fa="دفاتر جدید در امارات، قزاقستان، پرو، شیلی و آفریقای جنوبی افتتاح شد.">Opened new offices in UAE, Kazakhstan, Peru, Chile, and South Africa.</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date" data-en="March 2025" data-fa="مارس 2025">March 2025</div>
+                        <h4 data-en="ISO 9001:2015 Certification" data-fa="گواهینامه ISO 9001:2015">ISO 9001:2015 Certification</h4>
+                        <p data-en="Achieved ISO 9001:2015 certification for quality management systems." data-fa="گواهینامه ISO 9001:2015 برای سیستم‌های مدیریت کیفیت دریافت شد.">Achieved ISO 9001:2015 certification for quality management systems.</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date" data-en="June 2025" data-fa="ژوئن 2025">June 2025</div>
+                        <h4 data-en="Reached 200+ Projects Milestone" data-fa="به نقطه عطف 200+ پروژه رسید">Reached 200+ Projects Milestone</h4>
+                        <p data-en="Successfully completed our 200th project, a gold processing plant in Africa." data-fa="پروژه 200ام خود، یک کارخانه فرآوری طلا در آفریقا را با موفقیت تکمیل کردیم.">Successfully completed our 200th project, a gold processing plant in Africa.</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date" data-en="September 2025" data-fa="سپتامبر 2025">September 2025</div>
+                        <h4 data-en="Launched Research & Development Center" data-fa="مرکز تحقیق و توسعه راه‌اندازی شد">Launched Research & Development Center</h4>
+                        <p data-en="Established state-of-the-art R&D facility focusing on sustainable mining technologies." data-fa="تأسیسات تحقیق و توسعه پیشرفته با تمرکز بر فناوری‌های معدنکاری پایدار ایجاد شد.">Established state-of-the-art R&D facility focusing on sustainable mining technologies.</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date" data-en="December 2025" data-fa="دسامبر 2025">December 2025</div>
+                        <h4 data-en="Won Best Mining Consultancy Award" data-fa="برنده جایزه بهترین مشاوره معدنی">Won Best Mining Consultancy Award</h4>
+                        <p data-en="Received prestigious industry recognition from International Mining Association." data-fa="شناخت معتبر صنعت از انجمن بین‌المللی معدن دریافت شد.">Received prestigious industry recognition from International Mining Association.</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="press-releases">
+        <h2 class="section-title" data-en="Press Releases" data-fa="بیانیه‌های مطبوعاتی">Press Releases</h2>
+        <div class="press-list">
+            <div class="press-item">
+                <div class="press-icon"><i class="fas fa-file-pdf"></i></div>
+                <div class="press-content">
+                    <div class="press-date" data-en="December 22, 2025" data-fa="22 دسامبر 2025">December 22, 2025</div>
+                    <h4 data-en="Kavian Development Mine Wins Best Mining Consultancy Award 2025" data-fa="کاویان توسعه معدن برنده جایزه بهترین مشاوره معدنی 2025">Kavian Development Mine Wins Best Mining Consultancy Award 2025</h4>
+                    <p data-en="Official press release announcing our recognition by the International Mining Association." data-fa="بیانیه مطبوعاتی رسمی اعلام شناخت ما توسط انجمن بین‌المللی معدن.">Official press release announcing our recognition by the International Mining Association.</p>
+                </div>
+                <a href="#" class="press-download" data-en="Download PDF" data-fa="دانلود PDF">Download PDF</a>
+            </div>
+            
+            <div class="press-item">
+                <div class="press-icon"><i class="fas fa-file-pdf"></i></div>
+                <div class="press-content">
+                    <div class="press-date" data-en="December 18, 2025" data-fa="18 دسامبر 2025">December 18, 2025</div>
+                    <h4 data-en="$120M Copper Project Contract Signed with Oman Mining Company" data-fa="قرارداد پروژه 120 میلیون دلاری مس با شرکت معدنی عمان امضا شد">$120M Copper Project Contract Signed with Oman Mining Company</h4>
+                    <p data-en="Details of our largest Middle East project to date, including scope and timeline." data-fa="جزئیات بزرگترین پروژه خاورمیانه ما تا به امروز، از جمله دامنه و جدول زمانی.">Details of our largest Middle East project to date, including scope and timeline.</p>
+                </div>
+                <a href="#" class="press-download" data-en="Download PDF" data-fa="دانلود PDF">Download PDF</a>
+            </div>
+            
+            <div class="press-item">
+                <div class="press-icon"><i class="fas fa-file-pdf"></i></div>
+                <div class="press-content">
+                    <div class="press-date" data-en="December 15, 2025" data-fa="15 دسامبر 2025">December 15, 2025</div>
+                    <h4 data-en="Launch of AI-Powered Cost Estimation Platform" data-fa="راه‌اندازی پلتفرم برآورد هزینه مبتنی بر هوش مصنوعی">Launch of AI-Powered Cost Estimation Platform</h4>
+                    <p data-en="Introducing our revolutionary technology that transforms mining cost estimation." data-fa="معرفی فناوری انقلابی ما که برآورد هزینه معدن را متحول می‌کند.">Introducing our revolutionary technology that transforms mining cost estimation.</p>
+                </div>
+                <a href="#" class="press-download" data-en="Download PDF" data-fa="دانلود PDF">Download PDF</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 data-en="Company" data-fa="شرکت">Company</h3>
+                <ul>
+                    <li><a href="about.html" data-en="About Us" data-fa="درباره ما">About Us</a></li>
+                    <li><a href="portfolio.html" data-en="Portfolio" data-fa="نمونه کارها">Portfolio</a></li>
+                    <li><a href="blog.html" data-en="Blog" data-fa="وبلاگ">Blog</a></li>
+                    <li><a href="news.html" data-en="News" data-fa="اخبار">News</a></li>
+                    <li><a href="contact.html" data-en="Contact" data-fa="تماس با ما">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 data-en="Services" data-fa="خدمات">Services</h3>
+                <ul>
+                    <li><a href="services/equipment-selection.html" data-en="Equipment Selection" data-fa="انتخاب تجهیزات">Equipment Selection</a></li>
+                    <li><a href="services/economic-analysis.html" data-en="Economic Analysis" data-fa="تحلیل اقتصادی">Economic Analysis</a></li>
+                    <li><a href="services/plant-design.html" data-en="Plant Design" data-fa="طراحی کارخانه">Plant Design</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 data-en="Contact" data-fa="تماس">Contact</h3>
+                <ul>
+                    <li>📧 info@kdmine.com</li>
+                    <li>📞 +98 21 1234 5678</li>
+                    <li>📍 Tehran, Iran</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-en="&copy; 2025 Kavian Development Mine. All rights reserved." data-fa="© 2025 کاویان توسعه معدن. تمامی حقوق محفوظ است.">&copy; 2025 Kavian Development Mine. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        (function(){ emailjs.init("u3dfoUdeOTtWSAjk_"); })();
+        
+        // Filter functionality
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        const newsCards = document.querySelectorAll('.news-card');
+        
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const category = tab.getAttribute('data-category');
+                
+                filterTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                newsCards.forEach(card => {
+                    if (category === 'all' || card.getAttribute('data-category') === category) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        function switchLanguage(lang) {
+            const body = document.body;
+            const elements = document.querySelectorAll('[data-en][data-fa]');
+            const langButtons = document.querySelectorAll('.lang-btn');
+            
+            if (lang === 'fa') { body.classList.add('rtl'); } 
+            else { body.classList.remove('rtl'); }
+            
+            langButtons.forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.lang-btn').classList.add('active');
+            
+            elements.forEach(el => {
+                el.innerHTML = el.getAttribute('data-' + lang);
+            });
+            
+            localStorage.setItem('preferredLanguage', lang);
+        }
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferredLanguage') || 'en';
+            if (savedLang === 'fa') {
+                document.querySelector('.lang-btn:last-child').click();
+            }
+        });
+    </script>
+</body>
+</html>

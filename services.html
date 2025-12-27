@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - Kavian Development Mine</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #1e3a8a;
+            --secondary-blue: #2563eb;
+            --accent-gold: #f59e0b;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+        }
+        body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-dark); overflow-x: hidden; }
+        body.rtl { font-family: 'Vazirmatn', sans-serif; direction: rtl; }
+        
+        .language-switcher { position: fixed; top: 20px; right: 20px; z-index: 3000; background: white; border-radius: 50px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); padding: 8px; display: flex; gap: 8px; }
+        body.rtl .language-switcher { right: auto; left: 20px; }
+        .lang-btn { padding: 10px 20px; border: 2px solid transparent; background: transparent; border-radius: 25px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: all 0.3s; display: flex; align-items: center; gap: 8px; color: var(--text-light); }
+        .lang-btn:hover { background: var(--light-bg); color: var(--secondary-blue); }
+        .lang-btn.active { background: var(--secondary-blue); color: white; border-color: var(--secondary-blue); }
+        
+        header { background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%); color: white; padding: 1rem 0; position: sticky; top: 0; z-index: 2000; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        nav { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
+        .logo { display: flex; align-items: center; gap: 15px; font-size: 1.5rem; font-weight: 700; text-decoration: none; color: white; }
+        .logo img { height: 55px; width: auto; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2)); }
+        .nav-links { display: flex; list-style: none; gap: 2.5rem; align-items: center; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 500; transition: all 0.3s; position: relative; padding: 5px 0; }
+        .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--accent-gold); transition: width 0.3s; }
+        .nav-links a:hover::after { width: 100%; }
+        
+        .page-hero { background: linear-gradient(135deg, rgba(30, 58, 138, 0.95) 0%, rgba(37, 99, 235, 0.95) 100%), url('https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?w=1920') center/cover; color: white; padding: 120px 2rem 80px; text-align: center; }
+        .page-hero h1 { font-size: 3.5rem; margin-bottom: 1rem; font-weight: 700; text-shadow: 2px 2px 8px rgba(0,0,0,0.3); }
+        .page-hero p { font-size: 1.3rem; opacity: 0.95; max-width: 800px; margin: 0 auto; }
+        
+        .services-intro { max-width: 1200px; margin: 80px auto; padding: 0 2rem; text-align: center; }
+        .services-intro h2 { font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 20px; }
+        .services-intro p { font-size: 1.2rem; color: var(--text-light); line-height: 1.9; }
+        
+        .services-grid { max-width: 1400px; margin: 0 auto 80px; padding: 0 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 3rem; }
+        
+        .service-card { background: white; border-radius: 25px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.08); transition: all 0.5s; position: relative; }
+        .service-card:hover { transform: translateY(-15px); box-shadow: 0 25px 60px rgba(0,0,0,0.15); }
+        
+        .service-image { height: 250px; background-size: cover; background-position: center; position: relative; overflow: hidden; }
+        .service-image::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(30, 58, 138, 0.8), rgba(245, 158, 11, 0.6)); opacity: 0; transition: opacity 0.4s; }
+        .service-card:hover .service-image::before { opacity: 1; }
+        
+        .service-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 4rem; color: white; z-index: 1; opacity: 0; transition: all 0.4s; }
+        .service-card:hover .service-icon { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+        
+        .service-content { padding: 35px; }
+        .service-category { display: inline-block; padding: 8px 20px; background: var(--light-bg); color: var(--secondary-blue); border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 15px; }
+        .service-content h3 { font-size: 1.8rem; color: var(--primary-blue); margin-bottom: 15px; }
+        .service-content p { color: var(--text-light); line-height: 1.8; margin-bottom: 25px; }
+        
+        .service-features { list-style: none; margin-bottom: 25px; }
+        .service-features li { padding: 10px 0; color: var(--text-light); display: flex; align-items: center; gap: 12px; }
+        .service-features li i { color: var(--accent-gold); font-size: 1.1rem; }
+        
+        .service-link { display: inline-flex; align-items: center; gap: 10px; padding: 12px 30px; background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); color: white; text-decoration: none; border-radius: 50px; font-weight: 600; transition: all 0.4s; }
+        .service-link:hover { transform: translateX(5px); box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3); }
+        body.rtl .service-link:hover { transform: translateX(-5px); }
+        
+        .process-section { background: var(--light-bg); padding: 80px 2rem; margin: 80px 0; }
+        .process-container { max-width: 1400px; margin: 0 auto; }
+        .section-title { text-align: center; font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 60px; }
+        
+        .process-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; }
+        .process-step { text-align: center; position: relative; }
+        .step-number { width: 80px; height: 80px; background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: 700; margin: 0 auto 25px; box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3); }
+        .process-step h3 { color: var(--primary-blue); font-size: 1.5rem; margin-bottom: 15px; }
+        .process-step p { color: var(--text-light); line-height: 1.8; }
+        
+        .cta-section { background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%); color: white; padding: 80px 2rem; text-align: center; }
+        .cta-section h2 { font-size: 2.8rem; margin-bottom: 20px; }
+        .cta-section p { font-size: 1.3rem; margin-bottom: 35px; opacity: 0.95; max-width: 800px; margin-left: auto; margin-right: auto; }
+        .cta-buttons { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        .btn { display: inline-flex; align-items: center; gap: 10px; padding: 16px 35px; border-radius: 50px; font-weight: 600; font-size: 1.05rem; text-decoration: none; transition: all 0.4s; }
+        .btn-primary { background: var(--accent-gold); color: white; box-shadow: 0 8px 24px rgba(245, 158, 11, 0.3); }
+        .btn-primary:hover { background: #d97706; transform: translateY(-3px); box-shadow: 0 12px 32px rgba(245, 158, 11, 0.4); }
+        .btn-secondary { background: white; color: var(--secondary-blue); box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2); }
+        .btn-secondary:hover { background: var(--light-bg); transform: translateY(-3px); }
+        
+        footer { background: var(--dark-bg); color: white; padding: 60px 2rem 30px; }
+        .footer-content { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 40px; }
+        .footer-section h3 { color: var(--accent-gold); margin-bottom: 20px; font-size: 1.3rem; }
+        .footer-section ul { list-style: none; }
+        .footer-section a { color: #cbd5e1; text-decoration: none; display: block; margin-bottom: 12px; transition: all 0.3s; }
+        .footer-section a:hover { color: var(--accent-gold); padding-left: 5px; }
+        body.rtl .footer-section a:hover { padding-left: 0; padding-right: 5px; }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); color: #94a3b8; }
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .page-hero h1 { font-size: 2.5rem; }
+            .services-grid { grid-template-columns: 1fr; }
+            .process-steps { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switcher">
+        <button class="lang-btn active" onclick="switchLanguage('en')">
+            <span>🇬🇧</span><span>EN</span>
+        </button>
+        <button class="lang-btn" onclick="switchLanguage('fa')">
+            <span>🇮🇷</span><span>FA</span>
+        </button>
+    </div>
+
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Logo">
+                <span data-en="Kavian Development Mine" data-fa="کاویان توسعه معدن">Kavian Development Mine</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" data-en="Home" data-fa="خانه">Home</a></li>
+                <li><a href="about.html" data-en="About" data-fa="درباره ما">About</a></li>
+                <li><a href="services.html" data-en="Services" data-fa="خدمات">Services</a></li>
+                <li><a href="portfolio.html" data-en="Portfolio" data-fa="نمونه کارها">Portfolio</a></li>
+                <li><a href="blog.html" data-en="Blog" data-fa="وبلاگ">Blog</a></li>
+                <li><a href="news.html" data-en="News" data-fa="اخبار">News</a></li>
+                <li><a href="technical-resources.html" data-en="Resources" data-fa="منابع فنی">Resources</a></li>
+                <li><a href="contact.html" data-en="Contact" data-fa="تماس">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="page-hero">
+        <h1 data-en="Our Services" data-fa="خدمات ما">Our Services</h1>
+        <p data-en="Comprehensive Mining Engineering Solutions for Every Stage of Your Project" data-fa="راهکارهای جامع مهندسی معدن برای هر مرحله از پروژه شما">Comprehensive Mining Engineering Solutions for Every Stage of Your Project</p>
+    </section>
+
+    <section class="services-intro">
+        <h2 data-en="What We Offer" data-fa="آنچه ما ارائه می‌دهیم">What We Offer</h2>
+        <p data-en="Kavian Development Mine provides end-to-end mining engineering services, from initial concept through to plant commissioning and optimization. Our multidisciplinary team of experts delivers innovative, cost-effective solutions tailored to your specific project requirements, ensuring maximum efficiency and profitability." data-fa="کاویان توسعه معدن خدمات مهندسی معدن سرتاسری را از مفهوم اولیه تا راه‌اندازی و بهینه‌سازی کارخانه ارائه می‌دهد. تیم چند رشته‌ای متخصصان ما راهکارهای نوآورانه و مقرون‌به‌صرفه متناسب با نیازهای خاص پروژه شما ارائه می‌دهد و حداکثر کارایی و سودآوری را تضمین می‌کند.">Kavian Development Mine provides end-to-end mining engineering services, from initial concept through to plant commissioning and optimization. Our multidisciplinary team of experts delivers innovative, cost-effective solutions tailored to your specific project requirements, ensuring maximum efficiency and profitability.</p>
+    </section>
+
+    <section class="services-grid">
+        <div class="service-card">
+            <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1581094271901-8022df4466f9?w=800');">
+                <div class="service-icon">⚙️</div>
+            </div>
+            <div class="service-content">
+                <span class="service-category" data-en="CONSULTING" data-fa="مشاوره">CONSULTING</span>
+                <h3 data-en="Equipment Selection" data-fa="انتخاب تجهیزات">Equipment Selection</h3>
+                <p data-en="Expert guidance in selecting optimal mining and processing equipment based on ore characteristics, production targets, and budget constraints." data-fa="راهنمایی تخصصی در انتخاب بهینه تجهیزات معدنی و فرآوری بر اساس ویژگی‌های سنگ معدن، اهداف تولید و محدودیت‌های بودجه.">Expert guidance in selecting optimal mining and processing equipment based on ore characteristics, production targets, and budget constraints.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check-circle"></i><span data-en="Equipment sizing & capacity analysis" data-fa="تعیین اندازه و تحلیل ظرفیت تجهیزات">Equipment sizing & capacity analysis</span></li>
+                    <li><i class="fas fa-check-circle"></i><span data-en="Vendor evaluation & comparison" data-fa="ارزیابی و مقایسه تامین‌کنندگان">Vendor evaluation & comparison</span></li>
+                    <li><i class="fas fa-check-circle"></i><span data-en="Cost-benefit analysis" data-fa="تحلیل هزینه-فایده">Cost-benefit analysis</span></li>
+                </ul>
+                <a href="services/equipment-selection.html" class="service-link">
+                    <span data-en="Learn More" data-fa="بیشتر بدانید">Learn More</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        
+        <div class="service-card">
+            <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800');">
+                <div class="service-icon">💰</div>
+            </div>
+            <div class="service-content">
+                <span class="service-category" data-en="FINANCIAL" data-fa="مالی">FINANCIAL</span>
+                <h3 data-en="Economic Analysis" data-fa="تحلیل اقتصادی">Economic Analysis</h3>
+                <p data-en="Comprehensive financial modeling and feasibility studies to ensure project viability and maximize return on investment." data-fa="مدل‌سازی مالی جامع و مطالعات امکان‌سنجی برای اطمینان از امکان‌پذیری پروژه و حداکثر بازده سرمایه.">Comprehensive financial modeling and feasibility studies to ensure project viability and maximize return on investment.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check-circle"></i><span data-en="NPV & IRR calculations" data-fa="محاسبات NPV و IRR">NPV & IRR calculations</span></li>
+                    <li><i class="fas fa-check-circle"></i><span data-en="Sensitivity & risk analysis" data-fa="تحلیل حساسیت و ریسک">Sensitivity & risk analysis</span></li>
+                    <li><i class="fas fa-check-circle"></i><span data-en="Cash flow projections" data-fa="پیش‌بینی جریان نقدی">Cash flow projections</span></li>
+                </ul>
+                <a href="services/economic-analysis.html" class="service-link">
+                    <span data-en="Learn More" data-fa="بیشتر بدانید">Learn More</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        
+        <div class="service-card">
+            <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800');">
+                <div class="service-icon">⚠️</div>
+            </div>
+            <div class="service-content">
+                <span class="service-category" data-en="SAFETY" data-fa="ایمنی">SAFETY</span>
+                <h3 data-en="Risk Analysis" data-fa="تحلیل ریسک">Risk Analysis</h3>
+                <p data-en="Comprehensive risk assessment and mitigation strategies to ensure safe and sustainable mining operations." data-fa="ارزیابی جامع ریسک و استراتژی‌های کاهش ریسک برای اطمینان از عملیات معدنی ایمن و پایدار.">Comprehensive risk assessment and mitigation strategies to ensure safe and sustainable mining operations.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check-circle"></i><span data-en="Hazard identification" data-fa="شناسایی خطرات">Hazard identification</span></li>
+                    <li><i class="fas fa-check-circle"></i><span data-en="Safety protocols development" data-fa="توسعه پروتکل‌های ایمنی">Safety protocols development</span></li>
+                    <li><i class="fas fa-check-circle"></i><span data-en="Environmental impact assessment" data-fa="ارزیابی اثرات زیست‌محیطی">Environmental impact assessment</span></li>
+                </ul>
+                <a href="services/risk-analysis.html" class="service-link">
+                    <span data-en="Learn More" data-fa="بیشتر بدانید">Learn More</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        
+        <div class="service-card">
+            <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800');">
+                <div class="service-icon">🔬</div>
+            </div>
+            <div class="service-content">
+                <span class="service-category" data-en="OPTIMIZATION" data-fa="بهینه‌سازی">OPTIMIZATION</span>
+                <h3 data-en="Technology Optimization" data-fa="بهینه‌سازی فناوری">Technology Optimization</h3>
+                <p data-en="Process optimization and implementation of cutting-edge technologies to maximize productivity and reduce costs." data-fa="بهینه‌سازی فرآیند و پیاده‌سازی فناوری‌های پیشرفته برای حداکثر بهره‌وری و کاهش هزینه‌ها.">Process optimization and implementation of cutting-edge technologies to maximize productivity and reduce costs.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check-circle"></i><span data-en="Process efficiency improvement" data-fa="بهبود کارایی فرآیند">Process efficiency improvement</span></li>
+                    <li><i class="fas fa-check-circle"></i><span data-en="Automation integration" data-fa="یکپارچه‌سازی اتوماسیون">Automation integration</span></li>
+                    <li><i class="fas fa-check-circle"></i><span data-en="Energy consumption reduction" data-fa="کاهش مصرف انرژی">Energy consumption reduction</span></li>
+                </ul>
+                <a href="services/technology-optimization.html" class="service-link">
+                    <span data-en="Learn More" data-fa="بیشتر بدانید">Learn More</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        
+        <div class="service-card">
+            <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800');">
+                <div class="service-icon">🏭</div>
+            </div>
+            <div class="service-content">
+                <span class="service-category" data-en="ENGINEERING" data-fa="مهندسی">ENGINEERING</span>
+                <h3 data-en="Plant Design" data-fa="طراحی کارخانه">Plant Design</h3>
+                <p data-en="Complete mineral processing plant design from conceptual studies to detailed engineering and commissioning support." data-fa="طراحی کامل کارخانه فرآوری مواد معدنی از مطالعات مفهومی تا مهندسی تفصیلی و پشتیبانی راه‌اندازی.">Complete mineral processing plant design from conceptual studies to detailed engineering and commissioning support.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check-circle"></i><span data-en="Process flowsheet development" data-fa="توسعه فلوشیت فرآیند">Process flowsheet development</span></li>
+                    <li><i class="fas fa-check-circle"></i><span data-en="3D plant modeling" data-fa="مدل‌سازی سه‌بعدی کارخانه">3D plant modeling</span></li>
+                    <li><i class="fas fa-check-circle"></i><span data-en="Detailed engineering drawings" data-fa="نقشه‌های مهندسی تفصیلی">Detailed engineering drawings</span></li>
+                </ul>
+                <a href="services/plant-design.html" class="service-link">
+                    <span data-en="Learn More" data-fa="بیشتر بدانید">Learn More</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        
+        <div class="service-card">
+            <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800');">
+                <div class="service-icon">📊</div>
+            </div>
+            <div class="service-content">
+                <span class="service-category" data-en="STUDIES" data-fa="مطالعات">STUDIES</span>
+                <h3 data-en="Feasibility Studies" data-fa="مطالعات امکان‌سنجی">Feasibility Studies</h3>
+                <p data-en="Detailed technical, economic, and environmental feasibility studies following international standards." data-fa="مطالعات امکان‌سنجی دقیق فنی، اقتصادی و زیست‌محیطی مطابق با استانداردهای بین‌المللی.">Detailed technical, economic, and environmental feasibility studies following international standards.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check-circle"></i><span data-en="Pre-feasibility & feasibility studies" data-fa="مطالعات پیش‌امکان‌سنجی و امکان‌سنجی">Pre-feasibility & feasibility studies</span></li>
+                    <li><i class="fas fa-check-circle"></i><span data-en="Resource estimation" data-fa="برآورد منابع">Resource estimation</span></li>
+                    <li><i class="fas fa-check-circle"></i><span data-en="Market analysis" data-fa="تحلیل بازار">Market analysis</span></li>
+                </ul>
+                <a href="services/feasibility-studies.html" class="service-link">
+                    <span data-en="Learn More" data-fa="بیشتر بدانید">Learn More</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        
+        <div class="service-card">
+            <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800');">
+                <div class="service-icon">🤝</div>
+            </div>
+            <div class="service-content">
+                <span class="service-category" data-en="PROCUREMENT" data-fa="تدارکات">PROCUREMENT</span>
+                <h3 data-en="Vendor Selection" data-fa="انتخاب تامین‌کننده">Vendor Selection</h3>
+                <p data-en="Expert assistance in vendor evaluation, selection, and contract negotiation for equipment and services." data-fa="کمک تخصصی در ارزیابی، انتخاب و مذاکره قرارداد تامین‌کننده برای تجهیزات و خدمات.">Expert assistance in vendor evaluation, selection, and contract negotiation for equipment and services.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check-circle"></i><span data-en="Supplier qualification" data-fa="صلاحیت تامین‌کننده">Supplier qualification</span></li>
+                    <li><i class="fas fa-check-circle"></i><span data-en="Technical bid evaluation" data-fa="ارزیابی پیشنهاد فنی">Technical bid evaluation</span></li>
+                    <li><i class="fas fa-check-circle"></i><span data-en="Contract negotiation support" data-fa="پشتیبانی مذاکره قرارداد">Contract negotiation support</span></li>
+                </ul>
+                <a href="services/vendor-selection.html" class="service-link">
+                    <span data-en="Learn More" data-fa="بیشتر بدانید">Learn More</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        
+        <div class="service-card">
+            <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1581092160607-ee67e4e9c390?w=800');">
+                <div class="service-icon">⚗️</div>
+            </div>
+            <div class="service-content">
+                <span class="service-category" data-en="PROCESSING" data-fa="فرآوری">PROCESSING</span>
+                <h3 data-en="Concentration Plants" data-fa="کارخانه‌های کنسانتره">Concentration Plants</h3>
+                <p data-en="Design and optimization of mineral concentration plants including crushing, grinding, and separation processes." data-fa="طراحی و بهینه‌سازی کارخانه‌های کنسانتره مواد معدنی شامل فرآیندهای خردایش، آسیاب و جداسازی.">Design and optimization of mineral concentration plants including crushing, grinding, and separation processes.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check-circle"></i><span data-en="Crushing & grinding circuits" data-fa="مدارهای خردایش و آسیاب">Crushing & grinding circuits</span></li>
+                    <li><i class="fas fa-check-circle"></i><span data-en="Flotation & separation" data-fa="فلوتاسیون و جداسازی">Flotation & separation</span></li>
+                    <li><i class="fas fa-check-circle"></i><span data-en="Tailings management" data-fa="مدیریت باطله">Tailings management</span></li>
+                </ul>
+                <a href="services/concentration-plants.html" class="service-link">
+                    <span data-en="Learn More" data-fa="بیشتر بدانید">Learn More</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        
+        <div class="service-card">
+            <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800');">
+                <div class="service-icon">🧪</div>
+            </div>
+            <div class="service-content">
+                <span class="service-category" data-en="HYDROMETALLURGY" data-fa="هیدرومتالورژی">HYDROMETALLURGY</span>
+                <h3 data-en="Leaching Systems" data-fa="سیستم‌های لیچینگ">Leaching Systems</h3>
+                <p data-en="Advanced leaching technologies for copper, gold, and other metals including heap and tank leaching systems." data-fa="فناوری‌های پیشرفته لیچینگ برای مس، طلا و سایر فلزات شامل سیستم‌های لیچینگ توده‌ای و مخزنی.">Advanced leaching technologies for copper, gold, and other metals including heap and tank leaching systems.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check-circle"></i><span data-en="Heap leaching design" data-fa="طراحی لیچینگ توده‌ای">Heap leaching design</span></li>
+                    <li><i class="fas fa-check-circle"></i><span data-en="SX-EW processes" data-fa="فرآیندهای SX-EW">SX-EW processes</span></li>
+                    <li><i class="fas fa-check-circle"></i><span data-en="Solution management" data-fa="مدیریت محلول">Solution management</span></li>
+                </ul>
+                <a href="services/leaching-systems.html" class="service-link">
+                    <span data-en="Learn More" data-fa="بیشتر بدانید">Learn More</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        
+        <div class="service-card">
+            <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800');">
+                <div class="service-icon">🏭</div>
+            </div>
+            <div class="service-content">
+                <span class="service-category" data-en="CHEMICAL" data-fa="شیمیایی">CHEMICAL</span>
+                <h3 data-en="Acid Production" data-fa="تولید اسید">Acid Production</h3>
+                <p data-en="Sulfuric acid plant design and optimization for mining and metallurgical operations." data-fa="طراحی و بهینه‌سازی کارخانه اسید سولفوریک برای عملیات معدنی و متالورژیکی.">Sulfuric acid plant design and optimization for mining and metallurgical operations.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check-circle"></i><span data-en="Acid plant engineering" data-fa="مهندسی کارخانه اسید">Acid plant engineering</span></li>
+                    <li><i class="fas fa-check-circle"></i><span data-en="SO2 gas handling" data-fa="مدیریت گاز SO2">SO2 gas handling</span></li>
+                    <li><i class="fas fa-check-circle"></i><span data-en="Environmental compliance" data-fa="انطباق زیست‌محیطی">Environmental compliance</span></li>
+                </ul>
+                <a href="services/acid-production.html" class="service-link">
+                    <span data-en="Learn More" data-fa="بیشتر بدانید">Learn More</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="process-section">
+        <div class="process-container">
+            <h2 class="section-title" data-en="Our Process" data-fa="فرآیند ما">Our Process</h2>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3 data-en="Consultation" data-fa="مشاوره">Consultation</h3>
+                    <p data-en="Initial meeting to understand your project requirements, goals, and constraints." data-fa="جلسه اولیه برای درک نیازها، اهداف و محدودیت‌های پروژه شما.">Initial meeting to understand your project requirements, goals, and constraints.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3 data-en="Analysis" data-fa="تحلیل">Analysis</h3>
+                    <p data-en="Comprehensive technical and economic analysis of your project parameters." data-fa="تحلیل جامع فنی و اقتصادی پارامترهای پروژه شما.">Comprehensive technical and economic analysis of your project parameters.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3 data-en="Design" data-fa="طراحی">Design</h3>
+                    <p data-en="Development of detailed engineering designs and specifications." data-fa="توسعه طراحی‌های مهندسی تفصیلی و مشخصات.">Development of detailed engineering designs and specifications.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3 data-en="Implementation" data-fa="اجرا">Implementation</h3>
+                    <p data-en="Support during procurement, construction, and commissioning phases." data-fa="پشتیبانی در طول مراحل تدارکات، ساخت و راه‌اندازی.">Support during procurement, construction, and commissioning phases.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <h3 data-en="Optimization" data-fa="بهینه‌سازی">Optimization</h3>
+                    <p data-en="Ongoing support for process optimization and performance improvement." data-fa="پشتیبانی مستمر برای بهینه‌سازی فرآیند و بهبود عملکرد.">Ongoing support for process optimization and performance improvement.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2 data-en="Ready to Get Started?" data-fa="آماده شروع هستید؟">Ready to Get Started?</h2>
+        <p data-en="Let's discuss how our services can help you achieve your mining project goals. Contact us today for a free consultation." data-fa="بیایید در مورد اینکه چگونه خدمات ما می‌تواند به شما در دستیابی به اهداف پروژه معدنی کمک کند صحبت کنیم. همین امروز برای مشاوره رایگان با ما تماس بگیرید.">Let's discuss how our services can help you achieve your mining project goals. Contact us today for a free consultation.</p>
+        <div class="cta-buttons">
+            <a href="contact.html" class="btn btn-primary">
+                <span data-en="Contact Us" data-fa="تماس با ما">Contact Us</span>
+                <i class="fas fa-phone"></i>
+            </a>
+            <a href="portfolio.html" class="btn btn-secondary">
+                <span data-en="View Portfolio" data-fa="مشاهده نمونه کارها">View Portfolio</span>
+                <i class="fas fa-briefcase"></i>
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 data-en="Company" data-fa="شرکت">Company</h3>
+                <ul>
+                    <li><a href="about.html" data-en="About Us" data-fa="درباره ما">About Us</a></li>
+                    <li><a href="portfolio.html" data-en="Portfolio" data-fa="نمونه کارها">Portfolio</a></li>
+                    <li><a href="blog.html" data-en="Blog" data-fa="وبلاگ">Blog</a></li>
+                    <li><a href="news.html" data-en="News" data-fa="اخبار">News</a></li>
+                    <li><a href="contact.html" data-en="Contact" data-fa="تماس با ما">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 data-en="Services" data-fa="خدمات">Services</h3>
+                <ul>
+                    <li><a href="services/equipment-selection.html" data-en="Equipment Selection" data-fa="انتخاب تجهیزات">Equipment Selection</a></li>
+                    <li><a href="services/economic-analysis.html" data-en="Economic Analysis" data-fa="تحلیل اقتصادی">Economic Analysis</a></li>
+                    <li><a href="services/plant-design.html" data-en="Plant Design" data-fa="طراحی کارخانه">Plant Design</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 data-en="Contact" data-fa="تماس">Contact</h3>
+                <ul>
+                    <li>📧 info@kdmine.com</li>
+                    <li>📞 +98 21 1234 5678</li>
+                    <li>📍 Tehran, Iran</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-en="&copy; 2025 Kavian Development Mine. All rights reserved." data-fa="© 2025 کاویان توسعه معدن. تمامی حقوق محفوظ است.">&copy; 2025 Kavian Development Mine. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        (function(){ emailjs.init("u3dfoUdeOTtWSAjk_"); })();
+        
+        function switchLanguage(lang) {
+            const body = document.body;
+            const elements = document.querySelectorAll('[data-en][data-fa]');
+            const langButtons = document.querySelectorAll('.lang-btn');
+            
+            if (lang === 'fa') { body.classList.add('rtl'); } 
+            else { body.classList.remove('rtl'); }
+            
+            langButtons.forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.lang-btn').classList.add('active');
+            
+            elements.forEach(el => {
+                el.innerHTML = el.getAttribute('data-' + lang);
+            });
+            
+            localStorage.setItem('preferredLanguage', lang);
+        }
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferredLanguage') || 'en';
+            if (savedLang === 'fa') {
+                document.querySelector('.lang-btn:last-child').click();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Kavian Development Mine</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #1e3a8a;
+            --secondary-blue: #2563eb;
+            --accent-gold: #f59e0b;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+        }
+        body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-dark); overflow-x: hidden; }
+        body.rtl { font-family: 'Vazirmatn', sans-serif; direction: rtl; }
+        
+        .language-switcher { position: fixed; top: 20px; right: 20px; z-index: 3000; background: white; border-radius: 50px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); padding: 8px; display: flex; gap: 8px; }
+        body.rtl .language-switcher { right: auto; left: 20px; }
+        .lang-btn { padding: 10px 20px; border: 2px solid transparent; background: transparent; border-radius: 25px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: all 0.3s; display: flex; align-items: center; gap: 8px; color: var(--text-light); }
+        .lang-btn:hover { background: var(--light-bg); color: var(--secondary-blue); }
+        .lang-btn.active { background: var(--secondary-blue); color: white; border-color: var(--secondary-blue); }
+        
+        header { background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%); color: white; padding: 1rem 0; position: sticky; top: 0; z-index: 2000; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        nav { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
+        .logo { display: flex; align-items: center; gap: 15px; font-size: 1.5rem; font-weight: 700; text-decoration: none; color: white; }
+        .logo img { height: 55px; width: auto; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2)); }
+        .nav-links { display: flex; list-style: none; gap: 2.5rem; align-items: center; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 500; transition: all 0.3s; position: relative; padding: 5px 0; }
+        .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--accent-gold); transition: width 0.3s; }
+        .nav-links a:hover::after { width: 100%; }
+        
+        .page-hero { background: linear-gradient(135deg, rgba(30, 58, 138, 0.95) 0%, rgba(37, 99, 235, 0.95) 100%), url('https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1920') center/cover; color: white; padding: 120px 2rem 80px; text-align: center; }
+        .page-hero h1 { font-size: 3.5rem; margin-bottom: 1rem; font-weight: 700; text-shadow: 2px 2px 8px rgba(0,0,0,0.3); }
+        .page-hero p { font-size: 1.3rem; opacity: 0.95; max-width: 800px; margin: 0 auto; }
+        
+        .blog-container { max-width: 1400px; margin: 80px auto; padding: 0 2rem; display: grid; grid-template-columns: 1fr 350px; gap: 4rem; }
+        
+        .blog-main { }
+        
+        .featured-post { background: white; border-radius: 25px; overflow: hidden; box-shadow: 0 15px 50px rgba(0,0,0,0.1); margin-bottom: 60px; transition: all 0.4s; }
+        .featured-post:hover { transform: translateY(-5px); box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+        .featured-image { height: 450px; background-size: cover; background-position: center; position: relative; }
+        .featured-badge { position: absolute; top: 30px; left: 30px; background: var(--accent-gold); color: white; padding: 10px 25px; border-radius: 25px; font-weight: 700; font-size: 0.9rem; }
+        body.rtl .featured-badge { left: auto; right: 30px; }
+        .featured-content { padding: 50px; }
+        .post-meta { display: flex; gap: 25px; margin-bottom: 20px; flex-wrap: wrap; }
+        .meta-item { display: flex; align-items: center; gap: 8px; color: var(--text-light); font-size: 0.95rem; }
+        .meta-item i { color: var(--secondary-blue); }
+        .featured-content h2 { font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 20px; line-height: 1.3; }
+        .featured-content p { color: var(--text-light); font-size: 1.15rem; line-height: 1.9; margin-bottom: 30px; }
+        .read-more { display: inline-flex; align-items: center; gap: 10px; padding: 14px 35px; background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); color: white; text-decoration: none; border-radius: 50px; font-weight: 600; transition: all 0.4s; }
+        .read-more:hover { transform: translateX(5px); box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3); }
+        body.rtl .read-more:hover { transform: translateX(-5px); }
+        
+        .blog-posts { display: grid; gap: 3rem; }
+        .blog-post { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.08); transition: all 0.4s; display: grid; grid-template-columns: 300px 1fr; }
+        .blog-post:hover { transform: translateY(-5px); box-shadow: 0 15px 50px rgba(0,0,0,0.12); }
+        .post-image { height: 100%; background-size: cover; background-position: center; position: relative; }
+        .post-category { position: absolute; top: 20px; left: 20px; background: var(--secondary-blue); color: white; padding: 8px 20px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
+        body.rtl .post-category { left: auto; right: 20px; }
+        .post-content { padding: 35px; }
+        .post-content h3 { font-size: 1.6rem; color: var(--primary-blue); margin-bottom: 15px; line-height: 1.4; }
+        .post-content p { color: var(--text-light); line-height: 1.8; margin-bottom: 20px; }
+        .post-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 20px; border-top: 2px solid var(--light-bg); }
+        .post-author { display: flex; align-items: center; gap: 12px; }
+        .author-avatar { width: 45px; height: 45px; border-radius: 50%; background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; }
+        .author-info { }
+        .author-name { font-weight: 600; color: var(--primary-blue); font-size: 0.95rem; }
+        .post-date { color: var(--text-light); font-size: 0.85rem; }
+        .post-link { color: var(--secondary-blue); font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 8px; transition: all 0.3s; }
+        .post-link:hover { color: var(--accent-gold); gap: 12px; }
+        
+        .sidebar { }
+        .sidebar-widget { background: white; padding: 35px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); margin-bottom: 30px; }
+        .widget-title { font-size: 1.5rem; color: var(--primary-blue); margin-bottom: 25px; padding-bottom: 15px; border-bottom: 3px solid var(--accent-gold); }
+        
+        .search-box { position: relative; }
+        .search-box input { width: 100%; padding: 15px 50px 15px 20px; border: 2px solid #e2e8f0; border-radius: 50px; font-size: 1rem; transition: all 0.3s; }
+        body.rtl .search-box input { padding: 15px 20px 15px 50px; }
+        .search-box input:focus { outline: none; border-color: var(--secondary-blue); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); }
+        .search-btn { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--secondary-blue); font-size: 1.2rem; cursor: pointer; }
+        body.rtl .search-btn { right: auto; left: 15px; }
+        
+        .categories-list { list-style: none; }
+        .categories-list li { margin-bottom: 15px; }
+        .categories-list a { display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; background: var(--light-bg); border-radius: 12px; color: var(--text-dark); text-decoration: none; transition: all 0.3s; }
+        .categories-list a:hover { background: var(--secondary-blue); color: white; transform: translateX(5px); }
+        body.rtl .categories-list a:hover { transform: translateX(-5px); }
+        .category-count { background: white; padding: 4px 12px; border-radius: 15px; font-size: 0.85rem; font-weight: 600; }
+        
+        .popular-posts { list-style: none; }
+        .popular-post { display: flex; gap: 15px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 2px solid var(--light-bg); }
+        .popular-post:last-child { border-bottom: none; padding-bottom: 0; }
+        .popular-thumb { width: 80px; height: 80px; border-radius: 12px; background-size: cover; background-position: center; flex-shrink: 0; }
+        .popular-info h4 { font-size: 1rem; color: var(--primary-blue); margin-bottom: 8px; line-height: 1.4; }
+        .popular-info a { color: var(--primary-blue); text-decoration: none; transition: color 0.3s; }
+        .popular-info a:hover { color: var(--accent-gold); }
+        .popular-date { color: var(--text-light); font-size: 0.85rem; }
+        
+        .tags-cloud { display: flex; flex-wrap: wrap; gap: 10px; }
+        .tag { padding: 8px 18px; background: var(--light-bg); color: var(--secondary-blue); border-radius: 20px; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: all 0.3s; }
+        .tag:hover { background: var(--secondary-blue); color: white; transform: translateY(-2px); }
+        
+        .newsletter-form { }
+        .newsletter-form p { color: var(--text-light); margin-bottom: 20px; line-height: 1.7; }
+        .newsletter-form input { width: 100%; padding: 15px 20px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 1rem; margin-bottom: 15px; }
+        .newsletter-form input:focus { outline: none; border-color: var(--secondary-blue); }
+        .newsletter-form button { width: 100%; padding: 15px; background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); color: white; border: none; border-radius: 50px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.3s; }
+        .newsletter-form button:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3); }
+        
+        footer { background: var(--dark-bg); color: white; padding: 60px 2rem 30px; margin-top: 80px; }
+        .footer-content { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 40px; }
+        .footer-section h3 { color: var(--accent-gold); margin-bottom: 20px; font-size: 1.3rem; }
+        .footer-section ul { list-style: none; }
+        .footer-section a { color: #cbd5e1; text-decoration: none; display: block; margin-bottom: 12px; transition: all 0.3s; }
+        .footer-section a:hover { color: var(--accent-gold); padding-left: 5px; }
+        body.rtl .footer-section a:hover { padding-left: 0; padding-right: 5px; }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); color: #94a3b8; }
+        
+        @media (max-width: 1200px) {
+            .blog-container { grid-template-columns: 1fr; }
+            .sidebar { max-width: 600px; margin: 0 auto; }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .page-hero h1 { font-size: 2.5rem; }
+            .blog-post { grid-template-columns: 1fr; }
+            .post-image { height: 250px; }
+            .featured-image { height: 300px; }
+            .featured-content { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switcher">
+        <button class="lang-btn active" onclick="switchLanguage('en')">
+            <span>🇬🇧</span><span>EN</span>
+        </button>
+        <button class="lang-btn" onclick="switchLanguage('fa')">
+            <span>🇮🇷</span><span>FA</span>
+        </button>
+    </div>
+
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Logo">
+                <span data-en="Kavian Development Mine" data-fa="کاویان توسعه معدن">Kavian Development Mine</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" data-en="Home" data-fa="خانه">Home</a></li>
+                <li><a href="about.html" data-en="About" data-fa="درباره ما">About</a></li>
+                <li><a href="services.html" data-en="Services" data-fa="خدمات">Services</a></li>
+                <li><a href="portfolio.html" data-en="Portfolio" data-fa="نمونه کارها">Portfolio</a></li>
+                <li><a href="blog.html" data-en="Blog" data-fa="وبلاگ">Blog</a></li>
+                <li><a href="news.html" data-en="News" data-fa="اخبار">News</a></li>
+                <li><a href="technical-resources.html" data-en="Resources" data-fa="منابع فنی">Resources</a></li>
+                <li><a href="contact.html" data-en="Contact" data-fa="تماس">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="page-hero">
+        <h1 data-en="Mining Insights & Expertise" data-fa="بینش و تخصص معدنی">Mining Insights & Expertise</h1>
+        <p data-en="Expert Analysis, Industry Trends, and Technical Guides from Mining Professionals" data-fa="تحلیل تخصصی، روندهای صنعت و راهنماهای فنی از متخصصان معدن">Expert Analysis, Industry Trends, and Technical Guides from Mining Professionals</p>
+    </section>
+
+    <div class="blog-container">
+        <main class="blog-main">
+            <article class="featured-post">
+                <div class="featured-image" style="background-image: url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=1200');">
+                    <span class="featured-badge" data-en="FEATURED" data-fa="ویژه">FEATURED</span>
+                </div>
+                <div class="featured-content">
+                    <div class="post-meta">
+                        <span class="meta-item">
+                            <i class="fas fa-folder"></i>
+                            <span data-en="Process Engineering" data-fa="مهندسی فرآیند">Process Engineering</span>
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-calendar"></i>
+                            <span data-en="December 20, 2025" data-fa="20 دسامبر 2025">December 20, 2025</span>
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span data-en="8 min read" data-fa="8 دقیقه مطالعه">8 min read</span>
+                        </span>
+                    </div>
+                    <h2 data-en="Optimizing Copper Recovery: Advanced Flotation Techniques for 2025" data-fa="بهینه‌سازی بازیابی مس: تکنیک‌های پیشرفته فلوتاسیون برای 2025">Optimizing Copper Recovery: Advanced Flotation Techniques for 2025</h2>
+                    <p data-en="Discover the latest innovations in copper flotation technology that are revolutionizing mineral processing. This comprehensive guide explores new reagent formulations, equipment designs, and control strategies that can increase recovery rates by up to 15% while reducing operating costs." data-fa="آخرین نوآوری‌ها در فناوری فلوتاسیون مس را که در حال متحول کردن فرآوری مواد معدنی هستند، کشف کنید. این راهنمای جامع فرمولاسیون‌های جدید معرف، طراحی تجهیزات و استراتژی‌های کنترل را بررسی می‌کند که می‌تواند نرخ بازیابی را تا 15٪ افزایش دهد و در عین حال هزینه‌های عملیاتی را کاهش دهد.">Discover the latest innovations in copper flotation technology that are revolutionizing mineral processing. This comprehensive guide explores new reagent formulations, equipment designs, and control strategies that can increase recovery rates by up to 15% while reducing operating costs.</p>
+                    <a href="blog/copper-flotation-optimization.html" class="read-more">
+                        <span data-en="Read Full Article" data-fa="مطالعه مقاله کامل">Read Full Article</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </article>
+            
+            <div class="blog-posts">
+                <article class="blog-post">
+                    <div class="post-image" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600');">
+                        <span class="post-category" data-en="Economics" data-fa="اقتصاد">Economics</span>
+                    </div>
+                    <div class="post-content">
+                        <h3 data-en="Cost Estimation Best Practices for Mining Projects" data-fa="بهترین شیوه‌های برآورد هزینه برای پروژه‌های معدنی">Cost Estimation Best Practices for Mining Projects</h3>
+                        <p data-en="Learn how to develop accurate cost estimates using AACE International standards. This article covers capital and operating cost estimation methodologies with real-world examples." data-fa="یاد بگیرید چگونه با استفاده از استانداردهای بین‌المللی AACE برآوردهای هزینه دقیق ایجاد کنید. این مقاله روش‌های برآورد هزینه سرمایه‌ای و عملیاتی را با مثال‌های واقعی پوشش می‌دهد.">Learn how to develop accurate cost estimates using AACE International standards. This article covers capital and operating cost estimation methodologies with real-world examples.</p>
+                        <div class="post-footer">
+                            <div class="post-author">
+                                <div class="author-avatar">DR</div>
+                                <div class="author-info">
+                                    <div class="author-name" data-en="Dr. Rezaei" data-fa="دکتر رضایی">Dr. Rezaei</div>
+                                    <div class="post-date" data-en="Dec 15, 2025" data-fa="15 دسامبر 2025">Dec 15, 2025</div>
+                                </div>
+                            </div>
+                            <a href="#" class="post-link">
+                                <span data-en="Read More" data-fa="بیشتر بخوانید">Read More</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="blog-post">
+                    <div class="post-image" style="background-image: url('https://images.unsplash.com/photo-1581092160607-ee67e4e9c390?w=600');">
+                        <span class="post-category" data-en="Technology" data-fa="فناوری">Technology</span>
+                    </div>
+                    <div class="post-content">
+                        <h3 data-en="AI and Machine Learning in Mineral Processing" data-fa="هوش مصنوعی و یادگیری ماشین در فرآوری مواد معدنی">AI and Machine Learning in Mineral Processing</h3>
+                        <p data-en="Explore how artificial intelligence is transforming mineral processing operations. From predictive maintenance to process optimization, discover the future of smart mining." data-fa="کشف کنید که چگونه هوش مصنوعی عملیات فرآوری مواد معدنی را متحول می‌کند. از نگهداری پیش‌بینانه تا بهینه‌سازی فرآیند، آینده معدنکاری هوشمند را کشف کنید.">Explore how artificial intelligence is transforming mineral processing operations. From predictive maintenance to process optimization, discover the future of smart mining.</p>
+                        <div class="post-footer">
+                            <div class="post-author">
+                                <div class="author-avatar">SM</div>
+                                <div class="author-info">
+                                    <div class="author-name" data-en="S. Mohammadi" data-fa="س. محمدی">S. Mohammadi</div>
+                                    <div class="post-date" data-en="Dec 10, 2025" data-fa="10 دسامبر 2025">Dec 10, 2025</div>
+                                </div>
+                            </div>
+                            <a href="#" class="post-link">
+                                <span data-en="Read More" data-fa="بیشتر بخوانید">Read More</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="blog-post">
+                    <div class="post-image" style="background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=600');">
+                        <span class="post-category" data-en="Sustainability" data-fa="پایداری">Sustainability</span>
+                    </div>
+                    <div class="post-content">
+                        <h3 data-en="Water Management in Mining: Sustainable Solutions" data-fa="مدیریت آب در معدن: راهکارهای پایدار">Water Management in Mining: Sustainable Solutions</h3>
+                        <p data-en="Comprehensive guide to water conservation and recycling in mining operations. Learn about closed-loop systems, tailings water recovery, and regulatory compliance." data-fa="راهنمای جامع حفاظت و بازیافت آب در عملیات معدنی. درباره سیستم‌های حلقه بسته، بازیابی آب باطله و انطباق با مقررات بیاموزید.">Comprehensive guide to water conservation and recycling in mining operations. Learn about closed-loop systems, tailings water recovery, and regulatory compliance.</p>
+                        <div class="post-footer">
+                            <div class="post-author">
+                                <div class="author-avatar">MK</div>
+                                <div class="author-info">
+                                    <div class="author-name" data-en="M. Karimi" data-fa="م. کریمی">M. Karimi</div>
+                                    <div class="post-date" data-en="Dec 5, 2025" data-fa="5 دسامبر 2025">Dec 5, 2025</div>
+                                </div>
+                            </div>
+                            <a href="#" class="post-link">
+                                <span data-en="Read More" data-fa="بیشتر بخوانید">Read More</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="blog-post">
+                    <div class="post-image" style="background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600');">
+                        <span class="post-category" data-en="Equipment" data-fa="تجهیزات">Equipment</span>
+                    </div>
+                    <div class="post-content">
+                        <h3 data-en="Selecting the Right Grinding Mill for Your Operation" data-fa="انتخاب آسیاب مناسب برای عملیات شما">Selecting the Right Grinding Mill for Your Operation</h3>
+                        <p data-en="A technical comparison of SAG mills, ball mills, and vertical roller mills. Understand the advantages, limitations, and selection criteria for different ore types." data-fa="مقایسه فنی آسیاب‌های SAG، آسیاب‌های توپی و آسیاب‌های غلتکی عمودی. مزایا، محدودیت‌ها و معیارهای انتخاب برای انواع مختلف سنگ معدن را درک کنید.">A technical comparison of SAG mills, ball mills, and vertical roller mills. Understand the advantages, limitations, and selection criteria for different ore types.</p>
+                        <div class="post-footer">
+                            <div class="post-author">
+                                <div class="author-avatar">ZA</div>
+                                <div class="author-info">
+                                    <div class="author-name" data-en="Z. Ahmadi" data-fa="ز. احمدی">Z. Ahmadi</div>
+                                    <div class="post-date" data-en="Nov 28, 2025" data-fa="28 نوامبر 2025">Nov 28, 2025</div>
+                                </div>
+                            </div>
+                            <a href="#" class="post-link">
+                                <span data-en="Read More" data-fa="بیشتر بخوانید">Read More</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </main>
+        
+        <aside class="sidebar">
+            <div class="sidebar-widget">
+                <h3 class="widget-title" data-en="Search" data-fa="جستجو">Search</h3>
+                <div class="search-box">
+                    <input type="text" placeholder="Search articles..." data-en-placeholder="Search articles..." data-fa-placeholder="جستجوی مقالات...">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            
+            <div class="sidebar-widget">
+                <h3 class="widget-title" data-en="Categories" data-fa="دسته‌بندی‌ها">Categories</h3>
+                <ul class="categories-list">
+                    <li><a href="#"><span data-en="Process Engineering" data-fa="مهندسی فرآیند">Process Engineering</span> <span class="category-count">24</span></a></li>
+                    <li><a href="#"><span data-en="Economics & Finance" data-fa="اقتصاد و مالی">Economics & Finance</span> <span class="category-count">18</span></a></li>
+                    <li><a href="#"><span data-en="Equipment & Technology" data-fa="تجهیزات و فناوری">Equipment & Technology</span> <span class="category-count">31</span></a></li>
+                    <li><a href="#"><span data-en="Sustainability" data-fa="پایداری">Sustainability</span> <span class="category-count">15</span></a></li>
+                    <li><a href="#"><span data-en="Project Management" data-fa="مدیریت پروژه">Project Management</span> <span class="category-count">12</span></a></li>
+                    <li><a href="#"><span data-en="Case Studies" data-fa="مطالعات موردی">Case Studies</span> <span class="category-count">22</span></a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-widget">
+                <h3 class="widget-title" data-en="Popular Posts" data-fa="پست‌های محبوب">Popular Posts</h3>
+                <ul class="popular-posts">
+                    <li class="popular-post">
+                        <div class="popular-thumb" style="background-image: url('https://images.unsplash.com/photo-1581094271901-8022df4466f9?w=200');"></div>
+                        <div class="popular-info">
+                            <h4><a href="#" data-en="Top 10 Mining Equipment Innovations" data-fa="10 نوآوری برتر تجهیزات معدنی">Top 10 Mining Equipment Innovations</a></h4>
+                            <div class="popular-date" data-en="Nov 20, 2025" data-fa="20 نوامبر 2025">Nov 20, 2025</div>
+                        </div>
+                    </li>
+                    <li class="popular-post">
+                        <div class="popular-thumb" style="background-image: url('https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=200');"></div>
+                        <div class="popular-info">
+                            <h4><a href="#" data-en="Gold Price Forecast 2026" data-fa="پیش‌بینی قیمت طلا 2026">Gold Price Forecast 2026</a></h4>
+                            <div class="popular-date" data-en="Nov 15, 2025" data-fa="15 نوامبر 2025">Nov 15, 2025</div>
+                        </div>
+                    </li>
+                    <li class="popular-post">
+                        <div class="popular-thumb" style="background-image: url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=200');"></div>
+                        <div class="popular-info">
+                            <h4><a href="#" data-en="Heap Leaching Design Guide" data-fa="راهنمای طراحی لیچینگ توده‌ای">Heap Leaching Design Guide</a></h4>
+                            <div class="popular-date" data-en="Nov 10, 2025" data-fa="10 نوامبر 2025">Nov 10, 2025</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-widget">
+                <h3 class="widget-title" data-en="Tags" data-fa="برچسب‌ها">Tags</h3>
+                <div class="tags-cloud">
+                    <a href="#" class="tag" data-en="Copper" data-fa="مس">Copper</a>
+                    <a href="#" class="tag" data-en="Gold" data-fa="طلا">Gold</a>
+                    <a href="#" class="tag" data-en="Flotation" data-fa="فلوتاسیون">Flotation</a>
+                    <a href="#" class="tag" data-en="Grinding" data-fa="آسیاب">Grinding</a>
+                    <a href="#" class="tag" data-en="Cost Estimation" data-fa="برآورد هزینه">Cost Estimation</a>
+                    <a href="#" class="tag" data-en="Plant Design" data-fa="طراحی کارخانه">Plant Design</a>
+                    <a href="#" class="tag" data-en="Leaching" data-fa="لیچینگ">Leaching</a>
+                    <a href="#" class="tag" data-en="SAG Mill" data-fa="آسیاب SAG">SAG Mill</a>
+                    <a href="#" class="tag" data-en="Tailings" data-fa="باطله">Tailings</a>
+                    <a href="#" class="tag" data-en="Automation" data-fa="اتوماسیون">Automation</a>
+                </div>
+            </div>
+            
+            <div class="sidebar-widget">
+                <h3 class="widget-title" data-en="Newsletter" data-fa="خبرنامه">Newsletter</h3>
+                <form class="newsletter-form">
+                    <p data-en="Subscribe to receive our latest articles and industry insights directly to your inbox." data-fa="برای دریافت آخرین مقالات و بینش‌های صنعتی ما مستقیماً در صندوق ورودی خود مشترک شوید.">Subscribe to receive our latest articles and industry insights directly to your inbox.</p>
+                    <input type="email" placeholder="Your email address" data-en-placeholder="Your email address" data-fa-placeholder="آدرس ایمیل شما" required>
+                    <button type="submit" data-en="Subscribe" data-fa="اشتراک">Subscribe</button>
+                </form>
+            </div>
+        </aside>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 data-en="Company" data-fa="شرکت">Company</h3>
+                <ul>
+                    <li><a href="about.html" data-en="About Us" data-fa="درباره ما">About Us</a></li>
+                    <li><a href="portfolio.html" data-en="Portfolio" data-fa="نمونه کارها">Portfolio</a></li>
+                    <li><a href="blog.html" data-en="Blog" data-fa="وبلاگ">Blog</a></li>
+                    <li><a href="news.html" data-en="News" data-fa="اخبار">News</a></li>
+                    <li><a href="contact.html" data-en="Contact" data-fa="تماس با ما">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 data-en="Services" data-fa="خدمات">Services</h3>
+                <ul>
+                    <li><a href="services/equipment-selection.html" data-en="Equipment Selection" data-fa="انتخاب تجهیزات">Equipment Selection</a></li>
+                    <li><a href="services/economic-analysis.html" data-en="Economic Analysis" data-fa="تحلیل اقتصادی">Economic Analysis</a></li>
+                    <li><a href="services/plant-design.html" data-en="Plant Design" data-fa="طراحی کارخانه">Plant Design</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 data-en="Contact" data-fa="تماس">Contact</h3>
+                <ul>
+                    <li>📧 info@kdmine.com</li>
+                    <li>📞 +98 21 1234 5678</li>
+                    <li>📍 Tehran, Iran</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-en="&copy; 2025 Kavian Development Mine. All rights reserved." data-fa="© 2025 کاویان توسعه معدن. تمامی حقوق محفوظ است.">&copy; 2025 Kavian Development Mine. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        (function(){ emailjs.init("u3dfoUdeOTtWSAjk_"); })();
+        
+        function switchLanguage(lang) {
+            const body = document.body;
+            const elements = document.querySelectorAll('[data-en][data-fa]');
+            const langButtons = document.querySelectorAll('.lang-btn');
+            const inputs = document.querySelectorAll('[data-en-placeholder][data-fa-placeholder]');
+            
+            if (lang === 'fa') { body.classList.add('rtl'); } 
+            else { body.classList.remove('rtl'); }
+            
+            langButtons.forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.lang-btn').classList.add('active');
+            
+            elements.forEach(el => {
+                el.innerHTML = el.getAttribute('data-' + lang);
+            });
+            
+            inputs.forEach(input => {
+                input.placeholder = input.getAttribute('data-' + lang + '-placeholder');
+            });
+            
+            localStorage.setItem('preferredLanguage', lang);
+        }
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferredLanguage') || 'en';
+            if (savedLang === 'fa') {
+                document.querySelector('.lang-btn:last-child').click();
+            }
+        });
+    </script>
+</body>
+</html>

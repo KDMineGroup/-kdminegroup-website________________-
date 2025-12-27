@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Kavian Development Mine</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #1e3a8a;
+            --secondary-blue: #2563eb;
+            --accent-gold: #f59e0b;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+        }
+        body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-dark); overflow-x: hidden; }
+        body.rtl { font-family: 'Vazirmatn', sans-serif; direction: rtl; }
+        
+        .language-switcher { position: fixed; top: 20px; right: 20px; z-index: 3000; background: white; border-radius: 50px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); padding: 8px; display: flex; gap: 8px; }
+        body.rtl .language-switcher { right: auto; left: 20px; }
+        .lang-btn { padding: 10px 20px; border: 2px solid transparent; background: transparent; border-radius: 25px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: all 0.3s; display: flex; align-items: center; gap: 8px; color: var(--text-light); }
+        .lang-btn:hover { background: var(--light-bg); color: var(--secondary-blue); }
+        .lang-btn.active { background: var(--secondary-blue); color: white; border-color: var(--secondary-blue); }
+        
+        header { background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%); color: white; padding: 1rem 0; position: sticky; top: 0; z-index: 2000; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        nav { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
+        .logo { display: flex; align-items: center; gap: 15px; font-size: 1.5rem; font-weight: 700; text-decoration: none; color: white; }
+        .logo img { height: 55px; width: auto; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2)); }
+        .nav-links { display: flex; list-style: none; gap: 2.5rem; align-items: center; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 500; transition: all 0.3s; position: relative; padding: 5px 0; }
+        .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--accent-gold); transition: width 0.3s; }
+        .nav-links a:hover::after { width: 100%; }
+        
+        .page-hero { background: linear-gradient(135deg, rgba(30, 58, 138, 0.95) 0%, rgba(37, 99, 235, 0.95) 100%), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920') center/cover; color: white; padding: 120px 2rem 80px; text-align: center; }
+        .page-hero h1 { font-size: 3.5rem; margin-bottom: 1rem; font-weight: 700; text-shadow: 2px 2px 8px rgba(0,0,0,0.3); }
+        .page-hero p { font-size: 1.3rem; opacity: 0.95; max-width: 800px; margin: 0 auto; }
+        
+        .portfolio-intro { max-width: 1200px; margin: 80px auto; padding: 0 2rem; text-align: center; }
+        .portfolio-intro h2 { font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 20px; }
+        .portfolio-intro p { font-size: 1.2rem; color: var(--text-light); line-height: 1.9; }
+        
+        .filter-buttons { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin: 60px 0; padding: 0 2rem; }
+        .filter-btn { padding: 12px 30px; border: 2px solid var(--secondary-blue); background: white; color: var(--secondary-blue); border-radius: 50px; cursor: pointer; font-weight: 600; font-size: 1rem; transition: all 0.3s; }
+        .filter-btn:hover, .filter-btn.active { background: var(--secondary-blue); color: white; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3); }
+        
+        .projects-grid { max-width: 1400px; margin: 0 auto 80px; padding: 0 2rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 3rem; }
+        
+        .project-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.08); transition: all 0.5s; cursor: pointer; }
+        .project-card:hover { transform: translateY(-10px); box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+        
+        .project-image { height: 280px; background-size: cover; background-position: center; position: relative; overflow: hidden; }
+        .project-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(30, 58, 138, 0.9), rgba(245, 158, 11, 0.8)); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.4s; }
+        .project-card:hover .project-overlay { opacity: 1; }
+        .view-project { color: white; font-size: 1.2rem; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+        
+        .project-tags { position: absolute; top: 20px; left: 20px; display: flex; gap: 10px; flex-wrap: wrap; z-index: 1; }
+        .project-tag { padding: 6px 15px; background: rgba(255,255,255,0.95); color: var(--secondary-blue); border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
+        
+        .project-content { padding: 30px; }
+        .project-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .project-location { color: var(--accent-gold); font-weight: 600; display: flex; align-items: center; gap: 8px; }
+        .project-year { color: var(--text-light); font-weight: 600; }
+        .project-content h3 { font-size: 1.8rem; color: var(--primary-blue); margin-bottom: 15px; }
+        .project-content p { color: var(--text-light); line-height: 1.8; margin-bottom: 20px; }
+        
+        .project-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; padding-top: 20px; border-top: 2px solid var(--light-bg); }
+        .stat-item { text-align: center; }
+        .stat-value { font-size: 1.5rem; font-weight: 700; color: var(--secondary-blue); }
+        .stat-label { font-size: 0.85rem; color: var(--text-light); margin-top: 5px; }
+        
+        .stats-section { background: var(--dark-bg); color: white; padding: 80px 2rem; margin: 80px 0; }
+        .stats-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; text-align: center; }
+        .stat-number { font-size: 4rem; font-weight: 700; color: var(--accent-gold); margin-bottom: 10px; }
+        .stat-label-big { font-size: 1.2rem; opacity: 0.9; }
+        
+        .testimonials { max-width: 1200px; margin: 80px auto; padding: 0 2rem; }
+        .section-title { text-align: center; font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 60px; }
+        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; }
+        .testimonial-card { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); position: relative; }
+        .testimonial-card::before { content: '"'; position: absolute; top: 20px; left: 30px; font-size: 6rem; color: var(--light-bg); font-family: Georgia, serif; line-height: 1; }
+        .testimonial-text { color: var(--text-light); font-size: 1.1rem; line-height: 1.8; margin-bottom: 25px; position: relative; z-index: 1; }
+        .testimonial-author { display: flex; align-items: center; gap: 15px; }
+        .author-avatar { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: 700; }
+        .author-info h4 { color: var(--primary-blue); font-size: 1.2rem; margin-bottom: 5px; }
+        .author-info p { color: var(--text-light); font-size: 0.95rem; }
+        
+        .cta-section { background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%); color: white; padding: 80px 2rem; text-align: center; }
+        .cta-section h2 { font-size: 2.8rem; margin-bottom: 20px; }
+        .cta-section p { font-size: 1.3rem; margin-bottom: 35px; opacity: 0.95; max-width: 800px; margin-left: auto; margin-right: auto; }
+        .btn { display: inline-flex; align-items: center; gap: 10px; padding: 16px 35px; border-radius: 50px; font-weight: 600; font-size: 1.05rem; text-decoration: none; transition: all 0.4s; }
+        .btn-primary { background: var(--accent-gold); color: white; box-shadow: 0 8px 24px rgba(245, 158, 11, 0.3); }
+        .btn-primary:hover { background: #d97706; transform: translateY(-3px); box-shadow: 0 12px 32px rgba(245, 158, 11, 0.4); }
+        
+        footer { background: var(--dark-bg); color: white; padding: 60px 2rem 30px; }
+        .footer-content { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 40px; }
+        .footer-section h3 { color: var(--accent-gold); margin-bottom: 20px; font-size: 1.3rem; }
+        .footer-section ul { list-style: none; }
+        .footer-section a { color: #cbd5e1; text-decoration: none; display: block; margin-bottom: 12px; transition: all 0.3s; }
+        .footer-section a:hover { color: var(--accent-gold); padding-left: 5px; }
+        body.rtl .footer-section a:hover { padding-left: 0; padding-right: 5px; }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); color: #94a3b8; }
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .page-hero h1 { font-size: 2.5rem; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .filter-buttons { flex-direction: column; align-items: center; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switcher">
+        <button class="lang-btn active" onclick="switchLanguage('en')">
+            <span>🇬🇧</span><span>EN</span>
+        </button>
+        <button class="lang-btn" onclick="switchLanguage('fa')">
+            <span>🇮🇷</span><span>FA</span>
+        </button>
+    </div>
+
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Logo">
+                <span data-en="Kavian Development Mine" data-fa="کاویان توسعه معدن">Kavian Development Mine</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" data-en="Home" data-fa="خانه">Home</a></li>
+                <li><a href="about.html" data-en="About" data-fa="درباره ما">About</a></li>
+                <li><a href="services.html" data-en="Services" data-fa="خدمات">Services</a></li>
+                <li><a href="portfolio.html" data-en="Portfolio" data-fa="نمونه کارها">Portfolio</a></li>
+                <li><a href="blog.html" data-en="Blog" data-fa="وبلاگ">Blog</a></li>
+                <li><a href="news.html" data-en="News" data-fa="اخبار">News</a></li>
+                <li><a href="technical-resources.html" data-en="Resources" data-fa="منابع فنی">Resources</a></li>
+                <li><a href="contact.html" data-en="Contact" data-fa="تماس">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="page-hero">
+        <h1 data-en="Our Portfolio" data-fa="نمونه کارهای ما">Our Portfolio</h1>
+        <p data-en="Explore Our Successful Mining Projects Across the Globe" data-fa="پروژه‌های موفق معدنی ما را در سراسر جهان کشف کنید">Explore Our Successful Mining Projects Across the Globe</p>
+    </section>
+
+    <section class="portfolio-intro">
+        <h2 data-en="Proven Track Record" data-fa="سابقه اثبات شده">Proven Track Record</h2>
+        <p data-en="With over 200 successfully completed projects across 30 countries, Kavian Development Mine has established itself as a trusted partner in the mining industry. From small-scale feasibility studies to large multi-million dollar plant designs, we deliver excellence at every scale." data-fa="با بیش از 200 پروژه تکمیل شده موفق در 30 کشور، کاویان توسعه معدن خود را به عنوان یک شریک مورد اعتماد در صنعت معدن معرفی کرده است. از مطالعات امکان‌سنجی در مقیاس کوچک تا طراحی کارخانه‌های چند میلیون دلاری بزرگ، ما تعالی را در هر مقیاسی ارائه می‌دهیم.">With over 200 successfully completed projects across 30 countries, Kavian Development Mine has established itself as a trusted partner in the mining industry. From small-scale feasibility studies to large multi-million dollar plant designs, we deliver excellence at every scale.</p>
+    </section>
+
+    <div class="filter-buttons">
+        <button class="filter-btn active" data-category="all" data-en="All Projects" data-fa="همه پروژه‌ها">All Projects</button>
+        <button class="filter-btn" data-category="copper" data-en="Copper" data-fa="مس">Copper</button>
+        <button class="filter-btn" data-category="gold" data-en="Gold" data-fa="طلا">Gold</button>
+        <button class="filter-btn" data-category="iron" data-en="Iron Ore" data-fa="سنگ آهن">Iron Ore</button>
+        <button class="filter-btn" data-category="feasibility" data-en="Feasibility Studies" data-fa="مطالعات امکان‌سنجی">Feasibility Studies</button>
+        <button class="filter-btn" data-category="plant" data-en="Plant Design" data-fa="طراحی کارخانه">Plant Design</button>
+    </div>
+
+    <section class="projects-grid" id="projectsGrid">
+        <div class="project-card" data-category="copper plant">
+            <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1581094271901-8022df4466f9?w=800');">
+                <div class="project-tags">
+                    <span class="project-tag" data-en="Copper" data-fa="مس">Copper</span>
+                    <span class="project-tag" data-en="Plant Design" data-fa="طراحی کارخانه">Plant Design</span>
+                </div>
+                <div class="project-overlay">
+                    <div class="view-project">
+                        <span data-en="View Project" data-fa="مشاهده پروژه">View Project</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="project-content">
+                <div class="project-meta">
+                    <div class="project-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span data-en="Kerman, Iran" data-fa="کرمان، ایران">Kerman, Iran</span>
+                    </div>
+                    <div class="project-year">2023</div>
+                </div>
+                <h3 data-en="Sarcheshmeh Copper Complex" data-fa="مجتمع مس سرچشمه">Sarcheshmeh Copper Complex</h3>
+                <p data-en="Complete process plant design for 50,000 TPD copper concentrator including crushing, grinding, flotation, and tailings management systems. Project value: $85M." data-fa="طراحی کامل کارخانه فرآوری برای کنسانتره مس 50000 تن در روز شامل سیستم‌های خردایش، آسیاب، فلوتاسیون و مدیریت باطله. ارزش پروژه: 85 میلیون دلار.">Complete process plant design for 50,000 TPD copper concentrator including crushing, grinding, flotation, and tailings management systems. Project value: $85M.</p>
+                <div class="project-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">50K</div>
+                        <div class="stat-label" data-en="TPD" data-fa="تن/روز">TPD</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">$85M</div>
+                        <div class="stat-label" data-en="Value" data-fa="ارزش">Value</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">18</div>
+                        <div class="stat-label" data-en="Months" data-fa="ماه">Months</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="project-card" data-category="gold feasibility">
+            <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=800');">
+                <div class="project-tags">
+                    <span class="project-tag" data-en="Gold" data-fa="طلا">Gold</span>
+                    <span class="project-tag" data-en="Feasibility" data-fa="امکان‌سنجی">Feasibility</span>
+                </div>
+                <div class="project-overlay">
+                    <div class="view-project">
+                        <span data-en="View Project" data-fa="مشاهده پروژه">View Project</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="project-content">
+                <div class="project-meta">
+                    <div class="project-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span data-en="Takab, Iran" data-fa="تکاب، ایران">Takab, Iran</span>
+                    </div>
+                    <div class="project-year">2022</div>
+                </div>
+                <h3 data-en="Zarshuran Gold Mine Expansion" data-fa="توسعه معدن طلای زرشوران">Zarshuran Gold Mine Expansion</h3>
+                <p data-en="Comprehensive feasibility study for heap leaching expansion project. Economic analysis, process design, and environmental impact assessment. NPV: $120M." data-fa="مطالعه امکان‌سنجی جامع برای پروژه توسعه لیچینگ توده‌ای. تحلیل اقتصادی، طراحی فرآیند و ارزیابی اثرات زیست‌محیطی. NPV: 120 میلیون دلار.">Comprehensive feasibility study for heap leaching expansion project. Economic analysis, process design, and environmental impact assessment. NPV: $120M.</p>
+                <div class="project-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">5K</div>
+                        <div class="stat-label" data-en="TPD" data-fa="تن/روز">TPD</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">$45M</div>
+                        <div class="stat-label" data-en="CAPEX" data-fa="سرمایه">CAPEX</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">12</div>
+                        <div class="stat-label" data-en="Months" data-fa="ماه">Months</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="project-card" data-category="iron plant">
+            <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=800');">
+                <div class="project-tags">
+                    <span class="project-tag" data-en="Iron Ore" data-fa="سنگ آهن">Iron Ore</span>
+                    <span class="project-tag" data-en="Plant Design" data-fa="طراحی کارخانه">Plant Design</span>
+                </div>
+                <div class="project-overlay">
+                    <div class="view-project">
+                        <span data-en="View Project" data-fa="مشاهده پروژه">View Project</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="project-content">
+                <div class="project-meta">
+                    <div class="project-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span data-en="Yazd, Iran" data-fa="یزد، ایران">Yazd, Iran</span>
+                    </div>
+                    <div class="project-year">2024</div>
+                </div>
+                <h3 data-en="Chadormalu Iron Ore Beneficiation" data-fa="کارخانه فرآوری سنگ آهن چادرملو">Chadormalu Iron Ore Beneficiation</h3>
+                <p data-en="Design and optimization of magnetic separation plant for iron ore concentration. Increased recovery from 68% to 82% with improved product quality." data-fa="طراحی و بهینه‌سازی کارخانه جداسازی مغناطیسی برای کنسانتره سنگ آهن. افزایش بازیابی از 68٪ به 82٪ با بهبود کیفیت محصول.">Design and optimization of magnetic separation plant for iron ore concentration. Increased recovery from 68% to 82% with improved product quality.</p>
+                <div class="project-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">100K</div>
+                        <div class="stat-label" data-en="TPD" data-fa="تن/روز">TPD</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">82%</div>
+                        <div class="stat-label" data-en="Recovery" data-fa="بازیابی">Recovery</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">24</div>
+                        <div class="stat-label" data-en="Months" data-fa="ماه">Months</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="project-card" data-category="copper feasibility">
+            <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800');">
+                <div class="project-tags">
+                    <span class="project-tag" data-en="Copper" data-fa="مس">Copper</span>
+                    <span class="project-tag" data-en="SX-EW" data-fa="SX-EW">SX-EW</span>
+                </div>
+                <div class="project-overlay">
+                    <div class="view-project">
+                        <span data-en="View Project" data-fa="مشاهده پروژه">View Project</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="project-content">
+                <div class="project-meta">
+                    <div class="project-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span data-en="Rafsanjan, Iran" data-fa="رفسنجان، ایران">Rafsanjan, Iran</span>
+                    </div>
+                    <div class="project-year">2023</div>
+                </div>
+                <h3 data-en="Miduk Copper SX-EW Plant" data-fa="کارخانه SX-EW مس میدوک">Miduk Copper SX-EW Plant</h3>
+                <p data-en="Complete design of solvent extraction and electrowinning plant for copper recovery from heap leaching operations. Production: 15,000 TPY cathode copper." data-fa="طراحی کامل کارخانه استخراج با حلال و الکتروویننگ برای بازیابی مس از عملیات لیچینگ توده‌ای. تولید: 15000 تن در سال مس کاتد.">Complete design of solvent extraction and electrowinning plant for copper recovery from heap leaching operations. Production: 15,000 TPY cathode copper.</p>
+                <div class="project-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">15K</div>
+                        <div class="stat-label" data-en="TPY" data-fa="تن/سال">TPY</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">$32M</div>
+                        <div class="stat-label" data-en="Value" data-fa="ارزش">Value</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">15</div>
+                        <div class="stat-label" data-en="Months" data-fa="ماه">Months</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="project-card" data-category="gold plant">
+            <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800');">
+                <div class="project-tags">
+                    <span class="project-tag" data-en="Gold" data-fa="طلا">Gold</span>
+                    <span class="project-tag" data-en="CIL Plant" data-fa="کارخانه CIL">CIL Plant</span>
+                </div>
+                <div class="project-overlay">
+                    <div class="view-project">
+                        <span data-en="View Project" data-fa="مشاهده پروژه">View Project</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="project-content">
+                <div class="project-meta">
+                    <div class="project-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span data-en="Oman" data-fa="عمان">Oman</span>
+                    </div>
+                    <div class="project-year">2021</div>
+                </div>
+                <h3 data-en="Al Hajar Gold Processing Plant" data-fa="کارخانه فرآوری طلای الحجر">Al Hajar Gold Processing Plant</h3>
+                <p data-en="Carbon-in-leach (CIL) plant design for gold recovery. Includes crushing, grinding, leaching, and gold recovery circuits. Annual production: 50,000 oz." data-fa="طراحی کارخانه کربن در لیچ (CIL) برای بازیابی طلا. شامل مدارهای خردایش، آسیاب، لیچینگ و بازیابی طلا. تولید سالانه: 50000 اونس.">Carbon-in-leach (CIL) plant design for gold recovery. Includes crushing, grinding, leaching, and gold recovery circuits. Annual production: 50,000 oz.</p>
+                <div class="project-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">3K</div>
+                        <div class="stat-label" data-en="TPD" data-fa="تن/روز">TPD</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">50K</div>
+                        <div class="stat-label" data-en="oz/year" data-fa="اونس/سال">oz/year</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">20</div>
+                        <div class="stat-label" data-en="Months" data-fa="ماه">Months</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="project-card" data-category="copper feasibility">
+            <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?w=800');">
+                <div class="project-tags">
+                    <span class="project-tag" data-en="Copper" data-fa="مس">Copper</span>
+                    <span class="project-tag" data-en="Feasibility" data-fa="امکان‌سنجی">Feasibility</span>
+                </div>
+                <div class="project-overlay">
+                    <div class="view-project">
+                        <span data-en="View Project" data-fa="مشاهده پروژه">View Project</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="project-content">
+                <div class="project-meta">
+                    <div class="project-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span data-en="Afghanistan" data-fa="افغانستان">Afghanistan</span>
+                    </div>
+                    <div class="project-year">2020</div>
+                </div>
+                <h3 data-en="Aynak Copper Mine Study" data-fa="مطالعه معدن مس عینک">Aynak Copper Mine Study</h3>
+                <p data-en="Pre-feasibility study for one of the world's largest undeveloped copper deposits. Resource estimation, mining method selection, and economic analysis." data-fa="مطالعه پیش‌امکان‌سنجی برای یکی از بزرگترین ذخایر مس توسعه نیافته جهان. برآورد منابع، انتخاب روش استخراج و تحلیل اقتصادی.">Pre-feasibility study for one of the world's largest undeveloped copper deposits. Resource estimation, mining method selection, and economic analysis.</p>
+                <div class="project-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">240M</div>
+                        <div class="stat-label" data-en="Tonnes" data-fa="تن">Tonnes</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">$3B</div>
+                        <div class="stat-label" data-en="NPV" data-fa="NPV">NPV</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">18</div>
+                        <div class="stat-label" data-en="Months" data-fa="ماه">Months</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">200+</div>
+                <div class="stat-label-big" data-en="Completed Projects" data-fa="پروژه تکمیل شده">Completed Projects</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">30+</div>
+                <div class="stat-label-big" data-en="Countries Served" data-fa="کشور خدمت‌رسانی">Countries Served</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">$2B+</div>
+                <div class="stat-label-big" data-en="Project Value" data-fa="ارزش پروژه">Project Value</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">98%</div>
+                <div class="stat-label-big" data-en="Client Satisfaction" data-fa="رضایت مشتری">Client Satisfaction</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <h2 class="section-title" data-en="Client Testimonials" data-fa="نظرات مشتریان">Client Testimonials</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-text" data-en="Kavian Development Mine delivered exceptional results on our copper concentrator project. Their technical expertise and attention to detail ensured the plant was delivered on time and within budget. Highly recommended!" data-fa="کاویان توسعه معدن نتایج استثنایی در پروژه کنسانتره مس ما ارائه داد. تخصص فنی و توجه به جزئیات آنها تضمین کرد که کارخانه به موقع و در بودجه تحویل داده شود. بسیار توصیه می‌شود!">Kavian Development Mine delivered exceptional results on our copper concentrator project. Their technical expertise and attention to detail ensured the plant was delivered on time and within budget. Highly recommended!</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">MR</div>
+                    <div class="author-info">
+                        <h4 data-en="Mohammad Rezaei" data-fa="محمد رضایی">Mohammad Rezaei</h4>
+                        <p data-en="Project Manager, National Copper Industries" data-fa="مدیر پروژه، صنایع ملی مس">Project Manager, National Copper Industries</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <p class="testimonial-text" data-en="The feasibility study prepared by Kavian was comprehensive and professional. Their economic analysis was accurate and helped us secure financing for our gold project. Excellent work!" data-fa="مطالعه امکان‌سنجی تهیه شده توسط کاویان جامع و حرفه‌ای بود. تحلیل اقتصادی آنها دقیق بود و به ما کمک کرد تا تامین مالی برای پروژه طلای خود را تامین کنیم. کار عالی!">The feasibility study prepared by Kavian was comprehensive and professional. Their economic analysis was accurate and helped us secure financing for our gold project. Excellent work!</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">SA</div>
+                    <div class="author-info">
+                        <h4 data-en="Sarah Ahmadi" data-fa="سارا احمدی">Sarah Ahmadi</h4>
+                        <p data-en="CEO, Zarin Mining Company" data-fa="مدیرعامل، شرکت معدنی زرین">CEO, Zarin Mining Company</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <p class="testimonial-text" data-en="Working with Kavian on our plant optimization project resulted in a 15% increase in recovery and 20% reduction in operating costs. Their process engineering team is world-class." data-fa="کار با کاویان در پروژه بهینه‌سازی کارخانه ما منجر به افزایش 15٪ در بازیابی و کاهش 20٪ در هزینه‌های عملیاتی شد. تیم مهندسی فرآیند آنها در سطح جهانی است.">Working with Kavian on our plant optimization project resulted in a 15% increase in recovery and 20% reduction in operating costs. Their process engineering team is world-class.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">AK</div>
+                    <div class="author-info">
+                        <h4 data-en="Ali Karimi" data-fa="علی کریمی">Ali Karimi</h4>
+                        <p data-en="Operations Director, Sarcheshmeh Copper" data-fa="مدیر عملیات، مس سرچشمه">Operations Director, Sarcheshmeh Copper</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2 data-en="Start Your Project Today" data-fa="پروژه خود را امروز شروع کنید">Start Your Project Today</h2>
+        <p data-en="Ready to bring your mining project to life? Contact us for a free consultation and discover how we can help you achieve your goals." data-fa="آماده هستید تا پروژه معدنی خود را به واقعیت تبدیل کنید؟ برای مشاوره رایگان با ما تماس بگیرید و کشف کنید که چگونه می‌توانیم به شما در دستیابی به اهداف خود کمک کنیم.">Ready to bring your mining project to life? Contact us for a free consultation and discover how we can help you achieve your goals.</p>
+        <a href="contact.html" class="btn btn-primary">
+            <span data-en="Get In Touch" data-fa="تماس بگیرید">Get In Touch</span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 data-en="Company" data-fa="شرکت">Company</h3>
+                <ul>
+                    <li><a href="about.html" data-en="About Us" data-fa="درباره ما">About Us</a></li>
+                    <li><a href="portfolio.html" data-en="Portfolio" data-fa="نمونه کارها">Portfolio</a></li>
+                    <li><a href="blog.html" data-en="Blog" data-fa="وبلاگ">Blog</a></li>
+                    <li><a href="news.html" data-en="News" data-fa="اخبار">News</a></li>
+                    <li><a href="contact.html" data-en="Contact" data-fa="تماس با ما">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 data-en="Services" data-fa="خدمات">Services</h3>
+                <ul>
+                    <li><a href="services/equipment-selection.html" data-en="Equipment Selection" data-fa="انتخاب تجهیزات">Equipment Selection</a></li>
+                    <li><a href="services/economic-analysis.html" data-en="Economic Analysis" data-fa="تحلیل اقتصادی">Economic Analysis</a></li>
+                    <li><a href="services/plant-design.html" data-en="Plant Design" data-fa="طراحی کارخانه">Plant Design</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 data-en="Contact" data-fa="تماس">Contact</h3>
+                <ul>
+                    <li>📧 info@kdmine.com</li>
+                    <li>📞 +98 21 1234 5678</li>
+                    <li>📍 Tehran, Iran</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-en="&copy; 2025 Kavian Development Mine. All rights reserved." data-fa="© 2025 کاویان توسعه معدن. تمامی حقوق محفوظ است.">&copy; 2025 Kavian Development Mine. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        (function(){ emailjs.init("u3dfoUdeOTtWSAjk_"); })();
+        
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const category = button.getAttribute('data-category');
+                
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                projectCards.forEach(card => {
+                    if (category === 'all' || card.getAttribute('data-category').includes(category)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        function switchLanguage(lang) {
+            const body = document.body;
+            const elements = document.querySelectorAll('[data-en][data-fa]');
+            const langButtons = document.querySelectorAll('.lang-btn');
+            
+            if (lang === 'fa') { body.classList.add('rtl'); } 
+            else { body.classList.remove('rtl'); }
+            
+            langButtons.forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.lang-btn').classList.add('active');
+            
+            elements.forEach(el => {
+                el.innerHTML = el.getAttribute('data-' + lang);
+            });
+            
+            localStorage.setItem('preferredLanguage', lang);
+        }
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferredLanguage') || 'en';
+            if (savedLang === 'fa') {
+                document.querySelector('.lang-btn:last-child').click();
+            }
+        });
+    </script>
+</body>
+</html>
