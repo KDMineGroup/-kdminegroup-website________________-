@@ -3,123 +3,772 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نمونه کارها - Kavian Development Mine</title>
+    <title>نمونه کارها | کاویان توسعه معدن</title>
+    <meta name="description" content="نمونه پروژه‌های موفق کاویان توسعه معدن در زمینه مشاوره معدنی">
+    <link rel="icon" type="image/svg+xml" href="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg">
+    
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; }
-        .language-switcher { position: fixed; top: 20px; left: 20px; z-index: 2000; display: flex; gap: 10px; background: white; padding: 10px; border-radius: 50px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        .lang-btn { padding: 8px 16px; border: 2px solid #e2e8f0; background: white; border-radius: 25px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: all 0.3s; text-decoration: none; color: #64748b; display: flex; align-items: center; gap: 6px; }
-        .lang-btn:hover { border-color: #2563eb; color: #2563eb; transform: translateY(-2px); }
-        .lang-btn.active { background: #2563eb; color: white; border-color: #2563eb; }
-        header { background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); color: white; padding: 1rem 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        nav { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
-        .logo { display: flex; align-items: center; gap: 15px; font-size: 1.5rem; font-weight: bold; }
-        .logo img { height: 50px; width: auto; }
-        .nav-links { display: flex; list-style: none; gap: 2rem; }
-        .nav-links a { color: white; text-decoration: none; font-weight: 500; transition: color 0.3s; }
-        .nav-links a:hover { color: #60a5fa; }
-        .hero { background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); color: white; padding: 120px 2rem 80px; text-align: center; }
-        .hero h1 { font-size: 3rem; margin-bottom: 1.5rem; }
-        .hero p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.95; }
-        .content { max-width: 1200px; margin: 0 auto; padding: 60px 2rem; }
-        .section { margin-bottom: 4rem; }
-        .section h2 { color: #1e3a8a; font-size: 2rem; margin-bottom: 1.5rem; }
-        .section p { color: #666; line-height: 1.8; margin-bottom: 1rem; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
-        .card { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); transition: transform 0.3s; }
-        .card:hover { transform: translateY(-5px); }
-        .card h3 { color: #2563eb; margin-bottom: 1rem; font-size: 1.5rem; }
-        .card p { color: #666; }
-        .btn { display: inline-block; padding: 12px 30px; background: #2563eb; color: white; text-decoration: none; border-radius: 50px; font-weight: 600; transition: all 0.3s; margin-top: 1rem; }
-        .btn:hover { background: #1e3a8a; transform: translateY(-2px); }
-        footer { background: #1e293b; color: white; padding: 3rem 2rem 1rem; margin-top: 4rem; }
-        .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
-        .footer-section h3 { margin-bottom: 1rem; color: #60a5fa; }
-        .footer-section ul { list-style: none; }
-        .footer-section a { color: #cbd5e1; text-decoration: none; display: block; margin-bottom: 0.5rem; }
-        .footer-section a:hover { color: white; }
-        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid #334155; color: #94a3b8; }
-        form { max-width: 600px; margin: 2rem auto; }
-        .form-group { margin-bottom: 1.5rem; }
-        label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: #1e3a8a; }
-        input, textarea, select { width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s; }
-        input:focus, textarea:focus, select:focus { outline: none; border-color: #2563eb; }
-        textarea { min-height: 150px; resize: vertical; }
-        button[type="submit"] { width: 100%; padding: 15px; background: #2563eb; color: white; border: none; border-radius: 50px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; }
-        button[type="submit"]:hover { background: #1e3a8a; transform: translateY(-2px); }
-        @media (max-width: 768px) { .nav-links { display: none; } .hero h1 { font-size: 2rem; } .grid { grid-template-columns: 1fr; } }
+        @font-face {
+            font-family: 'B Nazanin';
+            src: local('B Nazanin'), local('BNazanin');
+            font-display: swap;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'B Nazanin', Tahoma, sans-serif;
+            line-height: 1.8;
+            color: #1a202c;
+            background: #ffffff;
+        }
+        
+        /* Navigation */
+        .navbar {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            background: white;
+            padding: 5px;
+        }
+        
+        .logo-text h2 {
+            font-size: 1.4rem;
+            margin-bottom: 2px;
+        }
+        
+        .logo-text p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.05rem;
+            font-weight: 600;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        
+        .nav-cta {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn-nav {
+            padding: 10px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+        
+        .btn-primary {
+            background: white;
+            color: #2563eb;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255,255,255,0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: #2563eb;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.95), rgba(37, 99, 235, 0.95)),
+                        url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80') center/cover;
+            color: white;
+            padding: 120px 40px 100px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.85), rgba(37, 99, 235, 0.75));
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .hero p {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Filter Section */
+        .filter-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 40px 40px;
+            text-align: center;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 12px 30px;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 50px;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #4a5568;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            border-color: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+        }
+        
+        /* Portfolio Grid */
+        .portfolio-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 40px 100px;
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 35px;
+        }
+        
+        .portfolio-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            border: 3px solid transparent;
+        }
+        
+        .portfolio-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            border-color: #2563eb;
+        }
+        
+        .portfolio-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            position: relative;
+        }
+        
+        .portfolio-content {
+            padding: 30px;
+        }
+        
+        .portfolio-badge {
+            display: inline-block;
+            padding: 6px 15px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .portfolio-card h3 {
+            font-size: 1.6rem;
+            color: #1a202c;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        
+        .portfolio-meta {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #4a5568;
+        }
+        
+        .portfolio-card p {
+            color: #4a5568;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .portfolio-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 10px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2563eb;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.85rem;
+            color: #4a5568;
+        }
+        
+        .portfolio-link {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .portfolio-link:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+        }
+        
+        /* Stats Section */
+        .stats-section {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.95), rgba(37, 99, 235, 0.95)),
+                        url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1920&q=80') center/cover;
+            color: white;
+            padding: 100px 40px;
+            position: relative;
+        }
+        
+        .stats-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.9), rgba(37, 99, 235, 0.8));
+            z-index: 1;
+        }
+        
+        .stats-grid {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 50px;
+            text-align: center;
+        }
+        
+        .stat-item-large h3 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .stat-item-large p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: white;
+            padding: 100px 40px;
+            text-align: center;
+        }
+        
+        .cta-content h2 {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            color: #1a202c;
+            margin-bottom: 20px;
+        }
+        
+        .cta-content p {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: #4a5568;
+            margin-bottom: 40px;
+        }
+        
+        .btn-cta {
+            padding: 18px 40px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            display: inline-block;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+        }
+        
+        .btn-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(37, 99, 235, 0.4);
+        }
+        
+        /* Footer */
+        .footer {
+            background: #1a202c;
+            color: white;
+            padding: 60px 40px 30px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+        
+        .footer-section p,
+        .footer-section a {
+            color: #cbd5e0;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 30px;
+            border-top: 1px solid #2d3748;
+            text-align: center;
+            color: #cbd5e0;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links, .nav-cta {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero {
+                padding: 100px 25px 80px;
+            }
+            
+            .filter-section,
+            .portfolio-section,
+            .stats-section,
+            .cta-section {
+                padding: 60px 25px;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="language-switcher">
-        <a href="../en/portfolio.html" class="lang-btn ">
-            <span>🇬🇧</span>
-            <span>EN</span>
-        </a>
-        <a href="../fa/portfolio.html" class="lang-btn active">
-            <span>🇮🇷</span>
-            <span>FA</span>
-        </a>
-    </div>
-    <header>
-        <nav>
-            <div class="logo">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
                 <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Logo">
-                <span>Kavian Development Mine</span>
-            </div>
-            <ul class="nav-links"><li><a href="index.html">خانه</a></li>
+                <div class="logo-text">
+                    <h2>کاویان توسعه معدن</h2>
+                    <p>Kavian Development Mine</p>
+                </div>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="index.html">خانه</a></li>
                 <li><a href="about.html">درباره ما</a></li>
                 <li><a href="services.html">خدمات</a></li>
                 <li><a href="portfolio.html">نمونه کارها</a></li>
                 <li><a href="blog.html">وبلاگ</a></li>
-                <li><a href="news.html">اخبار</a></li>
-                <li><a href="technical-resources.html">منابع فنی</a></li>
-                <li><a href="contact.html">تماس با ما</a></li></ul>
-        </nav>
-    </header>
+            </ul>
+            
+            <div class="nav-cta">
+                <a href="register.html" class="btn-nav btn-primary">ثبت‌نام</a>
+                <a href="contact.html" class="btn-nav btn-secondary">تماس با ما</a>
+            </div>
+            
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
     <section class="hero">
-        <h1>پروژه‌های ما</h1>
-        <p>پروژه‌های معدنی موفق در سراسر جهان</p>
+        <div class="hero-content">
+            <h1>نمونه کارهای ما</h1>
+            <p>پروژه‌های موفق در زمینه مشاوره و مهندسی معدن</p>
+        </div>
     </section>
-    <div class="content">
-<section class="section">
-    <h2>پروژه‌های برجسته</h2>
-    <div class="grid">
-        <div class="card"><h3>کارخانه فرآوری مس</h3><p>ظرفیت 18 میلیون تن در سال - ایران</p></div>
-        <div class="card"><h3>تاسیسات استخراج طلا</h3><p>سیستم لیچینگ پیشرفته - خاورمیانه</p></div>
-        <div class="card"><h3>کنسانتره سنگ آهن</h3><p>کارخانه فرآوری در مقیاس بزرگ - آسیا</p></div>
-    </div>
-</section></div>
-    <footer>
+    
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">همه پروژه‌ها</button>
+            <button class="filter-btn" data-filter="equipment">انتخاب تجهیزات</button>
+            <button class="filter-btn" data-filter="economic">تحلیل اقتصادی</button>
+            <button class="filter-btn" data-filter="optimization">بهینه‌سازی</button>
+            <button class="filter-btn" data-filter="design">طراحی کارخانه</button>
+        </div>
+    </section>
+    
+    <!-- Portfolio Grid -->
+    <section class="portfolio-section">
+        <div class="portfolio-grid">
+            <!-- Project 1 -->
+            <div class="portfolio-card" data-category="equipment">
+                <img src="https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?w=800&q=80" alt="معدن مس سرچشمه" class="portfolio-image">
+                <div class="portfolio-content">
+                    <span class="portfolio-badge">انتخاب تجهیزات</span>
+                    <h3>معدن مس سرچشمه</h3>
+                    <div class="portfolio-meta">
+                        <span>📍 کرمان</span>
+                        <span>📅 2023</span>
+                    </div>
+                    <p>انتخاب و اندازه‌گذاری تجهیزات خردایش و آسیاب برای افزایش ظرفیت به 18 میلیون تن در سال</p>
+                    <div class="portfolio-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">18M</span>
+                            <span class="stat-label">تن/سال</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">25%</span>
+                            <span class="stat-label">افزایش ظرفیت</span>
+                        </div>
+                    </div>
+                    <a href="#" class="portfolio-link">جزئیات پروژه ←</a>
+                </div>
+            </div>
+            
+            <!-- Project 2 -->
+            <div class="portfolio-card" data-category="economic">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80" alt="معدن طلای زرشوران" class="portfolio-image">
+                <div class="portfolio-content">
+                    <span class="portfolio-badge">تحلیل اقتصادی</span>
+                    <h3>معدن طلای زرشوران</h3>
+                    <div class="portfolio-meta">
+                        <span>📍 تکاب</span>
+                        <span>📅 2022</span>
+                    </div>
+                    <p>تحلیل اقتصادی و امکان‌سنجی توسعه معدن طلای زرشوران با ظرفیت 1.5 میلیون تن</p>
+                    <div class="portfolio-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">$450M</span>
+                            <span class="stat-label">ارزش پروژه</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">18%</span>
+                            <span class="stat-label">IRR</span>
+                        </div>
+                    </div>
+                    <a href="#" class="portfolio-link">جزئیات پروژه ←</a>
+                </div>
+            </div>
+            
+            <!-- Project 3 -->
+            <div class="portfolio-card" data-category="design">
+                <img src="https://images.unsplash.com/photo-1581092918484-8313e1f7e8c7?w=800&q=80" alt="کارخانه فرآوری سنگ آهن" class="portfolio-image">
+                <div class="portfolio-content">
+                    <span class="portfolio-badge">طراحی کارخانه</span>
+                    <h3>کارخانه فرآوری سنگ آهن گل‌گهر</h3>
+                    <div class="portfolio-meta">
+                        <span>📍 سیرجان</span>
+                        <span>📅 2023</span>
+                    </div>
+                    <p>طراحی و مهندسی کارخانه فرآوری سنگ آهن با ظرفیت 10 میلیون تن در سال</p>
+                    <div class="portfolio-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">10M</span>
+                            <span class="stat-label">تن/سال</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">85%</span>
+                            <span class="stat-label">بازیابی</span>
+                        </div>
+                    </div>
+                    <a href="#" class="portfolio-link">جزئیات پروژه ←</a>
+                </div>
+            </div>
+            
+            <!-- Project 4 -->
+            <div class="portfolio-card" data-category="optimization">
+                <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&q=80" alt="بهینه‌سازی کارخانه مس" class="portfolio-image">
+                <div class="portfolio-content">
+                    <span class="portfolio-badge">بهینه‌سازی</span>
+                    <h3>بهینه‌سازی کارخانه مس میدوک</h3>
+                    <div class="portfolio-meta">
+                        <span>📍 یزد</span>
+                        <span>📅 2022</span>
+                    </div>
+                    <p>بهینه‌سازی مدار فلوتاسیون و افزایش بازیابی مس از 82% به 89%</p>
+                    <div class="portfolio-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">+7%</span>
+                            <span class="stat-label">افزایش بازیابی</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">$3M</span>
+                            <span class="stat-label">صرفه‌جویی سالانه</span>
+                        </div>
+                    </div>
+                    <a href="#" class="portfolio-link">جزئیات پروژه ←</a>
+                </div>
+            </div>
+            
+            <!-- Project 5 -->
+            <div class="portfolio-card" data-category="equipment">
+                <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&q=80" alt="معدن سنگ آهن چادرملو" class="portfolio-image">
+                <div class="portfolio-content">
+                    <span class="portfolio-badge">انتخاب تجهیزات</span>
+                    <h3>معدن سنگ آهن چادرملو</h3>
+                    <div class="portfolio-meta">
+                        <span>📍 یزد</span>
+                        <span>📅 2021</span>
+                    </div>
+                    <p>انتخاب و خرید تجهیزات حمل‌ونقل و بارگیری برای معدن سنگ آهن</p>
+                    <div class="portfolio-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">15M</span>
+                            <span class="stat-label">تن/سال</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">$85M</span>
+                            <span class="stat-label">سرمایه‌گذاری</span>
+                        </div>
+                    </div>
+                    <a href="#" class="portfolio-link">جزئیات پروژه ←</a>
+                </div>
+            </div>
+            
+            <!-- Project 6 -->
+            <div class="portfolio-card" data-category="economic">
+                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80" alt="معدن سرب و روی انگوران" class="portfolio-image">
+                <div class="portfolio-content">
+                    <span class="portfolio-badge">تحلیل اقتصادی</span>
+                    <h3>معدن سرب و روی انگوران</h3>
+                    <div class="portfolio-meta">
+                        <span>📍 زنجان</span>
+                        <span>📅 2023</span>
+                    </div>
+                    <p>مطالعه امکان‌سنجی و تحلیل اقتصادی توسعه معدن سرب و روی</p>
+                    <div class="portfolio-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">$280M</span>
+                            <span class="stat-label">NPV</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">22%</span>
+                            <span class="stat-label">IRR</span>
+                        </div>
+                    </div>
+                    <a href="#" class="portfolio-link">جزئیات پروژه ←</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item-large">
+                <h3>50+</h3>
+                <p>پروژه موفق</p>
+            </div>
+            
+            <div class="stat-item-large">
+                <h3>$2B+</h3>
+                <p>ارزش پروژه‌ها</p>
+            </div>
+            
+            <div class="stat-item-large">
+                <h3>30+</h3>
+                <p>مشتری راضی</p>
+            </div>
+            
+            <div class="stat-item-large">
+                <h3>98%</h3>
+                <p>رضایت مشتریان</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>پروژه بعدی شما را با ما شروع کنید</h2>
+            <p>برای مشاوره رایگان و بررسی پروژه خود با ما تماس بگیرید</p>
+            <a href="contact.html" class="btn-cta">شروع پروژه</a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
-                <h3>شرکت</h3>
-                <ul>
-                    <li><a href="about.html">درباره ما</a></li>
-                    <li><a href="portfolio.html">نمونه کارها</a></li>
-                    <li><a href="contact.html">تماس با ما</a></li>
-                </ul>
+                <h3>کاویان توسعه معدن</h3>
+                <p>مشاور تخصصی در زمینه مهندسی تجهیزات معدنی و اقتصاد معدن</p>
             </div>
+            
+            <div class="footer-section">
+                <h3>دسترسی سریع</h3>
+                <a href="index.html">خانه</a>
+                <a href="about.html">درباره ما</a>
+                <a href="services.html">خدمات</a>
+                <a href="portfolio.html">نمونه کارها</a>
+            </div>
+            
             <div class="footer-section">
                 <h3>خدمات</h3>
-                <ul>
-                    <li><a href="services/equipment-selection.html">انتخاب تجهیزات</a></li>
-                    <li><a href="services/economic-analysis.html">تحلیل اقتصادی</a></li>
-                    <li><a href="services/plant-design.html">طراحی کارخانه</a></li>
-                </ul>
+                <a href="equipment-selection.html">انتخاب تجهیزات</a>
+                <a href="economic-analysis.html">تحلیل اقتصادی</a>
+                <a href="risk-analysis.html">تحلیل ریسک</a>
             </div>
+            
             <div class="footer-section">
-                <h3>تماس</h3>
-                <ul>
-                    <li>📧 info@kdmine.com</li>
-                    <li>📞 +98 21 1234 5678</li>
-                    <li>📍 تهران، ایران</li>
-                </ul>
+                <h3>تماس با ما</h3>
+                <p>📧 info@kdmine.com</p>
+                <p>📞 +98 21 1234 5678</p>
+                <p>📍 تهران، ایران</p>
             </div>
         </div>
+        
         <div class="footer-bottom">
-            <p>&copy; 2025 Kavian Development Mine. All rights reserved.</p>
+            <p>© 2025 کاویان توسعه معدن. تمامی حقوق محفوظ است.</p>
         </div>
     </footer>
+    
+    <script>
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const portfolioCards = document.querySelectorAll('.portfolio-card');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                const filterValue = button.getAttribute('data-filter');
+                
+                portfolioCards.forEach(card => {
+                    if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
