@@ -1,587 +1,1349 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - Kavian Development Mine</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>پنل مدیریت | کاویان توسعه معدن</title>
+    <link rel="icon" type="image/svg+xml" href="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg">
+    
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --primary-blue: #1e3a8a;
-            --secondary-blue: #2563eb;
-            --accent-gold: #f59e0b;
-            --dark-bg: #0f172a;
-            --light-bg: #f8fafc;
-            --text-dark: #1e293b;
-            --text-light: #64748b;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
+        @font-face {
+            font-family: 'B Nazanin';
+            src: local('B Nazanin'), local('BNazanin');
+            font-display: swap;
         }
-        body { font-family: 'Poppins', sans-serif; background: var(--light-bg); color: var(--text-dark); }
         
-        .admin-header { background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue)); color: white; padding: 1.5rem 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
-        .admin-header-content { max-width: 1600px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .admin-logo { display: flex; align-items: center; gap: 15px; font-size: 1.5rem; font-weight: 700; }
-        .admin-logo i { font-size: 2rem; color: var(--accent-gold); }
-        .admin-user { display: flex; align-items: center; gap: 15px; }
-        .user-avatar { width: 45px; height: 45px; background: var(--accent-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; }
-        .logout-btn { background: rgba(255,255,255,0.2); border: 2px solid white; color: white; padding: 10px 25px; border-radius: 25px; cursor: pointer; font-weight: 600; transition: all 0.3s; }
-        .logout-btn:hover { background: white; color: var(--primary-blue); }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         
-        .dashboard-container { max-width: 1600px; margin: 0 auto; padding: 2rem; }
+        body {
+            font-family: 'B Nazanin', Tahoma, sans-serif;
+            background: #f8fafc;
+            direction: rtl;
+        }
         
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 3rem; }
-        .stat-card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); display: flex; align-items: center; gap: 20px; transition: all 0.3s; }
-        .stat-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.12); }
-        .stat-icon { width: 70px; height: 70px; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white; }
-        .stat-icon.total { background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); }
-        .stat-icon.new { background: linear-gradient(135deg, var(--success), #34d399); }
-        .stat-icon.pending { background: linear-gradient(135deg, var(--warning), #fbbf24); }
-        .stat-icon.resolved { background: linear-gradient(135deg, #8b5cf6, #a78bfa); }
-        .stat-content h3 { font-size: 2rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 5px; }
-        .stat-content p { color: var(--text-light); font-size: 0.95rem; }
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            min-height: 100vh;
+        }
         
-        .filters-section { background: white; padding: 25px 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); margin-bottom: 2rem; }
-        .filters-row { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
-        .filter-group { flex: 1; min-width: 200px; }
-        .filter-group label { display: block; font-weight: 600; color: var(--text-dark); margin-bottom: 8px; font-size: 0.9rem; }
-        .filter-group input, .filter-group select { width: 100%; padding: 12px 15px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 1rem; transition: all 0.3s; font-family: inherit; }
-        .filter-group input:focus, .filter-group select:focus { outline: none; border-color: var(--secondary-blue); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); }
-        .filter-btn { padding: 12px 30px; background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; transition: all 0.3s; margin-top: 24px; }
-        .filter-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3); }
+        /* Sidebar */
+        .sidebar {
+            background: linear-gradient(180deg, #1e3a8a, #1e40af);
+            color: white;
+            padding: 25px 18px;
+            box-shadow: 4px 0 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
         
-        .requests-section { background: white; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); overflow: hidden; }
-        .section-header { padding: 25px 30px; border-bottom: 2px solid var(--light-bg); display: flex; justify-content: space-between; align-items: center; }
-        .section-header h2 { font-size: 1.5rem; color: var(--primary-blue); }
-        .export-btn { padding: 10px 25px; background: var(--success); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: all 0.3s; }
-        .export-btn:hover { background: #059669; transform: translateY(-2px); }
+        .sidebar-header {
+            text-align: center;
+            margin-bottom: 35px;
+            padding-bottom: 25px;
+            border-bottom: 2px solid rgba(255,255,255,0.2);
+        }
         
-        .requests-table { width: 100%; overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; }
-        thead { background: var(--light-bg); }
-        th { padding: 18px 20px; text-align: left; font-weight: 600; color: var(--text-dark); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; }
-        tbody tr { border-bottom: 1px solid var(--light-bg); transition: all 0.3s; }
-        tbody tr:hover { background: var(--light-bg); }
-        td { padding: 20px; color: var(--text-light); }
-        .request-id { font-weight: 600; color: var(--secondary-blue); }
-        .status-badge { padding: 6px 15px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; display: inline-block; }
-        .status-new { background: #dbeafe; color: #1e40af; }
-        .status-pending { background: #fef3c7; color: #92400e; }
-        .status-resolved { background: #d1fae5; color: #065f46; }
-        .priority-high { color: var(--danger); font-weight: 600; }
-        .priority-medium { color: var(--warning); font-weight: 600; }
-        .priority-low { color: var(--success); font-weight: 600; }
-        .action-btns { display: flex; gap: 8px; }
-        .action-btn { padding: 8px 12px; border: none; border-radius: 8px; cursor: pointer; font-size: 0.9rem; transition: all 0.3s; }
-        .view-btn { background: var(--secondary-blue); color: white; }
-        .view-btn:hover { background: var(--primary-blue); }
-        .delete-btn { background: var(--danger); color: white; }
-        .delete-btn:hover { background: #dc2626; }
+        .sidebar-header img {
+            width: 70px;
+            height: 70px;
+            border-radius: 15px;
+            background: white;
+            padding: 10px;
+            margin: 0 auto 12px;
+        }
         
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 9999; align-items: center; justify-content: center; }
-        .modal.active { display: flex; }
-        .modal-content { background: white; border-radius: 20px; max-width: 700px; width: 90%; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
-        .modal-header { padding: 30px; border-bottom: 2px solid var(--light-bg); display: flex; justify-content: space-between; align-items: center; }
-        .modal-header h3 { font-size: 1.5rem; color: var(--primary-blue); }
-        .close-btn { width: 35px; height: 35px; border: none; background: var(--light-bg); border-radius: 50%; cursor: pointer; font-size: 1.2rem; color: var(--text-dark); transition: all 0.3s; }
-        .close-btn:hover { background: var(--danger); color: white; }
-        .modal-body { padding: 30px; }
-        .detail-row { margin-bottom: 20px; }
-        .detail-label { font-weight: 600; color: var(--text-dark); margin-bottom: 8px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; }
-        .detail-value { color: var(--text-light); line-height: 1.6; padding: 12px 15px; background: var(--light-bg); border-radius: 8px; }
-        .modal-footer { padding: 20px 30px; border-top: 2px solid var(--light-bg); display: flex; gap: 10px; justify-content: flex-end; }
-        .modal-btn { padding: 12px 25px; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
-        .btn-primary { background: var(--secondary-blue); color: white; }
-        .btn-primary:hover { background: var(--primary-blue); }
-        .btn-success { background: var(--success); color: white; }
-        .btn-success:hover { background: #059669; }
+        .sidebar-header h2 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
         
-        .pagination { display: flex; justify-content: center; align-items: center; gap: 10px; padding: 30px; }
-        .page-btn { padding: 10px 18px; border: 2px solid var(--light-bg); background: white; border-radius: 8px; cursor: pointer; font-weight: 600; color: var(--text-dark); transition: all 0.3s; }
-        .page-btn:hover { border-color: var(--secondary-blue); color: var(--secondary-blue); }
-        .page-btn.active { background: var(--secondary-blue); color: white; border-color: var(--secondary-blue); }
+        .sidebar-header p {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+        }
+        
+        .sidebar-menu li {
+            margin-bottom: 8px;
+        }
+        
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+        
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background: rgba(255,255,255,0.2);
+            transform: translateX(-5px);
+        }
+        
+        .sidebar-menu .icon {
+            font-size: 1.2rem;
+        }
+        
+        .logout-btn {
+            margin-top: 35px;
+            width: 100%;
+            padding: 12px;
+            background: rgba(220, 38, 38, 0.9);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .logout-btn:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 35px;
+            overflow-y: auto;
+        }
+        
+        .page-header {
+            margin-bottom: 35px;
+        }
+        
+        .page-header h1 {
+            font-size: 2.2rem;
+            color: #1a202c;
+            margin-bottom: 8px;
+        }
+        
+        .page-header p {
+            color: #4a5568;
+            font-size: 1.05rem;
+        }
+        
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 22px;
+            margin-bottom: 35px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        
+        .stat-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .stat-card-title {
+            color: #4a5568;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+        
+        .stat-card-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+        }
+        
+        .stat-card-value {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #1a202c;
+            margin-bottom: 8px;
+        }
+        
+        .stat-card-change {
+            font-size: 0.85rem;
+            color: #059669;
+            font-weight: 600;
+        }
+        
+        /* Section Card */
+        .section-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 1px solid #e2e8f0;
+            margin-bottom: 25px;
+        }
+        
+        .section-card-header {
+            padding: 22px 28px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .section-card-header h2 {
+            font-size: 1.4rem;
+            color: #1a202c;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 7px 15px;
+            border: 2px solid #e2e8f0;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            border-color: #2563eb;
+            background: #eff6ff;
+            color: #2563eb;
+        }
+        
+        .section-card-body {
+            padding: 28px;
+        }
+        
+        /* Table */
+        .requests-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        
+        .requests-table thead {
+            background: #f8fafc;
+        }
+        
+        .requests-table th {
+            padding: 14px 12px;
+            text-align: right;
+            font-weight: bold;
+            color: #1a202c;
+            border-bottom: 2px solid #e2e8f0;
+            font-size: 0.9rem;
+        }
+        
+        .requests-table td {
+            padding: 16px 12px;
+            border-bottom: 1px solid #e2e8f0;
+            color: #4a5568;
+        }
+        
+        .requests-table tbody tr {
+            transition: background 0.2s;
+        }
+        
+        .requests-table tbody tr:hover {
+            background: #f8fafc;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .status-pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        .status-approved {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        
+        .status-rejected {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        
+        .access-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .access-basic {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        
+        .access-premium {
+            background: #fae8ff;
+            color: #86198f;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-action {
+            padding: 7px 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .btn-approve {
+            background: #059669;
+            color: white;
+        }
+        
+        .btn-approve:hover {
+            background: #047857;
+            transform: translateY(-2px);
+        }
+        
+        .btn-reject {
+            background: #dc2626;
+            color: white;
+        }
+        
+        .btn-reject:hover {
+            background: #b91c1c;
+            transform: translateY(-2px);
+        }
+        
+        .btn-view {
+            background: #2563eb;
+            color: white;
+        }
+        
+        .btn-view:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .modal.show {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 650px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: modalSlide 0.3s ease;
+        }
+        
+        @keyframes modalSlide {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .modal-header {
+            padding: 22px 28px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h3 {
+            font-size: 1.4rem;
+            color: #1a202c;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #4a5568;
+            transition: color 0.3s;
+            padding: 5px 10px;
+        }
+        
+        .modal-close:hover {
+            color: #1a202c;
+        }
+        
+        .modal-body {
+            padding: 28px;
+        }
+        
+        .detail-row {
+            margin-bottom: 18px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+        
+        .detail-label {
+            font-weight: bold;
+            color: #1a202c;
+            margin-bottom: 6px;
+            font-size: 0.95rem;
+        }
+        
+        .detail-value {
+            color: #4a5568;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .modal-footer {
+            padding: 18px 28px;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+        }
+        
+        .access-control-section {
+            background: #f8fafc;
+            padding: 18px;
+            border-radius: 10px;
+            margin-top: 18px;
+        }
+        
+        .access-control-section h4 {
+            color: #1a202c;
+            margin-bottom: 14px;
+            font-size: 1.05rem;
+        }
+        
+        .form-group {
+            margin-bottom: 14px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            color: #1a202c;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .form-group select,
+        .form-group input {
+            width: 100%;
+            padding: 11px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+        
+        .form-group select:focus,
+        .form-group input:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+        
+        .credentials-display {
+            background: #eff6ff;
+            border: 2px solid #bfdbfe;
+            padding: 14px;
+            border-radius: 8px;
+            margin-top: 14px;
+        }
+        
+        .credentials-display p {
+            margin-bottom: 7px;
+            color: #1e40af;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .credentials-display code {
+            background: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: #1e40af;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #4a5568;
+        }
+        
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+        
+        .empty-state h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #1a202c;
+        }
+        
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.8s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                position: relative;
+                height: auto;
+            }
+            
+            .requests-table {
+                font-size: 0.8rem;
+            }
+            
+            .requests-table th,
+            .requests-table td {
+                padding: 10px 8px;
+            }
+        }
         
         @media (max-width: 768px) {
-            .admin-header-content { flex-direction: column; gap: 15px; text-align: center; }
-            .stats-grid { grid-template-columns: 1fr; }
-            .filters-row { flex-direction: column; }
-            .requests-table { font-size: 0.85rem; }
-            th, td { padding: 12px 10px; }
+            .main-content {
+                padding: 20px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .btn-action {
+                width: 100%;
+            }
+            
+            .requests-table {
+                display: block;
+                overflow-x: auto;
+            }
         }
     </style>
 </head>
 <body>
-    <header class="admin-header">
-        <div class="admin-header-content">
-            <div class="admin-logo">
-                <i class="fas fa-shield-alt"></i>
-                <span>Admin Dashboard</span>
-            </div>
-            <div class="admin-user">
-                <div>
-                    <div style="font-weight: 600;" id="adminName">Admin User</div>
-                    <div style="font-size: 0.85rem; opacity: 0.9;" id="adminEmail">admin@kdmine.com</div>
-                </div>
-                <div class="user-avatar" id="adminAvatar">A</div>
-                <button class="logout-btn" onclick="logout()">
-                    <i class="fas fa-sign-out-alt"></i> Logout
-                </button>
-            </div>
-        </div>
-    </header>
-    
     <div class="dashboard-container">
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-icon total">
-                    <i class="fas fa-inbox"></i>
-                </div>
-                <div class="stat-content">
-                    <h3 id="totalRequests">0</h3>
-                    <p>Total Requests</p>
-                </div>
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Logo">
+                <h2>پنل مدیریت</h2>
+                <p id="adminName">مدیر سیستم</p>
             </div>
             
-            <div class="stat-card">
-                <div class="stat-icon new">
-                    <i class="fas fa-star"></i>
-                </div>
-                <div class="stat-content">
-                    <h3 id="newRequests">0</h3>
-                    <p>New Requests</p>
-                </div>
-            </div>
+            <ul class="sidebar-menu">
+                <li><a href="#" class="active" onclick="showTab('dashboard')"><span class="icon">📊</span> داشبورد</a></li>
+                <li><a href="#" onclick="showTab('registrations')"><span class="icon">👥</span> درخواست‌های عضویت</a></li>
+                <li><a href="#" onclick="showTab('contacts')"><span class="icon">📧</span> پیام‌های تماس</a></li>
+                <li><a href="#" onclick="showTab('users')"><span class="icon">✓</span> کاربران تایید شده</a></li>
+            </ul>
             
-            <div class="stat-card">
-                <div class="stat-icon pending">
-                    <i class="fas fa-clock"></i>
-                </div>
-                <div class="stat-content">
-                    <h3 id="pendingRequests">0</h3>
-                    <p>Pending</p>
-                </div>
-            </div>
-            
-            <div class="stat-card">
-                <div class="stat-icon resolved">
-                    <i class="fas fa-check-circle"></i>
-                </div>
-                <div class="stat-content">
-                    <h3 id="resolvedRequests">0</h3>
-                    <p>Resolved</p>
-                </div>
-            </div>
-        </div>
+            <button class="logout-btn" onclick="logout()">خروج از سیستم</button>
+        </aside>
         
-        <div class="filters-section">
-            <div class="filters-row">
-                <div class="filter-group">
-                    <label>Search</label>
-                    <input type="text" id="searchInput" placeholder="Search by name, email, company...">
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Tab -->
+            <div id="dashboardTab" class="tab-content">
+                <div class="page-header">
+                    <h1>داشبورد مدیریت</h1>
+                    <p>مدیریت کاربران، درخواست‌ها و پیام‌ها</p>
                 </div>
-                <div class="filter-group">
-                    <label>Status</label>
-                    <select id="statusFilter">
-                        <option value="">All Status</option>
-                        <option value="new">New</option>
-                        <option value="pending">Pending</option>
-                        <option value="resolved">Resolved</option>
-                    </select>
+                
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <span class="stat-card-title">درخواست‌های در انتظار</span>
+                            <div class="stat-card-icon" style="background: #fef3c7; color: #92400e;">⏳</div>
+                        </div>
+                        <div class="stat-card-value" id="pendingCount">0</div>
+                        <div class="stat-card-change">نیاز به بررسی</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <span class="stat-card-title">کاربران تایید شده</span>
+                            <div class="stat-card-icon" style="background: #d1fae5; color: #065f46;">✓</div>
+                        </div>
+                        <div class="stat-card-value" id="approvedCount">0</div>
+                        <div class="stat-card-change">کاربران فعال</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <span class="stat-card-title">پیام‌های جدید</span>
+                            <div class="stat-card-icon" style="background: #dbeafe; color: #1e40af;">📧</div>
+                        </div>
+                        <div class="stat-card-value" id="messagesCount">0</div>
+                        <div class="stat-card-change">پیام‌های خوانده نشده</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <span class="stat-card-title">اشتراک پریمیوم</span>
+                            <div class="stat-card-icon" style="background: #fae8ff; color: #86198f;">⭐</div>
+                        </div>
+                        <div class="stat-card-value" id="premiumCount">0</div>
+                        <div class="stat-card-change">کاربران پریمیوم</div>
+                    </div>
                 </div>
-                <div class="filter-group">
-                    <label>Service Type</label>
-                    <select id="serviceFilter">
-                        <option value="">All Services</option>
-                        <option value="equipment">Equipment Selection</option>
-                        <option value="feasibility">Feasibility Studies</option>
-                        <option value="plant-design">Plant Design</option>
-                        <option value="optimization">Process Optimization</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-                <button class="filter-btn" onclick="applyFilters()">
-                    <i class="fas fa-filter"></i> Apply Filters
-                </button>
-            </div>
-        </div>
-        
-        <div class="requests-section">
-            <div class="section-header">
-                <h2>All Requests</h2>
-                <button class="export-btn" onclick="exportToCSV()">
-                    <i class="fas fa-download"></i> Export CSV
-                </button>
-            </div>
-            
-            <div class="requests-table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Date</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Company</th>
-                            <th>Service</th>
-                            <th>Status</th>
-                            <th>Priority</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="requestsTableBody">
-                        <!-- Requests will be loaded here -->
-                    </tbody>
-                </table>
             </div>
             
-            <div class="pagination" id="pagination">
-                <!-- Pagination will be generated here -->
+            <!-- Registrations Tab -->
+            <div id="registrationsTab" class="tab-content" style="display: none;">
+                <div class="section-card">
+                    <div class="section-card-header">
+                        <h2>درخواست‌های عضویت</h2>
+                        <div class="filter-buttons">
+                            <button class="filter-btn active" onclick="filterRegistrations('all')">همه</button>
+                            <button class="filter-btn" onclick="filterRegistrations('pending')">در انتظار</button>
+                            <button class="filter-btn" onclick="filterRegistrations('approved')">تایید شده</button>
+                            <button class="filter-btn" onclick="filterRegistrations('rejected')">رد شده</button>
+                        </div>
+                    </div>
+                    
+                    <div class="section-card-body">
+                        <table class="requests-table" id="registrationsTable">
+                            <thead>
+                                <tr>
+                                    <th>نام</th>
+                                    <th>ایمیل</th>
+                                    <th>شرکت</th>
+                                    <th>سطح دسترسی</th>
+                                    <th>تاریخ</th>
+                                    <th>وضعیت</th>
+                                    <th>عملیات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="registrationsBody">
+                            </tbody>
+                        </table>
+                        <div id="registrationsEmpty" class="empty-state" style="display: none;">
+                            <div class="empty-state-icon">📋</div>
+                            <h3>درخواستی وجود ندارد</h3>
+                            <p>هنوز درخواست عضویتی ثبت نشده است</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contacts Tab -->
+            <div id="contactsTab" class="tab-content" style="display: none;">
+                <div class="section-card">
+                    <div class="section-card-header">
+                        <h2>پیام‌های تماس</h2>
+                        <div class="filter-buttons">
+                            <button class="filter-btn active" onclick="filterContacts('all')">همه</button>
+                            <button class="filter-btn" onclick="filterContacts('new')">جدید</button>
+                            <button class="filter-btn" onclick="filterContacts('read')">خوانده شده</button>
+                        </div>
+                    </div>
+                    
+                    <div class="section-card-body">
+                        <table class="requests-table" id="contactsTable">
+                            <thead>
+                                <tr>
+                                    <th>نام</th>
+                                    <th>ایمیل</th>
+                                    <th>موضوع</th>
+                                    <th>تاریخ</th>
+                                    <th>وضعیت</th>
+                                    <th>عملیات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="contactsBody">
+                            </tbody>
+                        </table>
+                        <div id="contactsEmpty" class="empty-state" style="display: none;">
+                            <div class="empty-state-icon">📧</div>
+                            <h3>پیامی وجود ندارد</h3>
+                            <p>هنوز پیام تماسی دریافت نشده است</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Users Tab -->
+            <div id="usersTab" class="tab-content" style="display: none;">
+                <div class="section-card">
+                    <div class="section-card-header">
+                        <h2>کاربران تایید شده</h2>
+                        <div class="filter-buttons">
+                            <button class="filter-btn active" onclick="filterUsers('all')">همه</button>
+                            <button class="filter-btn" onclick="filterUsers('basic')">پایه</button>
+                            <button class="filter-btn" onclick="filterUsers('premium')">پریمیوم</button>
+                        </div>
+                    </div>
+                    
+                    <div class="section-card-body">
+                        <table class="requests-table" id="usersTable">
+                            <thead>
+                                <tr>
+                                    <th>نام</th>
+                                    <th>ایمیل</th>
+                                    <th>نام کاربری</th>
+                                    <th>سطح دسترسی</th>
+                                    <th>تاریخ تایید</th>
+                                    <th>عملیات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersBody">
+                            </tbody>
+                        </table>
+                        <div id="usersEmpty" class="empty-state" style="display: none;">
+                            <div class="empty-state-icon">👥</div>
+                            <h3>کاربری وجود ندارد</h3>
+                            <p>هنوز کاربری تایید نشده است</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- View Registration Modal -->
+    <div class="modal" id="viewModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>جزئیات درخواست عضویت</h3>
+                <button class="modal-close" onclick="closeModal('viewModal')">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Content will be populated dynamically -->
+            </div>
+            <div class="modal-footer" id="modalFooter">
+                <!-- Buttons will be populated dynamically -->
             </div>
         </div>
     </div>
     
-    <!-- Request Detail Modal -->
-    <div class="modal" id="requestModal">
+    <!-- View Contact Modal -->
+    <div class="modal" id="contactModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>Request Details</h3>
-                <button class="close-btn" onclick="closeModal()">&times;</button>
+                <h3>جزئیات پیام تماس</h3>
+                <button class="modal-close" onclick="closeModal('contactModal')">&times;</button>
             </div>
-            <div class="modal-body" id="modalBody">
-                <!-- Details will be loaded here -->
+            <div class="modal-body" id="contactModalBody">
+                <!-- Content will be populated dynamically -->
             </div>
             <div class="modal-footer">
-                <button class="modal-btn btn-success" onclick="markAsResolved()">Mark as Resolved</button>
-                <button class="modal-btn btn-primary" onclick="closeModal()">Close</button>
+                <button class="btn-action btn-view" onclick="closeModal('contactModal')">بستن</button>
             </div>
         </div>
     </div>
     
     <script>
-        // Check authentication on page load
-        window.addEventListener('DOMContentLoaded', () => {
-            const session = localStorage.getItem('adminSession') || sessionStorage.getItem('adminSession');
-            
-            if (!session) {
-                // Not logged in, redirect to login
-                window.location.href = 'admin-login.html';
-                return;
-            }
-            
-            const sessionData = JSON.parse(session);
-            const hoursSinceLogin = (Date.now() - sessionData.timestamp) / (1000 * 60 * 60);
-            
-            // Session valid for 24 hours
-            if (hoursSinceLogin >= 24) {
-                // Session expired
-                localStorage.removeItem('adminSession');
-                sessionStorage.removeItem('adminSession');
-                window.location.href = 'admin-login.html';
-                return;
-            }
-            
-            // Update admin info
-            document.getElementById('adminEmail').textContent = sessionData.email;
-            document.getElementById('adminAvatar').textContent = sessionData.email.charAt(0).toUpperCase();
-            
-            // Initialize dashboard
-            init();
+        // EmailJS Configuration
+        emailjs.init("YOUR_PUBLIC_KEY");
+        const SERVICE_ID = "YOUR_SERVICE_ID";
+        const TEMPLATE_APPROVAL = "template_approval";
+        
+        // Check admin authentication
+        const adminAuth = localStorage.getItem('adminAuth');
+        if (!adminAuth) {
+            window.location.href = 'admin-login.html';
+        }
+        
+        // Load data on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadDashboardStats();
+            loadRegistrations();
+            loadContacts();
+            loadUsers();
         });
         
-        // Sample data
-        let requests = [
-            {
-                id: 'REQ-001',
-                date: '2025-12-27',
-                name: 'John Smith',
-                email: 'john.smith@miningco.com',
-                company: 'Global Mining Corp',
-                service: 'Feasibility Studies',
-                status: 'new',
-                priority: 'high',
-                message: 'We need a comprehensive feasibility study for our new copper project in Chile. The project has an estimated capacity of 50,000 TPD.',
-                phone: '+1 555-0123',
-                budget: '$500,000 - $1,000,000'
-            },
-            {
-                id: 'REQ-002',
-                date: '2025-12-26',
-                name: 'Sarah Johnson',
-                email: 'sarah.j@techmine.com',
-                company: 'TechMine Solutions',
-                service: 'Plant Design',
-                status: 'pending',
-                priority: 'medium',
-                message: 'Looking for complete plant design services for a gold processing facility.',
-                phone: '+44 20 1234 5678',
-                budget: '$200,000 - $500,000'
-            },
-            {
-                id: 'REQ-003',
-                date: '2025-12-25',
-                name: 'Ahmed Hassan',
-                email: 'ahmed.h@minerals.ae',
-                company: 'Emirates Minerals',
-                service: 'Equipment Selection',
-                status: 'resolved',
-                priority: 'low',
-                message: 'Need assistance in selecting crushing equipment for our iron ore project.',
-                phone: '+971 4 123 4567',
-                budget: '$50,000 - $100,000'
-            },
-            {
-                id: 'REQ-004',
-                date: '2025-12-24',
-                name: 'Maria Garcia',
-                email: 'maria.g@mineria.mx',
-                company: 'Mineria del Norte',
-                service: 'Process Optimization',
-                status: 'new',
-                priority: 'high',
-                message: 'Our flotation circuit needs optimization. Current recovery is below target.',
-                phone: '+52 55 1234 5678',
-                budget: '$100,000 - $200,000'
-            },
-            {
-                id: 'REQ-005',
-                date: '2025-12-23',
-                name: 'Chen Wei',
-                email: 'chen.w@chinamining.cn',
-                company: 'China Mining Group',
-                service: 'Concentration Plants',
-                status: 'pending',
-                priority: 'medium',
-                message: 'Interested in designing a new concentration plant for copper-gold ore.',
-                phone: '+86 10 1234 5678',
-                budget: '$1,000,000+'
-            }
-        ];
-        
-        let currentPage = 1;
-        let itemsPerPage = 10;
-        let filteredRequests = [...requests];
-        let selectedRequest = null;
-        
-        function init() {
-            updateStats();
-            renderTable();
-            renderPagination();
-        }
-        
-        function updateStats() {
-            document.getElementById('totalRequests').textContent = requests.length;
-            document.getElementById('newRequests').textContent = requests.filter(r => r.status === 'new').length;
-            document.getElementById('pendingRequests').textContent = requests.filter(r => r.status === 'pending').length;
-            document.getElementById('resolvedRequests').textContent = requests.filter(r => r.status === 'resolved').length;
-        }
-        
-        function renderTable() {
-            const tbody = document.getElementById('requestsTableBody');
-            const start = (currentPage - 1) * itemsPerPage;
-            const end = start + itemsPerPage;
-            const pageRequests = filteredRequests.slice(start, end);
+        function loadDashboardStats() {
+            const registrations = JSON.parse(localStorage.getItem('registrations') || '[]');
+            const contacts = JSON.parse(localStorage.getItem('contacts') || '[]');
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
             
-            if (pageRequests.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="9" style="text-align: center; padding: 40px;">No requests found</td></tr>';
+            const pendingCount = registrations.filter(r => r.status === 'pending').length;
+            const approvedCount = users.length;
+            const messagesCount = contacts.filter(c => c.status === 'new').length;
+            const premiumCount = users.filter(u => u.accessLevel === 'premium').length;
+            
+            document.getElementById('pendingCount').textContent = pendingCount;
+            document.getElementById('approvedCount').textContent = approvedCount;
+            document.getElementById('messagesCount').textContent = messagesCount;
+            document.getElementById('premiumCount').textContent = premiumCount;
+        }
+        
+        function loadRegistrations() {
+            const registrations = JSON.parse(localStorage.getItem('registrations') || '[]');
+            const tbody = document.getElementById('registrationsBody');
+            const empty = document.getElementById('registrationsEmpty');
+            
+            if (registrations.length === 0) {
+                tbody.innerHTML = '';
+                empty.style.display = 'block';
                 return;
             }
             
-            tbody.innerHTML = pageRequests.map(req => `
-                <tr>
-                    <td class="request-id">${req.id}</td>
-                    <td>${req.date}</td>
-                    <td>${req.name}</td>
-                    <td>${req.email}</td>
-                    <td>${req.company}</td>
-                    <td>${req.service}</td>
-                    <td><span class="status-badge status-${req.status}">${req.status.toUpperCase()}</span></td>
-                    <td class="priority-${req.priority}">${req.priority.toUpperCase()}</td>
+            empty.style.display = 'none';
+            tbody.innerHTML = registrations.map((reg, index) => `
+                <tr data-status="${reg.status}" data-access="${reg.accessLevel}">
+                    <td>${reg.firstName} ${reg.lastName}</td>
+                    <td>${reg.email}</td>
+                    <td>${reg.company || '-'}</td>
+                    <td><span class="access-badge access-${reg.accessLevel}">${reg.accessLevel === 'premium' ? 'پریمیوم' : 'پایه'}</span></td>
+                    <td>${formatDate(reg.submittedAt)}</td>
+                    <td><span class="status-badge status-${reg.status}">${getStatusLabel(reg.status)}</span></td>
                     <td>
-                        <div class="action-btns">
-                            <button class="action-btn view-btn" onclick="viewRequest('${req.id}')">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                            <button class="action-btn delete-btn" onclick="deleteRequest('${req.id}')">
-                                <i class="fas fa-trash"></i>
-                            </button>
+                        <div class="action-buttons">
+                            <button class="btn-action btn-view" onclick="viewRegistration(${index})">مشاهده</button>
+                            ${reg.status === 'pending' ? `
+                                <button class="btn-action btn-approve" onclick="approveRegistration(${index})">تایید</button>
+                                <button class="btn-action btn-reject" onclick="rejectRegistration(${index})">رد</button>
+                            ` : ''}
                         </div>
                     </td>
                 </tr>
             `).join('');
         }
         
-        function renderPagination() {
-            const totalPages = Math.ceil(filteredRequests.length / itemsPerPage);
-            const pagination = document.getElementById('pagination');
+        function loadContacts() {
+            const contacts = JSON.parse(localStorage.getItem('contacts') || '[]');
+            const tbody = document.getElementById('contactsBody');
+            const empty = document.getElementById('contactsEmpty');
             
-            if (totalPages <= 1) {
-                pagination.innerHTML = '';
+            if (contacts.length === 0) {
+                tbody.innerHTML = '';
+                empty.style.display = 'block';
                 return;
             }
             
-            let html = '<button class="page-btn" onclick="changePage(' + (currentPage - 1) + ')" ' + (currentPage === 1 ? 'disabled' : '') + '><i class="fas fa-chevron-left"></i></button>';
+            empty.style.display = 'none';
+            tbody.innerHTML = contacts.map((contact, index) => `
+                <tr data-status="${contact.status}">
+                    <td>${contact.fullName}</td>
+                    <td>${contact.email}</td>
+                    <td>${getSubjectLabel(contact.subject)}</td>
+                    <td>${formatDate(contact.submittedAt)}</td>
+                    <td><span class="status-badge status-${contact.status === 'new' ? 'pending' : 'approved'}">${contact.status === 'new' ? 'جدید' : 'خوانده شده'}</span></td>
+                    <td>
+                        <button class="btn-action btn-view" onclick="viewContact(${index})">مشاهده</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+        
+        function loadUsers() {
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const tbody = document.getElementById('usersBody');
+            const empty = document.getElementById('usersEmpty');
             
-            for (let i = 1; i <= totalPages; i++) {
-                html += '<button class="page-btn ' + (i === currentPage ? 'active' : '') + '" onclick="changePage(' + i + ')">' + i + '</button>';
+            if (users.length === 0) {
+                tbody.innerHTML = '';
+                empty.style.display = 'block';
+                return;
             }
             
-            html += '<button class="page-btn" onclick="changePage(' + (currentPage + 1) + ')" ' + (currentPage === totalPages ? 'disabled' : '') + '><i class="fas fa-chevron-right"></i></button>';
-            
-            pagination.innerHTML = html;
+            empty.style.display = 'none';
+            tbody.innerHTML = users.map((user, index) => `
+                <tr data-access="${user.accessLevel}">
+                    <td>${user.firstName} ${user.lastName}</td>
+                    <td>${user.email}</td>
+                    <td><code>${user.username}</code></td>
+                    <td><span class="access-badge access-${user.accessLevel}">${user.accessLevel === 'premium' ? 'پریمیوم' : 'پایه'}</span></td>
+                    <td>${formatDate(user.approvedAt)}</td>
+                    <td>
+                        <button class="btn-action btn-view" onclick="viewUser(${index})">مشاهده</button>
+                    </td>
+                </tr>
+            `).join('');
         }
         
-        function changePage(page) {
-            const totalPages = Math.ceil(filteredRequests.length / itemsPerPage);
-            if (page < 1 || page > totalPages) return;
-            currentPage = page;
-            renderTable();
-            renderPagination();
-        }
-        
-        function applyFilters() {
-            const search = document.getElementById('searchInput').value.toLowerCase();
-            const status = document.getElementById('statusFilter').value;
-            const service = document.getElementById('serviceFilter').value;
+        function viewRegistration(index) {
+            const registrations = JSON.parse(localStorage.getItem('registrations') || '[]');
+            const reg = registrations[index];
             
-            filteredRequests = requests.filter(req => {
-                const matchSearch = !search || 
-                    req.name.toLowerCase().includes(search) ||
-                    req.email.toLowerCase().includes(search) ||
-                    req.company.toLowerCase().includes(search);
-                const matchStatus = !status || req.status === status;
-                const matchService = !service || req.service.toLowerCase().includes(service.toLowerCase());
+            const modalBody = document.getElementById('modalBody');
+            const modalFooter = document.getElementById('modalFooter');
+            
+            modalBody.innerHTML = `
+                <div class="detail-row">
+                    <div class="detail-label">نام و نام خانوادگی</div>
+                    <div class="detail-value">${reg.firstName} ${reg.lastName}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">ایمیل</div>
+                    <div class="detail-value">${reg.email}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">شماره تماس</div>
+                    <div class="detail-value">${reg.phone}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">شرکت/سازمان</div>
+                    <div class="detail-value">${reg.company || 'نامشخص'}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">سمت شغلی</div>
+                    <div class="detail-value">${getPositionLabel(reg.position)}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">حوزه تخصصی</div>
+                    <div class="detail-value">${getExpertiseLabel(reg.expertise)}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">سطح دسترسی درخواستی</div>
+                    <div class="detail-value"><span class="access-badge access-${reg.accessLevel}">${reg.accessLevel === 'premium' ? 'پریمیوم' : 'پایه'}</span></div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">توضیحات</div>
+                    <div class="detail-value">${reg.description || 'بدون توضیحات'}</div>
+                </div>
                 
-                return matchSearch && matchStatus && matchService;
-            });
+                ${reg.status === 'pending' ? `
+                <div class="access-control-section">
+                    <h4>تنظیمات تایید و ارسال اعتبارنامه</h4>
+                    
+                    <div class="form-group">
+                        <label>سطح دسترسی تایید شده</label>
+                        <select id="approvedAccessLevel">
+                            <option value="basic" ${reg.accessLevel === 'basic' ? 'selected' : ''}>پایه (رایگان)</option>
+                            <option value="premium" ${reg.accessLevel === 'premium' ? 'selected' : ''}>پریمیوم (اشتراک)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>نام کاربری (اختیاری - در صورت خالی بودن، خودکار ایجاد می‌شود)</label>
+                        <input type="text" id="customUsername" placeholder="مثال: ${reg.firstName.toLowerCase()}.${reg.lastName.toLowerCase()}">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>رمز عبور (اختیاری - در صورت خالی بودن، خودکار ایجاد می‌شود)</label>
+                        <input type="text" id="customPassword" placeholder="حداقل 8 کاراکتر">
+                    </div>
+                    
+                    <div class="credentials-display">
+                        <p>اعتبارنامه‌های پیشنهادی:</p>
+                        <p>نام کاربری: <code id="displayUsername">${generateUsername(reg)}</code></p>
+                        <p>رمز عبور: <code id="displayPassword">${generatePassword()}</code></p>
+                        <p style="margin-top: 10px; font-size: 0.85rem;">این اطلاعات به ایمیل کاربر ارسال خواهد شد.</p>
+                    </div>
+                </div>
+                ` : ''}
+            `;
             
-            currentPage = 1;
-            renderTable();
-            renderPagination();
+            if (reg.status === 'pending') {
+                modalFooter.innerHTML = `
+                    <button class="btn-action btn-reject" onclick="rejectRegistration(${index}); closeModal('viewModal');">رد درخواست</button>
+                    <button class="btn-action btn-approve" onclick="approveWithCredentials(${index})">تایید و ارسال اعتبارنامه</button>
+                `;
+            } else {
+                modalFooter.innerHTML = `
+                    <button class="btn-action btn-view" onclick="closeModal('viewModal')">بستن</button>
+                `;
+            }
+            
+            document.getElementById('viewModal').classList.add('show');
         }
         
-        function viewRequest(id) {
-            selectedRequest = requests.find(r => r.id === id);
-            if (!selectedRequest) return;
+        function viewContact(index) {
+            const contacts = JSON.parse(localStorage.getItem('contacts') || '[]');
+            const contact = contacts[index];
+            
+            // Mark as read
+            contact.status = 'read';
+            contacts[index] = contact;
+            localStorage.setItem('contacts', JSON.stringify(contacts));
+            
+            const modalBody = document.getElementById('contactModalBody');
+            modalBody.innerHTML = `
+                <div class="detail-row">
+                    <div class="detail-label">نام</div>
+                    <div class="detail-value">${contact.fullName}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">ایمیل</div>
+                    <div class="detail-value">${contact.email}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">شماره تماس</div>
+                    <div class="detail-value">${contact.phone}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">موضوع</div>
+                    <div class="detail-value">${getSubjectLabel(contact.subject)}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">پیام</div>
+                    <div class="detail-value">${contact.message}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">تاریخ ارسال</div>
+                    <div class="detail-value">${formatDate(contact.submittedAt)}</div>
+                </div>
+            `;
+            
+            document.getElementById('contactModal').classList.add('show');
+            loadContacts();
+            loadDashboardStats();
+        }
+        
+        function viewUser(index) {
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const user = users[index];
             
             const modalBody = document.getElementById('modalBody');
             modalBody.innerHTML = `
                 <div class="detail-row">
-                    <div class="detail-label">Request ID</div>
-                    <div class="detail-value">${selectedRequest.id}</div>
+                    <div class="detail-label">نام و نام خانوادگی</div>
+                    <div class="detail-value">${user.firstName} ${user.lastName}</div>
                 </div>
                 <div class="detail-row">
-                    <div class="detail-label">Date Submitted</div>
-                    <div class="detail-value">${selectedRequest.date}</div>
+                    <div class="detail-label">ایمیل</div>
+                    <div class="detail-value">${user.email}</div>
                 </div>
                 <div class="detail-row">
-                    <div class="detail-label">Full Name</div>
-                    <div class="detail-value">${selectedRequest.name}</div>
+                    <div class="detail-label">نام کاربری</div>
+                    <div class="detail-value"><code>${user.username}</code></div>
                 </div>
                 <div class="detail-row">
-                    <div class="detail-label">Email</div>
-                    <div class="detail-value">${selectedRequest.email}</div>
+                    <div class="detail-label">سطح دسترسی</div>
+                    <div class="detail-value"><span class="access-badge access-${user.accessLevel}">${user.accessLevel === 'premium' ? 'پریمیوم' : 'پایه'}</span></div>
                 </div>
                 <div class="detail-row">
-                    <div class="detail-label">Phone</div>
-                    <div class="detail-value">${selectedRequest.phone}</div>
-                </div>
-                <div class="detail-row">
-                    <div class="detail-label">Company</div>
-                    <div class="detail-value">${selectedRequest.company}</div>
-                </div>
-                <div class="detail-row">
-                    <div class="detail-label">Service Type</div>
-                    <div class="detail-value">${selectedRequest.service}</div>
-                </div>
-                <div class="detail-row">
-                    <div class="detail-label">Budget Range</div>
-                    <div class="detail-value">${selectedRequest.budget}</div>
-                </div>
-                <div class="detail-row">
-                    <div class="detail-label">Status</div>
-                    <div class="detail-value"><span class="status-badge status-${selectedRequest.status}">${selectedRequest.status.toUpperCase()}</span></div>
-                </div>
-                <div class="detail-row">
-                    <div class="detail-label">Priority</div>
-                    <div class="detail-value priority-${selectedRequest.priority}">${selectedRequest.priority.toUpperCase()}</div>
-                </div>
-                <div class="detail-row">
-                    <div class="detail-label">Message</div>
-                    <div class="detail-value">${selectedRequest.message}</div>
+                    <div class="detail-label">تاریخ تایید</div>
+                    <div class="detail-value">${formatDate(user.approvedAt)}</div>
                 </div>
             `;
             
-            document.getElementById('requestModal').classList.add('active');
-        }
-        
-        function closeModal() {
-            document.getElementById('requestModal').classList.remove('active');
-            selectedRequest = null;
-        }
-        
-        function markAsResolved() {
-            if (!selectedRequest) return;
+            document.getElementById('modalFooter').innerHTML = `
+                <button class="btn-action btn-view" onclick="closeModal('viewModal')">بستن</button>
+            `;
             
-            const index = requests.findIndex(r => r.id === selectedRequest.id);
-            if (index !== -1) {
-                requests[index].status = 'resolved';
-                updateStats();
-                applyFilters();
-                closeModal();
-                alert('Request marked as resolved!');
+            document.getElementById('viewModal').classList.add('show');
+        }
+        
+        async function approveWithCredentials(index) {
+            const registrations = JSON.parse(localStorage.getItem('registrations') || '[]');
+            const reg = registrations[index];
+            
+            const accessLevel = document.getElementById('approvedAccessLevel').value;
+            const username = document.getElementById('customUsername').value || document.getElementById('displayUsername').textContent;
+            const password = document.getElementById('customPassword').value || document.getElementById('displayPassword').textContent;
+            
+            // Disable button
+            event.target.disabled = true;
+            event.target.innerHTML = '<span class="spinner"></span> در حال ارسال...';
+            
+            try {
+                // Send approval email
+                const templateParams = {
+                    from_name: `${reg.firstName} ${reg.lastName}`,
+                    to_email: reg.email,
+                    username: username,
+                    password: password,
+                    access_level: accessLevel === 'premium' ? 'پریمیوم' : 'پایه'
+                };
+                
+                await emailjs.send(SERVICE_ID, TEMPLATE_APPROVAL, templateParams);
+                
+                // Update registration status
+                reg.status = 'approved';
+                reg.approvedAt = new Date().toISOString();
+                registrations[index] = reg;
+                localStorage.setItem('registrations', JSON.stringify(registrations));
+                
+                // Add to users
+                const users = JSON.parse(localStorage.getItem('users') || '[]');
+                users.push({
+                    ...reg,
+                    username: username,
+                    password: password,
+                    accessLevel: accessLevel,
+                    approvedAt: new Date().toISOString()
+                });
+                localStorage.setItem('users', JSON.stringify(users));
+                
+                alert('✓ کاربر با موفقیت تایید شد و اعتبارنامه‌ها به ایمیل ارسال شد.');
+                closeModal('viewModal');
+                loadRegistrations();
+                loadUsers();
+                loadDashboardStats();
+                
+            } catch (error) {
+                console.error('Error:', error);
+                alert('✗ خطا در ارسال ایمیل. لطفاً دوباره تلاش کنید.');
+                event.target.disabled = false;
+                event.target.textContent = 'تایید و ارسال اعتبارنامه';
             }
         }
         
-        function deleteRequest(id) {
-            if (!confirm('Are you sure you want to delete this request?')) return;
-            
-            const index = requests.findIndex(r => r.id === id);
-            if (index !== -1) {
-                requests.splice(index, 1);
-                updateStats();
-                applyFilters();
-                alert('Request deleted successfully!');
-            }
+        function approveRegistration(index) {
+            viewRegistration(index);
         }
         
-        function exportToCSV() {
-            const headers = ['ID', 'Date', 'Name', 'Email', 'Company', 'Service', 'Status', 'Priority', 'Message'];
-            const csvContent = [
-                headers.join(','),
-                ...filteredRequests.map(req => [
-                    req.id,
-                    req.date,
-                    req.name,
-                    req.email,
-                    req.company,
-                    req.service,
-                    req.status,
-                    req.priority,
-                    '"' + req.message.replace(/"/g, '""') + '"'
-                ].join(','))
-            ].join('\n');
+        function rejectRegistration(index) {
+            if (!confirm('آیا از رد این درخواست اطمینان دارید؟')) return;
             
-            const blob = new Blob([csvContent], { type: 'text/csv' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'requests_' + new Date().toISOString().split('T')[0] + '.csv';
-            a.click();
-            window.URL.revokeObjectURL(url);
+            const registrations = JSON.parse(localStorage.getItem('registrations') || '[]');
+            registrations[index].status = 'rejected';
+            registrations[index].rejectedAt = new Date().toISOString();
+            localStorage.setItem('registrations', JSON.stringify(registrations));
+            
+            loadRegistrations();
+            loadDashboardStats();
+        }
+        
+        function generateUsername(reg) {
+            return `${reg.firstName.toLowerCase()}.${reg.lastName.toLowerCase()}`;
+        }
+        
+        function generatePassword() {
+            return Math.random().toString(36).slice(-10) + Math.random().toString(36).slice(-2).toUpperCase();
+        }
+        
+        function formatDate(dateString) {
+            if (!dateString) return '-';
+            const date = new Date(dateString);
+            return new Intl.DateTimeFormat('fa-IR').format(date);
+        }
+        
+        function getStatusLabel(status) {
+            const labels = {
+                'pending': 'در انتظار',
+                'approved': 'تایید شده',
+                'rejected': 'رد شده'
+            };
+            return labels[status] || status;
+        }
+        
+        function getPositionLabel(value) {
+            const positions = {
+                'mining-engineer': 'مهندس معدن',
+                'process-engineer': 'مهندس فرآیند',
+                'project-manager': 'مدیر پروژه',
+                'consultant': 'مشاور',
+                'researcher': 'محقق/دانشجو',
+                'executive': 'مدیر اجرایی',
+                'other': 'سایر'
+            };
+            return positions[value] || value;
+        }
+        
+        function getExpertiseLabel(value) {
+            const expertise = {
+                'equipment-selection': 'انتخاب تجهیزات',
+                'concentration': 'کارخانجات تغلیظ',
+                'leaching': 'لیچینگ و تصفیه',
+                'acid-production': 'تولید اسید',
+                'economic-analysis': 'تحلیل اقتصادی',
+                'risk-analysis': 'تحلیل ریسک',
+                'other': 'سایر'
+            };
+            return expertise[value] || value;
+        }
+        
+        function getSubjectLabel(value) {
+            const subjects = {
+                'consultation': 'درخواست مشاوره',
+                'equipment': 'سوال درباره تجهیزات',
+                'project': 'همکاری در پروژه',
+                'pricing': 'استعلام قیمت',
+                'technical': 'پشتیبانی فنی',
+                'other': 'سایر موارد'
+            };
+            return subjects[value] || value;
+        }
+        
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => tab.style.display = 'none');
+            
+            // Remove active class from all menu items
+            document.querySelectorAll('.sidebar-menu a').forEach(link => link.classList.remove('active'));
+            
+            // Show selected tab
+            if (tabName === 'dashboard') {
+                document.getElementById('dashboardTab').style.display = 'block';
+            } else if (tabName === 'registrations') {
+                document.getElementById('registrationsTab').style.display = 'block';
+            } else if (tabName === 'contacts') {
+                document.getElementById('contactsTab').style.display = 'block';
+            } else if (tabName === 'users') {
+                document.getElementById('usersTab').style.display = 'block';
+            }
+            
+            // Add active class to clicked menu item
+            event.target.closest('a').classList.add('active');
+        }
+        
+        function filterRegistrations(filter) {
+            const rows = document.querySelectorAll('#registrationsTable tbody tr');
+            const buttons = document.querySelectorAll('#registrationsTab .filter-btn');
+            
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            rows.forEach(row => {
+                if (filter === 'all') {
+                    row.style.display = '';
+                } else {
+                    const status = row.getAttribute('data-status');
+                    row.style.display = status === filter ? '' : 'none';
+                }
+            });
+        }
+        
+        function filterContacts(filter) {
+            const rows = document.querySelectorAll('#contactsTable tbody tr');
+            const buttons = document.querySelectorAll('#contactsTab .filter-btn');
+            
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            rows.forEach(row => {
+                if (filter === 'all') {
+                    row.style.display = '';
+                } else {
+                    const status = row.getAttribute('data-status');
+                    row.style.display = status === filter ? '' : 'none';
+                }
+            });
+        }
+        
+        function filterUsers(filter) {
+            const rows = document.querySelectorAll('#usersTable tbody tr');
+            const buttons = document.querySelectorAll('#usersTab .filter-btn');
+            
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            rows.forEach(row => {
+                if (filter === 'all') {
+                    row.style.display = '';
+                } else {
+                    const accessLevel = row.getAttribute('data-access');
+                    row.style.display = accessLevel === filter ? '' : 'none';
+                }
+            });
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('show');
         }
         
         function logout() {
-            if (confirm('Are you sure you want to logout?')) {
-                localStorage.removeItem('adminSession');
-                sessionStorage.removeItem('adminSession');
+            if (confirm('آیا می‌خواهید از سیستم خارج شوید؟')) {
+                localStorage.removeItem('adminAuth');
                 window.location.href = 'admin-login.html';
             }
         }
         
-        document.getElementById('searchInput').addEventListener('input', applyFilters);
+        // Close modal when clicking outside
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal(this.id);
+                }
+            });
+        });
     </script>
 </body>
 </html>
