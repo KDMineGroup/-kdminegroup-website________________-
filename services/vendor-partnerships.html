@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Partnerships & Procurement - Kavian Development Mine</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #1e3a8a;
+            --secondary-blue: #2563eb;
+            --accent-gold: #f59e0b;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+        }
+        body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-dark); overflow-x: hidden; }
+        body.rtl { font-family: 'Vazirmatn', sans-serif; direction: rtl; }
+        
+        .language-switcher { position: fixed; top: 20px; right: 20px; z-index: 3000; background: white; border-radius: 50px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); padding: 8px; display: flex; gap: 8px; }
+        body.rtl .language-switcher { right: auto; left: 20px; }
+        .lang-btn { padding: 10px 20px; border: 2px solid transparent; background: transparent; border-radius: 25px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: all 0.3s; display: flex; align-items: center; gap: 8px; color: var(--text-light); }
+        .lang-btn:hover { background: var(--light-bg); color: var(--secondary-blue); }
+        .lang-btn.active { background: var(--secondary-blue); color: white; border-color: var(--secondary-blue); }
+        
+        header { background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%); color: white; padding: 1rem 0; position: sticky; top: 0; z-index: 2000; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        nav { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
+        .logo { display: flex; align-items: center; gap: 15px; font-size: 1.5rem; font-weight: 700; text-decoration: none; color: white; }
+        .logo img { height: 55px; width: auto; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2)); }
+        .nav-links { display: flex; list-style: none; gap: 2.5rem; align-items: center; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 500; transition: all 0.3s; position: relative; padding: 5px 0; }
+        .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--accent-gold); transition: width 0.3s; }
+        .nav-links a:hover::after { width: 100%; }
+        
+        .breadcrumb { max-width: 1400px; margin: 30px auto; padding: 0 2rem; display: flex; align-items: center; gap: 10px; color: var(--text-light); font-size: 0.95rem; }
+        .breadcrumb a { color: var(--secondary-blue); text-decoration: none; transition: color 0.3s; }
+        .breadcrumb a:hover { color: var(--accent-gold); }
+        
+        .service-hero { background: linear-gradient(135deg, rgba(30, 58, 138, 0.95) 0%, rgba(37, 99, 235, 0.95) 100%), url('https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1920') center/cover; color: white; padding: 100px 2rem 80px; }
+        .hero-content { max-width: 1200px; margin: 0 auto; }
+        .service-category { display: inline-block; padding: 8px 20px; background: var(--accent-gold); border-radius: 25px; font-weight: 600; font-size: 0.9rem; margin-bottom: 20px; }
+        .service-hero h1 { font-size: 3.5rem; margin-bottom: 25px; font-weight: 700; text-shadow: 2px 2px 8px rgba(0,0,0,0.3); }
+        .service-hero p { font-size: 1.3rem; opacity: 0.95; line-height: 1.8; }
+        
+        .service-content { max-width: 1400px; margin: 80px auto; padding: 0 2rem; display: grid; grid-template-columns: 1fr 350px; gap: 4rem; }
+        
+        .main-content { }
+        .content-section { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); margin-bottom: 40px; }
+        .section-title { font-size: 2rem; color: var(--primary-blue); margin-bottom: 25px; }
+        .content-section p { color: var(--text-light); line-height: 1.9; font-size: 1.05rem; margin-bottom: 20px; }
+        
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 30px; }
+        .feature-card { background: var(--light-bg); padding: 30px; border-radius: 15px; transition: all 0.3s; }
+        .feature-card:hover { background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transform: translateY(-5px); }
+        .feature-icon { width: 60px; height: 60px; background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); border-radius: 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.8rem; margin-bottom: 20px; }
+        .feature-card h4 { color: var(--primary-blue); font-size: 1.3rem; margin-bottom: 12px; }
+        .feature-card p { color: var(--text-light); line-height: 1.7; font-size: 0.95rem; }
+        
+        .partners-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 30px; }
+        .partner-card { background: white; padding: 30px; border-radius: 15px; text-align: center; border: 2px solid var(--light-bg); transition: all 0.3s; }
+        .partner-card:hover { border-color: var(--secondary-blue); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .partner-logo { width: 100%; height: 80px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; font-size: 2.5rem; color: var(--secondary-blue); }
+        .partner-card h5 { color: var(--primary-blue); font-size: 1.1rem; margin-bottom: 8px; }
+        .partner-card p { color: var(--text-light); font-size: 0.85rem; line-height: 1.5; }
+        
+        .procurement-process { background: var(--light-bg); padding: 40px; border-radius: 20px; margin-top: 30px; }
+        .procurement-process h4 { color: var(--primary-blue); font-size: 1.6rem; margin-bottom: 30px; text-align: center; }
+        .process-timeline { position: relative; padding-left: 40px; }
+        body.rtl .process-timeline { padding-left: 0; padding-right: 40px; }
+        .process-timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, var(--secondary-blue), var(--accent-gold)); }
+        body.rtl .process-timeline::before { left: auto; right: 0; }
+        .timeline-item { position: relative; padding-bottom: 30px; }
+        .timeline-item:last-child { padding-bottom: 0; }
+        .timeline-dot { position: absolute; left: -46px; top: 5px; width: 20px; height: 20px; background: var(--secondary-blue); border-radius: 50%; border: 3px solid white; box-shadow: 0 0 0 3px var(--light-bg); }
+        body.rtl .timeline-dot { left: auto; right: -46px; }
+        .timeline-content { background: white; padding: 20px 25px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .timeline-content h5 { color: var(--primary-blue); font-size: 1.2rem; margin-bottom: 8px; }
+        .timeline-content p { color: var(--text-light); font-size: 0.95rem; line-height: 1.7; }
+        
+        .value-props { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 30px; }
+        .value-card { background: white; padding: 30px; border-radius: 15px; text-align: center; border-left: 5px solid var(--secondary-blue); transition: all 0.3s; }
+        body.rtl .value-card { border-left: none; border-right: 5px solid var(--secondary-blue); }
+        .value-card:hover { transform: translateX(10px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        body.rtl .value-card:hover { transform: translateX(-10px); }
+        .value-icon { font-size: 3rem; color: var(--accent-gold); margin-bottom: 15px; }
+        .value-card h5 { color: var(--primary-blue); font-size: 1.2rem; margin-bottom: 10px; }
+        .value-card p { color: var(--text-light); font-size: 0.9rem; line-height: 1.6; }
+        
+        .stats-banner { background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue)); color: white; padding: 50px 40px; border-radius: 20px; margin-top: 30px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 2rem; }
+        .stat-item { text-align: center; }
+        .stat-value { font-size: 2.5rem; font-weight: 700; color: var(--accent-gold); margin-bottom: 8px; }
+        .stat-label { font-size: 0.95rem; opacity: 0.95; }
+        
+        .sidebar { }
+        .sidebar-widget { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); margin-bottom: 25px; }
+        .widget-title { font-size: 1.4rem; color: var(--primary-blue); margin-bottom: 20px; padding-bottom: 15px; border-bottom: 3px solid var(--accent-gold); }
+        
+        .contact-form { }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; color: var(--text-dark); font-weight: 600; margin-bottom: 8px; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px 15px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 1rem; transition: all 0.3s; font-family: inherit; }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: var(--secondary-blue); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+        .btn-submit { width: 100%; padding: 15px; background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); color: white; border: none; border-radius: 50px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.3s; }
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3); }
+        
+        .related-services { list-style: none; }
+        .related-services li { margin-bottom: 15px; }
+        .related-services a { display: flex; align-items: center; gap: 12px; padding: 12px 15px; background: var(--light-bg); border-radius: 10px; color: var(--text-dark); text-decoration: none; transition: all 0.3s; }
+        .related-services a:hover { background: var(--secondary-blue); color: white; transform: translateX(5px); }
+        body.rtl .related-services a:hover { transform: translateX(-5px); }
+        .related-services i { color: var(--secondary-blue); transition: color 0.3s; }
+        .related-services a:hover i { color: white; }
+        
+        footer { background: var(--dark-bg); color: white; padding: 60px 2rem 30px; margin-top: 80px; }
+        .footer-content { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 40px; }
+        .footer-section h3 { color: var(--accent-gold); margin-bottom: 20px; font-size: 1.3rem; }
+        .footer-section ul { list-style: none; }
+        .footer-section a { color: #cbd5e1; text-decoration: none; display: block; margin-bottom: 12px; transition: all 0.3s; }
+        .footer-section a:hover { color: var(--accent-gold); padding-left: 5px; }
+        body.rtl .footer-section a:hover { padding-left: 0; padding-right: 5px; }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); color: #94a3b8; }
+        
+        @media (max-width: 1200px) {
+            .service-content { grid-template-columns: 1fr; }
+            .sidebar { max-width: 600px; margin: 0 auto; }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .service-hero h1 { font-size: 2.5rem; }
+            .features-grid { grid-template-columns: 1fr; }
+            .partners-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switcher">
+        <button class="lang-btn active" onclick="switchLanguage('en')">
+            <span>🇬🇧</span><span>EN</span>
+        </button>
+        <button class="lang-btn" onclick="switchLanguage('fa')">
+            <span>🇮🇷</span><span>FA</span>
+        </button>
+    </div>
+
+    <header>
+        <nav>
+            <a href="../index.html" class="logo">
+                <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Logo">
+                <span data-en="Kavian Development Mine" data-fa="کاویان توسعه معدن">Kavian Development Mine</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="../index.html" data-en="Home" data-fa="خانه">Home</a></li>
+                <li><a href="../about.html" data-en="About" data-fa="درباره ما">About</a></li>
+                <li><a href="../services.html" data-en="Services" data-fa="خدمات">Services</a></li>
+                <li><a href="../portfolio.html" data-en="Portfolio" data-fa="نمونه کارها">Portfolio</a></li>
+                <li><a href="../blog.html" data-en="Blog" data-fa="وبلاگ">Blog</a></li>
+                <li><a href="../news.html" data-en="News" data-fa="اخبار">News</a></li>
+                <li><a href="../technical-resources.html" data-en="Resources" data-fa="منابع فنی">Resources</a></li>
+                <li><a href="../contact.html" data-en="Contact" data-fa="تماس">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="breadcrumb">
+        <a href="../index.html" data-en="Home" data-fa="خانه">Home</a>
+        <i class="fas fa-chevron-right"></i>
+        <a href="../services.html" data-en="Services" data-fa="خدمات">Services</a>
+        <i class="fas fa-chevron-right"></i>
+        <span data-en="Vendor Partnerships & Procurement" data-fa="شراکت‌های تامین‌کننده و تدارکات">Vendor Partnerships & Procurement</span>
+    </div>
+
+    <section class="service-hero">
+        <div class="hero-content">
+            <span class="service-category" data-en="STRATEGIC PARTNERSHIPS" data-fa="شراکت‌های استراتژیک">STRATEGIC PARTNERSHIPS</span>
+            <h1 data-en="Vendor Partnerships & Procurement Support" data-fa="شراکت‌های تامین‌کننده و پشتیبانی تدارکات">Vendor Partnerships & Procurement Support</h1>
+            <p data-en="Comprehensive procurement services leveraging our global network of qualified vendors to deliver competitive pricing, reliable equipment, and seamless project execution for mining operations worldwide." data-fa="خدمات تدارکات جامع با استفاده از شبکه جهانی تامین‌کنندگان واجد شرایط ما برای ارائه قیمت‌گذاری رقابتی، تجهیزات قابل اعتماد و اجرای یکپارچه پروژه برای عملیات معدنی در سراسر جهان.">Comprehensive procurement services leveraging our global network of qualified vendors to deliver competitive pricing, reliable equipment, and seamless project execution for mining operations worldwide.</p>
+        </div>
+    </section>
+
+    <div class="service-content">
+        <main class="main-content">
+            <div class="content-section">
+                <h2 class="section-title" data-en="Overview" data-fa="نمای کلی">Overview</h2>
+                <p data-en="Successful project execution depends on selecting the right equipment suppliers and managing the procurement process effectively. Our vendor partnership and procurement services help clients navigate the complex landscape of mining equipment suppliers, negotiate favorable terms, and ensure timely delivery of quality equipment." data-fa="اجرای موفق پروژه به انتخاب تامین‌کنندگان تجهیزات مناسب و مدیریت مؤثر فرآیند تدارکات بستگی دارد. خدمات شراکت تامین‌کننده و تدارکات ما به مشتریان کمک می‌کند تا در چشم‌انداز پیچیده تامین‌کنندگان تجهیزات معدنی حرکت کنند، شرایط مطلوب را مذاکره کنند و تحویل به موقع تجهیزات با کیفیت را تضمین کنند.">Successful project execution depends on selecting the right equipment suppliers and managing the procurement process effectively. Our vendor partnership and procurement services help clients navigate the complex landscape of mining equipment suppliers, negotiate favorable terms, and ensure timely delivery of quality equipment.</p>
+                
+                <p data-en="With established relationships with over 200 leading equipment manufacturers and suppliers worldwide, we provide clients with access to competitive pricing, technical support, and proven equipment solutions. Our procurement team has managed equipment packages valued at over $2 billion for mining projects globally." data-fa="با روابط مستقر با بیش از 200 تولیدکننده و تامین‌کننده پیشرو تجهیزات در سراسر جهان، ما به مشتریان دسترسی به قیمت‌گذاری رقابتی، پشتیبانی فنی و راهکارهای تجهیزات اثبات شده را فراهم می‌کنیم. تیم تدارکات ما بسته‌های تجهیزاتی به ارزش بیش از 2 میلیارد دلار را برای پروژه‌های معدنی در سطح جهانی مدیریت کرده است.">With established relationships with over 200 leading equipment manufacturers and suppliers worldwide, we provide clients with access to competitive pricing, technical support, and proven equipment solutions. Our procurement team has managed equipment packages valued at over $2 billion for mining projects globally.</p>
+            </div>
+            
+            <div class="content-section">
+                <h2 class="section-title" data-en="Key Services" data-fa="خدمات کلیدی">Key Services</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🔍</div>
+                        <h4 data-en="Vendor Qualification" data-fa="صلاحیت تامین‌کننده">Vendor Qualification</h4>
+                        <p data-en="Comprehensive evaluation of suppliers including technical capability, financial stability, and track record." data-fa="ارزیابی جامع تامین‌کنندگان از جمله توانایی فنی، ثبات مالی و سابقه کاری.">Comprehensive evaluation of suppliers including technical capability, financial stability, and track record.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">📋</div>
+                        <h4 data-en="RFQ Management" data-fa="مدیریت RFQ">RFQ Management</h4>
+                        <p data-en="Preparation of detailed technical specifications and management of request for quotation process." data-fa="تهیه مشخصات فنی تفصیلی و مدیریت فرآیند درخواست قیمت.">Preparation of detailed technical specifications and management of request for quotation process.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">💼</div>
+                        <h4 data-en="Bid Evaluation" data-fa="ارزیابی پیشنهاد">Bid Evaluation</h4>
+                        <p data-en="Technical and commercial evaluation of vendor proposals with detailed comparison matrices." data-fa="ارزیابی فنی و تجاری پیشنهادات تامین‌کننده با ماتریس‌های مقایسه تفصیلی.">Technical and commercial evaluation of vendor proposals with detailed comparison matrices.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🤝</div>
+                        <h4 data-en="Contract Negotiation" data-fa="مذاکره قرارداد">Contract Negotiation</h4>
+                        <p data-en="Negotiation of favorable terms including pricing, delivery schedules, warranties, and payment terms." data-fa="مذاکره شرایط مطلوب از جمله قیمت‌گذاری، برنامه تحویل، ضمانت‌ها و شرایط پرداخت.">Negotiation of favorable terms including pricing, delivery schedules, warranties, and payment terms.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">📦</div>
+                        <h4 data-en="Logistics Management" data-fa="مدیریت لجستیک">Logistics Management</h4>
+                        <p data-en="Coordination of shipping, customs clearance, and delivery to site with progress tracking." data-fa="هماهنگی حمل و نقل، ترخیص گمرکی و تحویل به سایت با ردیابی پیشرفت.">Coordination of shipping, customs clearance, and delivery to site with progress tracking.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">✅</div>
+                        <h4 data-en="Quality Assurance" data-fa="تضمین کیفیت">Quality Assurance</h4>
+                        <p data-en="Factory acceptance testing, inspection services, and quality control throughout manufacturing." data-fa="آزمایش پذیرش کارخانه، خدمات بازرسی و کنترل کیفیت در طول تولید.">Factory acceptance testing, inspection services, and quality control throughout manufacturing.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="procurement-process">
+                <h4 data-en="Procurement Process" data-fa="فرآیند تدارکات">Procurement Process</h4>
+                <div class="process-timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h5 data-en="1. Requirements Definition" data-fa="1. تعریف الزامات">1. Requirements Definition</h5>
+                            <p data-en="Detailed technical specifications, performance requirements, and commercial terms are defined based on project needs." data-fa="مشخصات فنی تفصیلی، الزامات عملکرد و شرایط تجاری بر اساس نیازهای پروژه تعریف می‌شود.">Detailed technical specifications, performance requirements, and commercial terms are defined based on project needs.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h5 data-en="2. Vendor Identification" data-fa="2. شناسایی تامین‌کننده">2. Vendor Identification</h5>
+                            <p data-en="Qualified vendors are identified from our global network and invited to participate in the bidding process." data-fa="تامین‌کنندگان واجد شرایط از شبکه جهانی ما شناسایی شده و برای شرکت در فرآیند مناقصه دعوت می‌شوند.">Qualified vendors are identified from our global network and invited to participate in the bidding process.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h5 data-en="3. RFQ & Bid Collection" data-fa="3. RFQ و جمع‌آوری پیشنهاد">3. RFQ & Bid Collection</h5>
+                            <p data-en="Request for quotations are issued and vendor proposals are collected and organized for evaluation." data-fa="درخواست قیمت صادر شده و پیشنهادات تامین‌کننده جمع‌آوری و برای ارزیابی سازماندهی می‌شود.">Request for quotations are issued and vendor proposals are collected and organized for evaluation.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h5 data-en="4. Technical & Commercial Evaluation" data-fa="4. ارزیابی فنی و تجاری">4. Technical & Commercial Evaluation</h5>
+                            <p data-en="Detailed evaluation of technical compliance, pricing, delivery schedules, and commercial terms." data-fa="ارزیابی تفصیلی انطباق فنی، قیمت‌گذاری، برنامه تحویل و شرایط تجاری.">Detailed evaluation of technical compliance, pricing, delivery schedules, and commercial terms.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h5 data-en="5. Contract Award & Management" data-fa="5. اعطای قرارداد و مدیریت">5. Contract Award & Management</h5>
+                            <p data-en="Contract finalization, purchase order issuance, and ongoing vendor management throughout delivery." data-fa="نهایی‌سازی قرارداد، صدور سفارش خرید و مدیریت مستمر تامین‌کننده در طول تحویل.">Contract finalization, purchase order issuance, and ongoing vendor management throughout delivery.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-section">
+                <h2 class="section-title" data-en="Our Partner Network" data-fa="شبکه شرکای ما">Our Partner Network</h2>
+                <p data-en="We maintain strategic partnerships with leading equipment manufacturers across all major equipment categories:" data-fa="ما شراکت‌های استراتژیک با تولیدکنندگان پیشرو تجهیزات در همه دسته‌های اصلی تجهیزات حفظ می‌کنیم:">We maintain strategic partnerships with leading equipment manufacturers across all major equipment categories:</p>
+                <div class="partners-grid">
+                    <div class="partner-card">
+                        <div class="partner-logo">🏗️</div>
+                        <h5 data-en="Crushing Equipment" data-fa="تجهیزات خردایش">Crushing Equipment</h5>
+                        <p data-en="Metso, Sandvik, FLSmidth, Terex" data-fa="Metso، Sandvik، FLSmidth، Terex">Metso, Sandvik, FLSmidth, Terex</p>
+                    </div>
+                    
+                    <div class="partner-card">
+                        <div class="partner-logo">⚙️</div>
+                        <h5 data-en="Grinding Mills" data-fa="آسیاب‌ها">Grinding Mills</h5>
+                        <p data-en="FLSmidth, Metso, Polysius, CITIC" data-fa="FLSmidth، Metso، Polysius، CITIC">FLSmidth, Metso, Polysius, CITIC</p>
+                    </div>
+                    
+                    <div class="partner-card">
+                        <div class="partner-logo">💧</div>
+                        <h5 data-en="Flotation Systems" data-fa="سیستم‌های فلوتاسیون">Flotation Systems</h5>
+                        <p data-en="Outotec, FLSmidth, Metso, Eriez" data-fa="Outotec، FLSmidth، Metso، Eriez">Outotec, FLSmidth, Metso, Eriez</p>
+                    </div>
+                    
+                    <div class="partner-card">
+                        <div class="partner-logo">💦</div>
+                        <h5 data-en="Dewatering" data-fa="آبگیری">Dewatering</h5>
+                        <p data-en="WesTech, Andritz, FLSmidth, Metso" data-fa="WesTech، Andritz، FLSmidth، Metso">WesTech, Andritz, FLSmidth, Metso</p>
+                    </div>
+                    
+                    <div class="partner-card">
+                        <div class="partner-logo">🚛</div>
+                        <h5 data-en="Material Handling" data-fa="جابجایی مواد">Material Handling</h5>
+                        <p data-en="Sandvik, Siemens, ThyssenKrupp" data-fa="Sandvik، Siemens، ThyssenKrupp">Sandvik, Siemens, ThyssenKrupp</p>
+                    </div>
+                    
+                    <div class="partner-card">
+                        <div class="partner-logo">⚡</div>
+                        <h5 data-en="Electrical Systems" data-fa="سیستم‌های برق">Electrical Systems</h5>
+                        <p data-en="ABB, Siemens, Schneider, GE" data-fa="ABB، Siemens، Schneider، GE">ABB, Siemens, Schneider, GE</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-section">
+                <h2 class="section-title" data-en="Value Proposition" data-fa="ارزش پیشنهادی">Value Proposition</h2>
+                <div class="value-props">
+                    <div class="value-card">
+                        <div class="value-icon">💰</div>
+                        <h5 data-en="Competitive Pricing" data-fa="قیمت‌گذاری رقابتی">Competitive Pricing</h5>
+                        <p data-en="Leverage our purchasing power and vendor relationships to secure best pricing." data-fa="از قدرت خرید و روابط تامین‌کننده ما برای تأمین بهترین قیمت استفاده کنید.">Leverage our purchasing power and vendor relationships to secure best pricing.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">⏱️</div>
+                        <h5 data-en="Time Savings" data-fa="صرفه‌جویی در زمان">Time Savings</h5>
+                        <p data-en="Streamlined procurement process reduces project timelines significantly." data-fa="فرآیند تدارکات ساده‌شده به طور قابل توجهی زمان‌بندی پروژه را کاهش می‌دهد.">Streamlined procurement process reduces project timelines significantly.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">🎯</div>
+                        <h5 data-en="Risk Mitigation" data-fa="کاهش ریسک">Risk Mitigation</h5>
+                        <p data-en="Pre-qualified vendors and proven equipment reduce project execution risks." data-fa="تامین‌کنندگان پیش‌واجد شرایط و تجهیزات اثبات شده ریسک‌های اجرای پروژه را کاهش می‌دهد.">Pre-qualified vendors and proven equipment reduce project execution risks.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">🔧</div>
+                        <h5 data-en="Technical Support" data-fa="پشتیبانی فنی">Technical Support</h5>
+                        <p data-en="Access to vendor technical expertise throughout equipment lifecycle." data-fa="دسترسی به تخصص فنی تامین‌کننده در طول چرخه عمر تجهیزات.">Access to vendor technical expertise throughout equipment lifecycle.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stats-banner">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">200+</div>
+                        <div class="stat-label" data-en="Vendor Partners" data-fa="شرکای تامین‌کننده">Vendor Partners</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">$2B+</div>
+                        <div class="stat-label" data-en="Equipment Procured" data-fa="تجهیزات تدارک دیده شده">Equipment Procured</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">50+</div>
+                        <div class="stat-label" data-en="Countries Served" data-fa="کشور خدمت‌رسانی">Countries Served</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">15-25%</div>
+                        <div class="stat-label" data-en="Cost Savings" data-fa="صرفه‌جویی هزینه">Cost Savings</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <aside class="sidebar">
+            <div class="sidebar-widget">
+                <h3 class="widget-title" data-en="Request Support" data-fa="درخواست پشتیبانی">Request Support</h3>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label data-en="Full Name" data-fa="نام کامل">Full Name</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label data-en="Email" data-fa="ایمیل">Email</label>
+                        <input type="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label data-en="Company" data-fa="شرکت">Company</label>
+                        <input type="text">
+                    </div>
+                    <div class="form-group">
+                        <label data-en="Equipment Category" data-fa="دسته تجهیزات">Equipment Category</label>
+                        <select>
+                            <option data-en="Crushing Equipment" data-fa="تجهیزات خردایش">Crushing Equipment</option>
+                            <option data-en="Grinding Mills" data-fa="آسیاب‌ها">Grinding Mills</option>
+                            <option data-en="Flotation Systems" data-fa="سیستم‌های فلوتاسیون">Flotation Systems</option>
+                            <option data-en="Complete Plant" data-fa="کارخانه کامل">Complete Plant</option>
+                            <option data-en="Other" data-fa="سایر">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label data-en="Project Budget (USD)" data-fa="بودجه پروژه (دلار)">Project Budget (USD)</label>
+                        <input type="text">
+                    </div>
+                    <div class="form-group">
+                        <label data-en="Message" data-fa="پیام">Message</label>
+                        <textarea></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit" data-en="Submit Request" data-fa="ارسال درخواست">Submit Request</button>
+                </form>
+            </div>
+            
+            <div class="sidebar-widget">
+                <h3 class="widget-title" data-en="Related Services" data-fa="خدمات مرتبط">Related Services</h3>
+                <ul class="related-services">
+                    <li><a href="equipment-selection.html"><i class="fas fa-cogs"></i><span data-en="Equipment Selection" data-fa="انتخاب تجهیزات">Equipment Selection</span></a></li>
+                    <li><a href="plant-design.html"><i class="fas fa-drafting-compass"></i><span data-en="Plant Design" data-fa="طراحی کارخانه">Plant Design</span></a></li>
+                    <li><a href="feasibility-studies.html"><i class="fas fa-file-alt"></i><span data-en="Feasibility Studies" data-fa="مطالعات امکان‌سنجی">Feasibility Studies</span></a></li>
+                    <li><a href="economic-analysis.html"><i class="fas fa-chart-line"></i><span data-en="Economic Analysis" data-fa="تحلیل اقتصادی">Economic Analysis</span></a></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 data-en="Company" data-fa="شرکت">Company</h3>
+                <ul>
+                    <li><a href="../about.html" data-en="About Us" data-fa="درباره ما">About Us</a></li>
+                    <li><a href="../portfolio.html" data-en="Portfolio" data-fa="نمونه کارها">Portfolio</a></li>
+                    <li><a href="../contact.html" data-en="Contact" data-fa="تماس با ما">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 data-en="Services" data-fa="خدمات">Services</h3>
+                <ul>
+                    <li><a href="vendor-partnerships.html" data-en="Vendor Partnerships" data-fa="شراکت‌های تامین‌کننده">Vendor Partnerships</a></li>
+                    <li><a href="equipment-selection.html" data-en="Equipment Selection" data-fa="انتخاب تجهیزات">Equipment Selection</a></li>
+                    <li><a href="plant-design.html" data-en="Plant Design" data-fa="طراحی کارخانه">Plant Design</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 data-en="Contact" data-fa="تماس">Contact</h3>
+                <ul>
+                    <li>📧 info@kdmine.com</li>
+                    <li>📞 +98 21 1234 5678</li>
+                    <li>📍 Tehran, Iran</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-en="&copy; 2025 Kavian Development Mine. All rights reserved." data-fa="© 2025 کاویان توسعه معدن. تمامی حقوق محفوظ است.">&copy; 2025 Kavian Development Mine. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function switchLanguage(lang) {
+            const body = document.body;
+            const elements = document.querySelectorAll('[data-en][data-fa]');
+            const langButtons = document.querySelectorAll('.lang-btn');
+            
+            if (lang === 'fa') { body.classList.add('rtl'); } 
+            else { body.classList.remove('rtl'); }
+            
+            langButtons.forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.lang-btn').classList.add('active');
+            
+            elements.forEach(el => {
+                el.innerHTML = el.getAttribute('data-' + lang);
+            });
+            
+            localStorage.setItem('preferredLanguage', lang);
+        }
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferredLanguage') || 'en';
+            if (savedLang === 'fa') {
+                document.querySelector('.lang-btn:last-child').click();
+            }
+        });
+        
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Form submitted! In production, this would send via EmailJS.');
+        });
+    </script>
+</body>
+</html>
