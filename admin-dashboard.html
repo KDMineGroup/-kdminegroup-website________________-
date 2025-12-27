@@ -11,8 +11,8 @@
     
     <style>
         @font-face {
-            font-family: 'B Nazanin';
-            src: local('B Nazanin'), local('BNazanin');
+            font-family: 'Vazirmatn';
+            src: local('Vazirmatn');
             font-display: swap;
         }
         
@@ -23,14 +23,14 @@
         }
         
         body {
-            font-family: 'B Nazanin', Tahoma, sans-serif;
+            font-family: 'Vazirmatn', 'B Nazanin', Tahoma, sans-serif;
             background: #f8fafc;
             direction: rtl;
         }
         
         .dashboard-container {
             display: grid;
-            grid-template-columns: 260px 1fr;
+            grid-template-columns: 280px 1fr;
             min-height: 100vh;
         }
         
@@ -38,8 +38,8 @@
         .sidebar {
             background: linear-gradient(180deg, #1e3a8a, #1e40af);
             color: white;
-            padding: 25px 18px;
-            box-shadow: 4px 0 10px rgba(0,0,0,0.1);
+            padding: 30px 20px;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
             height: 100vh;
@@ -48,28 +48,30 @@
         
         .sidebar-header {
             text-align: center;
-            margin-bottom: 35px;
-            padding-bottom: 25px;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
             border-bottom: 2px solid rgba(255,255,255,0.2);
         }
         
         .sidebar-header img {
-            width: 70px;
-            height: 70px;
-            border-radius: 15px;
+            width: 80px;
+            height: 80px;
+            border-radius: 18px;
             background: white;
-            padding: 10px;
-            margin: 0 auto 12px;
+            padding: 12px;
+            margin: 0 auto 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
         
         .sidebar-header h2 {
-            font-size: 1.2rem;
-            margin-bottom: 5px;
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            font-weight: 700;
         }
         
         .sidebar-header p {
-            font-size: 0.85rem;
-            opacity: 0.8;
+            font-size: 0.9rem;
+            opacity: 0.85;
         }
         
         .sidebar-menu {
@@ -77,126 +79,149 @@
         }
         
         .sidebar-menu li {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
         
         .sidebar-menu a {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
+            gap: 15px;
+            padding: 14px 18px;
             color: white;
             text-decoration: none;
-            border-radius: 10px;
+            border-radius: 12px;
             transition: all 0.3s;
-            font-size: 0.95rem;
+            font-size: 1rem;
+            font-weight: 500;
         }
         
         .sidebar-menu a:hover,
         .sidebar-menu a.active {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.25);
             transform: translateX(-5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
         
         .sidebar-menu .icon {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
+            width: 24px;
+            text-align: center;
         }
         
         .logout-btn {
-            margin-top: 35px;
+            margin-top: 40px;
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             background: rgba(220, 38, 38, 0.9);
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             font-family: inherit;
             font-size: 1rem;
-            font-weight: bold;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
         
         .logout-btn:hover {
             background: #dc2626;
             transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(220, 38, 38, 0.4);
         }
         
         /* Main Content */
         .main-content {
-            padding: 35px;
+            padding: 40px;
             overflow-y: auto;
+            max-height: 100vh;
         }
         
         .page-header {
-            margin-bottom: 35px;
+            margin-bottom: 40px;
         }
         
         .page-header h1 {
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             color: #1a202c;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            font-weight: 700;
         }
         
         .page-header p {
             color: #4a5568;
-            font-size: 1.05rem;
+            font-size: 1.1rem;
         }
         
         /* Stats Cards */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 22px;
-            margin-bottom: 35px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
         }
         
         .stat-card {
             background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 28px;
+            border-radius: 18px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             border: 1px solid #e2e8f0;
             transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #2563eb, #f59e0b);
         }
         
         .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
         }
         
         .stat-card-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
         }
         
         .stat-card-title {
             color: #4a5568;
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 600;
         }
         
         .stat-card-icon {
-            width: 45px;
-            height: 45px;
-            border-radius: 12px;
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.4rem;
+            font-size: 1.6rem;
         }
         
         .stat-card-value {
-            font-size: 2.2rem;
-            font-weight: bold;
+            font-size: 2.5rem;
+            font-weight: 800;
             color: #1a202c;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
         
         .stat-card-change {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: #059669;
             font-weight: 600;
         }
@@ -204,41 +229,42 @@
         /* Section Card */
         .section-card {
             background: white;
-            border-radius: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-radius: 18px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             border: 1px solid #e2e8f0;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
         
         .section-card-header {
-            padding: 22px 28px;
-            border-bottom: 1px solid #e2e8f0;
+            padding: 25px 32px;
+            border-bottom: 2px solid #e2e8f0;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 20px;
         }
         
         .section-card-header h2 {
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             color: #1a202c;
+            font-weight: 700;
         }
         
         .filter-buttons {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             flex-wrap: wrap;
         }
         
         .filter-btn {
-            padding: 7px 15px;
+            padding: 9px 18px;
             border: 2px solid #e2e8f0;
             background: white;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
             font-family: inherit;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             transition: all 0.3s;
             font-weight: 600;
         }
@@ -248,17 +274,18 @@
             border-color: #2563eb;
             background: #eff6ff;
             color: #2563eb;
+            transform: translateY(-2px);
         }
         
         .section-card-body {
-            padding: 28px;
+            padding: 32px;
         }
         
         /* Table */
         .requests-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
         
         .requests-table thead {
@@ -266,16 +293,16 @@
         }
         
         .requests-table th {
-            padding: 14px 12px;
+            padding: 16px 14px;
             text-align: right;
-            font-weight: bold;
+            font-weight: 700;
             color: #1a202c;
             border-bottom: 2px solid #e2e8f0;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
         
         .requests-table td {
-            padding: 16px 12px;
+            padding: 18px 14px;
             border-bottom: 1px solid #e2e8f0;
             color: #4a5568;
         }
@@ -290,10 +317,10 @@
         
         .status-badge {
             display: inline-block;
-            padding: 5px 12px;
+            padding: 6px 14px;
             border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
+            font-size: 0.85rem;
+            font-weight: 700;
         }
         
         .status-pending {
@@ -313,10 +340,10 @@
         
         .access-badge {
             display: inline-block;
-            padding: 5px 12px;
+            padding: 6px 14px;
             border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
+            font-size: 0.85rem;
+            font-weight: 700;
         }
         
         .access-basic {
@@ -331,18 +358,18 @@
         
         .action-buttons {
             display: flex;
-            gap: 6px;
+            gap: 8px;
             flex-wrap: wrap;
         }
         
         .btn-action {
-            padding: 7px 14px;
+            padding: 8px 16px;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
             font-family: inherit;
-            font-size: 0.85rem;
-            font-weight: bold;
+            font-size: 0.9rem;
+            font-weight: 700;
             transition: all 0.3s;
         }
         
@@ -354,6 +381,7 @@
         .btn-approve:hover {
             background: #047857;
             transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
         }
         
         .btn-reject {
@@ -364,6 +392,7 @@
         .btn-reject:hover {
             background: #b91c1c;
             transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
         }
         
         .btn-view {
@@ -374,6 +403,7 @@
         .btn-view:hover {
             background: #1d4ed8;
             transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
         }
         
         /* Modal */
@@ -384,7 +414,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.6);
+            background: rgba(0,0,0,0.65);
             z-index: 1000;
             align-items: center;
             justify-content: center;
@@ -397,19 +427,19 @@
         
         .modal-content {
             background: white;
-            border-radius: 20px;
-            max-width: 650px;
+            border-radius: 24px;
+            max-width: 700px;
             width: 100%;
             max-height: 90vh;
             overflow-y: auto;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            box-shadow: 0 25px 70px rgba(0,0,0,0.35);
             animation: modalSlide 0.3s ease;
         }
         
         @keyframes modalSlide {
             from {
                 opacity: 0;
-                transform: translateY(-30px);
+                transform: translateY(-40px);
             }
             to {
                 opacity: 1;
@@ -418,39 +448,41 @@
         }
         
         .modal-header {
-            padding: 22px 28px;
-            border-bottom: 1px solid #e2e8f0;
+            padding: 25px 32px;
+            border-bottom: 2px solid #e2e8f0;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         
         .modal-header h3 {
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             color: #1a202c;
+            font-weight: 700;
         }
         
         .modal-close {
             background: none;
             border: none;
-            font-size: 1.8rem;
+            font-size: 2rem;
             cursor: pointer;
             color: #4a5568;
             transition: color 0.3s;
-            padding: 5px 10px;
+            padding: 5px 12px;
+            line-height: 1;
         }
         
         .modal-close:hover {
-            color: #1a202c;
+            color: #dc2626;
         }
         
         .modal-body {
-            padding: 28px;
+            padding: 32px;
         }
         
         .detail-row {
-            margin-bottom: 18px;
-            padding-bottom: 18px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
             border-bottom: 1px solid #e2e8f0;
         }
         
@@ -459,21 +491,21 @@
         }
         
         .detail-label {
-            font-weight: bold;
+            font-weight: 700;
             color: #1a202c;
-            margin-bottom: 6px;
-            font-size: 0.95rem;
+            margin-bottom: 8px;
+            font-size: 1rem;
         }
         
         .detail-value {
             color: #4a5568;
-            font-size: 0.95rem;
-            line-height: 1.6;
+            font-size: 1rem;
+            line-height: 1.7;
         }
         
         .modal-footer {
-            padding: 18px 28px;
-            border-top: 1px solid #e2e8f0;
+            padding: 20px 32px;
+            border-top: 2px solid #e2e8f0;
             display: flex;
             gap: 12px;
             justify-content: flex-end;
@@ -482,91 +514,97 @@
         
         .access-control-section {
             background: #f8fafc;
-            padding: 18px;
-            border-radius: 10px;
-            margin-top: 18px;
+            padding: 22px;
+            border-radius: 14px;
+            margin-top: 20px;
+            border: 2px solid #e2e8f0;
         }
         
         .access-control-section h4 {
             color: #1a202c;
-            margin-bottom: 14px;
-            font-size: 1.05rem;
+            margin-bottom: 18px;
+            font-size: 1.15rem;
+            font-weight: 700;
         }
         
         .form-group {
-            margin-bottom: 14px;
+            margin-bottom: 16px;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             color: #1a202c;
-            font-weight: bold;
-            font-size: 0.9rem;
+            font-weight: 700;
+            font-size: 0.95rem;
         }
         
         .form-group select,
         .form-group input {
             width: 100%;
-            padding: 11px;
+            padding: 12px 14px;
             border: 2px solid #e2e8f0;
-            border-radius: 8px;
+            border-radius: 10px;
             font-family: inherit;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            transition: all 0.3s;
         }
         
         .form-group select:focus,
         .form-group input:focus {
             outline: none;
             border-color: #2563eb;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
         }
         
         .credentials-display {
             background: #eff6ff;
             border: 2px solid #bfdbfe;
-            padding: 14px;
-            border-radius: 8px;
-            margin-top: 14px;
+            padding: 18px;
+            border-radius: 12px;
+            margin-top: 16px;
         }
         
         .credentials-display p {
-            margin-bottom: 7px;
+            margin-bottom: 8px;
             color: #1e40af;
-            font-weight: bold;
-            font-size: 0.9rem;
+            font-weight: 700;
+            font-size: 0.95rem;
         }
         
         .credentials-display code {
             background: white;
-            padding: 4px 8px;
-            border-radius: 4px;
+            padding: 6px 10px;
+            border-radius: 6px;
             color: #1e40af;
             font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            font-weight: 600;
         }
         
         .empty-state {
             text-align: center;
-            padding: 60px 20px;
+            padding: 80px 20px;
             color: #4a5568;
         }
         
         .empty-state-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            opacity: 0.5;
+            font-size: 5rem;
+            margin-bottom: 25px;
+            opacity: 0.4;
         }
         
         .empty-state h3 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
             color: #1a202c;
+            font-weight: 700;
         }
         
         .spinner {
             display: inline-block;
-            width: 16px;
-            height: 16px;
+            width: 18px;
+            height: 18px;
             border: 3px solid rgba(255,255,255,0.3);
             border-radius: 50%;
             border-top-color: white;
@@ -587,32 +625,15 @@
                 position: relative;
                 height: auto;
             }
-            
-            .requests-table {
-                font-size: 0.8rem;
-            }
-            
-            .requests-table th,
-            .requests-table td {
-                padding: 10px 8px;
-            }
         }
         
         @media (max-width: 768px) {
             .main-content {
-                padding: 20px;
+                padding: 25px;
             }
             
             .stats-grid {
                 grid-template-columns: 1fr;
-            }
-            
-            .action-buttons {
-                flex-direction: column;
-            }
-            
-            .btn-action {
-                width: 100%;
             }
             
             .requests-table {
@@ -628,7 +649,7 @@
         <aside class="sidebar">
             <div class="sidebar-header">
                 <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Logo">
-                <h2>پنل مدیریت</h2>
+                <h2>پنل مدیریت کاویان</h2>
                 <p id="adminName">مدیر سیستم</p>
             </div>
             
@@ -639,7 +660,10 @@
                 <li><a href="#" onclick="showTab('users')"><span class="icon">✓</span> کاربران تایید شده</a></li>
             </ul>
             
-            <button class="logout-btn" onclick="logout()">خروج از سیستم</button>
+            <button class="logout-btn" onclick="logout()">
+                <span>🚪</span>
+                <span>خروج از سیستم</span>
+            </button>
         </aside>
         
         <!-- Main Content -->
@@ -811,10 +835,8 @@
                 <button class="modal-close" onclick="closeModal('viewModal')">&times;</button>
             </div>
             <div class="modal-body" id="modalBody">
-                <!-- Content will be populated dynamically -->
             </div>
             <div class="modal-footer" id="modalFooter">
-                <!-- Buttons will be populated dynamically -->
             </div>
         </div>
     </div>
@@ -827,7 +849,6 @@
                 <button class="modal-close" onclick="closeModal('contactModal')">&times;</button>
             </div>
             <div class="modal-body" id="contactModalBody">
-                <!-- Content will be populated dynamically -->
             </div>
             <div class="modal-footer">
                 <button class="btn-action btn-view" onclick="closeModal('contactModal')">بستن</button>
@@ -1023,7 +1044,7 @@
                         <p>اعتبارنامه‌های پیشنهادی:</p>
                         <p>نام کاربری: <code id="displayUsername">${generateUsername(reg)}</code></p>
                         <p>رمز عبور: <code id="displayPassword">${generatePassword()}</code></p>
-                        <p style="margin-top: 10px; font-size: 0.85rem;">این اطلاعات به ایمیل کاربر ارسال خواهد شد.</p>
+                        <p style="margin-top: 12px; font-size: 0.9rem; color: #4a5568;">این اطلاعات به ایمیل کاربر ارسال خواهد شد.</p>
                     </div>
                 </div>
                 ` : ''}
@@ -1047,7 +1068,6 @@
             const contacts = JSON.parse(localStorage.getItem('contacts') || '[]');
             const contact = contacts[index];
             
-            // Mark as read
             contact.status = 'read';
             contacts[index] = contact;
             localStorage.setItem('contacts', JSON.stringify(contacts));
@@ -1128,14 +1148,13 @@
             const username = document.getElementById('customUsername').value || document.getElementById('displayUsername').textContent;
             const password = document.getElementById('customPassword').value || document.getElementById('displayPassword').textContent;
             
-            // Disable button
-            event.target.disabled = true;
-            event.target.innerHTML = '<span class="spinner"></span> در حال ارسال...';
+            const btn = event.target;
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner"></span> در حال ارسال...';
             
             try {
-                // Send approval email
                 const templateParams = {
-                    from_name: `${reg.firstName} ${reg.lastName}`,
+                    to_name: `${reg.firstName} ${reg.lastName}`,
                     to_email: reg.email,
                     username: username,
                     password: password,
@@ -1144,13 +1163,11 @@
                 
                 await emailjs.send(SERVICE_ID, TEMPLATE_APPROVAL, templateParams);
                 
-                // Update registration status
                 reg.status = 'approved';
                 reg.approvedAt = new Date().toISOString();
                 registrations[index] = reg;
                 localStorage.setItem('registrations', JSON.stringify(registrations));
                 
-                // Add to users
                 const users = JSON.parse(localStorage.getItem('users') || '[]');
                 users.push({
                     ...reg,
@@ -1170,8 +1187,8 @@
             } catch (error) {
                 console.error('Error:', error);
                 alert('✗ خطا در ارسال ایمیل. لطفاً دوباره تلاش کنید.');
-                event.target.disabled = false;
-                event.target.textContent = 'تایید و ارسال اعتبارنامه';
+                btn.disabled = false;
+                btn.textContent = 'تایید و ارسال اعتبارنامه';
             }
         }
         
@@ -1253,13 +1270,9 @@
         }
         
         function showTab(tabName) {
-            // Hide all tabs
             document.querySelectorAll('.tab-content').forEach(tab => tab.style.display = 'none');
-            
-            // Remove active class from all menu items
             document.querySelectorAll('.sidebar-menu a').forEach(link => link.classList.remove('active'));
             
-            // Show selected tab
             if (tabName === 'dashboard') {
                 document.getElementById('dashboardTab').style.display = 'block';
             } else if (tabName === 'registrations') {
@@ -1270,7 +1283,6 @@
                 document.getElementById('usersTab').style.display = 'block';
             }
             
-            // Add active class to clicked menu item
             event.target.closest('a').classList.add('active');
         }
         
@@ -1336,7 +1348,6 @@
             }
         }
         
-        // Close modal when clicking outside
         document.querySelectorAll('.modal').forEach(modal => {
             modal.addEventListener('click', function(e) {
                 if (e.target === this) {
