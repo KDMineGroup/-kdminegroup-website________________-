@@ -1,1236 +1,455 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تحلیل ریسک | کاویان توسعه معدن</title>
-    <meta name="description" content="خدمات تخصصی تحلیل و مدیریت ریسک پروژه‌های معدنی">
+    <title>Risk Analysis & Management | Kavian Development Mine</title>
     <link rel="icon" type="image/svg+xml" href="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg">
-    
-    <!-- EmailJS SDK -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script type="text/javascript">
-        (function(){
-            emailjs.init({
-                publicKey: "YOUR_PUBLIC_KEY",
-            });
-        })();
-    </script>
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        @font-face {
-            font-family: 'B Nazanin';
-            src: local('B Nazanin'), local('BNazanin');
-            font-display: swap;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'B Nazanin', Tahoma, sans-serif;
-            line-height: 1.8;
-            color: #1a202c;
-            background: #ffffff;
-        }
-        
-        /* Navigation */
-        .navbar {
-            background: linear-gradient(135deg, #1e3a8a, #2563eb);
-            padding: 20px 0;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            color: white;
-            text-decoration: none;
-        }
-        
-        .logo img {
-            width: 50px;
-            height: 50px;
-            border-radius: 10px;
-            background: white;
-            padding: 5px;
-        }
-        
-        .logo-text h2 {
-            font-size: 1.4rem;
-            margin-bottom: 2px;
-        }
-        
-        .logo-text p {
-            font-size: 0.85rem;
-            opacity: 0.9;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-        
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.05rem;
-            font-weight: 600;
-            transition: opacity 0.3s;
-        }
-        
-        .nav-links a:hover {
-            opacity: 0.8;
-        }
-        
-        .nav-cta {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .btn-nav {
-            padding: 10px 25px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s;
-            font-size: 0.95rem;
-        }
-        
-        .btn-primary {
-            background: white;
-            color: #2563eb;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255,255,255,0.3);
-        }
-        
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-        }
-        
-        .btn-secondary:hover {
-            background: white;
-            color: #2563eb;
-        }
-        
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.8rem;
-            cursor: pointer;
-        }
-        
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, rgba(30, 58, 138, 0.95), rgba(37, 99, 235, 0.95)),
-                        url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1920&q=80') center/cover;
-            color: white;
-            padding: 120px 40px 100px;
-            text-align: center;
-            position: relative;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(30, 58, 138, 0.85), rgba(37, 99, 235, 0.75));
-            z-index: 1;
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-        
-        .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-        
-        .hero p {
-            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
-            opacity: 0.95;
-            max-width: 900px;
-            margin: 0 auto 40px;
-        }
-        
-        .hero-cta {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .btn-hero {
-            padding: 16px 35px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-        
-        .btn-hero-primary {
-            background: white;
-            color: #2563eb;
-        }
-        
-        .btn-hero-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(255,255,255,0.3);
-        }
-        
-        .btn-hero-secondary {
-            background: transparent;
-            color: white;
-            border: 3px solid white;
-        }
-        
-        .btn-hero-secondary:hover {
-            background: white;
-            color: #2563eb;
-        }
-        
-        /* Overview Section */
-        .overview-section {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 100px 40px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-        
-        .overview-image {
-            width: 100%;
-            height: 500px;
-            border-radius: 20px;
-            object-fit: cover;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-        }
-        
-        .overview-content h2 {
-            font-size: clamp(2rem, 4vw, 2.8rem);
-            color: #1a202c;
-            margin-bottom: 25px;
-        }
-        
-        .overview-content p {
-            font-size: 1.15rem;
-            color: #4a5568;
-            line-height: 2;
-            margin-bottom: 20px;
-        }
-        
-        .warning-box {
-            background: #fef3c7;
-            border-right: 5px solid #f59e0b;
-            padding: 25px;
-            border-radius: 10px;
-            margin-top: 30px;
-        }
-        
-        .warning-box h4 {
-            color: #92400e;
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-        }
-        
-        .warning-box p {
-            color: #92400e;
-            font-size: 1.05rem;
-        }
-        
-        /* Risk Types Section */
-        .risk-types-section {
-            background: #f8fafc;
-            padding: 100px 40px;
-        }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 70px;
-        }
-        
-        .section-header h2 {
-            font-size: clamp(2rem, 4vw, 2.8rem);
-            color: #1a202c;
-            margin-bottom: 15px;
-        }
-        
-        .section-header p {
-            font-size: clamp(1rem, 2vw, 1.2rem);
-            color: #4a5568;
-        }
-        
-        .risk-types-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 35px;
-        }
-        
-        .risk-card {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-            border-top: 5px solid transparent;
-        }
-        
-        .risk-card.high {
-            border-top-color: #dc2626;
-        }
-        
-        .risk-card.medium {
-            border-top-color: #f59e0b;
-        }
-        
-        .risk-card.low {
-            border-top-color: #059669;
-        }
-        
-        .risk-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-        }
-        
-        .risk-icon {
-            width: 80px;
-            height: 80px;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            color: white;
-            margin-bottom: 25px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
-        
-        .risk-card.high .risk-icon {
-            background: linear-gradient(135deg, #dc2626, #ef4444);
-        }
-        
-        .risk-card.medium .risk-icon {
-            background: linear-gradient(135deg, #f59e0b, #fbbf24);
-        }
-        
-        .risk-card.low .risk-icon {
-            background: linear-gradient(135deg, #059669, #10b981);
-        }
-        
-        .risk-card h3 {
-            font-size: 1.6rem;
-            color: #1a202c;
-            margin-bottom: 15px;
-        }
-        
-        .risk-card p {
-            color: #4a5568;
-            font-size: 1.05rem;
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
-        
-        .risk-examples {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .risk-examples li {
-            padding: 8px 0;
-            padding-right: 25px;
-            position: relative;
-            color: #4a5568;
-            font-size: 0.95rem;
-        }
-        
-        .risk-examples li::before {
-            content: '⚠';
-            position: absolute;
-            right: 0;
-            font-size: 1rem;
-        }
-        
-        /* Methods Section */
-        .methods-section {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 100px 40px;
-        }
-        
-        .methods-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 35px;
-            margin-top: 60px;
-        }
-        
-        .method-card {
-            background: linear-gradient(135deg, #f8fafc, #e0f2fe);
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            border: 2px solid #bae6fd;
-            transition: all 0.3s;
-        }
-        
-        .method-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            border-color: #2563eb;
-        }
-        
-        .method-number {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #2563eb, #60a5fa);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: white;
-            margin: 0 auto 20px;
-            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
-        }
-        
-        .method-card h3 {
-            font-size: 1.4rem;
-            color: #1a202c;
-            margin-bottom: 12px;
-        }
-        
-        .method-card p {
-            color: #4a5568;
-            font-size: 1rem;
-            line-height: 1.7;
-        }
-        
-        /* Risk Matrix Section */
-        .risk-matrix-section {
-            background: linear-gradient(135deg, rgba(30, 58, 138, 0.95), rgba(37, 99, 235, 0.95)),
-                        url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1920&q=80') center/cover;
-            color: white;
-            padding: 100px 40px;
-            position: relative;
-        }
-        
-        .risk-matrix-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(30, 58, 138, 0.9), rgba(37, 99, 235, 0.8));
-            z-index: 1;
-        }
-        
-        .risk-matrix-content {
-            position: relative;
-            z-index: 2;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .matrix-container {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 50px;
-            border-radius: 20px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            margin-top: 60px;
-        }
-        
-        .matrix-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 10px;
-        }
-        
-        .matrix-table th,
-        .matrix-table td {
-            padding: 20px;
-            text-align: center;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: bold;
-        }
-        
-        .matrix-table th {
-            background: rgba(255, 255, 255, 0.2);
-        }
-        
-        .matrix-table td.low {
-            background: rgba(5, 150, 105, 0.7);
-        }
-        
-        .matrix-table td.medium {
-            background: rgba(245, 158, 11, 0.7);
-        }
-        
-        .matrix-table td.high {
-            background: rgba(220, 38, 38, 0.7);
-        }
-        
-        /* Process Section */
-        .process-section {
-            background: #f8fafc;
-            padding: 100px 40px;
-        }
-        
-        .process-timeline {
-            max-width: 1000px;
-            margin: 60px auto 0;
-            position: relative;
-        }
-        
-        .process-timeline::before {
-            content: '';
-            position: absolute;
-            right: 50%;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: linear-gradient(to bottom, #2563eb, #60a5fa);
-        }
-        
-        .timeline-item {
-            display: flex;
-            gap: 40px;
-            margin-bottom: 60px;
-            position: relative;
-        }
-        
-        .timeline-item:nth-child(odd) {
-            flex-direction: row-reverse;
-        }
-        
-        .timeline-content {
-            flex: 1;
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        
-        .timeline-number {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #2563eb, #60a5fa);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: white;
-            position: absolute;
-            right: calc(50% - 30px);
-            box-shadow: 0 0 0 8px #f8fafc;
-        }
-        
-        .timeline-content h3 {
-            font-size: 1.4rem;
-            color: #1a202c;
-            margin-bottom: 10px;
-        }
-        
-        .timeline-content p {
-            color: #4a5568;
-            font-size: 1.05rem;
-            line-height: 1.7;
-        }
-        
-        /* Benefits Section */
-        .benefits-section {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 100px 40px;
-        }
-        
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 35px;
-            margin-top: 60px;
-        }
-        
-        .benefit-card {
-            background: white;
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-            border-right: 5px solid #2563eb;
-        }
-        
-        .benefit-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        }
-        
-        .benefit-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-        
-        .benefit-card h3 {
-            font-size: 1.4rem;
-            color: #1a202c;
-            margin-bottom: 12px;
-        }
-        
-        .benefit-card p {
-            color: #4a5568;
-            font-size: 1.05rem;
-            line-height: 1.7;
-        }
-        
-        /* CTA Section */
-        .cta-section {
-            background: white;
-            padding: 100px 40px;
-        }
-        
-        .cta-container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: linear-gradient(135deg, #2563eb, #1d4ed8);
-            padding: 60px;
-            border-radius: 25px;
-            text-align: center;
-            color: white;
-            box-shadow: 0 20px 60px rgba(37, 99, 235, 0.3);
-        }
-        
-        .cta-container h2 {
-            font-size: clamp(2rem, 4vw, 2.8rem);
-            margin-bottom: 20px;
-        }
-        
-        .cta-container p {
-            font-size: clamp(1rem, 2vw, 1.3rem);
-            margin-bottom: 40px;
-            opacity: 0.95;
-        }
-        
-        .cta-form {
-            display: flex;
-            gap: 15px;
-            max-width: 600px;
-            margin: 0 auto;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        
-        .cta-form input {
-            flex: 1;
-            min-width: 250px;
-            padding: 16px 20px;
-            border: none;
-            border-radius: 10px;
-            font-family: inherit;
-            font-size: 1rem;
-        }
-        
-        .cta-form button {
-            padding: 16px 35px;
-            background: white;
-            color: #2563eb;
-            border: none;
-            border-radius: 10px;
-            font-family: inherit;
-            font-weight: bold;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .cta-form button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        
-        .cta-message {
-            margin-top: 20px;
-            padding: 12px;
-            border-radius: 8px;
-            display: none;
-            font-weight: bold;
-        }
-        
-        .cta-message.success {
-            background: rgba(209, 250, 229, 0.3);
-            border: 2px solid rgba(5, 150, 105, 0.5);
-        }
-        
-        .cta-message.error {
-            background: rgba(254, 226, 226, 0.3);
-            border: 2px solid rgba(220, 38, 38, 0.5);
-        }
-        
-        /* Footer */
-        .footer {
-            background: #1a202c;
-            color: white;
-            padding: 60px 40px 30px;
-        }
-        
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-        
-        .footer-section h3 {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-        }
-        
-        .footer-section p,
-        .footer-section a {
-            color: #cbd5e0;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 10px;
-            font-size: 0.95rem;
-        }
-        
-        .footer-section a:hover {
-            color: white;
-        }
-        
-        .footer-bottom {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding-top: 30px;
-            border-top: 1px solid #2d3748;
-            text-align: center;
-            color: #cbd5e0;
-            font-size: 0.9rem;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #1e3a8a;
+            --secondary-blue: #2563eb;
+            --accent-gold: #f59e0b;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --success: #059669;
+            --warning: #f59e0b;
+            --danger: #dc2626;
+        }
+        body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-dark); overflow-x: hidden; }
+        body.rtl { font-family: 'Vazirmatn', sans-serif; direction: rtl; }
+        
+        .language-switcher { position: fixed; top: 15px; right: 15px; z-index: 3000; background: white; border-radius: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 4px; display: flex; gap: 4px; }
+        body.rtl .language-switcher { right: auto; left: 15px; }
+        .lang-btn { padding: 6px 12px; border: none; background: transparent; border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 0.75rem; transition: all 0.3s; display: flex; align-items: center; gap: 5px; color: var(--text-light); }
+        .lang-btn span:first-child { font-size: 0.9rem; }
+        .lang-btn:hover { background: #f1f5f9; color: var(--secondary-blue); }
+        .lang-btn.active { background: var(--secondary-blue); color: white; }
+        
+        header { background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%); color: white; padding: 1rem 0; position: sticky; top: 0; z-index: 2000; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        nav { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
+        .logo { display: flex; align-items: center; gap: 15px; font-size: 1.5rem; font-weight: 700; text-decoration: none; color: white; }
+        .logo img { height: 55px; width: auto; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2)); }
+        .nav-links { display: flex; list-style: none; gap: 2.5rem; align-items: center; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 500; transition: all 0.3s; position: relative; padding: 5px 0; }
+        .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--accent-gold); transition: width 0.3s; }
+        .nav-links a:hover::after { width: 100%; }
+        
+        .page-hero { background: linear-gradient(135deg, rgba(30, 58, 138, 0.95) 0%, rgba(37, 99, 235, 0.9) 100%), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1920') center/cover; color: white; padding: 120px 2rem 80px; text-align: center; }
+        .page-hero h1 { font-size: 3.5rem; margin-bottom: 20px; font-weight: 700; text-shadow: 2px 2px 8px rgba(0,0,0,0.3); }
+        .page-hero p { font-size: 1.3rem; max-width: 800px; margin: 0 auto; opacity: 0.95; line-height: 1.8; }
+        
+        .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 20px 2rem; display: flex; gap: 10px; align-items: center; font-size: 0.9rem; color: var(--text-light); }
+        .breadcrumb a { color: var(--secondary-blue); text-decoration: none; transition: color 0.3s; }
+        .breadcrumb a:hover { color: var(--accent-gold); }
+        
+        .container { max-width: 1400px; margin: 0 auto; padding: 80px 2rem; }
+        
+        .intro-section { text-align: center; margin-bottom: 80px; }
+        .intro-section h2 { font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 20px; }
+        .intro-section p { font-size: 1.2rem; color: var(--text-light); max-width: 900px; margin: 0 auto; line-height: 1.8; }
+        
+        .risk-categories { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 80px; }
+        .risk-card { background: white; border-radius: 20px; padding: 40px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); transition: all 0.4s; border-top: 5px solid var(--secondary-blue); }
+        .risk-card:hover { transform: translateY(-10px); box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+        .risk-card.high { border-top-color: var(--danger); }
+        .risk-card.medium { border-top-color: var(--warning); }
+        .risk-card.low { border-top-color: var(--success); }
+        .risk-icon { width: 70px; height: 70px; background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white; margin-bottom: 20px; }
+        .risk-card h3 { font-size: 1.5rem; color: var(--primary-blue); margin-bottom: 15px; }
+        .risk-level { display: inline-block; padding: 5px 15px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; margin-bottom: 15px; }
+        .risk-level.high { background: #fee2e2; color: var(--danger); }
+        .risk-level.medium { background: #fef3c7; color: #92400e; }
+        .risk-level.low { background: #d1fae5; color: var(--success); }
+        .risk-card ul { list-style: none; margin-top: 20px; }
+        .risk-card ul li { padding: 10px 0; color: var(--text-light); display: flex; align-items: flex-start; gap: 10px; }
+        .risk-card ul li::before { content: '→'; color: var(--secondary-blue); font-weight: bold; }
+        
+        .methodology-section { background: var(--light-bg); padding: 80px 2rem; margin: 80px 0; }
+        .methodology-content { max-width: 1400px; margin: 0 auto; }
+        .methodology-content h2 { font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 40px; text-align: center; }
+        .methodology-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .method-card { background: white; padding: 35px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); }
+        .method-number { width: 50px; height: 50px; background: var(--secondary-blue); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; margin-bottom: 20px; }
+        .method-card h3 { font-size: 1.3rem; color: var(--primary-blue); margin-bottom: 15px; }
+        .method-card p { color: var(--text-light); line-height: 1.7; }
+        
+        .tools-section { margin: 80px 0; }
+        .tools-section h2 { font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 40px; text-align: center; }
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+        .tool-item { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); text-align: center; transition: all 0.3s; }
+        .tool-item:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.12); }
+        .tool-item i { font-size: 3rem; color: var(--secondary-blue); margin-bottom: 15px; }
+        .tool-item h4 { font-size: 1.2rem; color: var(--primary-blue); margin-bottom: 10px; }
+        .tool-item p { font-size: 0.9rem; color: var(--text-light); }
+        
+        .benefits-section { background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue)); color: white; padding: 80px 2rem; margin: 80px 0; }
+        .benefits-content { max-width: 1400px; margin: 0 auto; }
+        .benefits-content h2 { font-size: 2.5rem; margin-bottom: 50px; text-align: center; }
+        .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .benefit-card { background: rgba(255,255,255,0.1); padding: 30px; border-radius: 15px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); }
+        .benefit-card i { font-size: 2.5rem; color: var(--accent-gold); margin-bottom: 15px; }
+        .benefit-card h3 { font-size: 1.3rem; margin-bottom: 15px; }
+        .benefit-card p { opacity: 0.9; line-height: 1.7; }
+        
+        .cta-section { text-align: center; padding: 80px 2rem; background: var(--light-bg); }
+        .cta-section h2 { font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 20px; }
+        .cta-section p { font-size: 1.2rem; color: var(--text-light); margin-bottom: 40px; max-width: 700px; margin-left: auto; margin-right: auto; }
+        .btn { padding: 15px 40px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s; display: inline-flex; align-items: center; gap: 10px; font-size: 1.1rem; }
+        .btn-primary { background: var(--accent-gold); color: white; box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(245, 158, 11, 0.4); }
+        
+        footer { background: var(--dark-bg); color: white; padding: 60px 2rem 30px; }
+        .footer-content { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 40px; }
+        .footer-section h3 { color: var(--accent-gold); margin-bottom: 20px; font-size: 1.3rem; }
+        .footer-section ul { list-style: none; }
+        .footer-section a { color: #cbd5e1; text-decoration: none; display: block; margin-bottom: 12px; transition: all 0.3s; }
+        .footer-section a:hover { color: var(--accent-gold); padding-left: 5px; }
+        body.rtl .footer-section a:hover { padding-left: 0; padding-right: 5px; }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); color: #94a3b8; }
         
         @media (max-width: 768px) {
-            .nav-links, .nav-cta {
-                display: none;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .overview-section {
-                grid-template-columns: 1fr;
-            }
-            
-            .hero {
-                padding: 100px 25px 80px;
-            }
-            
-            .overview-section,
-            .risk-types-section,
-            .methods-section,
-            .risk-matrix-section,
-            .process-section,
-            .benefits-section,
-            .cta-section {
-                padding: 80px 25px;
-            }
-            
-            .cta-container,
-            .matrix-container {
-                padding: 40px 25px;
-            }
-            
-            .cta-form {
-                flex-direction: column;
-            }
-            
-            .cta-form input {
-                width: 100%;
-            }
-            
-            .process-timeline::before {
-                right: 20px;
-            }
-            
-            .timeline-item {
-                flex-direction: column !important;
-                padding-right: 50px;
-            }
-            
-            .timeline-number {
-                right: 0 !important;
-            }
-            
-            .matrix-table {
-                font-size: 0.8rem;
-            }
-            
-            .matrix-table th,
-            .matrix-table td {
-                padding: 10px;
-            }
+            .page-hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+            .risk-categories, .methodology-grid, .tools-grid, .benefits-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
+    <div class="language-switcher">
+        <button class="lang-btn active" onclick="switchLanguage('en')">
+            <span>🇬🇧</span><span>EN</span>
+        </button>
+        <button class="lang-btn" onclick="switchLanguage('fa')">
+            <span>🇮🇷</span><span>FA</span>
+        </button>
+    </div>
+
+    <header>
+        <nav>
+            <a href="../index.html" class="logo">
                 <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Logo">
-                <div class="logo-text">
-                    <h2>کاویان توسعه معدن</h2>
-                    <p>Kavian Development Mine</p>
-                </div>
+                <span data-en="Kavian Development Mine" data-fa="کاویان توسعه معدن">Kavian Development Mine</span>
             </a>
-            
             <ul class="nav-links">
-                <li><a href="index.html">خانه</a></li>
-                <li><a href="about.html">درباره ما</a></li>
-                <li><a href="services.html">خدمات</a></li>
-                <li><a href="portfolio.html">نمونه کارها</a></li>
-                <li><a href="blog.html">وبلاگ</a></li>
+                <li><a href="../index.html" data-en="Home" data-fa="خانه">Home</a></li>
+                <li><a href="../about.html" data-en="About" data-fa="درباره ما">About</a></li>
+                <li><a href="../services.html" data-en="Services" data-fa="خدمات">Services</a></li>
+                <li><a href="../contact-form.html" data-en="Contact" data-fa="تماس">Contact</a></li>
             </ul>
-            
-            <div class="nav-cta">
-                <a href="register.html" class="btn-nav btn-primary">ثبت‌نام</a>
-                <a href="contact.html" class="btn-nav btn-secondary">تماس با ما</a>
-            </div>
-            
-            <button class="mobile-menu-btn">☰</button>
-        </div>
-    </nav>
-    
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>تحلیل و مدیریت ریسک</h1>
-            <p>شناسایی، ارزیابی و مدیریت ریسک‌های فنی، مالی و عملیاتی پروژه‌های معدنی</p>
-            <div class="hero-cta">
-                <a href="#contact" class="btn-hero btn-hero-primary">درخواست مشاوره</a>
-                <a href="#risks" class="btn-hero btn-hero-secondary">انواع ریسک</a>
-            </div>
-        </div>
+        </nav>
+    </header>
+
+    <section class="page-hero">
+        <h1 data-en="Risk Analysis & Management" data-fa="تحلیل و مدیریت ریسک">Risk Analysis & Management</h1>
+        <p data-en="Comprehensive risk assessment and mitigation strategies for mining projects to ensure project success and investment security" data-fa="ارزیابی جامع ریسک و استراتژی‌های کاهش ریسک برای پروژه‌های معدنی جهت تضمین موفقیت پروژه و امنیت سرمایه‌گذاری">Comprehensive risk assessment and mitigation strategies for mining projects to ensure project success and investment security</p>
     </section>
-    
-    <!-- Overview Section -->
-    <section class="overview-section">
-        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80" alt="تحلیل ریسک" class="overview-image">
-        
-        <div class="overview-content">
-            <h2>چرا مدیریت ریسک ضروری است؟</h2>
-            <p>
-                پروژه‌های معدنی با ریسک‌های متعددی روبرو هستند که می‌تواند تأثیر قابل توجهی بر موفقیت پروژه داشته باشد. 
-                شناسایی و مدیریت صحیح این ریسک‌ها می‌تواند از شکست پروژه جلوگیری کند.
-            </p>
-            <p>
-                تیم متخصص ما با استفاده از روش‌های پیشرفته و استانداردهای بین‌المللی، ریسک‌های پروژه شما را شناسایی، 
-                ارزیابی و برنامه‌های کاهش ریسک را ارائه می‌دهد.
-            </p>
-            <div class="warning-box">
-                <h4>⚠️ هشدار</h4>
-                <p>عدم توجه به مدیریت ریسک می‌تواند منجر به تأخیر در پروژه، افزایش هزینه‌ها و حتی شکست کامل پروژه شود.</p>
-            </div>
+
+    <div class="breadcrumb">
+        <a href="../index.html" data-en="Home" data-fa="خانه">Home</a>
+        <span>›</span>
+        <a href="../services.html" data-en="Services" data-fa="خدمات">Services</a>
+        <span>›</span>
+        <span data-en="Risk Analysis" data-fa="تحلیل ریسک">Risk Analysis</span>
+    </div>
+
+    <div class="container">
+        <div class="intro-section">
+            <h2 data-en="Why Risk Analysis Matters" data-fa="چرا تحلیل ریسک مهم است">Why Risk Analysis Matters</h2>
+            <p data-en="Mining projects involve significant capital investment and face numerous uncertainties. Our comprehensive risk analysis services help identify, quantify, and mitigate potential risks throughout the project lifecycle, from exploration to operation." data-fa="پروژه‌های معدنی شامل سرمایه‌گذاری قابل توجه سرمایه هستند و با عدم قطعیت‌های متعددی روبرو هستند. خدمات جامع تحلیل ریسک ما به شناسایی، کمی‌سازی و کاهش ریسک‌های بالقوه در طول چرخه عمر پروژه، از اکتشاف تا بهره‌برداری کمک می‌کند.">Mining projects involve significant capital investment and face numerous uncertainties. Our comprehensive risk analysis services help identify, quantify, and mitigate potential risks throughout the project lifecycle, from exploration to operation.</p>
         </div>
-    </section>
-    
-    <!-- Risk Types Section -->
-    <section class="risk-types-section" id="risks">
-        <div class="section-header">
-            <h2>انواع ریسک در پروژه‌های معدنی</h2>
-            <p>دسته‌بندی ریسک‌ها بر اساس اهمیت و تأثیر</p>
-        </div>
-        
-        <div class="risk-types-grid">
-            <!-- High Risk -->
+
+        <div class="risk-categories">
             <div class="risk-card high">
-                <div class="risk-icon">🔴</div>
-                <h3>ریسک‌های بحرانی</h3>
-                <p>ریسک‌هایی با احتمال بالا و تأثیر شدید که نیاز به توجه فوری دارند</p>
-                <ul class="risk-examples">
-                    <li>نوسانات شدید قیمت محصول</li>
-                    <li>تغییرات قوانین و مقررات</li>
-                    <li>مشکلات زیست‌محیطی جدی</li>
-                    <li>کمبود منابع مالی</li>
+                <div class="risk-icon">⚠️</div>
+                <span class="risk-level high" data-en="High Impact" data-fa="تأثیر بالا">High Impact</span>
+                <h3 data-en="Technical Risks" data-fa="ریسک‌های فنی">Technical Risks</h3>
+                <ul>
+                    <li data-en="Geological uncertainties and resource estimation" data-fa="عدم قطعیت‌های زمین‌شناسی و برآورد منابع">Geological uncertainties and resource estimation</li>
+                    <li data-en="Metallurgical recovery variability" data-fa="تغییرپذیری بازیابی متالورژی">Metallurgical recovery variability</li>
+                    <li data-en="Equipment performance and reliability" data-fa="عملکرد و قابلیت اطمینان تجهیزات">Equipment performance and reliability</li>
+                    <li data-en="Technology selection and implementation" data-fa="انتخاب و پیاده‌سازی فناوری">Technology selection and implementation</li>
                 </ul>
             </div>
-            
-            <!-- Medium Risk -->
+
             <div class="risk-card medium">
-                <div class="risk-icon">🟡</div>
-                <h3>ریسک‌های متوسط</h3>
-                <p>ریسک‌هایی که نیاز به نظارت و برنامه‌ریزی دارند</p>
-                <ul class="risk-examples">
-                    <li>تأخیر در تأمین تجهیزات</li>
-                    <li>کمبود نیروی متخصص</li>
-                    <li>مشکلات فنی تجهیزات</li>
-                    <li>افزایش هزینه‌های عملیاتی</li>
-                </ul>
-            </div>
-            
-            <!-- Low Risk -->
-            <div class="risk-card low">
-                <div class="risk-icon">🟢</div>
-                <h3>ریسک‌های کم</h3>
-                <p>ریسک‌هایی با احتمال یا تأثیر کم که قابل مدیریت هستند</p>
-                <ul class="risk-examples">
-                    <li>تغییرات جزئی در بازار</li>
-                    <li>مشکلات اداری</li>
-                    <li>تأخیرات کوچک</li>
-                    <li>نوسانات کم قیمت</li>
-                </ul>
-            </div>
-            
-            <!-- Technical Risk -->
-            <div class="risk-card high">
-                <div class="risk-icon">⚙️</div>
-                <h3>ریسک‌های فنی</h3>
-                <p>ریسک‌های مرتبط با جنبه‌های فنی و مهندسی</p>
-                <ul class="risk-examples">
-                    <li>عدم دستیابی به بازیابی مورد انتظار</li>
-                    <li>مشکلات ژئوتکنیکی</li>
-                    <li>خرابی تجهیزات کلیدی</li>
-                    <li>مشکلات کیفیت ماده معدنی</li>
-                </ul>
-            </div>
-            
-            <!-- Financial Risk -->
-            <div class="risk-card high">
                 <div class="risk-icon">💰</div>
-                <h3>ریسک‌های مالی</h3>
-                <p>ریسک‌های مرتبط با جنبه‌های اقتصادی و مالی</p>
-                <ul class="risk-examples">
-                    <li>نوسانات نرخ ارز</li>
-                    <li>افزایش نرخ بهره</li>
-                    <li>تورم بالا</li>
-                    <li>کاهش قیمت محصول</li>
+                <span class="risk-level medium" data-en="Medium Impact" data-fa="تأثیر متوسط">Medium Impact</span>
+                <h3 data-en="Financial Risks" data-fa="ریسک‌های مالی">Financial Risks</h3>
+                <ul>
+                    <li data-en="Capital cost overruns" data-fa="افزایش هزینه‌های سرمایه‌ای">Capital cost overruns</li>
+                    <li data-en="Operating cost escalation" data-fa="افزایش هزینه‌های عملیاتی">Operating cost escalation</li>
+                    <li data-en="Commodity price volatility" data-fa="نوسانات قیمت کالا">Commodity price volatility</li>
+                    <li data-en="Currency exchange rate fluctuations" data-fa="نوسانات نرخ ارز">Currency exchange rate fluctuations</li>
+                    <li data-en="Financing and funding availability" data-fa="در دسترس بودن تامین مالی و بودجه">Financing and funding availability</li>
                 </ul>
             </div>
-            
-            <!-- Operational Risk -->
+
+            <div class="risk-card high">
+                <div class="risk-icon">📋</div>
+                <span class="risk-level high" data-en="High Impact" data-fa="تأثیر بالا">High Impact</span>
+                <h3 data-en="Regulatory & Political" data-fa="نظارتی و سیاسی">Regulatory & Political</h3>
+                <ul>
+                    <li data-en="Permitting delays and compliance" data-fa="تأخیر در صدور مجوز و انطباق">Permitting delays and compliance</li>
+                    <li data-en="Environmental regulations changes" data-fa="تغییرات مقررات زیست‌محیطی">Environmental regulations changes</li>
+                    <li data-en="Political instability and policy changes" data-fa="بی‌ثباتی سیاسی و تغییرات سیاست">Political instability and policy changes</li>
+                    <li data-en="Community relations and social license" data-fa="روابط جامعه و مجوز اجتماعی">Community relations and social license</li>
+                </ul>
+            </div>
+
             <div class="risk-card medium">
-                <div class="risk-icon">🏭</div>
-                <h3>ریسک‌های عملیاتی</h3>
-                <p>ریسک‌های مرتبط با فرآیندهای عملیاتی</p>
-                <ul class="risk-examples">
-                    <li>کاهش راندمان تجهیزات</li>
-                    <li>افزایش زمان توقف</li>
-                    <li>مشکلات ایمنی</li>
-                    <li>کمبود قطعات یدکی</li>
+                <div class="risk-icon">🌍</div>
+                <span class="risk-level medium" data-en="Medium Impact" data-fa="تأثیر متوسط">Medium Impact</span>
+                <h3 data-en="Environmental Risks" data-fa="ریسک‌های زیست‌محیطی">Environmental Risks</h3>
+                <ul>
+                    <li data-en="Water management and availability" data-fa="مدیریت و در دسترس بودن آب">Water management and availability</li>
+                    <li data-en="Waste disposal and tailings management" data-fa="دفع زباله و مدیریت باطله">Waste disposal and tailings management</li>
+                    <li data-en="Air quality and emissions control" data-fa="کیفیت هوا و کنترل انتشار">Air quality and emissions control</li>
+                    <li data-en="Biodiversity and habitat protection" data-fa="حفاظت از تنوع زیستی و زیستگاه">Biodiversity and habitat protection</li>
+                </ul>
+            </div>
+
+            <div class="risk-card low">
+                <div class="risk-icon">👷</div>
+                <span class="risk-level low" data-en="Low Impact" data-fa="تأثیر پایین">Low Impact</span>
+                <h3 data-en="Operational Risks" data-fa="ریسک‌های عملیاتی">Operational Risks</h3>
+                <ul>
+                    <li data-en="Production delays and schedule slippage" data-fa="تأخیر تولید و لغزش برنامه">Production delays and schedule slippage</li>
+                    <li data-en="Labor availability and productivity" data-fa="در دسترس بودن و بهره‌وری نیروی کار">Labor availability and productivity</li>
+                    <li data-en="Supply chain disruptions" data-fa="اختلالات زنجیره تأمین">Supply chain disruptions</li>
+                    <li data-en="Health and safety incidents" data-fa="حوادث بهداشت و ایمنی">Health and safety incidents</li>
+                </ul>
+            </div>
+
+            <div class="risk-card medium">
+                <div class="risk-icon">🌐</div>
+                <span class="risk-level medium" data-en="Medium Impact" data-fa="تأثیر متوسط">Medium Impact</span>
+                <h3 data-en="Market Risks" data-fa="ریسک‌های بازار">Market Risks</h3>
+                <ul>
+                    <li data-en="Demand fluctuations and market access" data-fa="نوسانات تقاضا و دسترسی به بازار">Demand fluctuations and market access</li>
+                    <li data-en="Competition and market share" data-fa="رقابت و سهم بازار">Competition and market share</li>
+                    <li data-en="Product quality and specifications" data-fa="کیفیت محصول و مشخصات">Product quality and specifications</li>
+                    <li data-en="Transportation and logistics" data-fa="حمل و نقل و لجستیک">Transportation and logistics</li>
                 </ul>
             </div>
         </div>
-    </section>
-    
-    <!-- Methods Section -->
-    <section class="methods-section">
-        <div class="section-header">
-            <h2>روش‌های تحلیل ریسک</h2>
-            <p>ابزارها و تکنیک‌های مورد استفاده</p>
-        </div>
-        
-        <div class="methods-grid">
-            <div class="method-card">
-                <div class="method-number">1</div>
-                <h3>تحلیل SWOT</h3>
-                <p>شناسایی نقاط قوت، ضعف، فرصت‌ها و تهدیدها</p>
-            </div>
-            
-            <div class="method-card">
-                <div class="method-number">2</div>
-                <h3>ماتریس احتمال-تأثیر</h3>
-                <p>ارزیابی کمی ریسک‌ها بر اساس احتمال و تأثیر</p>
-            </div>
-            
-            <div class="method-card">
-                <div class="method-number">3</div>
-                <h3>شبیه‌سازی مونت کارلو</h3>
-                <p>تحلیل احتمالاتی با استفاده از شبیه‌سازی</p>
-            </div>
-            
-            <div class="method-card">
-                <div class="method-number">4</div>
-                <h3>تحلیل درخت تصمیم</h3>
-                <p>ارزیابی گزینه‌های مختلف و نتایج احتمالی</p>
-            </div>
-            
-            <div class="method-card">
-                <div class="method-number">5</div>
-                <h3>تحلیل حساسیت</h3>
-                <p>بررسی تأثیر تغییر پارامترها بر نتایج</p>
-            </div>
-            
-            <div class="method-card">
-                <div class="method-number">6</div>
-                <h3>FMEA</h3>
-                <p>تحلیل حالت‌های خرابی و اثرات آن</p>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Risk Matrix Section -->
-    <section class="risk-matrix-section">
-        <div class="risk-matrix-content">
-            <div class="section-header">
-                <h2>ماتریس ارزیابی ریسک</h2>
-                <p>طبقه‌بندی ریسک‌ها بر اساس احتمال و تأثیر</p>
-            </div>
-            
-            <div class="matrix-container">
-                <table class="matrix-table">
-                    <tr>
-                        <th>تأثیر \ احتمال</th>
-                        <th>کم</th>
-                        <th>متوسط</th>
-                        <th>زیاد</th>
-                    </tr>
-                    <tr>
-                        <th>زیاد</th>
-                        <td class="medium">متوسط</td>
-                        <td class="high">بالا</td>
-                        <td class="high">بحرانی</td>
-                    </tr>
-                    <tr>
-                        <th>متوسط</th>
-                        <td class="low">کم</td>
-                        <td class="medium">متوسط</td>
-                        <td class="high">بالا</td>
-                    </tr>
-                    <tr>
-                        <th>کم</th>
-                        <td class="low">کم</td>
-                        <td class="low">کم</td>
-                        <td class="medium">متوسط</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Process Section -->
-    <section class="process-section">
-        <div class="section-header">
-            <h2>فرآیند مدیریت ریسک</h2>
-            <p>مراحل شناسایی و مدیریت ریسک</p>
-        </div>
-        
-        <div class="process-timeline">
-            <div class="timeline-item">
-                <div class="timeline-number">1</div>
-                <div class="timeline-content">
-                    <h3>شناسایی ریسک‌ها</h3>
-                    <p>شناسایی تمام ریسک‌های احتمالی پروژه با استفاده از جلسات طوفان فکری، بررسی اسناد و تجربیات گذشته</p>
+    </div>
+
+    <section class="methodology-section">
+        <div class="methodology-content">
+            <h2 data-en="Our Risk Analysis Methodology" data-fa="روش‌شناسی تحلیل ریسک ما">Our Risk Analysis Methodology</h2>
+            <div class="methodology-grid">
+                <div class="method-card">
+                    <div class="method-number">1</div>
+                    <h3 data-en="Risk Identification" data-fa="شناسایی ریسک">Risk Identification</h3>
+                    <p data-en="Systematic identification of all potential risks through workshops, expert interviews, historical data analysis, and industry benchmarking." data-fa="شناسایی سیستماتیک تمام ریسک‌های بالقوه از طریق کارگاه‌ها، مصاحبه با متخصصان، تحلیل داده‌های تاریخی و معیارسنجی صنعت.">Systematic identification of all potential risks through workshops, expert interviews, historical data analysis, and industry benchmarking.</p>
                 </div>
-            </div>
-            
-            <div class="timeline-item">
-                <div class="timeline-number">2</div>
-                <div class="timeline-content">
-                    <h3>ارزیابی کیفی</h3>
-                    <p>رتبه‌بندی ریسک‌ها بر اساس احتمال وقوع و میزان تأثیر با استفاده از ماتریس ریسک</p>
+
+                <div class="method-card">
+                    <div class="method-number">2</div>
+                    <h3 data-en="Risk Assessment" data-fa="ارزیابی ریسک">Risk Assessment</h3>
+                    <p data-en="Quantitative and qualitative evaluation of risk probability and impact using Monte Carlo simulation, sensitivity analysis, and decision trees." data-fa="ارزیابی کمی و کیفی احتمال و تأثیر ریسک با استفاده از شبیه‌سازی مونت کارلو، تحلیل حساسیت و درخت تصمیم.">Quantitative and qualitative evaluation of risk probability and impact using Monte Carlo simulation, sensitivity analysis, and decision trees.</p>
                 </div>
-            </div>
-            
-            <div class="timeline-item">
-                <div class="timeline-number">3</div>
-                <div class="timeline-content">
-                    <h3>ارزیابی کمی</h3>
-                    <p>تحلیل عددی ریسک‌های مهم با استفاده از شبیه‌سازی و مدل‌سازی مالی</p>
+
+                <div class="method-card">
+                    <div class="method-number">3</div>
+                    <h3 data-en="Risk Prioritization" data-fa="اولویت‌بندی ریسک">Risk Prioritization</h3>
+                    <p data-en="Ranking risks based on their potential impact and likelihood, creating a risk matrix to focus mitigation efforts on critical areas." data-fa="رتبه‌بندی ریسک‌ها بر اساس تأثیر بالقوه و احتمال آنها، ایجاد ماتریس ریسک برای تمرکز تلاش‌های کاهش بر روی حوزه‌های حیاتی.">Ranking risks based on their potential impact and likelihood, creating a risk matrix to focus mitigation efforts on critical areas.</p>
                 </div>
-            </div>
-            
-            <div class="timeline-item">
-                <div class="timeline-number">4</div>
-                <div class="timeline-content">
-                    <h3>برنامه پاسخ به ریسک</h3>
-                    <p>تهیه استراتژی‌های کاهش، انتقال، پذیرش یا اجتناب از ریسک</p>
+
+                <div class="method-card">
+                    <div class="method-number">4</div>
+                    <h3 data-en="Mitigation Planning" data-fa="برنامه‌ریزی کاهش">Mitigation Planning</h3>
+                    <p data-en="Development of specific strategies to avoid, transfer, mitigate, or accept each identified risk with clear action plans and responsibilities." data-fa="توسعه استراتژی‌های خاص برای اجتناب، انتقال، کاهش یا پذیرش هر ریسک شناسایی شده با برنامه‌های اقدام و مسئولیت‌های واضح.">Development of specific strategies to avoid, transfer, mitigate, or accept each identified risk with clear action plans and responsibilities.</p>
                 </div>
-            </div>
-            
-            <div class="timeline-item">
-                <div class="timeline-number">5</div>
-                <div class="timeline-content">
-                    <h3>نظارت و کنترل</h3>
-                    <p>پایش مستمر ریسک‌ها و به‌روزرسانی برنامه‌های مدیریت ریسک</p>
+
+                <div class="method-card">
+                    <div class="method-number">5</div>
+                    <h3 data-en="Implementation" data-fa="پیاده‌سازی">Implementation</h3>
+                    <p data-en="Execution of risk mitigation strategies with defined timelines, resource allocation, and performance indicators for tracking progress." data-fa="اجرای استراتژی‌های کاهش ریسک با جدول زمانی تعریف شده، تخصیص منابع و شاخص‌های عملکرد برای پیگیری پیشرفت.">Execution of risk mitigation strategies with defined timelines, resource allocation, and performance indicators for tracking progress.</p>
+                </div>
+
+                <div class="method-card">
+                    <div class="method-number">6</div>
+                    <h3 data-en="Monitoring & Review" data-fa="نظارت و بازبینی">Monitoring & Review</h3>
+                    <p data-en="Continuous monitoring of risk status, effectiveness of mitigation measures, and identification of new risks throughout the project lifecycle." data-fa="نظارت مستمر بر وضعیت ریسک، اثربخشی اقدامات کاهش و شناسایی ریسک‌های جدید در طول چرخه عمر پروژه.">Continuous monitoring of risk status, effectiveness of mitigation measures, and identification of new risks throughout the project lifecycle.</p>
                 </div>
             </div>
         </div>
     </section>
-    
-    <!-- Benefits Section -->
+
+    <div class="container">
+        <div class="tools-section">
+            <h2 data-en="Risk Analysis Tools & Techniques" data-fa="ابزارها و تکنیک‌های تحلیل ریسک">Risk Analysis Tools & Techniques</h2>
+            <div class="tools-grid">
+                <div class="tool-item">
+                    <i class="fas fa-chart-line"></i>
+                    <h4 data-en="Monte Carlo Simulation" data-fa="شبیه‌سازی مونت کارلو">Monte Carlo Simulation</h4>
+                    <p data-en="Probabilistic modeling for NPV and IRR analysis" data-fa="مدل‌سازی احتمالی برای تحلیل NPV و IRR">Probabilistic modeling for NPV and IRR analysis</p>
+                </div>
+
+                <div class="tool-item">
+                    <i class="fas fa-project-diagram"></i>
+                    <h4 data-en="Decision Tree Analysis" data-fa="تحلیل درخت تصمیم">Decision Tree Analysis</h4>
+                    <p data-en="Structured approach to complex decisions" data-fa="رویکرد ساختاریافته به تصمیمات پیچیده">Structured approach to complex decisions</p>
+                </div>
+
+                <div class="tool-item">
+                    <i class="fas fa-sliders-h"></i>
+                    <h4 data-en="Sensitivity Analysis" data-fa="تحلیل حساسیت">Sensitivity Analysis</h4>
+                    <p data-en="Impact assessment of variable changes" data-fa="ارزیابی تأثیر تغییرات متغیر">Impact assessment of variable changes</p>
+                </div>
+
+                <div class="tool-item">
+                    <i class="fas fa-th"></i>
+                    <h4 data-en="Risk Matrix" data-fa="ماتریس ریسک">Risk Matrix</h4>
+                    <p data-en="Visual representation of risk levels" data-fa="نمایش بصری سطوح ریسک">Visual representation of risk levels</p>
+                </div>
+
+                <div class="tool-item">
+                    <i class="fas fa-chart-area"></i>
+                    <h4 data-en="Scenario Analysis" data-fa="تحلیل سناریو">Scenario Analysis</h4>
+                    <p data-en="Best, base, and worst case evaluations" data-fa="ارزیابی بهترین، پایه و بدترین حالت">Best, base, and worst case evaluations</p>
+                </div>
+
+                <div class="tool-item">
+                    <i class="fas fa-network-wired"></i>
+                    <h4 data-en="Fault Tree Analysis" data-fa="تحلیل درخت خطا">Fault Tree Analysis</h4>
+                    <p data-en="Systematic failure mode identification" data-fa="شناسایی سیستماتیک حالت خرابی">Systematic failure mode identification</p>
+                </div>
+
+                <div class="tool-item">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h4 data-en="HAZOP Studies" data-fa="مطالعات HAZOP">HAZOP Studies</h4>
+                    <p data-en="Hazard and operability analysis" data-fa="تحلیل خطر و عملیات">Hazard and operability analysis</p>
+                </div>
+
+                <div class="tool-item">
+                    <i class="fas fa-clipboard-check"></i>
+                    <h4 data-en="FMEA" data-fa="FMEA">FMEA</h4>
+                    <p data-en="Failure modes and effects analysis" data-fa="تحلیل حالت‌ها و اثرات خرابی">Failure modes and effects analysis</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <section class="benefits-section">
-        <div class="section-header">
-            <h2>مزایای مدیریت ریسک</h2>
-            <p>چرا باید به مدیریت ریسک توجه کنید؟</p>
-        </div>
-        
-        <div class="benefits-grid">
-            <div class="benefit-card">
-                <div class="benefit-icon">🎯</div>
-                <h3>تصمیم‌گیری بهتر</h3>
-                <p>اطلاعات دقیق برای تصمیم‌گیری آگاهانه در مورد سرمایه‌گذاری</p>
-            </div>
-            
-            <div class="benefit-card">
-                <div class="benefit-icon">💰</div>
-                <h3>کاهش هزینه‌ها</h3>
-                <p>جلوگیری از هزینه‌های غیرمنتظره و کاهش ضررهای احتمالی</p>
-            </div>
-            
-            <div class="benefit-card">
-                <div class="benefit-icon">⏱️</div>
-                <h3>مدیریت زمان</h3>
-                <p>جلوگیری از تأخیرات و اطمینان از اجرای به موقع پروژه</p>
-            </div>
-            
-            <div class="benefit-card">
-                <div class="benefit-icon">🛡️</div>
-                <h3>افزایش اطمینان</h3>
-                <p>افزایش اعتماد سرمایه‌گذاران و ذینفعان پروژه</p>
-            </div>
-            
-            <div class="benefit-card">
-                <div class="benefit-icon">📈</div>
-                <h3>بهبود عملکرد</h3>
-                <p>افزایش احتمال موفقیت و دستیابی به اهداف پروژه</p>
-            </div>
-            
-            <div class="benefit-card">
-                <div class="benefit-icon">🔄</div>
-                <h3>انعطاف‌پذیری</h3>
-                <p>آمادگی برای مواجهه با تغییرات و شرایط غیرمنتظره</p>
+        <div class="benefits-content">
+            <h2 data-en="Benefits of Professional Risk Analysis" data-fa="مزایای تحلیل حرفه‌ای ریسک">Benefits of Professional Risk Analysis</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3 data-en="Investment Protection" data-fa="حفاظت از سرمایه‌گذاری">Investment Protection</h3>
+                    <p data-en="Safeguard capital through early identification and mitigation of potential threats to project success." data-fa="حفاظت از سرمایه از طریق شناسایی زودهنگام و کاهش تهدیدات بالقوه برای موفقیت پروژه.">Safeguard capital through early identification and mitigation of potential threats to project success.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3 data-en="Improved Decision Making" data-fa="بهبود تصمیم‌گیری">Improved Decision Making</h3>
+                    <p data-en="Make informed decisions based on comprehensive understanding of project risks and opportunities." data-fa="تصمیمات آگاهانه بر اساس درک جامع از ریسک‌ها و فرصت‌های پروژه بگیرید.">Make informed decisions based on comprehensive understanding of project risks and opportunities.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <i class="fas fa-dollar-sign"></i>
+                    <h3 data-en="Cost Optimization" data-fa="بهینه‌سازی هزینه">Cost Optimization</h3>
+                    <p data-en="Reduce unexpected costs and budget overruns through proactive risk management strategies." data-fa="کاهش هزینه‌های غیرمنتظره و افزایش بودجه از طریق استراتژی‌های مدیریت ریسک فعال.">Reduce unexpected costs and budget overruns through proactive risk management strategies.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <i class="fas fa-clock"></i>
+                    <h3 data-en="Schedule Adherence" data-fa="پایبندی به برنامه">Schedule Adherence</h3>
+                    <p data-en="Maintain project timelines by anticipating and addressing potential delays before they occur." data-fa="حفظ جدول زمانی پروژه با پیش‌بینی و رسیدگی به تأخیرهای احتمالی قبل از وقوع.">Maintain project timelines by anticipating and addressing potential delays before they occur.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <i class="fas fa-handshake"></i>
+                    <h3 data-en="Stakeholder Confidence" data-fa="اعتماد ذینفعان">Stakeholder Confidence</h3>
+                    <p data-en="Build trust with investors and lenders through transparent risk assessment and management." data-fa="ایجاد اعتماد با سرمایه‌گذاران و وام‌دهندگان از طریق ارزیابی و مدیریت شفاف ریسک.">Build trust with investors and lenders through transparent risk assessment and management.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <i class="fas fa-balance-scale"></i>
+                    <h3 data-en="Regulatory Compliance" data-fa="انطباق نظارتی">Regulatory Compliance</h3>
+                    <p data-en="Ensure adherence to environmental, safety, and regulatory requirements throughout the project." data-fa="اطمینان از رعایت الزامات زیست‌محیطی، ایمنی و نظارتی در طول پروژه.">Ensure adherence to environmental, safety, and regulatory requirements throughout the project.</p>
+                </div>
             </div>
         </div>
     </section>
-    
-    <!-- CTA Section -->
-    <section class="cta-section" id="contact">
-        <div class="cta-container">
-            <h2>ریسک‌های پروژه خود را مدیریت کنید</h2>
-            <p>برای دریافت تحلیل ریسک رایگان اطلاعات خود را وارد کنید</p>
-            <form class="cta-form" id="ctaForm">
-                <input type="text" name="from_name" placeholder="نام و نام خانوادگی" required>
-                <input type="email" name="from_email" placeholder="ایمیل" required>
-                <input type="tel" name="phone" placeholder="تلفن" required>
-                <button type="submit">درخواست تحلیل رایگان</button>
-            </form>
-            <div class="cta-message" id="ctaMessage"></div>
-        </div>
+
+    <section class="cta-section">
+        <h2 data-en="Protect Your Mining Investment" data-fa="از سرمایه‌گذاری معدنی خود محافظت کنید">Protect Your Mining Investment</h2>
+        <p data-en="Contact our risk analysis experts to develop a comprehensive risk management strategy for your mining project." data-fa="با متخصصان تحلیل ریسک ما تماس بگیرید تا یک استراتژی جامع مدیریت ریسک برای پروژه معدنی خود توسعه دهید.">Contact our risk analysis experts to develop a comprehensive risk management strategy for your mining project.</p>
+        <a href="../contact-form.html" class="btn btn-primary">
+            <span data-en="Request Risk Assessment" data-fa="درخواست ارزیابی ریسک">Request Risk Assessment</span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
     </section>
-    
-    <!-- Footer -->
-    <footer class="footer">
+
+    <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <h3>کاویان توسعه معدن</h3>
-                <p>مشاور تخصصی در زمینه مهندسی تجهیزات معدنی و اقتصاد معدن</p>
+                <h3 data-en="Company" data-fa="شرکت">Company</h3>
+                <ul>
+                    <li><a href="../about.html" data-en="About Us" data-fa="درباره ما">About Us</a></li>
+                    <li><a href="../portfolio.html" data-en="Portfolio" data-fa="نمونه کارها">Portfolio</a></li>
+                    <li><a href="../contact-form.html" data-en="Contact" data-fa="تماس">Contact</a></li>
+                </ul>
             </div>
-            
             <div class="footer-section">
-                <h3>دسترسی سریع</h3>
-                <a href="index.html">خانه</a>
-                <a href="about.html">درباره ما</a>
-                <a href="services.html">خدمات</a>
-                <a href="portfolio.html">نمونه کارها</a>
+                <h3 data-en="Services" data-fa="خدمات">Services</h3>
+                <ul>
+                    <li><a href="plant-design.html" data-en="Plant Design" data-fa="طراحی کارخانه">Plant Design</a></li>
+                    <li><a href="feasibility-studies.html" data-en="Feasibility Studies" data-fa="مطالعات امکان‌سنجی">Feasibility Studies</a></li>
+                    <li><a href="equipment-selection.html" data-en="Equipment Selection" data-fa="انتخاب تجهیزات">Equipment Selection</a></li>
+                </ul>
             </div>
-            
             <div class="footer-section">
-                <h3>خدمات</h3>
-                <a href="equipment-selection.html">انتخاب تجهیزات</a>
-                <a href="economic-analysis.html">تحلیل اقتصادی</a>
-                <a href="risk-analysis.html">تحلیل ریسک</a>
-            </div>
-            
-            <div class="footer-section">
-                <h3>تماس با ما</h3>
-                <p>📧 info@kdmine.com</p>
-                <p>📞 +98 21 1234 5678</p>
-                <p>📍 تهران، ایران</p>
+                <h3 data-en="Contact" data-fa="تماس">Contact</h3>
+                <ul>
+                    <li>📧 info@kdmine.com</li>
+                    <li>📞 +98 21 1234 5678</li>
+                    <li>📍 Tehran, Iran</li>
+                </ul>
             </div>
         </div>
-        
         <div class="footer-bottom">
-            <p>© 2025 کاویان توسعه معدن. تمامی حقوق محفوظ است.</p>
+            <p data-en="&copy; 2025 Kavian Development Mine. All rights reserved." data-fa="© 2025 کاویان توسعه معدن. تمامی حقوق محفوظ است.">&copy; 2025 Kavian Development Mine. All rights reserved.</p>
         </div>
     </footer>
-    
+
     <script>
-        // CTA Form Submission
-        document.getElementById('ctaForm').addEventListener('submit', function(event) {
-            event.preventDefault();
+        function switchLanguage(lang) {
+            const body = document.body;
+            const elements = document.querySelectorAll('[data-en][data-fa]');
+            const langButtons = document.querySelectorAll('.lang-btn');
             
-            const submitBtn = this.querySelector('button');
-            const message = document.getElementById('ctaMessage');
+            if (lang === 'fa') { body.classList.add('rtl'); } 
+            else { body.classList.remove('rtl'); }
             
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'در حال ارسال...';
+            langButtons.forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.lang-btn').classList.add('active');
             
-            const templateParams = {
-                from_name: this.from_name.value,
-                from_email: this.from_email.value,
-                phone: this.phone.value,
-                subject: 'درخواست تحلیل ریسک رایگان',
-                message: 'درخواست تحلیل و مدیریت ریسک پروژه معدنی'
-            };
+            elements.forEach(el => {
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.placeholder = el.getAttribute('data-' + lang);
+                } else {
+                    el.innerHTML = el.getAttribute('data-' + lang);
+                }
+            });
             
-            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
-                .then(function() {
-                    message.className = 'cta-message success';
-                    message.textContent = '✓ درخواست شما ثبت شد! متخصصان ما به زودی با شما تماس خواهند گرفت.';
-                    message.style.display = 'block';
-                    document.getElementById('ctaForm').reset();
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'درخواست تحلیل رایگان';
-                }, function(error) {
-                    message.className = 'cta-message error';
-                    message.textContent = '✗ خطا در ارسال. لطفاً دوباره تلاش کنید.';
-                    message.style.display = 'block';
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'درخواست تحلیل رایگان';
-                    console.log('FAILED...', error);
-                });
+            localStorage.setItem('preferredLanguage', lang);
+        }
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferredLanguage') || 'en';
+            if (savedLang === 'fa') {
+                document.querySelector('.lang-btn:last-child').click();
+            }
         });
     </script>
 </body>
