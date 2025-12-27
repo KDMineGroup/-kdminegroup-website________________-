@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>کارخانجات تغلیظ شیمیایی | کاویان توسعه معدن</title>
+    <meta name="description" content="طراحی و مشاوره کارخانجات تغلیظ و فرآوری شیمیایی مواد معدنی">
+    <link rel="icon" type="image/svg+xml" href="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg">
+    
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function(){
+            emailjs.init({
+                publicKey: "YOUR_PUBLIC_KEY",
+            });
+        })();
+    </script>
+    
+    <style>
+        @font-face {
+            font-family: 'B Nazanin';
+            src: local('B Nazanin'), local('BNazanin');
+            font-display: swap;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'B Nazanin', Tahoma, sans-serif;
+            line-height: 1.8;
+            color: #1a202c;
+            background: #ffffff;
+        }
+        
+        /* Navigation */
+        .navbar {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            background: white;
+            padding: 5px;
+        }
+        
+        .logo-text h2 {
+            font-size: 1.4rem;
+            margin-bottom: 2px;
+        }
+        
+        .logo-text p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.05rem;
+            font-weight: 600;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        
+        .nav-cta {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn-nav {
+            padding: 10px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+        
+        .btn-primary {
+            background: white;
+            color: #2563eb;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255,255,255,0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: #2563eb;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.95), rgba(37, 99, 235, 0.95)),
+                        url('https://images.unsplash.com/photo-1581092918484-8313e1f7e8c7?w=1920&q=80') center/cover;
+            color: white;
+            padding: 120px 40px 100px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.85), rgba(37, 99, 235, 0.75));
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .hero p {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            opacity: 0.95;
+            max-width: 900px;
+            margin: 0 auto 40px;
+        }
+        
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-hero {
+            padding: 16px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .btn-hero-primary {
+            background: white;
+            color: #2563eb;
+        }
+        
+        .btn-hero-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255,255,255,0.3);
+        }
+        
+        .btn-hero-secondary {
+            background: transparent;
+            color: white;
+            border: 3px solid white;
+        }
+        
+        .btn-hero-secondary:hover {
+            background: white;
+            color: #2563eb;
+        }
+        
+        /* Overview Section */
+        .overview-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .overview-image {
+            width: 100%;
+            height: 500px;
+            border-radius: 20px;
+            object-fit: cover;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+        
+        .overview-content h2 {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            color: #1a202c;
+            margin-bottom: 25px;
+        }
+        
+        .overview-content p {
+            font-size: 1.15rem;
+            color: #4a5568;
+            line-height: 2;
+            margin-bottom: 20px;
+        }
+        
+        .info-box {
+            background: #dbeafe;
+            border-right: 5px solid #2563eb;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        
+        .info-box h4 {
+            color: #1e40af;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .info-box p {
+            color: #1e40af;
+            font-size: 1.05rem;
+        }
+        
+        /* Plant Types Section */
+        .plant-types-section {
+            background: #f8fafc;
+            padding: 100px 40px;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+        
+        .section-header h2 {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            color: #1a202c;
+            margin-bottom: 15px;
+        }
+        
+        .section-header p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: #4a5568;
+        }
+        
+        .plant-types-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 35px;
+        }
+        
+        .plant-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .plant-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+        
+        .plant-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .plant-content {
+            padding: 40px;
+        }
+        
+        .plant-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #2563eb, #60a5fa);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+        }
+        
+        .plant-card h3 {
+            font-size: 1.6rem;
+            color: #1a202c;
+            margin-bottom: 15px;
+        }
+        
+        .plant-card p {
+            color: #4a5568;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .plant-features {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .plant-features li {
+            padding: 8px 0;
+            padding-right: 25px;
+            position: relative;
+            color: #4a5568;
+            font-size: 0.95rem;
+        }
+        
+        .plant-features li::before {
+            content: '✓';
+            position: absolute;
+            right: 0;
+            color: #059669;
+            font-weight: bold;
+        }
+        
+        /* Processes Section */
+        .processes-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 40px;
+        }
+        
+        .processes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .process-card {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s;
+            border-top: 4px solid #2563eb;
+        }
+        
+        .process-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .process-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .process-card h3 {
+            font-size: 1.3rem;
+            color: #1a202c;
+            margin-bottom: 12px;
+        }
+        
+        .process-card p {
+            color: #4a5568;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+        
+        /* Equipment Section */
+        .equipment-section {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.95), rgba(37, 99, 235, 0.95)),
+                        url('https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?w=1920&q=80') center/cover;
+            color: white;
+            padding: 100px 40px;
+            position: relative;
+        }
+        
+        .equipment-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.9), rgba(37, 99, 235, 0.8));
+            z-index: 1;
+        }
+        
+        .equipment-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .equipment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .equipment-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 35px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s;
+        }
+        
+        .equipment-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+        }
+        
+        .equipment-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .equipment-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+        }
+        
+        .equipment-card p {
+            font-size: 1rem;
+            opacity: 0.95;
+            line-height: 1.7;
+        }
+        
+        /* Applications Section */
+        .applications-section {
+            background: #f8fafc;
+            padding: 100px 40px;
+        }
+        
+        .applications-grid {
+            max-width: 1200px;
+            margin: 60px auto 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .application-card {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .application-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .application-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #2563eb, #60a5fa);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+        }
+        
+        .application-card h3 {
+            font-size: 1.3rem;
+            color: #1a202c;
+            margin-bottom: 15px;
+        }
+        
+        .application-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .application-card li {
+            padding: 6px 0;
+            padding-right: 20px;
+            position: relative;
+            color: #4a5568;
+            font-size: 0.95rem;
+        }
+        
+        .application-card li::before {
+            content: '•';
+            position: absolute;
+            right: 0;
+            color: #2563eb;
+            font-weight: bold;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: white;
+            padding: 100px 40px;
+        }
+        
+        .cta-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            padding: 60px;
+            border-radius: 25px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 20px 60px rgba(37, 99, 235, 0.3);
+        }
+        
+        .cta-container h2 {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            margin-bottom: 20px;
+        }
+        
+        .cta-container p {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+        
+        .cta-form {
+            display: flex;
+            gap: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .cta-form input {
+            flex: 1;
+            min-width: 250px;
+            padding: 16px 20px;
+            border: none;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        
+        .cta-form button {
+            padding: 16px 35px;
+            background: white;
+            color: #2563eb;
+            border: none;
+            border-radius: 10px;
+            font-family: inherit;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .cta-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .cta-message {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 8px;
+            display: none;
+            font-weight: bold;
+        }
+        
+        .cta-message.success {
+            background: rgba(209, 250, 229, 0.3);
+            border: 2px solid rgba(5, 150, 105, 0.5);
+        }
+        
+        .cta-message.error {
+            background: rgba(254, 226, 226, 0.3);
+            border: 2px solid rgba(220, 38, 38, 0.5);
+        }
+        
+        /* Footer */
+        .footer {
+            background: #1a202c;
+            color: white;
+            padding: 60px 40px 30px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+        
+        .footer-section p,
+        .footer-section a {
+            color: #cbd5e0;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 30px;
+            border-top: 1px solid #2d3748;
+            text-align: center;
+            color: #cbd5e0;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links, .nav-cta {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .overview-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero {
+                padding: 100px 25px 80px;
+            }
+            
+            .overview-section,
+            .plant-types-section,
+            .processes-section,
+            .equipment-section,
+            .applications-section,
+            .cta-section {
+                padding: 80px 25px;
+            }
+            
+            .cta-container {
+                padding: 40px 25px;
+            }
+            
+            .cta-form {
+                flex-direction: column;
+            }
+            
+            .cta-form input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Logo">
+                <div class="logo-text">
+                    <h2>کاویان توسعه معدن</h2>
+                    <p>Kavian Development Mine</p>
+                </div>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="index.html">خانه</a></li>
+                <li><a href="about.html">درباره ما</a></li>
+                <li><a href="services.html">خدمات</a></li>
+                <li><a href="portfolio.html">نمونه کارها</a></li>
+                <li><a href="blog.html">وبلاگ</a></li>
+            </ul>
+            
+            <div class="nav-cta">
+                <a href="register.html" class="btn-nav btn-primary">ثبت‌نام</a>
+                <a href="contact.html" class="btn-nav btn-secondary">تماس با ما</a>
+            </div>
+            
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>کارخانجات تغلیظ شیمیایی</h1>
+            <p>طراحی و مشاوره کارخانجات فرآوری شیمیایی برای استخراج بهینه فلزات</p>
+            <div class="hero-cta">
+                <a href="#contact" class="btn-hero btn-hero-primary">درخواست مشاوره</a>
+                <a href="#types" class="btn-hero btn-hero-secondary">انواع کارخانجات</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Overview Section -->
+    <section class="overview-section">
+        <img src="https://images.unsplash.com/photo-1581092918484-8313e1f7e8c7?w=800&q=80" alt="کارخانه تغلیظ" class="overview-image">
+        
+        <div class="overview-content">
+            <h2>فرآوری شیمیایی مواد معدنی</h2>
+            <p>
+                کارخانجات تغلیظ شیمیایی از فرآیندهای شیمیایی برای استخراج و تغلیظ فلزات از سنگ معدن استفاده می‌کنند. 
+                این روش‌ها برای کانی‌هایی که فرآوری فیزیکی برای آن‌ها کافی نیست، ضروری هستند.
+            </p>
+            <p>
+                ما طراحی کامل کارخانجات فلوتاسیون، لیچینگ، استخراج حلالی و الکتروویننگ را با 
+                استفاده از جدیدترین تکنولوژی‌ها و بهترین شیوه‌های صنعتی ارائه می‌دهیم.
+            </p>
+            <div class="info-box">
+                <h4>💡 نکته کلیدی</h4>
+                <p>انتخاب صحیح فرآیند شیمیایی می‌تواند بازیابی فلز را تا 95% افزایش دهد.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Plant Types Section -->
+    <section class="plant-types-section" id="types">
+        <div class="section-header">
+            <h2>انواع کارخانجات تغلیظ</h2>
+            <p>کارخانجات تخصصی برای فلزات مختلف</p>
+        </div>
+        
+        <div class="plant-types-grid">
+            <!-- Flotation Plant -->
+            <div class="plant-card">
+                <img src="https://images.unsplash.com/photo-1581092918484-8313e1f7e8c7?w=600&q=80" alt="کارخانه فلوتاسیون" class="plant-image">
+                <div class="plant-content">
+                    <div class="plant-icon">🫧</div>
+                    <h3>کارخانه فلوتاسیون</h3>
+                    <p>فرآوری کانی‌های سولفیدی با استفاده از فلوتاسیون کفی</p>
+                    <ul class="plant-features">
+                        <li>فلوتاسیون مس</li>
+                        <li>فلوتاسیون سرب و روی</li>
+                        <li>فلوتاسیون طلا</li>
+                        <li>فلوتاسیون مولیبدن</li>
+                        <li>فلوتاسیون فسفات</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Hydrometallurgy Plant -->
+            <div class="plant-card">
+                <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=600&q=80" alt="کارخانه هیدرومتالورژی" class="plant-image">
+                <div class="plant-content">
+                    <div class="plant-icon">💧</div>
+                    <h3>کارخانه هیدرومتالورژی</h3>
+                    <p>استخراج فلزات با استفاده از محلول‌های آبی</p>
+                    <ul class="plant-features">
+                        <li>لیچینگ اسیدی</li>
+                        <li>لیچینگ قلیایی</li>
+                        <li>استخراج حلالی (SX)</li>
+                        <li>الکتروویننگ (EW)</li>
+                        <li>رسوب‌دهی شیمیایی</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- CIP/CIL Plant -->
+            <div class="plant-card">
+                <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=600&q=80" alt="کارخانه CIP/CIL" class="plant-image">
+                <div class="plant-content">
+                    <div class="plant-icon">⚗️</div>
+                    <h3>کارخانه CIP/CIL</h3>
+                    <p>استخراج طلا با روش کربن در پالپ یا لیچ</p>
+                    <ul class="plant-features">
+                        <li>لیچینگ سیانوری</li>
+                        <li>جذب بر روی کربن</li>
+                        <li>واجذبی (Elution)</li>
+                        <li>الکتروویننگ</li>
+                        <li>ذوب و ریخته‌گری</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Heap Leach -->
+            <div class="plant-card">
+                <img src="https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?w=600&q=80" alt="لیچینگ توده‌ای" class="plant-image">
+                <div class="plant-content">
+                    <div class="plant-icon">⛰️</div>
+                    <h3>لیچینگ توده‌ای</h3>
+                    <p>استخراج فلز از کانسنگ‌های کم‌عیار</p>
+                    <ul class="plant-features">
+                        <li>لیچینگ مس</li>
+                        <li>لیچینگ طلا</li>
+                        <li>لیچینگ اورانیوم</li>
+                        <li>سیستم آبیاری</li>
+                        <li>جمع‌آوری محلول</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Magnetic Separation -->
+            <div class="plant-card">
+                <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=600&q=80" alt="جداسازی مغناطیسی" class="plant-image">
+                <div class="plant-content">
+                    <div class="plant-icon">🧲</div>
+                    <h3>جداسازی مغناطیسی</h3>
+                    <p>تغلیظ کانی‌های مغناطیسی</p>
+                    <ul class="plant-features">
+                        <li>تغلیظ سنگ آهن</li>
+                        <li>جداسازی ایلمنیت</li>
+                        <li>تغلیظ مگنتیت</li>
+                        <li>جداسازی کروم</li>
+                        <li>پاک‌سازی کانی‌ها</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Gravity Concentration -->
+            <div class="plant-card">
+                <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&q=80" alt="تغلیظ ثقلی" class="plant-image">
+                <div class="plant-content">
+                    <div class="plant-icon">⚖️</div>
+                    <h3>تغلیظ ثقلی</h3>
+                    <p>جداسازی بر اساس اختلاف وزن مخصوص</p>
+                    <ul class="plant-features">
+                        <li>میز تکان‌دهنده</li>
+                        <li>مارپیچ (Spiral)</li>
+                        <li>جیگ (Jig)</li>
+                        <li>کن مخروطی (Knelson)</li>
+                        <li>سلوس باکس</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Processes Section -->
+    <section class="processes-section">
+        <div class="section-header">
+            <h2>فرآیندهای اصلی</h2>
+            <p>مراحل کلیدی در فرآوری شیمیایی</p>
+        </div>
+        
+        <div class="processes-grid">
+            <div class="process-card">
+                <div class="process-icon">🔨</div>
+                <h3>خردایش و آسیاب</h3>
+                <p>کاهش اندازه ذرات برای آزادسازی کانی‌ها</p>
+            </div>
+            
+            <div class="process-card">
+                <div class="process-icon">🧪</div>
+                <h3>لیچینگ</h3>
+                <p>انحلال فلز مورد نظر در محلول مناسب</p>
+            </div>
+            
+            <div class="process-card">
+                <div class="process-icon">🫧</div>
+                <h3>فلوتاسیون</h3>
+                <p>جداسازی کانی‌ها با استفاده از حباب‌های هوا</p>
+            </div>
+            
+            <div class="process-card">
+                <div class="process-icon">🔬</div>
+                <h3>استخراج حلالی</h3>
+                <p>انتقال فلز از فاز آبی به فاز آلی</p>
+            </div>
+            
+            <div class="process-card">
+                <div class="process-icon">⚡</div>
+                <h3>الکتروویننگ</h3>
+                <p>رسوب‌دهی الکتریکی فلز خالص</p>
+            </div>
+            
+            <div class="process-card">
+                <div class="process-icon">💧</div>
+                <h3>آبگیری</h3>
+                <p>کاهش رطوبت کنسانتره نهایی</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Equipment Section -->
+    <section class="equipment-section">
+        <div class="equipment-content">
+            <div class="section-header">
+                <h2>تجهیزات اصلی</h2>
+                <p>دستگاه‌های کلیدی در کارخانجات تغلیظ</p>
+            </div>
+            
+            <div class="equipment-grid">
+                <div class="equipment-card">
+                    <div class="equipment-icon">🫧</div>
+                    <h3>سلول‌های فلوتاسیون</h3>
+                    <p>مکانیکی، کلمن و ستونی</p>
+                </div>
+                
+                <div class="equipment-card">
+                    <div class="equipment-icon">🏺</div>
+                    <h3>مخازن لیچینگ</h3>
+                    <p>مخازن هم‌زن‌دار و پاچوکا</p>
+                </div>
+                
+                <div class="equipment-card">
+                    <div class="equipment-icon">🔄</div>
+                    <h3>غلیظ‌کننده</h3>
+                    <p>ته‌نشینی و جداسازی جامد-مایع</p>
+                </div>
+                
+                <div class="equipment-card">
+                    <div class="equipment-icon">💧</div>
+                    <h3>فیلتر پرس</h3>
+                    <p>آبگیری کنسانتره</p>
+                </div>
+                
+                <div class="equipment-card">
+                    <div class="equipment-icon">⚗️</div>
+                    <h3>ستون‌های SX</h3>
+                    <p>استخراج حلالی</p>
+                </div>
+                
+                <div class="equipment-card">
+                    <div class="equipment-icon">⚡</div>
+                    <h3>سلول‌های EW</h3>
+                    <p>الکتروویننگ</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Applications Section -->
+    <section class="applications-section">
+        <div class="section-header">
+            <h2>کاربردها</h2>
+            <p>فلزات قابل استخراج</p>
+        </div>
+        
+        <div class="applications-grid">
+            <div class="application-card">
+                <div class="application-icon">🔶</div>
+                <h3>مس</h3>
+                <ul>
+                    <li>فلوتاسیون سولفید مس</li>
+                    <li>لیچینگ اکسید مس</li>
+                    <li>SX-EW</li>
+                </ul>
+            </div>
+            
+            <div class="application-card">
+                <div class="application-icon">✨</div>
+                <h3>طلا و نقره</h3>
+                <ul>
+                    <li>CIP/CIL</li>
+                    <li>لیچینگ سیانوری</li>
+                    <li>گراویتی + فلوتاسیون</li>
+                </ul>
+            </div>
+            
+            <div class="application-card">
+                <div class="application-icon">⚫</div>
+                <h3>سرب و روی</h3>
+                <ul>
+                    <li>فلوتاسیون انتخابی</li>
+                    <li>جداسازی Pb-Zn</li>
+                    <li>تمیزکاری</li>
+                </ul>
+            </div>
+            
+            <div class="application-card">
+                <div class="application-icon">🔴</div>
+                <h3>آهن</h3>
+                <ul>
+                    <li>جداسازی مغناطیسی</li>
+                    <li>فلوتاسیون معکوس</li>
+                    <li>تغلیظ ثقلی</li>
+                </ul>
+            </div>
+            
+            <div class="application-card">
+                <div class="application-icon">⚪</div>
+                <h3>نیکل و کبالت</h3>
+                <ul>
+                    <li>فلوتاسیون</li>
+                    <li>لیچینگ فشار بالا</li>
+                    <li>هیدرومتالورژی</li>
+                </ul>
+            </div>
+            
+            <div class="application-card">
+                <div class="application-icon">🟡</div>
+                <h3>اورانیوم</h3>
+                <ul>
+                    <li>لیچینگ اسیدی</li>
+                    <li>استخراج حلالی</li>
+                    <li>رسوب‌دهی</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta-section" id="contact">
+        <div class="cta-container">
+            <h2>کارخانه خود را طراحی کنید</h2>
+            <p>برای مشاوره رایگان و دریافت پیشنهاد طراحی اطلاعات خود را وارد کنید</p>
+            <form class="cta-form" id="ctaForm">
+                <input type="text" name="from_name" placeholder="نام و نام خانوادگی" required>
+                <input type="email" name="from_email" placeholder="ایمیل" required>
+                <input type="tel" name="phone" placeholder="تلفن" required>
+                <button type="submit">درخواست مشاوره رایگان</button>
+            </form>
+            <div class="cta-message" id="ctaMessage"></div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>کاویان توسعه معدن</h3>
+                <p>مشاور تخصصی در زمینه مهندسی تجهیزات معدنی و اقتصاد معدن</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>دسترسی سریع</h3>
+                <a href="index.html">خانه</a>
+                <a href="about.html">درباره ما</a>
+                <a href="services.html">خدمات</a>
+                <a href="portfolio.html">نمونه کارها</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>خدمات</h3>
+                <a href="equipment-selection.html">انتخاب تجهیزات</a>
+                <a href="economic-analysis.html">تحلیل اقتصادی</a>
+                <a href="risk-analysis.html">تحلیل ریسک</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>تماس با ما</h3>
+                <p>📧 info@kdmine.com</p>
+                <p>📞 +98 21 1234 5678</p>
+                <p>📍 تهران، ایران</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2025 کاویان توسعه معدن. تمامی حقوق محفوظ است.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // CTA Form Submission
+        document.getElementById('ctaForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const submitBtn = this.querySelector('button');
+            const message = document.getElementById('ctaMessage');
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'در حال ارسال...';
+            
+            const templateParams = {
+                from_name: this.from_name.value,
+                from_email: this.from_email.value,
+                phone: this.phone.value,
+                subject: 'درخواست مشاوره کارخانجات تغلیظ',
+                message: 'درخواست مشاوره برای طراحی کارخانه تغلیظ شیمیایی'
+            };
+            
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+                .then(function() {
+                    message.className = 'cta-message success';
+                    message.textContent = '✓ درخواست شما ثبت شد! تیم ما به زودی با شما تماس خواهند گرفت.';
+                    message.style.display = 'block';
+                    document.getElementById('ctaForm').reset();
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'درخواست مشاوره رایگان';
+                }, function(error) {
+                    message.className = 'cta-message error';
+                    message.textContent = '✗ خطا در ارسال. لطفاً دوباره تلاش کنید.';
+                    message.style.display = 'block';
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'درخواست مشاوره رایگان';
+                    console.log('FAILED...', error);
+                });
+        });
+    </script>
+</body>
+</html>
