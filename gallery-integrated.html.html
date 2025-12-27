@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Gallery | Kavian Development Mine</title>
+    <link rel="icon" type="image/svg+xml" href="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- LOAD ASSET INTEGRATION SYSTEM -->
+    <script src="assets-integration.js"></script>
+    
+    <style>
+        /* [Previous gallery CSS styles] */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #1e3a8a;
+            --secondary-blue: #2563eb;
+            --accent-gold: #f59e0b;
+        }
+        body { font-family: 'Poppins', sans-serif; background: #f8fafc; }
+        
+        header { background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue)); color: white; padding: 1rem 2rem; }
+        
+        .page-hero { background: linear-gradient(135deg, rgba(30, 58, 138, 0.95), rgba(37, 99, 235, 0.9)), url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1920') center/cover; color: white; padding: 120px 2rem 80px; text-align: center; }
+        .page-hero h1 { font-size: 3.5rem; margin-bottom: 20px; }
+        
+        .container { max-width: 1400px; margin: 0 auto; padding: 80px 2rem; }
+        
+        .filter-tabs { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 60px; }
+        .filter-btn { padding: 12px 30px; border: 2px solid var(--secondary-blue); background: white; color: var(--secondary-blue); border-radius: 50px; cursor: pointer; font-weight: 600; transition: all 0.3s; font-family: inherit; }
+        .filter-btn:hover, .filter-btn.active { background: var(--secondary-blue); color: white; }
+        
+        .albums-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 35px; }
+        .album-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.08); transition: all 0.4s; cursor: pointer; }
+        .album-card:hover { transform: translateY(-10px); box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+        .album-cover { position: relative; height: 280px; overflow: hidden; }
+        .album-cover img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .album-card:hover .album-cover img { transform: scale(1.1); }
+        .album-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 100%); display: flex; align-items: flex-end; padding: 25px; }
+        .album-count { background: var(--accent-gold); color: white; padding: 8px 16px; border-radius: 20px; font-weight: 700; }
+        .album-info { padding: 25px; }
+        .album-title { font-size: 1.4rem; color: var(--primary-blue); margin-bottom: 10px; font-weight: 700; }
+        
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 5000; align-items: center; justify-content: center; padding: 20px; }
+        .modal.show { display: flex; }
+        .modal-content { max-width: 1200px; width: 100%; max-height: 90vh; overflow-y: auto; background: white; border-radius: 20px; }
+        .modal-header { padding: 30px; border-bottom: 2px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; }
+        .modal-close { background: none; border: none; font-size: 2rem; cursor: pointer; }
+        .modal-body { padding: 30px; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+        .gallery-item { border-radius: 15px; overflow: hidden; cursor: pointer; aspect-ratio: 1; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+        .gallery-item:hover img { transform: scale(1.1); }
+        
+        .sync-indicator { position: fixed; bottom: 20px; right: 20px; background: var(--accent-gold); color: white; padding: 10px 20px; border-radius: 50px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); display: none; align-items: center; gap: 10px; z-index: 9999; }
+        .sync-indicator.show { display: flex; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Project Gallery - Synced with Asset Manager</h1>
+    </header>
+    
+    <section class="page-hero">
+        <h1>Project Gallery</h1>
+        <p>All images automatically synced from Asset Manager</p>
+    </section>
+    
+    <div class="container">
+        <div class="filter-tabs">
+            <button class="filter-btn active" onclick="filterAlbums('all')">All Projects</button>
+            <button class="filter-btn" onclick="filterAlbums('concentration')">Concentration Plants</button>
+            <button class="filter-btn" onclick="filterAlbums('leaching')">Leaching Plants</button>
+            <button class="filter-btn" onclick="filterAlbums('equipment')">Equipment</button>
+            <button class="filter-btn" onclick="filterAlbums('construction')">Construction</button>
+        </div>
+        
+        <div class="albums-grid" id="albumsGrid"></div>
+    </div>
+    
+    <div class="modal" id="albumModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Album Title</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="gallery-grid" id="galleryGrid"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="sync-indicator" id="syncIndicator">
+        <i class="fas fa-sync fa-spin"></i>
+        <span>Syncing with Asset Manager...</span>
+    </div>
+    
+    <script>
+        let currentFilter = 'all';
+        
+        // Initialize
+        function init() {
+            renderAlbums();
+            
+            // Listen for asset updates
+            window.addEventListener('assetsUpdated', () => {
+                showSyncIndicator();
+                setTimeout(() => {
+                    renderAlbums();
+                    hideSyncIndicator();
+                }, 500);
+            });
+        }
+        
+        // Render albums using integrated data
+        function renderAlbums() {
+            const grid = document.getElementById('albumsGrid');
+            const albums = AlbumManager.getAllAlbums();
+            
+            const filteredAlbums = currentFilter === 'all' 
+                ? albums 
+                : albums.filter(a => a.category === currentFilter);
+            
+            grid.innerHTML = filteredAlbums.map(album => {
+                const images = AlbumManager.getAlbumImages(album.id);
+                const actualCount = images.length;
+                const coverImage = images[0]?.url || album.cover;
+                
+                return `
+                    <div class="album-card" onclick="openAlbum(${album.id})">
+                        <div class="album-cover">
+                            <img src="${coverImage}" alt="${album.title}">
+                            <div class="album-overlay">
+                                <span class="album-count">${actualCount} Photos</span>
+                            </div>
+                        </div>
+                        <div class="album-info">
+                            <h3 class="album-title">${album.title}</h3>
+                            <p>${album.description}</p>
+                            <div style="margin-top: 15px; color: #64748b; font-size: 0.9rem;">
+                                <span>📍 ${album.location}</span>
+                                <span style="margin-left: 15px;">📅 ${album.year}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // Filter albums
+        function filterAlbums(category) {
+            currentFilter = category;
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            renderAlbums();
+        }
+        
+        // Open album
+        function openAlbum(albumId) {
+            const album = AlbumManager.getAlbumById(albumId);
+            const images = AlbumManager.getAlbumImages(albumId);
+            
+            document.getElementById('modalTitle').textContent = album.title;
+            
+            const galleryGrid = document.getElementById('galleryGrid');
+            galleryGrid.innerHTML = images.map(img => `
+                <div class="gallery-item">
+                    <img src="${img.url}" alt="${img.name}">
+                </div>
+            `).join('');
+            
+            document.getElementById('albumModal').classList.add('show');
+        }
+        
+        // Close modal
+        function closeModal() {
+            document.getElementById('albumModal').classList.remove('show');
+        }
+        
+        // Show sync indicator
+        function showSyncIndicator() {
+            document.getElementById('syncIndicator').classList.add('show');
+        }
+        
+        // Hide sync indicator
+        function hideSyncIndicator() {
+            document.getElementById('syncIndicator').classList.remove('show');
+        }
+        
+        // Initialize on load
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

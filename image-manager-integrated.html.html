@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Asset Manager | Kavian Development Mine</title>
+    <link rel="icon" type="image/svg+xml" href="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- LOAD ASSET INTEGRATION SYSTEM -->
+    <script src="assets-integration.js"></script>
+    
+    <style>
+        /* [Previous CSS styles remain the same] */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #1e3a8a;
+            --secondary-blue: #2563eb;
+            --accent-gold: #f59e0b;
+            --success: #059669;
+            --danger: #dc2626;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f8fafc; }
+        
+        .container { display: grid; grid-template-columns: 280px 1fr; height: 100vh; }
+        .sidebar { background: white; border-right: 2px solid #e2e8f0; padding: 20px; overflow-y: auto; }
+        .sidebar h2 { color: var(--primary-blue); margin-bottom: 20px; font-size: 1.3rem; display: flex; align-items: center; gap: 10px; }
+        
+        .folder-tree { list-style: none; }
+        .folder-item { margin-bottom: 5px; }
+        .folder-label { display: flex; align-items: center; gap: 8px; padding: 10px; border-radius: 8px; cursor: pointer; transition: all 0.3s; font-size: 0.95rem; }
+        .folder-label:hover { background: #f1f5f9; }
+        .folder-label.active { background: var(--secondary-blue); color: white; }
+        .folder-icon { font-size: 1.1rem; width: 20px; }
+        .folder-count { margin-left: auto; background: #e2e8f0; padding: 2px 8px; border-radius: 10px; font-size: 0.8rem; font-weight: 600; }
+        .folder-label.active .folder-count { background: rgba(255,255,255,0.3); color: white; }
+        
+        .subfolder-list { list-style: none; margin-left: 25px; margin-top: 5px; }
+        
+        .main-content { display: flex; flex-direction: column; }
+        
+        .toolbar { background: white; padding: 20px 30px; border-bottom: 2px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+        .toolbar-left { display: flex; gap: 15px; align-items: center; flex: 1; }
+        .toolbar-right { display: flex; gap: 10px; }
+        
+        .search-box { flex: 1; max-width: 400px; position: relative; }
+        .search-box input { width: 100%; padding: 10px 40px 10px 15px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 0.95rem; }
+        .search-box input:focus { outline: none; border-color: var(--secondary-blue); }
+        .search-icon { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: #64748b; }
+        
+        .view-toggle { display: flex; gap: 5px; background: #f1f5f9; padding: 5px; border-radius: 10px; }
+        .view-btn { padding: 8px 15px; border: none; background: transparent; cursor: pointer; border-radius: 8px; transition: all 0.3s; }
+        .view-btn.active { background: white; color: var(--secondary-blue); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        
+        .btn { padding: 10px 20px; border: none; border-radius: 10px; cursor: pointer; font-weight: 600; transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px; font-family: inherit; }
+        .btn-primary { background: var(--secondary-blue); color: white; }
+        .btn-primary:hover { background: var(--primary-blue); transform: translateY(-2px); }
+        .btn-success { background: var(--success); color: white; }
+        .btn-success:hover { background: #047857; }
+        
+        .content-area { flex: 1; padding: 30px; overflow-y: auto; }
+        
+        .breadcrumb { display: flex; gap: 10px; align-items: center; margin-bottom: 25px; color: #64748b; font-size: 0.9rem; }
+        .breadcrumb a { color: var(--secondary-blue); text-decoration: none; }
+        
+        .stats-bar { display: flex; gap: 20px; margin-bottom: 25px; flex-wrap: wrap; }
+        .stat-item { background: white; padding: 15px 20px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 12px; }
+        .stat-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+        .stat-info h4 { font-size: 1.5rem; color: var(--primary-blue); }
+        .stat-info p { font-size: 0.85rem; color: #64748b; }
+        
+        .image-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
+        .image-grid.list-view { grid-template-columns: 1fr; }
+        
+        .image-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: all 0.3s; cursor: pointer; position: relative; }
+        .image-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+        .image-card.selected { border: 3px solid var(--secondary-blue); }
+        
+        .image-preview { width: 100%; height: 180px; overflow: hidden; background: #f1f5f9; display: flex; align-items: center; justify-content: center; }
+        .image-preview img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .image-info { padding: 12px; }
+        .image-name { font-weight: 600; color: var(--primary-blue); font-size: 0.9rem; margin-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .image-meta { font-size: 0.8rem; color: #64748b; display: flex; justify-content: space-between; }
+        
+        .image-actions { position: absolute; top: 10px; right: 10px; display: flex; gap: 5px; opacity: 0; transition: opacity 0.3s; }
+        .image-card:hover .image-actions { opacity: 1; }
+        .action-btn { width: 32px; height: 32px; border-radius: 8px; border: none; background: white; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+        .action-btn:hover { transform: scale(1.1); }
+        
+        .upload-zone { background: white; border: 3px dashed #cbd5e1; border-radius: 15px; padding: 60px 30px; text-align: center; cursor: pointer; transition: all 0.3s; margin-bottom: 30px; }
+        .upload-zone:hover, .upload-zone.dragover { border-color: var(--secondary-blue); background: #eff6ff; }
+        .upload-zone i { font-size: 4rem; color: var(--secondary-blue); margin-bottom: 20px; }
+        .upload-zone h3 { color: var(--primary-blue); margin-bottom: 10px; }
+        
+        .category-selector { margin-bottom: 20px; }
+        .category-selector label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--primary-blue); }
+        .category-selector select { width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 0.95rem; font-family: inherit; }
+        
+        .notification { position: fixed; top: 20px; right: 20px; background: var(--success); color: white; padding: 15px 25px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 9999; animation: slideIn 0.3s ease; }
+        @keyframes slideIn { from { transform: translateX(400px); } to { transform: translateX(0); } }
+        
+        .empty-state { text-align: center; padding: 80px 20px; color: #64748b; }
+        .empty-state i { font-size: 5rem; margin-bottom: 20px; opacity: 0.3; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <h2><i class="fas fa-folder-open"></i> Asset Folders</h2>
+            <ul class="folder-tree" id="folderTree">
+                <!-- Populated by JavaScript -->
+            </ul>
+            
+            <div style="margin-top: 30px; padding-top: 20px; border-top: 2px solid #e2e8f0;">
+                <button class="btn btn-success" style="width: 100%; margin-bottom: 10px;" onclick="ExportImport.exportData()">
+                    <i class="fas fa-download"></i> Export Data
+                </button>
+                <button class="btn btn-primary" style="width: 100%;" onclick="document.getElementById('importFile').click()">
+                    <i class="fas fa-upload"></i> Import Data
+                </button>
+                <input type="file" id="importFile" accept=".json" style="display: none;" onchange="handleImport(event)">
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <div class="toolbar">
+                <div class="toolbar-left">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Search images..." oninput="searchImages()">
+                        <i class="fas fa-search search-icon"></i>
+                    </div>
+                    <div class="view-toggle">
+                        <button class="view-btn active" onclick="setView('grid')"><i class="fas fa-th"></i></button>
+                        <button class="view-btn" onclick="setView('list')"><i class="fas fa-list"></i></button>
+                    </div>
+                </div>
+                <div class="toolbar-right">
+                    <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
+                        <i class="fas fa-upload"></i> Upload Images
+                    </button>
+                    <input type="file" id="fileInput" multiple accept="image/*" style="display: none;" onchange="handleFileUpload(event)">
+                </div>
+            </div>
+            
+            <div class="content-area">
+                <div class="breadcrumb">
+                    <a href="#" onclick="selectFolder('all')">Assets</a>
+                    <span>›</span>
+                    <span id="currentFolder">All Images</span>
+                </div>
+                
+                <div class="stats-bar" id="statsBar">
+                    <!-- Populated by JavaScript -->
+                </div>
+                
+                <div class="category-selector">
+                    <label>Upload Category:</label>
+                    <select id="uploadCategory">
+                        <option value="general">General</option>
+                        <option value="concentration">Concentration Plants</option>
+                        <option value="leaching">Leaching Plants</option>
+                        <option value="equipment">Equipment</option>
+                        <option value="construction">Construction</option>
+                        <option value="team">Team</option>
+                        <option value="branding">Branding</option>
+                    </select>
+                </div>
+                
+                <div class="upload-zone" onclick="document.getElementById('fileInput').click()" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <h3>Drop images here or click to upload</h3>
+                    <p>Images will be available across all pages instantly</p>
+                </div>
+                
+                <div class="image-grid" id="imageGrid">
+                    <!-- Images populated by JavaScript -->
+                </div>
+                
+                <div class="empty-state" id="emptyState" style="display: none;">
+                    <i class="fas fa-images"></i>
+                    <h3>No images found</h3>
+                    <p>Upload some images to get started</p>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        let currentFolder = 'all';
+        let currentView = 'grid';
+        
+        // Initialize
+        function init() {
+            renderFolders();
+            renderImages();
+            updateStats();
+            
+            // Listen for updates from other tabs/pages
+            window.addEventListener('assetsUpdated', () => {
+                renderImages();
+                updateStats();
+                renderFolders();
+            });
+        }
+        
+        // Render folder tree
+        function renderFolders() {
+            const stats = AssetUtils.getStatistics();
+            const folderTree = document.getElementById('folderTree');
+            
+            folderTree.innerHTML = `
+                <li class="folder-item">
+                    <div class="folder-label ${currentFolder === 'all' ? 'active' : ''}" onclick="selectFolder('all')">
+                        <i class="fas fa-images folder-icon"></i>
+                        <span>All Images</span>
+                        <span class="folder-count">${stats.totalAssets}</span>
+                    </div>
+                </li>
+                <li class="folder-item">
+                    <div class="folder-label ${currentFolder === 'projects' ? 'active' : ''}" onclick="selectFolder('projects')">
+                        <i class="fas fa-folder folder-icon"></i>
+                        <span>Projects</span>
+                        <span class="folder-count">${stats.byFolder['projects'] || 0}</span>
+                    </div>
+                    <ul class="subfolder-list">
+                        <li><div class="folder-label ${currentFolder === 'projects/concentration' ? 'active' : ''}" onclick="selectFolder('projects/concentration')">
+                            <i class="fas fa-folder-open folder-icon"></i> Concentration
+                        </div></li>
+                        <li><div class="folder-label ${currentFolder === 'projects/leaching' ? 'active' : ''}" onclick="selectFolder('projects/leaching')">
+                            <i class="fas fa-folder-open folder-icon"></i> Leaching
+                        </div></li>
+                        <li><div class="folder-label ${currentFolder === 'projects/equipment' ? 'active' : ''}" onclick="selectFolder('projects/equipment')">
+                            <i class="fas fa-folder-open folder-icon"></i> Equipment
+                        </div></li>
+                    </ul>
+                </li>
+                <li class="folder-item">
+                    <div class="folder-label ${currentFolder === 'team' ? 'active' : ''}" onclick="selectFolder('team')">
+                        <i class="fas fa-folder folder-icon"></i>
+                        <span>Team Photos</span>
+                        <span class="folder-count">${stats.byFolder['team'] || 0}</span>
+                    </div>
+                </li>
+                <li class="folder-item">
+                    <div class="folder-label ${currentFolder === 'logos' ? 'active' : ''}" onclick="selectFolder('logos')">
+                        <i class="fas fa-folder folder-icon"></i>
+                        <span>Logos & Branding</span>
+                        <span class="folder-count">${stats.byFolder['logos'] || 0}</span>
+                    </div>
+                </li>
+            `;
+        }
+        
+        // Render images
+        function renderImages() {
+            const grid = document.getElementById('imageGrid');
+            const emptyState = document.getElementById('emptyState');
+            const searchTerm = document.getElementById('searchInput').value;
+            
+            let images = searchTerm 
+                ? AssetManager.searchAssets(searchTerm)
+                : AssetManager.getAssetsByFolder(currentFolder);
+            
+            if (images.length === 0) {
+                grid.innerHTML = '';
+                emptyState.style.display = 'block';
+                return;
+            }
+            
+            emptyState.style.display = 'none';
+            
+            grid.innerHTML = images.map(img => `
+                <div class="image-card">
+                    <div class="image-preview">
+                        <img src="${img.url}" alt="${img.name}" loading="lazy">
+                    </div>
+                    <div class="image-info">
+                        <div class="image-name" title="${img.name}">${img.name}</div>
+                        <div class="image-meta">
+                            <span>${AssetUtils.formatSize(img.size)}</span>
+                            <span>${img.date}</span>
+                        </div>
+                    </div>
+                    <div class="image-actions">
+                        <button class="action-btn" onclick="copyUrl(${img.id})" title="Copy URL">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        <button class="action-btn" onclick="deleteAsset(${img.id})" title="Delete" style="color: #dc2626;">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Update statistics
+        function updateStats() {
+            const stats = AssetUtils.getStatistics();
+            const statsBar = document.getElementById('statsBar');
+            
+            statsBar.innerHTML = `
+                <div class="stat-item">
+                    <div class="stat-icon" style="background: #dbeafe; color: #2563eb;">
+                        <i class="fas fa-images"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h4>${stats.totalAssets}</h4>
+                        <p>Total Images</p>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon" style="background: #fef3c7; color: #f59e0b;">
+                        <i class="fas fa-folder"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h4>${stats.totalAlbums}</h4>
+                        <p>Albums</p>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon" style="background: #d1fae5; color: #059669;">
+                        <i class="fas fa-hdd"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h4>${stats.totalSize} MB</h4>
+                        <p>Total Size</p>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Select folder
+        function selectFolder(folder) {
+            currentFolder = folder;
+            renderFolders();
+            renderImages();
+        }
+        
+        // Set view
+        function setView(view) {
+            currentView = view;
+            const grid = document.getElementById('imageGrid');
+            const buttons = document.querySelectorAll('.view-btn');
+            
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            if (view === 'list') {
+                grid.classList.add('list-view');
+            } else {
+                grid.classList.remove('list-view');
+            }
+        }
+        
+        // Search images
+        function searchImages() {
+            renderImages();
+        }
+        
+        // Handle file upload
+        async function handleFileUpload(event) {
+            const files = event.target.files;
+            const category = document.getElementById('uploadCategory').value;
+            const folder = currentFolder === 'all' ? 'projects' : currentFolder;
+            
+            showNotification('Uploading images...');
+            
+            const uploaded = await AssetUtils.uploadFiles(Array.from(files), folder, category);
+            
+            showNotification(`✓ Successfully uploaded ${uploaded.length} image(s)!`);
+            
+            renderImages();
+            updateStats();
+            renderFolders();
+        }
+        
+        // Drag and drop handlers
+        function handleDragOver(event) {
+            event.preventDefault();
+            event.target.closest('.upload-zone').classList.add('dragover');
+        }
+        
+        function handleDragLeave(event) {
+            event.target.closest('.upload-zone').classList.remove('dragover');
+        }
+        
+        function handleDrop(event) {
+            event.preventDefault();
+            event.target.closest('.upload-zone').classList.remove('dragover');
+            const files = event.dataTransfer.files;
+            document.getElementById('fileInput').files = files;
+            handleFileUpload({ target: { files } });
+        }
+        
+        // Copy URL
+        function copyUrl(imageId) {
+            const asset = AssetManager.getAssetById(imageId);
+            if (asset) {
+                navigator.clipboard.writeText(asset.url).then(() => {
+                    showNotification('✓ URL copied to clipboard!');
+                });
+            }
+        }
+        
+        // Delete asset
+        function deleteAsset(imageId) {
+            if (confirm('Are you sure you want to delete this image?')) {
+                AssetManager.deleteAsset(imageId);
+                showNotification('✓ Image deleted successfully!');
+                renderImages();
+                updateStats();
+                renderFolders();
+            }
+        }
+        
+        // Show notification
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+        
+        // Handle import
+        async function handleImport(event) {
+            const file = event.target.files[0];
+            if (file) {
+                try {
+                    await ExportImport.importData(file);
+                    showNotification('✓ Data imported successfully!');
+                    renderImages();
+                    updateStats();
+                    renderFolders();
+                } catch (error) {
+                    alert('Error importing data: ' + error.message);
+                }
+            }
+        }
+        
+        // Initialize on load
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
