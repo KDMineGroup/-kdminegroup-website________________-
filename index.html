@@ -98,16 +98,153 @@
     </style>
 </head>
 <body>
-    <div class="language-switcher">
-        <button class="lang-btn active" onclick="switchLanguage('en')">
-            <span>🇬🇧</span><span>EN</span>
-        </button>
-        <button class="lang-btn" onclick="switchLanguage('fa')">
-            <span>🇮🇷</span><span>FA</span>
-        </button>
+    <title>Smaller Language Switcher</title>
+    <style>
+        .language-switcher {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 3000;
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 4px;
+            display: flex;
+            gap: 4px;
+        }
+        
+        body.rtl .language-switcher {
+            right: auto;
+            left: 15px;
+        }
+        
+        .lang-btn {
+            padding: 6px 12px;
+            border: none;
+            background: transparent;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.75rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #64748b;
+            line-height: 1;
+        }
+        
+        .lang-btn span:first-child {
+            font-size: 0.9rem;
+        }
+        
+        .lang-btn:hover {
+            background: #f1f5f9;
+            color: #2563eb;
+        }
+        
+        .lang-btn.active {
+            background: #2563eb;
+            color: white;
+        }
+        
+        /* Even smaller version */
+        .language-switcher.compact {
+            padding: 3px;
+            gap: 3px;
+        }
+        
+        .language-switcher.compact .lang-btn {
+            padding: 5px 10px;
+            font-size: 0.7rem;
+            gap: 4px;
+        }
+        
+        .language-switcher.compact .lang-btn span:first-child {
+            font-size: 0.85rem;
+        }
+        
+        /* Mini version (icon only) */
+        .language-switcher.mini {
+            padding: 3px;
+            gap: 3px;
+        }
+        
+        .language-switcher.mini .lang-btn {
+            padding: 6px;
+            font-size: 0;
+            width: 28px;
+            height: 28px;
+            justify-content: center;
+        }
+        
+        .language-switcher.mini .lang-btn span:first-child {
+            font-size: 1rem;
+        }
+        
+        .language-switcher.mini .lang-btn span:last-child {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h2 style="text-align: center; margin: 20px;">Choose Your Style:</h2>
+    
+    <!-- Default Small Version -->
+    <div style="margin: 40px 0;">
+        <h3 style="text-align: center; color: #64748b;">Default Small</h3>
+        <div class="language-switcher">
+            <button class="lang-btn active" onclick="switchLanguage('en')">
+                <span>🇬🇧</span><span>EN</span>
+            </button>
+            <button class="lang-btn" onclick="switchLanguage('fa')">
+                <span>🇮🇷</span><span>FA</span>
+            </button>
+        </div>
     </div>
-
-    <header>
+    
+    <!-- Compact Version -->
+    <div style="margin: 40px 0;">
+        <h3 style="text-align: center; color: #64748b;">Compact</h3>
+        <div class="language-switcher compact" style="position: relative; top: 0; right: 0; margin: 20px auto; width: fit-content;">
+            <button class="lang-btn active" onclick="switchLanguage('en')">
+                <span>🇬🇧</span><span>EN</span>
+            </button>
+            <button class="lang-btn" onclick="switchLanguage('fa')">
+                <span>🇮🇷</span><span>FA</span>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Mini Version (Icon Only) -->
+    <div style="margin: 40px 0;">
+        <h3 style="text-align: center; color: #64748b;">Mini (Icon Only)</h3>
+        <div class="language-switcher mini" style="position: relative; top: 0; right: 0; margin: 20px auto; width: fit-content;">
+            <button class="lang-btn active" onclick="switchLanguage('en')" title="English">
+                <span>🇬🇧</span><span>EN</span>
+            </button>
+            <button class="lang-btn" onclick="switchLanguage('fa')" title="فارسی">
+                <span>🇮🇷</span><span>FA</span>
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        function switchLanguage(lang) {
+            const body = document.body;
+            const buttons = event.target.closest('.language-switcher').querySelectorAll('.lang-btn');
+            
+            if (lang === 'fa') { 
+                body.classList.add('rtl'); 
+            } else { 
+                body.classList.remove('rtl'); 
+            }
+            
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.lang-btn').classList.add('active');
+            
+            localStorage.setItem('preferredLanguage', lang);
+        }    <header>
         <nav>
             <a href="index.html" class="logo">
                 <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Logo">
