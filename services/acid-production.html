@@ -1,1 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acid Production Systems - Kavian Development Mine</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #1e3a8a;
+            --secondary-blue: #2563eb;
+            --accent-gold: #f59e0b;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+        }
+        body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-dark); overflow-x: hidden; }
+        body.rtl { font-family: 'Vazirmatn', sans-serif; direction: rtl; }
+        
+        .language-switcher { position: fixed; top: 20px; right: 20px; z-index: 3000; background: white; border-radius: 50px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); padding: 8px; display: flex; gap: 8px; }
+        body.rtl .language-switcher { right: auto; left: 20px; }
+        .lang-btn { padding: 10px 20px; border: 2px solid transparent; background: transparent; border-radius: 25px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: all 0.3s; display: flex; align-items: center; gap: 8px; color: var(--text-light); }
+        .lang-btn:hover { background: var(--light-bg); color: var(--secondary-blue); }
+        .lang-btn.active { background: var(--secondary-blue); color: white; border-color: var(--secondary-blue); }
+        
+        header { background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%); color: white; padding: 1rem 0; position: sticky; top: 0; z-index: 2000; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        nav { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
+        .logo { display: flex; align-items: center; gap: 15px; font-size: 1.5rem; font-weight: 700; text-decoration: none; color: white; }
+        .logo img { height: 55px; width: auto; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2)); }
+        .nav-links { display: flex; list-style: none; gap: 2.5rem; align-items: center; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 500; transition: all 0.3s; position: relative; padding: 5px 0; }
+        .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--accent-gold); transition: width 0.3s; }
+        .nav-links a:hover::after { width: 100%; }
+        
+        .breadcrumb { max-width: 1400px; margin: 30px auto; padding: 0 2rem; display: flex; align-items: center; gap: 10px; color: var(--text-light); font-size: 0.95rem; }
+        .breadcrumb a { color: var(--secondary-blue); text-decoration: none; transition: color 0.3s; }
+        .breadcrumb a:hover { color: var(--accent-gold); }
+        
+        .service-hero { background: linear-gradient(135deg, rgba(30, 58, 138, 0.95) 0%, rgba(37, 99, 235, 0.95) 100%), url('https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=1920') center/cover; color: white; padding: 100px 2rem 80px; }
+        .hero-content { max-width: 1200px; margin: 0 auto; }
+        .service-category { display: inline-block; padding: 8px 20px; background: var(--accent-gold); border-radius: 25px; font-weight: 600; font-size: 0.9rem; margin-bottom: 20px; }
+        .service-hero h1 { font-size: 3.5rem; margin-bottom: 25px; font-weight: 700; text-shadow: 2px 2px 8px rgba(0,0,0,0.3); }
+        .service-hero p { font-size: 1.3rem; opacity: 0.95; line-height: 1.8; }
+        
+        .service-content { max-width: 1400px; margin: 80px auto; padding: 0 2rem; display: grid; grid-template-columns: 1fr 350px; gap: 4rem; }
+        
+        .main-content { }
+        .content-section { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); margin-bottom: 40px; }
+        .section-title { font-size: 2rem; color: var(--primary-blue); margin-bottom: 25px; }
+        .content-section p { color: var(--text-light); line-height: 1.9; font-size: 1.05rem; margin-bottom: 20px; }
+        .content-section ul { margin-left: 25px; color: var(--text-light); line-height: 2; }
+        body.rtl .content-section ul { margin-left: 0; margin-right: 25px; }
+        .content-section li { margin-bottom: 12px; }
+        
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 30px; }
+        .feature-card { background: var(--light-bg); padding: 30px; border-radius: 15px; transition: all 0.3s; }
+        .feature-card:hover { background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transform: translateY(-5px); }
+        .feature-icon { width: 60px; height: 60px; background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); border-radius: 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.8rem; margin-bottom: 20px; }
+        .feature-card h4 { color: var(--primary-blue); font-size: 1.3rem; margin-bottom: 12px; }
+        .feature-card p { color: var(--text-light); line-height: 1.7; font-size: 0.95rem; }
+        
+        .tech-specs { background: var(--light-bg); padding: 30px; border-radius: 15px; margin-top: 30px; }
+        .tech-specs h4 { color: var(--primary-blue); font-size: 1.4rem; margin-bottom: 20px; }
+        .specs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
+        .spec-item { background: white; padding: 20px; border-radius: 10px; }
+        .spec-label { color: var(--text-light); font-size: 0.9rem; margin-bottom: 5px; }
+        .spec-value { color: var(--primary-blue); font-size: 1.3rem; font-weight: 700; }
+        
+        .sidebar { }
+        .sidebar-widget { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); margin-bottom: 25px; }
+        .widget-title { font-size: 1.4rem; color: var(--primary-blue); margin-bottom: 20px; padding-bottom: 15px; border-bottom: 3px solid var(--accent-gold); }
+        
+        .contact-form { }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; color: var(--text-dark); font-weight: 600; margin-bottom: 8px; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px 15px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 1rem; transition: all 0.3s; font-family: inherit; }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: var(--secondary-blue); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+        .btn-submit { width: 100%; padding: 15px; background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); color: white; border: none; border-radius: 50px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.3s; }
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3); }
+        
+        .related-services { list-style: none; }
+        .related-services li { margin-bottom: 15px; }
+        .related-services a { display: flex; align-items: center; gap: 12px; padding: 12px 15px; background: var(--light-bg); border-radius: 10px; color: var(--text-dark); text-decoration: none; transition: all 0.3s; }
+        .related-services a:hover { background: var(--secondary-blue); color: white; transform: translateX(5px); }
+        body.rtl .related-services a:hover { transform: translateX(-5px); }
+        .related-services i { color: var(--secondary-blue); transition: color 0.3s; }
+        .related-services a:hover i { color: white; }
+        
+        footer { background: var(--dark-bg); color: white; padding: 60px 2rem 30px; margin-top: 80px; }
+        .footer-content { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 40px; }
+        .footer-section h3 { color: var(--accent-gold); margin-bottom: 20px; font-size: 1.3rem; }
+        .footer-section ul { list-style: none; }
+        .footer-section a { color: #cbd5e1; text-decoration: none; display: block; margin-bottom: 12px; transition: all 0.3s; }
+        .footer-section a:hover { color: var(--accent-gold); padding-left: 5px; }
+        body.rtl .footer-section a:hover { padding-left: 0; padding-right: 5px; }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); color: #94a3b8; }
+        
+        @media (max-width: 1200px) {
+            .service-content { grid-template-columns: 1fr; }
+            .sidebar { max-width: 600px; margin: 0 auto; }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .service-hero h1 { font-size: 2.5rem; }
+            .features-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switcher">
+        <button class="lang-btn active" onclick="switchLanguage('en')">
+            <span>🇬🇧</span><span>EN</span>
+        </button>
+        <button class="lang-btn" onclick="switchLanguage('fa')">
+            <span>🇮🇷</span><span>FA</span>
+        </button>
+    </div>
 
+    <header>
+        <nav>
+            <a href="../index.html" class="logo">
+                <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Logo">
+                <span data-en="Kavian Development Mine" data-fa="کاویان توسعه معدن">Kavian Development Mine</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="../index.html" data-en="Home" data-fa="خانه">Home</a></li>
+                <li><a href="../about.html" data-en="About" data-fa="درباره ما">About</a></li>
+                <li><a href="../services.html" data-en="Services" data-fa="خدمات">Services</a></li>
+                <li><a href="../portfolio.html" data-en="Portfolio" data-fa="نمونه کارها">Portfolio</a></li>
+                <li><a href="../blog.html" data-en="Blog" data-fa="وبلاگ">Blog</a></li>
+                <li><a href="../news.html" data-en="News" data-fa="اخبار">News</a></li>
+                <li><a href="../technical-resources.html" data-en="Resources" data-fa="منابع فنی">Resources</a></li>
+                <li><a href="../contact.html" data-en="Contact" data-fa="تماس">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="breadcrumb">
+        <a href="../index.html" data-en="Home" data-fa="خانه">Home</a>
+        <i class="fas fa-chevron-right"></i>
+        <a href="../services.html" data-en="Services" data-fa="خدمات">Services</a>
+        <i class="fas fa-chevron-right"></i>
+        <span data-en="Acid Production Systems" data-fa="سیستم‌های تولید اسید">Acid Production Systems</span>
+    </div>
+
+    <section class="service-hero">
+        <div class="hero-content">
+            <span class="service-category" data-en="PROCESS ENGINEERING" data-fa="مهندسی فرآیند">PROCESS ENGINEERING</span>
+            <h1 data-en="Sulfuric Acid Production Systems" data-fa="سیستم‌های تولید اسید سولفوریک">Sulfuric Acid Production Systems</h1>
+            <p data-en="Complete engineering solutions for sulfuric acid plants including design, equipment selection, and process optimization for copper smelters and hydrometallurgical operations." data-fa="راهکارهای مهندسی کامل برای کارخانه‌های اسید سولفوریک از جمله طراحی، انتخاب تجهیزات و بهینه‌سازی فرآیند برای ذوب‌کننده‌های مس و عملیات هیدرومتالورژی.">Complete engineering solutions for sulfuric acid plants including design, equipment selection, and process optimization for copper smelters and hydrometallurgical operations.</p>
+        </div>
+    </section>
+
+    <div class="service-content">
+        <main class="main-content">
+            <div class="content-section">
+                <h2 class="section-title" data-en="Overview" data-fa="نمای کلی">Overview</h2>
+                <p data-en="Sulfuric acid is a critical component in many mining and metallurgical operations, particularly in copper processing. Our acid production engineering services cover the complete spectrum from conceptual design through commissioning and optimization. We specialize in both contact process and wet sulfuric acid (WSA) technologies." data-fa="اسید سولفوریک یک جزء حیاتی در بسیاری از عملیات معدنی و متالورژی، به ویژه در فرآوری مس است. خدمات مهندسی تولید اسید ما طیف کاملی از طراحی مفهومی تا راه‌اندازی و بهینه‌سازی را پوشش می‌دهد. ما در هر دو فناوری فرآیند تماسی و اسید سولفوریک مرطوب (WSA) تخصص داریم.">Sulfuric acid is a critical component in many mining and metallurgical operations, particularly in copper processing. Our acid production engineering services cover the complete spectrum from conceptual design through commissioning and optimization. We specialize in both contact process and wet sulfuric acid (WSA) technologies.</p>
+                
+                <p data-en="Our team has extensive experience in designing acid plants ranging from 500 to 5,000 tonnes per day capacity. We work with leading technology providers and equipment manufacturers to deliver reliable, efficient, and environmentally compliant acid production systems." data-fa="تیم ما تجربه گسترده‌ای در طراحی کارخانه‌های اسید با ظرفیت 500 تا 5000 تن در روز دارد. ما با ارائه‌دهندگان فناوری پیشرو و تولیدکنندگان تجهیزات کار می‌کنیم تا سیستم‌های تولید اسید قابل اعتماد، کارآمد و مطابق با استانداردهای زیست‌محیطی ارائه دهیم.">Our team has extensive experience in designing acid plants ranging from 500 to 5,000 tonnes per day capacity. We work with leading technology providers and equipment manufacturers to deliver reliable, efficient, and environmentally compliant acid production systems.</p>
+            </div>
+            
+            <div class="content-section">
+                <h2 class="section-title" data-en="Key Services" data-fa="خدمات کلیدی">Key Services</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🏭</div>
+                        <h4 data-en="Plant Design" data-fa="طراحی کارخانه">Plant Design</h4>
+                        <p data-en="Complete acid plant design including gas cleaning, drying, conversion, and absorption systems." data-fa="طراحی کامل کارخانه اسید از جمله سیستم‌های تمیزکردن گاز، خشک‌کردن، تبدیل و جذب.">Complete acid plant design including gas cleaning, drying, conversion, and absorption systems.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">⚙️</div>
+                        <h4 data-en="Equipment Selection" data-fa="انتخاب تجهیزات">Equipment Selection</h4>
+                        <p data-en="Selection of converters, heat exchangers, absorbers, and auxiliary equipment from qualified vendors." data-fa="انتخاب مبدل‌ها، مبدل‌های حرارتی، جاذب‌ها و تجهیزات کمکی از تامین‌کنندگان واجد شرایط.">Selection of converters, heat exchangers, absorbers, and auxiliary equipment from qualified vendors.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🌡️</div>
+                        <h4 data-en="Heat Recovery" data-fa="بازیابی حرارت">Heat Recovery</h4>
+                        <p data-en="Design of heat recovery systems to maximize energy efficiency and steam generation." data-fa="طراحی سیستم‌های بازیابی حرارت برای به حداکثر رساندن کارایی انرژی و تولید بخار.">Design of heat recovery systems to maximize energy efficiency and steam generation.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🌿</div>
+                        <h4 data-en="Emission Control" data-fa="کنترل انتشار">Emission Control</h4>
+                        <p data-en="SO2 abatement systems to meet stringent environmental regulations." data-fa="سیستم‌های کاهش SO2 برای رعایت مقررات سخت‌گیرانه زیست‌محیطی.">SO2 abatement systems to meet stringent environmental regulations.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h4 data-en="Process Optimization" data-fa="بهینه‌سازی فرآیند">Process Optimization</h4>
+                        <p data-en="Optimization of conversion efficiency, acid strength, and energy consumption." data-fa="بهینه‌سازی کارایی تبدیل، قدرت اسید و مصرف انرژی.">Optimization of conversion efficiency, acid strength, and energy consumption.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🔧</div>
+                        <h4 data-en="Revamp Studies" data-fa="مطالعات بازسازی">Revamp Studies</h4>
+                        <p data-en="Capacity expansion and modernization of existing acid plants." data-fa="توسعه ظرفیت و نوسازی کارخانه‌های اسید موجود.">Capacity expansion and modernization of existing acid plants.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-section">
+                <h2 class="section-title" data-en="Technology Options" data-fa="گزینه‌های فناوری">Technology Options</h2>
+                <p data-en="We provide engineering services for multiple acid production technologies:" data-fa="ما خدمات مهندسی را برای چندین فناوری تولید اسید ارائه می‌دهیم:">We provide engineering services for multiple acid production technologies:</p>
+                <ul>
+                    <li data-en="Contact Process (Single or Double Absorption)" data-fa="فرآیند تماسی (جذب تک یا دوگانه)">Contact Process (Single or Double Absorption)</li>
+                    <li data-en="Wet Sulfuric Acid (WSA) Process" data-fa="فرآیند اسید سولفوریک مرطوب (WSA)">Wet Sulfuric Acid (WSA) Process</li>
+                    <li data-en="Combined SO2 and Acid Production" data-fa="تولید ترکیبی SO2 و اسید">Combined SO2 and Acid Production</li>
+                    <li data-en="Sulfur Burning Acid Plants" data-fa="کارخانه‌های اسید سوزاندن گوگرد">Sulfur Burning Acid Plants</li>
+                    <li data-en="Metallurgical Gas-based Systems" data-fa="سیستم‌های مبتنی بر گاز متالورژیکی">Metallurgical Gas-based Systems</li>
+                </ul>
+            </div>
+            
+            <div class="tech-specs">
+                <h4 data-en="Typical Plant Specifications" data-fa="مشخصات معمول کارخانه">Typical Plant Specifications</h4>
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <div class="spec-label" data-en="Capacity Range" data-fa="محدوده ظرفیت">Capacity Range</div>
+                        <div class="spec-value">500-5000 TPD</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label" data-en="Acid Strength" data-fa="قدرت اسید">Acid Strength</div>
+                        <div class="spec-value">93-98% H₂SO₄</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label" data-en="Conversion Efficiency" data-fa="کارایی تبدیل">Conversion Efficiency</div>
+                        <div class="spec-value">>99.7%</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label" data-en="SO2 Emissions" data-fa="انتشار SO2">SO2 Emissions</div>
+                        <div class="spec-value"><200 mg/Nm³</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <aside class="sidebar">
+            <div class="sidebar-widget">
+                <h3 class="widget-title" data-en="Request Consultation" data-fa="درخواست مشاوره">Request Consultation</h3>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label data-en="Full Name" data-fa="نام کامل">Full Name</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label data-en="Email" data-fa="ایمیل">Email</label>
+                        <input type="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label data-en="Company" data-fa="شرکت">Company</label>
+                        <input type="text">
+                    </div>
+                    <div class="form-group">
+                        <label data-en="Plant Capacity (TPD)" data-fa="ظرفیت کارخانه (تن/روز)">Plant Capacity (TPD)</label>
+                        <input type="number">
+                    </div>
+                    <div class="form-group">
+                        <label data-en="Message" data-fa="پیام">Message</label>
+                        <textarea></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit" data-en="Submit Request" data-fa="ارسال درخواست">Submit Request</button>
+                </form>
+            </div>
+            
+            <div class="sidebar-widget">
+                <h3 class="widget-title" data-en="Related Services" data-fa="خدمات مرتبط">Related Services</h3>
+                <ul class="related-services">
+                    <li><a href="leaching-systems.html"><i class="fas fa-flask"></i><span data-en="Leaching Systems" data-fa="سیستم‌های لیچینگ">Leaching Systems</span></a></li>
+                    <li><a href="concentration-plants.html"><i class="fas fa-industry"></i><span data-en="Concentration Plants" data-fa="کارخانه‌های کنسانتره">Concentration Plants</span></a></li>
+                    <li><a href="plant-design.html"><i class="fas fa-drafting-compass"></i><span data-en="Plant Design" data-fa="طراحی کارخانه">Plant Design</span></a></li>
+                    <li><a href="technology-optimization.html"><i class="fas fa-chart-line"></i><span data-en="Process Optimization" data-fa="بهینه‌سازی فرآیند">Process Optimization</span></a></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 data-en="Company" data-fa="شرکت">Company</h3>
+                <ul>
+                    <li><a href="../about.html" data-en="About Us" data-fa="درباره ما">About Us</a></li>
+                    <li><a href="../portfolio.html" data-en="Portfolio" data-fa="نمونه کارها">Portfolio</a></li>
+                    <li><a href="../contact.html" data-en="Contact" data-fa="تماس با ما">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 data-en="Services" data-fa="خدمات">Services</h3>
+                <ul>
+                    <li><a href="acid-production.html" data-en="Acid Production" data-fa="تولید اسید">Acid Production</a></li>
+                    <li><a href="leaching-systems.html" data-en="Leaching Systems" data-fa="سیستم‌های لیچینگ">Leaching Systems</a></li>
+                    <li><a href="concentration-plants.html" data-en="Concentration Plants" data-fa="کارخانه‌های کنسانتره">Concentration Plants</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 data-en="Contact" data-fa="تماس">Contact</h3>
+                <ul>
+                    <li>📧 info@kdmine.com</li>
+                    <li>📞 +98 21 1234 5678</li>
+                    <li>📍 Tehran, Iran</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-en="&copy; 2025 Kavian Development Mine. All rights reserved." data-fa="© 2025 کاویان توسعه معدن. تمامی حقوق محفوظ است.">&copy; 2025 Kavian Development Mine. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function switchLanguage(lang) {
+            const body = document.body;
+            const elements = document.querySelectorAll('[data-en][data-fa]');
+            const langButtons = document.querySelectorAll('.lang-btn');
+            
+            if (lang === 'fa') { body.classList.add('rtl'); } 
+            else { body.classList.remove('rtl'); }
+            
+            langButtons.forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.lang-btn').classList.add('active');
+            
+            elements.forEach(el => {
+                el.innerHTML = el.getAttribute('data-' + lang);
+            });
+            
+            localStorage.setItem('preferredLanguage', lang);
+        }
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferredLanguage') || 'en';
+            if (savedLang === 'fa') {
+                document.querySelector('.lang-btn:last-child').click();
+            }
+        });
+        
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Form submitted! In production, this would send via EmailJS.');
+        });
+    </script>
+</body>
+</html>
