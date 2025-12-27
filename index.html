@@ -3,16 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kavian Development Mine - Mining Engineering Excellence</title>
+    <title>Kavian Development Mine - Mining Engineering & Consulting</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --primary-blue: #1e3a8a;
             --secondary-blue: #2563eb;
@@ -22,550 +17,93 @@
             --text-dark: #1e293b;
             --text-light: #64748b;
         }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            overflow-x: hidden;
-        }
-
-        body.rtl {
-            font-family: 'Vazirmatn', sans-serif;
-            direction: rtl;
-        }
-
-        /* Language Switcher */
-        .language-switcher {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 3000;
-            background: white;
-            border-radius: 50px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-            padding: 8px;
-            display: flex;
-            gap: 8px;
-        }
-
-        body.rtl .language-switcher {
-            right: auto;
-            left: 20px;
-        }
-
-        .lang-btn {
-            padding: 10px 20px;
-            border: 2px solid transparent;
-            background: transparent;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--text-light);
-        }
-
-        .lang-btn:hover {
-            background: var(--light-bg);
-            color: var(--secondary-blue);
-        }
-
-        .lang-btn.active {
-            background: var(--secondary-blue);
-            color: white;
-            border-color: var(--secondary-blue);
-        }
-
-        /* Header & Navigation */
-        header {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
-            color: white;
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 2000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-        }
-
-        nav {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-size: 1.5rem;
-            font-weight: 700;
-            text-decoration: none;
-            color: white;
-        }
-
-        .logo img {
-            height: 55px;
-            width: auto;
-            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2));
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2.5rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s;
-            position: relative;
-            padding: 5px 0;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-gold);
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, rgba(30, 58, 138, 0.95) 0%, rgba(37, 99, 235, 0.95) 100%),
-                        url('https://images.unsplash.com/photo-1581094271901-8022df4466f9?w=1920') center/cover;
-            color: white;
-            padding: 150px 2rem 100px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 30% 50%, rgba(245, 158, 11, 0.1) 0%, transparent 50%);
-        }
-
-        .hero-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
-            font-weight: 700;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
-            animation: fadeInUp 1s ease;
-        }
-
-        .hero p {
-            font-size: 1.4rem;
-            margin-bottom: 2.5rem;
-            opacity: 0.95;
-            animation: fadeInUp 1s ease 0.2s both;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: fadeInUp 1s ease 0.4s both;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 15px 35px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.05rem;
-            text-decoration: none;
-            transition: all 0.4s;
-            cursor: pointer;
-            border: none;
-        }
-
-        .btn-primary {
-            background: var(--accent-gold);
-            color: white;
-            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.3);
-        }
-
-        .btn-primary:hover {
-            background: #d97706;
-            transform: translateY(-3px);
-            box-shadow: 0 12px 32px rgba(245, 158, 11, 0.4);
-        }
-
-        .btn-secondary {
-            background: white;
-            color: var(--secondary-blue);
-            box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2);
-        }
-
-        .btn-secondary:hover {
-            background: var(--light-bg);
-            transform: translateY(-3px);
-        }
-
-        /* Stats Section */
-        .stats {
-            background: var(--dark-bg);
-            color: white;
-            padding: 60px 2rem;
-        }
-
-        .stats-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            text-align: center;
-        }
-
-        .stat-item {
-            padding: 20px;
-        }
-
-        .stat-number {
-            font-size: 3.5rem;
-            font-weight: 700;
-            color: var(--accent-gold);
-            margin-bottom: 10px;
-        }
-
-        .stat-label {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        /* Services Section */
-        .services {
-            padding: 100px 2rem;
-            background: var(--light-bg);
-        }
-
-        .section-header {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 60px;
-        }
-
-        .section-header h2 {
-            font-size: 3rem;
-            color: var(--primary-blue);
-            margin-bottom: 20px;
-        }
-
-        .section-header p {
-            font-size: 1.2rem;
-            color: var(--text-light);
-        }
-
-        .services-grid {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
-        }
-
-        .service-card {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-            transition: all 0.4s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--secondary-blue), var(--accent-gold));
-            transform: scaleX(0);
-            transition: transform 0.4s;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-        }
-
-        .service-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .service-icon {
-            font-size: 3.5rem;
-            color: var(--secondary-blue);
-            margin-bottom: 20px;
-        }
-
-        .service-card h3 {
-            font-size: 1.8rem;
-            color: var(--primary-blue);
-            margin-bottom: 15px;
-        }
-
-        .service-card p {
-            color: var(--text-light);
-            margin-bottom: 20px;
-            line-height: 1.8;
-        }
-
-        .service-link {
-            color: var(--secondary-blue);
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: gap 0.3s;
-        }
-
-        .service-link:hover {
-            gap: 15px;
-        }
-
-        /* Why Choose Us */
-        .why-choose {
-            padding: 100px 2rem;
-            background: white;
-        }
-
-        .features-grid {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            text-align: center;
-            padding: 40px 30px;
-            border-radius: 15px;
-            transition: all 0.3s;
-        }
-
-        .feature-card:hover {
-            background: var(--light-bg);
-        }
-
-        .feature-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 2rem;
-            color: white;
-        }
-
-        .feature-card h3 {
-            font-size: 1.5rem;
-            color: var(--primary-blue);
-            margin-bottom: 15px;
-        }
-
-        .feature-card p {
-            color: var(--text-light);
-            line-height: 1.8;
-        }
-
-        /* CTA Section */
-        .cta {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
-            color: white;
-            padding: 80px 2rem;
-            text-align: center;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            opacity: 0.95;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--dark-bg);
-            color: white;
-            padding: 60px 2rem 30px;
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin-bottom: 40px;
-        }
-
-        .footer-section h3 {
-            color: var(--accent-gold);
-            margin-bottom: 20px;
-            font-size: 1.3rem;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section a {
-            color: #cbd5e1;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 12px;
-            transition: all 0.3s;
-        }
-
-        .footer-section a:hover {
-            color: var(--accent-gold);
-            padding-left: 5px;
-        }
-
-        body.rtl .footer-section a:hover {
-            padding-left: 0;
-            padding-right: 5px;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: #94a3b8;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .social-links a {
-            width: 45px;
-            height: 45px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-        }
-
-        .social-links a:hover {
-            background: var(--accent-gold);
-            transform: translateY(-3px);
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive */
+        body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-dark); overflow-x: hidden; }
+        body.rtl { font-family: 'Vazirmatn', sans-serif; direction: rtl; }
+        
+        .language-switcher { position: fixed; top: 20px; right: 20px; z-index: 3000; background: white; border-radius: 50px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); padding: 8px; display: flex; gap: 8px; }
+        body.rtl .language-switcher { right: auto; left: 20px; }
+        .lang-btn { padding: 10px 20px; border: 2px solid transparent; background: transparent; border-radius: 25px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: all 0.3s; display: flex; align-items: center; gap: 8px; color: var(--text-light); }
+        .lang-btn:hover { background: var(--light-bg); color: var(--secondary-blue); }
+        .lang-btn.active { background: var(--secondary-blue); color: white; border-color: var(--secondary-blue); }
+        
+        header { background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%); color: white; padding: 1rem 0; position: sticky; top: 0; z-index: 2000; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        nav { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
+        .logo { display: flex; align-items: center; gap: 15px; font-size: 1.5rem; font-weight: 700; text-decoration: none; color: white; }
+        .logo img { height: 55px; width: auto; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2)); }
+        .nav-links { display: flex; list-style: none; gap: 2.5rem; align-items: center; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 500; transition: all 0.3s; position: relative; padding: 5px 0; }
+        .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--accent-gold); transition: width 0.3s; }
+        .nav-links a:hover::after { width: 100%; }
+        .admin-link { background: rgba(245, 158, 11, 0.2); padding: 8px 16px !important; border-radius: 20px; border: 2px solid var(--accent-gold); display: flex; align-items: center; gap: 8px; }
+        .admin-link:hover { background: var(--accent-gold); }
+        .admin-link::after { display: none; }
+        
+        .hero { background: linear-gradient(135deg, rgba(30, 58, 138, 0.95) 0%, rgba(37, 99, 235, 0.9) 100%), url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=1920') center/cover; color: white; padding: 150px 2rem 100px; text-align: center; position: relative; }
+        .hero-content { max-width: 1000px; margin: 0 auto; }
+        .hero h1 { font-size: 4rem; margin-bottom: 25px; font-weight: 700; text-shadow: 2px 2px 8px rgba(0,0,0,0.3); animation: fadeInUp 1s ease; }
+        .hero p { font-size: 1.4rem; margin-bottom: 40px; opacity: 0.95; line-height: 1.8; animation: fadeInUp 1.2s ease; }
+        .cta-buttons { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; animation: fadeInUp 1.4s ease; }
+        .btn { padding: 15px 40px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s; display: inline-flex; align-items: center; gap: 10px; font-size: 1.1rem; }
+        .btn-primary { background: var(--accent-gold); color: white; box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(245, 158, 11, 0.4); }
+        .btn-secondary { background: white; color: var(--primary-blue); }
+        .btn-secondary:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(255,255,255,0.3); }
+        
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .services-preview { padding: 100px 2rem; background: var(--light-bg); }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-title { font-size: 3rem; color: var(--primary-blue); margin-bottom: 20px; }
+        .section-subtitle { font-size: 1.2rem; color: var(--text-light); max-width: 700px; margin: 0 auto; }
+        
+        .services-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
+        .service-card { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); transition: all 0.4s; text-align: center; }
+        .service-card:hover { transform: translateY(-10px); box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+        .service-icon { width: 80px; height: 80px; background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; font-size: 2.5rem; color: white; }
+        .service-card h3 { font-size: 1.6rem; color: var(--primary-blue); margin-bottom: 15px; }
+        .service-card p { color: var(--text-light); line-height: 1.8; margin-bottom: 25px; }
+        .service-link { color: var(--secondary-blue); font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s; }
+        .service-link:hover { gap: 12px; color: var(--accent-gold); }
+        
+        .stats-section { background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue)); color: white; padding: 80px 2rem; }
+        .stats-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; text-align: center; }
+        .stat-item { }
+        .stat-number { font-size: 4rem; font-weight: 700; color: var(--accent-gold); margin-bottom: 10px; }
+        .stat-label { font-size: 1.2rem; opacity: 0.95; }
+        
+        .cta-section { padding: 100px 2rem; background: var(--light-bg); text-align: center; }
+        .cta-content { max-width: 800px; margin: 0 auto; }
+        .cta-content h2 { font-size: 3rem; color: var(--primary-blue); margin-bottom: 25px; }
+        .cta-content p { font-size: 1.3rem; color: var(--text-light); margin-bottom: 40px; line-height: 1.8; }
+        
+        footer { background: var(--dark-bg); color: white; padding: 60px 2rem 30px; }
+        .footer-content { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 40px; }
+        .footer-section h3 { color: var(--accent-gold); margin-bottom: 20px; font-size: 1.3rem; }
+        .footer-section ul { list-style: none; }
+        .footer-section a { color: #cbd5e1; text-decoration: none; display: block; margin-bottom: 12px; transition: all 0.3s; }
+        .footer-section a:hover { color: var(--accent-gold); padding-left: 5px; }
+        body.rtl .footer-section a:hover { padding-left: 0; padding-right: 5px; }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); color: #94a3b8; }
+        
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            .section-header h2 {
-                font-size: 2rem;
-            }
-            
-            .services-grid,
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.1rem; }
+            .services-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <!-- Language Switcher -->
     <div class="language-switcher">
         <button class="lang-btn active" onclick="switchLanguage('en')">
-            <span>🇬🇧</span>
-            <span>EN</span>
+            <span>🇬🇧</span><span>EN</span>
         </button>
         <button class="lang-btn" onclick="switchLanguage('fa')">
-            <span>🇮🇷</span>
-            <span>FA</span>
+            <span>🇮🇷</span><span>FA</span>
         </button>
     </div>
 
-    <!-- Header -->
     <header>
         <nav>
             <a href="index.html" class="logo">
@@ -581,19 +119,16 @@
                 <li><a href="news.html" data-en="News" data-fa="اخبار">News</a></li>
                 <li><a href="technical-resources.html" data-en="Resources" data-fa="منابع فنی">Resources</a></li>
                 <li><a href="contact.html" data-en="Contact" data-fa="تماس">Contact</a></li>
+                <li><a href="admin-dashboard.html" class="admin-link" data-en="Admin" data-fa="مدیریت"><i class="fas fa-shield-alt"></i> Admin</a></li>
             </ul>
-            <button class="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
-            </button>
         </nav>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1 data-en="Mining Engineering Excellence" data-fa="تعالی در مهندسی معدن">Mining Engineering Excellence</h1>
-            <p data-en="Comprehensive Solutions for Mining Projects Worldwide" data-fa="راهکارهای جامع برای پروژه‌های معدنی در سراسر جهان">Comprehensive Solutions for Mining Projects Worldwide</p>
-            <div class="hero-buttons">
+            <h1 data-en="Engineering Excellence in Mining" data-fa="تعالی مهندسی در معدنکاری">Engineering Excellence in Mining</h1>
+            <p data-en="Comprehensive mining engineering and consulting services from feasibility studies to plant design and optimization." data-fa="خدمات جامع مهندسی و مشاوره معدن از مطالعات امکان‌سنجی تا طراحی و بهینه‌سازی کارخانه.">Comprehensive mining engineering and consulting services from feasibility studies to plant design and optimization.</p>
+            <div class="cta-buttons">
                 <a href="services.html" class="btn btn-primary">
                     <span data-en="Our Services" data-fa="خدمات ما">Our Services</span>
                     <i class="fas fa-arrow-right"></i>
@@ -606,80 +141,18 @@
         </div>
     </section>
 
-    <!-- Stats Section -->
-    <section class="stats">
-        <div class="stats-grid">
-            <div class="stat-item">
-                <div class="stat-number">15+</div>
-                <div class="stat-label" data-en="Years of Experience" data-fa="سال تجربه">Years of Experience</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">200+</div>
-                <div class="stat-label" data-en="Completed Projects" data-fa="پروژه تکمیل شده">Completed Projects</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">50+</div>
-                <div class="stat-label" data-en="Expert Engineers" data-fa="مهندس متخصص">Expert Engineers</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">30+</div>
-                <div class="stat-label" data-en="Countries Served" data-fa="کشور خدمت‌رسانی">Countries Served</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="services">
+    <section class="services-preview">
         <div class="section-header">
-            <h2 data-en="Our Core Services" data-fa="خدمات اصلی ما">Our Core Services</h2>
-            <p data-en="Comprehensive mining engineering solutions tailored to your project needs" data-fa="راهکارهای جامع مهندسی معدن متناسب با نیازهای پروژه شما">Comprehensive mining engineering solutions tailored to your project needs</p>
+            <h2 class="section-title" data-en="Our Core Services" data-fa="خدمات اصلی ما">Our Core Services</h2>
+            <p class="section-subtitle" data-en="Delivering world-class engineering solutions for the global mining industry" data-fa="ارائه راهکارهای مهندسی در سطح جهانی برای صنعت معدن جهانی">Delivering world-class engineering solutions for the global mining industry</p>
         </div>
+        
         <div class="services-grid">
             <div class="service-card">
-                <div class="service-icon">⚙️</div>
-                <h3 data-en="Equipment Selection" data-fa="انتخاب تجهیزات">Equipment Selection</h3>
-                <p data-en="Expert guidance in selecting optimal mining and processing equipment based on your project requirements, budget constraints, and operational goals." data-fa="راهنمایی تخصصی در انتخاب بهینه تجهیزات معدنی و فرآوری بر اساس نیازهای پروژه، محدودیت‌های بودجه و اهداف عملیاتی شما.">Expert guidance in selecting optimal mining and processing equipment based on your project requirements, budget constraints, and operational goals.</p>
-                <a href="services/equipment-selection.html" class="service-link">
-                    <span data-en="Learn More" data-fa="بیشتر بدانید">Learn More</span>
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-            
-            <div class="service-card">
-                <div class="service-icon">💰</div>
-                <h3 data-en="Economic Analysis" data-fa="تحلیل اقتصادی">Economic Analysis</h3>
-                <p data-en="Comprehensive financial modeling, feasibility studies, NPV analysis, IRR calculations, and sensitivity analysis to ensure project viability and maximize ROI." data-fa="مدل‌سازی مالی جامع، مطالعات امکان‌سنجی، تحلیل NPV، محاسبات IRR و تحلیل حساسیت برای اطمینان از امکان‌پذیری پروژه و حداکثر بازده سرمایه.">Comprehensive financial modeling, feasibility studies, NPV analysis, IRR calculations, and sensitivity analysis to ensure project viability and maximize ROI.</p>
-                <a href="services/economic-analysis.html" class="service-link">
-                    <span data-en="Learn More" data-fa="بیشتر بدانید">Learn More</span>
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-            
-            <div class="service-card">
                 <div class="service-icon">🏭</div>
-                <h3 data-en="Plant Design" data-fa="طراحی کارخانه">Plant Design</h3>
-                <p data-en="Complete mineral processing plant design services from conceptual studies to detailed engineering, 3D modeling, and commissioning support." data-fa="خدمات کامل طراحی کارخانه فرآوری مواد معدنی از مطالعات مفهومی تا مهندسی تفصیلی، مدل‌سازی سه‌بعدی و پشتیبانی راه‌اندازی.">Complete mineral processing plant design services from conceptual studies to detailed engineering, 3D modeling, and commissioning support.</p>
+                <h3 data-en="Plant Design & Engineering" data-fa="طراحی و مهندسی کارخانه">Plant Design & Engineering</h3>
+                <p data-en="Complete plant design from conceptual to detailed engineering with optimized layouts and equipment selection." data-fa="طراحی کامل کارخانه از مفهومی تا مهندسی تفصیلی با چیدمان بهینه و انتخاب تجهیزات.">Complete plant design from conceptual to detailed engineering with optimized layouts and equipment selection.</p>
                 <a href="services/plant-design.html" class="service-link">
-                    <span data-en="Learn More" data-fa="بیشتر بدانید">Learn More</span>
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-            
-            <div class="service-card">
-                <div class="service-icon">⚠️</div>
-                <h3 data-en="Risk Analysis" data-fa="تحلیل ریسک">Risk Analysis</h3>
-                <p data-en="Comprehensive risk assessment, identification of potential hazards, and development of mitigation strategies for mining operations." data-fa="ارزیابی جامع ریسک، شناسایی خطرات بالقوه و توسعه استراتژی‌های کاهش ریسک برای عملیات معدنی.">Comprehensive risk assessment, identification of potential hazards, and development of mitigation strategies for mining operations.</p>
-                <a href="services/risk-analysis.html" class="service-link">
-                    <span data-en="Learn More" data-fa="بیشتر بدانید">Learn More</span>
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-            
-            <div class="service-card">
-                <div class="service-icon">🔬</div>
-                <h3 data-en="Technology Optimization" data-fa="بهینه‌سازی فناوری">Technology Optimization</h3>
-                <p data-en="Process optimization, efficiency improvement, and implementation of cutting-edge technologies to maximize productivity and reduce operational costs." data-fa="بهینه‌سازی فرآیند، بهبود کارایی و پیاده‌سازی فناوری‌های پیشرفته برای حداکثر بهره‌وری و کاهش هزینه‌های عملیاتی.">Process optimization, efficiency improvement, and implementation of cutting-edge technologies to maximize productivity and reduce operational costs.</p>
-                <a href="services/technology-optimization.html" class="service-link">
                     <span data-en="Learn More" data-fa="بیشتر بدانید">Learn More</span>
                     <i class="fas fa-arrow-right"></i>
                 </a>
@@ -688,8 +161,48 @@
             <div class="service-card">
                 <div class="service-icon">📊</div>
                 <h3 data-en="Feasibility Studies" data-fa="مطالعات امکان‌سنجی">Feasibility Studies</h3>
-                <p data-en="Detailed technical, economic, and environmental feasibility studies following international standards and best practices." data-fa="مطالعات امکان‌سنجی دقیق فنی، اقتصادی و زیست‌محیطی مطابق با استانداردهای بین‌المللی و بهترین شیوه‌ها.">Detailed technical, economic, and environmental feasibility studies following international standards and best practices.</p>
+                <p data-en="Comprehensive feasibility studies compliant with NI 43-101, JORC, and SAMREC standards for informed investment decisions." data-fa="مطالعات امکان‌سنجی جامع مطابق با استانداردهای NI 43-101، JORC و SAMREC برای تصمیمات سرمایه‌گذاری آگاهانه.">Comprehensive feasibility studies compliant with NI 43-101, JORC, and SAMREC standards for informed investment decisions.</p>
                 <a href="services/feasibility-studies.html" class="service-link">
+                    <span data-en="Learn More" data-fa="بیشتر بدانید">Learn More</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">⚙️</div>
+                <h3 data-en="Equipment Selection" data-fa="انتخاب تجهیزات">Equipment Selection</h3>
+                <p data-en="Expert equipment selection and sizing services ensuring optimal performance and cost-effectiveness." data-fa="خدمات انتخاب و اندازه‌گیری تجهیزات تخصصی که عملکرد بهینه و مقرون به صرفه بودن را تضمین می‌کند.">Expert equipment selection and sizing services ensuring optimal performance and cost-effectiveness.</p>
+                <a href="services/equipment-selection.html" class="service-link">
+                    <span data-en="Learn More" data-fa="بیشتر بدانید">Learn More</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🔬</div>
+                <h3 data-en="Process Optimization" data-fa="بهینه‌سازی فرآیند">Process Optimization</h3>
+                <p data-en="Advanced optimization services to maximize recovery, reduce costs, and improve overall plant efficiency." data-fa="خدمات بهینه‌سازی پیشرفته برای به حداکثر رساندن بازیابی، کاهش هزینه‌ها و بهبود کارایی کلی کارخانه.">Advanced optimization services to maximize recovery, reduce costs, and improve overall plant efficiency.</p>
+                <a href="services/technology-optimization.html" class="service-link">
+                    <span data-en="Learn More" data-fa="بیشتر بدانید">Learn More</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🏗️</div>
+                <h3 data-en="Concentration Plants" data-fa="کارخانه‌های کنسانتره">Concentration Plants</h3>
+                <p data-en="Complete design services for mineral concentration plants including crushing, grinding, and separation systems." data-fa="خدمات طراحی کامل برای کارخانه‌های کنسانتره مواد معدنی از جمله سیستم‌های خردایش، آسیاب و جداسازی.">Complete design services for mineral concentration plants including crushing, grinding, and separation systems.</p>
+                <a href="services/concentration-plants.html" class="service-link">
+                    <span data-en="Learn More" data-fa="بیشتر بدانید">Learn More</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🤝</div>
+                <h3 data-en="Vendor Partnerships" data-fa="شراکت‌های تامین‌کننده">Vendor Partnerships</h3>
+                <p data-en="Global network of qualified vendors delivering competitive pricing and reliable equipment solutions." data-fa="شبکه جهانی تامین‌کنندگان واجد شرایط که قیمت‌گذاری رقابتی و راهکارهای تجهیزات قابل اعتماد ارائه می‌دهند.">Global network of qualified vendors delivering competitive pricing and reliable equipment solutions.</p>
+                <a href="services/vendor-partnerships.html" class="service-link">
                     <span data-en="Learn More" data-fa="بیشتر بدانید">Learn More</span>
                     <i class="fas fa-arrow-right"></i>
                 </a>
@@ -697,74 +210,38 @@
         </div>
     </section>
 
-    <!-- Why Choose Us -->
-    <section class="why-choose">
-        <div class="section-header">
-            <h2 data-en="Why Choose Kavian?" data-fa="چرا کاویان؟">Why Choose Kavian?</h2>
-            <p data-en="We bring unmatched expertise and commitment to every project" data-fa="ما تخصص و تعهد بی‌نظیر را به هر پروژه می‌آوریم">We bring unmatched expertise and commitment to every project</p>
-        </div>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-graduation-cap"></i>
-                </div>
-                <h3 data-en="Expert Team" data-fa="تیم متخصص">Expert Team</h3>
-                <p data-en="Decades of combined experience in mining engineering and mineral processing with international certifications" data-fa="دهه‌ها تجربه ترکیبی در مهندسی معدن و فرآوری مواد معدنی با گواهینامه‌های بین‌المللی">Decades of combined experience in mining engineering and mineral processing with international certifications</p>
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">200+</div>
+                <div class="stat-label" data-en="Projects Completed" data-fa="پروژه تکمیل شده">Projects Completed</div>
             </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-laptop-code"></i>
-                </div>
-                <h3 data-en="Advanced Technology" data-fa="فناوری پیشرفته">Advanced Technology</h3>
-                <p data-en="Utilizing cutting-edge software and methodologies for accurate cost estimation and project planning" data-fa="استفاده از نرم‌افزارها و روش‌های پیشرفته برای برآورد دقیق هزینه و برنامه‌ریزی پروژه">Utilizing cutting-edge software and methodologies for accurate cost estimation and project planning</p>
+            <div class="stat-item">
+                <div class="stat-number">30+</div>
+                <div class="stat-label" data-en="Countries Served" data-fa="کشور خدمت‌رسانی">Countries Served</div>
             </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-globe"></i>
-                </div>
-                <h3 data-en="Global Standards" data-fa="استانداردهای جهانی">Global Standards</h3>
-                <p data-en="Following AACE International standards and industry best practices in all our deliverables" data-fa="پیروی از استانداردهای AACE بین‌المللی و بهترین شیوه‌های صنعت در تمام تحویلی‌های ما">Following AACE International standards and industry best practices in all our deliverables</p>
+            <div class="stat-item">
+                <div class="stat-number">150+</div>
+                <div class="stat-label" data-en="Expert Engineers" data-fa="مهندس متخصص">Expert Engineers</div>
             </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-handshake"></i>
-                </div>
-                <h3 data-en="Client-Focused" data-fa="مشتری‌محور">Client-Focused</h3>
-                <p data-en="Dedicated support throughout the project lifecycle with transparent communication and regular updates" data-fa="پشتیبانی اختصاصی در طول چرخه حیات پروژه با ارتباطات شفاف و به‌روزرسانی‌های منظم">Dedicated support throughout the project lifecycle with transparent communication and regular updates</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-shield-alt"></i>
-                </div>
-                <h3 data-en="Quality Assurance" data-fa="تضمین کیفیت">Quality Assurance</h3>
-                <p data-en="Rigorous quality control processes ensuring accuracy and reliability in all our engineering solutions" data-fa="فرآیندهای کنترل کیفیت دقیق که دقت و قابلیت اطمینان را در تمام راهکارهای مهندسی ما تضمین می‌کند">Rigorous quality control processes ensuring accuracy and reliability in all our engineering solutions</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-leaf"></i>
-                </div>
-                <h3 data-en="Sustainable Solutions" data-fa="راهکارهای پایدار">Sustainable Solutions</h3>
-                <p data-en="Environmentally responsible approaches that balance economic viability with ecological preservation" data-fa="رویکردهای مسئولانه زیست‌محیطی که امکان‌پذیری اقتصادی را با حفاظت از محیط زیست متعادل می‌کند">Environmentally responsible approaches that balance economic viability with ecological preservation</p>
+            <div class="stat-item">
+                <div class="stat-number">20</div>
+                <div class="stat-label" data-en="Years of Excellence" data-fa="سال تعالی">Years of Excellence</div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta">
-        <h2 data-en="Ready to Start Your Project?" data-fa="آماده شروع پروژه خود هستید؟">Ready to Start Your Project?</h2>
-        <p data-en="Let's discuss how we can help you achieve your mining project goals" data-fa="بیایید در مورد اینکه چگونه می‌توانیم به شما در دستیابی به اهداف پروژه معدنی کمک کنیم صحبت کنیم">Let's discuss how we can help you achieve your mining project goals</p>
-        <a href="contact.html" class="btn btn-primary">
-            <span data-en="Contact Us Today" data-fa="همین امروز با ما تماس بگیرید">Contact Us Today</span>
-            <i class="fas fa-phone"></i>
-        </a>
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2 data-en="Ready to Start Your Project?" data-fa="آماده شروع پروژه خود هستید؟">Ready to Start Your Project?</h2>
+            <p data-en="Contact our team of experts to discuss your mining project requirements and discover how we can help you achieve your goals." data-fa="با تیم متخصصان ما تماس بگیرید تا در مورد الزامات پروژه معدنی خود بحث کنید و کشف کنید که چگونه می‌توانیم به شما در دستیابی به اهدافتان کمک کنیم.">Contact our team of experts to discuss your mining project requirements and discover how we can help you achieve your goals.</p>
+            <a href="contact.html" class="btn btn-primary">
+                <span data-en="Contact Us Today" data-fa="امروز با ما تماس بگیرید">Contact Us Today</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-section">
@@ -772,32 +249,25 @@
                 <ul>
                     <li><a href="about.html" data-en="About Us" data-fa="درباره ما">About Us</a></li>
                     <li><a href="portfolio.html" data-en="Portfolio" data-fa="نمونه کارها">Portfolio</a></li>
-                    <li><a href="blog.html" data-en="Blog" data-fa="وبلاگ">Blog</a></li>
-                    <li><a href="news.html" data-en="News" data-fa="اخبار">News</a></li>
                     <li><a href="contact.html" data-en="Contact" data-fa="تماس با ما">Contact</a></li>
                 </ul>
             </div>
-            
             <div class="footer-section">
                 <h3 data-en="Services" data-fa="خدمات">Services</h3>
                 <ul>
-                    <li><a href="services/equipment-selection.html" data-en="Equipment Selection" data-fa="انتخاب تجهیزات">Equipment Selection</a></li>
-                    <li><a href="services/economic-analysis.html" data-en="Economic Analysis" data-fa="تحلیل اقتصادی">Economic Analysis</a></li>
                     <li><a href="services/plant-design.html" data-en="Plant Design" data-fa="طراحی کارخانه">Plant Design</a></li>
-                    <li><a href="services/risk-analysis.html" data-en="Risk Analysis" data-fa="تحلیل ریسک">Risk Analysis</a></li>
                     <li><a href="services/feasibility-studies.html" data-en="Feasibility Studies" data-fa="مطالعات امکان‌سنجی">Feasibility Studies</a></li>
+                    <li><a href="services/equipment-selection.html" data-en="Equipment Selection" data-fa="انتخاب تجهیزات">Equipment Selection</a></li>
                 </ul>
             </div>
-            
             <div class="footer-section">
                 <h3 data-en="Resources" data-fa="منابع">Resources</h3>
                 <ul>
+                    <li><a href="blog.html" data-en="Blog" data-fa="وبلاگ">Blog</a></li>
+                    <li><a href="news.html" data-en="News" data-fa="اخبار">News</a></li>
                     <li><a href="technical-resources.html" data-en="Technical Resources" data-fa="منابع فنی">Technical Resources</a></li>
-                    <li><a href="technical-login.html" data-en="Client Portal" data-fa="پورتال مشتری">Client Portal</a></li>
-                    <li><a href="register.html" data-en="Register" data-fa="ثبت‌نام">Register</a></li>
                 </ul>
             </div>
-            
             <div class="footer-section">
                 <h3 data-en="Contact" data-fa="تماس">Contact</h3>
                 <ul>
@@ -805,15 +275,8 @@
                     <li>📞 +98 21 1234 5678</li>
                     <li>📍 Tehran, Iran</li>
                 </ul>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                </div>
             </div>
         </div>
-        
         <div class="footer-bottom">
             <p data-en="&copy; 2025 Kavian Development Mine. All rights reserved." data-fa="© 2025 کاویان توسعه معدن. تمامی حقوق محفوظ است.">&copy; 2025 Kavian Development Mine. All rights reserved.</p>
         </div>
@@ -825,29 +288,23 @@
             const elements = document.querySelectorAll('[data-en][data-fa]');
             const langButtons = document.querySelectorAll('.lang-btn');
             
-            // Update body class
-            if (lang === 'fa') {
-                body.classList.add('rtl');
-            } else {
-                body.classList.remove('rtl');
-            }
+            if (lang === 'fa') { body.classList.add('rtl'); } 
+            else { body.classList.remove('rtl'); }
             
-            // Update button states
-            langButtons.forEach(btn => {
-                btn.classList.remove('active');
-            });
+            langButtons.forEach(btn => btn.classList.remove('active'));
             event.target.closest('.lang-btn').classList.add('active');
             
-            // Update all text content
             elements.forEach(el => {
-                el.innerHTML = el.getAttribute('data-' + lang);
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.placeholder = el.getAttribute('data-' + lang);
+                } else {
+                    el.innerHTML = el.getAttribute('data-' + lang);
+                }
             });
             
-            // Save preference
             localStorage.setItem('preferredLanguage', lang);
         }
         
-        // Load saved language preference
         window.addEventListener('DOMContentLoaded', () => {
             const savedLang = localStorage.getItem('preferredLanguage') || 'en';
             if (savedLang === 'fa') {
