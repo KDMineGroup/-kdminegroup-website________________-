@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Kavian Development Mine</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #1e3a8a;
+            --secondary-blue: #2563eb;
+            --accent-gold: #f59e0b;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+        }
+        body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-dark); overflow-x: hidden; }
+        body.rtl { font-family: 'Vazirmatn', sans-serif; direction: rtl; }
+        
+        .language-switcher { position: fixed; top: 20px; right: 20px; z-index: 3000; background: white; border-radius: 50px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); padding: 8px; display: flex; gap: 8px; }
+        body.rtl .language-switcher { right: auto; left: 20px; }
+        .lang-btn { padding: 10px 20px; border: 2px solid transparent; background: transparent; border-radius: 25px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: all 0.3s; display: flex; align-items: center; gap: 8px; color: var(--text-light); }
+        .lang-btn:hover { background: var(--light-bg); color: var(--secondary-blue); }
+        .lang-btn.active { background: var(--secondary-blue); color: white; border-color: var(--secondary-blue); }
+        
+        header { background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%); color: white; padding: 1rem 0; position: sticky; top: 0; z-index: 2000; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        nav { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
+        .logo { display: flex; align-items: center; gap: 15px; font-size: 1.5rem; font-weight: 700; text-decoration: none; color: white; }
+        .logo img { height: 55px; width: auto; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2)); }
+        .nav-links { display: flex; list-style: none; gap: 2.5rem; align-items: center; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 500; transition: all 0.3s; position: relative; padding: 5px 0; }
+        .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--accent-gold); transition: width 0.3s; }
+        .nav-links a:hover::after { width: 100%; }
+        
+        .page-hero { background: linear-gradient(135deg, rgba(30, 58, 138, 0.95) 0%, rgba(37, 99, 235, 0.95) 100%), url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=1920') center/cover; color: white; padding: 120px 2rem 80px; text-align: center; }
+        .page-hero h1 { font-size: 3.5rem; margin-bottom: 1rem; font-weight: 700; text-shadow: 2px 2px 8px rgba(0,0,0,0.3); }
+        .page-hero p { font-size: 1.3rem; opacity: 0.95; max-width: 800px; margin: 0 auto; }
+        
+        .content-section { max-width: 1400px; margin: 0 auto; padding: 80px 2rem; }
+        .section-title { font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 2rem; text-align: center; }
+        .section-text { font-size: 1.1rem; color: var(--text-light); line-height: 1.9; margin-bottom: 2rem; text-align: center; max-width: 900px; margin-left: auto; margin-right: auto; }
+        
+        .timeline { position: relative; padding: 40px 0; }
+        .timeline::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, var(--secondary-blue), var(--accent-gold)); }
+        body.rtl .timeline::before { left: auto; right: 50%; }
+        
+        .timeline-item { display: flex; margin-bottom: 60px; position: relative; }
+        .timeline-item:nth-child(odd) { flex-direction: row; }
+        .timeline-item:nth-child(even) { flex-direction: row-reverse; }
+        body.rtl .timeline-item:nth-child(odd) { flex-direction: row-reverse; }
+        body.rtl .timeline-item:nth-child(even) { flex-direction: row; }
+        
+        .timeline-content { width: 45%; padding: 30px; background: white; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); position: relative; }
+        .timeline-content h3 { color: var(--secondary-blue); font-size: 1.8rem; margin-bottom: 10px; }
+        .timeline-year { color: var(--accent-gold); font-weight: 700; font-size: 1.3rem; margin-bottom: 15px; }
+        .timeline-content p { color: var(--text-light); line-height: 1.8; }
+        
+        .timeline-dot { position: absolute; left: 50%; top: 30px; width: 20px; height: 20px; background: var(--accent-gold); border-radius: 50%; transform: translateX(-50%); border: 4px solid white; box-shadow: 0 0 0 4px var(--secondary-blue); }
+        body.rtl .timeline-dot { left: auto; right: 50%; transform: translateX(50%); }
+        
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-top: 60px; }
+        .team-member { text-align: center; background: white; padding: 40px 30px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); transition: all 0.4s; }
+        .team-member:hover { transform: translateY(-10px); box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+        .team-avatar { width: 150px; height: 150px; border-radius: 50%; margin: 0 auto 20px; background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); display: flex; align-items: center; justify-content: center; font-size: 3rem; color: white; }
+        .team-member h3 { color: var(--primary-blue); font-size: 1.5rem; margin-bottom: 10px; }
+        .team-role { color: var(--accent-gold); font-weight: 600; margin-bottom: 15px; }
+        .team-member p { color: var(--text-light); line-height: 1.7; }
+        
+        .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; margin-top: 60px; }
+        .value-card { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); text-align: center; transition: all 0.3s; border-top: 5px solid var(--secondary-blue); }
+        .value-card:hover { transform: translateY(-5px); border-top-color: var(--accent-gold); }
+        .value-icon { font-size: 3.5rem; margin-bottom: 20px; }
+        .value-card h3 { color: var(--primary-blue); font-size: 1.6rem; margin-bottom: 15px; }
+        .value-card p { color: var(--text-light); line-height: 1.8; }
+        
+        .stats-section { background: var(--dark-bg); color: white; padding: 80px 2rem; margin: 80px 0; }
+        .stats-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; text-align: center; }
+        .stat-number { font-size: 4rem; font-weight: 700; color: var(--accent-gold); margin-bottom: 10px; }
+        .stat-label { font-size: 1.2rem; opacity: 0.9; }
+        
+        footer { background: var(--dark-bg); color: white; padding: 60px 2rem 30px; }
+        .footer-content { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 40px; }
+        .footer-section h3 { color: var(--accent-gold); margin-bottom: 20px; font-size: 1.3rem; }
+        .footer-section ul { list-style: none; }
+        .footer-section a { color: #cbd5e1; text-decoration: none; display: block; margin-bottom: 12px; transition: all 0.3s; }
+        .footer-section a:hover { color: var(--accent-gold); padding-left: 5px; }
+        body.rtl .footer-section a:hover { padding-left: 0; padding-right: 5px; }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); color: #94a3b8; }
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .page-hero h1 { font-size: 2.5rem; }
+            .timeline::before { left: 30px; }
+            body.rtl .timeline::before { left: auto; right: 30px; }
+            .timeline-item { flex-direction: column !important; }
+            .timeline-content { width: 100%; margin-left: 60px; }
+            body.rtl .timeline-content { margin-left: 0; margin-right: 60px; }
+            .timeline-dot { left: 30px; }
+            body.rtl .timeline-dot { left: auto; right: 30px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switcher">
+        <button class="lang-btn active" onclick="switchLanguage('en')">
+            <span>🇬🇧</span><span>EN</span>
+        </button>
+        <button class="lang-btn" onclick="switchLanguage('fa')">
+            <span>🇮🇷</span><span>FA</span>
+        </button>
+    </div>
+
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Logo">
+                <span data-en="Kavian Development Mine" data-fa="کاویان توسعه معدن">Kavian Development Mine</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" data-en="Home" data-fa="خانه">Home</a></li>
+                <li><a href="about.html" data-en="About" data-fa="درباره ما">About</a></li>
+                <li><a href="services.html" data-en="Services" data-fa="خدمات">Services</a></li>
+                <li><a href="portfolio.html" data-en="Portfolio" data-fa="نمونه کارها">Portfolio</a></li>
+                <li><a href="blog.html" data-en="Blog" data-fa="وبلاگ">Blog</a></li>
+                <li><a href="news.html" data-en="News" data-fa="اخبار">News</a></li>
+                <li><a href="technical-resources.html" data-en="Resources" data-fa="منابع فنی">Resources</a></li>
+                <li><a href="contact.html" data-en="Contact" data-fa="تماس">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="page-hero">
+        <h1 data-en="About Kavian Development Mine" data-fa="درباره کاویان توسعه معدن">About Kavian Development Mine</h1>
+        <p data-en="Your Trusted Partner in Mining Engineering Excellence Since 2010" data-fa="شریک مورد اعتماد شما در تعالی مهندسی معدن از سال 2010">Your Trusted Partner in Mining Engineering Excellence Since 2010</p>
+    </section>
+
+    <section class="content-section">
+        <h2 class="section-title" data-en="Who We Are" data-fa="ما کی هستیم">Who We Are</h2>
+        <p class="section-text" data-en="Kavian Development Mine is a leading mining engineering consultancy with over 15 years of experience in the industry. We specialize in providing comprehensive solutions for mining projects worldwide, from initial feasibility studies to plant commissioning and optimization. Our team of expert engineers combines deep technical knowledge with practical experience to deliver innovative, cost-effective, and sustainable mining solutions." data-fa="کاویان توسعه معدن یک مشاوره پیشرو مهندسی معدن با بیش از 15 سال تجربه در صنعت است. ما در ارائه راهکارهای جامع برای پروژه‌های معدنی در سراسر جهان، از مطالعات امکان‌سنجی اولیه تا راه‌اندازی و بهینه‌سازی کارخانه تخصص داریم. تیم مهندسان متخصص ما دانش فنی عمیق را با تجربه عملی ترکیب می‌کند تا راهکارهای معدنی نوآورانه، مقرون‌به‌صرفه و پایدار ارائه دهد.">Kavian Development Mine is a leading mining engineering consultancy with over 15 years of experience in the industry. We specialize in providing comprehensive solutions for mining projects worldwide, from initial feasibility studies to plant commissioning and optimization. Our team of expert engineers combines deep technical knowledge with practical experience to deliver innovative, cost-effective, and sustainable mining solutions.</p>
+    </section>
+
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">15+</div>
+                <div class="stat-label" data-en="Years of Experience" data-fa="سال تجربه">Years of Experience</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">200+</div>
+                <div class="stat-label" data-en="Completed Projects" data-fa="پروژه تکمیل شده">Completed Projects</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">50+</div>
+                <div class="stat-label" data-en="Expert Engineers" data-fa="مهندس متخصص">Expert Engineers</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">30+</div>
+                <div class="stat-label" data-en="Countries Served" data-fa="کشور خدمت‌رسانی">Countries Served</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2 class="section-title" data-en="Our Journey" data-fa="سفر ما">Our Journey</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2010</div>
+                    <h3 data-en="Foundation" data-fa="تاسیس">Foundation</h3>
+                    <p data-en="Kavian Development Mine was established by a team of experienced mining engineers with a vision to revolutionize mining consultancy services in the region." data-fa="کاویان توسعه معدن توسط تیمی از مهندسان معدن با تجربه با چشم‌اندازی برای متحول کردن خدمات مشاوره معدنی در منطقه تاسیس شد.">Kavian Development Mine was established by a team of experienced mining engineers with a vision to revolutionize mining consultancy services in the region.</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2013</div>
+                    <h3 data-en="First Major Project" data-fa="اولین پروژه بزرگ">First Major Project</h3>
+                    <p data-en="Successfully completed our first large-scale copper processing plant design, establishing our reputation for excellence in mineral processing engineering." data-fa="طراحی اولین کارخانه فرآوری مس در مقیاس بزرگ خود را با موفقیت تکمیل کردیم و شهرت خود را برای تعالی در مهندسی فرآوری مواد معدنی ایجاد کردیم.">Successfully completed our first large-scale copper processing plant design, establishing our reputation for excellence in mineral processing engineering.</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2016</div>
+                    <h3 data-en="International Expansion" data-fa="توسعه بین‌المللی">International Expansion</h3>
+                    <p data-en="Expanded operations to serve clients across Middle East, Asia, and Africa, bringing world-class mining engineering expertise to emerging markets." data-fa="عملیات را برای خدمت به مشتریان در سراسر خاورمیانه، آسیا و آفریقا گسترش دادیم و تخصص مهندسی معدن در سطح جهانی را به بازارهای نوظهور آوردیم.">Expanded operations to serve clients across Middle East, Asia, and Africa, bringing world-class mining engineering expertise to emerging markets.</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2019</div>
+                    <h3 data-en="Technology Integration" data-fa="یکپارچه‌سازی فناوری">Technology Integration</h3>
+                    <p data-en="Implemented advanced AI-powered cost estimation tools and 3D plant modeling systems, enhancing accuracy and efficiency in project delivery." data-fa="ابزارهای برآورد هزینه مبتنی بر هوش مصنوعی پیشرفته و سیستم‌های مدل‌سازی سه‌بعدی کارخانه را پیاده‌سازی کردیم و دقت و کارایی در تحویل پروژه را افزایش دادیم.">Implemented advanced AI-powered cost estimation tools and 3D plant modeling systems, enhancing accuracy and efficiency in project delivery.</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2022</div>
+                    <h3 data-en="Sustainability Initiative" data-fa="ابتکار پایداری">Sustainability Initiative</h3>
+                    <p data-en="Launched our Green Mining Solutions program, focusing on environmentally responsible mining practices and renewable energy integration." data-fa="برنامه راهکارهای معدنکاری سبز خود را راه‌اندازی کردیم که بر شیوه‌های معدنکاری مسئولانه زیست‌محیطی و یکپارچه‌سازی انرژی تجدیدپذیر تمرکز دارد.">Launched our Green Mining Solutions program, focusing on environmentally responsible mining practices and renewable energy integration.</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2025</div>
+                    <h3 data-en="Industry Leadership" data-fa="رهبری صنعت">Industry Leadership</h3>
+                    <p data-en="Recognized as one of the top mining consultancy firms in the region, with over 200 successful projects and numerous industry awards." data-fa="به عنوان یکی از برترین شرکت‌های مشاوره معدنی در منطقه شناخته شده‌ایم، با بیش از 200 پروژه موفق و جوایز متعدد صنعتی.">Recognized as one of the top mining consultancy firms in the region, with over 200 successful projects and numerous industry awards.</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section" style="background: var(--light-bg);">
+        <h2 class="section-title" data-en="Our Values" data-fa="ارزش‌های ما">Our Values</h2>
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-icon">🎯</div>
+                <h3 data-en="Excellence" data-fa="تعالی">Excellence</h3>
+                <p data-en="We are committed to delivering the highest quality engineering solutions, exceeding client expectations through meticulous attention to detail and continuous improvement." data-fa="ما متعهد به ارائه راهکارهای مهندسی با بالاترین کیفیت هستیم و از طریق توجه دقیق به جزئیات و بهبود مستمر، فراتر از انتظارات مشتری عمل می‌کنیم.">We are committed to delivering the highest quality engineering solutions, exceeding client expectations through meticulous attention to detail and continuous improvement.</p>
+            </div>
+            
+            <div class="value-card">
+                <div class="value-icon">💡</div>
+                <h3 data-en="Innovation" data-fa="نوآوری">Innovation</h3>
+                <p data-en="We embrace cutting-edge technologies and innovative approaches to solve complex mining challenges, staying at the forefront of industry advancements." data-fa="ما فناوری‌های پیشرفته و رویکردهای نوآورانه را برای حل چالش‌های پیچیده معدنی پذیرفته‌ایم و در خط مقدم پیشرفت‌های صنعت قرار داریم.">We embrace cutting-edge technologies and innovative approaches to solve complex mining challenges, staying at the forefront of industry advancements.</p>
+            </div>
+            
+            <div class="value-card">
+                <div class="value-icon">🤝</div>
+                <h3 data-en="Integrity" data-fa="صداقت">Integrity</h3>
+                <p data-en="We conduct business with the highest ethical standards, maintaining transparency, honesty, and accountability in all our professional relationships." data-fa="ما تجارت را با بالاترین استانداردهای اخلاقی انجام می‌دهیم و شفافیت، صداقت و پاسخگویی را در تمام روابط حرفه‌ای خود حفظ می‌کنیم.">We conduct business with the highest ethical standards, maintaining transparency, honesty, and accountability in all our professional relationships.</p>
+            </div>
+            
+            <div class="value-card">
+                <div class="value-icon">🌱</div>
+                <h3 data-en="Sustainability" data-fa="پایداری">Sustainability</h3>
+                <p data-en="We prioritize environmentally responsible practices, balancing economic viability with ecological preservation for future generations." data-fa="ما اولویت را به شیوه‌های مسئولانه زیست‌محیطی می‌دهیم و امکان‌پذیری اقتصادی را با حفاظت از محیط زیست برای نسل‌های آینده متعادل می‌کنیم.">We prioritize environmentally responsible practices, balancing economic viability with ecological preservation for future generations.</p>
+            </div>
+            
+            <div class="value-card">
+                <div class="value-icon">👥</div>
+                <h3 data-en="Collaboration" data-fa="همکاری">Collaboration</h3>
+                <p data-en="We believe in the power of teamwork, fostering strong partnerships with clients, suppliers, and stakeholders to achieve shared success." data-fa="ما به قدرت کار تیمی اعتقاد داریم و مشارکت‌های قوی با مشتریان، تامین‌کنندگان و ذینفعان را برای دستیابی به موفقیت مشترک تقویت می‌کنیم.">We believe in the power of teamwork, fostering strong partnerships with clients, suppliers, and stakeholders to achieve shared success.</p>
+            </div>
+            
+            <div class="value-card">
+                <div class="value-icon">🏆</div>
+                <h3 data-en="Quality" data-fa="کیفیت">Quality</h3>
+                <p data-en="We maintain rigorous quality control processes, ensuring accuracy, reliability, and compliance with international standards in all deliverables." data-fa="ما فرآیندهای کنترل کیفیت دقیق را حفظ می‌کنیم و دقت، قابلیت اطمینان و انطباق با استانداردهای بین‌المللی را در تمام تحویلی‌ها تضمین می‌کنیم.">We maintain rigorous quality control processes, ensuring accuracy, reliability, and compliance with international standards in all deliverables.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2 class="section-title" data-en="Leadership Team" data-fa="تیم رهبری">Leadership Team</h2>
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="team-avatar">👨‍💼</div>
+                <h3 data-en="Dr. Ahmad Rezaei" data-fa="دکتر احمد رضایی">Dr. Ahmad Rezaei</h3>
+                <div class="team-role" data-en="CEO & Founder" data-fa="مدیرعامل و بنیانگذار">CEO & Founder</div>
+                <p data-en="25+ years of experience in mining engineering with PhD in Mineral Processing. Led numerous large-scale mining projects across Middle East and Asia." data-fa="بیش از 25 سال تجربه در مهندسی معدن با دکترای فرآوری مواد معدنی. رهبری پروژه‌های معدنی بزرگ متعدد در خاورمیانه و آسیا.">25+ years of experience in mining engineering with PhD in Mineral Processing. Led numerous large-scale mining projects across Middle East and Asia.</p>
+            </div>
+            
+            <div class="team-member">
+                <div class="team-avatar">👩‍💼</div>
+                <h3 data-en="Eng. Sara Mohammadi" data-fa="مهندس سارا محمدی">Eng. Sara Mohammadi</h3>
+                <div class="team-role" data-en="Chief Technical Officer" data-fa="مدیر فنی ارشد">Chief Technical Officer</div>
+                <p data-en="Expert in plant design and process optimization with 18 years of experience. Specializes in copper and gold processing technologies." data-fa="متخصص در طراحی کارخانه و بهینه‌سازی فرآیند با 18 سال تجربه. تخصص در فناوری‌های فرآوری مس و طلا.">Expert in plant design and process optimization with 18 years of experience. Specializes in copper and gold processing technologies.</p>
+            </div>
+            
+            <div class="team-member">
+                <div class="team-avatar">👨‍💼</div>
+                <h3 data-en="Dr. Mehdi Karimi" data-fa="دکتر مهدی کریمی">Dr. Mehdi Karimi</h3>
+                <div class="team-role" data-en="Head of Economic Analysis" data-fa="رئیس تحلیل اقتصادی">Head of Economic Analysis</div>
+                <p data-en="PhD in Mining Economics with expertise in financial modeling and feasibility studies. Published 30+ research papers in international journals." data-fa="دکترای اقتصاد معدن با تخصص در مدل‌سازی مالی و مطالعات امکان‌سنجی. انتشار بیش از 30 مقاله تحقیقاتی در مجلات بین‌المللی.">PhD in Mining Economics with expertise in financial modeling and feasibility studies. Published 30+ research papers in international journals.</p>
+            </div>
+            
+            <div class="team-member">
+                <div class="team-avatar">👩‍💼</div>
+                <h3 data-en="Eng. Zahra Ahmadi" data-fa="مهندس زهرا احمدی">Eng. Zahra Ahmadi</h3>
+                <div class="team-role" data-en="Director of Operations" data-fa="مدیر عملیات">Director of Operations</div>
+                <p data-en="15 years of experience in project management and operations. Certified PMP and expert in AACE cost estimation standards." data-fa="15 سال تجربه در مدیریت پروژه و عملیات. دارای گواهینامه PMP و متخصص در استانداردهای برآورد هزینه AACE.">15 years of experience in project management and operations. Certified PMP and expert in AACE cost estimation standards.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 data-en="Company" data-fa="شرکت">Company</h3>
+                <ul>
+                    <li><a href="about.html" data-en="About Us" data-fa="درباره ما">About Us</a></li>
+                    <li><a href="portfolio.html" data-en="Portfolio" data-fa="نمونه کارها">Portfolio</a></li>
+                    <li><a href="blog.html" data-en="Blog" data-fa="وبلاگ">Blog</a></li>
+                    <li><a href="news.html" data-en="News" data-fa="اخبار">News</a></li>
+                    <li><a href="contact.html" data-en="Contact" data-fa="تماس با ما">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 data-en="Services" data-fa="خدمات">Services</h3>
+                <ul>
+                    <li><a href="services/equipment-selection.html" data-en="Equipment Selection" data-fa="انتخاب تجهیزات">Equipment Selection</a></li>
+                    <li><a href="services/economic-analysis.html" data-en="Economic Analysis" data-fa="تحلیل اقتصادی">Economic Analysis</a></li>
+                    <li><a href="services/plant-design.html" data-en="Plant Design" data-fa="طراحی کارخانه">Plant Design</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 data-en="Contact" data-fa="تماس">Contact</h3>
+                <ul>
+                    <li>📧 info@kdmine.com</li>
+                    <li>📞 +98 21 1234 5678</li>
+                    <li>📍 Tehran, Iran</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-en="&copy; 2025 Kavian Development Mine. All rights reserved." data-fa="© 2025 کاویان توسعه معدن. تمامی حقوق محفوظ است.">&copy; 2025 Kavian Development Mine. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize EmailJS
+        (function(){
+            emailjs.init("u3dfoUdeOTtWSAjk_");
+        })();
+        
+        function switchLanguage(lang) {
+            const body = document.body;
+            const elements = document.querySelectorAll('[data-en][data-fa]');
+            const langButtons = document.querySelectorAll('.lang-btn');
+            
+            if (lang === 'fa') {
+                body.classList.add('rtl');
+            } else {
+                body.classList.remove('rtl');
+            }
+            
+            langButtons.forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.lang-btn').classList.add('active');
+            
+            elements.forEach(el => {
+                el.innerHTML = el.getAttribute('data-' + lang);
+            });
+            
+            localStorage.setItem('preferredLanguage', lang);
+        }
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferredLanguage') || 'en';
+            if (savedLang === 'fa') {
+                document.querySelector('.lang-btn:last-child').click();
+            }
+        });
+    </script>
+</body>
+</html>
