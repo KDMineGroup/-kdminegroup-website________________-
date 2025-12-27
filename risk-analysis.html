@@ -1,1 +1,1237 @@
-
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحلیل ریسک | کاویان توسعه معدن</title>
+    <meta name="description" content="خدمات تخصصی تحلیل و مدیریت ریسک پروژه‌های معدنی">
+    <link rel="icon" type="image/svg+xml" href="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg">
+    
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function(){
+            emailjs.init({
+                publicKey: "YOUR_PUBLIC_KEY",
+            });
+        })();
+    </script>
+    
+    <style>
+        @font-face {
+            font-family: 'B Nazanin';
+            src: local('B Nazanin'), local('BNazanin');
+            font-display: swap;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'B Nazanin', Tahoma, sans-serif;
+            line-height: 1.8;
+            color: #1a202c;
+            background: #ffffff;
+        }
+        
+        /* Navigation */
+        .navbar {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            background: white;
+            padding: 5px;
+        }
+        
+        .logo-text h2 {
+            font-size: 1.4rem;
+            margin-bottom: 2px;
+        }
+        
+        .logo-text p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.05rem;
+            font-weight: 600;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        
+        .nav-cta {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn-nav {
+            padding: 10px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+        
+        .btn-primary {
+            background: white;
+            color: #2563eb;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255,255,255,0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: #2563eb;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.95), rgba(37, 99, 235, 0.95)),
+                        url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1920&q=80') center/cover;
+            color: white;
+            padding: 120px 40px 100px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.85), rgba(37, 99, 235, 0.75));
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .hero p {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            opacity: 0.95;
+            max-width: 900px;
+            margin: 0 auto 40px;
+        }
+        
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-hero {
+            padding: 16px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .btn-hero-primary {
+            background: white;
+            color: #2563eb;
+        }
+        
+        .btn-hero-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255,255,255,0.3);
+        }
+        
+        .btn-hero-secondary {
+            background: transparent;
+            color: white;
+            border: 3px solid white;
+        }
+        
+        .btn-hero-secondary:hover {
+            background: white;
+            color: #2563eb;
+        }
+        
+        /* Overview Section */
+        .overview-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .overview-image {
+            width: 100%;
+            height: 500px;
+            border-radius: 20px;
+            object-fit: cover;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+        
+        .overview-content h2 {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            color: #1a202c;
+            margin-bottom: 25px;
+        }
+        
+        .overview-content p {
+            font-size: 1.15rem;
+            color: #4a5568;
+            line-height: 2;
+            margin-bottom: 20px;
+        }
+        
+        .warning-box {
+            background: #fef3c7;
+            border-right: 5px solid #f59e0b;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        
+        .warning-box h4 {
+            color: #92400e;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .warning-box p {
+            color: #92400e;
+            font-size: 1.05rem;
+        }
+        
+        /* Risk Types Section */
+        .risk-types-section {
+            background: #f8fafc;
+            padding: 100px 40px;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+        
+        .section-header h2 {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            color: #1a202c;
+            margin-bottom: 15px;
+        }
+        
+        .section-header p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: #4a5568;
+        }
+        
+        .risk-types-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 35px;
+        }
+        
+        .risk-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            border-top: 5px solid transparent;
+        }
+        
+        .risk-card.high {
+            border-top-color: #dc2626;
+        }
+        
+        .risk-card.medium {
+            border-top-color: #f59e0b;
+        }
+        
+        .risk-card.low {
+            border-top-color: #059669;
+        }
+        
+        .risk-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+        
+        .risk-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .risk-card.high .risk-icon {
+            background: linear-gradient(135deg, #dc2626, #ef4444);
+        }
+        
+        .risk-card.medium .risk-icon {
+            background: linear-gradient(135deg, #f59e0b, #fbbf24);
+        }
+        
+        .risk-card.low .risk-icon {
+            background: linear-gradient(135deg, #059669, #10b981);
+        }
+        
+        .risk-card h3 {
+            font-size: 1.6rem;
+            color: #1a202c;
+            margin-bottom: 15px;
+        }
+        
+        .risk-card p {
+            color: #4a5568;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .risk-examples {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .risk-examples li {
+            padding: 8px 0;
+            padding-right: 25px;
+            position: relative;
+            color: #4a5568;
+            font-size: 0.95rem;
+        }
+        
+        .risk-examples li::before {
+            content: '⚠';
+            position: absolute;
+            right: 0;
+            font-size: 1rem;
+        }
+        
+        /* Methods Section */
+        .methods-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 40px;
+        }
+        
+        .methods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 35px;
+            margin-top: 60px;
+        }
+        
+        .method-card {
+            background: linear-gradient(135deg, #f8fafc, #e0f2fe);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px solid #bae6fd;
+            transition: all 0.3s;
+        }
+        
+        .method-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-color: #2563eb;
+        }
+        
+        .method-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #2563eb, #60a5fa);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+        }
+        
+        .method-card h3 {
+            font-size: 1.4rem;
+            color: #1a202c;
+            margin-bottom: 12px;
+        }
+        
+        .method-card p {
+            color: #4a5568;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+        
+        /* Risk Matrix Section */
+        .risk-matrix-section {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.95), rgba(37, 99, 235, 0.95)),
+                        url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1920&q=80') center/cover;
+            color: white;
+            padding: 100px 40px;
+            position: relative;
+        }
+        
+        .risk-matrix-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.9), rgba(37, 99, 235, 0.8));
+            z-index: 1;
+        }
+        
+        .risk-matrix-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .matrix-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 50px;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            margin-top: 60px;
+        }
+        
+        .matrix-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 10px;
+        }
+        
+        .matrix-table th,
+        .matrix-table td {
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+        
+        .matrix-table th {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .matrix-table td.low {
+            background: rgba(5, 150, 105, 0.7);
+        }
+        
+        .matrix-table td.medium {
+            background: rgba(245, 158, 11, 0.7);
+        }
+        
+        .matrix-table td.high {
+            background: rgba(220, 38, 38, 0.7);
+        }
+        
+        /* Process Section */
+        .process-section {
+            background: #f8fafc;
+            padding: 100px 40px;
+        }
+        
+        .process-timeline {
+            max-width: 1000px;
+            margin: 60px auto 0;
+            position: relative;
+        }
+        
+        .process-timeline::before {
+            content: '';
+            position: absolute;
+            right: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #2563eb, #60a5fa);
+        }
+        
+        .timeline-item {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+        
+        .timeline-content {
+            flex: 1;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #2563eb, #60a5fa);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            position: absolute;
+            right: calc(50% - 30px);
+            box-shadow: 0 0 0 8px #f8fafc;
+        }
+        
+        .timeline-content h3 {
+            font-size: 1.4rem;
+            color: #1a202c;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-content p {
+            color: #4a5568;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+        
+        /* Benefits Section */
+        .benefits-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 40px;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 35px;
+            margin-top: 60px;
+        }
+        
+        .benefit-card {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            border-right: 5px solid #2563eb;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .benefit-card h3 {
+            font-size: 1.4rem;
+            color: #1a202c;
+            margin-bottom: 12px;
+        }
+        
+        .benefit-card p {
+            color: #4a5568;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: white;
+            padding: 100px 40px;
+        }
+        
+        .cta-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            padding: 60px;
+            border-radius: 25px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 20px 60px rgba(37, 99, 235, 0.3);
+        }
+        
+        .cta-container h2 {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            margin-bottom: 20px;
+        }
+        
+        .cta-container p {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+        
+        .cta-form {
+            display: flex;
+            gap: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .cta-form input {
+            flex: 1;
+            min-width: 250px;
+            padding: 16px 20px;
+            border: none;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        
+        .cta-form button {
+            padding: 16px 35px;
+            background: white;
+            color: #2563eb;
+            border: none;
+            border-radius: 10px;
+            font-family: inherit;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .cta-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .cta-message {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 8px;
+            display: none;
+            font-weight: bold;
+        }
+        
+        .cta-message.success {
+            background: rgba(209, 250, 229, 0.3);
+            border: 2px solid rgba(5, 150, 105, 0.5);
+        }
+        
+        .cta-message.error {
+            background: rgba(254, 226, 226, 0.3);
+            border: 2px solid rgba(220, 38, 38, 0.5);
+        }
+        
+        /* Footer */
+        .footer {
+            background: #1a202c;
+            color: white;
+            padding: 60px 40px 30px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+        
+        .footer-section p,
+        .footer-section a {
+            color: #cbd5e0;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 30px;
+            border-top: 1px solid #2d3748;
+            text-align: center;
+            color: #cbd5e0;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links, .nav-cta {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .overview-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero {
+                padding: 100px 25px 80px;
+            }
+            
+            .overview-section,
+            .risk-types-section,
+            .methods-section,
+            .risk-matrix-section,
+            .process-section,
+            .benefits-section,
+            .cta-section {
+                padding: 80px 25px;
+            }
+            
+            .cta-container,
+            .matrix-container {
+                padding: 40px 25px;
+            }
+            
+            .cta-form {
+                flex-direction: column;
+            }
+            
+            .cta-form input {
+                width: 100%;
+            }
+            
+            .process-timeline::before {
+                right: 20px;
+            }
+            
+            .timeline-item {
+                flex-direction: column !important;
+                padding-right: 50px;
+            }
+            
+            .timeline-number {
+                right: 0 !important;
+            }
+            
+            .matrix-table {
+                font-size: 0.8rem;
+            }
+            
+            .matrix-table th,
+            .matrix-table td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Logo">
+                <div class="logo-text">
+                    <h2>کاویان توسعه معدن</h2>
+                    <p>Kavian Development Mine</p>
+                </div>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="index.html">خانه</a></li>
+                <li><a href="about.html">درباره ما</a></li>
+                <li><a href="services.html">خدمات</a></li>
+                <li><a href="portfolio.html">نمونه کارها</a></li>
+                <li><a href="blog.html">وبلاگ</a></li>
+            </ul>
+            
+            <div class="nav-cta">
+                <a href="register.html" class="btn-nav btn-primary">ثبت‌نام</a>
+                <a href="contact.html" class="btn-nav btn-secondary">تماس با ما</a>
+            </div>
+            
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>تحلیل و مدیریت ریسک</h1>
+            <p>شناسایی، ارزیابی و مدیریت ریسک‌های فنی، مالی و عملیاتی پروژه‌های معدنی</p>
+            <div class="hero-cta">
+                <a href="#contact" class="btn-hero btn-hero-primary">درخواست مشاوره</a>
+                <a href="#risks" class="btn-hero btn-hero-secondary">انواع ریسک</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Overview Section -->
+    <section class="overview-section">
+        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80" alt="تحلیل ریسک" class="overview-image">
+        
+        <div class="overview-content">
+            <h2>چرا مدیریت ریسک ضروری است؟</h2>
+            <p>
+                پروژه‌های معدنی با ریسک‌های متعددی روبرو هستند که می‌تواند تأثیر قابل توجهی بر موفقیت پروژه داشته باشد. 
+                شناسایی و مدیریت صحیح این ریسک‌ها می‌تواند از شکست پروژه جلوگیری کند.
+            </p>
+            <p>
+                تیم متخصص ما با استفاده از روش‌های پیشرفته و استانداردهای بین‌المللی، ریسک‌های پروژه شما را شناسایی، 
+                ارزیابی و برنامه‌های کاهش ریسک را ارائه می‌دهد.
+            </p>
+            <div class="warning-box">
+                <h4>⚠️ هشدار</h4>
+                <p>عدم توجه به مدیریت ریسک می‌تواند منجر به تأخیر در پروژه، افزایش هزینه‌ها و حتی شکست کامل پروژه شود.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Risk Types Section -->
+    <section class="risk-types-section" id="risks">
+        <div class="section-header">
+            <h2>انواع ریسک در پروژه‌های معدنی</h2>
+            <p>دسته‌بندی ریسک‌ها بر اساس اهمیت و تأثیر</p>
+        </div>
+        
+        <div class="risk-types-grid">
+            <!-- High Risk -->
+            <div class="risk-card high">
+                <div class="risk-icon">🔴</div>
+                <h3>ریسک‌های بحرانی</h3>
+                <p>ریسک‌هایی با احتمال بالا و تأثیر شدید که نیاز به توجه فوری دارند</p>
+                <ul class="risk-examples">
+                    <li>نوسانات شدید قیمت محصول</li>
+                    <li>تغییرات قوانین و مقررات</li>
+                    <li>مشکلات زیست‌محیطی جدی</li>
+                    <li>کمبود منابع مالی</li>
+                </ul>
+            </div>
+            
+            <!-- Medium Risk -->
+            <div class="risk-card medium">
+                <div class="risk-icon">🟡</div>
+                <h3>ریسک‌های متوسط</h3>
+                <p>ریسک‌هایی که نیاز به نظارت و برنامه‌ریزی دارند</p>
+                <ul class="risk-examples">
+                    <li>تأخیر در تأمین تجهیزات</li>
+                    <li>کمبود نیروی متخصص</li>
+                    <li>مشکلات فنی تجهیزات</li>
+                    <li>افزایش هزینه‌های عملیاتی</li>
+                </ul>
+            </div>
+            
+            <!-- Low Risk -->
+            <div class="risk-card low">
+                <div class="risk-icon">🟢</div>
+                <h3>ریسک‌های کم</h3>
+                <p>ریسک‌هایی با احتمال یا تأثیر کم که قابل مدیریت هستند</p>
+                <ul class="risk-examples">
+                    <li>تغییرات جزئی در بازار</li>
+                    <li>مشکلات اداری</li>
+                    <li>تأخیرات کوچک</li>
+                    <li>نوسانات کم قیمت</li>
+                </ul>
+            </div>
+            
+            <!-- Technical Risk -->
+            <div class="risk-card high">
+                <div class="risk-icon">⚙️</div>
+                <h3>ریسک‌های فنی</h3>
+                <p>ریسک‌های مرتبط با جنبه‌های فنی و مهندسی</p>
+                <ul class="risk-examples">
+                    <li>عدم دستیابی به بازیابی مورد انتظار</li>
+                    <li>مشکلات ژئوتکنیکی</li>
+                    <li>خرابی تجهیزات کلیدی</li>
+                    <li>مشکلات کیفیت ماده معدنی</li>
+                </ul>
+            </div>
+            
+            <!-- Financial Risk -->
+            <div class="risk-card high">
+                <div class="risk-icon">💰</div>
+                <h3>ریسک‌های مالی</h3>
+                <p>ریسک‌های مرتبط با جنبه‌های اقتصادی و مالی</p>
+                <ul class="risk-examples">
+                    <li>نوسانات نرخ ارز</li>
+                    <li>افزایش نرخ بهره</li>
+                    <li>تورم بالا</li>
+                    <li>کاهش قیمت محصول</li>
+                </ul>
+            </div>
+            
+            <!-- Operational Risk -->
+            <div class="risk-card medium">
+                <div class="risk-icon">🏭</div>
+                <h3>ریسک‌های عملیاتی</h3>
+                <p>ریسک‌های مرتبط با فرآیندهای عملیاتی</p>
+                <ul class="risk-examples">
+                    <li>کاهش راندمان تجهیزات</li>
+                    <li>افزایش زمان توقف</li>
+                    <li>مشکلات ایمنی</li>
+                    <li>کمبود قطعات یدکی</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Methods Section -->
+    <section class="methods-section">
+        <div class="section-header">
+            <h2>روش‌های تحلیل ریسک</h2>
+            <p>ابزارها و تکنیک‌های مورد استفاده</p>
+        </div>
+        
+        <div class="methods-grid">
+            <div class="method-card">
+                <div class="method-number">1</div>
+                <h3>تحلیل SWOT</h3>
+                <p>شناسایی نقاط قوت، ضعف، فرصت‌ها و تهدیدها</p>
+            </div>
+            
+            <div class="method-card">
+                <div class="method-number">2</div>
+                <h3>ماتریس احتمال-تأثیر</h3>
+                <p>ارزیابی کمی ریسک‌ها بر اساس احتمال و تأثیر</p>
+            </div>
+            
+            <div class="method-card">
+                <div class="method-number">3</div>
+                <h3>شبیه‌سازی مونت کارلو</h3>
+                <p>تحلیل احتمالاتی با استفاده از شبیه‌سازی</p>
+            </div>
+            
+            <div class="method-card">
+                <div class="method-number">4</div>
+                <h3>تحلیل درخت تصمیم</h3>
+                <p>ارزیابی گزینه‌های مختلف و نتایج احتمالی</p>
+            </div>
+            
+            <div class="method-card">
+                <div class="method-number">5</div>
+                <h3>تحلیل حساسیت</h3>
+                <p>بررسی تأثیر تغییر پارامترها بر نتایج</p>
+            </div>
+            
+            <div class="method-card">
+                <div class="method-number">6</div>
+                <h3>FMEA</h3>
+                <p>تحلیل حالت‌های خرابی و اثرات آن</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Risk Matrix Section -->
+    <section class="risk-matrix-section">
+        <div class="risk-matrix-content">
+            <div class="section-header">
+                <h2>ماتریس ارزیابی ریسک</h2>
+                <p>طبقه‌بندی ریسک‌ها بر اساس احتمال و تأثیر</p>
+            </div>
+            
+            <div class="matrix-container">
+                <table class="matrix-table">
+                    <tr>
+                        <th>تأثیر \ احتمال</th>
+                        <th>کم</th>
+                        <th>متوسط</th>
+                        <th>زیاد</th>
+                    </tr>
+                    <tr>
+                        <th>زیاد</th>
+                        <td class="medium">متوسط</td>
+                        <td class="high">بالا</td>
+                        <td class="high">بحرانی</td>
+                    </tr>
+                    <tr>
+                        <th>متوسط</th>
+                        <td class="low">کم</td>
+                        <td class="medium">متوسط</td>
+                        <td class="high">بالا</td>
+                    </tr>
+                    <tr>
+                        <th>کم</th>
+                        <td class="low">کم</td>
+                        <td class="low">کم</td>
+                        <td class="medium">متوسط</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Process Section -->
+    <section class="process-section">
+        <div class="section-header">
+            <h2>فرآیند مدیریت ریسک</h2>
+            <p>مراحل شناسایی و مدیریت ریسک</p>
+        </div>
+        
+        <div class="process-timeline">
+            <div class="timeline-item">
+                <div class="timeline-number">1</div>
+                <div class="timeline-content">
+                    <h3>شناسایی ریسک‌ها</h3>
+                    <p>شناسایی تمام ریسک‌های احتمالی پروژه با استفاده از جلسات طوفان فکری، بررسی اسناد و تجربیات گذشته</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-number">2</div>
+                <div class="timeline-content">
+                    <h3>ارزیابی کیفی</h3>
+                    <p>رتبه‌بندی ریسک‌ها بر اساس احتمال وقوع و میزان تأثیر با استفاده از ماتریس ریسک</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-number">3</div>
+                <div class="timeline-content">
+                    <h3>ارزیابی کمی</h3>
+                    <p>تحلیل عددی ریسک‌های مهم با استفاده از شبیه‌سازی و مدل‌سازی مالی</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-number">4</div>
+                <div class="timeline-content">
+                    <h3>برنامه پاسخ به ریسک</h3>
+                    <p>تهیه استراتژی‌های کاهش، انتقال، پذیرش یا اجتناب از ریسک</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-number">5</div>
+                <div class="timeline-content">
+                    <h3>نظارت و کنترل</h3>
+                    <p>پایش مستمر ریسک‌ها و به‌روزرسانی برنامه‌های مدیریت ریسک</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Benefits Section -->
+    <section class="benefits-section">
+        <div class="section-header">
+            <h2>مزایای مدیریت ریسک</h2>
+            <p>چرا باید به مدیریت ریسک توجه کنید؟</p>
+        </div>
+        
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">🎯</div>
+                <h3>تصمیم‌گیری بهتر</h3>
+                <p>اطلاعات دقیق برای تصمیم‌گیری آگاهانه در مورد سرمایه‌گذاری</p>
+            </div>
+            
+            <div class="benefit-card">
+                <div class="benefit-icon">💰</div>
+                <h3>کاهش هزینه‌ها</h3>
+                <p>جلوگیری از هزینه‌های غیرمنتظره و کاهش ضررهای احتمالی</p>
+            </div>
+            
+            <div class="benefit-card">
+                <div class="benefit-icon">⏱️</div>
+                <h3>مدیریت زمان</h3>
+                <p>جلوگیری از تأخیرات و اطمینان از اجرای به موقع پروژه</p>
+            </div>
+            
+            <div class="benefit-card">
+                <div class="benefit-icon">🛡️</div>
+                <h3>افزایش اطمینان</h3>
+                <p>افزایش اعتماد سرمایه‌گذاران و ذینفعان پروژه</p>
+            </div>
+            
+            <div class="benefit-card">
+                <div class="benefit-icon">📈</div>
+                <h3>بهبود عملکرد</h3>
+                <p>افزایش احتمال موفقیت و دستیابی به اهداف پروژه</p>
+            </div>
+            
+            <div class="benefit-card">
+                <div class="benefit-icon">🔄</div>
+                <h3>انعطاف‌پذیری</h3>
+                <p>آمادگی برای مواجهه با تغییرات و شرایط غیرمنتظره</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta-section" id="contact">
+        <div class="cta-container">
+            <h2>ریسک‌های پروژه خود را مدیریت کنید</h2>
+            <p>برای دریافت تحلیل ریسک رایگان اطلاعات خود را وارد کنید</p>
+            <form class="cta-form" id="ctaForm">
+                <input type="text" name="from_name" placeholder="نام و نام خانوادگی" required>
+                <input type="email" name="from_email" placeholder="ایمیل" required>
+                <input type="tel" name="phone" placeholder="تلفن" required>
+                <button type="submit">درخواست تحلیل رایگان</button>
+            </form>
+            <div class="cta-message" id="ctaMessage"></div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>کاویان توسعه معدن</h3>
+                <p>مشاور تخصصی در زمینه مهندسی تجهیزات معدنی و اقتصاد معدن</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>دسترسی سریع</h3>
+                <a href="index.html">خانه</a>
+                <a href="about.html">درباره ما</a>
+                <a href="services.html">خدمات</a>
+                <a href="portfolio.html">نمونه کارها</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>خدمات</h3>
+                <a href="equipment-selection.html">انتخاب تجهیزات</a>
+                <a href="economic-analysis.html">تحلیل اقتصادی</a>
+                <a href="risk-analysis.html">تحلیل ریسک</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>تماس با ما</h3>
+                <p>📧 info@kdmine.com</p>
+                <p>📞 +98 21 1234 5678</p>
+                <p>📍 تهران، ایران</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2025 کاویان توسعه معدن. تمامی حقوق محفوظ است.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // CTA Form Submission
+        document.getElementById('ctaForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const submitBtn = this.querySelector('button');
+            const message = document.getElementById('ctaMessage');
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'در حال ارسال...';
+            
+            const templateParams = {
+                from_name: this.from_name.value,
+                from_email: this.from_email.value,
+                phone: this.phone.value,
+                subject: 'درخواست تحلیل ریسک رایگان',
+                message: 'درخواست تحلیل و مدیریت ریسک پروژه معدنی'
+            };
+            
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+                .then(function() {
+                    message.className = 'cta-message success';
+                    message.textContent = '✓ درخواست شما ثبت شد! متخصصان ما به زودی با شما تماس خواهند گرفت.';
+                    message.style.display = 'block';
+                    document.getElementById('ctaForm').reset();
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'درخواست تحلیل رایگان';
+                }, function(error) {
+                    message.className = 'cta-message error';
+                    message.textContent = '✗ خطا در ارسال. لطفاً دوباره تلاش کنید.';
+                    message.style.display = 'block';
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'درخواست تحلیل رایگان';
+                    console.log('FAILED...', error);
+                });
+        });
+    </script>
+</body>
+</html>
