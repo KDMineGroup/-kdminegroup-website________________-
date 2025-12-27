@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Kavian Development Mine</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #1e3a8a;
+            --secondary-blue: #2563eb;
+            --accent-gold: #f59e0b;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+        body { font-family: 'Poppins', sans-serif; background: var(--light-bg); color: var(--text-dark); }
+        
+        .admin-header { background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue)); color: white; padding: 1.5rem 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .admin-header-content { max-width: 1600px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .admin-logo { display: flex; align-items: center; gap: 15px; font-size: 1.5rem; font-weight: 700; }
+        .admin-logo i { font-size: 2rem; color: var(--accent-gold); }
+        .admin-user { display: flex; align-items: center; gap: 15px; }
+        .user-avatar { width: 45px; height: 45px; background: var(--accent-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; }
+        .logout-btn { background: rgba(255,255,255,0.2); border: 2px solid white; color: white; padding: 10px 25px; border-radius: 25px; cursor: pointer; font-weight: 600; transition: all 0.3s; }
+        .logout-btn:hover { background: white; color: var(--primary-blue); }
+        
+        .dashboard-container { max-width: 1600px; margin: 0 auto; padding: 2rem; }
+        
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 3rem; }
+        .stat-card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); display: flex; align-items: center; gap: 20px; transition: all 0.3s; }
+        .stat-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.12); }
+        .stat-icon { width: 70px; height: 70px; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white; }
+        .stat-icon.total { background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); }
+        .stat-icon.new { background: linear-gradient(135deg, var(--success), #34d399); }
+        .stat-icon.pending { background: linear-gradient(135deg, var(--warning), #fbbf24); }
+        .stat-icon.resolved { background: linear-gradient(135deg, #8b5cf6, #a78bfa); }
+        .stat-content h3 { font-size: 2rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 5px; }
+        .stat-content p { color: var(--text-light); font-size: 0.95rem; }
+        
+        .filters-section { background: white; padding: 25px 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); margin-bottom: 2rem; }
+        .filters-row { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+        .filter-group { flex: 1; min-width: 200px; }
+        .filter-group label { display: block; font-weight: 600; color: var(--text-dark); margin-bottom: 8px; font-size: 0.9rem; }
+        .filter-group input, .filter-group select { width: 100%; padding: 12px 15px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 1rem; transition: all 0.3s; font-family: inherit; }
+        .filter-group input:focus, .filter-group select:focus { outline: none; border-color: var(--secondary-blue); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); }
+        .filter-btn { padding: 12px 30px; background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; transition: all 0.3s; margin-top: 24px; }
+        .filter-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3); }
+        
+        .requests-section { background: white; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); overflow: hidden; }
+        .section-header { padding: 25px 30px; border-bottom: 2px solid var(--light-bg); display: flex; justify-content: space-between; align-items: center; }
+        .section-header h2 { font-size: 1.5rem; color: var(--primary-blue); }
+        .export-btn { padding: 10px 25px; background: var(--success); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: all 0.3s; }
+        .export-btn:hover { background: #059669; transform: translateY(-2px); }
+        
+        .requests-table { width: 100%; overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; }
+        thead { background: var(--light-bg); }
+        th { padding: 18px 20px; text-align: left; font-weight: 600; color: var(--text-dark); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        tbody tr { border-bottom: 1px solid var(--light-bg); transition: all 0.3s; }
+        tbody tr:hover { background: var(--light-bg); }
+        td { padding: 20px; color: var(--text-light); }
+        .request-id { font-weight: 600; color: var(--secondary-blue); }
+        .status-badge { padding: 6px 15px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; display: inline-block; }
+        .status-new { background: #dbeafe; color: #1e40af; }
+        .status-pending { background: #fef3c7; color: #92400e; }
+        .status-resolved { background: #d1fae5; color: #065f46; }
+        .priority-high { color: var(--danger); font-weight: 600; }
+        .priority-medium { color: var(--warning); font-weight: 600; }
+        .priority-low { color: var(--success); font-weight: 600; }
+        .action-btns { display: flex; gap: 8px; }
+        .action-btn { padding: 8px 12px; border: none; border-radius: 8px; cursor: pointer; font-size: 0.9rem; transition: all 0.3s; }
+        .view-btn { background: var(--secondary-blue); color: white; }
+        .view-btn:hover { background: var(--primary-blue); }
+        .delete-btn { background: var(--danger); color: white; }
+        .delete-btn:hover { background: #dc2626; }
+        
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 9999; align-items: center; justify-content: center; }
+        .modal.active { display: flex; }
+        .modal-content { background: white; border-radius: 20px; max-width: 700px; width: 90%; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        .modal-header { padding: 30px; border-bottom: 2px solid var(--light-bg); display: flex; justify-content: space-between; align-items: center; }
+        .modal-header h3 { font-size: 1.5rem; color: var(--primary-blue); }
+        .close-btn { width: 35px; height: 35px; border: none; background: var(--light-bg); border-radius: 50%; cursor: pointer; font-size: 1.2rem; color: var(--text-dark); transition: all 0.3s; }
+        .close-btn:hover { background: var(--danger); color: white; }
+        .modal-body { padding: 30px; }
+        .detail-row { margin-bottom: 20px; }
+        .detail-label { font-weight: 600; color: var(--text-dark); margin-bottom: 8px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .detail-value { color: var(--text-light); line-height: 1.6; padding: 12px 15px; background: var(--light-bg); border-radius: 8px; }
+        .modal-footer { padding: 20px 30px; border-top: 2px solid var(--light-bg); display: flex; gap: 10px; justify-content: flex-end; }
+        .modal-btn { padding: 12px 25px; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .btn-primary { background: var(--secondary-blue); color: white; }
+        .btn-primary:hover { background: var(--primary-blue); }
+        .btn-success { background: var(--success); color: white; }
+        .btn-success:hover { background: #059669; }
+        
+        .pagination { display: flex; justify-content: center; align-items: center; gap: 10px; padding: 30px; }
+        .page-btn { padding: 10px 18px; border: 2px solid var(--light-bg); background: white; border-radius: 8px; cursor: pointer; font-weight: 600; color: var(--text-dark); transition: all 0.3s; }
+        .page-btn:hover { border-color: var(--secondary-blue); color: var(--secondary-blue); }
+        .page-btn.active { background: var(--secondary-blue); color: white; border-color: var(--secondary-blue); }
+        
+        @media (max-width: 768px) {
+            .admin-header-content { flex-direction: column; gap: 15px; text-align: center; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .filters-row { flex-direction: column; }
+            .requests-table { font-size: 0.85rem; }
+            th, td { padding: 12px 10px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="admin-header">
+        <div class="admin-header-content">
+            <div class="admin-logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>Admin Dashboard</span>
+            </div>
+            <div class="admin-user">
+                <div>
+                    <div style="font-weight: 600;" id="adminName">Admin User</div>
+                    <div style="font-size: 0.85rem; opacity: 0.9;" id="adminEmail">admin@kdmine.com</div>
+                </div>
+                <div class="user-avatar" id="adminAvatar">A</div>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <div class="dashboard-container">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon total">
+                    <i class="fas fa-inbox"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="totalRequests">0</h3>
+                    <p>Total Requests</p>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon new">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="newRequests">0</h3>
+                    <p>New Requests</p>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon pending">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="pendingRequests">0</h3>
+                    <p>Pending</p>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon resolved">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="resolvedRequests">0</h3>
+                    <p>Resolved</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="filters-section">
+            <div class="filters-row">
+                <div class="filter-group">
+                    <label>Search</label>
+                    <input type="text" id="searchInput" placeholder="Search by name, email, company...">
+                </div>
+                <div class="filter-group">
+                    <label>Status</label>
+                    <select id="statusFilter">
+                        <option value="">All Status</option>
+                        <option value="new">New</option>
+                        <option value="pending">Pending</option>
+                        <option value="resolved">Resolved</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Service Type</label>
+                    <select id="serviceFilter">
+                        <option value="">All Services</option>
+                        <option value="equipment">Equipment Selection</option>
+                        <option value="feasibility">Feasibility Studies</option>
+                        <option value="plant-design">Plant Design</option>
+                        <option value="optimization">Process Optimization</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <button class="filter-btn" onclick="applyFilters()">
+                    <i class="fas fa-filter"></i> Apply Filters
+                </button>
+            </div>
+        </div>
+        
+        <div class="requests-section">
+            <div class="section-header">
+                <h2>All Requests</h2>
+                <button class="export-btn" onclick="exportToCSV()">
+                    <i class="fas fa-download"></i> Export CSV
+                </button>
+            </div>
+            
+            <div class="requests-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Date</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Company</th>
+                            <th>Service</th>
+                            <th>Status</th>
+                            <th>Priority</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="requestsTableBody">
+                        <!-- Requests will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="pagination" id="pagination">
+                <!-- Pagination will be generated here -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Request Detail Modal -->
+    <div class="modal" id="requestModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Request Details</h3>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Details will be loaded here -->
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn btn-success" onclick="markAsResolved()">Mark as Resolved</button>
+                <button class="modal-btn btn-primary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Check authentication on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            const session = localStorage.getItem('adminSession') || sessionStorage.getItem('adminSession');
+            
+            if (!session) {
+                // Not logged in, redirect to login
+                window.location.href = 'admin-login.html';
+                return;
+            }
+            
+            const sessionData = JSON.parse(session);
+            const hoursSinceLogin = (Date.now() - sessionData.timestamp) / (1000 * 60 * 60);
+            
+            // Session valid for 24 hours
+            if (hoursSinceLogin >= 24) {
+                // Session expired
+                localStorage.removeItem('adminSession');
+                sessionStorage.removeItem('adminSession');
+                window.location.href = 'admin-login.html';
+                return;
+            }
+            
+            // Update admin info
+            document.getElementById('adminEmail').textContent = sessionData.email;
+            document.getElementById('adminAvatar').textContent = sessionData.email.charAt(0).toUpperCase();
+            
+            // Initialize dashboard
+            init();
+        });
+        
+        // Sample data
+        let requests = [
+            {
+                id: 'REQ-001',
+                date: '2025-12-27',
+                name: 'John Smith',
+                email: 'john.smith@miningco.com',
+                company: 'Global Mining Corp',
+                service: 'Feasibility Studies',
+                status: 'new',
+                priority: 'high',
+                message: 'We need a comprehensive feasibility study for our new copper project in Chile. The project has an estimated capacity of 50,000 TPD.',
+                phone: '+1 555-0123',
+                budget: '$500,000 - $1,000,000'
+            },
+            {
+                id: 'REQ-002',
+                date: '2025-12-26',
+                name: 'Sarah Johnson',
+                email: 'sarah.j@techmine.com',
+                company: 'TechMine Solutions',
+                service: 'Plant Design',
+                status: 'pending',
+                priority: 'medium',
+                message: 'Looking for complete plant design services for a gold processing facility.',
+                phone: '+44 20 1234 5678',
+                budget: '$200,000 - $500,000'
+            },
+            {
+                id: 'REQ-003',
+                date: '2025-12-25',
+                name: 'Ahmed Hassan',
+                email: 'ahmed.h@minerals.ae',
+                company: 'Emirates Minerals',
+                service: 'Equipment Selection',
+                status: 'resolved',
+                priority: 'low',
+                message: 'Need assistance in selecting crushing equipment for our iron ore project.',
+                phone: '+971 4 123 4567',
+                budget: '$50,000 - $100,000'
+            },
+            {
+                id: 'REQ-004',
+                date: '2025-12-24',
+                name: 'Maria Garcia',
+                email: 'maria.g@mineria.mx',
+                company: 'Mineria del Norte',
+                service: 'Process Optimization',
+                status: 'new',
+                priority: 'high',
+                message: 'Our flotation circuit needs optimization. Current recovery is below target.',
+                phone: '+52 55 1234 5678',
+                budget: '$100,000 - $200,000'
+            },
+            {
+                id: 'REQ-005',
+                date: '2025-12-23',
+                name: 'Chen Wei',
+                email: 'chen.w@chinamining.cn',
+                company: 'China Mining Group',
+                service: 'Concentration Plants',
+                status: 'pending',
+                priority: 'medium',
+                message: 'Interested in designing a new concentration plant for copper-gold ore.',
+                phone: '+86 10 1234 5678',
+                budget: '$1,000,000+'
+            }
+        ];
+        
+        let currentPage = 1;
+        let itemsPerPage = 10;
+        let filteredRequests = [...requests];
+        let selectedRequest = null;
+        
+        function init() {
+            updateStats();
+            renderTable();
+            renderPagination();
+        }
+        
+        function updateStats() {
+            document.getElementById('totalRequests').textContent = requests.length;
+            document.getElementById('newRequests').textContent = requests.filter(r => r.status === 'new').length;
+            document.getElementById('pendingRequests').textContent = requests.filter(r => r.status === 'pending').length;
+            document.getElementById('resolvedRequests').textContent = requests.filter(r => r.status === 'resolved').length;
+        }
+        
+        function renderTable() {
+            const tbody = document.getElementById('requestsTableBody');
+            const start = (currentPage - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const pageRequests = filteredRequests.slice(start, end);
+            
+            if (pageRequests.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="9" style="text-align: center; padding: 40px;">No requests found</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = pageRequests.map(req => `
+                <tr>
+                    <td class="request-id">${req.id}</td>
+                    <td>${req.date}</td>
+                    <td>${req.name}</td>
+                    <td>${req.email}</td>
+                    <td>${req.company}</td>
+                    <td>${req.service}</td>
+                    <td><span class="status-badge status-${req.status}">${req.status.toUpperCase()}</span></td>
+                    <td class="priority-${req.priority}">${req.priority.toUpperCase()}</td>
+                    <td>
+                        <div class="action-btns">
+                            <button class="action-btn view-btn" onclick="viewRequest('${req.id}')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="action-btn delete-btn" onclick="deleteRequest('${req.id}')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+        
+        function renderPagination() {
+            const totalPages = Math.ceil(filteredRequests.length / itemsPerPage);
+            const pagination = document.getElementById('pagination');
+            
+            if (totalPages <= 1) {
+                pagination.innerHTML = '';
+                return;
+            }
+            
+            let html = '<button class="page-btn" onclick="changePage(' + (currentPage - 1) + ')" ' + (currentPage === 1 ? 'disabled' : '') + '><i class="fas fa-chevron-left"></i></button>';
+            
+            for (let i = 1; i <= totalPages; i++) {
+                html += '<button class="page-btn ' + (i === currentPage ? 'active' : '') + '" onclick="changePage(' + i + ')">' + i + '</button>';
+            }
+            
+            html += '<button class="page-btn" onclick="changePage(' + (currentPage + 1) + ')" ' + (currentPage === totalPages ? 'disabled' : '') + '><i class="fas fa-chevron-right"></i></button>';
+            
+            pagination.innerHTML = html;
+        }
+        
+        function changePage(page) {
+            const totalPages = Math.ceil(filteredRequests.length / itemsPerPage);
+            if (page < 1 || page > totalPages) return;
+            currentPage = page;
+            renderTable();
+            renderPagination();
+        }
+        
+        function applyFilters() {
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            const status = document.getElementById('statusFilter').value;
+            const service = document.getElementById('serviceFilter').value;
+            
+            filteredRequests = requests.filter(req => {
+                const matchSearch = !search || 
+                    req.name.toLowerCase().includes(search) ||
+                    req.email.toLowerCase().includes(search) ||
+                    req.company.toLowerCase().includes(search);
+                const matchStatus = !status || req.status === status;
+                const matchService = !service || req.service.toLowerCase().includes(service.toLowerCase());
+                
+                return matchSearch && matchStatus && matchService;
+            });
+            
+            currentPage = 1;
+            renderTable();
+            renderPagination();
+        }
+        
+        function viewRequest(id) {
+            selectedRequest = requests.find(r => r.id === id);
+            if (!selectedRequest) return;
+            
+            const modalBody = document.getElementById('modalBody');
+            modalBody.innerHTML = `
+                <div class="detail-row">
+                    <div class="detail-label">Request ID</div>
+                    <div class="detail-value">${selectedRequest.id}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Date Submitted</div>
+                    <div class="detail-value">${selectedRequest.date}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Full Name</div>
+                    <div class="detail-value">${selectedRequest.name}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Email</div>
+                    <div class="detail-value">${selectedRequest.email}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Phone</div>
+                    <div class="detail-value">${selectedRequest.phone}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Company</div>
+                    <div class="detail-value">${selectedRequest.company}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Service Type</div>
+                    <div class="detail-value">${selectedRequest.service}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Budget Range</div>
+                    <div class="detail-value">${selectedRequest.budget}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Status</div>
+                    <div class="detail-value"><span class="status-badge status-${selectedRequest.status}">${selectedRequest.status.toUpperCase()}</span></div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Priority</div>
+                    <div class="detail-value priority-${selectedRequest.priority}">${selectedRequest.priority.toUpperCase()}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Message</div>
+                    <div class="detail-value">${selectedRequest.message}</div>
+                </div>
+            `;
+            
+            document.getElementById('requestModal').classList.add('active');
+        }
+        
+        function closeModal() {
+            document.getElementById('requestModal').classList.remove('active');
+            selectedRequest = null;
+        }
+        
+        function markAsResolved() {
+            if (!selectedRequest) return;
+            
+            const index = requests.findIndex(r => r.id === selectedRequest.id);
+            if (index !== -1) {
+                requests[index].status = 'resolved';
+                updateStats();
+                applyFilters();
+                closeModal();
+                alert('Request marked as resolved!');
+            }
+        }
+        
+        function deleteRequest(id) {
+            if (!confirm('Are you sure you want to delete this request?')) return;
+            
+            const index = requests.findIndex(r => r.id === id);
+            if (index !== -1) {
+                requests.splice(index, 1);
+                updateStats();
+                applyFilters();
+                alert('Request deleted successfully!');
+            }
+        }
+        
+        function exportToCSV() {
+            const headers = ['ID', 'Date', 'Name', 'Email', 'Company', 'Service', 'Status', 'Priority', 'Message'];
+            const csvContent = [
+                headers.join(','),
+                ...filteredRequests.map(req => [
+                    req.id,
+                    req.date,
+                    req.name,
+                    req.email,
+                    req.company,
+                    req.service,
+                    req.status,
+                    req.priority,
+                    '"' + req.message.replace(/"/g, '""') + '"'
+                ].join(','))
+            ].join('\n');
+            
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'requests_' + new Date().toISOString().split('T')[0] + '.csv';
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+        
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('adminSession');
+                sessionStorage.removeItem('adminSession');
+                window.location.href = 'admin-login.html';
+            }
+        }
+        
+        document.getElementById('searchInput').addEventListener('input', applyFilters);
+    </script>
+</body>
+</html>
