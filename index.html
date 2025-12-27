@@ -35,7 +35,7 @@
         .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--accent-gold); transition: width 0.3s; }
         .nav-links a:hover::after { width: 100%; }
         .admin-link { background: rgba(245, 158, 11, 0.2); padding: 8px 16px !important; border-radius: 20px; border: 2px solid var(--accent-gold); display: flex; align-items: center; gap: 8px; }
-        .admin-link:hover { background: var(--accent-gold); }
+        .admin-link:hover { background: var(--accent-gold); transform: translateY(-2px); }
         .admin-link::after { display: none; }
         
         .hero { background: linear-gradient(135deg, rgba(30, 58, 138, 0.95) 0%, rgba(37, 99, 235, 0.9) 100%), url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=1920') center/cover; color: white; padding: 150px 2rem 100px; text-align: center; position: relative; }
@@ -85,8 +85,11 @@
         body.rtl .footer-section a:hover { padding-left: 0; padding-right: 5px; }
         .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); color: #94a3b8; }
         
+        .mobile-menu-btn { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+        
         @media (max-width: 768px) {
             .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
             .hero h1 { font-size: 2.5rem; }
             .hero p { font-size: 1.1rem; }
             .services-grid { grid-template-columns: 1fr; }
@@ -110,6 +113,9 @@
                 <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Logo">
                 <span data-en="Kavian Development Mine" data-fa="کاویان توسعه معدن">Kavian Development Mine</span>
             </a>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
             <ul class="nav-links">
                 <li><a href="index.html" data-en="Home" data-fa="خانه">Home</a></li>
                 <li><a href="about.html" data-en="About" data-fa="درباره ما">About</a></li>
@@ -119,22 +125,22 @@
                 <li><a href="news.html" data-en="News" data-fa="اخبار">News</a></li>
                 <li><a href="technical-resources.html" data-en="Resources" data-fa="منابع فنی">Resources</a></li>
                 <li><a href="contact.html" data-en="Contact" data-fa="تماس">Contact</a></li>
-                <li><a href="admin-dashboard.html" class="admin-link" data-en="Admin" data-fa="مدیریت"><i class="fas fa-shield-alt"></i> Admin</a></li>
+                <li><a href="admin-login.html" class="admin-link" data-en="Admin" data-fa="مدیریت"><i class="fas fa-shield-alt"></i> <span>Admin</span></a></li>
             </ul>
         </nav>
     </header>
 
     <section class="hero">
         <div class="hero-content">
-            <h1 data-en="Engineering Excellence in Mining" data-fa="تعالی مهندسی در معدنکاری">Engineering Excellence in Mining</h1>
-            <p data-en="Comprehensive mining engineering and consulting services from feasibility studies to plant design and optimization." data-fa="خدمات جامع مهندسی و مشاوره معدن از مطالعات امکان‌سنجی تا طراحی و بهینه‌سازی کارخانه.">Comprehensive mining engineering and consulting services from feasibility studies to plant design and optimization.</p>
+            <h1 data-en="Engineering Excellence in Mining" data-fa="پیشرو در مهندسی معدن و فرآوری مواد معدنی">Engineering Excellence in Mining</h1>
+            <p data-en="Comprehensive mining engineering and consulting services from feasibility studies to plant design and optimization." data-fa="ارائه راهکارهای مهندسی پیشرفته از مطالعات امکان‌سنجی تا طراحی، اجرا و بهینه‌سازی کامل پروژه‌های معدنی و صنعتی">Comprehensive mining engineering and consulting services from feasibility studies to plant design and optimization.</p>
             <div class="cta-buttons">
                 <a href="services.html" class="btn btn-primary">
                     <span data-en="Our Services" data-fa="خدمات ما">Our Services</span>
                     <i class="fas fa-arrow-right"></i>
                 </a>
                 <a href="contact.html" class="btn btn-secondary">
-                    <span data-en="Get Started" data-fa="شروع کنید">Get Started</span>
+                    <span data-en="Get Started" data-fa="شروع همکاری">Get Started</span>
                     <i class="fas fa-paper-plane"></i>
                 </a>
             </div>
