@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaching Systems - Kavian Development Mine</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #1e3a8a;
+            --secondary-blue: #2563eb;
+            --accent-gold: #f59e0b;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+        }
+        body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-dark); overflow-x: hidden; }
+        body.rtl { font-family: 'Vazirmatn', sans-serif; direction: rtl; }
+        
+        .language-switcher { position: fixed; top: 20px; right: 20px; z-index: 3000; background: white; border-radius: 50px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); padding: 8px; display: flex; gap: 8px; }
+        body.rtl .language-switcher { right: auto; left: 20px; }
+        .lang-btn { padding: 10px 20px; border: 2px solid transparent; background: transparent; border-radius: 25px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: all 0.3s; display: flex; align-items: center; gap: 8px; color: var(--text-light); }
+        .lang-btn:hover { background: var(--light-bg); color: var(--secondary-blue); }
+        .lang-btn.active { background: var(--secondary-blue); color: white; border-color: var(--secondary-blue); }
+        
+        header { background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%); color: white; padding: 1rem 0; position: sticky; top: 0; z-index: 2000; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        nav { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
+        .logo { display: flex; align-items: center; gap: 15px; font-size: 1.5rem; font-weight: 700; text-decoration: none; color: white; }
+        .logo img { height: 55px; width: auto; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2)); }
+        .nav-links { display: flex; list-style: none; gap: 2.5rem; align-items: center; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 500; transition: all 0.3s; position: relative; padding: 5px 0; }
+        .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--accent-gold); transition: width 0.3s; }
+        .nav-links a:hover::after { width: 100%; }
+        
+        .breadcrumb { max-width: 1400px; margin: 30px auto; padding: 0 2rem; display: flex; align-items: center; gap: 10px; color: var(--text-light); font-size: 0.95rem; }
+        .breadcrumb a { color: var(--secondary-blue); text-decoration: none; transition: color 0.3s; }
+        .breadcrumb a:hover { color: var(--accent-gold); }
+        
+        .service-hero { background: linear-gradient(135deg, rgba(30, 58, 138, 0.95) 0%, rgba(37, 99, 235, 0.95) 100%), url('https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=1920') center/cover; color: white; padding: 100px 2rem 80px; }
+        .hero-content { max-width: 1200px; margin: 0 auto; }
+        .service-category { display: inline-block; padding: 8px 20px; background: var(--accent-gold); border-radius: 25px; font-weight: 600; font-size: 0.9rem; margin-bottom: 20px; }
+        .service-hero h1 { font-size: 3.5rem; margin-bottom: 25px; font-weight: 700; text-shadow: 2px 2px 8px rgba(0,0,0,0.3); }
+        .service-hero p { font-size: 1.3rem; opacity: 0.95; line-height: 1.8; }
+        
+        .service-content { max-width: 1400px; margin: 80px auto; padding: 0 2rem; display: grid; grid-template-columns: 1fr 350px; gap: 4rem; }
+        
+        .main-content { }
+        .content-section { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); margin-bottom: 40px; }
+        .section-title { font-size: 2rem; color: var(--primary-blue); margin-bottom: 25px; }
+        .content-section p { color: var(--text-light); line-height: 1.9; font-size: 1.05rem; margin-bottom: 20px; }
+        .content-section ul { margin-left: 25px; color: var(--text-light); line-height: 2; }
+        body.rtl .content-section ul { margin-left: 0; margin-right: 25px; }
+        .content-section li { margin-bottom: 12px; }
+        
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 30px; }
+        .feature-card { background: var(--light-bg); padding: 30px; border-radius: 15px; transition: all 0.3s; }
+        .feature-card:hover { background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transform: translateY(-5px); }
+        .feature-icon { width: 60px; height: 60px; background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); border-radius: 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.8rem; margin-bottom: 20px; }
+        .feature-card h4 { color: var(--primary-blue); font-size: 1.3rem; margin-bottom: 12px; }
+        .feature-card p { color: var(--text-light); line-height: 1.7; font-size: 0.95rem; }
+        
+        .leaching-types { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; margin-top: 30px; }
+        .type-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.08); transition: all 0.3s; }
+        .type-card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+        .type-header { background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); color: white; padding: 30px; text-align: center; }
+        .type-header h4 { font-size: 1.6rem; margin-bottom: 10px; }
+        .type-header p { opacity: 0.95; font-size: 0.95rem; }
+        .type-body { padding: 30px; }
+        .type-body ul { list-style: none; }
+        .type-body li { padding: 12px 0; border-bottom: 1px solid var(--light-bg); display: flex; align-items: center; gap: 12px; color: var(--text-light); }
+        .type-body li:last-child { border-bottom: none; }
+        .type-body li i { color: var(--secondary-blue); font-size: 1.1rem; }
+        
+        .comparison-table { width: 100%; border-collapse: collapse; margin-top: 30px; background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.08); }
+        .comparison-table th { background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); color: white; padding: 20px; text-align: left; font-weight: 600; }
+        .comparison-table td { padding: 20px; border-bottom: 1px solid var(--light-bg); color: var(--text-light); }
+        .comparison-table tr:last-child td { border-bottom: none; }
+        .comparison-table tr:hover { background: var(--light-bg); }
+        
+        .sidebar { }
+        .sidebar-widget { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); margin-bottom: 25px; }
+        .widget-title { font-size: 1.4rem; color: var(--primary-blue); margin-bottom: 20px; padding-bottom: 15px; border-bottom: 3px solid var(--accent-gold); }
+        
+        .contact-form { }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; color: var(--text-dark); font-weight: 600; margin-bottom: 8px; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px 15px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 1rem; transition: all 0.3s; font-family: inherit; }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: var(--secondary-blue); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+        .btn-submit { width: 100%; padding: 15px; background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); color: white; border: none; border-radius: 50px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.3s; }
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3); }
+        
+        .related-services { list-style: none; }
+        .related-services li { margin-bottom: 15px; }
+        .related-services a { display: flex; align-items: center; gap: 12px; padding: 12px 15px; background: var(--light-bg); border-radius: 10px; color: var(--text-dark); text-decoration: none; transition: all 0.3s; }
+        .related-services a:hover { background: var(--secondary-blue); color: white; transform: translateX(5px); }
+        body.rtl .related-services a:hover { transform: translateX(-5px); }
+        .related-services i { color: var(--secondary-blue); transition: color 0.3s; }
+        .related-services a:hover i { color: white; }
+        
+        footer { background: var(--dark-bg); color: white; padding: 60px 2rem 30px; margin-top: 80px; }
+        .footer-content { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 40px; }
+        .footer-section h3 { color: var(--accent-gold); margin-bottom: 20px; font-size: 1.3rem; }
+        .footer-section ul { list-style: none; }
+        .footer-section a { color: #cbd5e1; text-decoration: none; display: block; margin-bottom: 12px; transition: all 0.3s; }
+        .footer-section a:hover { color: var(--accent-gold); padding-left: 5px; }
+        body.rtl .footer-section a:hover { padding-left: 0; padding-right: 5px; }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); color: #94a3b8; }
+        
+        @media (max-width: 1200px) {
+            .service-content { grid-template-columns: 1fr; }
+            .sidebar { max-width: 600px; margin: 0 auto; }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .service-hero h1 { font-size: 2.5rem; }
+            .features-grid { grid-template-columns: 1fr; }
+            .leaching-types { grid-template-columns: 1fr; }
+            .comparison-table { font-size: 0.85rem; }
+            .comparison-table th, .comparison-table td { padding: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switcher">
+        <button class="lang-btn active" onclick="switchLanguage('en')">
+            <span>🇬🇧</span><span>EN</span>
+        </button>
+        <button class="lang-btn" onclick="switchLanguage('fa')">
+            <span>🇮🇷</span><span>FA</span>
+        </button>
+    </div>
+
+    <header>
+        <nav>
+            <a href="../index.html" class="logo">
+                <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Logo">
+                <span data-en="Kavian Development Mine" data-fa="کاویان توسعه معدن">Kavian Development Mine</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="../index.html" data-en="Home" data-fa="خانه">Home</a></li>
+                <li><a href="../about.html" data-en="About" data-fa="درباره ما">About</a></li>
+                <li><a href="../services.html" data-en="Services" data-fa="خدمات">Services</a></li>
+                <li><a href="../portfolio.html" data-en="Portfolio" data-fa="نمونه کارها">Portfolio</a></li>
+                <li><a href="../blog.html" data-en="Blog" data-fa="وبلاگ">Blog</a></li>
+                <li><a href="../news.html" data-en="News" data-fa="اخبار">News</a></li>
+                <li><a href="../technical-resources.html" data-en="Resources" data-fa="منابع فنی">Resources</a></li>
+                <li><a href="../contact.html" data-en="Contact" data-fa="تماس">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="breadcrumb">
+        <a href="../index.html" data-en="Home" data-fa="خانه">Home</a>
+        <i class="fas fa-chevron-right"></i>
+        <a href="../services.html" data-en="Services" data-fa="خدمات">Services</a>
+        <i class="fas fa-chevron-right"></i>
+        <span data-en="Leaching Systems" data-fa="سیستم‌های لیچینگ">Leaching Systems</span>
+    </div>
+
+    <section class="service-hero">
+        <div class="hero-content">
+            <span class="service-category" data-en="HYDROMETALLURGY" data-fa="هیدرومتالورژی">HYDROMETALLURGY</span>
+            <h1 data-en="Heap & Tank Leaching Systems" data-fa="سیستم‌های لیچینگ توده‌ای و مخزنی">Heap & Tank Leaching Systems</h1>
+            <p data-en="Comprehensive engineering services for heap leaching, tank leaching, and pressure oxidation systems for copper, gold, nickel, and uranium extraction with optimized recovery and environmental compliance." data-fa="خدمات مهندسی جامع برای سیستم‌های لیچینگ توده‌ای، لیچینگ مخزنی و اکسیداسیون تحت فشار برای استخراج مس، طلا، نیکل و اورانیوم با بازیابی بهینه و انطباق زیست‌محیطی.">Comprehensive engineering services for heap leaching, tank leaching, and pressure oxidation systems for copper, gold, nickel, and uranium extraction with optimized recovery and environmental compliance.</p>
+        </div>
+    </section>
+
+    <div class="service-content">
+        <main class="main-content">
+            <div class="content-section">
+                <h2 class="section-title" data-en="Overview" data-fa="نمای کلی">Overview</h2>
+                <p data-en="Leaching is a hydrometallurgical process that uses aqueous solutions to extract valuable metals from ores. Our leaching system engineering services encompass all aspects of design, from pad construction and solution management to pregnant leach solution (PLS) processing and metal recovery." data-fa="لیچینگ یک فرآیند هیدرومتالورژیکی است که از محلول‌های آبی برای استخراج فلزات ارزشمند از سنگ‌ها استفاده می‌کند. خدمات مهندسی سیستم لیچینگ ما همه جنبه‌های طراحی را از ساخت پد و مدیریت محلول تا فرآوری محلول لیچ بارور (PLS) و بازیابی فلز در بر می‌گیرد.">Leaching is a hydrometallurgical process that uses aqueous solutions to extract valuable metals from ores. Our leaching system engineering services encompass all aspects of design, from pad construction and solution management to pregnant leach solution (PLS) processing and metal recovery.</p>
+                
+                <p data-en="We have designed leaching systems for operations ranging from small-scale heap leach pads processing 5,000 tonnes per day to large tank leaching circuits handling 50,000 tonnes per day. Our expertise covers acid leaching, cyanide leaching, ammonia leaching, and pressure oxidation technologies." data-fa="ما سیستم‌های لیچینگ را برای عملیات از پدهای لیچ توده‌ای در مقیاس کوچک که 5000 تن در روز را فرآوری می‌کنند تا مدارهای لیچینگ مخزنی بزرگ که 50000 تن در روز را مدیریت می‌کنند، طراحی کرده‌ایم. تخصص ما لیچینگ اسیدی، لیچینگ سیانیدی، لیچینگ آمونیاکی و فناوری‌های اکسیداسیون تحت فشار را پوشش می‌دهد.">We have designed leaching systems for operations ranging from small-scale heap leach pads processing 5,000 tonnes per day to large tank leaching circuits handling 50,000 tonnes per day. Our expertise covers acid leaching, cyanide leaching, ammonia leaching, and pressure oxidation technologies.</p>
+            </div>
+            
+            <div class="content-section">
+                <h2 class="section-title" data-en="Leaching Technologies" data-fa="فناوری‌های لیچینگ">Leaching Technologies</h2>
+                <div class="leaching-types">
+                    <div class="type-card">
+                        <div class="type-header">
+                            <h4 data-en="Heap Leaching" data-fa="لیچینگ توده‌ای">Heap Leaching</h4>
+                            <p data-en="Low-grade ore processing" data-fa="فرآوری سنگ کم‌عیار">Low-grade ore processing</p>
+                        </div>
+                        <div class="type-body">
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i><span data-en="Pad design & construction" data-fa="طراحی و ساخت پد">Pad design & construction</span></li>
+                                <li><i class="fas fa-check-circle"></i><span data-en="Liner systems (HDPE/clay)" data-fa="سیستم‌های پوشش (HDPE/خاک رس)">Liner systems (HDPE/clay)</span></li>
+                                <li><i class="fas fa-check-circle"></i><span data-en="Solution distribution" data-fa="توزیع محلول">Solution distribution</span></li>
+                                <li><i class="fas fa-check-circle"></i><span data-en="PLS collection systems" data-fa="سیستم‌های جمع‌آوری PLS">PLS collection systems</span></li>
+                                <li><i class="fas fa-check-circle"></i><span data-en="Stacking methods" data-fa="روش‌های انباشت">Stacking methods</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="type-card">
+                        <div class="type-header">
+                            <h4 data-en="Tank Leaching" data-fa="لیچینگ مخزنی">Tank Leaching</h4>
+                            <p data-en="High-grade ore processing" data-fa="فرآوری سنگ پرعیار">High-grade ore processing</p>
+                        </div>
+                        <div class="type-body">
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i><span data-en="Agitated tank design" data-fa="طراحی مخزن همزن‌دار">Agitated tank design</span></li>
+                                <li><i class="fas fa-check-circle"></i><span data-en="CIL/CIP circuits" data-fa="مدارهای CIL/CIP">CIL/CIP circuits</span></li>
+                                <li><i class="fas fa-check-circle"></i><span data-en="Oxygen injection systems" data-fa="سیستم‌های تزریق اکسیژن">Oxygen injection systems</span></li>
+                                <li><i class="fas fa-check-circle"></i><span data-en="Temperature control" data-fa="کنترل دما">Temperature control</span></li>
+                                <li><i class="fas fa-check-circle"></i><span data-en="Residence time optimization" data-fa="بهینه‌سازی زمان ماند">Residence time optimization</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="type-card">
+                        <div class="type-header">
+                            <h4 data-en="Pressure Oxidation" data-fa="اکسیداسیون تحت فشار">Pressure Oxidation</h4>
+                            <p data-en="Refractory ore treatment" data-fa="تصفیه سنگ نسوز">Refractory ore treatment</p>
+                        </div>
+                        <div class="type-body">
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i><span data-en="Autoclave design" data-fa="طراحی اتوکلاو">Autoclave design</span></li>
+                                <li><i class="fas fa-check-circle"></i><span data-en="High-pressure systems" data-fa="سیستم‌های فشار بالا">High-pressure systems</span></li>
+                                <li><i class="fas fa-check-circle"></i><span data-en="SO2 abatement" data-fa="کاهش SO2">SO2 abatement</span></li>
+                                <li><i class="fas fa-check-circle"></i><span data-en="Heat recovery" data-fa="بازیابی حرارت">Heat recovery</span></li>
+                                <li><i class="fas fa-check-circle"></i><span data-en="Safety systems" data-fa="سیستم‌های ایمنی">Safety systems</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-section">
+                <h2 class="section-title" data-en="Key Services" data-fa="خدمات کلیدی">Key Services</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🏗️</div>
+                        <h4 data-en="Pad Engineering" data-fa="مهندسی پد">Pad Engineering</h4>
+                        <p data-en="Complete heap leach pad design including liner systems, drainage, and solution management." data-fa="طراحی کامل پد لیچ توده‌ای از جمله سیستم‌های پوشش، زهکشی و مدیریت محلول.">Complete heap leach pad design including liner systems, drainage, and solution management.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">💧</div>
+                        <h4 data-en="Solution Chemistry" data-fa="شیمی محلول">Solution Chemistry</h4>
+                        <p data-en="Optimization of lixiviant concentration, pH control, and reagent consumption." data-fa="بهینه‌سازی غلظت محلول لیچ، کنترل pH و مصرف معرف.">Optimization of lixiviant concentration, pH control, and reagent consumption.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">⚗️</div>
+                        <h4 data-en="Metal Recovery" data-fa="بازیابی فلز">Metal Recovery</h4>
+                        <p data-en="SX-EW, precipitation, and ion exchange systems for metal recovery from PLS." data-fa="سیستم‌های SX-EW، رسوب‌گیری و تبادل یونی برای بازیابی فلز از PLS.">SX-EW, precipitation, and ion exchange systems for metal recovery from PLS.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🌿</div>
+                        <h4 data-en="Environmental Design" data-fa="طراحی زیست‌محیطی">Environmental Design</h4>
+                        <p data-en="Seepage control, water management, and closure planning for environmental compliance." data-fa="کنترل نشت، مدیریت آب و برنامه‌ریزی بسته‌سازی برای انطباق زیست‌محیطی.">Seepage control, water management, and closure planning for environmental compliance.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h4 data-en="Process Optimization" data-fa="بهینه‌سازی فرآیند">Process Optimization</h4>
+                        <p data-en="Column leach testing, kinetic modeling, and recovery optimization studies." data-fa="آزمایش لیچ ستونی، مدل‌سازی سینتیکی و مطالعات بهینه‌سازی بازیابی.">Column leach testing, kinetic modeling, and recovery optimization studies.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🔧</div>
+                        <h4 data-en="Equipment Selection" data-fa="انتخاب تجهیزات">Equipment Selection</h4>
+                        <p data-en="Pumps, agitators, autoclaves, and instrumentation selection and sizing." data-fa="انتخاب و اندازه‌گیری پمپ‌ها، همزن‌ها، اتوکلاوها و ابزار دقیق.">Pumps, agitators, autoclaves, and instrumentation selection and sizing.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-section">
+                <h2 class="section-title" data-en="Technology Comparison" data-fa="مقایسه فناوری">Technology Comparison</h2>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th data-en="Parameter" data-fa="پارامتر">Parameter</th>
+                            <th data-en="Heap Leaching" data-fa="لیچینگ توده‌ای">Heap Leaching</th>
+                            <th data-en="Tank Leaching" data-fa="لیچینگ مخزنی">Tank Leaching</th>
+                            <th data-en="Pressure Oxidation" data-fa="اکسیداسیون تحت فشار">Pressure Oxidation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-en="Ore Grade" data-fa="عیار سنگ">Ore Grade</td>
+                            <td data-en="Low (0.2-1%)" data-fa="کم (0.2-1%)">Low (0.2-1%)</td>
+                            <td data-en="Medium-High (>1%)" data-fa="متوسط-بالا (>1%)">Medium-High (>1%)</td>
+                            <td data-en="Refractory ores" data-fa="سنگ‌های نسوز">Refractory ores</td>
+                        </tr>
+                        <tr>
+                            <td data-en="Recovery" data-fa="بازیابی">Recovery</td>
+                            <td>60-80%</td>
+                            <td>85-95%</td>
+                            <td>90-98%</td>
+                        </tr>
+                        <tr>
+                            <td data-en="CAPEX" data-fa="هزینه سرمایه‌ای">CAPEX</td>
+                            <td data-en="Low" data-fa="کم">Low</td>
+                            <td data-en="Medium" data-fa="متوسط">Medium</td>
+                            <td data-en="High" data-fa="بالا">High</td>
+                        </tr>
+                        <tr>
+                            <td data-en="OPEX" data-fa="هزینه عملیاتی">OPEX</td>
+                            <td data-en="Low" data-fa="کم">Low</td>
+                            <td data-en="Medium" data-fa="متوسط">Medium</td>
+                            <td data-en="High" data-fa="بالا">High</td>
+                        </tr>
+                        <tr>
+                            <td data-en="Leach Time" data-fa="زمان لیچ">Leach Time</td>
+                            <td data-en="60-180 days" data-fa="60-180 روز">60-180 days</td>
+                            <td data-en="12-48 hours" data-fa="12-48 ساعت">12-48 hours</td>
+                            <td data-en="1-4 hours" data-fa="1-4 ساعت">1-4 hours</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+        
+        <aside class="sidebar">
+            <div class="sidebar-widget">
+                <h3 class="widget-title" data-en="Request Design" data-fa="درخواست طراحی">Request Design</h3>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label data-en="Full Name" data-fa="نام کامل">Full Name</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label data-en="Email" data-fa="ایمیل">Email</label>
+                        <input type="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label data-en="Company" data-fa="شرکت">Company</label>
+                        <input type="text">
+                    </div>
+                    <div class="form-group">
+                        <label data-en="Leaching Type" data-fa="نوع لیچینگ">Leaching Type</label>
+                        <select>
+                            <option data-en="Heap Leaching" data-fa="لیچینگ توده‌ای">Heap Leaching</option>
+                            <option data-en="Tank Leaching" data-fa="لیچینگ مخزنی">Tank Leaching</option>
+                            <option data-en="Pressure Oxidation" data-fa="اکسیداسیون تحت فشار">Pressure Oxidation</option>
+                            <option data-en="Other" data-fa="سایر">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label data-en="Capacity (TPD)" data-fa="ظرفیت (تن/روز)">Capacity (TPD)</label>
+                        <input type="number">
+                    </div>
+                    <div class="form-group">
+                        <label data-en="Message" data-fa="پیام">Message</label>
+                        <textarea></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit" data-en="Submit Request" data-fa="ارسال درخواست">Submit Request</button>
+                </form>
+            </div>
+            
+            <div class="sidebar-widget">
+                <h3 class="widget-title" data-en="Related Services" data-fa="خدمات مرتبط">Related Services</h3>
+                <ul class="related-services">
+                    <li><a href="acid-production.html"><i class="fas fa-flask"></i><span data-en="Acid Production" data-fa="تولید اسید">Acid Production</span></a></li>
+                    <li><a href="concentration-plants.html"><i class="fas fa-industry"></i><span data-en="Concentration Plants" data-fa="کارخانه‌های کنسانتره">Concentration Plants</span></a></li>
+                    <li><a href="plant-design.html"><i class="fas fa-drafting-compass"></i><span data-en="Plant Design" data-fa="طراحی کارخانه">Plant Design</span></a></li>
+                    <li><a href="technology-optimization.html"><i class="fas fa-chart-line"></i><span data-en="Process Optimization" data-fa="بهینه‌سازی فرآیند">Process Optimization</span></a></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 data-en="Company" data-fa="شرکت">Company</h3>
+                <ul>
+                    <li><a href="../about.html" data-en="About Us" data-fa="درباره ما">About Us</a></li>
+                    <li><a href="../portfolio.html" data-en="Portfolio" data-fa="نمونه کارها">Portfolio</a></li>
+                    <li><a href="../contact.html" data-en="Contact" data-fa="تماس با ما">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 data-en="Services" data-fa="خدمات">Services</h3>
+                <ul>
+                    <li><a href="leaching-systems.html" data-en="Leaching Systems" data-fa="سیستم‌های لیچینگ">Leaching Systems</a></li>
+                    <li><a href="acid-production.html" data-en="Acid Production" data-fa="تولید اسید">Acid Production</a></li>
+                    <li><a href="concentration-plants.html" data-en="Concentration Plants" data-fa="کارخانه‌های کنسانتره">Concentration Plants</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 data-en="Contact" data-fa="تماس">Contact</h3>
+                <ul>
+                    <li>📧 info@kdmine.com</li>
+                    <li>📞 +98 21 1234 5678</li>
+                    <li>📍 Tehran, Iran</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-en="&copy; 2025 Kavian Development Mine. All rights reserved." data-fa="© 2025 کاویان توسعه معدن. تمامی حقوق محفوظ است.">&copy; 2025 Kavian Development Mine. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function switchLanguage(lang) {
+            const body = document.body;
+            const elements = document.querySelectorAll('[data-en][data-fa]');
+            const langButtons = document.querySelectorAll('.lang-btn');
+            
+            if (lang === 'fa') { body.classList.add('rtl'); } 
+            else { body.classList.remove('rtl'); }
+            
+            langButtons.forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.lang-btn').classList.add('active');
+            
+            elements.forEach(el => {
+                el.innerHTML = el.getAttribute('data-' + lang);
+            });
+            
+            localStorage.setItem('preferredLanguage', lang);
+        }
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferredLanguage') || 'en';
+            if (savedLang === 'fa') {
+                document.querySelector('.lang-btn:last-child').click();
+            }
+        });
+        
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Form submitted! In production, this would send via EmailJS.');
+        });
+    </script>
+</body>
+</html>

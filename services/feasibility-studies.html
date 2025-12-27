@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feasibility Studies - Kavian Development Mine</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #1e3a8a;
+            --secondary-blue: #2563eb;
+            --accent-gold: #f59e0b;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+        }
+        body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-dark); overflow-x: hidden; }
+        body.rtl { font-family: 'Vazirmatn', sans-serif; direction: rtl; }
+        
+        .language-switcher { position: fixed; top: 20px; right: 20px; z-index: 3000; background: white; border-radius: 50px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); padding: 8px; display: flex; gap: 8px; }
+        body.rtl .language-switcher { right: auto; left: 20px; }
+        .lang-btn { padding: 10px 20px; border: 2px solid transparent; background: transparent; border-radius: 25px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: all 0.3s; display: flex; align-items: center; gap: 8px; color: var(--text-light); }
+        .lang-btn:hover { background: var(--light-bg); color: var(--secondary-blue); }
+        .lang-btn.active { background: var(--secondary-blue); color: white; border-color: var(--secondary-blue); }
+        
+        header { background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%); color: white; padding: 1rem 0; position: sticky; top: 0; z-index: 2000; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        nav { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
+        .logo { display: flex; align-items: center; gap: 15px; font-size: 1.5rem; font-weight: 700; text-decoration: none; color: white; }
+        .logo img { height: 55px; width: auto; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2)); }
+        .nav-links { display: flex; list-style: none; gap: 2.5rem; align-items: center; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 500; transition: all 0.3s; position: relative; padding: 5px 0; }
+        .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--accent-gold); transition: width 0.3s; }
+        .nav-links a:hover::after { width: 100%; }
+        
+        .breadcrumb { max-width: 1400px; margin: 30px auto; padding: 0 2rem; display: flex; align-items: center; gap: 10px; color: var(--text-light); font-size: 0.95rem; }
+        .breadcrumb a { color: var(--secondary-blue); text-decoration: none; transition: color 0.3s; }
+        .breadcrumb a:hover { color: var(--accent-gold); }
+        
+        .service-hero { background: linear-gradient(135deg, rgba(30, 58, 138, 0.95) 0%, rgba(37, 99, 235, 0.95) 100%), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1920') center/cover; color: white; padding: 100px 2rem 80px; }
+        .hero-content { max-width: 1200px; margin: 0 auto; }
+        .service-category { display: inline-block; padding: 8px 20px; background: var(--accent-gold); border-radius: 25px; font-weight: 600; font-size: 0.9rem; margin-bottom: 20px; }
+        .service-hero h1 { font-size: 3.5rem; margin-bottom: 25px; font-weight: 700; text-shadow: 2px 2px 8px rgba(0,0,0,0.3); }
+        .service-hero p { font-size: 1.3rem; opacity: 0.95; line-height: 1.8; }
+        
+        .service-content { max-width: 1400px; margin: 80px auto; padding: 0 2rem; display: grid; grid-template-columns: 1fr 350px; gap: 4rem; }
+        
+        .main-content { }
+        .content-section { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); margin-bottom: 40px; }
+        .section-title { font-size: 2rem; color: var(--primary-blue); margin-bottom: 25px; }
+        .content-section p { color: var(--text-light); line-height: 1.9; font-size: 1.05rem; margin-bottom: 20px; }
+        
+        .study-types { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; margin-top: 30px; }
+        .study-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.08); transition: all 0.4s; }
+        .study-card:hover { transform: translateY(-10px); box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+        .study-header { background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); color: white; padding: 35px 30px; text-align: center; }
+        .study-header h4 { font-size: 1.8rem; margin-bottom: 10px; }
+        .study-accuracy { font-size: 2rem; font-weight: 700; margin: 15px 0; }
+        .study-header p { opacity: 0.95; font-size: 0.95rem; }
+        .study-body { padding: 35px 30px; }
+        .study-features { list-style: none; margin-bottom: 25px; }
+        .study-features li { padding: 12px 0; border-bottom: 1px solid var(--light-bg); display: flex; align-items: flex-start; gap: 12px; color: var(--text-light); }
+        .study-features li:last-child { border-bottom: none; }
+        .study-features li i { color: var(--secondary-blue); font-size: 1.1rem; margin-top: 3px; flex-shrink: 0; }
+        .study-timeline { background: var(--light-bg); padding: 15px 20px; border-radius: 10px; text-align: center; }
+        .study-timeline strong { color: var(--primary-blue); font-size: 1.1rem; }
+        
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 30px; }
+        .feature-card { background: var(--light-bg); padding: 30px; border-radius: 15px; transition: all 0.3s; }
+        .feature-card:hover { background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transform: translateY(-5px); }
+        .feature-icon { width: 60px; height: 60px; background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); border-radius: 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.8rem; margin-bottom: 20px; }
+        .feature-card h4 { color: var(--primary-blue); font-size: 1.3rem; margin-bottom: 12px; }
+        .feature-card p { color: var(--text-light); line-height: 1.7; font-size: 0.95rem; }
+        
+        .deliverables-section { background: var(--light-bg); padding: 40px; border-radius: 20px; margin-top: 30px; }
+        .deliverables-section h4 { color: var(--primary-blue); font-size: 1.6rem; margin-bottom: 25px; text-align: center; }
+        .deliverables-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+        .deliverable-item { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        .deliverable-item h5 { color: var(--primary-blue); font-size: 1.1rem; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .deliverable-item h5 i { color: var(--accent-gold); }
+        .deliverable-item ul { list-style: none; color: var(--text-light); font-size: 0.95rem; }
+        .deliverable-item li { padding: 8px 0; padding-left: 20px; position: relative; }
+        .deliverable-item li::before { content: '•'; position: absolute; left: 0; color: var(--secondary-blue); font-weight: 700; }
+        
+        .compliance-badges { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-top: 30px; }
+        .badge { background: white; padding: 15px 25px; border-radius: 50px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--primary-blue); transition: all 0.3s; }
+        .badge:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.12); }
+        .badge i { color: var(--accent-gold); font-size: 1.2rem; }
+        
+        .sidebar { }
+        .sidebar-widget { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); margin-bottom: 25px; }
+        .widget-title { font-size: 1.4rem; color: var(--primary-blue); margin-bottom: 20px; padding-bottom: 15px; border-bottom: 3px solid var(--accent-gold); }
+        
+        .contact-form { }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; color: var(--text-dark); font-weight: 600; margin-bottom: 8px; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px 15px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 1rem; transition: all 0.3s; font-family: inherit; }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: var(--secondary-blue); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+        .btn-submit { width: 100%; padding: 15px; background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); color: white; border: none; border-radius: 50px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.3s; }
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3); }
+        
+        .related-services { list-style: none; }
+        .related-services li { margin-bottom: 15px; }
+        .related-services a { display: flex; align-items: center; gap: 12px; padding: 12px 15px; background: var(--light-bg); border-radius: 10px; color: var(--text-dark); text-decoration: none; transition: all 0.3s; }
+        .related-services a:hover { background: var(--secondary-blue); color: white; transform: translateX(5px); }
+        body.rtl .related-services a:hover { transform: translateX(-5px); }
+        .related-services i { color: var(--secondary-blue); transition: color 0.3s; }
+        .related-services a:hover i { color: white; }
+        
+        footer { background: var(--dark-bg); color: white; padding: 60px 2rem 30px; margin-top: 80px; }
+        .footer-content { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 40px; }
+        .footer-section h3 { color: var(--accent-gold); margin-bottom: 20px; font-size: 1.3rem; }
+        .footer-section ul { list-style: none; }
+        .footer-section a { color: #cbd5e1; text-decoration: none; display: block; margin-bottom: 12px; transition: all 0.3s; }
+        .footer-section a:hover { color: var(--accent-gold); padding-left: 5px; }
+        body.rtl .footer-section a:hover { padding-left: 0; padding-right: 5px; }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); color: #94a3b8; }
+        
+        @media (max-width: 1200px) {
+            .service-content { grid-template-columns: 1fr; }
+            .sidebar { max-width: 600px; margin: 0 auto; }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .service-hero h1 { font-size: 2.5rem; }
+            .study-types { grid-template-columns: 1fr; }
+            .features-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switcher">
+        <button class="lang-btn active" onclick="switchLanguage('en')">
+            <span>🇬🇧</span><span>EN</span>
+        </button>
+        <button class="lang-btn" onclick="switchLanguage('fa')">
+            <span>🇮🇷</span><span>FA</span>
+        </button>
+    </div>
+
+    <header>
+        <nav>
+            <a href="../index.html" class="logo">
+                <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Logo">
+                <span data-en="Kavian Development Mine" data-fa="کاویان توسعه معدن">Kavian Development Mine</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="../index.html" data-en="Home" data-fa="خانه">Home</a></li>
+                <li><a href="../about.html" data-en="About" data-fa="درباره ما">About</a></li>
+                <li><a href="../services.html" data-en="Services" data-fa="خدمات">Services</a></li>
+                <li><a href="../portfolio.html" data-en="Portfolio" data-fa="نمونه کارها">Portfolio</a></li>
+                <li><a href="../blog.html" data-en="Blog" data-fa="وبلاگ">Blog</a></li>
+                <li><a href="../news.html" data-en="News" data-fa="اخبار">News</a></li>
+                <li><a href="../technical-resources.html" data-en="Resources" data-fa="منابع فنی">Resources</a></li>
+                <li><a href="../contact.html" data-en="Contact" data-fa="تماس">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="breadcrumb">
+        <a href="../index.html" data-en="Home" data-fa="خانه">Home</a>
+        <i class="fas fa-chevron-right"></i>
+        <a href="../services.html" data-en="Services" data-fa="خدمات">Services</a>
+        <i class="fas fa-chevron-right"></i>
+        <span data-en="Feasibility Studies" data-fa="مطالعات امکان‌سنجی">Feasibility Studies</span>
+    </div>
+
+    <section class="service-hero">
+        <div class="hero-content">
+            <span class="service-category" data-en="PROJECT EVALUATION" data-fa="ارزیابی پروژه">PROJECT EVALUATION</span>
+            <h1 data-en="Comprehensive Feasibility Studies" data-fa="مطالعات امکان‌سنجی جامع">Comprehensive Feasibility Studies</h1>
+            <p data-en="Professional feasibility studies compliant with international standards (NI 43-101, JORC, SAMREC) providing investors with reliable technical and economic evaluations for informed decision-making." data-fa="مطالعات امکان‌سنجی حرفه‌ای مطابق با استانداردهای بین‌المللی (NI 43-101، JORC، SAMREC) که ارزیابی‌های فنی و اقتصادی قابل اعتماد را برای تصمیم‌گیری آگاهانه به سرمایه‌گذاران ارائه می‌دهد.">Professional feasibility studies compliant with international standards (NI 43-101, JORC, SAMREC) providing investors with reliable technical and economic evaluations for informed decision-making.</p>
+        </div>
+    </section>
+
+    <div class="service-content">
+        <main class="main-content">
+            <div class="content-section">
+                <h2 class="section-title" data-en="Overview" data-fa="نمای کلی">Overview</h2>
+                <p data-en="Feasibility studies are critical documents that determine whether a mining project should proceed to development. Our feasibility study services provide comprehensive technical, economic, and financial evaluations that meet international reporting standards and satisfy the requirements of investors, lenders, and regulatory authorities." data-fa="مطالعات امکان‌سنجی اسناد حیاتی هستند که تعیین می‌کنند آیا یک پروژه معدنی باید به توسعه ادامه دهد یا خیر. خدمات مطالعه امکان‌سنجی ما ارزیابی‌های فنی، اقتصادی و مالی جامع را ارائه می‌دهد که استانداردهای گزارش‌دهی بین‌المللی را برآورده می‌کند و الزامات سرمایه‌گذاران، وام‌دهندگان و مقامات نظارتی را برآورده می‌سازد.">Feasibility studies are critical documents that determine whether a mining project should proceed to development. Our feasibility study services provide comprehensive technical, economic, and financial evaluations that meet international reporting standards and satisfy the requirements of investors, lenders, and regulatory authorities.</p>
+                
+                <p data-en="We have completed over 150 feasibility studies for projects ranging from small-scale operations to world-class mining developments. Our multidisciplinary team includes qualified persons (QPs) under NI 43-101 and competent persons under JORC/SAMREC codes." data-fa="ما بیش از 150 مطالعه امکان‌سنجی را برای پروژه‌هایی از عملیات در مقیاس کوچک تا توسعه‌های معدنی در سطح جهانی تکمیل کرده‌ایم. تیم چند رشته‌ای ما شامل افراد واجد شرایط (QP) تحت NI 43-101 و افراد صالح تحت کدهای JORC/SAMREC است.">We have completed over 150 feasibility studies for projects ranging from small-scale operations to world-class mining developments. Our multidisciplinary team includes qualified persons (QPs) under NI 43-101 and competent persons under JORC/SAMREC codes.</p>
+            </div>
+            
+            <div class="content-section">
+                <h2 class="section-title" data-en="Study Types" data-fa="انواع مطالعات">Study Types</h2>
+                <div class="study-types">
+                    <div class="study-card">
+                        <div class="study-header">
+                            <h4 data-en="Scoping Study" data-fa="مطالعه محدوده">Scoping Study</h4>
+                            <div class="study-accuracy">±30-40%</div>
+                            <p data-en="Initial assessment" data-fa="ارزیابی اولیه">Initial assessment</p>
+                        </div>
+                        <div class="study-body">
+                            <ul class="study-features">
+                                <li><i class="fas fa-check-circle"></i><span data-en="Conceptual mining plan" data-fa="برنامه معدنی مفهومی">Conceptual mining plan</span></li>
+                                <li><i class="fas fa-check-circle"></i><span data-en="Preliminary flowsheet" data-fa="فلوشیت مقدماتی">Preliminary flowsheet</span></li>
+                                <li><i class="fas fa-check-circle"></i><span data-en="Order of magnitude costs" data-fa="هزینه‌های تقریبی">Order of magnitude costs</span></li>
+                                <li><i class="fas fa-check-circle"></i><span data-en="High-level economics" data-fa="اقتصاد سطح بالا">High-level economics</span></li>
+                                <li><i class="fas fa-check-circle"></i><span data-en="Risk identification" data-fa="شناسایی ریسک">Risk identification</span></li>
+                            </ul>
+                            <div class="study-timeline">
+                                <strong data-en="Timeline: 2-4 months" data-fa="زمان: 2-4 ماه">Timeline: 2-4 months</strong>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="study-card">
+                        <div class="study-header">
+                            <h4 data-en="Pre-Feasibility" data-fa="پیش‌امکان‌سنجی">Pre-Feasibility</h4>
+                            <div class="study-accuracy">±25%</div>
+                            <p data-en="Detailed evaluation" data-fa="ارزیابی تفصیلی">Detailed evaluation</p>
+                        </div>
+                        <div class="study-body">
+                            <ul class="study-features">
+                                <li><i class="fas fa-check-circle"></i><span data-en="Detailed mine design" data-fa="طراحی تفصیلی معدن">Detailed mine design</span></li>
+                                <li><i class="fas fa-check-circle"></i><span data-en="Process flowsheet optimization" data-fa="بهینه‌سازی فلوشیت فرآیند">Process flowsheet optimization</span></li>
+                                <li><i class="fas fa-check-circle"></i><span data-en="Equipment selection" data-fa="انتخاب تجهیزات">Equipment selection</span></li>
+                                <li><i class="fas fa-check-circle"></i><span data-en="Detailed cost estimates" data-fa="برآورد هزینه تفصیلی">Detailed cost estimates</span></li>
+                                <li><i class="fas fa-check-circle"></i><span data-en="Financial modeling" data-fa="مدل‌سازی مالی">Financial modeling</span></li>
+                            </ul>
+                            <div class="study-timeline">
+                                <strong data-en="Timeline: 6-12 months" data-fa="زمان: 6-12 ماه">Timeline: 6-12 months</strong>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="study-card">
+                        <div class="study-header">
+                            <h4 data-en="Feasibility Study" data-fa="مطالعه امکان‌سنجی">Feasibility Study</h4>
+                            <div class="study-accuracy">±10-15%</div>
+                            <p data-en="Bankable document" data-fa="سند قابل اعتبار بانکی">Bankable document</p>
+                        </div>
+                        <div class="study-body">
+                            <ul class="study-features">
+                                <li><i class="fas fa-check-circle"></i><span data-en="Comprehensive engineering" data-fa="مهندسی جامع">Comprehensive engineering</span></li>
+                                <li><i class="fas fa-check-circle"></i><span data-en="Vendor quotations" data-fa="قیمت‌های تامین‌کننده">Vendor quotations</span></li>
+                                <li><i class="fas fa-check-circle"></i><span data-en="Detailed financial model" data-fa="مدل مالی تفصیلی">Detailed financial model</span></li>
+                                <li><i class="fas fa-check-circle"></i><span data-en="Risk analysis" data-fa="تحلیل ریسک">Risk analysis</span></li>
+                                <li><i class="fas fa-check-circle"></i><span data-en="Implementation plan" data-fa="برنامه اجرا">Implementation plan</span></li>
+                            </ul>
+                            <div class="study-timeline">
+                                <strong data-en="Timeline: 12-18 months" data-fa="زمان: 12-18 ماه">Timeline: 12-18 months</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-section">
+                <h2 class="section-title" data-en="Key Components" data-fa="اجزای کلیدی">Key Components</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">⛏️</div>
+                        <h4 data-en="Mining" data-fa="معدنکاری">Mining</h4>
+                        <p data-en="Mine design, production scheduling, equipment selection, and operating costs." data-fa="طراحی معدن، برنامه‌ریزی تولید، انتخاب تجهیزات و هزینه‌های عملیاتی.">Mine design, production scheduling, equipment selection, and operating costs.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🏭</div>
+                        <h4 data-en="Processing" data-fa="فرآوری">Processing</h4>
+                        <p data-en="Flowsheet development, metallurgical testing, plant design, and recovery optimization." data-fa="توسعه فلوشیت، آزمایش متالورژی، طراحی کارخانه و بهینه‌سازی بازیابی.">Flowsheet development, metallurgical testing, plant design, and recovery optimization.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🏗️</div>
+                        <h4 data-en="Infrastructure" data-fa="زیرساخت">Infrastructure</h4>
+                        <p data-en="Roads, power supply, water management, tailings storage, and site facilities." data-fa="جاده‌ها، تامین برق، مدیریت آب، ذخیره‌سازی باطله و تأسیسات سایت.">Roads, power supply, water management, tailings storage, and site facilities.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">💰</div>
+                        <h4 data-en="Economics" data-fa="اقتصاد">Economics</h4>
+                        <p data-en="CAPEX/OPEX estimation, financial modeling, NPV/IRR analysis, and sensitivity studies." data-fa="برآورد CAPEX/OPEX، مدل‌سازی مالی، تحلیل NPV/IRR و مطالعات حساسیت.">CAPEX/OPEX estimation, financial modeling, NPV/IRR analysis, and sensitivity studies.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🌿</div>
+                        <h4 data-en="Environment" data-fa="محیط زیست">Environment</h4>
+                        <p data-en="Environmental impact assessment, permitting strategy, and closure planning." data-fa="ارزیابی اثرات زیست‌محیطی، استراتژی مجوزها و برنامه‌ریزی بسته‌سازی.">Environmental impact assessment, permitting strategy, and closure planning.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">👥</div>
+                        <h4 data-en="Social" data-fa="اجتماعی">Social</h4>
+                        <p data-en="Community engagement, social impact assessment, and stakeholder management." data-fa="تعامل با جامعه، ارزیابی اثرات اجتماعی و مدیریت ذینفعان.">Community engagement, social impact assessment, and stakeholder management.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="deliverables-section">
+                <h4 data-en="Typical Deliverables" data-fa="تحویلی‌های معمول">Typical Deliverables</h4>
+                <div class="deliverables-grid">
+                    <div class="deliverable-item">
+                        <h5><i class="fas fa-file-alt"></i><span data-en="Technical Report" data-fa="گزارش فنی">Technical Report</span></h5>
+                        <ul>
+                            <li data-en="Executive summary" data-fa="خلاصه اجرایی">Executive summary</li>
+                            <li data-en="Geology & resources" data-fa="زمین‌شناسی و منابع">Geology & resources</li>
+                            <li data-en="Mining & processing" data-fa="معدنکاری و فرآوری">Mining & processing</li>
+                            <li data-en="Infrastructure" data-fa="زیرساخت">Infrastructure</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="deliverable-item">
+                        <h5><i class="fas fa-chart-line"></i><span data-en="Financial Model" data-fa="مدل مالی">Financial Model</span></h5>
+                        <ul>
+                            <li data-en="Cash flow projections" data-fa="پیش‌بینی جریان نقدی">Cash flow projections</li>
+                            <li data-en="NPV & IRR analysis" data-fa="تحلیل NPV و IRR">NPV & IRR analysis</li>
+                            <li data-en="Sensitivity analysis" data-fa="تحلیل حساسیت">Sensitivity analysis</li>
+                            <li data-en="Risk assessment" data-fa="ارزیابی ریسک">Risk assessment</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="deliverable-item">
+                        <h5><i class="fas fa-drafting-compass"></i><span data-en="Engineering Drawings" data-fa="نقشه‌های مهندسی">Engineering Drawings</span></h5>
+                        <ul>
+                            <li data-en="General arrangement" data-fa="چیدمان کلی">General arrangement</li>
+                            <li data-en="Process flowsheets" data-fa="فلوشیت‌های فرآیند">Process flowsheets</li>
+                            <li data-en="P&IDs" data-fa="P&ID">P&IDs</li>
+                            <li data-en="3D models" data-fa="مدل‌های سه‌بعدی">3D models</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="deliverable-item">
+                        <h5><i class="fas fa-tasks"></i><span data-en="Implementation Plan" data-fa="برنامه اجرا">Implementation Plan</span></h5>
+                        <ul>
+                            <li data-en="Project schedule" data-fa="برنامه زمانی پروژه">Project schedule</li>
+                            <li data-en="Procurement strategy" data-fa="استراتژی تدارکات">Procurement strategy</li>
+                            <li data-en="Construction plan" data-fa="برنامه ساخت">Construction plan</li>
+                            <li data-en="Commissioning plan" data-fa="برنامه راه‌اندازی">Commissioning plan</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-section">
+                <h2 class="section-title" data-en="Compliance Standards" data-fa="استانداردهای انطباق">Compliance Standards</h2>
+                <p data-en="Our feasibility studies comply with internationally recognized reporting standards:" data-fa="مطالعات امکان‌سنجی ما با استانداردهای گزارش‌دهی شناخته شده بین‌المللی مطابقت دارد:">Our feasibility studies comply with internationally recognized reporting standards:</p>
+                <div class="compliance-badges">
+                    <div class="badge"><i class="fas fa-certificate"></i><span data-en="NI 43-101" data-fa="NI 43-101">NI 43-101</span></div>
+                    <div class="badge"><i class="fas fa-certificate"></i><span data-en="JORC Code" data-fa="کد JORC">JORC Code</span></div>
+                    <div class="badge"><i class="fas fa-certificate"></i><span data-en="SAMREC Code" data-fa="کد SAMREC">SAMREC Code</span></div>
+                    <div class="badge"><i class="fas fa-certificate"></i><span data-en="PERC Standard" data-fa="استاندارد PERC">PERC Standard</span></div>
+                    <div class="badge"><i class="fas fa-certificate"></i><span data-en="CRIRSCO Standards" data-fa="استانداردهای CRIRSCO">CRIRSCO Standards</span></div>
+                </div>
+            </div>
+        </main>
+        
+        <aside class="sidebar">
+            <div class="sidebar-widget">
+                <h3 class="widget-title" data-en="Request Study" data-fa="درخواست مطالعه">Request Study</h3>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label data-en="Full Name" data-fa="نام کامل">Full Name</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label data-en="Email" data-fa="ایمیل">Email</label>
+                        <input type="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label data-en="Company" data-fa="شرکت">Company</label>
+                        <input type="text">
+                    </div>
+                    <div class="form-group">
+                        <label data-en="Study Type" data-fa="نوع مطالعه">Study Type</label>
+                        <select>
+                            <option data-en="Scoping Study" data-fa="مطالعه محدوده">Scoping Study</option>
+                            <option data-en="Pre-Feasibility" data-fa="پیش‌امکان‌سنجی">Pre-Feasibility</option>
+                            <option data-en="Feasibility Study" data-fa="مطالعه امکان‌سنجی">Feasibility Study</option>
+                            <option data-en="Not Sure" data-fa="مطمئن نیستم">Not Sure</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label data-en="Project Location" data-fa="موقعیت پروژه">Project Location</label>
+                        <input type="text">
+                    </div>
+                    <div class="form-group">
+                        <label data-en="Message" data-fa="پیام">Message</label>
+                        <textarea></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit" data-en="Submit Request" data-fa="ارسال درخواست">Submit Request</button>
+                </form>
+            </div>
+            
+            <div class="sidebar-widget">
+                <h3 class="widget-title" data-en="Related Services" data-fa="خدمات مرتبط">Related Services</h3>
+                <ul class="related-services">
+                    <li><a href="economic-analysis.html"><i class="fas fa-chart-line"></i><span data-en="Economic Analysis" data-fa="تحلیل اقتصادی">Economic Analysis</span></a></li>
+                    <li><a href="plant-design.html"><i class="fas fa-drafting-compass"></i><span data-en="Plant Design" data-fa="طراحی کارخانه">Plant Design</span></a></li>
+                    <li><a href="equipment-selection.html"><i class="fas fa-cogs"></i><span data-en="Equipment Selection" data-fa="انتخاب تجهیزات">Equipment Selection</span></a></li>
+                    <li><a href="concentration-plants.html"><i class="fas fa-industry"></i><span data-en="Concentration Plants" data-fa="کارخانه‌های کنسانتره">Concentration Plants</span></a></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 data-en="Company" data-fa="شرکت">Company</h3>
+                <ul>
+                    <li><a href="../about.html" data-en="About Us" data-fa="درباره ما">About Us</a></li>
+                    <li><a href="../portfolio.html" data-en="Portfolio" data-fa="نمونه کارها">Portfolio</a></li>
+                    <li><a href="../contact.html" data-en="Contact" data-fa="تماس با ما">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 data-en="Services" data-fa="خدمات">Services</h3>
+                <ul>
+                    <li><a href="feasibility-studies.html" data-en="Feasibility Studies" data-fa="مطالعات امکان‌سنجی">Feasibility Studies</a></li>
+                    <li><a href="economic-analysis.html" data-en="Economic Analysis" data-fa="تحلیل اقتصادی">Economic Analysis</a></li>
+                    <li><a href="plant-design.html" data-en="Plant Design" data-fa="طراحی کارخانه">Plant Design</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 data-en="Contact" data-fa="تماس">Contact</h3>
+                <ul>
+                    <li>📧 info@kdmine.com</li>
+                    <li>📞 +98 21 1234 5678</li>
+                    <li>📍 Tehran, Iran</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-en="&copy; 2025 Kavian Development Mine. All rights reserved." data-fa="© 2025 کاویان توسعه معدن. تمامی حقوق محفوظ است.">&copy; 2025 Kavian Development Mine. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function switchLanguage(lang) {
+            const body = document.body;
+            const elements = document.querySelectorAll('[data-en][data-fa]');
+            const langButtons = document.querySelectorAll('.lang-btn');
+            
+            if (lang === 'fa') { body.classList.add('rtl'); } 
+            else { body.classList.remove('rtl'); }
+            
+            langButtons.forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.lang-btn').classList.add('active');
+            
+            elements.forEach(el => {
+                el.innerHTML = el.getAttribute('data-' + lang);
+            });
+            
+            localStorage.setItem('preferredLanguage', lang);
+        }
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferredLanguage') || 'en';
+            if (savedLang === 'fa') {
+                document.querySelector('.lang-btn:last-child').click();
+            }
+        });
+        
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Form submitted! In production, this would send via EmailJS.');
+        });
+    </script>
+</body>
+</html>

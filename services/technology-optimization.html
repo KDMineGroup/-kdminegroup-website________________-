@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technology & Process Optimization - Kavian Development Mine</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #1e3a8a;
+            --secondary-blue: #2563eb;
+            --accent-gold: #f59e0b;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+        }
+        body { font-family: 'Poppins', sans-serif; line-height: 1.6; color: var(--text-dark); overflow-x: hidden; }
+        body.rtl { font-family: 'Vazirmatn', sans-serif; direction: rtl; }
+        
+        .language-switcher { position: fixed; top: 20px; right: 20px; z-index: 3000; background: white; border-radius: 50px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); padding: 8px; display: flex; gap: 8px; }
+        body.rtl .language-switcher { right: auto; left: 20px; }
+        .lang-btn { padding: 10px 20px; border: 2px solid transparent; background: transparent; border-radius: 25px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: all 0.3s; display: flex; align-items: center; gap: 8px; color: var(--text-light); }
+        .lang-btn:hover { background: var(--light-bg); color: var(--secondary-blue); }
+        .lang-btn.active { background: var(--secondary-blue); color: white; border-color: var(--secondary-blue); }
+        
+        header { background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%); color: white; padding: 1rem 0; position: sticky; top: 0; z-index: 2000; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        nav { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
+        .logo { display: flex; align-items: center; gap: 15px; font-size: 1.5rem; font-weight: 700; text-decoration: none; color: white; }
+        .logo img { height: 55px; width: auto; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2)); }
+        .nav-links { display: flex; list-style: none; gap: 2.5rem; align-items: center; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 500; transition: all 0.3s; position: relative; padding: 5px 0; }
+        .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--accent-gold); transition: width 0.3s; }
+        .nav-links a:hover::after { width: 100%; }
+        
+        .breadcrumb { max-width: 1400px; margin: 30px auto; padding: 0 2rem; display: flex; align-items: center; gap: 10px; color: var(--text-light); font-size: 0.95rem; }
+        .breadcrumb a { color: var(--secondary-blue); text-decoration: none; transition: color 0.3s; }
+        .breadcrumb a:hover { color: var(--accent-gold); }
+        
+        .service-hero { background: linear-gradient(135deg, rgba(30, 58, 138, 0.95) 0%, rgba(37, 99, 235, 0.95) 100%), url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=1920') center/cover; color: white; padding: 100px 2rem 80px; }
+        .hero-content { max-width: 1200px; margin: 0 auto; }
+        .service-category { display: inline-block; padding: 8px 20px; background: var(--accent-gold); border-radius: 25px; font-weight: 600; font-size: 0.9rem; margin-bottom: 20px; }
+        .service-hero h1 { font-size: 3.5rem; margin-bottom: 25px; font-weight: 700; text-shadow: 2px 2px 8px rgba(0,0,0,0.3); }
+        .service-hero p { font-size: 1.3rem; opacity: 0.95; line-height: 1.8; }
+        
+        .service-content { max-width: 1400px; margin: 80px auto; padding: 0 2rem; display: grid; grid-template-columns: 1fr 350px; gap: 4rem; }
+        
+        .main-content { }
+        .content-section { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); margin-bottom: 40px; }
+        .section-title { font-size: 2rem; color: var(--primary-blue); margin-bottom: 25px; }
+        .content-section p { color: var(--text-light); line-height: 1.9; font-size: 1.05rem; margin-bottom: 20px; }
+        
+        .optimization-areas { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 30px; }
+        .area-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.08); transition: all 0.3s; }
+        .area-card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+        .area-header { background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); color: white; padding: 30px; text-align: center; }
+        .area-icon { font-size: 3rem; margin-bottom: 15px; }
+        .area-header h4 { font-size: 1.5rem; margin-bottom: 10px; }
+        .area-body { padding: 30px; }
+        .area-body ul { list-style: none; }
+        .area-body li { padding: 10px 0; border-bottom: 1px solid var(--light-bg); display: flex; align-items: center; gap: 12px; color: var(--text-light); }
+        .area-body li:last-child { border-bottom: none; }
+        .area-body li i { color: var(--secondary-blue); font-size: 1rem; }
+        
+        .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 30px; }
+        .benefit-card { background: var(--light-bg); padding: 30px; border-radius: 15px; text-align: center; transition: all 0.3s; }
+        .benefit-card:hover { background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transform: translateY(-5px); }
+        .benefit-icon { width: 70px; height: 70px; background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; margin: 0 auto 20px; }
+        .benefit-value { font-size: 2.5rem; font-weight: 700; color: var(--secondary-blue); margin-bottom: 10px; }
+        .benefit-label { color: var(--text-dark); font-weight: 600; font-size: 1.1rem; margin-bottom: 8px; }
+        .benefit-description { color: var(--text-light); font-size: 0.9rem; line-height: 1.6; }
+        
+        .methodology { background: var(--light-bg); padding: 40px; border-radius: 20px; margin-top: 30px; }
+        .methodology h4 { color: var(--primary-blue); font-size: 1.6rem; margin-bottom: 30px; text-align: center; }
+        .method-steps { display: grid; gap: 2rem; }
+        .method-step { background: white; padding: 30px; border-radius: 15px; display: flex; gap: 25px; align-items: start; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        .step-number { width: 60px; height: 60px; background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.8rem; font-weight: 700; flex-shrink: 0; }
+        .step-content h5 { color: var(--primary-blue); font-size: 1.3rem; margin-bottom: 10px; }
+        .step-content p { color: var(--text-light); line-height: 1.8; }
+        
+        .case-study-banner { background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue)); color: white; padding: 50px 40px; border-radius: 20px; margin-top: 30px; }
+        .case-study-banner h4 { font-size: 1.8rem; margin-bottom: 20px; }
+        .case-study-banner p { opacity: 0.95; line-height: 1.8; margin-bottom: 30px; font-size: 1.05rem; }
+        .case-metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 2rem; }
+        .case-metric { text-align: center; }
+        .metric-value { font-size: 2.8rem; font-weight: 700; color: var(--accent-gold); margin-bottom: 8px; }
+        .metric-label { font-size: 0.95rem; opacity: 0.95; }
+        
+        .sidebar { }
+        .sidebar-widget { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); margin-bottom: 25px; }
+        .widget-title { font-size: 1.4rem; color: var(--primary-blue); margin-bottom: 20px; padding-bottom: 15px; border-bottom: 3px solid var(--accent-gold); }
+        
+        .contact-form { }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; color: var(--text-dark); font-weight: 600; margin-bottom: 8px; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px 15px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 1rem; transition: all 0.3s; font-family: inherit; }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: var(--secondary-blue); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+        .btn-submit { width: 100%; padding: 15px; background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold)); color: white; border: none; border-radius: 50px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.3s; }
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3); }
+        
+        .related-services { list-style: none; }
+        .related-services li { margin-bottom: 15px; }
+        .related-services a { display: flex; align-items: center; gap: 12px; padding: 12px 15px; background: var(--light-bg); border-radius: 10px; color: var(--text-dark); text-decoration: none; transition: all 0.3s; }
+        .related-services a:hover { background: var(--secondary-blue); color: white; transform: translateX(5px); }
+        body.rtl .related-services a:hover { transform: translateX(-5px); }
+        .related-services i { color: var(--secondary-blue); transition: color 0.3s; }
+        .related-services a:hover i { color: white; }
+        
+        footer { background: var(--dark-bg); color: white; padding: 60px 2rem 30px; margin-top: 80px; }
+        .footer-content { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 40px; }
+        .footer-section h3 { color: var(--accent-gold); margin-bottom: 20px; font-size: 1.3rem; }
+        .footer-section ul { list-style: none; }
+        .footer-section a { color: #cbd5e1; text-decoration: none; display: block; margin-bottom: 12px; transition: all 0.3s; }
+        .footer-section a:hover { color: var(--accent-gold); padding-left: 5px; }
+        body.rtl .footer-section a:hover { padding-left: 0; padding-right: 5px; }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); color: #94a3b8; }
+        
+        @media (max-width: 1200px) {
+            .service-content { grid-template-columns: 1fr; }
+            .sidebar { max-width: 600px; margin: 0 auto; }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .service-hero h1 { font-size: 2.5rem; }
+            .optimization-areas { grid-template-columns: 1fr; }
+            .benefits-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switcher">
+        <button class="lang-btn active" onclick="switchLanguage('en')">
+            <span>🇬🇧</span><span>EN</span>
+        </button>
+        <button class="lang-btn" onclick="switchLanguage('fa')">
+            <span>🇮🇷</span><span>FA</span>
+        </button>
+    </div>
+
+    <header>
+        <nav>
+            <a href="../index.html" class="logo">
+                <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Logo">
+                <span data-en="Kavian Development Mine" data-fa="کاویان توسعه معدن">Kavian Development Mine</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="../index.html" data-en="Home" data-fa="خانه">Home</a></li>
+                <li><a href="../about.html" data-en="About" data-fa="درباره ما">About</a></li>
+                <li><a href="../services.html" data-en="Services" data-fa="خدمات">Services</a></li>
+                <li><a href="../portfolio.html" data-en="Portfolio" data-fa="نمونه کارها">Portfolio</a></li>
+                <li><a href="../blog.html" data-en="Blog" data-fa="وبلاگ">Blog</a></li>
+                <li><a href="../news.html" data-en="News" data-fa="اخبار">News</a></li>
+                <li><a href="../technical-resources.html" data-en="Resources" data-fa="منابع فنی">Resources</a></li>
+                <li><a href="../contact.html" data-en="Contact" data-fa="تماس">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="breadcrumb">
+        <a href="../index.html" data-en="Home" data-fa="خانه">Home</a>
+        <i class="fas fa-chevron-right"></i>
+        <a href="../services.html" data-en="Services" data-fa="خدمات">Services</a>
+        <i class="fas fa-chevron-right"></i>
+        <span data-en="Technology & Process Optimization" data-fa="بهینه‌سازی فناوری و فرآیند">Technology & Process Optimization</span>
+    </div>
+
+    <section class="service-hero">
+        <div class="hero-content">
+            <span class="service-category" data-en="OPERATIONAL EXCELLENCE" data-fa="تعالی عملیاتی">OPERATIONAL EXCELLENCE</span>
+            <h1 data-en="Technology & Process Optimization" data-fa="بهینه‌سازی فناوری و فرآیند">Technology & Process Optimization</h1>
+            <p data-en="Advanced optimization services to maximize recovery, reduce operating costs, improve energy efficiency, and enhance overall plant performance through data-driven analysis and proven methodologies." data-fa="خدمات بهینه‌سازی پیشرفته برای به حداکثر رساندن بازیابی، کاهش هزینه‌های عملیاتی، بهبود کارایی انرژی و افزایش عملکرد کلی کارخانه از طریق تحلیل مبتنی بر داده و روش‌های اثبات شده.">Advanced optimization services to maximize recovery, reduce operating costs, improve energy efficiency, and enhance overall plant performance through data-driven analysis and proven methodologies.</p>
+        </div>
+    </section>
+
+    <div class="service-content">
+        <main class="main-content">
+            <div class="content-section">
+                <h2 class="section-title" data-en="Overview" data-fa="نمای کلی">Overview</h2>
+                <p data-en="Process optimization is essential for maintaining competitive advantage in today's mining industry. Our optimization services help operations achieve maximum efficiency by identifying bottlenecks, optimizing process parameters, implementing advanced control strategies, and leveraging digital technologies." data-fa="بهینه‌سازی فرآیند برای حفظ مزیت رقابتی در صنعت معدن امروز ضروری است. خدمات بهینه‌سازی ما به عملیات کمک می‌کند تا با شناسایی گلوگاه‌ها، بهینه‌سازی پارامترهای فرآیند، پیاده‌سازی استراتژی‌های کنترل پیشرفته و استفاده از فناوری‌های دیجیتال به حداکثر کارایی دست یابند.">Process optimization is essential for maintaining competitive advantage in today's mining industry. Our optimization services help operations achieve maximum efficiency by identifying bottlenecks, optimizing process parameters, implementing advanced control strategies, and leveraging digital technologies.</p>
+                
+                <p data-en="We have successfully completed over 100 optimization projects worldwide, delivering measurable improvements in recovery, throughput, energy consumption, and operating costs. Our team combines deep process knowledge with advanced analytical tools and practical implementation experience." data-fa="ما بیش از 100 پروژه بهینه‌سازی را با موفقیت در سراسر جهان تکمیل کرده‌ایم و بهبودهای قابل اندازه‌گیری در بازیابی، توان عملیاتی، مصرف انرژی و هزینه‌های عملیاتی ارائه داده‌ایم. تیم ما دانش عمیق فرآیند را با ابزارهای تحلیلی پیشرفته و تجربه عملی پیاده‌سازی ترکیب می‌کند.">We have successfully completed over 100 optimization projects worldwide, delivering measurable improvements in recovery, throughput, energy consumption, and operating costs. Our team combines deep process knowledge with advanced analytical tools and practical implementation experience.</p>
+            </div>
+            
+            <div class="content-section">
+                <h2 class="section-title" data-en="Optimization Areas" data-fa="حوزه‌های بهینه‌سازی">Optimization Areas</h2>
+                <div class="optimization-areas">
+                    <div class="area-card">
+                        <div class="area-header">
+                            <div class="area-icon">⚙️</div>
+                            <h4 data-en="Grinding Optimization" data-fa="بهینه‌سازی آسیاب">Grinding Optimization</h4>
+                        </div>
+                        <div class="area-body">
+                            <ul>
+                                <li><i class="fas fa-check"></i><span data-en="Mill throughput maximization" data-fa="حداکثرسازی توان آسیاب">Mill throughput maximization</span></li>
+                                <li><i class="fas fa-check"></i><span data-en="Energy efficiency improvement" data-fa="بهبود کارایی انرژی">Energy efficiency improvement</span></li>
+                                <li><i class="fas fa-check"></i><span data-en="Particle size optimization" data-fa="بهینه‌سازی اندازه ذرات">Particle size optimization</span></li>
+                                <li><i class="fas fa-check"></i><span data-en="Media consumption reduction" data-fa="کاهش مصرف رسانه">Media consumption reduction</span></li>
+                                <li><i class="fas fa-check"></i><span data-en="Circuit configuration" data-fa="پیکربندی مدار">Circuit configuration</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="area-card">
+                        <div class="area-header">
+                            <div class="area-icon">💧</div>
+                            <h4 data-en="Flotation Optimization" data-fa="بهینه‌سازی فلوتاسیون">Flotation Optimization</h4>
+                        </div>
+                        <div class="area-body">
+                            <ul>
+                                <li><i class="fas fa-check"></i><span data-en="Recovery maximization" data-fa="حداکثرسازی بازیابی">Recovery maximization</span></li>
+                                <li><i class="fas fa-check"></i><span data-en="Grade improvement" data-fa="بهبود عیار">Grade improvement</span></li>
+                                <li><i class="fas fa-check"></i><span data-en="Reagent optimization" data-fa="بهینه‌سازی معرف">Reagent optimization</span></li>
+                                <li><i class="fas fa-check"></i><span data-en="Aeration control" data-fa="کنترل هوادهی">Aeration control</span></li>
+                                <li><i class="fas fa-check"></i><span data-en="Circuit design improvement" data-fa="بهبود طراحی مدار">Circuit design improvement</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="area-card">
+                        <div class="area-header">
+                            <div class="area-icon">⚡</div>
+                            <h4 data-en="Energy Optimization" data-fa="بهینه‌سازی انرژی">Energy Optimization</h4>
+                        </div>
+                        <div class="area-body">
+                            <ul>
+                                <li><i class="fas fa-check"></i><span data-en="Power consumption reduction" data-fa="کاهش مصرف برق">Power consumption reduction</span></li>
+                                <li><i class="fas fa-check"></i><span data-en="Load management" data-fa="مدیریت بار">Load management</span></li>
+                                <li><i class="fas fa-check"></i><span data-en="Equipment efficiency" data-fa="کارایی تجهیزات">Equipment efficiency</span></li>
+                                <li><i class="fas fa-check"></i><span data-en="Heat recovery systems" data-fa="سیستم‌های بازیابی حرارت">Heat recovery systems</span></li>
+                                <li><i class="fas fa-check"></i><span data-en="Renewable energy integration" data-fa="یکپارچه‌سازی انرژی تجدیدپذیر">Renewable energy integration</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-section">
+                <h2 class="section-title" data-en="Expected Benefits" data-fa="مزایای مورد انتظار">Expected Benefits</h2>
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">📈</div>
+                        <div class="benefit-value">+3-8%</div>
+                        <div class="benefit-label" data-en="Recovery Increase" data-fa="افزایش بازیابی">Recovery Increase</div>
+                        <div class="benefit-description" data-en="Improved metal recovery through process optimization" data-fa="بهبود بازیابی فلز از طریق بهینه‌سازی فرآیند">Improved metal recovery through process optimization</div>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">💰</div>
+                        <div class="benefit-value">10-20%</div>
+                        <div class="benefit-label" data-en="Cost Reduction" data-fa="کاهش هزینه">Cost Reduction</div>
+                        <div class="benefit-description" data-en="Lower operating costs through efficiency gains" data-fa="کاهش هزینه‌های عملیاتی از طریق افزایش کارایی">Lower operating costs through efficiency gains</div>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">⚡</div>
+                        <div class="benefit-value">15-25%</div>
+                        <div class="benefit-label" data-en="Energy Savings" data-fa="صرفه‌جویی انرژی">Energy Savings</div>
+                        <div class="benefit-description" data-en="Reduced power consumption and energy costs" data-fa="کاهش مصرف برق و هزینه‌های انرژی">Reduced power consumption and energy costs</div>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🎯</div>
+                        <div class="benefit-value">+5-15%</div>
+                        <div class="benefit-label" data-en="Throughput Gain" data-fa="افزایش توان عملیاتی">Throughput Gain</div>
+                        <div class="benefit-description" data-en="Increased production capacity without capital investment" data-fa="افزایش ظرفیت تولید بدون سرمایه‌گذاری">Increased production capacity without capital investment</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="methodology">
+                <h4 data-en="Our Optimization Methodology" data-fa="روش بهینه‌سازی ما">Our Optimization Methodology</h4>
+                <div class="method-steps">
+                    <div class="method-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h5 data-en="Data Collection & Analysis" data-fa="جمع‌آوری و تحلیل داده">Data Collection & Analysis</h5>
+                            <p data-en="Comprehensive data gathering from plant instrumentation, laboratory results, and operational records. Statistical analysis to identify trends and opportunities." data-fa="جمع‌آوری جامع داده از ابزار دقیق کارخانه، نتایج آزمایشگاه و سوابق عملیاتی. تحلیل آماری برای شناسایی روندها و فرصت‌ها.">Comprehensive data gathering from plant instrumentation, laboratory results, and operational records. Statistical analysis to identify trends and opportunities.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="method-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h5 data-en="Process Auditing" data-fa="ممیزی فرآیند">Process Auditing</h5>
+                            <p data-en="Detailed assessment of current operations including mass balancing, equipment performance evaluation, and identification of bottlenecks and inefficiencies." data-fa="ارزیابی دقیق عملیات فعلی از جمله موازنه جرم، ارزیابی عملکرد تجهیزات و شناسایی گلوگاه‌ها و ناکارآمدی‌ها.">Detailed assessment of current operations including mass balancing, equipment performance evaluation, and identification of bottlenecks and inefficiencies.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="method-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h5 data-en="Optimization Strategy" data-fa="استراتژی بهینه‌سازی">Optimization Strategy</h5>
+                            <p data-en="Development of targeted improvement strategies based on audit findings. Prioritization of opportunities based on impact and implementation feasibility." data-fa="توسعه استراتژی‌های بهبود هدفمند بر اساس یافته‌های ممیزی. اولویت‌بندی فرصت‌ها بر اساس تأثیر و امکان‌پذیری اجرا.">Development of targeted improvement strategies based on audit findings. Prioritization of opportunities based on impact and implementation feasibility.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="method-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h5 data-en="Implementation & Testing" data-fa="پیاده‌سازی و آزمایش">Implementation & Testing</h5>
+                            <p data-en="Systematic implementation of optimization measures with careful monitoring and adjustment. Plant trials to validate improvements and fine-tune parameters." data-fa="پیاده‌سازی سیستماتیک اقدامات بهینه‌سازی با نظارت و تنظیم دقیق. آزمایش‌های کارخانه برای اعتبارسنجی بهبودها و تنظیم دقیق پارامترها.">Systematic implementation of optimization measures with careful monitoring and adjustment. Plant trials to validate improvements and fine-tune parameters.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="method-step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h5 data-en="Monitoring & Sustaining" data-fa="نظارت و پایداری">Monitoring & Sustaining</h5>
+                            <p data-en="Ongoing performance monitoring, training of operations staff, and establishment of control systems to sustain improvements over the long term." data-fa="نظارت مستمر بر عملکرد، آموزش کارکنان عملیاتی و استقرار سیستم‌های کنترل برای حفظ بهبودها در بلندمدت.">Ongoing performance monitoring, training of operations staff, and establishment of control systems to sustain improvements over the long term.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="case-study-banner">
+                <h4 data-en="Success Story: Copper Concentrator Optimization" data-fa="داستان موفقیت: بهینه‌سازی کنسانتره مس">Success Story: Copper Concentrator Optimization</h4>
+                <p data-en="We implemented a comprehensive optimization program at a 30,000 TPD copper concentrator, focusing on grinding circuit efficiency and flotation performance. Through systematic improvements and advanced control implementation, the operation achieved significant gains in multiple areas." data-fa="ما یک برنامه بهینه‌سازی جامع را در یک کنسانتره مس 30000 تن در روز اجرا کردیم که بر کارایی مدار آسیاب و عملکرد فلوتاسیون تمرکز داشت. از طریق بهبودهای سیستماتیک و پیاده‌سازی کنترل پیشرفته، عملیات به دستاوردهای قابل توجهی در حوزه‌های متعدد دست یافت.">We implemented a comprehensive optimization program at a 30,000 TPD copper concentrator, focusing on grinding circuit efficiency and flotation performance. Through systematic improvements and advanced control implementation, the operation achieved significant gains in multiple areas.</p>
+                
+                <div class="case-metrics">
+                    <div class="case-metric">
+                        <div class="metric-value">+4.2%</div>
+                        <div class="metric-label" data-en="Recovery Increase" data-fa="افزایش بازیابی">Recovery Increase</div>
+                    </div>
+                    <div class="case-metric">
+                        <div class="metric-value">+12%</div>
+                        <div class="metric-label" data-en="Throughput Gain" data-fa="افزایش توان">Throughput Gain</div>
+                    </div>
+                    <div class="case-metric">
+                        <div class="metric-value">-18%</div>
+                        <div class="metric-label" data-en="Energy Reduction" data-fa="کاهش انرژی">Energy Reduction</div>
+                    </div>
+                    <div class="case-metric">
+                        <div class="metric-value">$8M</div>
+                        <div class="metric-label" data-en="Annual Savings" data-fa="صرفه‌جویی سالانه">Annual Savings</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <aside class="sidebar">
+            <div class="sidebar-widget">
+                <h3 class="widget-title" data-en="Request Assessment" data-fa="درخواست ارزیابی">Request Assessment</h3>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label data-en="Full Name" data-fa="نام کامل">Full Name</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label data-en="Email" data-fa="ایمیل">Email</label>
+                        <input type="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label data-en="Company" data-fa="شرکت">Company</label>
+                        <input type="text">
+                    </div>
+                    <div class="form-group">
+                        <label data-en="Optimization Area" data-fa="حوزه بهینه‌سازی">Optimization Area</label>
+                        <select>
+                            <option data-en="Grinding Circuit" data-fa="مدار آسیاب">Grinding Circuit</option>
+                            <option data-en="Flotation" data-fa="فلوتاسیون">Flotation</option>
+                            <option data-en="Energy Efficiency" data-fa="کارایی انرژی">Energy Efficiency</option>
+                            <option data-en="Overall Plant" data-fa="کل کارخانه">Overall Plant</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label data-en="Plant Capacity (TPD)" data-fa="ظرفیت کارخانه (تن/روز)">Plant Capacity (TPD)</label>
+                        <input type="number">
+                    </div>
+                    <div class="form-group">
+                        <label data-en="Message" data-fa="پیام">Message</label>
+                        <textarea></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit" data-en="Submit Request" data-fa="ارسال درخواست">Submit Request</button>
+                </form>
+            </div>
+            
+            <div class="sidebar-widget">
+                <h3 class="widget-title" data-en="Related Services" data-fa="خدمات مرتبط">Related Services</h3>
+                <ul class="related-services">
+                    <li><a href="concentration-plants.html"><i class="fas fa-industry"></i><span data-en="Concentration Plants" data-fa="کارخانه‌های کنسانتره">Concentration Plants</span></a></li>
+                    <li><a href="plant-design.html"><i class="fas fa-drafting-compass"></i><span data-en="Plant Design" data-fa="طراحی کارخانه">Plant Design</span></a></li>
+                    <li><a href="equipment-selection.html"><i class="fas fa-cogs"></i><span data-en="Equipment Selection" data-fa="انتخاب تجهیزات">Equipment Selection</span></a></li>
+                    <li><a href="economic-analysis.html"><i class="fas fa-chart-line"></i><span data-en="Economic Analysis" data-fa="تحلیل اقتصادی">Economic Analysis</span></a></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 data-en="Company" data-fa="شرکت">Company</h3>
+                <ul>
+                    <li><a href="../about.html" data-en="About Us" data-fa="درباره ما">About Us</a></li>
+                    <li><a href="../portfolio.html" data-en="Portfolio" data-fa="نمونه کارها">Portfolio</a></li>
+                    <li><a href="../contact.html" data-en="Contact" data-fa="تماس با ما">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 data-en="Services" data-fa="خدمات">Services</h3>
+                <ul>
+                    <li><a href="technology-optimization.html" data-en="Process Optimization" data-fa="بهینه‌سازی فرآیند">Process Optimization</a></li>
+                    <li><a href="concentration-plants.html" data-en="Concentration Plants" data-fa="کارخانه‌های کنسانتره">Concentration Plants</a></li>
+                    <li><a href="plant-design.html" data-en="Plant Design" data-fa="طراحی کارخانه">Plant Design</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 data-en="Contact" data-fa="تماس">Contact</h3>
+                <ul>
+                    <li>📧 info@kdmine.com</li>
+                    <li>📞 +98 21 1234 5678</li>
+                    <li>📍 Tehran, Iran</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-en="&copy; 2025 Kavian Development Mine. All rights reserved." data-fa="© 2025 کاویان توسعه معدن. تمامی حقوق محفوظ است.">&copy; 2025 Kavian Development Mine. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function switchLanguage(lang) {
+            const body = document.body;
+            const elements = document.querySelectorAll('[data-en][data-fa]');
+            const langButtons = document.querySelectorAll('.lang-btn');
+            
+            if (lang === 'fa') { body.classList.add('rtl'); } 
+            else { body.classList.remove('rtl'); }
+            
+            langButtons.forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.lang-btn').classList.add('active');
+            
+            elements.forEach(el => {
+                el.innerHTML = el.getAttribute('data-' + lang);
+            });
+            
+            localStorage.setItem('preferredLanguage', lang);
+        }
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferredLanguage') || 'en';
+            if (savedLang === 'fa') {
+                document.querySelector('.lang-btn:last-child').click();
+            }
+        });
+        
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Form submitted! In production, this would send via EmailJS.');
+        });
+    </script>
+</body>
+</html>
