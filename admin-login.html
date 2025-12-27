@@ -1,70 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login - Kavian Development Mine</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>ورود مدیریت | کاویان توسعه معدن</title>
+    <link rel="icon" type="image/svg+xml" href="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg">
+    
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --primary-blue: #1e3a8a;
-            --secondary-blue: #2563eb;
-            --accent-gold: #f59e0b;
-            --dark-bg: #0f172a;
-            --light-bg: #f8fafc;
-            --text-dark: #1e293b;
-            --text-light: #64748b;
-            --success: #10b981;
-            --danger: #ef4444;
+        @font-face {
+            font-family: 'Vazirmatn';
+            src: local('Vazirmatn');
+            font-display: swap;
         }
-        body { 
-            font-family: 'Poppins', sans-serif; 
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 50%, var(--accent-gold) 100%);
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Vazirmatn', 'B Nazanin', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #f59e0b 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 2rem;
+            padding: 20px;
+            direction: rtl;
         }
         
-        .login-container { 
-            background: white; 
-            border-radius: 25px; 
-            box-shadow: 0 20px 80px rgba(0,0,0,0.3);
+        .login-container {
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.3);
             overflow: hidden;
-            max-width: 1000px;
+            max-width: 450px;
             width: 100%;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
             animation: slideUp 0.6s ease;
         }
         
         @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
-        .login-left {
-            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+        .login-header {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
             color: white;
-            padding: 60px 50px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            padding: 40px 35px;
+            text-align: center;
             position: relative;
             overflow: hidden;
         }
         
-        .login-left::before {
+        .login-header::before {
             content: '';
             position: absolute;
             top: -50%;
             right: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(245, 158, 11, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.15) 0%, transparent 70%);
             animation: rotate 20s linear infinite;
         }
         
@@ -73,108 +76,92 @@
             to { transform: rotate(360deg); }
         }
         
-        .login-left-content {
+        .logo-section {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 20px;
+        }
+        
+        .logo-section img {
+            width: 90px;
+            height: 90px;
+            background: white;
+            border-radius: 20px;
+            padding: 15px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+        
+        .login-header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+            font-weight: 700;
+        }
+        
+        .login-header p {
+            font-size: 1rem;
+            opacity: 0.9;
             position: relative;
             z-index: 1;
         }
         
-        .logo-section {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 30px;
+        .login-body {
+            padding: 40px 35px;
         }
         
-        .logo-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--accent-gold);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-        }
-        
-        .logo-text h2 {
-            font-size: 1.5rem;
-            margin-bottom: 5px;
-        }
-        
-        .logo-text p {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-        
-        .welcome-text h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-        
-        .welcome-text p {
-            font-size: 1.1rem;
-            opacity: 0.95;
-            line-height: 1.7;
-            margin-bottom: 30px;
-        }
-        
-        .features-list {
-            list-style: none;
-        }
-        
-        .features-list li {
-            display: flex;
+        .alert {
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: none;
             align-items: center;
             gap: 12px;
-            margin-bottom: 15px;
+            animation: slideDown 0.3s ease;
             font-size: 0.95rem;
         }
         
-        .features-list i {
-            color: var(--accent-gold);
-            font-size: 1.2rem;
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
-        .login-right {
-            padding: 60px 50px;
+        .alert.show {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
         }
         
-        .login-header {
-            text-align: center;
-            margin-bottom: 40px;
+        .alert-success {
+            background: #d1fae5;
+            color: #065f46;
+            border-right: 4px solid #059669;
         }
         
-        .login-header h2 {
-            font-size: 2rem;
-            color: var(--primary-blue);
-            margin-bottom: 10px;
+        .alert-error {
+            background: #fee2e2;
+            color: #991b1b;
+            border-right: 4px solid #dc2626;
         }
         
-        .login-header p {
-            color: var(--text-light);
-            font-size: 0.95rem;
-        }
-        
-        .login-form {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
+        .alert-icon {
+            font-size: 1.3rem;
         }
         
         .form-group {
-            position: relative;
+            margin-bottom: 25px;
         }
         
         .form-group label {
             display: block;
-            color: var(--text-dark);
-            font-weight: 600;
+            color: #1a202c;
+            font-weight: 700;
             margin-bottom: 10px;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
         
         .input-wrapper {
@@ -183,11 +170,11 @@
         
         .input-icon {
             position: absolute;
-            left: 18px;
+            right: 18px;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--text-light);
-            font-size: 1.1rem;
+            color: #64748b;
+            font-size: 1.2rem;
         }
         
         .form-group input {
@@ -202,32 +189,34 @@
         
         .form-group input:focus {
             outline: none;
-            border-color: var(--secondary-blue);
+            border-color: #2563eb;
             box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
         }
         
         .password-toggle {
             position: absolute;
-            right: 18px;
+            left: 18px;
             top: 50%;
             transform: translateY(-50%);
             background: none;
             border: none;
-            color: var(--text-light);
+            color: #64748b;
             cursor: pointer;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             transition: all 0.3s;
+            padding: 5px;
         }
         
         .password-toggle:hover {
-            color: var(--secondary-blue);
+            color: #2563eb;
         }
         
-        .form-options {
+        .remember-forgot {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: -10px;
+            margin-bottom: 25px;
+            font-size: 0.9rem;
         }
         
         .remember-me {
@@ -244,40 +233,38 @@
         }
         
         .remember-me label {
-            font-size: 0.9rem;
-            color: var(--text-dark);
             cursor: pointer;
-            margin: 0;
+            color: #4a5568;
+            font-weight: 600;
         }
         
         .forgot-password {
-            color: var(--secondary-blue);
+            color: #2563eb;
             text-decoration: none;
-            font-size: 0.9rem;
             font-weight: 600;
             transition: all 0.3s;
         }
         
         .forgot-password:hover {
-            color: var(--accent-gold);
+            color: #f59e0b;
         }
         
         .login-btn {
             width: 100%;
             padding: 16px;
-            background: linear-gradient(135deg, var(--secondary-blue), var(--accent-gold));
+            background: linear-gradient(135deg, #2563eb, #f59e0b);
             color: white;
             border: none;
             border-radius: 12px;
-            font-weight: 600;
+            font-family: inherit;
             font-size: 1.1rem;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            margin-top: 10px;
         }
         
         .login-btn:hover {
@@ -289,9 +276,9 @@
             transform: translateY(0);
         }
         
-        .login-btn.loading {
-            pointer-events: none;
-            opacity: 0.7;
+        .login-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
         }
         
         .spinner {
@@ -308,6 +295,10 @@
             display: block;
         }
         
+        .login-btn.loading .btn-text {
+            display: none;
+        }
+        
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
@@ -317,7 +308,7 @@
             align-items: center;
             gap: 15px;
             margin: 30px 0;
-            color: var(--text-light);
+            color: #64748b;
             font-size: 0.9rem;
         }
         
@@ -330,30 +321,32 @@
         }
         
         .demo-credentials {
-            background: var(--light-bg);
+            background: #f8fafc;
             padding: 20px;
             border-radius: 12px;
-            border-left: 4px solid var(--accent-gold);
+            border-right: 4px solid #f59e0b;
         }
         
         .demo-credentials h4 {
-            color: var(--primary-blue);
-            font-size: 0.95rem;
+            color: #1a202c;
+            font-size: 1rem;
             margin-bottom: 12px;
             display: flex;
             align-items: center;
             gap: 8px;
+            font-weight: 700;
         }
         
         .demo-credentials p {
-            color: var(--text-light);
-            font-size: 0.85rem;
+            color: #4a5568;
+            font-size: 0.9rem;
             margin: 5px 0;
             font-family: 'Courier New', monospace;
         }
         
         .demo-credentials strong {
-            color: var(--text-dark);
+            color: #1a202c;
+            font-weight: 700;
         }
         
         .back-home {
@@ -362,171 +355,101 @@
         }
         
         .back-home a {
-            color: var(--text-light);
+            color: #64748b;
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             display: inline-flex;
             align-items: center;
             gap: 8px;
             transition: all 0.3s;
+            font-weight: 600;
         }
         
         .back-home a:hover {
-            color: var(--secondary-blue);
+            color: #2563eb;
             gap: 12px;
-        }
-        
-        .alert {
-            padding: 15px 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            display: none;
-            align-items: center;
-            gap: 12px;
-            animation: slideDown 0.3s ease;
-        }
-        
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .alert.show {
-            display: flex;
-        }
-        
-        .alert-success {
-            background: #d1fae5;
-            color: #065f46;
-            border-left: 4px solid var(--success);
-        }
-        
-        .alert-error {
-            background: #fee2e2;
-            color: #991b1b;
-            border-left: 4px solid var(--danger);
-        }
-        
-        .alert i {
-            font-size: 1.2rem;
         }
         
         @media (max-width: 768px) {
             .login-container {
-                grid-template-columns: 1fr;
+                margin: 10px;
             }
             
-            .login-left {
-                display: none;
+            .login-header {
+                padding: 30px 25px;
             }
             
-            .login-right {
-                padding: 40px 30px;
+            .login-body {
+                padding: 30px 25px;
             }
         }
     </style>
 </head>
 <body>
     <div class="login-container">
-        <div class="login-left">
-            <div class="login-left-content">
-                <div class="logo-section">
-                    <div class="logo-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <div class="logo-text">
-                        <h2>Kavian Development</h2>
-                        <p>Admin Portal</p>
-                    </div>
-                </div>
-                
-                <div class="welcome-text">
-                    <h1>Welcome Back!</h1>
-                    <p>Access your admin dashboard to manage requests, monitor projects, and oversee operations.</p>
-                </div>
-                
-                <ul class="features-list">
-                    <li>
-                        <i class="fas fa-check-circle"></i>
-                        <span>Manage customer requests and inquiries</span>
-                    </li>
-                    <li>
-                        <i class="fas fa-check-circle"></i>
-                        <span>Monitor project statistics and analytics</span>
-                    </li>
-                    <li>
-                        <i class="fas fa-check-circle"></i>
-                        <span>Export data and generate reports</span>
-                    </li>
-                    <li>
-                        <i class="fas fa-check-circle"></i>
-                        <span>Secure and encrypted access</span>
-                    </li>
-                </ul>
+        <div class="login-header">
+            <div class="logo-section">
+                <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Logo">
             </div>
+            <h1>پنل مدیریت کاویان</h1>
+            <p>ورود به سیستم مدیریت</p>
         </div>
         
-        <div class="login-right">
-            <div class="login-header">
-                <h2>Admin Login</h2>
-                <p>Enter your credentials to access the dashboard</p>
-            </div>
-            
+        <div class="login-body">
             <div id="alertBox" class="alert">
-                <i class="fas fa-exclamation-circle"></i>
+                <span class="alert-icon">ℹ️</span>
                 <span id="alertMessage"></span>
             </div>
             
-            <form class="login-form" id="loginForm">
+            <form id="loginForm">
                 <div class="form-group">
-                    <label for="email">Email Address</label>
+                    <label for="username">نام کاربری</label>
                     <div class="input-wrapper">
-                        <i class="fas fa-envelope input-icon"></i>
-                        <input type="email" id="email" placeholder="admin@kdmine.com" required>
+                        <span class="input-icon">👤</span>
+                        <input type="text" id="username" placeholder="نام کاربری خود را وارد کنید" required autocomplete="username">
                     </div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="password">رمز عبور</label>
                     <div class="input-wrapper">
-                        <i class="fas fa-lock input-icon"></i>
-                        <input type="password" id="password" placeholder="Enter your password" required>
+                        <span class="input-icon">🔒</span>
+                        <input type="password" id="password" placeholder="رمز عبور خود را وارد کنید" required autocomplete="current-password">
                         <button type="button" class="password-toggle" onclick="togglePassword()">
-                            <i class="fas fa-eye" id="toggleIcon"></i>
+                            <span id="toggleIcon">👁️</span>
                         </button>
                     </div>
                 </div>
                 
-                <div class="form-options">
+                <div class="remember-forgot">
                     <div class="remember-me">
                         <input type="checkbox" id="remember">
-                        <label for="remember">Remember me</label>
+                        <label for="remember">مرا به خاطر بسپار</label>
                     </div>
-                    <a href="#" class="forgot-password">Forgot Password?</a>
+                    <a href="#" class="forgot-password" onclick="forgotPassword(event)">فراموشی رمز عبور</a>
                 </div>
                 
                 <button type="submit" class="login-btn" id="loginBtn">
-                    <span id="btnText">Sign In</span>
-                    <i class="fas fa-arrow-right" id="btnIcon"></i>
-                    <div class="spinner"></div>
+                    <span class="btn-text">ورود به سیستم</span>
+                    <span class="spinner"></span>
                 </button>
             </form>
             
-            <div class="divider">OR</div>
+            <div class="divider">یا</div>
             
             <div class="demo-credentials">
                 <h4>
-                    <i class="fas fa-info-circle"></i>
-                    Demo Credentials
+                    <span>ℹ️</span>
+                    <span>اطلاعات ورود دمو</span>
                 </h4>
-                <p><strong>Email:</strong> admin@kdmine.com</p>
-                <p><strong>Password:</strong> admin123</p>
+                <p><strong>نام کاربری:</strong> admin</p>
+                <p><strong>رمز عبور:</strong> admin123</p>
             </div>
             
             <div class="back-home">
                 <a href="index.html">
-                    <i class="fas fa-arrow-left"></i>
-                    Back to Homepage
+                    <span>←</span>
+                    <span>بازگشت به صفحه اصلی</span>
                 </a>
             </div>
         </div>
@@ -534,10 +457,26 @@
     
     <script>
         // Demo credentials
-        const DEMO_CREDENTIALS = {
-            email: 'admin@kdmine.com',
+        const ADMIN_CREDENTIALS = {
+            username: 'admin',
             password: 'admin123'
         };
+        
+        // Check if already logged in
+        window.addEventListener('DOMContentLoaded', () => {
+            const adminAuth = localStorage.getItem('adminAuth');
+            if (adminAuth) {
+                const authData = JSON.parse(adminAuth);
+                const hoursSinceLogin = (Date.now() - authData.timestamp) / (1000 * 60 * 60);
+                
+                // Session valid for 24 hours
+                if (hoursSinceLogin < 24) {
+                    window.location.href = 'admin-dashboard.html';
+                } else {
+                    localStorage.removeItem('adminAuth');
+                }
+            }
+        });
         
         // Toggle password visibility
         function togglePassword() {
@@ -546,12 +485,10 @@
             
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
-                toggleIcon.classList.remove('fa-eye');
-                toggleIcon.classList.add('fa-eye-slash');
+                toggleIcon.textContent = '🙈';
             } else {
                 passwordInput.type = 'password';
-                toggleIcon.classList.remove('fa-eye-slash');
-                toggleIcon.classList.add('fa-eye');
+                toggleIcon.textContent = '👁️';
             }
         }
         
@@ -559,9 +496,16 @@
         function showAlert(message, type) {
             const alertBox = document.getElementById('alertBox');
             const alertMessage = document.getElementById('alertMessage');
+            const alertIcon = alertBox.querySelector('.alert-icon');
             
             alertBox.className = 'alert show alert-' + type;
             alertMessage.textContent = message;
+            
+            if (type === 'success') {
+                alertIcon.textContent = '✓';
+            } else {
+                alertIcon.textContent = '✗';
+            }
             
             setTimeout(() => {
                 alertBox.classList.remove('show');
@@ -572,37 +516,30 @@
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const email = document.getElementById('email').value;
+            const username = document.getElementById('username').value.trim();
             const password = document.getElementById('password').value;
             const remember = document.getElementById('remember').checked;
             const loginBtn = document.getElementById('loginBtn');
-            const btnText = document.getElementById('btnText');
-            const btnIcon = document.getElementById('btnIcon');
             
             // Show loading state
             loginBtn.classList.add('loading');
-            btnText.textContent = 'Signing In...';
-            btnIcon.style.display = 'none';
+            loginBtn.disabled = true;
             
             // Simulate API call
             setTimeout(() => {
                 // Validate credentials
-                if (email === DEMO_CREDENTIALS.email && password === DEMO_CREDENTIALS.password) {
+                if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
                     // Success
-                    showAlert('Login successful! Redirecting to dashboard...', 'success');
+                    showAlert('ورود موفقیت‌آمیز! در حال انتقال به پنل مدیریت...', 'success');
                     
                     // Store session
-                    if (remember) {
-                        localStorage.setItem('adminSession', JSON.stringify({
-                            email: email,
-                            timestamp: Date.now()
-                        }));
-                    } else {
-                        sessionStorage.setItem('adminSession', JSON.stringify({
-                            email: email,
-                            timestamp: Date.now()
-                        }));
-                    }
+                    const authData = {
+                        username: username,
+                        timestamp: Date.now(),
+                        remember: remember
+                    };
+                    
+                    localStorage.setItem('adminAuth', JSON.stringify(authData));
                     
                     // Redirect to dashboard
                     setTimeout(() => {
@@ -610,42 +547,30 @@
                     }, 1500);
                 } else {
                     // Error
-                    showAlert('Invalid email or password. Please try again.', 'error');
+                    showAlert('نام کاربری یا رمز عبور اشتباه است. لطفاً دوباره تلاش کنید.', 'error');
                     
                     // Reset button
                     loginBtn.classList.remove('loading');
-                    btnText.textContent = 'Sign In';
-                    btnIcon.style.display = 'block';
+                    loginBtn.disabled = false;
                     
                     // Clear password field
                     document.getElementById('password').value = '';
+                    document.getElementById('password').focus();
                 }
             }, 1500);
         });
         
-        // Check if already logged in
-        window.addEventListener('DOMContentLoaded', () => {
-            const session = localStorage.getItem('adminSession') || sessionStorage.getItem('adminSession');
-            
-            if (session) {
-                const sessionData = JSON.parse(session);
-                const hoursSinceLogin = (Date.now() - sessionData.timestamp) / (1000 * 60 * 60);
-                
-                // Session valid for 24 hours
-                if (hoursSinceLogin < 24) {
-                    window.location.href = 'admin-dashboard.html';
-                } else {
-                    // Clear expired session
-                    localStorage.removeItem('adminSession');
-                    sessionStorage.removeItem('adminSession');
-                }
-            }
-        });
-        
         // Forgot password handler
-        document.querySelector('.forgot-password').addEventListener('click', function(e) {
+        function forgotPassword(e) {
             e.preventDefault();
-            showAlert('Password reset functionality will be available in production. For demo, use: admin123', 'error');
+            showAlert('برای بازیابی رمز عبور با مدیر سیستم تماس بگیرید. (دمو: admin / admin123)', 'error');
+        }
+        
+        // Auto-fill demo credentials on click
+        document.querySelector('.demo-credentials').addEventListener('click', function() {
+            document.getElementById('username').value = ADMIN_CREDENTIALS.username;
+            document.getElementById('password').value = ADMIN_CREDENTIALS.password;
+            showAlert('اطلاعات دمو وارد شد. روی "ورود به سیستم" کلیک کنید.', 'success');
         });
     </script>
 </body>
