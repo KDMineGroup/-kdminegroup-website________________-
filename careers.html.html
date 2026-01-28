@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Careers - Join Our Team | Kavian Development Mine</title>
+  <meta name="description" content="Join Kavian Development Mine and build your career in mining consultancy. Explore open positions in equipment optimization, cost analysis, and engineering.">
+  <meta name="keywords" content="mining jobs, mining engineer careers, cost analyst jobs, equipment engineer, mining consultant careers">
+  <link rel="canonical" href="https://kavianmine.com/careers.html">
+  <link rel="icon" type="image/svg+xml" href="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&family=Vazirmatn:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: white; line-height: 1.6; }
+      body.rtl { font-family: 'Vazirmatn', sans-serif; direction: rtl; }
+      
+      .gradient-text { background: linear-gradient(135deg, #f59e0b 0%, #ef4444 50%, #8b5cf6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+      
+      /* Language Switcher */
+      .language-switcher { position: fixed; top: 20px; right: 20px; z-index: 3000; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(20px); border-radius: 50px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); padding: 8px; display: flex; gap: 8px; border: 1px solid rgba(148, 163, 184, 0.2); }
+      body.rtl .language-switcher { right: auto; left: 20px; }
+      .lang-btn { padding: 10px 20px; border: none; background: transparent; border-radius: 25px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: all 0.3s; color: rgba(255,255,255,0.6); }
+      .lang-btn.active { background: linear-gradient(135deg, #f59e0b, #ef4444); color: white; }
+      
+      /* Header */
+      header { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(20px); padding: 1rem 2rem; position: sticky; top: 0; z-index: 2000; border-bottom: 1px solid rgba(148, 163, 184, 0.1); }
+      nav { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+      .logo { display: flex; align-items: center; gap: 15px; font-size: 1.5rem; font-weight: 700; text-decoration: none; color: white; }
+      .logo img { height: 55px; }
+      .nav-links { display: flex; list-style: none; gap: 2.5rem; }
+      .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-weight: 500; transition: color 0.3s; }
+      .nav-links a:hover { color: #f59e0b; }
+      
+      /* Hero */
+      .hero { padding: 120px 2rem 80px; text-align: center; position: relative; overflow: hidden; }
+      .hero::before { content: ''; position: absolute; top: 20%; left: 10%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(245, 158, 11, 0.15), transparent); border-radius: 50%; filter: blur(80px); }
+      .hero::after { content: ''; position: absolute; bottom: 20%; right: 10%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(37, 99, 235, 0.15), transparent); border-radius: 50%; filter: blur(80px); }
+      .hero-content { position: relative; z-index: 1; }
+      .hero h1 { font-size: 4rem; font-weight: 900; margin-bottom: 20px; }
+      .hero p { font-size: 1.3rem; color: rgba(255,255,255,0.7); max-width: 800px; margin: 0 auto 40px; }
+      
+      .stats-row { display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; margin-top: 40px; }
+      .stat-item { text-align: center; }
+      .stat-number { font-size: 3rem; font-weight: 900; color: #f59e0b; }
+      .stat-label { font-size: 1rem; color: rgba(255,255,255,0.7); }
+      
+      /* Why Join Us */
+      .why-section { padding: 80px 2rem; background: rgba(30, 41, 59, 0.3); }
+      .why-container { max-width: 1400px; margin: 0 auto; }
+      .section-title { font-size: 2.5rem; font-weight: 900; text-align: center; margin-bottom: 60px; }
+      .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+      .benefit-card { background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(148, 163, 184, 0.1); border-radius: 20px; padding: 40px; text-align: center; transition: all 0.3s; }
+      .benefit-card:hover { transform: translateY(-10px); border-color: #f59e0b; }
+      .benefit-icon { width: 80px; height: 80px; margin: 0 auto 25px; background: linear-gradient(135deg, #f59e0b, #ef4444); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; }
+      .benefit-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 15px; }
+      .benefit-description { color: rgba(255,255,255,0.7); line-height: 1.8; }
+      
+      /* Open Positions */
+      .positions-section { padding: 80px 2rem; }
+      .positions-container { max-width: 1200px; margin: 0 auto; }
+      .position-card { background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(148, 163, 184, 0.1); border-radius: 20px; padding: 40px; margin-bottom: 30px; transition: all 0.3s; }
+      .position-card:hover { border-color: #f59e0b; transform: translateX(10px); }
+      body.rtl .position-card:hover { transform: translateX(-10px); }
+      .position-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 25px; flex-wrap: wrap; gap: 20px; }
+      .position-title { font-size: 1.8rem; font-weight: 700; color: #f59e0b; }
+      .position-meta { display: flex; gap: 20px; flex-wrap: wrap; }
+      .meta-item { display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.7); font-size: 0.9rem; }
+      .position-description { color: rgba(255,255,255,0.7); margin-bottom: 20px; line-height: 1.8; }
+      .requirements { margin-bottom: 20px; }
+      .requirements h4 { font-size: 1.2rem; margin-bottom: 15px; color: rgba(255,255,255,0.9); }
+      .requirements ul { margin-left: 25px; color: rgba(255,255,255,0.7); }
+      body.rtl .requirements ul { margin-left: 0; margin-right: 25px; }
+      .requirements li { margin-bottom: 8px; }
+      .apply-btn { display: inline-flex; align-items: center; gap: 10px; padding: 15px 35px; background: linear-gradient(135deg, #f59e0b, #ef4444); border-radius: 50px; color: white; text-decoration: none; font-weight: 700; transition: all 0.3s; }
+      .apply-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(245, 158, 11, 0.4); }
+      
+      /* Culture Section */
+      .culture-section { padding: 80px 2rem; background: rgba(30, 41, 59, 0.3); }
+      .culture-container { max-width: 1400px; margin: 0 auto; }
+      .culture-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
+      .culture-card { background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(148, 163, 184, 0.1); border-radius: 20px; padding: 30px; text-align: center; }
+      .culture-image { width: 100%; height: 200px; background-size: cover; background-position: center; border-radius: 15px; margin-bottom: 20px; }
+      .culture-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; }
+      .culture-description { color: rgba(255,255,255,0.7); font-size: 0.95rem; }
+      
+      /* Application Process */
+      .process-section { padding: 80px 2rem; }
+      .process-container { max-width: 1200px; margin: 0 auto; }
+      .process-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
+      .step-card { background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(148, 163, 184, 0.1); border-radius: 20px; padding: 30px; position: relative; }
+      .step-number { position: absolute; top: -20px; left: 30px; width: 50px; height: 50px; background: linear-gradient(135deg, #f59e0b, #ef4444); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 900; }
+      body.rtl .step-number { left: auto; right: 30px; }
+      .step-title { font-size: 1.3rem; font-weight: 700; margin: 30px 0 15px; }
+      .step-description { color: rgba(255,255,255,0.7); line-height: 1.8; }
+      
+      /* CTA Section */
+      .cta-section { padding: 80px 2rem; background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(239, 68, 68, 0.1)); }
+      .cta-container { max-width: 800px; margin: 0 auto; text-align: center; }
+      .cta-title { font-size: 2.5rem; font-weight: 900; margin-bottom: 20px; }
+      .cta-description { font-size: 1.2rem; color: rgba(255,255,255,0.7); margin-bottom: 40px; }
+      .cta-buttons { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+      .cta-btn-primary { display: inline-flex; align-items: center; gap: 10px; padding: 18px 40px; background: linear-gradient(135deg, #f59e0b, #ef4444); border-radius: 50px; color: white; text-decoration: none; font-weight: 700; transition: all 0.3s; }
+      .cta-btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(245, 158, 11, 0.4); }
+      .cta-btn-secondary { display: inline-flex; align-items: center; gap: 10px; padding: 18px 40px; background: rgba(30, 41, 59, 0.8); border: 2px solid rgba(148, 163, 184, 0.2); border-radius: 50px; color: white; text-decoration: none; font-weight: 700; transition: all 0.3s; }
+      .cta-btn-secondary:hover { border-color: #f59e0b; background: rgba(245, 158, 11, 0.1); }
+      
+      /* Footer */
+      footer { background: rgba(15, 23, 42, 0.95); padding: 40px 2rem; text-align: center; border-top: 1px solid rgba(148, 163, 184, 0.1); }
+      
+      @media (max-width: 768px) {
+          .hero h1 { font-size: 2.5rem; }
+          .nav-links { display: none; }
+          .position-header { flex-direction: column; }
+      }
+  </style>
+  
+  <!-- Job Posting Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "JobPosting",
+    "title": "Senior Mining Equipment Engineer",
+    "description": "Lead equipment selection and optimization projects for global mining operations. Requires 5+ years experience in mining equipment engineering.",
+    "datePosted": "2024-01-29",
+    "validThrough": "2024-04-30",
+    "employmentType": "FULL_TIME",
+    "hiringOrganization": {
+      "@type": "Organization",
+      "name": "Kavian Development Mine",
+      "sameAs": "https://kavianmine.com",
+      "logo": "https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg"
+    },
+    "jobLocation": {
+      "@type": "Place",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Tehran",
+        "addressCountry": "IR"
+      }
+    },
+    "baseSalary": {
+      "@type": "MonetaryAmount",
+      "currency": "USD",
+      "value": {
+        "@type": "QuantitativeValue",
+        "minValue": 80000,
+        "maxValue": 120000,
+        "unitText": "YEAR"
+      }
+    }
+  }
+  </script>
+</head>
+<body>
+  <!-- Language Switcher -->
+  <div class="language-switcher">
+      <button class="lang-btn active" data-lang="en">English</button>
+      <button class="lang-btn" data-lang="fa">فارسی</button>
+  </div>
+
+  <!-- Header -->
+  <header>
+      <nav>
+          <a href="index.html" class="logo">
+              <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Logo">
+              <span data-en="Kavian Development Mine" data-fa="کاویان توسعه معدن">Kavian <span class="gradient-text">Mine</span></span>
+          </a>
+          <ul class="nav-links">
+              <li><a href="index.html" data-en="Home" data-fa="خانه">Home</a></li>
+              <li><a href="about.html" data-en="About" data-fa="درباره ما">About</a></li>
+              <li><a href="services.html" data-en="Services" data-fa="خدمات">Services</a></li>
+              <li><a href="blog.html" data-en="Blog" data-fa="بلاگ">Blog</a></li>
+              <li><a href="careers.html" data-en="Careers" data-fa="فرصت‌های شغلی">Careers</a></li>
+              <li><a href="contact.html" data-en="Contact" data-fa="تماس">Contact</a></li>
+          </ul>
+      </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+      <div class="hero-content">
+          <h1 data-en="Build Your Career in Mining Excellence" data-fa="حرفه خود را در تعالی معدنی بسازید">
+              Build Your Career in <span class="gradient-text">Mining Excellence</span>
+          </h1>
+          <p data-en="Join a team of world-class mining consultants and engineers. Work on cutting-edge projects across the globe while advancing your professional growth." data-fa="به تیمی از مشاوران و مهندسان معدنی در سطح جهانی بپیوندید. در پروژه‌های پیشرفته در سراسر جهان کار کنید و در عین حال رشد حرفه‌ای خود را پیش ببرید.">
+              Join a team of world-class mining consultants and engineers. Work on cutting-edge projects across the globe while advancing your professional growth.
+          </p>
+          
+          <div class="stats-row">
+              <div class="stat-item">
+                  <div class="stat-number">50+</div>
+                  <div class="stat-label" data-en="Years Combined Experience" data-fa="سال تجربه ترکیبی">Years Combined Experience</div>
+              </div>
+              <div class="stat-item">
+                  <div class="stat-number">15+</div>
+                  <div class="stat-label" data-en="Team Members" data-fa="اعضای تیم">Team Members</div>
+              </div>
+              <div class="stat-item">
+                  <div class="stat-number">25+</div>
+                  <div class="stat-label" data-en="Countries Served" data-fa="کشورهای خدمات‌رسانی">Countries Served</div>
+              </div>
+              <div class="stat-item">
+                  <div class="stat-number">100+</div>
+                  <div class="stat-label" data-en="Projects Completed" data-fa="پروژه‌های تکمیل شده">Projects Completed</div>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- Why Join Us -->
+  <section class="why-section">
+      <div class="why-container">
+          <h2 class="section-title" data-en="Why Join Kavian?" data-fa="چرا به کاویان بپیوندیم؟">Why Join <span class="gradient-text">Kavian?</span></h2>
+          
+          <div class="benefits-grid">
+              <div class="benefit-card">
+                  <div class="benefit-icon"><i class="fas fa-rocket"></i></div>
+                  <h3 class="benefit-title" data-en="Cutting-Edge Projects" data-fa="پروژه‌های پیشرفته">Cutting-Edge Projects</h3>
+                  <p class="benefit-description" data-en="Work on innovative mining projects using AI, machine learning, and advanced analytics. Collaborate with industry leaders on multi-million dollar operations." data-fa="در پروژه‌های نوآورانه معدنی با استفاده از هوش مصنوعی، یادگیری ماشین و تحلیل‌های پیشرفته کار کنید. با رهبران صنعت در عملیات چند میلیون دلاری همکاری کنید.">
+                      Work on innovative mining projects using AI, machine learning, and advanced analytics. Collaborate with industry leaders on multi-million dollar operations.
+                  </p>
+              </div>
+              
+              <div class="benefit-card">
+                  <div class="benefit-icon"><i class="fas fa-globe-americas"></i></div>
+                  <h3 class="benefit-title" data-en="Global Exposure" data-fa="قرار گرفتن در معرض جهانی">Global Exposure</h3>
+                  <p class="benefit-description" data-en="Travel to mining sites across 5 continents. Gain international experience working with diverse teams and clients from Australia to Canada, Chile to Kazakhstan." data-fa="به سایت‌های معدنی در 5 قاره سفر کنید. تجربه بین‌المللی کار با تیم‌ها و مشتریان متنوع از استرالیا تا کانادا، شیلی تا قزاقستان را کسب کنید.">
+                      Travel to mining sites across 5 continents. Gain international experience working with diverse teams and clients from Australia to Canada, Chile to Kazakhstan.
+                  </p>
+              </div>
+              
+              <div class="benefit-card">
+                  <div class="benefit-icon"><i class="fas fa-graduation-cap"></i></div>
+                  <h3 class="benefit-title" data-en="Continuous Learning" data-fa="یادگیری مداوم">Continuous Learning</h3>
+                  <p class="benefit-description" data-en="Access to professional development programs, industry certifications, conference attendance, and mentorship from senior consultants with decades of experience." data-fa="دسترسی به برنامه‌های توسعه حرفه‌ای، گواهینامه‌های صنعتی، شرکت در کنفرانس‌ها و مربیگری از مشاوران ارشد با دهه‌ها تجربه.">
+                      Access to professional development programs, industry certifications, conference attendance, and mentorship from senior consultants with decades of experience.
+                  </p>
+              </div>
+              
+              <div class="benefit-card">
+                  <div class="benefit-icon"><i class="fas fa-dollar-sign"></i></div>
+                  <h3 class="benefit-title" data-en="Competitive Compensation" data-fa="جبران خسارت رقابتی">Competitive Compensation</h3>
+                  <p class="benefit-description" data-en="Industry-leading salaries, performance bonuses up to 30%, profit sharing, comprehensive health insurance, and retirement plans. We reward excellence." data-fa="حقوق پیشرو در صنعت، پاداش عملکرد تا 30٪، سهم سود، بیمه سلامت جامع و برنامه‌های بازنشستگی. ما تعالی را پاداش می‌دهیم.">
+                      Industry-leading salaries, performance bonuses up to 30%, profit sharing, comprehensive health insurance, and retirement plans. We reward excellence.
+                  </p>
+              </div>
+              
+              <div class="benefit-card">
+                  <div class="benefit-icon"><i class="fas fa-balance-scale"></i></div>
+                  <h3 class="benefit-title" data-en="Work-Life Balance" data-fa="تعادل کار و زندگی">Work-Life Balance</h3>
+                  <p class="benefit-description" data-en="Flexible work arrangements, remote work options, 25 days annual leave, and understanding that your personal well-being drives professional excellence." data-fa="ترتیبات کاری انعطاف‌پذیر، گزینه‌های کار از راه دور، 25 روز مرخصی سالانه و درک اینکه رفاه شخصی شما باعث تعالی حرفه‌ای می‌شود.">
+                      Flexible work arrangements, remote work options, 25 days annual leave, and understanding that your personal well-being drives professional excellence.
+                  </p>
+              </div>
+              
+              <div class="benefit-card">
+                  <div class="benefit-icon"><i class="fas fa-users"></i></div>
+                  <h3 class="benefit-title" data-en="Collaborative Culture" data-fa="فرهنگ مشارکتی">Collaborative Culture</h3>
+                  <p class="benefit-description" data-en="Work in a supportive environment that values diverse perspectives, encourages innovation, and celebrates team success. Your ideas matter here." data-fa="در محیطی حمایتی کار کنید که دیدگاه‌های متنوع را ارزش می‌گذارد، نوآوری را تشویق می‌کند و موفقیت تیمی را جشن می‌گیرد. ایده‌های شما اینجا اهمیت دارند.">
+                      Work in a supportive environment that values diverse perspectives, encourages innovation, and celebrates team success. Your ideas matter here.
+                  </p>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- Open Positions -->
+  <section class="positions-section">
+      <div class="positions-container">
+          <h2 class="section-title" data-en="Open Positions" data-fa="موقعیت‌های شغلی باز">Open <span class="gradient-text">Positions</span></h2>
+          
+          <!-- Position 1 -->
+          <div class="position-card">
+              <div class="position-header">
+                  <div>
+                      <h3 class="position-title" data-en="Senior Mining Equipment Engineer" data-fa="مهندس ارشد تجهیزات معدنی">Senior Mining Equipment Engineer</h3>
+                      <div class="position-meta">
+                          <span class="meta-item"><i class="fas fa-map-marker-alt"></i> <span data-en="Tehran, Iran / Remote" data-fa="تهران، ایران / دورکاری">Tehran, Iran / Remote</span></span>
+                          <span class="meta-item"><i class="fas fa-briefcase"></i> <span data-en="Full-Time" data-fa="تمام وقت">Full-Time</span></span>
+                          <span class="meta-item"><i class="fas fa-clock"></i> <span data-en="5+ Years Experience" data-fa="5+ سال تجربه">5+ Years Experience</span></span>
+                      </div>
+                  </div>
+              </div>
+              <p class="position-description" data-en="Lead equipment selection and optimization projects for global mining operations. Work directly with clients to design efficient processing plants and mobile equipment fleets. Utilize our proprietary database and AI tools to deliver world-class recommendations." data-fa="پروژه‌های انتخاب و بهینه‌سازی تجهیزات را برای عملیات معدنی جهانی رهبری کنید. مستقیماً با مشتریان کار کنید تا کارخانه‌های فرآوری کارآمد و ناوگان تجهیزات سیار را طراحی کنید. از پایگاه داده اختصاصی و ابزارهای هوش مصنوعی ما برای ارائه توصیه‌های در سطح جهانی استفاده کنید.">
+                  Lead equipment selection and optimization projects for global mining operations. Work directly with clients to design efficient processing plants and mobile equipment fleets. Utilize our proprietary database and AI tools to deliver world-class recommendations.
+              </p>
+              <div class="requirements">
+                  <h4 data-en="Requirements:" data-fa="الزامات:">Requirements:</h4>
+                  <ul>
+                      <li data-en="Bachelor's degree in Mining Engineering, Mechanical Engineering, or related field" data-fa="مدرک لیسانس در مهندسی معدن، مهندسی مکانیک یا رشته مرتبط">Bachelor's degree in Mining Engineering, Mechanical Engineering, or related field</li>
+                      <li data-en="5+ years experience in mining equipment selection and fleet management" data-fa="5+ سال تجربه در انتخاب تجهیزات معدنی و مدیریت ناوگان">5+ years experience in mining equipment selection and fleet management</li>
+                      <li data-en="Proficiency in AutoCAD, SAP2000, or similar engineering software" data-fa="مهارت در AutoCAD، SAP2000 یا نرم‌افزارهای مهندسی مشابه">Proficiency in AutoCAD, SAP2000, or similar engineering software</li>
+                      <li data-en="Strong knowledge of Caterpillar, Komatsu, Sandvik equipment lines" data-fa="دانش قوی از خطوط تجهیزات Caterpillar، Komatsu، Sandvik">Strong knowledge of Caterpillar, Komatsu, Sandvik equipment lines</li>
+                      <li data-en="Excellent English communication skills (written and verbal)" data-fa="مهارت‌های ارتباطی عالی انگلیسی (کتبی و شفاهی)">Excellent English communication skills (written and verbal)</li>
+                      <li data-en="Willingness to travel internationally (30-40% of time)" data-fa="تمایل به سفرهای بین‌المللی (30-40٪ از زمان)">Willingness to travel internationally (30-40% of time)</li>
+                  </ul>
+              </div>
+              <a href="mailto:careers@kavianmine.com?subject=Application: Senior Mining Equipment Engineer" class="apply-btn">
+                  <i class="fas fa-paper-plane"></i>
+                  <span data-en="Apply Now" data-fa="اکنون درخواست دهید">Apply Now</span>
+              </a>
+          </div>
+          
+          <!-- Position 2 -->
+          <div class="position-card">
+              <div class="position-header">
+                  <div>
+                      <h3 class="position-title" data-en="Cost Analysis Specialist" data-fa="متخصص تحلیل هزینه">Cost Analysis Specialist</h3>
+                      <div class="position-meta">
+                          <span class="meta-item"><i class="fas fa-map-marker-alt"></i> <span data-en="Tehran, Iran" data-fa="تهران، ایران">Tehran, Iran</span></span>
+                          <span class="meta-item"><i class="fas fa-briefcase"></i> <span data-en="Full-Time" data-fa="تمام وقت">Full-Time</span></span>
+                          <span class="meta-item"><i class="fas fa-clock"></i> <span data-en="3+ Years Experience" data-fa="3+ سال تجربه">3+ Years Experience</span></span>
+                      </div>
+                  </div>
+              </div>
+              <p class="position-description" data-en="Develop comprehensive CAPEX and OPEX estimates for mining projects following AACE International standards. Conduct sensitivity analyses, build financial models, and support feasibility studies for clients worldwide." data-fa="برآوردهای جامع CAPEX و OPEX را برای پروژه‌های معدنی مطابق با استانداردهای AACE International توسعه دهید. تحلیل‌های حساسیت انجام دهید، مدل‌های مالی بسازید و از مطالعات امکان‌سنجی برای مشتریان در سراسر جهان پشتیبانی کنید.">
+                  Develop comprehensive CAPEX and OPEX estimates for mining projects following AACE International standards. Conduct sensitivity analyses, build financial models, and support feasibility studies for clients worldwide.
+              </p>
+              <div class="requirements">
+                  <h4 data-en="Requirements:" data-fa="الزامات:">Requirements:</h4>
+                  <ul>
+                      <li data-en="Bachelor's degree in Mining Engineering, Industrial Engineering, or Finance" data-fa="مدرک لیسانس در مهندسی معدن، مهندسی صنایع یا امور مالی">Bachelor's degree in Mining Engineering, Industrial Engineering, or Finance</li>
+                      <li data-en="3+ years experience in mining cost estimation or financial analysis" data-fa="3+ سال تجربه در برآورد هزینه معدنی یا تحلیل مالی">3+ years experience in mining cost estimation or financial analysis</li>
+                      <li data-en="Familiarity with AACE International cost classification system" data-fa="آشنایی با سیستم طبقه‌بندی هزینه AACE International">Familiarity with AACE International cost classification system</li>
+                      <li data-en="Advanced Excel skills and experience with financial modeling" data-fa="مهارت‌های پیشرفته Excel و تجربه در مدل‌سازی مالی">Advanced Excel skills and experience with financial modeling</li>
+                      <li data-en="Knowledge of mining equipment pricing and market trends" data-fa="دانش قیمت‌گذاری تجهیزات معدنی و روندهای بازار">Knowledge of mining equipment pricing and market trends</li>
+                      <li data-en="Strong analytical and attention to detail" data-fa="تحلیلی قوی و توجه به جزئیات">Strong analytical and attention to detail</li>
+                  </ul>
+              </div>
+              <a href="mailto:careers@kavianmine.com?subject=Application: Cost Analysis Specialist" class="apply-btn">
+                  <i class="fas fa-paper-plane"></i>
+                  <span data-en="Apply Now" data-fa="اکنون درخواست دهید">Apply Now</span>
+              </a>
+          </div>
+          
+          <!-- Position 3 -->
+          <div class="position-card">
+              <div class="position-header">
+                  <div>
+                      <h3 class="position-title" data-en="Junior Mining Consultant" data-fa="مشاور معدنی جونیور">Junior Mining Consultant</h3>
+                      <div class="position-meta">
+                          <span class="meta-item"><i class="fas fa-map-marker-alt"></i> <span data-en="Tehran, Iran" data-fa="تهران، ایران">Tehran, Iran</span></span>
+                          <span class="meta-item"><i class="fas fa-briefcase"></i> <span data-en="Full-Time" data-fa="تمام وقت">Full-Time</span></span>
+                          <span class="meta-item"><i class="fas fa-clock"></i> <span data-en="0-2 Years Experience" data-fa="0-2 سال تجربه">0-2 Years Experience</span></span>
+                      </div>
+                  </div>
+              </div>
+              <p class="position-description" data-en="Perfect entry-level opportunity for recent graduates. Support senior consultants on diverse projects, conduct research, prepare reports, and learn our methodologies. Comprehensive training program included." data-fa="فرصت عالی سطح ورودی برای فارغ‌التحصیلان اخیر. از مشاوران ارشد در پروژه‌های متنوع پشتیبانی کنید، تحقیق انجام دهید، گزارش‌ها تهیه کنید و روش‌های ما را یاد بگیرید. برنامه آموزشی جامع شامل می‌شود.">
+                  Perfect entry-level opportunity for recent graduates. Support senior consultants on diverse projects, conduct research, prepare reports, and learn our methodologies. Comprehensive training program included.
+              </p>
+              <div class="requirements">
+                  <h4 data-en="Requirements:" data-fa="الزامات:">Requirements:</h4>
+                  <ul>
+                      <li data-en="Bachelor's degree in Mining Engineering (Master's preferred)" data-fa="مدرک لیسانس در مهندسی معدن (ترجیحاً فوق لیسانس)">Bachelor's degree in Mining Engineering (Master's preferred)</li>
+                      <li data-en="Strong academic record (GPA 3.0+)" data-fa="سابقه تحصیلی قوی (معدل 3.0+)">Strong academic record (GPA 3.0+)</li>
+                      <li data-en="Proficiency in Microsoft Office Suite" data-fa="مهارت در Microsoft Office Suite">Proficiency in Microsoft Office Suite</li>
+                      <li data-en="Basic understanding of mining operations and equipment" data-fa="درک اولیه از عملیات معدنی و تجهیزات">Basic understanding of mining operations and equipment</li>
+                      <li data-en="Good English communication skills" data-fa="مهارت‌های ارتباطی خوب انگلیسی">Good English communication skills</li>
+                      <li data-en="Eager to learn and strong work ethic" data-fa="مشتاق یادگیری و اخلاق کاری قوی">Eager to learn and strong work ethic</li>
+                  </ul>
+              </div>
+              <a href="mailto:careers@kavianmine.com?subject=Application: Junior Mining Consultant" class="apply-btn">
+                  <i class="fas fa-paper-plane"></i>
+                  <span data-en="Apply Now" data-fa="اکنون درخواست دهید">Apply Now</span>
+              </a>
+          </div>
+          
+          <!-- Position 4 -->
+          <div class="position-card">
+              <div class="position-header">
+                  <div>
+                      <h3 class="position-title" data-en="Data Scientist - Mining Analytics" data-fa="دانشمند داده - تحلیل معدنی">Data Scientist - Mining Analytics</h3>
+                      <div class="position-meta">
+                          <span class="meta-item"><i class="fas fa-map-marker-alt"></i> <span data-en="Remote / Tehran" data-fa="دورکاری / تهران">Remote / Tehran</span></span>
+                          <span class="meta-item"><i class="fas fa-briefcase"></i> <span data-en="Full-Time" data-fa="تمام وقت">Full-Time</span></span>
+                          <span class="meta-item"><i class="fas fa-clock"></i> <span data-en="3+ Years Experience" data-fa="3+ سال تجربه">3+ Years Experience</span></span>
+                      </div>
+                  </div>
+              </div>
+              <p class="position-description" data-en="Develop machine learning models for cost prediction, equipment optimization, and production forecasting. Work with our 94% accuracy AI system and help push the boundaries of mining analytics." data-fa="مدل‌های یادگیری ماشین را برای پیش‌بینی هزینه، بهینه‌سازی تجهیزات و پیش‌بینی تولید توسعه دهید. با سیستم هوش مصنوعی با دقت 94٪ ما کار کنید و به پیشبرد مرزهای تحلیل معدنی کمک کنید.">
+                  Develop machine learning models for cost prediction, equipment optimization, and production forecasting. Work with our 94% accuracy AI system and help push the boundaries of mining analytics.
+              </p>
+              <div class="requirements">
+                  <h4 data-en="Requirements:" data-fa="الزامات:">Requirements:</h4>
+                  <ul>
+                      <li data-en="Master's or PhD in Data Science, Computer Science, or Statistics" data-fa="فوق لیسانس یا دکتری در علم داده، علوم کامپیوتر یا آمار">Master's or PhD in Data Science, Computer Science, or Statistics</li>
+                      <li data-en="3+ years experience in machine learning and predictive modeling" data-fa="3+ سال تجربه در یادگیری ماشین و مدل‌سازی پیش‌بینی">3+ years experience in machine learning and predictive modeling</li>
+                      <li data-en="Proficiency in Python, R, TensorFlow, or PyTorch" data-fa="مهارت در Python، R، TensorFlow یا PyTorch">Proficiency in Python, R, TensorFlow, or PyTorch</li>
+                      <li data-en="Experience with large datasets and database management" data-fa="تجربه با مجموعه داده‌های بزرگ و مدیریت پایگاه داده">Experience with large datasets and database management</li>
+                      <li data-en="Mining or heavy industry experience is a plus" data-fa="تجربه معدنی یا صنایع سنگین یک مزیت است">Mining or heavy industry experience is a plus</li>
+                      <li data-en="Strong problem-solving and communication skills" data-fa="مهارت‌های قوی حل مسئله و ارتباطی">Strong problem-solving and communication skills</li>
+                  </ul>
+              </div>
+              <a href="mailto:careers@kavianmine.com?subject=Application: Data Scientist" class="apply-btn">
+                  <i class="fas fa-paper-plane"></i>
+                  <span data-en="Apply Now" data-fa="اکنون درخواست دهید">Apply Now</span>
+              </a>
+          </div>
+      </div>
+  </section>
+
+  <!-- Culture -->
+  <section class="culture-section">
+      <div class="culture-container">
+          <h2 class="section-title" data-en="Our Culture" data-fa="فرهنگ ما">Our <span class="gradient-text">Culture</span></h2>
+          
+          <div class="culture-grid">
+              <div class="culture-card">
+                  <div class="culture-image" style="background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=80');"></div>
+                  <h3 class="culture-title" data-en="Team Collaboration" data-fa="همکاری تیمی">Team Collaboration</h3>
+                  <p class="culture-description" data-en="We believe in the power of teamwork. Regular brainstorming sessions, peer reviews, and knowledge sharing are core to our success." data-fa="ما به قدرت کار تیمی اعتقاد داریم. جلسات طوفان فکری منظم، بررسی‌های همتایان و اشتراک‌گذاری دانش هسته موفقیت ما هستند.">
+                      We believe in the power of teamwork. Regular brainstorming sessions, peer reviews, and knowledge sharing are core to our success.
+                  </p>
+              </div>
+              
+              <div class="culture-card">
+                  <div class="culture-image" style="background-image: url('https://images.unsplash.com/photo-1556761175-b413da4baf72?w=600&q=80');"></div>
+                  <h3 class="culture-title" data-en="Innovation Focus" data-fa="تمرکز بر نوآوری">Innovation Focus</h3>
+                  <p class="culture-description" data-en="20% of your time can be dedicated to personal projects and innovation initiatives. We encourage experimentation and creative problem-solving." data-fa="20٪ از زمان شما می‌تواند به پروژه‌های شخصی و ابتکارات نوآوری اختصاص یابد. ما آزمایش و حل خلاق مسئله را تشویق می‌کنیم.">
+                      20% of your time can be dedicated to personal projects and innovation initiatives. We encourage experimentation and creative problem-solving.
+                  </p>
+              </div>
+              
+              <div class="culture-card">
+                  <div class="culture-image" style="background-image: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&q=80');"></div>
+                  <h3 class="culture-title" data-en="Continuous Learning" data-fa="یادگیری مداوم">Continuous Learning</h3>
+                  <p class="culture-description" data-en="Monthly technical workshops, access to online courses, conference attendance, and mentorship programs ensure you're always growing." data-fa="کارگاه‌های فنی ماهانه، دسترسی به دوره‌های آنلاین، شرکت در کنفرانس‌ها و برنامه‌های مربیگری اطمینان می‌دهند که همیشه در حال رشد هستید.">
+                      Monthly technical workshops, access to online courses, conference attendance, and mentorship programs ensure you're always growing.
+                  </p>
+              </div>
+              
+              <div class="culture-card">
+                  <div class="culture-image" style="background-image: url('https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=600&q=80');"></div>
+                  <h3 class="culture-title" data-en="Work-Life Balance" data-fa="تعادل کار و زندگی">Work-Life Balance</h3>
+                  <p class="culture-description" data-en="Flexible hours, remote work options, and a culture that respects personal time. We know happy employees deliver exceptional results." data-fa="ساعات انعطاف‌پذیر، گزینه‌های کار از راه دور و فرهنگی که به زمان شخصی احترام می‌گذارد. ما می‌دانیم کارمندان خوشحال نتایج استثنایی ارائه می‌دهند.">
+                      Flexible hours, remote work options, and a culture that respects personal time. We know happy employees deliver exceptional results.
+                  </p>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- Application Process -->
+  <section class="process-section">
+      <div class="process-container">
+          <h2 class="section-title" data-en="Application Process" data-fa="فرآیند درخواست">Application <span class="gradient-text">Process</span></h2>
+          
+          <div class="process-steps">
+              <div class="step-card">
+                  <div class="step-number">1</div>
+                  <h3 class="step-title" data-en="Submit Application" data-fa="ارسال درخواست">Submit Application</h3>
+                  <p class="step-description" data-en="Send your CV and cover letter to careers@kavianmine.com. Include relevant projects, certifications, and why you're interested in joining Kavian." data-fa="رزومه و نامه انگیزه خود را به careers@kavianmine.com ارسال کنید. پروژه‌های مرتبط، گواهینامه‌ها و دلیل علاقه‌مندی خود به پیوستن به کاویان را شامل کنید.">
+                      Send your CV and cover letter to careers@kavianmine.com. Include relevant projects, certifications, and why you're interested in joining Kavian.
+                  </p>
+              </div>
+              
+              <div class="step-card">
+                  <div class="step-number">2</div>
+                  <h3 class="step-title" data-en="Initial Screening" data-fa="غربالگری اولیه">Initial Screening</h3>
+                  <p class="step-description" data-en="Our HR team reviews applications within 5 business days. Qualified candidates receive an email for a phone screening (30 minutes)." data-fa="تیم منابع انسانی ما درخواست‌ها را ظرف 5 روز کاری بررسی می‌کند. نامزدهای واجد شرایط یک ایمیل برای غربالگری تلفنی (30 دقیقه) دریافت می‌کنند.">
+                      Our HR team reviews applications within 5 business days. Qualified candidates receive an email for a phone screening (30 minutes).
+                  </p>
+              </div>
+              
+              <div class="step-card">
+                  <div class="step-number">3</div>
+                  <h3 class="step-title" data-en="Technical Assessment" data-fa="ارزیابی فنی">Technical Assessment</h3>
+                  <p class="step-description" data-en="Complete a role-specific technical test or case study. This evaluates your problem-solving skills and technical knowledge (2-4 hours)." data-fa="یک آزمون فنی یا مطالعه موردی خاص نقش را تکمیل کنید. این مهارت‌های حل مسئله و دانش فنی شما را ارزیابی می‌کند (2-4 ساعت).">
+                      Complete a role-specific technical test or case study. This evaluates your problem-solving skills and technical knowledge (2-4 hours).
+                  </p>
+              </div>
+              
+              <div class="step-card">
+                  <div class="step-number">4</div>
+                  <h3 class="step-title" data-en="Team Interviews" data-fa="مصاحبه‌های تیمی">Team Interviews</h3>
+                  <p class="step-description" data-en="Meet with team members and hiring managers (2-3 rounds). Discuss technical expertise, project experience, and cultural fit." data-fa="با اعضای تیم و مدیران استخدام ملاقات کنید (2-3 دور). درباره تخصص فنی، تجربه پروژه و تناسب فرهنگی بحث کنید.">
+                      Meet with team members and hiring managers (2-3 rounds). Discuss technical expertise, project experience, and cultural fit.
+                  </p>
+              </div>
+              
+              <div class="step-card">
+                  <div class="step-number">5</div>
+                  <h3 class="step-title" data-en="Offer & Onboarding" data-fa="پیشنهاد و ورود">Offer & Onboarding</h3>
+                  <p class="step-description" data-en="Receive your offer letter with compensation details. Complete onboarding, meet the team, and start your comprehensive training program." data-fa="نامه پیشنهاد خود را با جزئیات جبران خسارت دریافت کنید. ورود را تکمیل کنید، با تیم ملاقات کنید و برنامه آموزشی جامع خود را شروع کنید.">
+                      Receive your offer letter with compensation details. Complete onboarding, meet the team, and start your comprehensive training program.
+                  </p>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+      <div class="cta-container">
+          <h2 class="cta-title" data-en="Ready to Make an Impact?" data-fa="آماده ایجاد تأثیر هستید؟">Ready to Make an <span class="gradient-text">Impact?</span></h2>
+          <p class="cta-description" data-en="Join our team of mining experts and work on projects that shape the future of the industry. Your next career move starts here." data-fa="به تیم متخصصان معدنی ما بپیوندید و در پروژه‌هایی کار کنید که آینده صنعت را شکل می‌دهند. حرکت بعدی شغلی شما از اینجا شروع می‌شود.">
+              Join our team of mining experts and work on projects that shape the future of the industry. Your next career move starts here.
+          </p>
+          <div class="cta-buttons">
+              <a href="mailto:careers@kavianmine.com" class="cta-btn-primary">
+                  <i class="fas fa-envelope"></i>
+                  <span data-en="Send Your CV" data-fa="رزومه خود را ارسال کنید">Send Your CV</span>
+              </a>
+              <a href="contact.html" class="cta-btn-secondary">
+                  <i class="fas fa-phone"></i>
+                  <span data-en="Contact HR" data-fa="تماس با منابع انسانی">Contact HR</span>
+              </a>
+          </div>
+          <p style="margin-top: 30px; color: rgba(255,255,255,0.6); font-size: 0.95rem;">
+              <span data-en="Email: careers@kavianmine.com | Phone: +98 (21) 1234-5678" data-fa="ایمیل: careers@kavianmine.com | تلفن: +98 (21) 1234-5678">
+                  Email: careers@kavianmine.com | Phone: +98 (21) 1234-5678
+              </span>
+          </p>
+      </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+      <p data-en="© 2024 Kavian Development Mine. All rights reserved. | Equal Opportunity Employer" data-fa="© 2024 کاویان توسعه معدن. تمامی حقوق محفوظ است. | کارفرمای فرصت برابر">
+          © 2024 Kavian Development Mine. All rights reserved. | Equal Opportunity Employer
+      </p>
+  </footer>
+
+  <script>
+      // Language Switcher
+      let currentLang = 'en';
+      const langButtons = document.querySelectorAll('.lang-btn');
+      
+      langButtons.forEach(btn => {
+          btn.addEventListener('click', () => {
+              currentLang = btn.dataset.lang;
+              langButtons.forEach(b => b.classList.remove('active'));
+              btn.classList.add('active');
+              
+              document.body.classList.toggle('rtl', currentLang === 'fa');
+              
+              document.querySelectorAll('[data-en]').forEach(el => {
+                  const text = el.getAttribute(`data-${currentLang}`);
+                  if (text) {
+                      if (el.innerHTML.includes('<span') || el.innerHTML.includes('<i') || el.innerHTML.includes('|')) {
+                          el.innerHTML = text;
+                      } else {
+                          el.textContent = text;
+                      }
+                  }
+              });
+          });
+      });
+  </script>
+</body>
+</html>
