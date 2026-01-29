@@ -41,64 +41,115 @@
       
       html { scroll-behavior: smooth; }
       
-      /* Language Switcher */
-      .language-switcher {
-          position: fixed;
-          top: 30px;
-          right: 30px;
-          z-index: 5000;
-          background: rgba(15, 23, 42, 0.8);
-          backdrop-filter: blur(20px);
-          border-radius: 100px;
-          padding: 6px;
+      /* Top Bar */
+      .top-bar {
+          background: rgba(15, 23, 42, 0.95);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+          padding: 0.8rem 0;
+          font-size: 0.85rem;
+      }
+      
+      .top-bar-content {
+          max-width: 1400px;
+          margin: 0 auto;
+          padding: 0 2rem;
           display: flex;
-          gap: 6px;
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+          justify-content: space-between;
+          align-items: center;
       }
       
-      body.rtl .language-switcher { right: auto; left: 30px; }
-      
-      .lang-btn {
-          padding: 10px 24px;
-          border: none;
-          background: transparent;
-          border-radius: 100px;
-          cursor: pointer;
-          font-weight: 600;
-          font-size: 0.9rem;
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          color: rgba(255, 255, 255, 0.6);
+      .top-bar-left {
+          display: flex;
+          gap: 2rem;
+          align-items: center;
       }
       
-      .lang-btn.active {
+      .top-bar-item {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          color: rgba(255, 255, 255, 0.7);
+          text-decoration: none;
+          transition: color 0.3s;
+      }
+      
+      .top-bar-item:hover {
+          color: #0ea5e9;
+      }
+      
+      .top-bar-item i {
+          color: #0ea5e9;
+      }
+      
+      .top-bar-right {
+          display: flex;
+          gap: 1.5rem;
+          align-items: center;
+      }
+      
+      .social-icon {
+          width: 32px;
+          height: 32px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(255, 255, 255, 0.05);
+          border-radius: 50%;
+          color: rgba(255, 255, 255, 0.7);
+          transition: all 0.3s;
+          text-decoration: none;
+      }
+      
+      .social-icon:hover {
           background: var(--gradient-1);
           color: white;
-          box-shadow: 0 4px 20px rgba(14, 165, 233, 0.4);
+          transform: translateY(-2px);
       }
       
-      /* Header */
+      .language-switcher-top {
+          display: flex;
+          gap: 0.5rem;
+          padding: 0.3rem;
+          background: rgba(255, 255, 255, 0.05);
+          border-radius: 20px;
+      }
+      
+      .lang-btn-top {
+          padding: 0.4rem 1rem;
+          border: none;
+          background: transparent;
+          color: rgba(255, 255, 255, 0.7);
+          border-radius: 15px;
+          cursor: pointer;
+          font-size: 0.8rem;
+          font-weight: 600;
+          transition: all 0.3s;
+      }
+      
+      .lang-btn-top.active {
+          background: var(--gradient-1);
+          color: white;
+      }
+      
+      /* Main Header */
       header {
-          position: fixed;
+          position: sticky;
           top: 0;
-          left: 0;
-          right: 0;
           z-index: 4000;
-          background: rgba(2, 6, 23, 0.8);
+          background: rgba(2, 6, 23, 0.95);
           backdrop-filter: blur(20px);
           border-bottom: 1px solid rgba(255, 255, 255, 0.05);
           transition: all 0.3s;
       }
       
       header.scrolled {
-          background: rgba(2, 6, 23, 0.95);
           box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
       }
       
       nav {
           max-width: 1400px;
           margin: 0 auto;
-          padding: 1.2rem 2rem;
+          padding: 1rem 2rem;
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -111,14 +162,14 @@
           text-decoration: none;
           color: white;
           font-weight: 800;
-          font-size: 1.4rem;
+          font-size: 1.5rem;
           transition: all 0.3s;
       }
       
       .logo:hover { transform: translateY(-2px); }
       
       .logo img {
-          height: 50px;
+          height: 55px;
           filter: drop-shadow(0 0 20px rgba(14, 165, 233, 0.5));
       }
       
@@ -129,51 +180,166 @@
           background-clip: text;
       }
       
-      .nav-links {
+      .nav-center {
           display: flex;
           list-style: none;
-          gap: 2.5rem;
+          gap: 0.5rem;
           align-items: center;
       }
       
-      .nav-links a {
+      .nav-item {
+          position: relative;
+      }
+      
+      .nav-link {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.8rem 1.5rem;
           color: rgba(255, 255, 255, 0.8);
           text-decoration: none;
           font-weight: 500;
           font-size: 0.95rem;
           transition: all 0.3s;
+          border-radius: 10px;
+      }
+      
+      .nav-link:hover {
+          color: white;
+          background: rgba(14, 165, 233, 0.1);
+      }
+      
+      .nav-link.active {
+          color: #0ea5e9;
+          background: rgba(14, 165, 233, 0.1);
+      }
+      
+      /* Dropdown Menu */
+      .dropdown {
           position: relative;
       }
       
-      .nav-links a::after {
-          content: '';
+      .dropdown-menu {
           position: absolute;
-          bottom: -5px;
+          top: 100%;
           left: 0;
-          width: 0;
-          height: 2px;
-          background: var(--gradient-1);
-          transition: width 0.3s;
+          min-width: 280px;
+          background: rgba(15, 23, 42, 0.98);
+          backdrop-filter: blur(20px);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 15px;
+          padding: 1rem;
+          margin-top: 0.5rem;
+          opacity: 0;
+          visibility: hidden;
+          transform: translateY(-10px);
+          transition: all 0.3s;
+          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
       }
       
-      .nav-links a:hover { color: white; }
-      .nav-links a:hover::after { width: 100%; }
+      body.rtl .dropdown-menu {
+          left: auto;
+          right: 0;
+      }
       
-      .nav-cta {
-          padding: 12px 28px;
+      .dropdown:hover .dropdown-menu {
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0);
+      }
+      
+      .dropdown-item {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          padding: 0.8rem 1rem;
+          color: rgba(255, 255, 255, 0.8);
+          text-decoration: none;
+          border-radius: 10px;
+          transition: all 0.3s;
+          margin-bottom: 0.5rem;
+      }
+      
+      .dropdown-item:last-child {
+          margin-bottom: 0;
+      }
+      
+      .dropdown-item:hover {
+          background: rgba(14, 165, 233, 0.1);
+          color: white;
+          transform: translateX(5px);
+      }
+      
+      body.rtl .dropdown-item:hover {
+          transform: translateX(-5px);
+      }
+      
+      .dropdown-icon {
+          width: 40px;
+          height: 40px;
           background: var(--gradient-1);
-          border-radius: 100px;
-          color: white !important;
+          border-radius: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.2rem;
+          flex-shrink: 0;
+      }
+      
+      .dropdown-content h4 {
+          font-size: 0.95rem;
+          margin-bottom: 0.2rem;
+      }
+      
+      .dropdown-content p {
+          font-size: 0.8rem;
+          color: rgba(255, 255, 255, 0.6);
+      }
+      
+      .nav-right {
+          display: flex;
+          gap: 1rem;
+          align-items: center;
+      }
+      
+      .search-btn {
+          width: 45px;
+          height: 45px;
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: rgba(255, 255, 255, 0.7);
+          cursor: pointer;
+          transition: all 0.3s;
+      }
+      
+      .search-btn:hover {
+          background: rgba(14, 165, 233, 0.1);
+          color: #0ea5e9;
+          border-color: rgba(14, 165, 233, 0.3);
+      }
+      
+      .cta-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.9rem 2rem;
+          background: var(--gradient-1);
+          color: white;
+          text-decoration: none;
+          border-radius: 50px;
           font-weight: 600;
+          transition: all 0.3s;
           box-shadow: 0 4px 20px rgba(14, 165, 233, 0.3);
       }
       
-      .nav-cta:hover {
+      .cta-btn:hover {
           transform: translateY(-2px);
           box-shadow: 0 6px 30px rgba(14, 165, 233, 0.5);
       }
-      
-      .nav-cta::after { display: none; }
       
       .mobile-menu-btn {
           display: none;
@@ -401,442 +567,160 @@
           color: rgba(255, 255, 255, 0.6);
       }
       
-      /* Services Section */
-      .services-section {
-          padding: 8rem 2rem;
-          position: relative;
-      }
-      
-      .section-header {
-          text-align: center;
-          max-width: 800px;
-          margin: 0 auto 5rem;
-      }
-      
-      .section-badge {
-          display: inline-block;
-          padding: 8px 20px;
-          background: rgba(139, 92, 246, 0.1);
-          border: 1px solid rgba(139, 92, 246, 0.3);
-          border-radius: 100px;
-          font-size: 0.85rem;
-          font-weight: 600;
-          color: #8b5cf6;
-          margin-bottom: 1.5rem;
-          text-transform: uppercase;
-          letter-spacing: 1px;
-      }
-      
-      .section-title {
-          font-size: clamp(2rem, 4vw, 3.5rem);
-          font-weight: 900;
-          margin-bottom: 1.5rem;
-          line-height: 1.2;
-      }
-      
-      .section-description {
-          font-size: 1.2rem;
-          color: rgba(255, 255, 255, 0.7);
-          line-height: 1.8;
-      }
-      
-      .services-grid {
-          max-width: 1400px;
-          margin: 0 auto;
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-          gap: 2rem;
-      }
-      
-      .service-card {
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid rgba(255, 255, 255, 0.05);
-          border-radius: 30px;
-          padding: 3rem;
-          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-          position: relative;
-          overflow: hidden;
-      }
-      
-      .service-card::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          height: 4px;
-          background: var(--gradient-1);
-          transform: scaleX(0);
-          transition: transform 0.4s;
-      }
-      
-      .service-card:hover {
-          transform: translateY(-10px);
-          background: rgba(255, 255, 255, 0.05);
-          border-color: rgba(14, 165, 233, 0.3);
-          box-shadow: 0 20px 60px rgba(14, 165, 233, 0.2);
-      }
-      
-      .service-card:hover::before { transform: scaleX(1); }
-      
-      .service-icon {
-          width: 80px;
-          height: 80px;
-          background: var(--gradient-1);
-          border-radius: 20px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 2.5rem;
-          margin-bottom: 2rem;
-          box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3);
-      }
-      
-      .service-card:nth-child(2) .service-icon { background: var(--gradient-2); box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3); }
-      .service-card:nth-child(3) .service-icon { background: var(--gradient-3); box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3); }
-      .service-card:nth-child(4) .service-icon { background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%); box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3); }
-      .service-card:nth-child(5) .service-icon { background: linear-gradient(135deg, #f59e0b 0%, #8b5cf6 100%); box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3); }
-      
-      .service-title {
-          font-size: 1.5rem;
-          font-weight: 700;
-          margin-bottom: 1rem;
-          line-height: 1.3;
-      }
-      
-      .service-description {
-          color: rgba(255, 255, 255, 0.7);
-          line-height: 1.8;
-          margin-bottom: 1.5rem;
-      }
-      
-      .service-features {
-          list-style: none;
-          margin-bottom: 1.5rem;
-      }
-      
-      .service-features li {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          color: rgba(255, 255, 255, 0.7);
-          margin-bottom: 0.8rem;
-          font-size: 0.95rem;
-      }
-      
-      .service-features li i {
-          color: #0ea5e9;
-          font-size: 0.8rem;
-      }
-      
-      .service-link {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          color: #0ea5e9;
-          font-weight: 600;
-          text-decoration: none;
-          transition: all 0.3s;
-      }
-      
-      .service-link:hover { gap: 12px; }
-      
-      /* Projects Section */
-      .projects-section {
-          padding: 8rem 2rem;
-          background: rgba(255, 255, 255, 0.02);
-      }
-      
-      .projects-grid {
-          max-width: 1400px;
-          margin: 0 auto;
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-          gap: 2rem;
-          margin-top: 4rem;
-      }
-      
-      .project-card {
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid rgba(255, 255, 255, 0.05);
-          border-radius: 30px;
-          overflow: hidden;
-          transition: all 0.4s;
-      }
-      
-      .project-card:hover {
-          transform: translateY(-10px);
-          box-shadow: 0 20px 60px rgba(14, 165, 233, 0.2);
-      }
-      
-      .project-image {
-          height: 280px;
-          background-size: cover;
-          background-position: center;
-          position: relative;
-      }
-      
-      .project-badge {
-          position: absolute;
-          top: 20px;
-          left: 20px;
-          background: var(--gradient-1);
-          padding: 8px 20px;
-          border-radius: 100px;
-          font-size: 0.85rem;
-          font-weight: 600;
-      }
-      
-      body.rtl .project-badge { left: auto; right: 20px; }
-      
-      .project-content { padding: 2rem; }
-      
-      .project-title {
-          font-size: 1.5rem;
-          font-weight: 700;
-          margin-bottom: 1rem;
-      }
-      
-      .project-description {
-          color: rgba(255, 255, 255, 0.7);
-          line-height: 1.8;
-          margin-bottom: 1.5rem;
-      }
-      
-      .project-stats {
-          display: flex;
-          gap: 2rem;
-          padding-top: 1.5rem;
-          border-top: 1px solid rgba(255, 255, 255, 0.05);
-      }
-      
-      .project-stat { flex: 1; }
-      
-      .project-stat-value {
-          font-size: 1.8rem;
-          font-weight: 900;
-          color: #0ea5e9;
-          margin-bottom: 0.3rem;
-      }
-      
-      .project-stat-label {
-          font-size: 0.85rem;
-          color: rgba(255, 255, 255, 0.6);
-      }
-      
-      /* Testimonials Section */
-      .testimonials-section {
-          padding: 8rem 2rem;
-      }
-      
-      .testimonials-grid {
-          max-width: 1400px;
-          margin: 0 auto;
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-          gap: 2rem;
-          margin-top: 4rem;
-      }
-      
-      .testimonial-card {
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid rgba(255, 255, 255, 0.05);
-          border-radius: 25px;
-          padding: 3rem;
-          transition: all 0.4s;
-          position: relative;
-      }
-      
-      .testimonial-card::before {
-          content: '"';
-          position: absolute;
-          top: 20px;
-          left: 30px;
-          font-size: 6rem;
-          color: rgba(14, 165, 233, 0.1);
-          font-family: Georgia, serif;
-      }
-      
-      body.rtl .testimonial-card::before { left: auto; right: 30px; }
-      
-      .testimonial-card:hover {
-          transform: translateY(-10px);
-          box-shadow: 0 20px 60px rgba(14, 165, 233, 0.2);
-      }
-      
-      .testimonial-header {
-          display: flex;
-          align-items: center;
-          gap: 1.5rem;
-          margin-bottom: 2rem;
-          position: relative;
-          z-index: 1;
-      }
-      
-      .testimonial-avatar {
-          width: 60px;
-          height: 60px;
-          background: var(--gradient-1);
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 1.5rem;
-          font-weight: 900;
-          flex-shrink: 0;
-      }
-      
-      .testimonial-info { flex: 1; }
-      
-      .testimonial-name {
-          font-size: 1.2rem;
-          font-weight: 700;
-          margin-bottom: 0.3rem;
-      }
-      
-      .testimonial-title {
-          color: rgba(255, 255, 255, 0.7);
-          font-size: 0.9rem;
-      }
-      
-      .testimonial-text {
-          color: rgba(255, 255, 255, 0.8);
-          line-height: 1.8;
-          font-style: italic;
-          position: relative;
-          z-index: 1;
-      }
-      
-      /* CTA Section */
-      .cta-section {
-          padding: 8rem 2rem;
-          position: relative;
-          overflow: hidden;
-          background: rgba(255, 255, 255, 0.02);
-      }
-      
-      .cta-section::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: var(--gradient-1);
-          opacity: 0.05;
-      }
-      
-      .cta-container {
-          max-width: 1000px;
-          margin: 0 auto;
-          text-align: center;
-          position: relative;
-          z-index: 1;
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 40px;
-          padding: 5rem 3rem;
-          backdrop-filter: blur(20px);
-      }
-      
-      .cta-title {
-          font-size: clamp(2rem, 4vw, 3rem);
-          font-weight: 900;
-          margin-bottom: 1.5rem;
-      }
-      
-      .cta-description {
-          font-size: 1.2rem;
-          color: rgba(255, 255, 255, 0.7);
-          margin-bottom: 3rem;
-          line-height: 1.8;
-      }
-      
       /* Footer */
       footer {
-          background: rgba(255, 255, 255, 0.02);
+          background: rgba(15, 23, 42, 0.95);
           border-top: 1px solid rgba(255, 255, 255, 0.05);
-          padding: 4rem 2rem 2rem;
       }
       
-      .footer-content {
+      .footer-main {
           max-width: 1400px;
           margin: 0 auto;
+          padding: 4rem 2rem;
           display: grid;
-          grid-template-columns: 2fr 1fr 1fr 1fr;
-          gap: 4rem;
-          margin-bottom: 3rem;
+          grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+          gap: 3rem;
       }
       
-      .footer-brand h3 {
-          font-size: 1.5rem;
-          margin-bottom: 1rem;
+      .footer-brand {
+          max-width: 350px;
+      }
+      
+      .footer-logo {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 1.5rem;
+          text-decoration: none;
+      }
+      
+      .footer-logo img {
+          height: 50px;
+      }
+      
+      .footer-logo-text {
+          font-size: 1.4rem;
+          font-weight: 800;
           background: var(--gradient-1);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
       }
       
-      .footer-brand p {
-          color: rgba(255, 255, 255, 0.6);
+      .footer-description {
+          color: rgba(255, 255, 255, 0.7);
           line-height: 1.8;
           margin-bottom: 1.5rem;
+          font-size: 0.95rem;
       }
       
-      .social-links {
+      .footer-social {
           display: flex;
-          gap: 1rem;
+          gap: 0.8rem;
       }
       
-      .social-links a {
-          width: 45px;
-          height: 45px;
+      .footer-social-link {
+          width: 42px;
+          height: 42px;
           background: rgba(255, 255, 255, 0.05);
           border: 1px solid rgba(255, 255, 255, 0.1);
           border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
-          color: white;
+          color: rgba(255, 255, 255, 0.7);
           transition: all 0.3s;
+          text-decoration: none;
       }
       
-      .social-links a:hover {
+      .footer-social-link:hover {
           background: var(--gradient-1);
+          color: white;
           transform: translateY(-3px);
+          border-color: transparent;
       }
       
       .footer-section h4 {
           font-size: 1.1rem;
           margin-bottom: 1.5rem;
+          font-weight: 700;
       }
       
-      .footer-section a {
-          display: block;
-          color: rgba(255, 255, 255, 0.6);
-          text-decoration: none;
+      .footer-links {
+          list-style: none;
+      }
+      
+      .footer-links li {
           margin-bottom: 0.8rem;
-          transition: all 0.3s;
       }
       
-      .footer-section a:hover {
+      .footer-links a {
+          color: rgba(255, 255, 255, 0.7);
+          text-decoration: none;
+          font-size: 0.95rem;
+          transition: all 0.3s;
+          display: inline-block;
+      }
+      
+      .footer-links a:hover {
           color: #0ea5e9;
           transform: translateX(5px);
       }
       
-      body.rtl .footer-section a:hover {
+      body.rtl .footer-links a:hover {
           transform: translateX(-5px);
       }
       
-      .footer-bottom {
-          max-width: 1400px;
-          margin: 0 auto;
-          padding-top: 2rem;
-          border-top: 1px solid rgba(255, 255, 255, 0.05);
-          text-align: center;
-          color: rgba(255, 255, 255, 0.5);
+      .footer-contact-item {
+          display: flex;
+          align-items: start;
+          gap: 0.8rem;
+          margin-bottom: 1rem;
+          color: rgba(255, 255, 255, 0.7);
+          font-size: 0.95rem;
       }
       
-      /* Animations */
+      .footer-contact-item i {
+          color: #0ea5e9;
+          margin-top: 0.2rem;
+      }
+      
+      .footer-bottom {
+          border-top: 1px solid rgba(255, 255, 255, 0.05);
+          padding: 2rem;
+      }
+      
+      .footer-bottom-content {
+          max-width: 1400px;
+          margin: 0 auto;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          flex-wrap: wrap;
+          gap: 1rem;
+      }
+      
+      .footer-copyright {
+          color: rgba(255, 255, 255, 0.6);
+          font-size: 0.9rem;
+      }
+      
+      .footer-bottom-links {
+          display: flex;
+          gap: 2rem;
+          list-style: none;
+      }
+      
+      .footer-bottom-links a {
+          color: rgba(255, 255, 255, 0.6);
+          text-decoration: none;
+          font-size: 0.9rem;
+          transition: color 0.3s;
+      }
+      
+      .footer-bottom-links a:hover {
+          color: #0ea5e9;
+      }
+      
       .fade-in {
           opacity: 0;
           transform: translateY(30px);
@@ -850,46 +734,148 @@
       
       /* Responsive */
       @media (max-width: 1024px) {
-          .footer-content { grid-template-columns: 1fr 1fr; }
-          .projects-grid { grid-template-columns: 1fr; }
+          .footer-main {
+              grid-template-columns: 1fr 1fr;
+          }
       }
       
       @media (max-width: 768px) {
-          .nav-links { display: none; }
-          .mobile-menu-btn { display: block; }
-          .hero { padding: 6rem 1.5rem 3rem; }
-          .hero-stats { grid-template-columns: 1fr 1fr; gap: 2rem; }
-          .services-grid { grid-template-columns: 1fr; }
-          .footer-content { grid-template-columns: 1fr; }
-          .language-switcher { top: 15px; right: 15px; }
-          body.rtl .language-switcher { right: auto; left: 15px; }
-          .trust-container { flex-direction: column; gap: 2rem; }
-          .testimonials-grid { grid-template-columns: 1fr; }
+          .top-bar {
+              display: none;
+          }
+          
+          .nav-center {
+              display: none;
+          }
+          
+          .mobile-menu-btn {
+              display: block;
+          }
+          
+          .hero {
+              padding: 6rem 1.5rem 3rem;
+          }
+          
+          .hero-stats {
+              grid-template-columns: 1fr 1fr;
+              gap: 2rem;
+          }
+          
+          .footer-main {
+              grid-template-columns: 1fr;
+          }
+          
+          .footer-bottom-content {
+              flex-direction: column;
+              text-align: center;
+          }
+          
+          .trust-container {
+              flex-direction: column;
+              gap: 2rem;
+          }
       }
   </style>
 </head>
 <body>
-  <!-- Language Switcher -->
-  <div class="language-switcher">
-      <button class="lang-btn active" data-lang="en">EN</button>
-      <button class="lang-btn" data-lang="fa">فا</button>
+  <!-- Top Bar -->
+  <div class="top-bar">
+      <div class="top-bar-content">
+          <div class="top-bar-left">
+              <a href="mailto:info@kavianmine.com" class="top-bar-item">
+                  <i class="fas fa-envelope"></i>
+                  <span data-en="info@kavianmine.com" data-fa="info@kavianmine.com">info@kavianmine.com</span>
+              </a>
+              <a href="tel:+982112345678" class="top-bar-item">
+                  <i class="fas fa-phone"></i>
+                  <span data-en="+98 (21) 1234-5678" data-fa="۰۲۱-۱۲۳۴-۵۶۷۸">+98 (21) 1234-5678</span>
+              </a>
+          </div>
+          <div class="top-bar-right">
+              <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+              <div class="language-switcher-top">
+                  <button class="lang-btn-top active" data-lang="en">EN</button>
+                  <button class="lang-btn-top" data-lang="fa">فا</button>
+              </div>
+          </div>
+      </div>
   </div>
 
-  <!-- Header -->
+  <!-- Main Header -->
   <header id="header">
       <nav>
-          <a href="#" class="logo">
+          <a href="index.html" class="logo">
               <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Logo">
               <span class="logo-text" data-en="KAVIAN" data-fa="کاویان">KAVIAN</span>
           </a>
-          <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
-          <ul class="nav-links">
-              <li><a href="#services" data-en="Services" data-fa="خدمات">Services</a></li>
-              <li><a href="#projects" data-en="Projects" data-fa="پروژه‌ها">Projects</a></li>
-              <li><a href="case-studies.html" data-en="Case Studies" data-fa="مطالعات موردی">Case Studies</a></li>
-              <li><a href="resources.html" data-en="Resources" data-fa="منابع">Resources</a></li>
-              <li><a href="contact.html" class="nav-cta" data-en="Get Consultation" data-fa="دریافت مشاوره">Get Consultation</a></li>
+          
+          <ul class="nav-center">
+              <li class="nav-item">
+                  <a href="index.html" class="nav-link active" data-en="Home" data-fa="خانه">
+                      <i class="fas fa-home"></i>
+                      <span>Home</span>
+                  </a>
+              </li>
+              <li class="nav-item dropdown">
+                  <a href="#" class="nav-link" data-en="Services" data-fa="خدمات">
+                      <span>Services</span>
+                      <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i>
+                  </a>
+                  <div class="dropdown-menu">
+                      <a href="services.html" class="dropdown-item">
+                          <div class="dropdown-icon"><i class="fas fa-cogs"></i></div>
+                          <div class="dropdown-content">
+                              <h4 data-en="Equipment Optimization" data-fa="بهینه‌سازی تجهیزات">Equipment Optimization</h4>
+                              <p data-en="Fleet analysis & selection" data-fa="تحلیل و انتخاب ناوگان">Fleet analysis & selection</p>
+                          </div>
+                      </a>
+                      <a href="services.html" class="dropdown-item">
+                          <div class="dropdown-icon"><i class="fas fa-calculator"></i></div>
+                          <div class="dropdown-content">
+                              <h4 data-en="Cost Estimation" data-fa="برآورد هزینه">Cost Estimation</h4>
+                              <p data-en="AACE-compliant analysis" data-fa="تحلیل مطابق با AACE">AACE-compliant analysis</p>
+                          </div>
+                      </a>
+                      <a href="services.html" class="dropdown-item">
+                          <div class="dropdown-icon"><i class="fas fa-globe"></i></div>
+                          <div class="dropdown-content">
+                              <h4 data-en="Procurement" data-fa="تامین">Procurement</h4>
+                              <p data-en="International sourcing" data-fa="تامین بین‌المللی">International sourcing</p>
+                          </div>
+                      </a>
+                  </div>
+              </li>
+              <li class="nav-item">
+                  <a href="case-studies.html" class="nav-link" data-en="Case Studies" data-fa="مطالعات موردی">
+                      <span>Case Studies</span>
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a href="resources.html" class="nav-link" data-en="Resources" data-fa="منابع">
+                      <span>Resources</span>
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a href="about.html" class="nav-link" data-en="About" data-fa="درباره ما">
+                      <span>About</span>
+                  </a>
+              </li>
           </ul>
+          
+          <div class="nav-right">
+              <button class="search-btn" aria-label="Search">
+                  <i class="fas fa-search"></i>
+              </button>
+              <a href="contact.html" class="cta-btn">
+                  <i class="fas fa-paper-plane"></i>
+                  <span data-en="Get Started" data-fa="شروع کنید">Get Started</span>
+              </a>
+              <button class="mobile-menu-btn">
+                  <i class="fas fa-bars"></i>
+              </button>
+          </div>
       </nav>
   </header>
 
@@ -980,426 +966,144 @@
       </div>
   </section>
 
-  <!-- Services Section -->
-  <section class="services-section fade-in" id="services">
-      <div class="section-header">
-          <span class="section-badge" data-en="Core Services" data-fa="خدمات اصلی">Core Services</span>
-          <h2 class="section-title">
-              <span data-en="Comprehensive Mining" data-fa="راه‌حل‌های جامع">Comprehensive Mining</span><br>
-              <span class="gradient-text" data-en="Consultancy Services" data-fa="مشاوره معدنی">Consultancy Services</span>
-          </h2>
-          <p class="section-description" data-en="End-to-end solutions for mining operations worldwide, backed by 50+ years of combined expertise and cutting-edge technology." data-fa="راه‌حل‌های کامل برای عملیات معدنی در سراسر جهان، با پشتوانه بیش از 50 سال تجربه ترکیبی و فناوری پیشرفته.">
-              End-to-end solutions for mining operations worldwide, backed by 50+ years of combined expertise and cutting-edge technology.
-          </p>
+  <!-- Footer -->
+  <footer>
+      <div class="footer-main">
+          <div class="footer-brand">
+              <a href="index.html" class="footer-logo">
+                  <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Logo">
+                  <span class="footer-logo-text" data-en="KAVIAN" data-fa="کاویان">KAVIAN</span>
+              </a>
+              <p class="footer-description" data-en="Leading mining consultancy specializing in AACE-compliant cost estimation, equipment optimization, and international procurement. Serving mining operations across 25+ countries." data-fa="مشاوره پیشرو معدنی با تخصص در برآورد هزینه مطابق با AACE، بهینه‌سازی تجهیزات و تامین بین‌المللی. خدمات‌رسانی به عملیات معدنی در بیش از 25 کشور.">
+                  Leading mining consultancy specializing in AACE-compliant cost estimation, equipment optimization, and international procurement. Serving mining operations across 25+ countries.
+              </p>
+              <div class="footer-social">
+                  <a href="#" class="footer-social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                  <a href="#" class="footer-social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                  <a href="#" class="footer-social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                  <a href="#" class="footer-social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              </div>
+          </div>
+          
+          <div class="footer-section">
+              <h4 data-en="Services" data-fa="خدمات">Services</h4>
+              <ul class="footer-links">
+                  <li><a href="services.html" data-en="Equipment Optimization" data-fa="بهینه‌سازی تجهیزات">Equipment Optimization</a></li>
+                  <li><a href="services.html" data-en="Cost Estimation" data-fa="برآورد هزینه">Cost Estimation</a></li>
+                  <li><a href="services.html" data-en="Procurement" data-fa="تامین">Procurement</a></li>
+                  <li><a href="services.html" data-en="Feasibility Studies" data-fa="مطالعات امکان‌سنجی">Feasibility Studies</a></li>
+                  <li><a href="services.html" data-en="Plant Engineering" data-fa="مهندسی کارخانه">Plant Engineering</a></li>
+              </ul>
+          </div>
+          
+          <div class="footer-section">
+              <h4 data-en="Company" data-fa="شرکت">Company</h4>
+              <ul class="footer-links">
+                  <li><a href="about.html" data-en="About Us" data-fa="درباره ما">About Us</a></li>
+                  <li><a href="case-studies.html" data-en="Case Studies" data-fa="مطالعات موردی">Case Studies</a></li>
+                  <li><a href="testimonials.html" data-en="Testimonials" data-fa="نظرات مشتریان">Testimonials</a></li>
+                  <li><a href="careers.html" data-en="Careers" data-fa="فرصت‌های شغلی">Careers</a></li>
+                  <li><a href="blog.html" data-en="Blog" data-fa="بلاگ">Blog</a></li>
+              </ul>
+          </div>
+          
+          <div class="footer-section">
+              <h4 data-en="Resources" data-fa="منابع">Resources</h4>
+              <ul class="footer-links">
+                  <li><a href="resources.html" data-en="Downloads" data-fa="دانلودها">Downloads</a></li>
+                  <li><a href="faq.html" data-en="FAQ" data-fa="سوالات متداول">FAQ</a></li>
+                  <li><a href="blog.html" data-en="Knowledge Base" data-fa="پایگاه دانش">Knowledge Base</a></li>
+                  <li><a href="resources.html" data-en="Whitepapers" data-fa="مقالات">Whitepapers</a></li>
+                  <li><a href="resources.html" data-en="Templates" data-fa="الگوها">Templates</a></li>
+              </ul>
+          </div>
+          
+          <div class="footer-section">
+              <h4 data-en="Contact" data-fa="تماس">Contact</h4>
+              <div class="footer-contact-item">
+                  <i class="fas fa-envelope"></i>
+                  <span>info@kavianmine.com</span>
+              </div>
+              <div class="footer-contact-item">
+                  <i class="fas fa-phone"></i>
+                  <span>+98 (21) 1234-5678</span>
+              </div>
+              <div class="footer-contact-item">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <span data-en="Tehran, Iran" data-fa="تهران، ایران">Tehran, Iran</span>
+              </div>
+          </div>
       </div>
+      
+      <div class="footer-bottom">
+          <div class="footer-bottom-content">
+              <p class="footer-copyright" data-en="© 2024 Kavian Development Mine. All rights reserved." data-fa="© 2024 کاویان توسعه معدن. تمامی حقوق محفوظ است.">
+                  © 2024 Kavian Development Mine. All rights reserved.
+              </p>
+              <ul class="footer-bottom-links">
+                  <li><a href="privacy-policy.html" data-en="Privacy Policy" data-fa="حریم خصوصی">Privacy Policy</a></li>
+                  <li><a href="terms-of-service.html" data-en="Terms of Service" data-fa="شرایط خدمات">Terms of Service</a></li>
+                  <li><a href="sitemap.xml" data-en="Sitemap" data-fa="نقشه سایت">Sitemap</a></li>
+              </ul>
+          </div>
+      </div>
+  </footer>
+
+  <script>
+      // Language Switcher
+      let currentLang = 'en';
+      const langButtons = document.querySelectorAll('.lang-btn-top');
       
-      <div class="services-grid">
-          <div class="service-card fade-in">
-              <div class="service-icon">
-                  <i class="fas fa-cogs"></i>
-              </div>
-              <h3 class="service-title" data-en="Equipment Optimization & Selection" data-fa="بهینه‌سازی و انتخاب تجهیزات">Equipment Optimization & Selection</h3>
-              <p class="service-description" data-en="Advanced equipment selection using AI-powered lifecycle cost analysis for crushing, grinding, hauling, and processing equipment." data-fa="انتخاب پیشرفته تجهیزات با استفاده از تحلیل هزینه چرخه عمر مبتنی بر هوش مصنوعی برای تجهیزات خردایش، آسیاب، حمل و فرآوری.">
-                  Advanced equipment selection using AI-powered lifecycle cost analysis for crushing, grinding, hauling, and processing equipment.
-              </p>
-              <ul class="service-features">
-                  <li><i class="fas fa-check-circle"></i> <span data-en="Caterpillar, Komatsu, Sandvik analysis" data-fa="تحلیل Caterpillar، Komatsu، Sandvik">Caterpillar, Komatsu, Sandvik analysis</span></li>
-                  <li><i class="fas fa-check-circle"></i> <span data-en="Fleet optimization & sizing" data-fa="بهینه‌سازی و اندازه‌گیری ناوگان">Fleet optimization & sizing</span></li>
-                  <li><i class="fas fa-check-circle"></i> <span data-en="Lifecycle cost modeling (LCC)" data-fa="مدل‌سازی هزینه چرخه عمر">Lifecycle cost modeling (LCC)</span></li>
-              </ul>
-              <a href="services.html" class="service-link">
-                  <span data-en="Learn More" data-fa="بیشتر بدانید">Learn More</span>
-                  <i class="fas fa-arrow-right"></i>
-              </a>
-          </div>
-          
-          <div class="service-card fade-in">
-              <div class="service-icon">
-                  <i class="fas fa-calculator"></i>
-              </div>
-              <h3 class="service-title" data-en="AACE-Compliant Cost Estimation" data-fa="برآورد هزینه مطابق با AACE">AACE-Compliant Cost Estimation</h3>
-              <p class="service-description" data-en="Comprehensive CAPEX/OPEX estimation following AACE International standards (Class 1-5) with real-time equipment pricing database." data-fa="برآورد جامع CAPEX/OPEX مطابق با استانداردهای بین‌المللی AACE (کلاس 1-5) با پایگاه داده قیمت‌گذاری لحظه‌ای تجهیزات.">
-                  Comprehensive CAPEX/OPEX estimation following AACE International standards (Class 1-5) with real-time equipment pricing database.
-              </p>
-              <ul class="service-features">
-                  <li><i class="fas fa-check-circle"></i> <span data-en="Class 2 accuracy (±10-15%)" data-fa="دقت کلاس 2 (±10-15٪)">Class 2 accuracy (±10-15%)</span></li>
-                  <li><i class="fas fa-check-circle"></i> <span data-en="Real-time global pricing data" data-fa="داده قیمت‌گذاری جهانی لحظه‌ای">Real-time global pricing data</span></li>
-                  <li><i class="fas fa-check-circle"></i> <span data-en="Sensitivity & risk analysis" data-fa="تحلیل حساسیت و ریسک">Sensitivity & risk analysis</span></li>
-              </ul>
-              <a href="services.html" class="service-link">
-                  <span data-en="Learn More" data-fa="بیشتر بدانید">Learn More</span>
-                  <i class="fas fa-arrow-right"></i>
-              </a>
-          </div>
-          
-          <div class="service-card fade-in">
-              <div class="service-icon">
-                  <i class="fas fa-globe"></i>
-              </div>
-              <h3 class="service-title" data-en="International Equipment Procurement" data-fa="تامین بین‌المللی تجهیزات">International Equipment Procurement</h3>
-              <p class="service-description" data-en="Global sourcing from verified manufacturers across USA, Europe, China, and Australia. Complete procurement management from RFQ to delivery." data-fa="تامین جهانی از تولیدکنندگان معتبر در آمریکا، اروپا، چین و استرالیا. مدیریت کامل تامین از RFQ تا تحویل.">
-                  Global sourcing from verified manufacturers across USA, Europe, China, and Australia. Complete procurement management from RFQ to delivery.
-              </p>
-              <ul class="service-features">
-                  <li><i class="fas fa-check-circle"></i> <span data-en="Vendor evaluation & selection" data-fa="ارزیابی و انتخاب فروشنده">Vendor evaluation & selection</span></li>
-                  <li><i class="fas fa-check-circle"></i> <span data-en="Contract negotiation support" data-fa="پشتیبانی مذاکره قرارداد">Contract negotiation support</span></li>
-                  <li><i class="fas fa-check-circle"></i> <span data-en="Quality assurance & logistics" data-fa="تضمین کیفیت و لجستیک">Quality assurance & logistics</span></li>
-              </ul>
-              <a href="services.html" class="service-link">
-                  <span data-en="Learn More" data-fa="بیشتر بدانید">Learn More</span>
-                  <i class="fas fa-arrow-right"></i>
-              </a>
-          </div>
-          
-          <div class="service-card fade-in">
-              <div class="service-icon">
-                  <i class="fas fa-file-alt"></i>
-              </div>
-              <h3 class="service-title" data-en="Feasibility Studies & Financial Modeling" data-fa="مطالعات امکان‌سنجی و مدل‌سازی مالی">Feasibility Studies & Financial Modeling</h3>
-              <p class="service-description" data-en="Bankable feasibility studies (PFS, DFS) with detailed NPV, IRR, and payback analysis for securing project financing." data-fa="مطالعات امکان‌سنجی قابل اعتماد (PFS، DFS) با تحلیل دقیق NPV، IRR و بازگشت سرمایه برای تامین مالی پروژه.">
-                  Bankable feasibility studies (PFS, DFS) with detailed NPV, IRR, and payback analysis for securing project financing.
-              </p>
-              <ul class="service-features">
-                  <li><i class="fas fa-check-circle"></i> <span data-en="Pre-feasibility & definitive studies" data-fa="مطالعات پیش‌امکان‌سنجی و قطعی">Pre-feasibility & definitive studies</span></li>
-                  <li><i class="fas fa-check-circle"></i> <span data-en="Economic modeling & valuation" data-fa="مدل‌سازی اقتصادی و ارزش‌گذاری">Economic modeling & valuation</span></li>
-                  <li><i class="fas fa-check-circle"></i> <span data-en="Investment decision support" data-fa="پشتیبانی تصمیم سرمایه‌گذاری">Investment decision support</span></li>
-              </ul>
-              <a href="services.html" class="service-link">
-                  <span data-en="Learn More" data-fa="بیشتر بدانید">Learn More</span>
-                  <i class="fas fa-arrow-right"></i>
-              </a>
-          </div>
-          
-          <div class="service-card fade-in">
-              <div class="service-icon">
-                  <i class="fas fa-industry"></i>
-              </div>
-              <h3 class="service-title" data-en="Plant Engineering & Optimization" data-fa="مهندسی و بهینه‌سازی کارخانه">Plant Engineering & Optimization</h3>
-              <p class="service-description" data-en="Complete plant design from crushing circuits to tailings management. Process optimization for existing operations to maximize throughput and recovery." data-fa="طراحی کامل کارخانه از مدارهای خردایش تا مدیریت باطله. بهینه‌سازی فرآیند برای عملیات موجود جهت حداکثر توان عملیاتی و بازیابی.">
-                  Complete plant design from crushing circuits to tailings management. Process optimization for existing operations to maximize throughput and recovery.
-              </p>
-              <ul class="service-features">
-                  <li><i class="fas fa-check-circle"></i> <span data-en="Crushing & screening design" data-fa="طراحی خردایش و غربالگری">Crushing & screening design</span></li>
-                  <li><i class="fas fa-check-circle"></i> <span data-en="Grinding & classification circuits" data-fa="مدارهای آسیاب و طبقه‌بندی">Grinding & classification circuits</span></li>
-                  <li><i class="fas fa-check-circle"></i> <span data-en="Production bottleneck analysis" data-fa="تحلیل گلوگاه تولید">Production bottleneck analysis</span></li>
-              </ul>
-              <a href="services.html" class="service-link">
-                  <span data-en="Learn More" data-fa="بیشتر بدانید">Learn More</span>
-                  <i class="fas fa-arrow-right"></i>
-              </a>
-          </div>
-      </div>
-  </section>
-
-  <!-- Projects Section -->
-  <section class="projects-section fade-in" id="projects">
-      <div class="section-header">
-          <span class="section-badge" data-en="Success Stories" data-fa="داستان‌های موفقیت">Success Stories</span>
-          <h2 class="section-title">
-              <span data-en="Recent Projects &" data-fa="پروژه‌های اخیر و">Recent Projects &</span><br>
-              <span class="gradient-text" data-en="Proven Results" data-fa="نتایج اثبات شده">Proven Results</span>
-          </h2>
-          <p class="section-description" data-en="Real-world case studies demonstrating measurable cost savings and operational improvements across diverse mining operations." data-fa="مطالعات موردی واقعی نشان‌دهنده صرفه‌جویی قابل اندازه‌گیری در هزینه و بهبودهای عملیاتی در عملیات معدنی متنوع.">
-              Real-world case studies demonstrating measurable cost savings and operational improvements across diverse mining operations.
-          </p>
-      </div>
+      langButtons.forEach(btn => {
+          btn.addEventListener('click', () => {
+              currentLang = btn.dataset.lang;
+              langButtons.forEach(b => b.classList.remove('active'));
+              btn.classList.add('active');
+              
+              document.body.classList.toggle('rtl', currentLang === 'fa');
+              document.documentElement.setAttribute('lang', currentLang);
+              document.documentElement.setAttribute('dir', currentLang === 'fa' ? 'rtl' : 'ltr');
+              
+              document.querySelectorAll('[data-en]').forEach(el => {
+                  const text = el.getAttribute(`data-${currentLang}`);
+                  if (text) {
+                      if (el.innerHTML.includes('<span') || el.innerHTML.includes('<br>') || el.innerHTML.includes('<i>')) {
+                          el.innerHTML = text;
+                      } else {
+                          el.textContent = text;
+                      }
+                  }
+              });
+          });
+      });
       
-      <div class="projects-grid">
-          <div class="project-card fade-in">
-              <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1581092918484-8313e1f7e8c6?w=800&q=80');">
-                  <div class="project-badge" data-en="Copper Mine - Chile" data-fa="معدن مس - شیلی">Copper Mine - Chile</div>
-              </div>
-              <div class="project-content">
-                  <h3 class="project-title" data-en="Fleet Optimization - Rio Mining Corp" data-fa="بهینه‌سازی ناوگان - شرکت ریو ماینینگ">Fleet Optimization - Rio Mining Corp</h3>
-                  <p class="project-description" data-en="Comprehensive haul truck fleet analysis and replacement strategy for 45-unit fleet. Implemented predictive maintenance program and standardized equipment platform." data-fa="تحلیل جامع ناوگان کامیون حمل و استراتژی جایگزینی برای ناوگان 45 واحدی. برنامه نگهداری پیش‌بینی و پلتفرم تجهیزات استاندارد شده اجرا شد.">
-                      Comprehensive haul truck fleet analysis and replacement strategy for 45-unit fleet. Implemented predictive maintenance program and standardized equipment platform.
-                  </p>
-                  <div class="project-stats">
-                      <div class="project-stat">
-                          <div class="project-stat-value">$2.4M</div>
-                          <div class="project-stat-label" data-en="Annual Savings" data-fa="صرفه‌جویی سالانه">Annual Savings</div>
-                      </div>
-                      <div class="project-stat">
-                          <div class="project-stat-value">18%</div>
-                          <div class="project-stat-label" data-en="Cost Reduction" data-fa="کاهش هزینه">Cost Reduction</div>
-                      </div>
-                      <div class="project-stat">
-                          <div class="project-stat-value">22%</div>
-                          <div class="project-stat-label" data-en="Productivity Gain" data-fa="افزایش بهره‌وری">Productivity Gain</div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          
-          <div class="project-card fade-in">
-              <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=800&q=80');">
-                  <div class="project-badge" data-en="Gold Project - Australia" data-fa="پروژه طلا - استرالیا">Gold Project - Australia</div>
-              </div>
-              <div class="project-content">
-                  <h3 class="project-title" data-en="Feasibility Study - Aurelia Resources" data-fa="مطالعه امکان‌سنجی - منابع اورلیا">Feasibility Study - Aurelia Resources</h3>
-                  <p class="project-description" data-en="AACE Class 2 feasibility study for 2.5 Mtpa gold processing plant. Detailed equipment selection, CAPEX/OPEX estimation, and NPV analysis for project financing." data-fa="مطالعه امکان‌سنجی کلاس 2 AACE برای کارخانه فرآوری طلا با ظرفیت 2.5 میلیون تن در سال. انتخاب دقیق تجهیزات، برآورد CAPEX/OPEX و تحلیل NPV برای تامین مالی پروژه.">
-                      AACE Class 2 feasibility study for 2.5 Mtpa gold processing plant. Detailed equipment selection, CAPEX/OPEX estimation, and NPV analysis for project financing.
-                  </p>
-                  <div class="project-stats">
-                      <div class="project-stat">
-                          <div class="project-stat-value">$180M</div>
-                          <div class="project-stat-label" data-en="Financing Secured" data-fa="تامین مالی تأمین شده">Financing Secured</div>
-                      </div>
-                      <div class="project-stat">
-                          <div class="project-stat-value">$22M</div>
-                          <div class="project-stat-label" data-en="CAPEX Saved" data-fa="صرفه‌جویی CAPEX">CAPEX Saved</div>
-                      </div>
-                      <div class="project-stat">
-                          <div class="project-stat-value">±12%</div>
-                          <div class="project-stat-label" data-en="Accuracy" data-fa="دقت">Accuracy</div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          
-          <div class="project-card fade-in">
-              <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&q=80');">
-                  <div class="project-badge" data-en="Copper Mine - Peru" data-fa="معدن مس - پرو">Copper Mine - Peru</div>
-              </div>
-              <div class="project-content">
-                  <h3 class="project-title" data-en="Equipment Procurement - Andean Copper" data-fa="تامین تجهیزات - آندین کاپر">Equipment Procurement - Andean Copper</h3>
-                  <p class="project-description" data-en="International procurement of primary gyratory crusher and secondary cone crushers. Competitive bidding process with 5 global manufacturers, technical evaluation, and logistics management." data-fa="تامین بین‌المللی سنگ‌شکن ژیراتوری اولیه و سنگ‌شکن‌های مخروطی ثانویه. فرآیند مناقصه رقابتی با 5 تولیدکننده جهانی، ارزیابی فنی و مدیریت لجستیک.">
-                      International procurement of primary gyratory crusher and secondary cone crushers. Competitive bidding process with 5 global manufacturers, technical evaluation, and logistics management.
-                  </p>
-                  <div class="project-stats">
-                      <div class="project-stat">
-                          <div class="project-stat-value">$8.5M</div>
-                          <div class="project-stat-label" data-en="Cost Savings" data-fa="صرفه‌جویی هزینه">Cost Savings</div>
-                      </div>
-                      <div class="project-stat">
-                          <div class="project-stat-value">24%</div>
-                          <div class="project-stat-label" data-en="Below Quote" data-fa="کمتر از پیشنهاد">Below Quote</div>
-                      </div>
-                      <div class="project-stat">
-                          <div class="project-stat-value">5</div>
-                          <div class="project-stat-label" data-en="Vendors Evaluated" data-fa="فروشندگان ارزیابی شده">Vendors Evaluated</div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </section>
-
-  <!-- Testimonials Section -->
-  <section class="testimonials-section fade-in">
-      <div class="section-header">
-          <span class="section-badge" data-en="Client Testimonials" data-fa="نظرات مشتریان">Client Testimonials</span>
-          <h2 class="section-title">
-              <span data-en="What Our" data-fa="نظرات">What Our</span><br>
-              <span class="gradient-text" data-en="Clients Say" data-fa="مشتریان ما">Clients Say</span>
-            </h2>
-            <p class="section-description" data-en="Real feedback from mining companies worldwide who have experienced measurable results with our services." data-fa="بازخورد واقعی از شرکت‌های معدنی در سراسر جهان که نتایج قابل اندازه‌گیری با خدمات ما تجربه کرده‌اند.">
-                Real feedback from mining companies worldwide who have experienced measurable results with our services.
-            </p>
-        </div>
-        
-        <div class="testimonials-grid">
-            <div class="testimonial-card fade-in">
-                <div class="testimonial-header">
-                    <div class="testimonial-avatar">JM</div>
-                    <div class="testimonial-info">
-                        <div class="testimonial-name">Juan Martinez</div>
-                        <div class="testimonial-title" data-en="VP of Operations, Rio Mining Corporation" data-fa="معاون عملیات، شرکت ریو ماینینگ">VP of Operations, Rio Mining Corporation</div>
-                    </div>
-                </div>
-                <p class="testimonial-text" data-en="Kavian's analysis was incredibly thorough. They provided a complete roadmap with financial modeling and implementation timeline. The $2.4M annual savings exceeded our expectations." data-fa="تحلیل کاویان فوق‌العاده کامل بود. آنها یک نقشه راه کامل با مدل‌سازی مالی و جدول زمانی اجرا ارائه دادند. صرفه‌جویی سالانه 2.4 میلیون دلار از انتظارات ما فراتر رفت.">
-                    "Kavian's analysis was incredibly thorough. They provided a complete roadmap with financial modeling and implementation timeline. The $2.4M annual savings exceeded our expectations."
-                </p>
-            </div>
-            
-            <div class="testimonial-card fade-in">
-                <div class="testimonial-header">
-                    <div class="testimonial-avatar">ST</div>
-                    <div class="testimonial-info">
-                        <div class="testimonial-name">Sarah Thompson</div>
-                        <div class="testimonial-title" data-en="CEO, Aurelia Resources" data-fa="مدیرعامل، منابع اورلیا">CEO, Aurelia Resources</div>
-                    </div>
-                </div>
-                <p class="testimonial-text" data-en="The level of detail in Kavian's feasibility study gave our investors complete confidence. Their equipment expertise and cost database were invaluable in securing $180M financing." data-fa="سطح جزئیات در مطالعه امکان‌سنجی کاویان به سرمایه‌گذاران ما اعتماد کامل داد. تخصص تجهیزات و پایگاه داده هزینه آنها در تأمین 180 میلیون دلار تامین مالی بسیار ارزشمند بود.">
-                    "The level of detail in Kavian's feasibility study gave our investors complete confidence. Their equipment expertise and cost database were invaluable in securing $180M financing."
-                </p>
-            </div>
-            
-            <div class="testimonial-card fade-in">
-                <div class="testimonial-header">
-                    <div class="testimonial-avatar">CR</div>
-                    <div class="testimonial-info">
-                        <div class="testimonial-name">Carlos Rodriguez</div>
-                        <div class="testimonial-title" data-en="Chief Engineer, Andean Copper Ltd." data-fa="مهندس ارشد، آندین کاپر">Chief Engineer, Andean Copper Ltd.</div>
-                    </div>
-                </div>
-                <p class="testimonial-text" data-en="Kavian's procurement expertise and vendor relationships saved us $8.5M. Their technical evaluation ensured we got the best value, not just the lowest price." data-fa="تخصص تامین و روابط فروشنده کاویان 8.5 میلیون دلار برای ما صرفه‌جویی کرد. ارزیابی فنی آنها اطمینان حاصل کرد که ما بهترین ارزش را دریافت کردیم، نه فقط کمترین قیمت.">
-                    "Kavian's procurement expertise and vendor relationships saved us $8.5M. Their technical evaluation ensured we got the best value, not just the lowest price."
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section fade-in">
-        <div class="cta-container">
-            <h2 class="cta-title">
-                <span data-en="Ready to Optimize Your" data-fa="آماده بهینه‌سازی">Ready to Optimize Your</span><br>
-                <span class="gradient-text" data-en="Mining Operations?" data-fa="عملیات معدنی خود هستید؟">Mining Operations?</span>
-            </h2>
-            <p class="cta-description" data-en="Get expert AACE-compliant cost estimation, equipment optimization, and procurement services. Our team delivers measurable results backed by 50+ years of combined experience." data-fa="برآورد هزینه مطابق با AACE، بهینه‌سازی تجهیزات و خدمات تامین تخصصی دریافت کنید. تیم ما نتایج قابل اندازه‌گیری با پشتوانه بیش از 50 سال تجربه ترکیبی ارائه می‌دهد.">
-                Get expert AACE-compliant cost estimation, equipment optimization, and procurement services. Our team delivers measurable results backed by 50+ years of combined experience.
-            </p>
-            <div class="hero-buttons">
-                <a href="contact.html" class="btn btn-primary">
-                    <i class="fas fa-calendar-check"></i>
-                    <span data-en="Schedule Free Consultation" data-fa="برنامه‌ریزی مشاوره رایگان">Schedule Free Consultation</span>
-                </a>
-                <a href="case-studies.html" class="btn btn-secondary">
-                    <i class="fas fa-chart-bar"></i>
-                    <span data-en="View All Case Studies" data-fa="مشاهده تمام مطالعات موردی">View All Case Studies</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-brand">
-                <h3 data-en="Kavian Development Mine" data-fa="کاویان توسعه معدن">Kavian Development Mine</h3>
-                <p data-en="Leading mining consultancy specializing in AACE-compliant cost estimation, equipment optimization, and international procurement. Serving mining operations across 25+ countries with 50+ years combined experience." data-fa="مشاوره پیشرو معدنی با تخصص در برآورد هزینه مطابق با AACE، بهینه‌سازی تجهیزات و تامین بین‌المللی. خدمات‌رسانی به عملیات معدنی در بیش از 25 کشور با بیش از 50 سال تجربه ترکیبی.">
-                    Leading mining consultancy specializing in AACE-compliant cost estimation, equipment optimization, and international procurement. Serving mining operations across 25+ countries with 50+ years combined experience.
-                </p>
-                <div class="social-links">
-                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-            
-            <div class="footer-section">
-                <h4 data-en="Services" data-fa="خدمات">Services</h4>
-                <a href="services.html" data-en="Equipment Optimization" data-fa="بهینه‌سازی تجهیزات">Equipment Optimization</a>
-                <a href="services.html" data-en="Cost Estimation" data-fa="برآورد هزینه">Cost Estimation</a>
-                <a href="services.html" data-en="International Procurement" data-fa="تامین بین‌المللی">International Procurement</a>
-                <a href="services.html" data-en="Feasibility Studies" data-fa="مطالعات امکان‌سنجی">Feasibility Studies</a>
-                <a href="services.html" data-en="Plant Engineering" data-fa="مهندسی کارخانه">Plant Engineering</a>
-            </div>
-            
-            <div class="footer-section">
-                <h4 data-en="Company" data-fa="شرکت">Company</h4>
-                <a href="about.html" data-en="About Us" data-fa="درباره ما">About Us</a>
-                <a href="case-studies.html" data-en="Case Studies" data-fa="مطالعات موردی">Case Studies</a>
-                <a href="testimonials.html" data-en="Testimonials" data-fa="نظرات مشتریان">Testimonials</a>
-                <a href="careers.html" data-en="Careers" data-fa="فرصت‌های شغلی">Careers</a>
-                <a href="blog.html" data-en="Blog" data-fa="بلاگ">Blog</a>
-            </div>
-            
-            <div class="footer-section">
-                <h4 data-en="Contact" data-fa="تماس">Contact</h4>
-                <a href="mailto:info@kavianmine.com">info@kavianmine.com</a>
-                <a href="tel:+982112345678">+98 (21) 1234-5678</a>
-                <a href="contact.html" data-en="Contact Form" data-fa="فرم تماس">Contact Form</a>
-                <a href="resources.html" data-en="Resources" data-fa="منابع">Resources</a>
-                <a href="faq.html" data-en="FAQ" data-fa="سوالات متداول">FAQ</a>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <p data-en="© 2024 Kavian Development Mine. All rights reserved. | Engineering Excellence • Mining Innovation • Global Standards" data-fa="© 2024 کاویان توسعه معدن. تمامی حقوق محفوظ است. | تخصص مهندسی • نوآوری معدنی • استانداردهای جهانی">
-                © 2024 Kavian Development Mine. All rights reserved. | Engineering Excellence • Mining Innovation • Global Standards
-            </p>
-        </div>
-    </footer>
-
-    <script>
-        // Language Switcher
-        let currentLang = 'en';
-        const langButtons = document.querySelectorAll('.lang-btn');
-        
-        langButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                currentLang = btn.dataset.lang;
-                langButtons.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                
-                document.body.classList.toggle('rtl', currentLang === 'fa');
-                document.documentElement.setAttribute('lang', currentLang);
-                document.documentElement.setAttribute('dir', currentLang === 'fa' ? 'rtl' : 'ltr');
-                
-                document.querySelectorAll('[data-en]').forEach(el => {
-                    const text = el.getAttribute(`data-${currentLang}`);
-                    if (text) {
-                        if (el.innerHTML.includes('<span') || el.innerHTML.includes('<br>')) {
-                            el.innerHTML = text;
-                        } else {
-                            el.textContent = text;
-                        }
-                    }
-                });
-            });
-        });
-        
-        // Header Scroll Effect
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            header.classList.toggle('scrolled', window.scrollY > 100);
-        });
-        
-        // Smooth Scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-        
-        // Intersection Observer for Fade-in Animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-        
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-        
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navLinks = document.querySelector('.nav-links');
-        
-        if (mobileMenuBtn) {
-            mobileMenuBtn.addEventListener('click', () => {
-                navLinks.classList.toggle('active');
-                if (navLinks.classList.contains('active')) {
-                    navLinks.style.display = 'flex';
-                    navLinks.style.flexDirection = 'column';
-                    navLinks.style.position = 'absolute';
-                    navLinks.style.top = '100%';
-                    navLinks.style.left = '0';
-                    navLinks.style.right = '0';
-                    navLinks.style.background = 'rgba(2, 6, 23, 0.98)';
-                    navLinks.style.padding = '2rem';
-                    navLinks.style.gap = '1.5rem';
-                    navLinks.style.borderTop = '1px solid rgba(255, 255, 255, 0.1)';
-                } else {
-                    navLinks.style.display = 'none';
-                }
-            });
-        }
-    </script>
-  </body>
-  </html>
+      // Header Scroll Effect
+      const header = document.getElementById('header');
+      window.addEventListener('scroll', () => {
+          header.classList.toggle('scrolled', window.scrollY > 50);
+      });
+      
+      // Smooth Scroll
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', function (e) {
+              e.preventDefault();
+              const target = document.querySelector(this.getAttribute('href'));
+              if (target) {
+                  target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+          });
+      });
+      
+      // Intersection Observer
+      const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                  entry.target.classList.add('visible');
+              }
+          });
+      }, { threshold: 0.1 });
+      
+      document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
