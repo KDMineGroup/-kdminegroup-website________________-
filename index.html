@@ -71,6 +71,15 @@
           100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
       }
       
+      @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+      @keyframes slideIn { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+      @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+      @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+      @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(30px); }
+          to { opacity: 1; transform: translateY(0); }
+      }
+      
       /* Top Bar */
       .top-bar {
           background: rgba(15, 23, 42, 0.98);
@@ -204,9 +213,7 @@
           transition: all 0.3s;
       }
       
-      .logo:hover { 
-          transform: translateY(-2px); 
-      }
+      .logo:hover { transform: translateY(-2px); }
       
       .logo img {
           height: 55px;
@@ -245,19 +252,6 @@
           font-size: 0.95rem;
           transition: all 0.3s;
           border-radius: 10px;
-          position: relative;
-      }
-      
-      .nav-link::before {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 0;
-          height: 2px;
-          background: var(--gradient-1);
-          transition: width 0.3s;
       }
       
       .nav-link:hover {
@@ -265,87 +259,9 @@
           background: rgba(14, 165, 233, 0.1);
       }
       
-      .nav-link:hover::before {
-          width: 80%;
-      }
-      
       .nav-link.active {
           color: #0ea5e9;
           background: rgba(14, 165, 233, 0.1);
-      }
-      
-      /* Dropdown Menu */
-      .dropdown { position: relative; }
-      
-      .dropdown-menu {
-          position: absolute;
-          top: 100%;
-          left: 0;
-          min-width: 300px;
-          background: rgba(15, 23, 42, 0.98);
-          backdrop-filter: blur(20px);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 15px;
-          padding: 1rem;
-          margin-top: 0.5rem;
-          opacity: 0;
-          visibility: hidden;
-          transform: translateY(-10px);
-          transition: all 0.3s;
-          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-      }
-      
-      body.rtl .dropdown-menu { left: auto; right: 0; }
-      
-      .dropdown:hover .dropdown-menu {
-          opacity: 1;
-          visibility: visible;
-          transform: translateY(0);
-      }
-      
-      .dropdown-item {
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-          padding: 0.8rem 1rem;
-          color: rgba(255, 255, 255, 0.8);
-          text-decoration: none;
-          border-radius: 10px;
-          transition: all 0.3s;
-          margin-bottom: 0.5rem;
-      }
-      
-      .dropdown-item:last-child { margin-bottom: 0; }
-      
-      .dropdown-item:hover {
-          background: rgba(14, 165, 233, 0.1);
-          color: white;
-          transform: translateX(5px);
-      }
-      
-      body.rtl .dropdown-item:hover { transform: translateX(-5px); }
-      
-      .dropdown-icon {
-          width: 45px;
-          height: 45px;
-          background: var(--gradient-1);
-          border-radius: 12px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 1.3rem;
-          flex-shrink: 0;
-          box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
-      }
-      
-      .dropdown-content h4 {
-          font-size: 0.95rem;
-          margin-bottom: 0.2rem;
-      }
-      
-      .dropdown-content p {
-          font-size: 0.8rem;
-          color: rgba(255, 255, 255, 0.6);
       }
       
       .nav-right {
@@ -468,11 +384,6 @@
           animation: fadeInUp 0.8s ease;
       }
       
-      @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(30px); }
-          to { opacity: 1; transform: translateY(0); }
-      }
-      
       .hero h1 {
           font-size: clamp(2.5rem, 6vw, 5rem);
           font-weight: 900;
@@ -580,8 +491,8 @@
           font-weight: 500;
       }
       
-      /* Services Showcase */
-      .services-showcase {
+      /* Tab Section */
+      .tab-section {
           padding: 8rem 2rem;
           background: rgba(255, 255, 255, 0.02);
           position: relative;
@@ -590,7 +501,7 @@
       .section-header {
           text-align: center;
           max-width: 800px;
-          margin: 0 auto 5rem;
+          margin: 0 auto 4rem;
       }
       
       .section-badge {
@@ -620,11 +531,60 @@
           line-height: 1.8;
       }
       
+      /* Tab Navigation */
+      .tab-nav {
+          display: flex;
+          justify-content: center;
+          gap: 1rem;
+          margin-bottom: 3rem;
+          flex-wrap: wrap;
+      }
+      
+      .tab-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          padding: 15px 35px;
+          background: rgba(30, 41, 59, 0.5);
+          border: 1px solid rgba(148, 163, 184, 0.1);
+          border-radius: 50px;
+          color: rgba(255, 255, 255, 0.7);
+          cursor: pointer;
+          transition: all 0.3s;
+          font-weight: 600;
+          font-size: 1rem;
+      }
+      
+      .tab-btn:hover {
+          background: rgba(14, 165, 233, 0.1);
+          border-color: var(--primary);
+          color: white;
+          transform: translateY(-2px);
+      }
+      
+      .tab-btn.active {
+          background: var(--gradient-1);
+          border-color: transparent;
+          color: white;
+          box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3);
+      }
+      
+      /* Tab Content */
+      .tab-content {
+          display: none;
+          animation: fadeIn 0.5s ease;
+      }
+      
+      .tab-content.active {
+          display: block;
+      }
+      
+      /* Services Grid */
       .services-grid {
           max-width: 1400px;
           margin: 0 auto;
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+          grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
           gap: 2rem;
       }
       
@@ -689,18 +649,122 @@
           margin-bottom: 1.5rem;
       }
       
-      /* Projects Gallery */
-      .projects-gallery {
-          padding: 8rem 2rem;
+      /* News Grid */
+      .news-grid {
+          max-width: 1400px;
+          margin: 0 auto;
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+          gap: 2rem;
       }
       
+      .news-card {
+          background: rgba(30, 41, 59, 0.5);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(148, 163, 184, 0.1);
+          border-radius: 20px;
+          overflow: hidden;
+          transition: all 0.3s;
+      }
+      
+      .news-card:hover {
+          transform: translateY(-10px);
+          border-color: var(--primary);
+          box-shadow: 0 20px 60px rgba(14, 165, 233, 0.2);
+      }
+      
+      .news-image {
+          width: 100%;
+          height: 220px;
+          object-fit: cover;
+      }
+      
+      .news-content {
+          padding: 25px;
+      }
+      
+      .news-meta {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 15px;
+          flex-wrap: wrap;
+          gap: 10px;
+      }
+      
+      .news-source {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 6px 15px;
+          background: var(--gradient-1);
+          border-radius: 20px;
+          font-size: 0.85rem;
+          font-weight: 600;
+      }
+      
+      .news-date {
+          color: rgba(255, 255, 255, 0.5);
+          font-size: 0.85rem;
+      }
+      
+      .news-title {
+          font-size: 1.2rem;
+          font-weight: 700;
+          margin-bottom: 12px;
+          line-height: 1.4;
+          color: white;
+      }
+      
+      .news-excerpt {
+          color: rgba(255, 255, 255, 0.7);
+          line-height: 1.6;
+          margin-bottom: 20px;
+      }
+      
+      .read-more {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          color: var(--accent);
+          font-weight: 600;
+          text-decoration: none;
+          transition: all 0.3s;
+      }
+      
+      .read-more:hover {
+          gap: 12px;
+      }
+      
+      .live-badge-inline {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 8px 16px;
+          background: rgba(34, 197, 94, 0.1);
+          border: 1px solid rgba(34, 197, 94, 0.3);
+          border-radius: 20px;
+          font-size: 0.85rem;
+          font-weight: 600;
+          color: #22c55e;
+          margin-bottom: 2rem;
+      }
+      
+      .live-dot {
+          width: 8px;
+          height: 8px;
+          background: #22c55e;
+          border-radius: 50%;
+          animation: pulse 2s infinite;
+      }
+      
+      /* Projects Gallery */
       .projects-grid {
           max-width: 1400px;
           margin: 0 auto;
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+          grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
           gap: 2rem;
-          margin-top: 4rem;
       }
       
       .project-card {
@@ -905,6 +969,8 @@
           .footer-main { grid-template-columns: 1fr; }
           .footer-bottom-content { flex-direction: column; text-align: center; }
           .services-grid { grid-template-columns: 1fr; }
+          .news-grid { grid-template-columns: 1fr; }
+          .tab-nav { flex-direction: column; }
       }
   </style>
 </head>
@@ -928,17 +994,17 @@
           <div class="top-bar-left">
               <a href="mailto:info@kavianmine.com" class="top-bar-item">
                   <i class="fas fa-envelope"></i>
-                  <span data-en="info@kavianmine.com" data-fa="info@kavianmine.com">info@kavianmine.com</span>
+                  <span>info@kavianmine.com</span>
               </a>
               <a href="tel:+982112345678" class="top-bar-item">
                   <i class="fas fa-phone"></i>
-                  <span data-en="+98 (21) 1234-5678" data-fa="۰۲۱-۱۲۳۴-۵۶۷۸">+98 (21) 1234-5678</span>
+                  <span>+98 (21) 1234-5678</span>
               </a>
           </div>
           <div class="top-bar-right">
-              <a href="https://linkedin.com" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-              <a href="https://twitter.com" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-              <a href="https://youtube.com" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+              <a href="https://linkedin.com" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+              <a href="https://twitter.com" class="social-icon"><i class="fab fa-twitter"></i></a>
+              <a href="https://youtube.com" class="social-icon"><i class="fab fa-youtube"></i></a>
               <div class="language-switcher-top">
                   <button class="lang-btn-top active" data-lang="en">EN</button>
                   <button class="lang-btn-top" data-lang="fa">فا</button>
@@ -962,34 +1028,10 @@
                       <span data-en="Home" data-fa="خانه">Home</span>
                   </a>
               </li>
-              <li class="nav-item dropdown">
+              <li class="nav-item">
                   <a href="services.html" class="nav-link">
                       <span data-en="Services" data-fa="خدمات">Services</span>
-                      <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i>
                   </a>
-                  <div class="dropdown-menu">
-                      <a href="services.html#equipment" class="dropdown-item">
-                          <div class="dropdown-icon"><i class="fas fa-cogs"></i></div>
-                          <div class="dropdown-content">
-                              <h4 data-en="Equipment Optimization" data-fa="بهینه‌سازی تجهیزات">Equipment Optimization</h4>
-                              <p data-en="Fleet analysis & selection" data-fa="تحلیل و انتخاب ناوگان">Fleet analysis & selection</p>
-                          </div>
-                      </a>
-                      <a href="services.html#cost" class="dropdown-item">
-                          <div class="dropdown-icon"><i class="fas fa-calculator"></i></div>
-                          <div class="dropdown-content">
-                              <h4 data-en="Cost Estimation" data-fa="برآورد هزینه">Cost Estimation</h4>
-                              <p data-en="AACE-compliant analysis" data-fa="تحلیل مطابق با AACE">AACE-compliant analysis</p>
-                          </div>
-                      </a>
-                      <a href="services.html#procurement" class="dropdown-item">
-                          <div class="dropdown-icon"><i class="fas fa-globe"></i></div>
-                          <div class="dropdown-content">
-                              <h4 data-en="Procurement" data-fa="تامین">Procurement</h4>
-                              <p data-en="International sourcing" data-fa="تامین بین‌المللی">International sourcing</p>
-                          </div>
-                      </a>
-                  </div>
               </li>
               <li class="nav-item">
                   <a href="case-studies.html" class="nav-link">
@@ -1046,9 +1088,9 @@
                   <i class="fas fa-calculator"></i>
                   <span data-en="Request Cost Estimate" data-fa="درخواست برآورد هزینه">Request Cost Estimate</span>
               </a>
-              <a href="services.html" class="btn btn-secondary">
+              <a href="#tab-section" class="btn btn-secondary">
                   <i class="fas fa-book-open"></i>
-                  <span data-en="View Services" data-fa="مشاهده خدمات">View Services</span>
+                  <span data-en="Explore More" data-fa="کشف بیشتر">Explore More</span>
               </a>
           </div>
           
@@ -1073,110 +1115,137 @@
       </div>
   </section>
 
-  <!-- Services Showcase -->
-  <section class="services-showcase">
+  <!-- Tab Section -->
+  <section class="tab-section" id="tab-section">
       <div class="section-header">
-          <span class="section-badge" data-en="Core Services" data-fa="خدمات اصلی">Core Services</span>
+          <span class="section-badge" data-en="Explore" data-fa="کاوش">Explore</span>
           <h2 class="section-title">
-              <span data-en="Comprehensive Mining" data-fa="راه‌حل‌های جامع">Comprehensive Mining</span><br>
-              <span class="gradient-text" data-en="Consultancy Services" data-fa="مشاوره معدنی">Consultancy Services</span>
+              <span data-en="Discover Our" data-fa="کشف">Discover Our</span><br>
+              <span class="gradient-text" data-en="Services, Projects & News" data-fa="خدمات، پروژه‌ها و اخبار">Services, Projects & News</span>
           </h2>
-          <p class="section-description" data-en="End-to-end solutions for mining operations worldwide, backed by 50+ years of combined expertise and cutting-edge technology." data-fa="راه‌حل‌های کامل برای عملیات معدنی در سراسر جهان، با پشتوانه بیش از 50 سال تجربه ترکیبی و فناوری پیشرفته.">
-              End-to-end solutions for mining operations worldwide, backed by 50+ years of combined expertise and cutting-edge technology.
+          <p class="section-description" data-en="Comprehensive solutions, proven results, and real-time industry updates all in one place." data-fa="راه‌حل‌های جامع، نتایج اثبات شده و به‌روزرسانی‌های لحظه‌ای صنعت همه در یک مکان.">
+              Comprehensive solutions, proven results, and real-time industry updates all in one place.
           </p>
       </div>
       
-      <div class="services-grid">
-          <div class="service-card">
-              <div class="service-icon">
-                  <i class="fas fa-cogs"></i>
-              </div>
-              <h3 class="service-title" data-en="Equipment Optimization" data-fa="بهینه‌سازی تجهیزات">Equipment Optimization</h3>
-              <p class="service-description" data-en="Advanced equipment selection using AI-powered lifecycle cost analysis for crushing, grinding, hauling, and processing equipment." data-fa="انتخاب پیشرفته تجهیزات با استفاده از تحلیل هزینه چرخه عمر مبتنی بر هوش مصنوعی برای تجهیزات خردایش، آسیاب، حمل و فرآوری.">
-                  Advanced equipment selection using AI-powered lifecycle cost analysis for crushing, grinding, hauling, and processing equipment.
-              </p>
-          </div>
-          
-          <div class="service-card">
-              <div class="service-icon">
-                  <i class="fas fa-calculator"></i>
-              </div>
-              <h3 class="service-title" data-en="Cost Estimation" data-fa="برآورد هزینه">Cost Estimation</h3>
-              <p class="service-description" data-en="Comprehensive CAPEX/OPEX estimation following AACE International standards (Class 1-5) with real-time equipment pricing database." data-fa="برآورد جامع CAPEX/OPEX مطابق با استانداردهای بین‌المللی AACE (کلاس 1-5) با پایگاه داده قیمت‌گذاری لحظه‌ای تجهیزات.">
-                  Comprehensive CAPEX/OPEX estimation following AACE International standards (Class 1-5) with real-time equipment pricing database.
-              </p>
-          </div>
-          
-          <div class="service-card">
-              <div class="service-icon">
-                  <i class="fas fa-globe"></i>
-              </div>
-              <h3 class="service-title" data-en="International Procurement" data-fa="تامین بین‌المللی">International Procurement</h3>
-              <p class="service-description" data-en="Global sourcing from verified manufacturers across USA, Europe, China, and Australia. Complete procurement management from RFQ to delivery." data-fa="تامین جهانی از تولیدکنندگان معتبر در آمریکا، اروپا، چین و استرالیا. مدیریت کامل تامین از RFQ تا تحویل.">
-                  Global sourcing from verified manufacturers across USA, Europe, China, and Australia. Complete procurement management from RFQ to delivery.
-              </p>
-          </div>
-          
-          <div class="service-card">
-              <div class="service-icon">
-                  <i class="fas fa-industry"></i>
-              </div>
-              <h3 class="service-title" data-en="Plant Engineering" data-fa="مهندسی کارخانه">Plant Engineering</h3>
-              <p class="service-description" data-en="Complete plant design from crushing circuits to tailings management. Process optimization for existing operations to maximize throughput and recovery." data-fa="طراحی کامل کارخانه از مدارهای خردایش تا مدیریت باطله. بهینه‌سازی فرآیند برای عملیات موجود جهت حداکثر توان عملیاتی و بازیابی.">
-                  Complete plant design from crushing circuits to tailings management. Process optimization for existing operations to maximize throughput and recovery.
-              </p>
-          </div>
-      </div>
-  </section>
-
-  <!-- Projects Gallery -->
-  <section class="projects-gallery">
-      <div class="section-header">
-          <span class="section-badge" data-en="Success Stories" data-fa="داستان‌های موفقیت">Success Stories</span>
-          <h2 class="section-title">
-              <span data-en="Recent Projects &" data-fa="پروژه‌های اخیر و">Recent Projects &</span><br>
-              <span class="gradient-text" data-en="Proven Results" data-fa="نتایج اثبات شده">Proven Results</span>
-          </h2>
-          <p class="section-description" data-en="Real-world case studies demonstrating measurable cost savings and operational improvements across diverse mining operations." data-fa="مطالعات موردی واقعی نشان‌دهنده صرفه‌جویی قابل اندازه‌گیری در هزینه و بهبودهای عملیاتی در عملیات معدنی متنوع.">
-              Real-world case studies demonstrating measurable cost savings and operational improvements across diverse mining operations.
-          </p>
+      <!-- Tab Navigation -->
+      <div class="tab-nav">
+          <button class="tab-btn active" data-tab="services">
+              <i class="fas fa-cogs"></i>
+              <span data-en="Services" data-fa="خدمات">Services</span>
+          </button>
+          <button class="tab-btn" data-tab="projects">
+              <i class="fas fa-chart-bar"></i>
+              <span data-en="Projects" data-fa="پروژه‌ها">Projects</span>
+          </button>
+          <button class="tab-btn" data-tab="news">
+              <i class="fas fa-newspaper"></i>
+              <span data-en="Industry News" data-fa="اخبار صنعت">Industry News</span>
+          </button>
       </div>
       
-      <div class="projects-grid">
-          <div class="project-card">
-              <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1581092918484-8313e1f7e8c6?w=800&q=80');">
-                  <div class="project-badge" data-en="Copper Mine - Chile" data-fa="معدن مس - شیلی">Copper Mine - Chile</div>
+      <!-- Services Tab Content -->
+      <div class="tab-content active" id="services-tab">
+          <div class="services-grid">
+              <div class="service-card">
+                  <div class="service-icon">
+                      <i class="fas fa-cogs"></i>
+                  </div>
+                  <h3 class="service-title" data-en="Equipment Optimization" data-fa="بهینه‌سازی تجهیزات">Equipment Optimization</h3>
+                  <p class="service-description" data-en="Advanced equipment selection using AI-powered lifecycle cost analysis for crushing, grinding, hauling, and processing equipment." data-fa="انتخاب پیشرفته تجهیزات با استفاده از تحلیل هزینه چرخه عمر مبتنی بر هوش مصنوعی برای تجهیزات خردایش، آسیاب، حمل و فرآوری.">
+                      Advanced equipment selection using AI-powered lifecycle cost analysis for crushing, grinding, hauling, and processing equipment.
+                  </p>
               </div>
-              <div class="project-content">
-                  <h3 class="project-title" data-en="Fleet Optimization Project" data-fa="پروژه بهینه‌سازی ناوگان">Fleet Optimization Project</h3>
-                  <p class="project-description" data-en="Comprehensive haul truck fleet analysis and replacement strategy for 45-unit fleet. Implemented predictive maintenance program and standardized equipment platform." data-fa="تحلیل جامع ناوگان کامیون حمل و استراتژی جایگزینی برای ناوگان 45 واحدی. برنامه نگهداری پیش‌بینی و پلتفرم تجهیزات استاندارد شده اجرا شد.">
-                      Comprehensive haul truck fleet analysis and replacement strategy for 45-unit fleet. Implemented predictive maintenance program and standardized equipment platform.
+              
+              <div class="service-card">
+                  <div class="service-icon">
+                      <i class="fas fa-calculator"></i>
+                  </div>
+                  <h3 class="service-title" data-en="Cost Estimation" data-fa="برآورد هزینه">Cost Estimation</h3>
+                  <p class="service-description" data-en="Comprehensive CAPEX/OPEX estimation following AACE International standards (Class 1-5) with real-time equipment pricing database." data-fa="برآورد جامع CAPEX/OPEX مطابق با استانداردهای بین‌المللی AACE (کلاس 1-5) با پایگاه داده قیمت‌گذاری لحظه‌ای تجهیزات.">
+                      Comprehensive CAPEX/OPEX estimation following AACE International standards (Class 1-5) with real-time equipment pricing database.
+                  </p>
+              </div>
+              
+              <div class="service-card">
+                  <div class="service-icon">
+                      <i class="fas fa-globe"></i>
+                  </div>
+                  <h3 class="service-title" data-en="International Procurement" data-fa="تامین بین‌المللی">International Procurement</h3>
+                  <p class="service-description" data-en="Global sourcing from verified manufacturers across USA, Europe, China, and Australia. Complete procurement management from RFQ to delivery." data-fa="تامین جهانی از تولیدکنندگان معتبر در آمریکا، اروپا، چین و استرالیا. مدیریت کامل تامین از RFQ تا تحویل.">
+                      Global sourcing from verified manufacturers across USA, Europe, China, and Australia. Complete procurement management from RFQ to delivery.
+                  </p>
+              </div>
+              
+              <div class="service-card">
+                  <div class="service-icon">
+                      <i class="fas fa-industry"></i>
+                  </div>
+                  <h3 class="service-title" data-en="Plant Engineering" data-fa="مهندسی کارخانه">Plant Engineering</h3>
+                  <p class="service-description" data-en="Complete plant design from crushing circuits to tailings management. Process optimization for existing operations to maximize throughput and recovery." data-fa="طراحی کامل کارخانه از مدارهای خردایش تا مدیریت باطله. بهینه‌سازی فرآیند برای عملیات موجود جهت حداکثر توان عملیاتی و بازیابی.">
+                      Complete plant design from crushing circuits to tailings management. Process optimization for existing operations to maximize throughput and recovery.
                   </p>
               </div>
           </div>
-          
-          <div class="project-card">
-              <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=800&q=80');">
-                  <div class="project-badge" data-en="Gold Project - Australia" data-fa="پروژه طلا - استرالیا">Gold Project - Australia</div>
+      </div>
+      
+      <!-- Projects Tab Content -->
+      <div class="tab-content" id="projects-tab">
+          <div class="projects-grid">
+              <div class="project-card">
+                  <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1581092918484-8313e1f7e8c6?w=800&q=80');">
+                      <div class="project-badge" data-en="Copper Mine - Chile" data-fa="معدن مس - شیلی">Copper Mine - Chile</div>
+                  </div>
+                  <div class="project-content">
+                      <h3 class="project-title" data-en="Fleet Optimization Project" data-fa="پروژه بهینه‌سازی ناوگان">Fleet Optimization Project</h3>
+                      <p class="project-description" data-en="Comprehensive haul truck fleet analysis and replacement strategy for 45-unit fleet. Implemented predictive maintenance program and standardized equipment platform." data-fa="تحلیل جامع ناوگان کامیون حمل و استراتژی جایگزینی برای ناوگان 45 واحدی. برنامه نگهداری پیش‌بینی و پلتفرم تجهیزات استاندارد شده اجرا شد.">
+                          Comprehensive haul truck fleet analysis and replacement strategy for 45-unit fleet. Implemented predictive maintenance program and standardized equipment platform.
+                      </p>
+                  </div>
               </div>
-              <div class="project-content">
-                  <h3 class="project-title" data-en="Feasibility Study" data-fa="مطالعه امکان‌سنجی">Feasibility Study</h3>
-                  <p class="project-description" data-en="AACE Class 2 feasibility study for 2.5 Mtpa gold processing plant. Detailed equipment selection, CAPEX/OPEX estimation, and NPV analysis for project financing." data-fa="مطالعه امکان‌سنجی کلاس 2 AACE برای کارخانه فرآوری طلا با ظرفیت 2.5 میلیون تن در سال. انتخاب دقیق تجهیزات، برآورد CAPEX/OPEX و تحلیل NPV برای تامین مالی پروژه.">
-                      AACE Class 2 feasibility study for 2.5 Mtpa gold processing plant. Detailed equipment selection, CAPEX/OPEX estimation, and NPV analysis for project financing.
-                  </p>
+              
+              <div class="project-card">
+                  <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=800&q=80');">
+                      <div class="project-badge" data-en="Gold Project - Australia" data-fa="پروژه طلا - استرالیا">Gold Project - Australia</div>
+                  </div>
+                  <div class="project-content">
+                      <h3 class="project-title" data-en="Feasibility Study" data-fa="مطالعه امکان‌سنجی">Feasibility Study</h3>
+                      <p class="project-description" data-en="AACE Class 2 feasibility study for 2.5 Mtpa gold processing plant. Detailed equipment selection, CAPEX/OPEX estimation, and NPV analysis for project financing." data-fa="مطالعه امکان‌سنجی کلاس 2 AACE برای کارخانه فرآوری طلا با ظرفیت 2.5 میلیون تن در سال. انتخاب دقیق تجهیزات، برآورد CAPEX/OPEX و تحلیل NPV برای تامین مالی پروژه.">
+                          AACE Class 2 feasibility study for 2.5 Mtpa gold processing plant. Detailed equipment selection, CAPEX/OPEX estimation, and NPV analysis for project financing.
+                      </p>
+                  </div>
+              </div>
+              
+              <div class="project-card">
+                  <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&q=80');">
+                      <div class="project-badge" data-en="Iron Ore - Brazil" data-fa="سنگ آهن - برزیل">Iron Ore - Brazil</div>
+                  </div>
+                  <div class="project-content">
+                      <h3 class="project-title" data-en="Equipment Procurement" data-fa="تامین تجهیزات">Equipment Procurement</h3>
+                      <p class="project-description" data-en="International procurement of primary gyratory crusher and secondary cone crushers. Competitive bidding process with 5 global manufacturers, technical evaluation, and logistics management." data-fa="تامین بین‌المللی سنگ‌شکن ژیراتوری اولیه و سنگ‌شکن‌های مخروطی ثانویه. فرآیند مناقصه رقابتی با 5 تولیدکننده جهانی، ارزیابی فنی و مدیریت لجستیک.">
+                          International procurement of primary gyratory crusher and secondary cone crushers. Competitive bidding process with 5 global manufacturers, technical evaluation, and logistics management.
+                      </p>
+                  </div>
               </div>
           </div>
+      </div>
+      
+      <!-- News Tab Content -->
+      <div class="tab-content" id="news-tab">
+          <div class="live-badge-inline">
+              <span class="live-dot"></span>
+              <span data-en="LIVE UPDATES FROM MINING INDUSTRY" data-fa="به‌روزرسانی زنده از صنعت معدن">LIVE UPDATES FROM MINING INDUSTRY</span>
+          </div>
           
-          <div class="project-card">
-              <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&q=80');">
-                  <div class="project-badge" data-en="Iron Ore - Brazil" data-fa="سنگ آهن - برزیل">Iron Ore - Brazil</div>
-              </div>
-              <div class="project-content">
-                  <h3 class="project-title" data-en="Equipment Procurement" data-fa="تامین تجهیزات">Equipment Procurement</h3>
-                  <p class="project-description" data-en="International procurement of primary gyratory crusher and secondary cone crushers. Competitive bidding process with 5 global manufacturers, technical evaluation, and logistics management." data-fa="تامین بین‌المللی سنگ‌شکن ژیراتوری اولیه و سنگ‌شکن‌های مخروطی ثانویه. فرآیند مناقصه رقابتی با 5 تولیدکننده جهانی، ارزیابی فنی و مدیریت لجستیک.">
-                      International procurement of primary gyratory crusher and secondary cone crushers. Competitive bidding process with 5 global manufacturers, technical evaluation, and logistics management.
-                  </p>
-              </div>
+          <div class="news-grid" id="newsGrid">
+              <!-- News will be loaded here -->
+          </div>
+          
+          <div style="text-align: center; margin-top: 3rem;">
+              <a href="news.html" class="btn btn-primary">
+                  <i class="fas fa-newspaper"></i>
+                  <span data-en="View All News" data-fa="مشاهده تمام اخبار">View All News</span>
+              </a>
           </div>
       </div>
   </section>
@@ -1193,10 +1262,10 @@
                   Leading mining consultancy specializing in AACE-compliant cost estimation, equipment optimization, and international procurement. Serving mining operations across 25+ countries.
               </p>
               <div class="footer-social">
-                  <a href="#" class="footer-social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                  <a href="#" class="footer-social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                  <a href="#" class="footer-social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                  <a href="#" class="footer-social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                  <a href="#" class="footer-social-link"><i class="fab fa-linkedin-in"></i></a>
+                  <a href="#" class="footer-social-link"><i class="fab fa-twitter"></i></a>
+                  <a href="#" class="footer-social-link"><i class="fab fa-youtube"></i></a>
+                  <a href="#" class="footer-social-link"><i class="fab fa-instagram"></i></a>
               </div>
           </div>
           
@@ -1244,23 +1313,24 @@
               </ul>
           </div>
       </div>
-      
-      <div class="footer-bottom">
-          <div class="footer-bottom-content">
-              <p class="footer-copyright" data-en="© 2024 Kavian Development Mine. All rights reserved." data-fa="© 2024 کاویان توسعه معدن. تمامی حقوق محفوظ است.">
-                  © 2024 Kavian Development Mine. All rights reserved.
-              </p>
-              <ul class="footer-bottom-links">
-                  <li><a href="privacy-policy.html" data-en="Privacy Policy" data-fa="حریم خصوصی">Privacy Policy</a></li>
-                  <li><a href="terms-of-service.html" data-en="Terms of Service" data-fa="شرایط خدمات">Terms of Service</a></li>
-                  <li><a href="sitemap.xml" data-en="Sitemap" data-fa="نقشه سایت">Sitemap</a></li>
+           <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <p class="footer-copyright" data-en="© 2024 Kavian Development Mine. All rights reserved." data-fa="© 2024 کاویان توسعه معدن. تمامی حقوق محفوظ است.">
+                    © 2024 Kavian Development Mine. All rights reserved.
+                </p>
+                <ul class="footer-bottom-links">
+                    <li><a href="privacy-policy.html" data-en="Privacy Policy" data-fa="حریم خصوصی">Privacy Policy</a></li>
+                    <li><a href="terms-of-service.html" data-en="Terms of Service" data-fa="شرایط خدمات">Terms of Service</a></li>
+                    <li><a href="sitemap.xml" data-en="Sitemap" data-fa="نقشه سایت">Sitemap</a></li>
                 </ul>
             </div>
         </div>
     </footer>
 
     <script>
-        // Language Switcher with Full Bilingual Support
+        // ==========================================
+        // BILINGUAL LANGUAGE SWITCHER
+        // ==========================================
         let currentLang = 'en';
         const langButtons = document.querySelectorAll('.lang-btn-top');
         
@@ -1279,19 +1349,7 @@
                 document.querySelectorAll('[data-en]').forEach(el => {
                     const text = el.getAttribute(`data-${currentLang}`);
                     if (text) {
-                        // Preserve HTML structure for elements with child elements
-                        if (el.children.length > 0 && !el.querySelector('[data-en]')) {
-                            el.textContent = text;
-                        } else if (el.innerHTML.includes('<')) {
-                            // For elements with HTML tags, preserve structure
-                            const tempDiv = document.createElement('div');
-                            tempDiv.innerHTML = text;
-                            if (tempDiv.children.length === 0) {
-                                el.textContent = text;
-                            }
-                        } else {
-                            el.textContent = text;
-                        }
+                        el.textContent = text;
                     }
                 });
                 
@@ -1311,7 +1369,138 @@
             }
         });
         
-        // Header Scroll Effect
+        // ==========================================
+        // TAB SWITCHING SYSTEM
+        // ==========================================
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all tabs
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                btn.classList.add('active');
+                const targetTab = document.getElementById(`${btn.dataset.tab}-tab`);
+                if (targetTab) {
+                    targetTab.classList.add('active');
+                }
+                
+                // Load news when news tab is clicked
+                if (btn.dataset.tab === 'news') {
+                    setTimeout(renderNews, 100);
+                }
+            });
+        });
+        
+        // ==========================================
+        // NEWS DATA WITH REAL IMAGES
+        // ==========================================
+        const newsData = [
+            {
+                title: "Caterpillar 797F Mining Truck Breaks Production Records",
+                titleFa: "کامیون معدنی کاترپیلار 797F رکورد تولید را شکست",
+                excerpt: "Latest haul truck achieves unprecedented 15% fuel efficiency improvement in Chilean copper mine operations.",
+                excerptFa: "جدیدترین کامیون حمل 15٪ بهبود کارایی سوخت بی‌سابقه در عملیات معدن مس شیلی به دست آورد.",
+                source: "Mining.com",
+                date: "2 hours ago",
+                dateFa: "2 ساعت پیش",
+                image: "https://images.unsplash.com/photo-1581092918484-8313e1f7e8c6?w=600&q=80"
+            },
+            {
+                title: "Gold Prices Surge to Record High Amid Economic Uncertainty",
+                titleFa: "قیمت طلا در میان عدم اطمینان اقتصادی به بالاترین حد رسید",
+                excerpt: "Gold reaches $2,100 per ounce as investors seek safe haven assets, driving increased exploration activity worldwide.",
+                excerptFa: "طلا به 2100 دلار در هر اونس رسید زیرا سرمایه‌گذاران به دنبال دارایی‌های امن هستند و فعالیت اکتشاف در سراسر جهان را افزایش می‌دهد.",
+                source: "Reuters",
+                date: "4 hours ago",
+                dateFa: "4 ساعت پیش",
+                image: "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=600&q=80"
+            },
+            {
+                title: "Rio Tinto Announces $5 Billion Copper Project in Mongolia",
+                titleFa: "ریو تینتو پروژه 5 میلیارد دلاری مس در مغولستان را اعلام کرد",
+                excerpt: "Major mining company commits to largest copper development project in Asia, expected to produce 500,000 tonnes annually.",
+                excerptFa: "شرکت بزرگ معدنی به بزرگترین پروژه توسعه مس در آسیا متعهد شد که انتظار می‌رود سالانه 500000 تن تولید کند.",
+                source: "Mining Weekly",
+                date: "6 hours ago",
+                dateFa: "6 ساعت پیش",
+                image: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=600&q=80"
+            },
+            {
+                title: "AI-Powered Drilling Technology Reduces Costs by 30%",
+                titleFa: "فناوری حفاری مبتنی بر هوش مصنوعی هزینه‌ها را 30٪ کاهش می‌دهد",
+                excerpt: "New autonomous drilling systems using artificial intelligence show remarkable cost savings in Australian iron ore operations.",
+                excerptFa: "سیستم‌های حفاری خودکار جدید با استفاده از هوش مصنوعی صرفه‌جویی قابل توجهی در هزینه در عملیات سنگ آهن استرالیا نشان می‌دهند.",
+                source: "Mining Technology",
+                date: "8 hours ago",
+                dateFa: "8 ساعت پیش",
+                image: "https://images.unsplash.com/photo-1581092918484-8313e1f7e8c6?w=600&q=80"
+            },
+            {
+                title: "Komatsu Unveils Zero-Emission Mining Equipment Fleet",
+                titleFa: "کوماتسو ناوگان تجهیزات معدنی بدون انتشار را رونمایی کرد",
+                excerpt: "Japanese manufacturer launches fully electric mining equipment line, targeting carbon-neutral operations by 2030.",
+                excerptFa: "تولیدکننده ژاپنی خط تجهیزات معدنی کاملاً الکتریکی را راه‌اندازی کرد و هدف عملیات خنثی کربن تا سال 2030 است.",
+                source: "Mining.com",
+                date: "12 hours ago",
+                dateFa: "12 ساعت پیش",
+                image: "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=600&q=80"
+            },
+            {
+                title: "Lithium Demand Soars as Electric Vehicle Market Expands",
+                titleFa: "تقاضا برای لیتیوم با گسترش بازار خودروهای برقی افزایش می‌یابد",
+                excerpt: "Electric vehicle boom drives lithium prices up 200%, spurring new mining projects across South America and Australia.",
+                excerptFa: "رونق خودروهای برقی قیمت لیتیوم را 200٪ افزایش می‌دهد و پروژه‌های معدنی جدید در آمریکای جنوبی و استرالیا را تحریک می‌کند.",
+                source: "Reuters",
+                date: "1 day ago",
+                dateFa: "1 روز پیش",
+                image: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=600&q=80"
+            }
+        ];
+        
+        // ==========================================
+        // RENDER NEWS FUNCTION
+        // ==========================================
+        function renderNews() {
+            const newsGrid = document.getElementById('newsGrid');
+            if (!newsGrid) return;
+            
+            newsGrid.innerHTML = '';
+            
+            newsData.forEach((news, index) => {
+                const card = document.createElement('div');
+                card.className = 'news-card';
+                card.style.animationDelay = `${index * 0.1}s`;
+                
+                card.innerHTML = `
+                    <img src="${news.image}" alt="${news.title}" class="news-image" loading="lazy">
+                    <div class="news-content">
+                        <div class="news-meta">
+                            <span class="news-source">
+                                <i class="fas fa-globe"></i>
+                                ${news.source}
+                            </span>
+                            <span class="news-date" data-en="${news.date}" data-fa="${news.dateFa}">${currentLang === 'fa' ? news.dateFa : news.date}</span>
+                        </div>
+                        <h3 class="news-title" data-en="${news.title}" data-fa="${news.titleFa}">${currentLang === 'fa' ? news.titleFa : news.title}</h3>
+                        <p class="news-excerpt" data-en="${news.excerpt}" data-fa="${news.excerptFa}">${currentLang === 'fa' ? news.excerptFa : news.excerpt}</p>
+                        <a href="news.html" class="read-more">
+                            <span data-en="Read More" data-fa="ادامه مطلب">${currentLang === 'fa' ? 'ادامه مطلب' : 'Read More'}</span>
+                            <i class="fas fa-arrow-${currentLang === 'fa' ? 'left' : 'right'}"></i>
+                        </a>
+                    </div>
+                `;
+                
+                newsGrid.appendChild(card);
+            });
+        }
+        
+        // ==========================================
+        // HEADER SCROLL EFFECT
+        // ==========================================
         const header = document.getElementById('header');
         let lastScroll = 0;
         
@@ -1327,7 +1516,9 @@
             lastScroll = currentScroll;
         });
         
-        // Smooth Scroll for Anchor Links
+        // ==========================================
+        // SMOOTH SCROLL FOR ANCHOR LINKS
+        // ==========================================
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 const href = this.getAttribute('href');
@@ -1347,34 +1538,72 @@
             });
         });
         
-        // Intersection Observer for Fade-in Animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
+        // ==========================================
+        // SEARCH BUTTON FUNCTIONALITY
+        // ==========================================
+        const searchBtn = document.querySelector('.search-btn');
+        if (searchBtn) {
+            searchBtn.addEventListener('click', () => {
+                const searchOverlay = document.createElement('div');
+                searchOverlay.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: rgba(2, 6, 23, 0.98);
+                    backdrop-filter: blur(20px);
+                    z-index: 9999;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 2rem;
+                    animation: fadeIn 0.3s ease;
+                `;
+                
+                searchOverlay.innerHTML = `
+                    <div style="max-width: 600px; width: 100%; position: relative;">
+                        <input type="text" placeholder="${currentLang === 'en' ? 'Search...' : 'جستجو...'}" 
+                            style="width: 100%; padding: 1.5rem 4rem 1.5rem 2rem; font-size: 1.2rem; 
+                            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); 
+                            border-radius: 50px; color: white; outline: none; font-family: ${currentLang === 'fa' ? 'Vazirmatn' : 'Inter'}, sans-serif;">
+                        <button style="position: absolute; ${currentLang === 'fa' ? 'left' : 'right'}: 1rem; top: 50%; transform: translateY(-50%); 
+                            background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer;">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `;
+                
+                document.body.appendChild(searchOverlay);
+                searchOverlay.querySelector('input').focus();
+                
+                searchOverlay.querySelector('button').addEventListener('click', () => {
+                    searchOverlay.remove();
+                });
+                
+                searchOverlay.addEventListener('click', (e) => {
+                    if (e.target === searchOverlay) {
+                        searchOverlay.remove();
+                    }
+                });
+                
+                // Close on ESC key
+                document.addEventListener('keydown', function escHandler(e) {
+                    if (e.key === 'Escape') {
+                        searchOverlay.remove();
+                        document.removeEventListener('keydown', escHandler);
+                    }
+                });
             });
-        }, observerOptions);
+        }
         
-        // Observe all service cards and project cards
-        document.querySelectorAll('.service-card, .project-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
-        });
-        
-        // Mobile Menu Toggle
+        // ==========================================
+        // MOBILE MENU TOGGLE
+        // ==========================================
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const navCenter = document.querySelector('.nav-center');
         
-        if (mobileMenuBtn) {
+        if (mobileMenuBtn && navCenter) {
             mobileMenuBtn.addEventListener('click', () => {
                 navCenter.classList.toggle('active');
                 
@@ -1407,56 +1636,9 @@
             });
         }
         
-        // Search Button Functionality
-        const searchBtn = document.querySelector('.search-btn');
-        if (searchBtn) {
-            searchBtn.addEventListener('click', () => {
-                // Create search overlay
-                const searchOverlay = document.createElement('div');
-                searchOverlay.style.cssText = `
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    background: rgba(2, 6, 23, 0.98);
-                    backdrop-filter: blur(20px);
-                    z-index: 9999;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    padding: 2rem;
-                `;
-                
-                searchOverlay.innerHTML = `
-                    <div style="max-width: 600px; width: 100%; position: relative;">
-                        <input type="text" placeholder="${currentLang === 'en' ? 'Search...' : 'جستجو...'}" 
-                            style="width: 100%; padding: 1.5rem 4rem 1.5rem 2rem; font-size: 1.2rem; 
-                            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); 
-                            border-radius: 50px; color: white; outline: none;">
-                        <button style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); 
-                            background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer;">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                `;
-                
-                document.body.appendChild(searchOverlay);
-                searchOverlay.querySelector('input').focus();
-                
-                searchOverlay.querySelector('button').addEventListener('click', () => {
-                    searchOverlay.remove();
-                });
-                
-                searchOverlay.addEventListener('click', (e) => {
-                    if (e.target === searchOverlay) {
-                        searchOverlay.remove();
-                    }
-                });
-            });
-        }
-        
-        // Animated Counter for Stats
+        // ==========================================
+        // ANIMATED COUNTER FOR STATS
+        // ==========================================
         const animateCounter = (element, target, duration = 2000) => {
             const start = 0;
             const increment = target / (duration / 16);
@@ -1500,7 +1682,34 @@
             statsObserver.observe(heroStats);
         }
         
-        // Parallax Effect for Hero Background
+        // ==========================================
+        // INTERSECTION OBSERVER FOR ANIMATIONS
+        // ==========================================
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all service cards and project cards
+        document.querySelectorAll('.service-card, .project-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+        
+        // ==========================================
+        // PARALLAX EFFECT FOR HERO BACKGROUND
+        // ==========================================
         window.addEventListener('scroll', () => {
             const heroBackground = document.querySelector('.hero-background');
             if (heroBackground) {
@@ -1509,18 +1718,9 @@
             }
         });
         
-        // Add hover effect to social icons
-        document.querySelectorAll('.social-icon, .footer-social-link').forEach(icon => {
-            icon.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-3px) scale(1.1)';
-            });
-            
-            icon.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
-        
-        // Lazy Loading for Images
+        // ==========================================
+        // LAZY LOADING FOR IMAGES
+        // ==========================================
         if ('IntersectionObserver' in window) {
             const imageObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -1540,7 +1740,9 @@
             });
         }
         
-        // Add active state to current page in navigation
+        // ==========================================
+        // ADD ACTIVE STATE TO CURRENT PAGE
+        // ==========================================
         const currentPage = window.location.pathname.split('/').pop() || 'index.html';
         document.querySelectorAll('.nav-link').forEach(link => {
             if (link.getAttribute('href') === currentPage) {
@@ -1548,12 +1750,15 @@
             }
         });
         
-        // Preload critical resources
+        // ==========================================
+        // PRELOAD CRITICAL RESOURCES
+        // ==========================================
         const preloadResources = () => {
             const links = [
                 { href: 'services.html', as: 'document' },
                 { href: 'contact.html', as: 'document' },
-                { href: 'case-studies.html', as: 'document' }
+                { href: 'case-studies.html', as: 'document' },
+                { href: 'news.html', as: 'document' }
             ];
             
             links.forEach(resource => {
@@ -1570,7 +1775,9 @@
             setTimeout(preloadResources, 2000);
         });
         
-        // Add loading animation
+        // ==========================================
+        // PAGE LOAD ANIMATION
+        // ==========================================
         window.addEventListener('load', () => {
             document.body.style.opacity = '0';
             setTimeout(() => {
@@ -1579,10 +1786,15 @@
             }, 100);
         });
         
-        // Console message for developers
+        // ==========================================
+        // CONSOLE MESSAGE FOR DEVELOPERS
+        // ==========================================
         console.log('%c🏔️ Kavian Development Mine', 'font-size: 20px; font-weight: bold; color: #0ea5e9;');
         console.log('%cMining Equipment Optimization & Cost Estimation Experts', 'font-size: 14px; color: #8b5cf6;');
         console.log('%c💼 Interested in joining our team? Visit: kavianmine.com/careers', 'font-size: 12px; color: #10b981;');
+        console.log('%c🌐 Bilingual Support: English & Persian (فارسی)', 'font-size: 12px; color: #f59e0b;');
     </script>
   </body>
   </html>
+   
+      
