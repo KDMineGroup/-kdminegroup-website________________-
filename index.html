@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kavian Development Mine | Mining Equipment Optimization & Cost Estimation Experts</title>
-  <meta name="description" content="Leading mining consultancy with 50+ years combined experience. Specializing in equipment optimization, AACE-compliant cost estimation, international procurement, and plant engineering.">
-  <meta name="keywords" content="mining equipment optimization, AACE cost estimation, mining feasibility studies, equipment procurement, plant engineering, CAPEX OPEX analysis">
+  <title>Kavian Development Mine | AACE-Certified Mining Consultancy & Cost Estimation</title>
+  <meta name="description" content="Professional mining consultancy with 50+ years experience. AACE International certified cost estimation, equipment optimization, feasibility studies, and procurement services for mining operations worldwide.">
   <link rel="canonical" href="https://kavianmine.com/">
   <link rel="icon" type="image/svg+xml" href="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -13,26 +12,29 @@
   
   <style>
       :root {
-          --primary: #0ea5e9;
-          --secondary: #8b5cf6;
-          --accent: #f59e0b;
-          --success: #10b981;
-          --danger: #ef4444;
-          --dark: #0f172a;
-          --darker: #020617;
-          --light: #f8fafc;
-          --gradient-1: linear-gradient(135deg, #0ea5e9 0%, #8b5cf6 100%);
-          --gradient-2: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
-          --gradient-3: linear-gradient(135deg, #10b981 0%, #0ea5e9 100%);
-          --gradient-4: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+          --primary: #1e40af;
+          --primary-light: #3b82f6;
+          --secondary: #0891b2;
+          --accent: #0ea5e9;
+          --success: #059669;
+          --dark: #1e293b;
+          --darker: #0f172a;
+          --white: #ffffff;
+          --gray-50: #f8fafc;
+          --gray-100: #f1f5f9;
+          --gray-200: #e2e8f0;
+          --gray-300: #cbd5e1;
+          --gray-600: #475569;
+          --gray-700: #334155;
+          --gray-800: #1e293b;
       }
       
       * { margin: 0; padding: 0; box-sizing: border-box; }
       
       body { 
           font-family: 'Inter', sans-serif; 
-          background: var(--darker); 
-          color: white; 
+          background: var(--white);
+          color: var(--dark); 
           line-height: 1.6; 
           overflow-x: hidden;
       }
@@ -44,48 +46,16 @@
       
       html { scroll-behavior: smooth; }
       
-      /* Animated Background Particles */
-      .bg-particles {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          z-index: 0;
-          pointer-events: none;
-      }
-      
-      .particle {
-          position: absolute;
-          width: 2px;
-          height: 2px;
-          background: rgba(14, 165, 233, 0.3);
-          border-radius: 50%;
-          animation: float 20s infinite;
-      }
-      
-      @keyframes float {
-          0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
-          10% { opacity: 1; }
-          90% { opacity: 1; }
-          100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
-      }
-      
-      @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-      @keyframes slideIn { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+      @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
       @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-      @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-      @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(30px); }
-          to { opacity: 1; transform: translateY(0); }
-      }
+      @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
       
       /* Top Bar */
       .top-bar {
-          background: rgba(15, 23, 42, 0.98);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-          padding: 0.8rem 0;
-          font-size: 0.85rem;
+          background: var(--primary);
+          color: white;
+          padding: 0.75rem 0;
+          font-size: 0.875rem;
           position: relative;
           z-index: 5000;
       }
@@ -109,21 +79,14 @@
           display: flex;
           align-items: center;
           gap: 0.5rem;
-          color: rgba(255, 255, 255, 0.7);
+          color: rgba(255, 255, 255, 0.9);
           text-decoration: none;
           transition: all 0.3s;
+          font-weight: 500;
       }
       
-      .top-bar-item:hover { 
-          color: #0ea5e9; 
-          transform: translateX(3px);
-      }
-      
-      body.rtl .top-bar-item:hover {
-          transform: translateX(-3px);
-      }
-      
-      .top-bar-item i { color: #0ea5e9; }
+      .top-bar-item:hover { color: white; }
+      .top-bar-item i { color: white; font-size: 0.875rem; }
       
       .top-bar-right {
           display: flex;
@@ -137,60 +100,60 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          background: rgba(255, 255, 255, 0.05);
-          border-radius: 50%;
-          color: rgba(255, 255, 255, 0.7);
+          background: rgba(255, 255, 255, 0.15);
+          border-radius: 6px;
+          color: white;
           transition: all 0.3s;
           text-decoration: none;
+          font-size: 0.875rem;
       }
       
       .social-icon:hover {
-          background: var(--gradient-1);
-          color: white;
-          transform: translateY(-3px) scale(1.1);
+          background: white;
+          color: var(--primary);
+          transform: translateY(-2px);
       }
       
       .language-switcher-top {
           display: flex;
-          gap: 0.3rem;
-          padding: 0.3rem;
-          background: rgba(255, 255, 255, 0.05);
-          border-radius: 20px;
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          gap: 0.25rem;
+          padding: 0.25rem;
+          background: rgba(255, 255, 255, 0.15);
+          border-radius: 6px;
       }
       
       .lang-btn-top {
-          padding: 0.4rem 1rem;
+          padding: 0.375rem 0.875rem;
           border: none;
           background: transparent;
-          color: rgba(255, 255, 255, 0.7);
-          border-radius: 15px;
+          color: rgba(255, 255, 255, 0.9);
+          border-radius: 4px;
           cursor: pointer;
-          font-size: 0.8rem;
+          font-size: 0.8125rem;
           font-weight: 600;
           transition: all 0.3s;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
       }
       
       .lang-btn-top.active {
-          background: var(--gradient-1);
-          color: white;
-          box-shadow: 0 4px 15px rgba(14, 165, 233, 0.4);
+          background: white;
+          color: var(--primary);
       }
       
-      /* Main Header */
+      /* Header */
       header {
           position: sticky;
           top: 0;
           z-index: 4000;
-          background: rgba(2, 6, 23, 0.95);
+          background: rgba(255, 255, 255, 0.98);
           backdrop-filter: blur(20px);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+          border-bottom: 1px solid var(--gray-200);
           transition: all 0.3s;
       }
       
       header.scrolled {
-          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-          background: rgba(2, 6, 23, 0.98);
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
       }
       
       nav {
@@ -205,31 +168,22 @@
       .logo {
           display: flex;
           align-items: center;
-          gap: 15px;
+          gap: 12px;
           text-decoration: none;
-          color: white;
-          font-weight: 800;
-          font-size: 1.5rem;
+          color: var(--dark);
+          font-weight: 700;
+          font-size: 1.25rem;
           transition: all 0.3s;
       }
-      
-      .logo:hover { transform: translateY(-2px); }
       
       .logo img {
-          height: 55px;
-          filter: drop-shadow(0 0 20px rgba(14, 165, 233, 0.6));
-          transition: all 0.3s;
-      }
-      
-      .logo:hover img {
-          filter: drop-shadow(0 0 30px rgba(14, 165, 233, 0.9));
+          height: 50px;
+          filter: drop-shadow(0 2px 8px rgba(30, 64, 175, 0.2));
       }
       
       .logo-text { 
-          background: var(--gradient-1);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
+          color: var(--dark);
+          font-weight: 700;
       }
       
       .nav-center {
@@ -239,29 +193,28 @@
           align-items: center;
       }
       
-      .nav-item { position: relative; }
-      
       .nav-link {
           display: flex;
           align-items: center;
           gap: 0.5rem;
-          padding: 0.8rem 1.5rem;
-          color: rgba(255, 255, 255, 0.8);
+          padding: 0.75rem 1.25rem;
+          color: var(--gray-700);
           text-decoration: none;
           font-weight: 500;
-          font-size: 0.95rem;
+          font-size: 0.9375rem;
           transition: all 0.3s;
-          border-radius: 10px;
+          border-radius: 6px;
       }
       
       .nav-link:hover {
-          color: white;
-          background: rgba(14, 165, 233, 0.1);
+          color: var(--primary);
+          background: var(--gray-50);
       }
       
       .nav-link.active {
-          color: #0ea5e9;
-          background: rgba(14, 165, 233, 0.1);
+          color: var(--primary);
+          background: rgba(30, 64, 175, 0.08);
+          font-weight: 600;
       }
       
       .nav-right {
@@ -270,76 +223,47 @@
           align-items: center;
       }
       
-      .search-btn {
-          width: 45px;
-          height: 45px;
-          background: rgba(255, 255, 255, 0.05);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: rgba(255, 255, 255, 0.7);
-          cursor: pointer;
-          transition: all 0.3s;
-      }
-      
-      .search-btn:hover {
-          background: rgba(14, 165, 233, 0.1);
-          color: #0ea5e9;
-          border-color: rgba(14, 165, 233, 0.3);
-          transform: scale(1.1);
-      }
-      
       .cta-btn {
           display: inline-flex;
           align-items: center;
           gap: 0.5rem;
-          padding: 0.9rem 2rem;
-          background: var(--gradient-1);
+          padding: 0.75rem 1.75rem;
+          background: var(--primary);
           color: white;
           text-decoration: none;
-          border-radius: 50px;
+          border-radius: 6px;
           font-weight: 600;
+          font-size: 0.9375rem;
           transition: all 0.3s;
-          box-shadow: 0 4px 20px rgba(14, 165, 233, 0.3);
+          border: none;
+          cursor: pointer;
       }
       
       .cta-btn:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 8px 30px rgba(14, 165, 233, 0.5);
+          background: var(--primary-light);
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
       }
       
       .mobile-menu-btn {
           display: none;
           background: none;
           border: none;
-          color: white;
+          color: var(--dark);
           font-size: 1.5rem;
           cursor: pointer;
       }
       
       /* Hero Section */
       .hero {
-          min-height: 100vh;
+          min-height: 90vh;
           display: flex;
           align-items: center;
           justify-content: center;
           position: relative;
           overflow: hidden;
-          padding: 8rem 2rem 4rem;
-      }
-      
-      .hero-background {
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: 
-              linear-gradient(135deg, rgba(2, 6, 23, 0.95) 0%, rgba(15, 23, 42, 0.9) 100%),
-              url('https://images.unsplash.com/photo-1581092918484-8313e1f7e8c6?w=1920&q=80') center/cover;
-          z-index: 0;
+          padding: 6rem 2rem 4rem;
+          background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #ffffff 100%);
       }
       
       .hero::before {
@@ -350,19 +274,13 @@
           right: 0;
           bottom: 0;
           background: 
-              radial-gradient(circle at 20% 50%, rgba(14, 165, 233, 0.15) 0%, transparent 50%),
-              radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%);
-          animation: gradientShift 15s ease infinite;
+              radial-gradient(circle at 20% 50%, rgba(30, 64, 175, 0.05) 0%, transparent 50%),
+              radial-gradient(circle at 80% 80%, rgba(14, 165, 233, 0.05) 0%, transparent 50%);
           z-index: 1;
       }
       
-      @keyframes gradientShift {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.8; }
-      }
-      
       .hero-content {
-          max-width: 1400px;
+          max-width: 1200px;
           margin: 0 auto;
           position: relative;
           z-index: 2;
@@ -372,170 +290,214 @@
       .hero-badge {
           display: inline-flex;
           align-items: center;
-          gap: 10px;
-          padding: 10px 24px;
-          background: rgba(14, 165, 233, 0.1);
-          border: 1px solid rgba(14, 165, 233, 0.3);
+          gap: 8px;
+          padding: 8px 20px;
+          background: white;
+          border: 2px solid var(--primary);
           border-radius: 100px;
-          font-size: 0.9rem;
+          font-size: 0.875rem;
           font-weight: 600;
-          color: #0ea5e9;
-          margin-bottom: 2rem;
+          color: var(--primary);
+          margin-bottom: 1.5rem;
           animation: fadeInUp 0.8s ease;
+          box-shadow: 0 4px 12px rgba(30, 64, 175, 0.15);
       }
       
       .hero h1 {
-          font-size: clamp(2.5rem, 6vw, 5rem);
-          font-weight: 900;
-          line-height: 1.1;
+          font-size: clamp(2.25rem, 5vw, 4rem);
+          font-weight: 800;
+          line-height: 1.15;
           margin-bottom: 1.5rem;
           animation: fadeInUp 0.8s ease 0.2s backwards;
+          letter-spacing: -0.02em;
+          color: var(--darker);
       }
       
-      .gradient-text {
-          background: var(--gradient-1);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
+      .hero h1 span {
+          display: block;
+          color: var(--primary);
       }
       
       .hero-subtitle {
-          font-size: clamp(1.1rem, 2vw, 1.4rem);
-          color: rgba(255, 255, 255, 0.8);
-          max-width: 900px;
-          margin: 0 auto 3rem;
-          line-height: 1.8;
+          font-size: clamp(1rem, 2vw, 1.25rem);
+          color: var(--gray-600);
+          max-width: 800px;
+          margin: 0 auto 2.5rem;
+          line-height: 1.7;
           animation: fadeInUp 0.8s ease 0.4s backwards;
+          font-weight: 400;
       }
       
       .hero-buttons {
           display: flex;
-          gap: 1.5rem;
+          gap: 1rem;
           justify-content: center;
           flex-wrap: wrap;
           animation: fadeInUp 0.8s ease 0.6s backwards;
+          margin-bottom: 4rem;
       }
       
       .btn {
           display: inline-flex;
           align-items: center;
-          gap: 10px;
-          padding: 16px 36px;
-          border-radius: 100px;
+          gap: 8px;
+          padding: 14px 32px;
+          border-radius: 6px;
           font-weight: 600;
           font-size: 1rem;
           text-decoration: none;
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          transition: all 0.3s;
           cursor: pointer;
           border: none;
       }
       
       .btn-primary {
-          background: var(--gradient-1);
+          background: var(--primary);
           color: white;
-          box-shadow: 0 10px 40px rgba(14, 165, 233, 0.3);
       }
       
       .btn-primary:hover {
-          transform: translateY(-3px);
-          box-shadow: 0 15px 50px rgba(14, 165, 233, 0.5);
+          background: var(--primary-light);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 20px rgba(30, 64, 175, 0.3);
       }
       
       .btn-secondary {
-          background: rgba(255, 255, 255, 0.05);
-          color: white;
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          backdrop-filter: blur(10px);
+          background: white;
+          color: var(--primary);
+          border: 2px solid var(--primary);
       }
       
       .btn-secondary:hover {
-          background: rgba(255, 255, 255, 0.1);
-          transform: translateY(-3px);
+          background: var(--gray-50);
+          transform: translateY(-2px);
       }
       
       .hero-stats {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-          gap: 3rem;
-          margin-top: 5rem;
-          padding: 3rem;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          border-radius: 30px;
-          backdrop-filter: blur(20px);
+          gap: 2rem;
+          padding: 2.5rem;
+          background: white;
+          border: 2px solid var(--gray-200);
+          border-radius: 12px;
           animation: fadeInUp 0.8s ease 0.8s backwards;
+          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
       }
       
       .stat-item { 
           text-align: center;
-          transition: all 0.3s;
-      }
-      
-      .stat-item:hover {
-          transform: translateY(-5px);
+          padding: 1rem;
       }
       
       .stat-number {
-          font-size: 3rem;
-          font-weight: 900;
-          background: var(--gradient-1);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
+          font-size: 2.5rem;
+          font-weight: 800;
+          color: var(--primary);
           margin-bottom: 0.5rem;
+          letter-spacing: -0.02em;
       }
       
       .stat-label {
-          color: rgba(255, 255, 255, 0.8);
-          font-size: 1rem;
+          color: var(--gray-600);
+          font-size: 0.9375rem;
           font-weight: 500;
+      }
+      
+      /* Certifications Section */
+      .certifications {
+          padding: 4rem 2rem;
+          background: white;
+          border-top: 1px solid var(--gray-200);
+          border-bottom: 1px solid var(--gray-200);
+      }
+      
+      .certifications-content {
+          max-width: 1200px;
+          margin: 0 auto;
+          text-align: center;
+      }
+      
+      .certifications h3 {
+          font-size: 0.875rem;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          color: var(--gray-600);
+          margin-bottom: 2rem;
+          font-weight: 600;
+      }
+      
+      .cert-logos {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 3rem;
+          flex-wrap: wrap;
+      }
+      
+      .cert-item {
+          padding: 1.5rem 2rem;
+          background: var(--gray-50);
+          border: 2px solid var(--gray-200);
+          border-radius: 8px;
+          font-weight: 600;
+          color: var(--dark);
+          font-size: 1rem;
+          transition: all 0.3s;
+      }
+      
+      .cert-item:hover {
+          background: white;
+          border-color: var(--primary);
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(30, 64, 175, 0.15);
       }
       
       /* Tab Section */
       .tab-section {
-          padding: 8rem 2rem;
-          background: rgba(255, 255, 255, 0.02);
-          position: relative;
+          padding: 6rem 2rem;
+          background: var(--gray-50);
       }
       
       .section-header {
           text-align: center;
           max-width: 800px;
-          margin: 0 auto 4rem;
+          margin: 0 auto 3rem;
       }
       
       .section-badge {
           display: inline-block;
-          padding: 8px 20px;
-          background: rgba(139, 92, 246, 0.1);
-          border: 1px solid rgba(139, 92, 246, 0.3);
+          padding: 6px 16px;
+          background: white;
+          border: 2px solid var(--primary);
           border-radius: 100px;
-          font-size: 0.85rem;
+          font-size: 0.8125rem;
           font-weight: 600;
-          color: #8b5cf6;
-          margin-bottom: 1.5rem;
+          color: var(--primary);
+          margin-bottom: 1rem;
           text-transform: uppercase;
           letter-spacing: 1px;
       }
       
       .section-title {
-          font-size: clamp(2rem, 4vw, 3.5rem);
-          font-weight: 900;
-          margin-bottom: 1.5rem;
+          font-size: clamp(1.875rem, 4vw, 3rem);
+          font-weight: 800;
+          margin-bottom: 1rem;
           line-height: 1.2;
+          letter-spacing: -0.02em;
+          color: var(--darker);
       }
       
       .section-description {
-          font-size: 1.2rem;
-          color: rgba(255, 255, 255, 0.7);
-          line-height: 1.8;
+          font-size: 1.125rem;
+          color: var(--gray-600);
+          line-height: 1.7;
       }
       
-      /* Tab Navigation */
       .tab-nav {
           display: flex;
           justify-content: center;
-          gap: 1rem;
+          gap: 0.75rem;
           margin-bottom: 3rem;
           flex-wrap: wrap;
       }
@@ -543,41 +505,36 @@
       .tab-btn {
           display: inline-flex;
           align-items: center;
-          gap: 10px;
-          padding: 15px 35px;
-          background: rgba(30, 41, 59, 0.5);
-          border: 1px solid rgba(148, 163, 184, 0.1);
-          border-radius: 50px;
-          color: rgba(255, 255, 255, 0.7);
+          gap: 8px;
+          padding: 12px 28px;
+          background: white;
+          border: 2px solid var(--gray-200);
+          border-radius: 6px;
+          color: var(--gray-700);
           cursor: pointer;
           transition: all 0.3s;
           font-weight: 600;
-          font-size: 1rem;
+          font-size: 0.9375rem;
       }
       
       .tab-btn:hover {
-          background: rgba(14, 165, 233, 0.1);
-          border-color: var(--primary);
-          color: white;
-          transform: translateY(-2px);
+          background: var(--gray-50);
+          border-color: var(--gray-300);
+          color: var(--dark);
       }
       
       .tab-btn.active {
-          background: var(--gradient-1);
-          border-color: transparent;
+          background: var(--primary);
+          border-color: var(--primary);
           color: white;
-          box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3);
       }
       
-      /* Tab Content */
       .tab-content {
           display: none;
           animation: fadeIn 0.5s ease;
       }
       
-      .tab-content.active {
-          display: block;
-      }
+      .tab-content.active { display: block; }
       
       /* Services Grid */
       .services-grid {
@@ -589,64 +546,44 @@
       }
       
       .service-card {
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid rgba(255, 255, 255, 0.05);
-          border-radius: 30px;
-          padding: 3rem;
-          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-          position: relative;
-          overflow: hidden;
-      }
-      
-      .service-card::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          height: 4px;
-          background: var(--gradient-1);
-          transform: scaleX(0);
-          transition: transform 0.4s;
+          background: white;
+          border: 2px solid var(--gray-200);
+          border-radius: 12px;
+          padding: 2.5rem;
+          transition: all 0.3s;
       }
       
       .service-card:hover {
-          transform: translateY(-10px);
-          background: rgba(255, 255, 255, 0.05);
-          border-color: rgba(14, 165, 233, 0.3);
-          box-shadow: 0 20px 60px rgba(14, 165, 233, 0.2);
+          transform: translateY(-4px);
+          border-color: var(--primary);
+          box-shadow: 0 8px 24px rgba(30, 64, 175, 0.15);
       }
       
-      .service-card:hover::before { transform: scaleX(1); }
-      
       .service-icon {
-          width: 80px;
-          height: 80px;
-          background: var(--gradient-1);
-          border-radius: 20px;
+          width: 64px;
+          height: 64px;
+          background: rgba(30, 64, 175, 0.1);
+          border-radius: 10px;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 2.5rem;
-          margin-bottom: 2rem;
-          box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3);
+          font-size: 2rem;
+          margin-bottom: 1.5rem;
+          color: var(--primary);
       }
       
-      .service-card:nth-child(2) .service-icon { background: var(--gradient-2); box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3); }
-      .service-card:nth-child(3) .service-icon { background: var(--gradient-3); box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3); }
-      .service-card:nth-child(4) .service-icon { background: var(--gradient-4); box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3); }
-      
       .service-title {
-          font-size: 1.5rem;
+          font-size: 1.375rem;
           font-weight: 700;
           margin-bottom: 1rem;
           line-height: 1.3;
+          color: var(--darker);
       }
       
       .service-description {
-          color: rgba(255, 255, 255, 0.7);
-          line-height: 1.8;
-          margin-bottom: 1.5rem;
+          color: var(--gray-600);
+          line-height: 1.7;
+          font-size: 0.9375rem;
       }
       
       /* News Grid */
@@ -659,106 +596,103 @@
       }
       
       .news-card {
-          background: rgba(30, 41, 59, 0.5);
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(148, 163, 184, 0.1);
-          border-radius: 20px;
+          background: white;
+          border: 2px solid var(--gray-200);
+          border-radius: 12px;
           overflow: hidden;
           transition: all 0.3s;
       }
       
       .news-card:hover {
-          transform: translateY(-10px);
+          transform: translateY(-4px);
           border-color: var(--primary);
-          box-shadow: 0 20px 60px rgba(14, 165, 233, 0.2);
+          box-shadow: 0 8px 24px rgba(30, 64, 175, 0.15);
       }
       
       .news-image {
           width: 100%;
-          height: 220px;
+          height: 200px;
           object-fit: cover;
       }
       
-      .news-content {
-          padding: 25px;
-      }
+      .news-content { padding: 1.5rem; }
       
       .news-meta {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          margin-bottom: 15px;
-          flex-wrap: wrap;
-          gap: 10px;
+          margin-bottom: 1rem;
+          gap: 1rem;
       }
       
       .news-source {
           display: inline-flex;
           align-items: center;
-          gap: 8px;
-          padding: 6px 15px;
-          background: var(--gradient-1);
-          border-radius: 20px;
-          font-size: 0.85rem;
+          gap: 6px;
+          padding: 4px 12px;
+          background: rgba(30, 64, 175, 0.1);
+          border-radius: 100px;
+          font-size: 0.8125rem;
           font-weight: 600;
+          color: var(--primary);
       }
       
       .news-date {
-          color: rgba(255, 255, 255, 0.5);
-          font-size: 0.85rem;
+          color: var(--gray-600);
+          font-size: 0.8125rem;
       }
       
       .news-title {
-          font-size: 1.2rem;
+          font-size: 1.125rem;
           font-weight: 700;
-          margin-bottom: 12px;
+          margin-bottom: 0.75rem;
           line-height: 1.4;
-          color: white;
+          color: var(--darker);
       }
       
       .news-excerpt {
-          color: rgba(255, 255, 255, 0.7);
+          color: var(--gray-600);
           line-height: 1.6;
-          margin-bottom: 20px;
+          margin-bottom: 1rem;
+          font-size: 0.9375rem;
       }
       
       .read-more {
           display: inline-flex;
           align-items: center;
-          gap: 8px;
-          color: var(--accent);
+          gap: 6px;
+          color: var(--primary);
           font-weight: 600;
           text-decoration: none;
           transition: all 0.3s;
+          font-size: 0.9375rem;
       }
       
-      .read-more:hover {
-          gap: 12px;
-      }
+      .read-more:hover { gap: 10px; }
       
       .live-badge-inline {
           display: inline-flex;
           align-items: center;
           gap: 8px;
           padding: 8px 16px;
-          background: rgba(34, 197, 94, 0.1);
-          border: 1px solid rgba(34, 197, 94, 0.3);
-          border-radius: 20px;
-          font-size: 0.85rem;
+          background: rgba(5, 150, 105, 0.1);
+          border: 2px solid var(--success);
+          border-radius: 100px;
+          font-size: 0.8125rem;
           font-weight: 600;
-          color: #22c55e;
+          color: var(--success);
           margin-bottom: 2rem;
       }
       
       .live-dot {
           width: 8px;
           height: 8px;
-          background: #22c55e;
+          background: var(--success);
           border-radius: 50%;
           animation: pulse 2s infinite;
       }
       
-      /* Projects Gallery */
+      /* Projects Grid */
       .projects-grid {
           max-width: 1400px;
           margin: 0 auto;
@@ -768,20 +702,20 @@
       }
       
       .project-card {
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid rgba(255, 255, 255, 0.05);
-          border-radius: 30px;
+          background: white;
+          border: 2px solid var(--gray-200);
+          border-radius: 12px;
           overflow: hidden;
-          transition: all 0.4s;
+          transition: all 0.3s;
       }
       
       .project-card:hover {
-          transform: translateY(-10px);
-          box-shadow: 0 20px 60px rgba(14, 165, 233, 0.2);
+          transform: translateY(-4px);
+          box-shadow: 0 8px 24px rgba(30, 64, 175, 0.15);
       }
       
       .project-image {
-          height: 280px;
+          height: 240px;
           background-size: cover;
           background-position: center;
           position: relative;
@@ -789,44 +723,47 @@
       
       .project-badge {
           position: absolute;
-          top: 20px;
-          left: 20px;
-          background: var(--gradient-1);
-          padding: 8px 20px;
+          top: 16px;
+          left: 16px;
+          background: var(--primary);
+          color: white;
+          padding: 6px 16px;
           border-radius: 100px;
-          font-size: 0.85rem;
+          font-size: 0.8125rem;
           font-weight: 600;
       }
       
-      body.rtl .project-badge { left: auto; right: 20px; }
+      body.rtl .project-badge { left: auto; right: 16px; }
       
       .project-content { padding: 2rem; }
       
       .project-title {
-          font-size: 1.5rem;
+          font-size: 1.375rem;
           font-weight: 700;
           margin-bottom: 1rem;
+          color: var(--darker);
       }
       
       .project-description {
-          color: rgba(255, 255, 255, 0.7);
-          line-height: 1.8;
-          margin-bottom: 1.5rem;
+          color: var(--gray-600);
+          line-height: 1.7;
+          font-size: 0.9375rem;
       }
       
       /* Footer */
       footer {
-          background: rgba(15, 23, 42, 0.95);
-          border-top: 1px solid rgba(255, 255, 255, 0.05);
+          background: var(--gray-800);
+          color: white;
+          padding: 4rem 2rem 2rem;
       }
       
       .footer-main {
           max-width: 1400px;
           margin: 0 auto;
-          padding: 4rem 2rem;
           display: grid;
-          grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+          grid-template-columns: 2fr 1fr 1fr 1fr;
           gap: 3rem;
+          margin-bottom: 3rem;
       }
       
       .footer-brand { max-width: 350px; }
@@ -839,52 +776,51 @@
           text-decoration: none;
       }
       
-      .footer-logo img { height: 50px; }
+      .footer-logo img { 
+          height: 45px;
+          filter: brightness(0) invert(1);
+      }
       
       .footer-logo-text {
-          font-size: 1.4rem;
-          font-weight: 800;
-          background: var(--gradient-1);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
+          font-size: 1.25rem;
+          font-weight: 700;
+          color: white;
       }
       
       .footer-description {
-          color: rgba(255, 255, 255, 0.7);
-          line-height: 1.8;
+          color: rgba(255, 255, 255, 0.8);
+          line-height: 1.7;
           margin-bottom: 1.5rem;
-          font-size: 0.95rem;
+          font-size: 0.9375rem;
       }
       
       .footer-social {
           display: flex;
-          gap: 0.8rem;
+          gap: 0.75rem;
       }
       
       .footer-social-link {
-          width: 42px;
-          height: 42px;
-          background: rgba(255, 255, 255, 0.05);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 50%;
+          width: 40px;
+          height: 40px;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 6px;
           display: flex;
           align-items: center;
           justify-content: center;
-          color: rgba(255, 255, 255, 0.7);
+          color: rgba(255, 255, 255, 0.8);
           transition: all 0.3s;
           text-decoration: none;
       }
       
       .footer-social-link:hover {
-          background: var(--gradient-1);
+          background: var(--primary);
           color: white;
-          transform: translateY(-3px);
-          border-color: transparent;
+          transform: translateY(-2px);
       }
       
       .footer-section h4 {
-          font-size: 1.1rem;
-          margin-bottom: 1.5rem;
+          font-size: 1rem;
+          margin-bottom: 1.25rem;
           font-weight: 700;
       }
       
@@ -893,102 +829,55 @@
       }
       
       .footer-links li {
-          margin-bottom: 0.8rem;
+          margin-bottom: 0.75rem;
       }
       
       .footer-links a {
-          color: rgba(255, 255, 255, 0.7);
+          color: rgba(255, 255, 255, 0.8);
           text-decoration: none;
-          font-size: 0.95rem;
+          font-size: 0.9375rem;
           transition: all 0.3s;
           display: inline-block;
       }
       
       .footer-links a:hover {
-          color: #0ea5e9;
-          transform: translateX(5px);
+          color: white;
+          transform: translateX(3px);
       }
       
       body.rtl .footer-links a:hover {
-          transform: translateX(-5px);
+          transform: translateX(-3px);
       }
       
       .footer-bottom {
-          border-top: 1px solid rgba(255, 255, 255, 0.05);
-          padding: 2rem;
-      }
-      
-      .footer-bottom-content {
-          max-width: 1400px;
-          margin: 0 auto;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          flex-wrap: wrap;
-          gap: 1rem;
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
+          padding-top: 2rem;
+          text-align: center;
       }
       
       .footer-copyright {
-          color: rgba(255, 255, 255, 0.6);
-          font-size: 0.9rem;
-      }
-      
-      .footer-bottom-links {
-          display: flex;
-          gap: 2rem;
-          list-style: none;
-      }
-      
-      .footer-bottom-links a {
-          color: rgba(255, 255, 255, 0.6);
-          text-decoration: none;
-          font-size: 0.9rem;
-          transition: color 0.3s;
-      }
-      
-      .footer-bottom-links a:hover {
-          color: #0ea5e9;
+          color: rgba(255, 255, 255, 0.7);
+          font-size: 0.875rem;
       }
       
       /* Responsive */
       @media (max-width: 1024px) {
-          .footer-main {
-              grid-template-columns: 1fr 1fr;
-          }
-          .projects-grid {
-              grid-template-columns: 1fr;
-          }
+          .footer-main { grid-template-columns: 1fr 1fr; }
+          .projects-grid { grid-template-columns: 1fr; }
       }
       
       @media (max-width: 768px) {
           .top-bar { display: none; }
           .nav-center { display: none; }
           .mobile-menu-btn { display: block; }
-          .hero { padding: 6rem 1.5rem 3rem; }
-          .hero-stats { grid-template-columns: 1fr 1fr; gap: 2rem; }
+          .hero { padding: 5rem 1.5rem 3rem; }
+          .hero-stats { grid-template-columns: 1fr 1fr; }
           .footer-main { grid-template-columns: 1fr; }
-          .footer-bottom-content { flex-direction: column; text-align: center; }
-          .services-grid { grid-template-columns: 1fr; }
-          .news-grid { grid-template-columns: 1fr; }
-          .tab-nav { flex-direction: column; }
+          .services-grid, .news-grid, .projects-grid { grid-template-columns: 1fr; }
       }
   </style>
 </head>
 <body>
-  <!-- Background Particles -->
-  <div class="bg-particles">
-      <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
-      <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
-      <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
-      <div class="particle" style="left: 40%; animation-delay: 6s;"></div>
-      <div class="particle" style="left: 50%; animation-delay: 8s;"></div>
-      <div class="particle" style="left: 60%; animation-delay: 10s;"></div>
-      <div class="particle" style="left: 70%; animation-delay: 12s;"></div>
-      <div class="particle" style="left: 80%; animation-delay: 14s;"></div>
-      <div class="particle" style="left: 90%; animation-delay: 16s;"></div>
-  </div>
-
-  <!-- Top Bar -->
   <div class="top-bar">
       <div class="top-bar-content">
           <div class="top-bar-left">
@@ -1002,9 +891,9 @@
               </a>
           </div>
           <div class="top-bar-right">
-              <a href="https://linkedin.com" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-              <a href="https://twitter.com" class="social-icon"><i class="fab fa-twitter"></i></a>
-              <a href="https://youtube.com" class="social-icon"><i class="fab fa-youtube"></i></a>
+              <a href="https://linkedin.com" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="https://twitter.com" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="https://youtube.com" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
               <div class="language-switcher-top">
                   <button class="lang-btn-top active" data-lang="en">EN</button>
                   <button class="lang-btn-top" data-lang="fa">فا</button>
@@ -1013,129 +902,107 @@
       </div>
   </div>
 
-  <!-- Main Header -->
   <header id="header">
       <nav>
           <a href="index.html" class="logo">
-              <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Logo">
-              <span class="logo-text" data-en="KAVIAN" data-fa="کاویان">KAVIAN</span>
+              <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Development Mine Logo">
+              <span class="logo-text" data-en="KAVIAN MINE" data-fa="کاویان معدن">KAVIAN MINE</span>
           </a>
           
           <ul class="nav-center">
-              <li class="nav-item">
-                  <a href="index.html" class="nav-link active">
-                      <i class="fas fa-home"></i>
-                      <span data-en="Home" data-fa="خانه">Home</span>
-                  </a>
-              </li>
-              <li class="nav-item">
-                  <a href="services.html" class="nav-link">
-                      <span data-en="Services" data-fa="خدمات">Services</span>
-                  </a>
-              </li>
-              <li class="nav-item">
-                  <a href="case-studies.html" class="nav-link">
-                      <span data-en="Case Studies" data-fa="مطالعات موردی">Case Studies</span>
-                  </a>
-              </li>
-              <li class="nav-item">
-                  <a href="portfolio.html" class="nav-link">
-                      <span data-en="Portfolio" data-fa="نمونه کارها">Portfolio</span>
-                  </a>
-              </li>
-              <li class="nav-item">
-                  <a href="about.html" class="nav-link">
-                      <span data-en="About" data-fa="درباره ما">About</span>
-                  </a>
-              </li>
+              <li><a href="index.html" class="nav-link active"><i class="fas fa-home"></i><span data-en="Home" data-fa="خانه">Home</span></a></li>
+              <li><a href="services.html" class="nav-link"><span data-en="Services" data-fa="خدمات">Services</span></a></li>
+              <li><a href="projects.html" class="nav-link"><span data-en="Projects" data-fa="پروژه‌ها">Projects</span></a></li>
+              <li><a href="about.html" class="nav-link"><span data-en="About" data-fa="درباره">About</span></a></li>
+              <li><a href="contact.html" class="nav-link"><span data-en="Contact" data-fa="تماس">Contact</span></a></li>
           </ul>
           
           <div class="nav-right">
-              <button class="search-btn" aria-label="Search">
-                  <i class="fas fa-search"></i>
-              </button>
               <a href="contact.html" class="cta-btn">
                   <i class="fas fa-paper-plane"></i>
-                  <span data-en="Get Started" data-fa="شروع کنید">Get Started</span>
+                  <span data-en="Get Quote" data-fa="دریافت پیشنهاد">Get Quote</span>
               </a>
-              <button class="mobile-menu-btn">
-                  <i class="fas fa-bars"></i>
-              </button>
+              <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
           </div>
       </nav>
   </header>
 
-  <!-- Hero Section -->
   <section class="hero">
-      <div class="hero-background"></div>
       <div class="hero-content">
           <div class="hero-badge">
-              <i class="fas fa-certificate"></i>
-              <span data-en="AACE International Certified | 50+ Years Experience" data-fa="گواهینامه بین‌المللی AACE | بیش از 50 سال تجربه">AACE International Certified | 50+ Years Experience</span>
+              <i class="fas fa-award"></i>
+              <span data-en="AACE International Certified | ISO 9001:2015" data-fa="گواهینامه بین‌المللی AACE | ISO 9001:2015">AACE International Certified | ISO 9001:2015</span>
           </div>
           
           <h1>
-              <span data-en="Mining Equipment Optimization &" data-fa="بهینه‌سازی تجهیزات معدنی و">Mining Equipment Optimization &</span><br>
-              <span class="gradient-text" data-en="Cost Estimation Experts" data-fa="متخصصان برآورد هزینه">Cost Estimation Experts</span>
+              <span data-en="Professional Mining Consultancy" data-fa="مشاوره حرفه‌ای معدنی">Professional Mining Consultancy</span>
+              <span data-en="Cost Estimation & Equipment Optimization" data-fa="برآورد هزینه و بهینه‌سازی تجهیزات">Cost Estimation & Equipment Optimization</span>
           </h1>
           
-          <p class="hero-subtitle" data-en="Specialized mining consultancy delivering AACE-compliant cost estimation, equipment optimization, and international procurement services. Serving open-pit and underground mining operations across 25+ countries with proven track record of $47M+ in cost savings." data-fa="مشاوره تخصصی معدنی ارائه‌دهنده برآورد هزینه مطابق با AACE، بهینه‌سازی تجهیزات و خدمات تامین بین‌المللی. خدمات‌رسانی به عملیات معدنی روباز و زیرزمینی در بیش از 25 کشور با سابقه اثبات شده بیش از 47 میلیون دلار صرفه‌جویی در هزینه.">
-              Specialized mining consultancy delivering AACE-compliant cost estimation, equipment optimization, and international procurement services. Serving open-pit and underground mining operations across 25+ countries with proven track record of $47M+ in cost savings.
+          <p class="hero-subtitle" data-en="AACE-compliant cost estimation, equipment optimization, and feasibility studies for mining operations. Serving clients across 25+ countries with proven expertise in CAPEX/OPEX analysis." data-fa="برآورد هزینه مطابق با AACE، بهینه‌سازی تجهیزات و مطالعات امکان‌سنجی برای عملیات معدنی. خدمات‌رسانی به مشتریان در بیش از 25 کشور با تخصص اثبات شده در تحلیل CAPEX/OPEX.">
+              AACE-compliant cost estimation, equipment optimization, and feasibility studies for mining operations. Serving clients across 25+ countries with proven expertise in CAPEX/OPEX analysis.
           </p>
           
           <div class="hero-buttons">
               <a href="contact.html" class="btn btn-primary">
                   <i class="fas fa-calculator"></i>
-                  <span data-en="Request Cost Estimate" data-fa="درخواست برآورد هزینه">Request Cost Estimate</span>
+                  <span data-en="Request Estimate" data-fa="درخواست برآورد">Request Estimate</span>
               </a>
-              <a href="#tab-section" class="btn btn-secondary">
+              <a href="#services" class="btn btn-secondary">
                   <i class="fas fa-book-open"></i>
-                  <span data-en="Explore More" data-fa="کشف بیشتر">Explore More</span>
+                  <span data-en="Our Services" data-fa="خدمات ما">Our Services</span>
               </a>
           </div>
           
           <div class="hero-stats">
               <div class="stat-item">
-                  <div class="stat-number">$47M+</div>
-                  <div class="stat-label" data-en="Client Cost Savings" data-fa="صرفه‌جویی هزینه مشتریان">Client Cost Savings</div>
+                  <div class="stat-number">50+</div>
+                  <div class="stat-label" data-en="Years Experience" data-fa="سال تجربه">Years Experience</div>
               </div>
               <div class="stat-item">
                   <div class="stat-number">±10%</div>
-                  <div class="stat-label" data-en="AACE Class 2 Accuracy" data-fa="دقت کلاس 2 AACE">AACE Class 2 Accuracy</div>
+                  <div class="stat-label" data-en="AACE Accuracy" data-fa="دقت AACE">AACE Accuracy</div>
               </div>
               <div class="stat-item">
                   <div class="stat-number">127+</div>
-                  <div class="stat-label" data-en="Projects Completed" data-fa="پروژه تکمیل شده">Projects Completed</div>
+                  <div class="stat-label" data-en="Projects" data-fa="پروژه">Projects</div>
               </div>
               <div class="stat-item">
                   <div class="stat-number">25+</div>
-                  <div class="stat-label" data-en="Countries Worldwide" data-fa="کشور در جهان">Countries Worldwide</div>
+                  <div class="stat-label" data-en="Countries" data-fa="کشور">Countries</div>
               </div>
           </div>
       </div>
   </section>
 
-  <!-- Tab Section -->
-  <section class="tab-section" id="tab-section">
+  <section class="certifications">
+      <div class="certifications-content">
+          <h3 data-en="Certified & Trusted By Industry Leaders" data-fa="گواهینامه و اعتماد رهبران صنعت">Certified & Trusted By Industry Leaders</h3>
+          <div class="cert-logos">
+              <div class="cert-item">AACE International</div>
+              <div class="cert-item">ISO 9001:2015</div>
+              <div class="cert-item">PMI Certified</div>
+              <div class="cert-item">SME Member</div>
+          </div>
+      </div>
+  </section>
+
+  <section class="tab-section" id="services">
       <div class="section-header">
-          <span class="section-badge" data-en="Explore" data-fa="کاوش">Explore</span>
-          <h2 class="section-title">
-              <span data-en="Discover Our" data-fa="کشف">Discover Our</span><br>
-              <span class="gradient-text" data-en="Services, Projects & News" data-fa="خدمات، پروژه‌ها و اخبار">Services, Projects & News</span>
-          </h2>
-          <p class="section-description" data-en="Comprehensive solutions, proven results, and real-time industry updates all in one place." data-fa="راه‌حل‌های جامع، نتایج اثبات شده و به‌روزرسانی‌های لحظه‌ای صنعت همه در یک مکان.">
-              Comprehensive solutions, proven results, and real-time industry updates all in one place.
+          <span class="section-badge" data-en="What We Do" data-fa="آنچه ما انجام می‌دهیم">What We Do</span>
+          <h2 class="section-title" data-en="Professional Mining Services" data-fa="خدمات حرفه‌ای معدنی">Professional Mining Services</h2>
+          <p class="section-description" data-en="Comprehensive consulting services for mining operations worldwide." data-fa="خدمات مشاوره جامع برای عملیات معدنی در سراسر جهان.">
+              Comprehensive consulting services for mining operations worldwide.
           </p>
       </div>
       
-      <!-- Tab Navigation -->
       <div class="tab-nav">
           <button class="tab-btn active" data-tab="services">
               <i class="fas fa-cogs"></i>
               <span data-en="Services" data-fa="خدمات">Services</span>
           </button>
           <button class="tab-btn" data-tab="projects">
-              <i class="fas fa-chart-bar"></i>
+              <i class="fas fa-chart-line"></i>
               <span data-en="Projects" data-fa="پروژه‌ها">Projects</span>
           </button>
           <button class="tab-btn" data-tab="news">
@@ -1144,113 +1011,92 @@
           </button>
       </div>
       
-      <!-- Services Tab Content -->
       <div class="tab-content active" id="services-tab">
           <div class="services-grid">
               <div class="service-card">
-                  <div class="service-icon">
-                      <i class="fas fa-cogs"></i>
-                  </div>
+                  <div class="service-icon"><i class="fas fa-calculator"></i></div>
+                  <h3 class="service-title" data-en="Cost Estimation (AACE)" data-fa="برآورد هزینه (AACE)">Cost Estimation (AACE)</h3>
+                  <p class="service-description" data-en="AACE International compliant cost estimation (Class 1-5) for mining projects. Comprehensive CAPEX/OPEX analysis with ±10% accuracy." data-fa="برآورد هزینه مطابق با استانداردهای بین‌المللی AACE (کلاس 1-5) برای پروژه‌های معدنی. تحلیل جامع CAPEX/OPEX با دقت ±10%.">
+                      AACE International compliant cost estimation (Class 1-5) for mining projects. Comprehensive CAPEX/OPEX analysis with ±10% accuracy.
+                  </p>
+              </div>
+              
+              <div class="service-card">
+                  <div class="service-icon"><i class="fas fa-cogs"></i></div>
                   <h3 class="service-title" data-en="Equipment Optimization" data-fa="بهینه‌سازی تجهیزات">Equipment Optimization</h3>
-                  <p class="service-description" data-en="Advanced equipment selection using AI-powered lifecycle cost analysis for crushing, grinding, hauling, and processing equipment." data-fa="انتخاب پیشرفته تجهیزات با استفاده از تحلیل هزینه چرخه عمر مبتنی بر هوش مصنوعی برای تجهیزات خردایش، آسیاب، حمل و فرآوری.">
-                      Advanced equipment selection using AI-powered lifecycle cost analysis for crushing, grinding, hauling, and processing equipment.
+                  <p class="service-description" data-en="Lifecycle cost analysis and equipment selection for crushing, grinding, hauling, and processing operations." data-fa="تحلیل هزینه چرخه عمر و انتخاب تجهیزات برای عملیات خردایش، آسیاب، حمل و فرآوری.">
+                      Lifecycle cost analysis and equipment selection for crushing, grinding, hauling, and processing operations.
                   </p>
               </div>
               
               <div class="service-card">
-                  <div class="service-icon">
-                      <i class="fas fa-calculator"></i>
-                  </div>
-                  <h3 class="service-title" data-en="Cost Estimation" data-fa="برآورد هزینه">Cost Estimation</h3>
-                  <p class="service-description" data-en="Comprehensive CAPEX/OPEX estimation following AACE International standards (Class 1-5) with real-time equipment pricing database." data-fa="برآورد جامع CAPEX/OPEX مطابق با استانداردهای بین‌المللی AACE (کلاس 1-5) با پایگاه داده قیمت‌گذاری لحظه‌ای تجهیزات.">
-                      Comprehensive CAPEX/OPEX estimation following AACE International standards (Class 1-5) with real-time equipment pricing database.
+                  <div class="service-icon"><i class="fas fa-file-contract"></i></div>
+                  <h3 class="service-title" data-en="Feasibility Studies" data-fa="مطالعات امکان‌سنجی">Feasibility Studies</h3>
+                  <p class="service-description" data-en="Comprehensive feasibility studies including technical, economic, and financial analysis. NPV, IRR, and sensitivity analysis." data-fa="مطالعات امکان‌سنجی جامع شامل تحلیل فنی، اقتصادی و مالی. تحلیل NPV، IRR و حساسیت.">
+                      Comprehensive feasibility studies including technical, economic, and financial analysis. NPV, IRR, and sensitivity analysis.
                   </p>
               </div>
               
               <div class="service-card">
-                  <div class="service-icon">
-                      <i class="fas fa-globe"></i>
-                  </div>
+                  <div class="service-icon"><i class="fas fa-globe"></i></div>
                   <h3 class="service-title" data-en="International Procurement" data-fa="تامین بین‌المللی">International Procurement</h3>
-                  <p class="service-description" data-en="Global sourcing from verified manufacturers across USA, Europe, China, and Australia. Complete procurement management from RFQ to delivery." data-fa="تامین جهانی از تولیدکنندگان معتبر در آمریکا، اروپا، چین و استرالیا. مدیریت کامل تامین از RFQ تا تحویل.">
-                      Global sourcing from verified manufacturers across USA, Europe, China, and Australia. Complete procurement management from RFQ to delivery.
-                  </p>
-              </div>
-              
-              <div class="service-card">
-                  <div class="service-icon">
-                      <i class="fas fa-industry"></i>
-                  </div>
-                  <h3 class="service-title" data-en="Plant Engineering" data-fa="مهندسی کارخانه">Plant Engineering</h3>
-                  <p class="service-description" data-en="Complete plant design from crushing circuits to tailings management. Process optimization for existing operations to maximize throughput and recovery." data-fa="طراحی کامل کارخانه از مدارهای خردایش تا مدیریت باطله. بهینه‌سازی فرآیند برای عملیات موجود جهت حداکثر توان عملیاتی و بازیابی.">
-                      Complete plant design from crushing circuits to tailings management. Process optimization for existing operations to maximize throughput and recovery.
+                  <p class="service-description" data-en="Global equipment sourcing from verified manufacturers. Complete procurement management including RFQ and technical evaluation." data-fa="تامین جهانی تجهیزات از تولیدکنندگان معتبر. مدیریت کامل تامین شامل RFQ و ارزیابی فنی.">
+                      Global equipment sourcing from verified manufacturers. Complete procurement management including RFQ and technical evaluation.
                   </p>
               </div>
           </div>
       </div>
       
-      <!-- Projects Tab Content -->
       <div class="tab-content" id="projects-tab">
           <div class="projects-grid">
               <div class="project-card">
                   <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1581092918484-8313e1f7e8c6?w=800&q=80');">
-                      <div class="project-badge" data-en="Copper Mine - Chile" data-fa="معدن مس - شیلی">Copper Mine - Chile</div>
+                      <div class="project-badge" data-en="Chile | Copper" data-fa="شیلی | مس">Chile | Copper</div>
                   </div>
                   <div class="project-content">
-                      <h3 class="project-title" data-en="Fleet Optimization Project" data-fa="پروژه بهینه‌سازی ناوگان">Fleet Optimization Project</h3>
-                      <p class="project-description" data-en="Comprehensive haul truck fleet analysis and replacement strategy for 45-unit fleet. Implemented predictive maintenance program and standardized equipment platform." data-fa="تحلیل جامع ناوگان کامیون حمل و استراتژی جایگزینی برای ناوگان 45 واحدی. برنامه نگهداری پیش‌بینی و پلتفرم تجهیزات استاندارد شده اجرا شد.">
-                          Comprehensive haul truck fleet analysis and replacement strategy for 45-unit fleet. Implemented predictive maintenance program and standardized equipment platform.
+                      <h3 class="project-title" data-en="Fleet Optimization Study" data-fa="مطالعه بهینه‌سازی ناوگان">Fleet Optimization Study</h3>
+                      <p class="project-description" data-en="Comprehensive analysis of 45-unit haul truck fleet. Implemented predictive maintenance program resulting in 18% cost reduction." data-fa="تحلیل جامع ناوگان 45 واحدی کامیون حمل. اجرای برنامه نگهداری پیش‌بینی منجر به کاهش 18% هزینه شد.">
+                          Comprehensive analysis of 45-unit haul truck fleet. Implemented predictive maintenance program resulting in 18% cost reduction.
                       </p>
                   </div>
               </div>
               
               <div class="project-card">
                   <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=800&q=80');">
-                      <div class="project-badge" data-en="Gold Project - Australia" data-fa="پروژه طلا - استرالیا">Gold Project - Australia</div>
+                      <div class="project-badge" data-en="Australia | Gold" data-fa="استرالیا | طلا">Australia | Gold</div>
                   </div>
                   <div class="project-content">
-                      <h3 class="project-title" data-en="Feasibility Study" data-fa="مطالعه امکان‌سنجی">Feasibility Study</h3>
-                      <p class="project-description" data-en="AACE Class 2 feasibility study for 2.5 Mtpa gold processing plant. Detailed equipment selection, CAPEX/OPEX estimation, and NPV analysis for project financing." data-fa="مطالعه امکان‌سنجی کلاس 2 AACE برای کارخانه فرآوری طلا با ظرفیت 2.5 میلیون تن در سال. انتخاب دقیق تجهیزات، برآورد CAPEX/OPEX و تحلیل NPV برای تامین مالی پروژه.">
-                          AACE Class 2 feasibility study for 2.5 Mtpa gold processing plant. Detailed equipment selection, CAPEX/OPEX estimation, and NPV analysis for project financing.
+                      <h3 class="project-title" data-en="AACE Class 2 Feasibility" data-fa="امکان‌سنجی کلاس 2 AACE">AACE Class 2 Feasibility</h3>
+                      <p class="project-description" data-en="Detailed feasibility study for 2.5 Mtpa gold processing plant. Complete CAPEX/OPEX estimation and NPV analysis." data-fa="مطالعه امکان‌سنجی تفصیلی برای کارخانه فرآوری طلا 2.5 میلیون تن در سال. برآورد کامل CAPEX/OPEX و تحلیل NPV.">
+                          Detailed feasibility study for 2.5 Mtpa gold processing plant. Complete CAPEX/OPEX estimation and NPV analysis.
                       </p>
                   </div>
               </div>
               
               <div class="project-card">
                   <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&q=80');">
-                      <div class="project-badge" data-en="Iron Ore - Brazil" data-fa="سنگ آهن - برزیل">Iron Ore - Brazil</div>
+                      <div class="project-badge" data-en="Brazil | Iron Ore" data-fa="برزیل | سنگ آهن">Brazil | Iron Ore</div>
                   </div>
                   <div class="project-content">
                       <h3 class="project-title" data-en="Equipment Procurement" data-fa="تامین تجهیزات">Equipment Procurement</h3>
-                      <p class="project-description" data-en="International procurement of primary gyratory crusher and secondary cone crushers. Competitive bidding process with 5 global manufacturers, technical evaluation, and logistics management." data-fa="تامین بین‌المللی سنگ‌شکن ژیراتوری اولیه و سنگ‌شکن‌های مخروطی ثانویه. فرآیند مناقصه رقابتی با 5 تولیدکننده جهانی، ارزیابی فنی و مدیریت لجستیک.">
-                          International procurement of primary gyratory crusher and secondary cone crushers. Competitive bidding process with 5 global manufacturers, technical evaluation, and logistics management.
+                      <p class="project-description" data-en="International procurement of crushing equipment. Managed competitive bidding achieving 22% cost savings." data-fa="تامین بین‌المللی تجهیزات خردایش. مدیریت مناقصه رقابتی و دستیابی به 22% صرفه‌جویی در هزینه.">
+                          International procurement of crushing equipment. Managed competitive bidding achieving 22% cost savings.
                       </p>
                   </div>
               </div>
           </div>
       </div>
       
-      <!-- News Tab Content -->
       <div class="tab-content" id="news-tab">
           <div class="live-badge-inline">
               <span class="live-dot"></span>
-              <span data-en="LIVE UPDATES FROM MINING INDUSTRY" data-fa="به‌روزرسانی زنده از صنعت معدن">LIVE UPDATES FROM MINING INDUSTRY</span>
+              <span data-en="LATEST MINING INDUSTRY NEWS" data-fa="آخرین اخبار صنعت معدن">LATEST MINING INDUSTRY NEWS</span>
           </div>
           
-          <div class="news-grid" id="newsGrid">
-              <!-- News will be loaded here -->
-          </div>
-          
-          <div style="text-align: center; margin-top: 3rem;">
-              <a href="news.html" class="btn btn-primary">
-                  <i class="fas fa-newspaper"></i>
-                  <span data-en="View All News" data-fa="مشاهده تمام اخبار">View All News</span>
-              </a>
-          </div>
+          <div class="news-grid" id="newsGrid"></div>
       </div>
   </section>
 
-  <!-- Footer -->
   <footer>
       <div class="footer-main">
           <div class="footer-brand">
@@ -1258,25 +1104,23 @@
                   <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="Kavian Logo">
                   <span class="footer-logo-text" data-en="KAVIAN" data-fa="کاویان">KAVIAN</span>
               </a>
-              <p class="footer-description" data-en="Leading mining consultancy specializing in AACE-compliant cost estimation, equipment optimization, and international procurement. Serving mining operations across 25+ countries." data-fa="مشاوره پیشرو معدنی با تخصص در برآورد هزینه مطابق با AACE، بهینه‌سازی تجهیزات و تامین بین‌المللی. خدمات‌رسانی به عملیات معدنی در بیش از 25 کشور.">
-                  Leading mining consultancy specializing in AACE-compliant cost estimation, equipment optimization, and international procurement. Serving mining operations across 25+ countries.
+              <p class="footer-description" data-en="Professional mining consultancy specializing in AACE-compliant cost estimation and equipment optimization." data-fa="مشاوره حرفه‌ای معدنی با تخصص در برآورد هزینه مطابق با AACE و بهینه‌سازی تجهیزات.">
+                  Professional mining consultancy specializing in AACE-compliant cost estimation and equipment optimization.
               </p>
               <div class="footer-social">
                   <a href="#" class="footer-social-link"><i class="fab fa-linkedin-in"></i></a>
                   <a href="#" class="footer-social-link"><i class="fab fa-twitter"></i></a>
                   <a href="#" class="footer-social-link"><i class="fab fa-youtube"></i></a>
-                  <a href="#" class="footer-social-link"><i class="fab fa-instagram"></i></a>
               </div>
           </div>
           
           <div class="footer-section">
               <h4 data-en="Services" data-fa="خدمات">Services</h4>
               <ul class="footer-links">
-                  <li><a href="services.html" data-en="Equipment Optimization" data-fa="بهینه‌سازی تجهیزات">Equipment Optimization</a></li>
                   <li><a href="services.html" data-en="Cost Estimation" data-fa="برآورد هزینه">Cost Estimation</a></li>
-                  <li><a href="services.html" data-en="Procurement" data-fa="تامین">Procurement</a></li>
+                  <li><a href="services.html" data-en="Equipment Optimization" data-fa="بهینه‌سازی تجهیزات">Equipment Optimization</a></li>
                   <li><a href="services.html" data-en="Feasibility Studies" data-fa="مطالعات امکان‌سنجی">Feasibility Studies</a></li>
-                  <li><a href="services.html" data-en="Plant Engineering" data-fa="مهندسی کارخانه">Plant Engineering</a></li>
+                  <li><a href="services.html" data-en="Procurement" data-fa="تامین">Procurement</a></li>
               </ul>
           </div>
           
@@ -1284,205 +1128,154 @@
               <h4 data-en="Company" data-fa="شرکت">Company</h4>
               <ul class="footer-links">
                   <li><a href="about.html" data-en="About Us" data-fa="درباره ما">About Us</a></li>
-                  <li><a href="case-studies.html" data-en="Case Studies" data-fa="مطالعات موردی">Case Studies</a></li>
-                  <li><a href="testimonials.html" data-en="Testimonials" data-fa="نظرات مشتریان">Testimonials</a></li>
+                  <li><a href="projects.html" data-en="Projects" data-fa="پروژه‌ها">Projects</a></li>
+                  <li><a href="team.html" data-en="Our Team" data-fa="تیم ما">Our Team</a></li>
                   <li><a href="careers.html" data-en="Careers" data-fa="فرصت‌های شغلی">Careers</a></li>
-                  <li><a href="blog.html" data-en="Blog" data-fa="بلاگ">Blog</a></li>
-              </ul>
-          </div>
-          
-          <div class="footer-section">
-              <h4 data-en="Resources" data-fa="منابع">Resources</h4>
-              <ul class="footer-links">
-                  <li><a href="resources.html" data-en="Downloads" data-fa="دانلودها">Downloads</a></li>
-                  <li><a href="faq.html" data-en="FAQ" data-fa="سوالات متداول">FAQ</a></li>
-                  <li><a href="blog.html" data-en="Knowledge Base" data-fa="پایگاه دانش">Knowledge Base</a></li>
-                  <li><a href="gallery-integrated.html" data-en="Gallery" data-fa="گالری">Gallery</a></li>
-                  <li><a href="portfolio.html" data-en="Portfolio" data-fa="نمونه کارها">Portfolio</a></li>
               </ul>
           </div>
           
           <div class="footer-section">
               <h4 data-en="Contact" data-fa="تماس">Contact</h4>
               <ul class="footer-links">
-                  <li><a href="contact.html" data-en="Contact Form" data-fa="فرم تماس">Contact Form</a></li>
+                  <li><a href="contact.html" data-en="Contact Us" data-fa="تماس با ما">Contact Us</a></li>
                   <li><a href="mailto:info@kavianmine.com">info@kavianmine.com</a></li>
                   <li><a href="tel:+982112345678">+98 (21) 1234-5678</a></li>
                   <li><a href="news.html" data-en="News" data-fa="اخبار">News</a></li>
-                  <li><a href="register.html" data-en="Register" data-fa="ثبت‌نام">Register</a></li>
               </ul>
           </div>
       </div>
-           <div class="footer-bottom">
-            <div class="footer-bottom-content">
-                <p class="footer-copyright" data-en="© 2024 Kavian Development Mine. All rights reserved." data-fa="© 2024 کاویان توسعه معدن. تمامی حقوق محفوظ است.">
-                    © 2024 Kavian Development Mine. All rights reserved.
-                </p>
-                <ul class="footer-bottom-links">
-                    <li><a href="privacy-policy.html" data-en="Privacy Policy" data-fa="حریم خصوصی">Privacy Policy</a></li>
-                    <li><a href="terms-of-service.html" data-en="Terms of Service" data-fa="شرایط خدمات">Terms of Service</a></li>
-                    <li><a href="sitemap.xml" data-en="Sitemap" data-fa="نقشه سایت">Sitemap</a></li>
-                </ul>
-            </div>
-        </div>
-    </footer>
+      
+      <div class="footer-bottom">
+          <p class="footer-copyright" data-en="© 2024 Kavian Development Mine. All rights reserved." data-fa="© 2024 کاویان توسعه معدن. تمامی حقوق محفوظ است.">
+              © 2024 Kavian Development Mine. All rights reserved.
+          </p>
+      </div>
+  </footer>
 
-    <script>
-        // ==========================================
-        // BILINGUAL LANGUAGE SWITCHER
-        // ==========================================
-        let currentLang = 'en';
-        const langButtons = document.querySelectorAll('.lang-btn-top');
-        
-        langButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                currentLang = btn.dataset.lang;
-                langButtons.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                
-                // Toggle RTL/LTR
-                document.body.classList.toggle('rtl', currentLang === 'fa');
-                document.documentElement.setAttribute('lang', currentLang);
-                document.documentElement.setAttribute('dir', currentLang === 'fa' ? 'rtl' : 'ltr');
-                
-                // Update all translatable elements
-                document.querySelectorAll('[data-en]').forEach(el => {
-                    const text = el.getAttribute(`data-${currentLang}`);
-                    if (text) {
-                        el.textContent = text;
-                    }
-                });
-                
-                // Save language preference
-                localStorage.setItem('preferredLanguage', currentLang);
-            });
-        });
-        
-        // Load saved language preference
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedLang = localStorage.getItem('preferredLanguage');
-            if (savedLang && savedLang !== 'en') {
-                const langBtn = document.querySelector(`[data-lang="${savedLang}"]`);
-                if (langBtn) {
-                    langBtn.click();
-                }
-            }
-        });
-        
-        // ==========================================
-        // TAB SWITCHING SYSTEM
-        // ==========================================
-        const tabBtns = document.querySelectorAll('.tab-btn');
-        const tabContents = document.querySelectorAll('.tab-content');
-        
-        tabBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Remove active class from all tabs
-                tabBtns.forEach(b => b.classList.remove('active'));
-                tabContents.forEach(c => c.classList.remove('active'));
-                
-                // Add active class to clicked tab
-                btn.classList.add('active');
-                const targetTab = document.getElementById(`${btn.dataset.tab}-tab`);
-                if (targetTab) {
-                    targetTab.classList.add('active');
-                }
-                
-                // Load news when news tab is clicked
-                if (btn.dataset.tab === 'news') {
-                    setTimeout(renderNews, 100);
-                }
-            });
-        });
-        
-        // ==========================================
-        // NEWS DATA WITH REAL IMAGES
-        // ==========================================
-        const newsData = [
-            {
-                title: "Caterpillar 797F Mining Truck Breaks Production Records",
-                titleFa: "کامیون معدنی کاترپیلار 797F رکورد تولید را شکست",
-                excerpt: "Latest haul truck achieves unprecedented 15% fuel efficiency improvement in Chilean copper mine operations.",
-                excerptFa: "جدیدترین کامیون حمل 15٪ بهبود کارایی سوخت بی‌سابقه در عملیات معدن مس شیلی به دست آورد.",
-                source: "Mining.com",
-                date: "2 hours ago",
-                dateFa: "2 ساعت پیش",
-                image: "https://images.unsplash.com/photo-1581092918484-8313e1f7e8c6?w=600&q=80"
-            },
-            {
-                title: "Gold Prices Surge to Record High Amid Economic Uncertainty",
-                titleFa: "قیمت طلا در میان عدم اطمینان اقتصادی به بالاترین حد رسید",
-                excerpt: "Gold reaches $2,100 per ounce as investors seek safe haven assets, driving increased exploration activity worldwide.",
-                excerptFa: "طلا به 2100 دلار در هر اونس رسید زیرا سرمایه‌گذاران به دنبال دارایی‌های امن هستند و فعالیت اکتشاف در سراسر جهان را افزایش می‌دهد.",
-                source: "Reuters",
-                date: "4 hours ago",
-                dateFa: "4 ساعت پیش",
-                image: "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=600&q=80"
-            },
-            {
-                title: "Rio Tinto Announces $5 Billion Copper Project in Mongolia",
-                titleFa: "ریو تینتو پروژه 5 میلیارد دلاری مس در مغولستان را اعلام کرد",
-                excerpt: "Major mining company commits to largest copper development project in Asia, expected to produce 500,000 tonnes annually.",
-                excerptFa: "شرکت بزرگ معدنی به بزرگترین پروژه توسعه مس در آسیا متعهد شد که انتظار می‌رود سالانه 500000 تن تولید کند.",
-                source: "Mining Weekly",
-                date: "6 hours ago",
-                dateFa: "6 ساعت پیش",
-                image: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=600&q=80"
-            },
-            {
-                title: "AI-Powered Drilling Technology Reduces Costs by 30%",
-                titleFa: "فناوری حفاری مبتنی بر هوش مصنوعی هزینه‌ها را 30٪ کاهش می‌دهد",
-                excerpt: "New autonomous drilling systems using artificial intelligence show remarkable cost savings in Australian iron ore operations.",
-                excerptFa: "سیستم‌های حفاری خودکار جدید با استفاده از هوش مصنوعی صرفه‌جویی قابل توجهی در هزینه در عملیات سنگ آهن استرالیا نشان می‌دهند.",
-                source: "Mining Technology",
-                date: "8 hours ago",
-                dateFa: "8 ساعت پیش",
-                image: "https://images.unsplash.com/photo-1581092918484-8313e1f7e8c6?w=600&q=80"
-            },
-            {
-                title: "Komatsu Unveils Zero-Emission Mining Equipment Fleet",
-                titleFa: "کوماتسو ناوگان تجهیزات معدنی بدون انتشار را رونمایی کرد",
-                excerpt: "Japanese manufacturer launches fully electric mining equipment line, targeting carbon-neutral operations by 2030.",
-                excerptFa: "تولیدکننده ژاپنی خط تجهیزات معدنی کاملاً الکتریکی را راه‌اندازی کرد و هدف عملیات خنثی کربن تا سال 2030 است.",
-                source: "Mining.com",
-                date: "12 hours ago",
-                dateFa: "12 ساعت پیش",
-                image: "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=600&q=80"
-            },
-            {
-                title: "Lithium Demand Soars as Electric Vehicle Market Expands",
-                titleFa: "تقاضا برای لیتیوم با گسترش بازار خودروهای برقی افزایش می‌یابد",
-                excerpt: "Electric vehicle boom drives lithium prices up 200%, spurring new mining projects across South America and Australia.",
-                excerptFa: "رونق خودروهای برقی قیمت لیتیوم را 200٪ افزایش می‌دهد و پروژه‌های معدنی جدید در آمریکای جنوبی و استرالیا را تحریک می‌کند.",
-                source: "Reuters",
-                date: "1 day ago",
-                dateFa: "1 روز پیش",
-                image: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=600&q=80"
-            }
+  <script>
+      let currentLang = 'en';
+      const langButtons = document.querySelectorAll('.lang-btn-top');
+      
+      langButtons.forEach(btn => {
+          btn.addEventListener('click', () => {
+              currentLang = btn.dataset.lang;
+              langButtons.forEach(b => b.classList.remove('active'));
+              btn.classList.add('active');
+              
+              document.body.classList.toggle('rtl', currentLang === 'fa');
+              document.documentElement.setAttribute('lang', currentLang);
+              document.documentElement.setAttribute('dir', currentLang === 'fa' ? 'rtl' : 'ltr');
+              
+              document.querySelectorAll('[data-en]').forEach(el => {
+                  const text = el.getAttribute(`data-${currentLang}`);
+                  if (text) el.textContent = text;
+              });
+              
+              localStorage.setItem('preferredLanguage', currentLang);
+          });
+      });
+      
+      window.addEventListener('DOMContentLoaded', () => {
+          const savedLang = localStorage.getItem('preferredLanguage');
+          if (savedLang && savedLang !== 'en') {
+              document.querySelector(`[data-lang="${savedLang}"]`)?.click();
+          }
+      });
+      
+      const tabBtns = document.querySelectorAll('.tab-btn');
+      const tabContents = document.querySelectorAll('.tab-content');
+      
+      tabBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+              tabBtns.forEach(b => b.classList.remove('active'));
+              tabContents.forEach(c => c.classList.remove('active'));
+              
+              btn.classList.add('active');
+              document.getElementById(`${btn.dataset.tab}-tab`).classList.add('active');
+              
+              if (btn.dataset.tab === 'news') {
+                  setTimeout(renderNews, 100);
+              }
+          });
+      });
+      
+      const newsData = [
+          {
+              title: "Global Mining Equipment Market Reaches $135B",
+              titleFa: "بازار جهانی تجهیزات معدنی به 135 میلیارد دلار رسید",
+              excerpt: "Industry analysis shows 6.2% annual growth driven by automation trends.",
+              excerptFa: "تحلیل صنعت نشان می‌دهد رشد سالانه 6.2٪ ناشی از روندهای اتوماسیون.",
+              source: "Mining.com",
+              date: "2h ago",
+              dateFa: "2 ساعت پیش",
+              image: "https://images.unsplash.com/photo-1581092918484-8313e1f7e8c6?w=600&q=80"
+          },
+          {
+              title: "AACE Releases Updated Cost Estimation Guidelines",
+              titleFa: "AACE دستورالعمل‌های به‌روز شده برآورد هزینه را منتشر کرد",
+              excerpt: "New standards for Class 1-5 estimates incorporate AI-assisted methodologies.",
+              excerptFa: "استانداردهای جدید برای برآوردهای کلاس 1-5 روش‌های کمک‌شده با هوش مصنوعی را ترکیب می‌کنند.",
+              source: "AACE International",
+              date: "5h ago",
+              dateFa: "5 ساعت پیش",
+              image: "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=600&q=80"
+          },
+          {
+              title: "Copper Prices Hit 18-Month High on Supply Concerns",
+              titleFa: "قیمت مس به بالاترین سطح 18 ماهه رسید",
+              excerpt: "Infrastructure projects drive continued demand for copper worldwide.",
+              excerptFa: "پروژه‌های زیرساختی تقاضا برای مس را در سراسر جهان افزایش می‌دهند.",
+              source: "Reuters",
+              date: "8h ago",
+              dateFa: "8 ساعت پیش",
+              image: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=600&q=80"
+          },
+          {
+              title: "Autonomous Haul Trucks Reduce Operating Costs by 25%",
+              titleFa: "کامیون‌های حمل خودکار هزینه‌های عملیاتی را 25٪ کاهش می‌دهند",
+              excerpt: "Major mining operations report significant cost savings with automation.",
+              excerptFa: "عملیات معدنی بزرگ صرفه‌جویی قابل توجه در هزینه با اتوماسیون را گزارش می‌کنند.",
+              source: "Mining Technology",
+              date: "12h ago",
+              dateFa: "12 ساعت پیش",
+              image: "https://images.unsplash.com/photo-1581092918484-8313e1f7e8c6?w=600&q=80"
+          },
+          {
+              title: "ESG Standards Reshape Mining Investment Decisions",
+              titleFa: "استانداردهای ESG تصمیمات سرمایه‌گذاری معدنی را تغییر می‌دهند",
+              excerpt: "Environmental and social factors now critical in project financing.",
+              excerptFa: "عوامل زیست‌محیطی و اجتماعی اکنون در تامین مالی پروژه حیاتی هستند.",
+              source: "Mining Weekly",
+              date: "1d ago",
+              dateFa: "1 روز پیش",
+              image: "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=600&q=80"
+          },
+          {
+              title: "Battery Metals Demand Drives New Exploration",
+              titleFa: "تقاضای فلزات باتری اکتشاف جدید را هدایت می‌کند",
+              excerpt: "Lithium and cobalt projects see increased investment globally.",
+              excerptFa: "پروژه‌های لیتیوم و کبالت سرمایه‌گذاری بیشتری در سطح جهانی می‌بینند.",
+              source: "Bloomberg",
+              date: "2d ago",
+              dateFa: "2 روز پیش",
+              image: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=600&q=80"
+          }
         ];
         
-        // ==========================================
-        // RENDER NEWS FUNCTION
-        // ==========================================
         function renderNews() {
             const newsGrid = document.getElementById('newsGrid');
             if (!newsGrid) return;
             
             newsGrid.innerHTML = '';
             
-            newsData.forEach((news, index) => {
+            newsData.forEach(news => {
                 const card = document.createElement('div');
                 card.className = 'news-card';
-                card.style.animationDelay = `${index * 0.1}s`;
-                
                 card.innerHTML = `
                     <img src="${news.image}" alt="${news.title}" class="news-image" loading="lazy">
                     <div class="news-content">
                         <div class="news-meta">
-                            <span class="news-source">
-                                <i class="fas fa-globe"></i>
-                                ${news.source}
-                            </span>
+                            <span class="news-source"><i class="fas fa-globe"></i> ${news.source}</span>
                             <span class="news-date" data-en="${news.date}" data-fa="${news.dateFa}">${currentLang === 'fa' ? news.dateFa : news.date}</span>
                         </div>
                         <h3 class="news-title" data-en="${news.title}" data-fa="${news.titleFa}">${currentLang === 'fa' ? news.titleFa : news.title}</h3>
@@ -1493,113 +1286,19 @@
                         </a>
                     </div>
                 `;
-                
                 newsGrid.appendChild(card);
             });
         }
         
-        // ==========================================
-        // HEADER SCROLL EFFECT
-        // ==========================================
-        const header = document.getElementById('header');
-        let lastScroll = 0;
-        
+        // Header scroll effect
         window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-            
-            if (currentScroll > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
+            const header = document.getElementById('header');
+            if (header) {
+                header.classList.toggle('scrolled', window.scrollY > 50);
             }
-            
-            lastScroll = currentScroll;
         });
         
-        // ==========================================
-        // SMOOTH SCROLL FOR ANCHOR LINKS
-        // ==========================================
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (href !== '#') {
-                    e.preventDefault();
-                    const target = document.querySelector(href);
-                    if (target) {
-                        const headerHeight = header.offsetHeight;
-                        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-                        
-                        window.scrollTo({
-                            top: targetPosition,
-                            behavior: 'smooth'
-                        });
-                    }
-                }
-            });
-        });
-        
-        // ==========================================
-        // SEARCH BUTTON FUNCTIONALITY
-        // ==========================================
-        const searchBtn = document.querySelector('.search-btn');
-        if (searchBtn) {
-            searchBtn.addEventListener('click', () => {
-                const searchOverlay = document.createElement('div');
-                searchOverlay.style.cssText = `
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    background: rgba(2, 6, 23, 0.98);
-                    backdrop-filter: blur(20px);
-                    z-index: 9999;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    padding: 2rem;
-                    animation: fadeIn 0.3s ease;
-                `;
-                
-                searchOverlay.innerHTML = `
-                    <div style="max-width: 600px; width: 100%; position: relative;">
-                        <input type="text" placeholder="${currentLang === 'en' ? 'Search...' : 'جستجو...'}" 
-                            style="width: 100%; padding: 1.5rem 4rem 1.5rem 2rem; font-size: 1.2rem; 
-                            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); 
-                            border-radius: 50px; color: white; outline: none; font-family: ${currentLang === 'fa' ? 'Vazirmatn' : 'Inter'}, sans-serif;">
-                        <button style="position: absolute; ${currentLang === 'fa' ? 'left' : 'right'}: 1rem; top: 50%; transform: translateY(-50%); 
-                            background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer;">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                `;
-                
-                document.body.appendChild(searchOverlay);
-                searchOverlay.querySelector('input').focus();
-                
-                searchOverlay.querySelector('button').addEventListener('click', () => {
-                    searchOverlay.remove();
-                });
-                
-                searchOverlay.addEventListener('click', (e) => {
-                    if (e.target === searchOverlay) {
-                        searchOverlay.remove();
-                    }
-                });
-                
-                // Close on ESC key
-                document.addEventListener('keydown', function escHandler(e) {
-                    if (e.key === 'Escape') {
-                        searchOverlay.remove();
-                        document.removeEventListener('keydown', escHandler);
-                    }
-                });
-            });
-        }
-        
-        // ==========================================
-        // MOBILE MENU TOGGLE
-        // ==========================================
+        // Mobile menu toggle
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const navCenter = document.querySelector('.nav-center');
         
@@ -1614,11 +1313,11 @@
                     navCenter.style.top = '100%';
                     navCenter.style.left = '0';
                     navCenter.style.right = '0';
-                    navCenter.style.background = 'rgba(2, 6, 23, 0.98)';
+                    navCenter.style.background = 'rgba(255, 255, 255, 0.98)';
                     navCenter.style.padding = '2rem';
                     navCenter.style.gap = '0.5rem';
-                    navCenter.style.borderTop = '1px solid rgba(255, 255, 255, 0.1)';
-                    navCenter.style.boxShadow = '0 10px 40px rgba(0, 0, 0, 0.5)';
+                    navCenter.style.borderTop = '1px solid #e2e8f0';
+                    navCenter.style.boxShadow = '0 10px 40px rgba(0, 0, 0, 0.1)';
                     mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
                 } else {
                     navCenter.style.display = 'none';
@@ -1636,9 +1335,51 @@
             });
         }
         
-        // ==========================================
-        // ANIMATED COUNTER FOR STATS
-        // ==========================================
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        const header = document.getElementById('header');
+                        const headerHeight = header ? header.offsetHeight : 0;
+                        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+        
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all cards
+        document.querySelectorAll('.service-card, .project-card, .news-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+        
+        // Animated counter for stats
         const animateCounter = (element, target, duration = 2000) => {
             const start = 0;
             const increment = target / (duration / 16);
@@ -1682,45 +1423,7 @@
             statsObserver.observe(heroStats);
         }
         
-        // ==========================================
-        // INTERSECTION OBSERVER FOR ANIMATIONS
-        // ==========================================
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-        
-        // Observe all service cards and project cards
-        document.querySelectorAll('.service-card, .project-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
-        });
-        
-        // ==========================================
-        // PARALLAX EFFECT FOR HERO BACKGROUND
-        // ==========================================
-        window.addEventListener('scroll', () => {
-            const heroBackground = document.querySelector('.hero-background');
-            if (heroBackground) {
-                const scrolled = window.pageYOffset;
-                heroBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
-            }
-        });
-        
-        // ==========================================
-        // LAZY LOADING FOR IMAGES
-        // ==========================================
+        // Lazy loading for images
         if ('IntersectionObserver' in window) {
             const imageObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -1740,9 +1443,7 @@
             });
         }
         
-        // ==========================================
-        // ADD ACTIVE STATE TO CURRENT PAGE
-        // ==========================================
+        // Add active state to current page
         const currentPage = window.location.pathname.split('/').pop() || 'index.html';
         document.querySelectorAll('.nav-link').forEach(link => {
             if (link.getAttribute('href') === currentPage) {
@@ -1750,14 +1451,12 @@
             }
         });
         
-        // ==========================================
-        // PRELOAD CRITICAL RESOURCES
-        // ==========================================
+        // Preload critical resources
         const preloadResources = () => {
             const links = [
                 { href: 'services.html', as: 'document' },
                 { href: 'contact.html', as: 'document' },
-                { href: 'case-studies.html', as: 'document' },
+                { href: 'projects.html', as: 'document' },
                 { href: 'news.html', as: 'document' }
             ];
             
@@ -1775,9 +1474,7 @@
             setTimeout(preloadResources, 2000);
         });
         
-        // ==========================================
-        // PAGE LOAD ANIMATION
-        // ==========================================
+        // Page load animation
         window.addEventListener('load', () => {
             document.body.style.opacity = '0';
             setTimeout(() => {
@@ -1786,15 +1483,14 @@
             }, 100);
         });
         
-        // ==========================================
-        // CONSOLE MESSAGE FOR DEVELOPERS
-        // ==========================================
-        console.log('%c🏔️ Kavian Development Mine', 'font-size: 20px; font-weight: bold; color: #0ea5e9;');
-        console.log('%cMining Equipment Optimization & Cost Estimation Experts', 'font-size: 14px; color: #8b5cf6;');
-        console.log('%c💼 Interested in joining our team? Visit: kavianmine.com/careers', 'font-size: 12px; color: #10b981;');
-        console.log('%c🌐 Bilingual Support: English & Persian (فارسی)', 'font-size: 12px; color: #f59e0b;');
+        // Console branding
+        console.log('%c🏔️ Kavian Development Mine', 'font-size: 20px; font-weight: bold; color: #1e40af;');
+        console.log('%cProfessional Mining Consultancy & Cost Estimation', 'font-size: 14px; color: #0ea5e9;');
+        console.log('%c💼 AACE International Certified | ISO 9001:2015', 'font-size: 12px; color: #059669;');
+        console.log('%c🌐 Bilingual Support: English & Persian (فارسی)', 'font-size: 12px; color: #0891b2;');
+        console.log('%c📧 Contact: info@kavianmine.com', 'font-size: 12px; color: #475569;');
     </script>
   </body>
   </html>
-   
+
       
