@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Plant Design & Feasibility Studies | KDMine</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      --gold:#C9A84C;--gold-light:#E8C97A;--gold-dark:#A07830;
+      --dark:#080C16;--dark2:#0F1520;--dark3:#161E2E;--dark4:#1E2840;
+      --text:#E8EDF5;--text-muted:#7A8BA8;
+      --border:rgba(201,168,76,0.2);--border2:rgba(255,255,255,0.06);
+      --green:#22C55E;--blue:#0EA5E9;--purple:#A855F7;--red:#EF4444;--orange:#F97316;
+    }
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;background:var(--dark);color:var(--text);overflow-x:hidden;}
+    body.fa{font-family:'Vazirmatn',sans-serif;direction:rtl;}
+    ::-webkit-scrollbar{width:5px;}
+    ::-webkit-scrollbar-track{background:var(--dark2);}
+    ::-webkit-scrollbar-thumb{background:var(--gold-dark);border-radius:3px;}
+
+    .lang-bar{position:fixed;top:0;left:0;right:0;z-index:2000;height:36px;background:var(--gold-dark);display:flex;align-items:center;justify-content:flex-end;padding:0 5%;gap:12px;}
+    .lang-btn{padding:4px 14px;border-radius:20px;border:none;cursor:pointer;font-size:12px;font-weight:700;transition:.2s;}
+    .lang-btn.active{background:var(--dark);color:var(--gold);}
+    .lang-btn:not(.active){background:rgba(0,0,0,0.2);color:rgba(0,0,0,0.7);}
+
+    nav{position:fixed;top:36px;left:0;right:0;z-index:1000;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:70px;background:rgba(8,12,22,0.95);backdrop-filter:blur(24px);border-bottom:1px solid var(--border2);}
+    .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+    .nav-logo-icon{width:42px;height:42px;border-radius:11px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));display:flex;align-items:center;justify-content:center;font-weight:900;font-size:17px;color:var(--dark);}
+    .nav-logo-text{font-size:21px;font-weight:800;color:#fff;}
+    .nav-logo-text span{color:var(--gold);}
+    .nav-back{display:flex;align-items:center;gap:8px;padding:9px 20px;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text);font-size:13px;font-weight:600;text-decoration:none;transition:.2s;}
+    .nav-back:hover{border-color:var(--gold);color:var(--gold);}
+
+    /* HERO */
+    .page-hero{padding:130px 5% 72px;position:relative;overflow:hidden;}
+    .hero-bg{position:absolute;inset:0;background:linear-gradient(160deg,#080C16,#0b1422,#080C16);}
+    .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(168,85,247,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(168,85,247,0.03) 1px,transparent 1px);background-size:52px 52px;}
+    .hero-glow-l{position:absolute;top:-80px;left:5%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.07),transparent 70%);}
+    .hero-glow-r{position:absolute;bottom:-60px;right:5%;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(168,85,247,0.05),transparent 70%);}
+    .hero-inner{position:relative;z-index:2;max-width:900px;}
+    .breadcrumb{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-muted);margin-bottom:18px;}
+    .breadcrumb a{color:var(--gold);text-decoration:none;}
+    .breadcrumb span{opacity:.5;}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border-radius:20px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.25);font-size:12px;font-weight:700;color:var(--purple);margin-bottom:18px;}
+    .page-hero h1{font-size:clamp(34px,5vw,62px);font-weight:900;color:#fff;letter-spacing:-2px;margin-bottom:16px;line-height:1.05;}
+    .page-hero h1 em{background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal;}
+    .page-hero p{font-size:16px;color:var(--text-muted);line-height:1.8;max-width:700px;margin-bottom:36px;}
+    .hero-kpis{display:flex;gap:36px;flex-wrap:wrap;}
+    .hkpi .num{font-size:30px;font-weight:900;color:#fff;letter-spacing:-1px;}
+    .hkpi .num em{color:var(--gold);font-style:normal;font-size:16px;}
+    .hkpi .lbl{font-size:11px;color:var(--text-muted);margin-top:3px;}
+
+    /* LAYOUT */
+    .wrap{padding:0 5% 72px;max-width:1400px;margin:0 auto;}
+    .sec-label{font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;}
+    .sec-title{font-size:28px;font-weight:900;color:#fff;letter-spacing:-.5px;margin-bottom:10px;}
+    .sec-sub{font-size:15px;color:var(--text-muted);line-height:1.75;margin-bottom:36px;max-width:720px;}
+
+    /* TABS */
+    .main-tabs{display:flex;gap:6px;margin-bottom:36px;flex-wrap:wrap;}
+    .mtab{padding:11px 22px;border-radius:12px;border:1px solid var(--border2);background:rgba(255,255,255,0.04);color:var(--text-muted);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:.2s;display:flex;align-items:center;gap:8px;}
+    .mtab.active{background:rgba(168,85,247,0.1);border-color:rgba(168,85,247,0.3);color:var(--purple);}
+    .tab-section{display:none;}
+    .tab-section.active{display:block;}
+
+    /* ── PLANT DESIGN TAB ── */
+    .plant-intro{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;margin-bottom:48px;align-items:start;}
+    .plant-intro-text p{font-size:14px;color:var(--text-muted);line-height:1.8;margin-bottom:14px;}
+
+    /* FLOWSHEET VISUAL */
+    .flowsheet-wrap{background:var(--dark3);border:1px solid var(--border2);border-radius:20px;padding:28px;margin-bottom:48px;}
+    .flowsheet-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:20px;display:flex;align-items:center;gap:8px;}
+    .flowsheet{display:flex;align-items:center;gap:0;overflow-x:auto;padding-bottom:8px;}
+    .fs-stage{display:flex;flex-direction:column;align-items:center;min-width:110px;}
+    .fs-box{background:var(--dark4);border:1px solid var(--border2);border-radius:12px;padding:12px 10px;text-align:center;width:100px;transition:.3s;cursor:pointer;}
+    .fs-box:hover{border-color:var(--border);background:rgba(201,168,76,0.06);}
+    .fs-icon{font-size:22px;margin-bottom:6px;}
+    .fs-name{font-size:10px;font-weight:700;color:#fff;line-height:1.3;}
+    .fs-sub{font-size:9px;color:var(--text-muted);margin-top:3px;}
+    .fs-arrow{font-size:18px;color:var(--gold);opacity:.5;margin:0 4px;align-self:center;margin-top:-20px;}
+    .fs-cost{font-size:9px;color:var(--gold);font-weight:700;margin-top:4px;}
+
+    /* CIRCUIT CARDS */
+    .circuit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:48px;}
+    .circ-card{background:var(--dark3);border:1px solid var(--border2);border-radius:18px;padding:22px;transition:.3s;}
+    .circ-card:hover{border-color:var(--border);}
+    .circ-icon{font-size:28px;margin-bottom:12px;}
+    .circ-title{font-size:14px;font-weight:800;color:#fff;margin-bottom:6px;}
+    .circ-desc{font-size:12px;color:var(--text-muted);line-height:1.65;margin-bottom:12px;}
+    .circ-specs{display:flex;flex-direction:column;gap:5px;}
+    .circ-spec{display:flex;justify-content:space-between;font-size:11px;}
+    .circ-spec-label{color:var(--text-muted);}
+    .circ-spec-val{color:var(--gold);font-weight:700;}
+    .circ-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:10px;}
+    .circ-tag{padding:3px 8px;border-radius:5px;background:rgba(255,255,255,0.04);border:1px solid var(--border2);font-size:10px;color:var(--text-muted);}
+
+    /* DESIGN PARAMETERS TABLE */
+    .param-table-wrap{background:var(--dark3);border:1px solid var(--border2);border-radius:20px;overflow:hidden;margin-bottom:48px;}
+    .param-table{width:100%;border-collapse:collapse;}
+    .param-table thead tr{background:var(--dark4);}
+    .param-table th{padding:11px 16px;text-align:left;font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border2);}
+    .param-table td{padding:11px 16px;font-size:12px;color:var(--text-muted);border-bottom:1px solid var(--border2);}
+    .param-table tr:last-child td{border-bottom:none;}
+    .param-table tr:hover td{background:rgba(255,255,255,0.02);}
+    .param-table td:first-child{font-weight:700;color:#fff;}
+    .param-group td{background:rgba(168,85,247,0.04);color:#fff;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;}
+
+    /* ── FEASIBILITY TAB ── */
+    .fs-class-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:48px;}
+    .fsc-card{background:var(--dark3);border:1px solid var(--border2);border-radius:16px;padding:18px;text-align:center;transition:.3s;cursor:pointer;}
+    .fsc-card:hover,.fsc-card.featured{border-color:var(--border);background:rgba(201,168,76,0.04);}
+    .fsc-card.featured{border-color:var(--gold);}
+    .fsc-class{font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+    .fsc-name{font-size:13px;font-weight:800;color:#fff;margin-bottom:8px;}
+    .fsc-acc{font-size:20px;font-weight:900;color:#fff;margin-bottom:4px;}
+    .fsc-acc em{color:var(--gold);font-style:normal;}
+    .fsc-effort{font-size:11px;color:var(--text-muted);margin-bottom:10px;}
+    .fsc-bar-wrap{width:100%;height:4px;background:var(--dark4);border-radius:2px;}
+    .fsc-bar{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--gold),var(--gold-light));}
+    .fsc-badge{display:inline-block;padding:3px 8px;border-radius:5px;font-size:10px;font-weight:700;margin-top:8px;}
+    .fsc-badge.kdmine{background:rgba(201,168,76,0.12);color:var(--gold);}
+
+    /* STUDY COMPARISON TABLE */
+    .study-table-wrap{background:var(--dark3);border:1px solid var(--border2);border-radius:20px;overflow:hidden;margin-bottom:48px;}
+    .study-table{width:100%;border-collapse:collapse;}
+    .study-table thead tr{background:var(--dark4);}
+    .study-table th{padding:12px 16px;text-align:left;font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border2);}
+    .study-table td{padding:12px 16px;font-size:12px;color:var(--text-muted);border-bottom:1px solid var(--border2);}
+    .study-table tr:last-child td{border-bottom:none;}
+    .study-table tr:hover td{background:rgba(255,255,255,0.02);}
+    .study-table td:first-child{font-weight:700;color:#fff;}
+    .check{color:var(--green);}
+    .cross{color:var(--red);}
+    .partial{color:var(--orange);}
+
+    /* STUDY PROCESS STEPS */
+    .study-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:48px;}
+    .sstep{background:var(--dark3);border:1px solid var(--border2);border-radius:16px;padding:20px;transition:.3s;}
+    .sstep:hover{border-color:var(--border);}
+    .sstep-num{font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+    .sstep-title{font-size:13px;font-weight:800;color:#fff;margin-bottom:6px;}
+    .sstep-desc{font-size:11px;color:var(--text-muted);line-height:1.6;}
+
+    /* FINANCIAL MODEL */
+    .fin-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:48px;}
+    .fin-text p{font-size:14px;color:var(--text-muted);line-height:1.8;margin-bottom:14px;}
+    .fin-metrics{display:flex;flex-direction:column;gap:10px;}
+    .fin-metric{background:var(--dark3);border:1px solid var(--border2);border-radius:12px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;}
+    .fin-metric-name{font-size:12px;font-weight:700;color:#fff;}
+    .fin-metric-val{font-size:16px;font-weight:900;color:var(--gold);}
+    .fin-metric-note{font-size:10px;color:var(--text-muted);}
+    .fin-chart-card{background:var(--dark3);border:1px solid var(--border2);border-radius:20px;padding:24px;}
+
+    /* DELIVERABLES */
+    .deliv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:48px;}
+    .deliv-card{background:var(--dark3);border:1px solid var(--border2);border-radius:16px;padding:18px;text-align:center;transition:.3s;}
+    .deliv-card:hover{border-color:var(--border);}
+    .deliv-icon{font-size:26px;margin-bottom:10px;}
+    .deliv-name{font-size:12px;font-weight:700;color:#fff;margin-bottom:4px;}
+    .deliv-desc{font-size:11px;color:var(--text-muted);line-height:1.5;}
+
+    /* CASE STUDY BAND */
+    .case-band{background:linear-gradient(135deg,rgba(168,85,247,0.06),rgba(201,168,76,0.04));border:1px solid var(--border);border-radius:20px;padding:32px;margin-bottom:48px;}
+    .case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px;}
+    .case-card{background:var(--dark4);border:1px solid var(--border2);border-radius:14px;padding:20px;transition:.3s;}
+    .case-card:hover{border-color:var(--border);}
+    .case-flag{font-size:22px;margin-bottom:8px;}
+    .case-title{font-size:13px;font-weight:800;color:#fff;margin-bottom:4px;}
+    .case-sub{font-size:11px;color:var(--text-muted);margin-bottom:10px;}
+    .case-metrics{display:flex;flex-direction:column;gap:5px;}
+    .case-metric{display:flex;justify-content:space-between;font-size:11px;}
+    .case-metric-label{color:var(--text-muted);}
+    .case-metric-val{color:var(--gold);font-weight:700;}
+
+    /* CTA */
+    .cta-band{background:linear-gradient(135deg,var(--dark3),var(--dark4));border:1px solid var(--border);border-radius:24px;padding:52px;text-align:center;margin-bottom:56px;}
+    .cta-band h3{font-size:32px;font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:12px;}
+    .cta-band h3 em{background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal;}
+    .cta-band p{font-size:15px;color:var(--text-muted);margin-bottom:28px;}
+    .cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+    .btn-gold{padding:13px 28px;border-radius:11px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--dark);font-weight:700;font-size:14px;border:none;cursor:pointer;font-family:inherit;transition:.2s;display:inline-flex;align-items:center;gap:8px;}
+    .btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,0.4);}
+    .btn-outline{padding:13px 28px;border-radius:11px;border:1px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text);font-weight:600;font-size:14px;cursor:pointer;font-family:inherit;transition:.2s;display:inline-flex;align-items:center;gap:8px;}
+    .btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+
+    .footer-mini{background:var(--dark2);border-top:1px solid var(--border2);padding:28px 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;}
+    .footer-mini p{font-size:13px;color:var(--text-muted);}
+    .footer-mini a{font-size:13px;color:var(--gold);text-decoration:none;}
+
+    .fade-up{opacity:0;transform:translateY(22px);transition:opacity .5s,transform .5s;}
+    .fade-up.visible{opacity:1;transform:translateY(0);}
+
+    @media(max-width:1100px){.plant-intro{grid-template-columns:1fr;}.circuit-grid{grid-template-columns:1fr 1fr;}.fs-class-grid{grid-template-columns:repeat(3,1fr);}.study-steps{grid-template-columns:1fr 1fr;}.fin-grid{grid-template-columns:1fr;}.deliv-grid{grid-template-columns:repeat(2,1fr);}.case-grid{grid-template-columns:1fr 1fr;}}
+    @media(max-width:768px){.circuit-grid{grid-template-columns:1fr;}.fs-class-grid{grid-template-columns:1fr 1fr;}.study-steps{grid-template-columns:1fr;}.deliv-grid{grid-template-columns:1fr 1fr;}.case-grid{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body id="body">
+
+  <div class="lang-bar">
+    <button class="lang-btn active" id="btn-en" onclick="setLang('en')">🇬🇧 English</button>
+    <button class="lang-btn" id="btn-fa" onclick="setLang('fa')">🇮🇷 فارسی</button>
+  </div>
+
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">KD</div>
+      <span class="nav-logo-text">KD<span>Mine</span></span>
+    </a>
+    <a href="index.html" class="nav-back"><i class="fas fa-arrow-left"></i> <span data-en="Back to Home" data-fa="بازگشت به خانه">Back to Home</span></a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="page-hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-glow-l"></div>
+    <div class="hero-glow-r"></div>
+    <div class="hero-inner fade-up">
+      <div class="breadcrumb">
+        <a href="index.html" data-en="Home" data-fa="خانه">Home</a><span>/</span>
+        <span data-en="Plant Design & Feasibility" data-fa="طراحی کارخانه و امکان‌سنجی">Plant Design & Feasibility</span>
+      </div>
+      <div class="hero-badge"><i class="fas fa-drafting-compass"></i> <span data-en="Process Flowsheet · Circuit Design · PFS · DFS · Financial Modelling" data-fa="فلوشیت فرآیند · طراحی مدار · PFS · DFS · مدل‌سازی مالی">Process Flowsheet · Circuit Design · PFS · DFS · Financial Modelling</span></div>
+      <h1><em data-en="Plant Design" data-fa="طراحی کارخانه">Plant Design</em><br/><span data-en="& Feasibility" data-fa="و مطالعات">&amp; Feasibility</span> <em data-en="Studies" data-fa="امکان‌سنجی">Studies</em></h1>
+      <p data-en="From conceptual process flowsheet to bankable Definitive Feasibility Study — KDMine integrates plant design, equipment selection, and AACE-class cost estimation into a single, coherent study package ready for board approval, project financing, and regulatory submission." data-fa="از فلوشیت فرآیند مفهومی تا مطالعه امکان‌سنجی قطعی بانکی — KDMine طراحی کارخانه، انتخاب تجهیزات و برآورد هزینه کلاس AACE را در یک بسته مطالعاتی منسجم و آماده برای تأیید هیئت مدیره، تأمین مالی پروژه و ارائه نظارتی ادغام می‌کند.">From conceptual process flowsheet to bankable Definitive Feasibility Study — KDMine integrates plant design, equipment selection, and AACE-class cost estimation into a single, coherent study package ready for board approval, project financing, and regulatory submission.</p>
+      <div class="hero-kpis">
+        <div class="hkpi"><div class="num">25<em>+</em></div><div class="lbl" data-en="Feasibility Studies" data-fa="مطالعات امکان‌سنجی">Feasibility Studies</div></div>
+        <div class="hkpi"><div class="num">8<em>+</em></div><div class="lbl" data-en="Commodities Covered" data-fa="کالاهای پوشش‌داده‌شده">Commodities Covered</div></div>
+        <div class="hkpi"><div class="num">NI<em> 43-101</em></div><div class="lbl" data-en="& JORC Compliant" data-fa="و منطبق با JORC">& JORC Compliant</div></div>
+        <div class="hkpi"><div class="num">AACE<em> Class</em></div><div class="lbl" data-en="1 to 5 Studies" data-fa="مطالعات ۱ تا ۵">1 to 5 Studies</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- TABS -->
+    <div class="main-tabs fade-up">
+      <button class="mtab active" onclick="switchTab('plant',this)"><i class="fas fa-industry"></i> <span data-en="Plant Design" data-fa="طراحی کارخانه">Plant Design</span></button>
+      <button class="mtab" onclick="switchTab('feasibility',this)"><i class="fas fa-clipboard-check"></i> <span data-en="Feasibility Studies" data-fa="مطالعات امکان‌سنجی">Feasibility Studies</span></button>
+      <button class="mtab" onclick="switchTab('financial',this)"><i class="fas fa-chart-line"></i> <span data-en="Financial Modelling" data-fa="مدل‌سازی مالی">Financial Modelling</span></button>
+      <button class="mtab" onclick="switchTab('casestudies',this)"><i class="fas fa-folder-open"></i> <span data-en="Case Studies" data-fa="مطالعات موردی">Case Studies</span></button>
+    </div>
+
+    <!-- ══ PLANT DESIGN TAB ══ -->
+    <div class="tab-section active" id="tab-plant">
+
+      <div class="plant-intro fade-up">
+        <div class="plant-intro-text">
+          <div class="sec-label" data-en="Process Plant Design" data-fa="طراحی کارخانه فرآوری">Process Plant Design</div>
+          <div class="sec-title" data-en="From Flowsheet to Plant Layout" data-fa="از فلوشیت تا طرح کارخانه">From Flowsheet to Plant Layout</div>
+          <p data-en="KDMine's plant design service begins with the process flowsheet — the engineering document that defines how ore is transformed into a saleable product. The flowsheet drives equipment selection, sizing, and ultimately the process plant CAPEX and OPEX. Our team works from metallurgical test work results to develop a practical, cost-optimised circuit design." data-fa="خدمات طراحی کارخانه KDMine با فلوشیت فرآیند شروع می‌شود — سند مهندسی که تعریف می‌کند چگونه سنگ معدن به یک محصول قابل فروش تبدیل می‌شود. فلوشیت انتخاب تجهیزات، اندازه‌گیری و در نهایت CAPEX و OPEX کارخانه فرآوری را هدایت می‌کند. تیم ما از نتایج آزمایش متالورژیکی برای توسعه یک طراحی مدار عملی و بهینه‌شده از نظر هزینه کار می‌کند.">KDMine's plant design service begins with the process flowsheet — the engineering document that defines how ore is transformed into a saleable product. The flowsheet drives equipment selection, sizing, and ultimately the process plant CAPEX and OPEX. Our team works from metallurgical test work results to develop a practical, cost-optimised circuit design.</p>
+          <p data-en="For each circuit, we evaluate multiple design options — throughput capacity, energy efficiency, water consumption, and reagent usage — and present a comparative cost analysis to support the optimal design selection." data-fa="برای هر مدار، ما چندین گزینه طراحی را ارزیابی می‌کنیم — ظرفیت توان عملیاتی، کارایی انرژی، مصرف آب و مصرف معرف — و یک تحلیل هزینه مقایسه‌ای برای حمایت از انتخاب طراحی بهینه ارائه می‌دهیم.">For each circuit, we evaluate multiple design options — throughput capacity, energy efficiency, water consumption, and reagent usage — and present a comparative cost analysis to support the optimal design selection.</p>
+        </div>
+        <div style="background:var(--dark3);border:1px solid var(--border2);border-radius:18px;padding:22px;">
+          <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:16px;" data-en="Plant Design Cost Distribution" data-fa="توزیع هزینه طراحی کارخانه">Plant Design Cost Distribution</div>
+          <canvas id="plantPieChart" style="max-height:260px;"></canvas>
+        </div>
+      </div>
+
+      <!-- FLOWSHEET VISUAL -->
+      <div class="flowsheet-wrap fade-up">
+        <div class="flowsheet-title"><i class="fas fa-project-diagram" style="color:var(--gold);"></i> <span data-en="Typical Gold CIL Process Flowsheet — Cost Reference Points" data-fa="فلوشیت فرآیند معمول طلای CIL — نقاط مرجع هزینه">Typical Gold CIL Process Flowsheet — Cost Reference Points</span></div>
+        <div class="flowsheet">
+          <div class="fs-stage"><div class="fs-box"><div class="fs-icon">⛏️</div><div class="fs-name" data-en="Run-of-Mine Ore" data-fa="سنگ معدن ROM">Run-of-Mine Ore</div><div class="fs-sub">Feed</div></div></div>
+          <div class="fs-arrow">→</div>
+          <div class="fs-stage"><div class="fs-box"><div class="fs-icon">🪨</div><div class="fs-name" data-en="Primary Crushing" data-fa="خردایش اولیه">Primary Crushing</div><div class="fs-sub">Gyratory</div><div class="fs-cost">$8–14M</div></div></div>
+          <div class="fs-arrow">→</div>
+          <div class="fs-stage"><div class="fs-box"><div class="fs-icon">⚙️</div><div class="fs-name" data-en="SAG Milling" data-fa="آسیاب SAG">SAG Milling</div><div class="fs-sub">36–40 ft</div><div class="fs-cost">$22–32M</div></div></div>
+          <div class="fs-arrow">→</div>
+          <div class="fs-stage"><div class="fs-box"><div class="fs-icon">🔄</div><div class="fs-name" data-en="Ball Milling" data-fa="آسیاب گلوله‌ای">Ball Milling</div><div class="fs-sub">22–26 ft</div><div class="fs-cost">$8–14M</div></div></div>
+          <div class="fs-arrow">→</div>
+          <div class="fs-stage"><div class="fs-box"><div class="fs-icon">🧪</div><div class="fs-name" data-en="CIL Circuit" data-fa="مدار CIL">CIL Circuit</div><div class="fs-sub">8–12 tanks</div><div class="fs-cost">$12–20M</div></div></div>
+          <div class="fs-arrow">→</div>
+          <div class="fs-stage"><div class="fs-box"><div class="fs-icon">⚡</div><div class="fs-name" data-en="Elution & EW" data-fa="الوشن و EW">Elution & EW</div><div class="fs-sub">Zadra/AARL</div><div class="fs-cost">$4–8M</div></div></div>
+          <div class="fs-arrow">→</div>
+          <div class="fs-stage"><div class="fs-box"><div class="fs-icon">🏅</div><div class="fs-name" data-en="Gold Room" data-fa="اتاق طلا">Gold Room</div><div class="fs-sub">Smelting</div><div class="fs-cost">$2–5M</div></div></div>
+          <div class="fs-arrow">→</div>
+          <div class="fs-stage"><div class="fs-box"><div class="fs-icon">🟡</div><div class="fs-name" data-en="Doré Bar" data-fa="شمش دوره">Doré Bar</div><div class="fs-sub">Product</div></div></div>
+        </div>
+      </div>
+
+      <!-- CIRCUIT CARDS -->
+      <div class="fade-up">
+        <div class="sec-label" data-en="Process Circuits" data-fa="مدارهای فرآیند">Process Circuits</div>
+        <div class="sec-title" data-en="Key Plant Design Areas" data-fa="حوزه‌های کلیدی طراحی کارخانه">Key Plant Design Areas</div>
+      </div>
+      <div class="circuit-grid fade-up">
+        <div class="circ-card">
+          <div class="circ-icon">🪨</div>
+          <div class="circ-title" data-en="Comminution Circuit" data-fa="مدار خردایش">Comminution Circuit</div>
+          <div class="circ-desc" data-en="Crushing and grinding to achieve target grind size (P80). Circuit selection (SABC, ABC, HPGR) drives the largest single process plant cost item." data-fa="خردایش و آسیاب برای دستیابی به اندازه آسیاب هدف (P80). انتخاب مدار (SABC، ABC، HPGR) بزرگترین قلم هزینه کارخانه فرآوری را هدایت می‌کند.">Crushing and grinding to achieve target grind size (P80). Circuit selection (SABC, ABC, HPGR) drives the largest single process plant cost item.</div>
+          <div class="circ-specs">
+            <div class="circ-spec"><span class="circ-spec-label" data-en="Typical CAPEX" data-fa="CAPEX معمول">Typical CAPEX</span><span class="circ-spec-val">$30–60M</span></div>
+            <div class="circ-spec"><span class="circ-spec-label" data-en="Energy" data-fa="انرژی">Energy</span><span class="circ-spec-val">8–18 kWh/t</span></div>
+            <div class="circ-spec"><span class="circ-spec-label" data-en="% of Plant CAPEX" data-fa="٪ از CAPEX کارخانه">% of Plant CAPEX</span><span class="circ-spec-val">35–45%</span></div>
+          </div>
+          <div class="circ-tags"><span class="circ-tag">SAG/Ball</span><span class="circ-tag">HPGR</span><span class="circ-tag">SABC</span></div>
+        </div>
+        <div class="circ-card">
+          <div class="circ-icon">🧪</div>
+          <div class="circ-title" data-en="Leaching & Adsorption" data-fa="لیچینگ و جذب">Leaching & Adsorption</div>
+          <div class="circ-desc" data-en="CIL, CIP, heap leach, or vat leach depending on ore type and grade. Carbon-in-leach is standard for most gold projects. Heap leach for low-grade oxide ores." data-fa="CIL، CIP، لیچ توده‌ای یا لیچ مخزنی بسته به نوع و عیار سنگ معدن. کربن در لیچ استاندارد برای اکثر پروژه‌های طلا است. لیچ توده‌ای برای سنگ معدن اکسیدی کم‌عیار.">CIL, CIP, heap leach, or vat leach depending on ore type and grade. Carbon-in-leach is standard for most gold projects. Heap leach for low-grade oxide ores.</div>
+          <div class="circ-specs">
+            <div class="circ-spec"><span class="circ-spec-label" data-en="Typical CAPEX" data-fa="CAPEX معمول">Typical CAPEX</span><span class="circ-spec-val">$12–25M</span></div>
+            <div class="circ-spec"><span class="circ-spec-label" data-en="Cyanide" data-fa="سیانید">Cyanide</span><span class="circ-spec-val">0.3–0.8 kg/t</span></div>
+            <div class="circ-spec"><span class="circ-spec-label" data-en="% of Plant CAPEX" data-fa="٪ از CAPEX کارخانه">% of Plant CAPEX</span><span class="circ-spec-val">15–22%</span></div>
+          </div>
+          <div class="circ-tags"><span class="circ-tag">CIL</span><span class="circ-tag">CIP</span><span class="circ-tag">Heap Leach</span></div>
+        </div>
+        <div class="circ-card">
+          <div class="circ-icon">🔵</div>
+          <div class="circ-title" data-en="Flotation Circuit" data-fa="مدار فلوتاسیون">Flotation Circuit</div>
+          <div class="circ-desc" data-en="Sulphide flotation for copper, zinc, lead, and refractory gold. Rougher-scavenger-cleaner configuration. Tank cell or column cell selection based on metallurgy." data-fa="فلوتاسیون سولفیدی برای مس، روی، سرب و طلای مقاوم. پیکربندی خشن‌کن-جاروکن-پاک‌کن. انتخاب سلول مخزنی یا سلول ستونی بر اساس متالورژی.">Sulphide flotation for copper, zinc, lead, and refractory gold. Rougher-scavenger-cleaner configuration. Tank cell or column cell selection based on metallurgy.</div>
+          <div class="circ-specs">
+            <div class="circ-spec"><span class="circ-spec-label" data-en="Typical CAPEX" data-fa="CAPEX معمول">Typical CAPEX</span><span class="circ-spec-val">$18–40M</span></div>
+            <div class="circ-spec"><span class="circ-spec-label" data-en="Recovery" data-fa="بازیابی">Recovery</span><span class="circ-spec-val">85–95%</span></div>
+            <div class="circ-spec"><span class="circ-spec-label" data-en="% of Plant CAPEX" data-fa="٪ از CAPEX کارخانه">% of Plant CAPEX</span><span class="circ-spec-val">20–30%</span></div>
+          </div>
+          <div class="circ-tags"><span class="circ-tag">Rougher</span><span class="circ-tag">Cleaner</span><span class="circ-tag">Column</span></div>
+        </div>
+        <div class="circ-card">
+          <div class="circ-icon">💧</div>
+          <div class="circ-title" data-en="Thickening & Filtration" data-fa="ضخیم‌سازی و فیلتراسیون">Thickening & Filtration</div>
+          <div class="circ-desc" data-en="Paste thickeners, high-rate thickeners, and pressure filters for tailings and concentrate dewatering. Critical for water recovery and tailings management." data-fa="ضخیم‌کننده‌های خمیری، ضخیم‌کننده‌های پرسرعت و فیلترهای فشاری برای آب‌زدایی باطله و کنسانتره. حیاتی برای بازیابی آب و مدیریت باطله.">Paste thickeners, high-rate thickeners, and pressure filters for tailings and concentrate dewatering. Critical for water recovery and tailings management.</div>
+          <div class="circ-specs">
+            <div class="circ-spec"><span class="circ-spec-label" data-en="Typical CAPEX" data-fa="CAPEX معمول">Typical CAPEX</span><span class="circ-spec-val">$5–15M</span></div>
+            <div class="circ-spec"><span class="circ-spec-label" data-en="Water Recovery" data-fa="بازیابی آب">Water Recovery</span><span class="circ-spec-val">70–85%</span></div>
+            <div class="circ-spec"><span class="circ-spec-label" data-en="% of Plant CAPEX" data-fa="٪ از CAPEX کارخانه">% of Plant CAPEX</span><span class="circ-spec-val">6–10%</span></div>
+          </div>
+          <div class="circ-tags"><span class="circ-tag">Paste</span><span class="circ-tag">High-Rate</span><span class="circ-tag">Pressure Filter</span></div>
+        </div>
+        <div class="circ-card">
+          <div class="circ-icon">⚡</div>
+          <div class="circ-title" data-en="Power & Utilities" data-fa="برق و تأسیسات">Power & Utilities</div>
+          <div class="circ-desc" data-en="HV/MV power distribution, process water, compressed air, reagent storage and dosing, and plant services. Often underestimated in early-stage studies." data-fa="توزیع برق فشار قوی/متوسط، آب فرآیند، هوای فشرده، ذخیره‌سازی و تزریق معرف و خدمات کارخانه. اغلب در مطالعات مرحله اولیه دست کم گرفته می‌شود.">HV/MV power distribution, process water, compressed air, reagent storage and dosing, and plant services. Often underestimated in early-stage studies.</div>
+          <div class="circ-specs">
+            <div class="circ-spec"><span class="circ-spec-label" data-en="Typical CAPEX" data-fa="CAPEX معمول">Typical CAPEX</span><span class="circ-spec-val">$10–25M</span></div>
+            <div class="circ-spec"><span class="circ-spec-label" data-en="Power Demand" data-fa="تقاضای برق">Power Demand</span><span class="circ-spec-val">15–40 MW</span></div>
+            <div class="circ-spec"><span class="circ-spec-label" data-en="% of Plant CAPEX" data-fa="٪ از CAPEX کارخانه">% of Plant CAPEX</span><span class="circ-spec-val">10–16%</span></div>
+          </div>
+          <div class="circ-tags"><span class="circ-tag">HV/MV</span><span class="circ-tag">Reagents</span><span class="circ-tag">Utilities</span></div>
+        </div>
+        <div class="circ-card">
+          <div class="circ-icon">🏗️</div>
+          <div class="circ-title" data-en="Civil & Structural" data-fa="عمرانی و سازه‌ای">Civil & Structural</div>
+          <div class="circ-desc" data-en="Foundations, structural steel, buildings, and concrete works. Geotechnical conditions and seismic zone heavily influence civil costs. Often 25–35% of total plant CAPEX." data-fa="پی‌ها، فولاد سازه‌ای، ساختمان‌ها و کارهای بتنی. شرایط ژئوتکنیک و منطقه لرزه‌ای به شدت بر هزینه‌های عمرانی تأثیر می‌گذارند. اغلب ۲۵-۳۵٪ از کل CAPEX کارخانه.">Foundations, structural steel, buildings, and concrete works. Geotechnical conditions and seismic zone heavily influence civil costs. Often 25–35% of total plant CAPEX.</div>
+          <div class="circ-specs">
+            <div class="circ-spec"><span class="circ-spec-label" data-en="Typical CAPEX" data-fa="CAPEX معمول">Typical CAPEX</span><span class="circ-spec-val">$20–50M</span></div>
+            <div class="circ-spec"><span class="circ-spec-label" data-en="Concrete" data-fa="بتن">Concrete</span><span class="circ-spec-val">5,000–15,000 m³</span></div>
+            <div class="circ-spec"><span class="circ-spec-label" data-en="% of Plant CAPEX" data-fa="٪ از CAPEX کارخانه">% of Plant CAPEX</span><span class="circ-spec-val">25–35%</span></div>
+          </div>
+          <div class="circ-tags"><span class="circ-tag">Foundations</span><span class="circ-tag">Structural Steel</span><span class="circ-tag">Buildings</span></div>
+        </div>
+      </div>
+
+      <!-- DESIGN PARAMETERS TABLE -->
+      <div class="fade-up">
+        <div class="sec-label" data-en="Design Parameters" data-fa="پارامترهای طراحی">Design Parameters</div>
+        <div class="sec-title" data-en="Key Plant Design Variables" data-fa="متغیرهای کلیدی طراحی کارخانه">Key Plant Design Variables</div>
+      </div>
+      <div class="param-table-wrap fade-up">
+        <table class="param-table">
+          <thead><tr>
+            <th data-en="Parameter" data-fa="پارامتر">Parameter</th>
+            <th data-en="Typical Range" data-fa="محدوده معمول">Typical Range</th>
+            <th data-en="Impact on CAPEX" data-fa="تأثیر بر CAPEX">Impact on CAPEX</th>
+            <th data-en="Impact on OPEX" data-fa="تأثیر بر OPEX">Impact on OPEX</th>
+            <th data-en="Notes" data-fa="یادداشت‌ها">Notes</th>
+          </tr></thead>
+          <tbody id="paramTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ══ FEASIBILITY TAB ══ -->
+    <div class="tab-section" id="tab-feasibility">
+
+      <div class="fade-up">
+        <div class="sec-label" data-en="AACE Study Classes" data-fa="کلاس‌های مطالعه AACE">AACE Study Classes</div>
+        <div class="sec-title" data-en="Feasibility Study Classification" data-fa="طبقه‌بندی مطالعه امکان‌سنجی">Feasibility Study Classification</div>
+        <div class="sec-sub" data-en="KDMine delivers feasibility studies across all AACE classes. Each class requires progressively more engineering definition and delivers progressively tighter cost accuracy." data-fa="KDMine مطالعات امکان‌سنجی را در تمام کلاس‌های AACE ارائه می‌دهد. هر کلاس به تعریف مهندسی بیشتری نیاز دارد و دقت هزینه بیشتری ارائه می‌دهد.">KDMine delivers feasibility studies across all AACE classes. Each class requires progressively more engineering definition and delivers progressively tighter cost accuracy.</div>
+      </div>
+
+      <div class="fs-class-grid fade-up">
+        <div class="fsc-card">
+          <div class="fsc-class">Class 5</div>
+          <div class="fsc-name" data-en="Concept Screening" data-fa="غربالگری مفهوم">Concept Screening</div>
+          <div class="fsc-acc">±<em>50%</em></div>
+          <div class="fsc-effort" data-en="0–2% of project cost" data-fa="۰-۲٪ از هزینه پروژه">0–2% of project cost</div>
+          <div class="fsc-bar-wrap"><div class="fsc-bar" style="width:20%;"></div></div>
+          <span class="fsc-badge kdmine" data-en="KDMine: from $18K" data-fa="KDMine: از ۱۸ هزار دلار">KDMine: from $18K</span>
+        </div>
+        <div class="fsc-card">
+          <div class="fsc-class">Class 4</div>
+          <div class="fsc-name" data-en="Study / Scoping" data-fa="مطالعه / اولیه">Study / Scoping</div>
+          <div class="fsc-acc">±<em>30%</em></div>
+          <div class="fsc-effort" data-en="1–3% of project cost" data-fa="۱-۳٪ از هزینه پروژه">1–3% of project cost</div>
+          <div class="fsc-bar-wrap"><div class="fsc-bar" style="width:40%;"></div></div>
+          <span class="fsc-badge kdmine" data-en="KDMine: from $35K" data-fa="KDMine: از ۳۵ هزار دلار">KDMine: from $35K</span>
+        </div>
+        <div class="fsc-card featured">
+          <div class="fsc-class">Class 3</div>
+          <div class="fsc-name" data-en="Pre-Feasibility (PFS)" data-fa="پیش‌امکان‌سنجی (PFS)">Pre-Feasibility (PFS)</div>
+          <div class="fsc-acc">±<em>20%</em></div>
+          <div class="fsc-effort" data-en="2–5% of project cost" data-fa="۲-۵٪ از هزینه پروژه">2–5% of project cost</div>
+          <div class="fsc-bar-wrap"><div class="fsc-bar" style="width:60%;"></div></div>
+          <span class="fsc-badge kdmine" data-en="KDMine: from $65K" data-fa="KDMine: از ۶۵ هزار دلار">KDMine: from $65K</span>
+        </div>
+        <div class="fsc-card">
+          <div class="fsc-class">Class 2</div>
+          <div class="fsc-name" data-en="Definitive (DFS)" data-fa="قطعی (DFS)">Definitive (DFS)</div>
+          <div class="fsc-acc">±<em>10%</em></div>
+          <div class="fsc-effort" data-en="3–10% of project cost" data-fa="۳-۱۰٪ از هزینه پروژه">3–10% of project cost</div>
+          <div class="fsc-bar-wrap"><div class="fsc-bar" style="width:80%;"></div></div>
+          <span class="fsc-badge kdmine" data-en="KDMine: from $180K" data-fa="KDMine: از ۱۸۰ هزار دلار">KDMine: from $180K</span>
+        </div>
+        <div class="fsc-card">
+          <div class="fsc-class">Class 1</div>
+          <div class="fsc-name" data-en="Check / Bid" data-fa="بررسی / مناقصه">Check / Bid</div>
+          <div class="fsc-acc">±<em>5%</em></div>
+          <div class="fsc-effort" data-en="5–15% of project cost" data-fa="۵-۱۵٪ از هزینه پروژه">5–15% of project cost</div>
+          <div class="fsc-bar-wrap"><div class="fsc-bar" style="width:100%;"></div></div>
+          <span class="fsc-badge kdmine" data-en="KDMine: on request" data-fa="KDMine: بنا به درخواست">KDMine: on request</span>
+        </div>
+      </div>
+
+      <!-- STUDY COMPARISON TABLE -->
+      <div class="fade-up">
+        <div class="sec-label" data-en="Study Comparison" data-fa="مقایسه مطالعه">Study Comparison</div>
+        <div class="sec-title" data-en="What Each Study Includes" data-fa="آنچه هر مطالعه شامل می‌شود">What Each Study Includes</div>
+      </div>
+      <div class="study-table-wrap fade-up">
+        <table class="study-table">
+          <thead><tr>
+            <th data-en="Study Component" data-fa="جزء مطالعه">Study Component</th>
+            <th>Class 5</th><th>Class 4</th><th>Class 3</th><th>Class 2</th><th>Class 1</th>
+          </tr></thead>
+          <tbody id="studyTableBody"></tbody>
+        </table>
+      </div>
+
+      <!-- STUDY PROCESS STEPS -->
+      <div class="fade-up">
+        <div class="sec-label" data-en="Our Process" data-fa="فرآیند ما">Our Process</div>
+        <div class="sec-title" data-en="How KDMine Delivers a Feasibility Study" data-fa="چگونه KDMine یک مطالعه امکان‌سنجی ارائه می‌دهد">How KDMine Delivers a Feasibility Study</div>Develop process flowsheet, equipment list, site layout, and infrastructure design to appropriate study level.</div></div>
+        <div class="sstep"><div class="sstep-num" data-en="Phase 3" data-fa="مرحله ۳">Phase 3</div><div class="sstep-title" data-en="Cost Estimation" data-fa="برآورد هزینه">Cost Estimation</div><div class="sstep-desc" data-en="Prepare CAPEX and OPEX estimates to AACE class standard. Apply location factors, escalation, and contingency." data-fa="تهیه برآوردهای CAPEX و OPEX به استاندارد کلاس AACE. اعمال ضرایب موقعیت، تعدیل و احتیاط.">Prepare CAPEX and OPEX estimates to AACE class standard. Apply location factors, escalation, and contingency.</div></div>
+        <div class="sstep"><div class="sstep-num" data-en="Phase 4" data-fa="مرحله ۴">Phase 4</div><div class="sstep-title" data-en="Financial Model" data-fa="مدل مالی">Financial Model</div><div class="sstep-desc" data-en="Build DCF financial model with NPV, IRR, payback, and sensitivity analysis. Integrate CAPEX, OPEX, revenue, and tax." data-fa="ساخت مدل مالی DCF با NPV، IRR، بازگشت سرمایه و تحلیل حساسیت. ادغام CAPEX، OPEX، درآمد و مالیات.">Build DCF financial model with NPV, IRR, payback, and sensitivity analysis. Integrate CAPEX, OPEX, revenue, and tax.</div></div>
+      </div>
+    </div>
+
+    <!-- ══ FINANCIAL MODELLING TAB ══ -->
+    <div class="tab-section" id="tab-financial">
+
+      <div class="fin-grid fade-up">
+        <div class="fin-text">
+          <div class="sec-label" data-en="Financial Modelling" data-fa="مدل‌سازی مالی">Financial Modelling</div>
+          <div class="sec-title" data-en="DCF Model & Project Economics" data-fa="مدل DCF و اقتصاد پروژه">DCF Model & Project Economics</div>
+          <p data-en="KDMine builds fully integrated discounted cash flow (DCF) financial models for mining projects. The model integrates the mine plan, process plant throughput, CAPEX schedule, OPEX profile, commodity price assumptions, royalties, taxes, and working capital to produce project-level NPV, IRR, and payback metrics." data-fa="KDMine مدل‌های مالی جریان نقدی تنزیل‌شده (DCF) کاملاً یکپارچه برای پروژه‌های معدنی می‌سازد. مدل برنامه معدن، توان عملیاتی کارخانه فرآوری، برنامه CAPEX، پروفیل OPEX، فرضیات قیمت کالا، حق‌الامتیازها، مالیات‌ها و سرمایه در گردش را برای تولید معیارهای NPV، IRR و بازگشت سرمایه در سطح پروژه ادغام می‌کند.">KDMine builds fully integrated discounted cash flow (DCF) financial models for mining projects. The model integrates the mine plan, process plant throughput, CAPEX schedule, OPEX profile, commodity price assumptions, royalties, taxes, and working capital to produce project-level NPV, IRR, and payback metrics.</p>
+          <p data-en="All models are built in Excel with full audit trail, scenario manager (base/upside/downside), and Monte Carlo simulation capability. Bilingual EN/FA versions available for Iranian project submissions." data-fa="تمام مدل‌ها در Excel با مسیر حسابرسی کامل، مدیر سناریو (پایه/صعودی/نزولی) و قابلیت شبیه‌سازی مونت کارلو ساخته می‌شوند. نسخه‌های دوزبانه EN/FA برای ارائه‌های پروژه ایرانی در دسترس است.">All models are built in Excel with full audit trail, scenario manager (base/upside/downside), and Monte Carlo simulation capability. Bilingual EN/FA versions available for Iranian project submissions.</p>
+          <div class="fin-metrics" id="finMetrics"></div>
+        </div>
+        <div class="fin-chart-card">
+          <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:16px;" data-en="Cumulative Cash Flow — Reference 10 Mtpa Gold Project" data-fa="جریان نقدی تجمعی — پروژه طلای مرجع ۱۰ میلیون تن در سال">Cumulative Cash Flow — Reference 10 Mtpa Gold Project</div>
+          <canvas id="cashflowChart" style="max-height:280px;"></canvas>
+        </div>
+      </div>
+
+      <!-- SENSITIVITY TORNADO -->
+      <div class="fade-up">
+        <div class="sec-label" data-en="Sensitivity Analysis" data-fa="تحلیل حساسیت">Sensitivity Analysis</div>
+        <div class="sec-title" data-en="NPV Sensitivity — Tornado Chart" data-fa="حساسیت NPV — نمودار تورنادو">NPV Sensitivity — Tornado Chart</div>
+        <div class="sec-sub" data-en="Impact of ±20% change in key variables on project NPV (Base NPV = $320M). Commodity price and CAPEX are the dominant drivers." data-fa="تأثیر تغییر ±۲۰٪ در متغیرهای کلیدی بر NPV پروژه (NPV پایه = ۳۲۰ میلیون دلار). قیمت کالا و CAPEX محرک‌های اصلی هستند.">Impact of ±20% change in key variables on project NPV (Base NPV = $320M). Commodity price and CAPEX are the dominant drivers.</div>
+      </div>
+      <div style="background:var(--dark3);border:1px solid var(--border2);border-radius:20px;padding:28px;margin-bottom:48px;" class="fade-up">
+        <canvas id="tornadoChart" style="max-height:320px;"></canvas>
+      </div>
+
+      <!-- SCENARIO TABLE -->
+      <div class="fade-up">
+        <div class="sec-label" data-en="Scenario Analysis" data-fa="تحلیل سناریو">Scenario Analysis</div>
+        <div class="sec-title" data-en="Base / Upside / Downside Scenarios" data-fa="سناریوهای پایه / صعودی / نزولی">Base / Upside / Downside Scenarios</div>
+      </div>
+      <div class="param-table-wrap fade-up">
+        <table class="param-table">
+          <thead><tr>
+            <th data-en="Metric" data-fa="معیار">Metric</th>
+            <th data-en="Downside (−20%)" data-fa="نزولی (−۲۰٪)">Downside (−20%)</th>
+            <th data-en="Base Case" data-fa="حالت پایه">Base Case</th>
+            <th data-en="Upside (+20%)" data-fa="صعودی (+۲۰٪)">Upside (+20%)</th>
+            <th data-en="Key Driver" data-fa="محرک کلیدی">Key Driver</th>
+          </tr></thead>
+          <tbody id="scenarioTableBody"></tbody>
+        </table>
+      </div>
+
+      <!-- FINANCIAL DELIVERABLES -->
+      <div class="fade-up">
+        <div class="sec-label" data-en="Financial Deliverables" data-fa="تحویل‌دادنی‌های مالی">Financial Deliverables</div>
+        <div class="sec-title" data-en="What the Financial Model Includes" data-fa="آنچه مدل مالی شامل می‌شود">What the Financial Model Includes</div>
+      </div>
+      <div class="deliv-grid fade-up">
+        <div class="deliv-card"><div class="deliv-icon">📊</div><div class="deliv-name" data-en="DCF Model (Excel)" data-fa="مدل DCF (Excel)">DCF Model (Excel)</div><div class="deliv-desc" data-en="Fully auditable Excel model with annual cash flows, NPV, IRR, and payback." data-fa="مدل Excel کاملاً قابل حسابرسی با جریان‌های نقدی سالانه، NPV، IRR و بازگشت سرمایه.">Fully auditable Excel model with annual cash flows, NPV, IRR, and payback.</div></div>
+        <div class="deliv-card"><div class="deliv-icon">🌪️</div><div class="deliv-name" data-en="Tornado Chart" data-fa="نمودار تورنادو">Tornado Chart</div><div class="deliv-desc" data-en="NPV and IRR sensitivity to all key variables with ±10%, ±20% scenarios." data-fa="حساسیت NPV و IRR به تمام متغیرهای کلیدی با سناریوهای ±۱۰٪، ±۲۰٪.">NPV and IRR sensitivity to all key variables with ±10%, ±20% scenarios.</div></div>
+        <div class="deliv-card"><div class="deliv-icon">🎲</div><div class="deliv-name" data-en="Monte Carlo" data-fa="مونت کارلو">Monte Carlo</div><div class="deliv-desc" data-en="10,000-iteration probabilistic NPV distribution. P10/P50/P90 outcomes." data-fa="توزیع NPV احتمالاتی با ۱۰,۰۰۰ تکرار. نتایج P10/P50/P90.">10,000-iteration probabilistic NPV distribution. P10/P50/P90 outcomes.</div></div>
+        <div class="deliv-card"><div class="deliv-icon">📋</div><div class="deliv-name" data-en="Scenario Manager" data-fa="مدیر سناریو">Scenario Manager</div><div class="deliv-desc" data-en="Base, upside, and downside scenarios with commodity price, CAPEX, and OPEX toggles." data-fa="سناریوهای پایه، صعودی و نزولی با کلیدهای قیمت کالا، CAPEX و OPEX.">Base, upside, and downside scenarios with commodity price, CAPEX, and OPEX toggles.</div></div>
+        <div class="deliv-card"><div class="deliv-icon">💰</div><div class="deliv-name" data-en="Tax & Royalty Model" data-fa="مدل مالیات و حق‌الامتیاز">Tax & Royalty Model</div><div class="deliv-desc" data-en="Country-specific tax, royalty, and depreciation schedules integrated into cash flow." data-fa="برنامه‌های مالیاتی، حق‌الامتیاز و استهلاک خاص کشور در جریان نقدی ادغام‌شده.">Country-specific tax, royalty, and depreciation schedules integrated into cash flow.</div></div>
+        <div class="deliv-card"><div class="deliv-icon">📈</div><div class="deliv-name" data-en="Breakeven Analysis" data-fa="تحلیل سربه‌سر">Breakeven Analysis</div><div class="deliv-desc" data-en="Commodity price, grade, and throughput breakeven points for NPV=0 and IRR=WACC." data-fa="نقاط سربه‌سر قیمت کالا، عیار و توان عملیاتی برای NPV=0 و IRR=WACC.">Commodity price, grade, and throughput breakeven points for NPV=0 and IRR=WACC.</div></div>
+        <div class="deliv-card"><div class="deliv-icon">🌐</div><div class="deliv-name" data-en="Bilingual EN/FA" data-fa="دوزبانه EN/FA">Bilingual EN/FA</div><div class="deliv-desc" data-en="Full Persian translation of financial model summary for Iranian regulatory and investor submissions." data-fa="ترجمه کامل فارسی خلاصه مدل مالی برای ارائه‌های نظارتی و سرمایه‌گذار ایرانی.">Full Persian translation of financial model summary for Iranian regulatory and investor submissions.</div></div>
+        <div class="deliv-card"><div class="deliv-icon">📞</div><div class="deliv-name" data-en="Model Walkthrough" data-fa="راهنمایی مدل">Model Walkthrough</div><div class="deliv-desc" data-en="2-hour video session to walk through model logic, assumptions, and key outputs with client team." data-fa="جلسه ویدیویی ۲ ساعته برای راهنمایی منطق مدل، فرضیات و خروجی‌های کلیدی با تیم مشتری.">2-hour video session to walk through model logic, assumptions, and key outputs with client team.</div></div>
+      </div>
+    </div>
+
+    <!-- ══ CASE STUDIES TAB ══ -->
+    <div class="tab-section" id="tab-casestudies">
+
+      <div class="fade-up">
+        <div class="sec-label" data-en="Project Experience" data-fa="تجربه پروژه">Project Experience</div>
+        <div class="sec-title" data-en="Selected Case Studies" data-fa="مطالعات موردی منتخب">Selected Case Studies</div>
+        <div class="sec-sub" data-en="A selection of representative feasibility and plant design studies completed by KDMine across multiple commodities and jurisdictions." data-fa="انتخابی از مطالعات امکان‌سنجی و طراحی کارخانه نماینده که توسط KDMine در چندین کالا و حوزه قضایی تکمیل شده است.">A selection of representative feasibility and plant design studies completed by KDMine across multiple commodities and jurisdictions.</div>
+      </div>
+
+      <div class="case-band fade-up">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:8px;">
+          <span style="font-size:28px;">🇮🇷</span>
+          <div>
+            <div style="font-size:17px;font-weight:800;color:#fff;" data-en="Iran & CIS Region — Specialist Coverage" data-fa="منطقه ایران و CIS — پوشش تخصصی">Iran & CIS Region — Specialist Coverage</div>
+            <div style="font-size:13px;color:var(--text-muted);" data-en="KDMine's Tehran-based team has completed feasibility studies for copper, iron ore, zinc, and gold projects across Iran, Kazakhstan, and Uzbekistan." data-fa="تیم مستقر در تهران KDMine مطالعات امکان‌سنجی برای پروژه‌های مس، سنگ آهن، روی و طلا در سراسر ایران، قزاقستان و ازبکستان تکمیل کرده است.">KDMine's Tehran-based team has completed feasibility studies for copper, iron ore, zinc, and gold projects across Iran, Kazakhstan, and Uzbekistan.</div>
+          </div>
+        </div>
+        <div class="case-grid">
+          <div class="case-card">
+            <div class="case-flag">🇮🇷</div>
+            <div class="case-title" data-en="Copper Porphyry — Central Iran" data-fa="پورفیری مس — مرکز ایران">Copper Porphyry — Central Iran</div>
+            <div class="case-sub" data-en="Pre-Feasibility Study (Class 3)" data-fa="پیش‌امکان‌سنجی (کلاس ۳)">Pre-Feasibility Study (Class 3)</div>
+            <div class="case-metrics">
+              <div class="case-metric"><span class="case-metric-label" data-en="Throughput" data-fa="توان عملیاتی">Throughput</span><span class="case-metric-val">15 Mtpa</span></div>
+              <div class="case-metric"><span class="case-metric-label" data-en="CAPEX" data-fa="CAPEX">CAPEX</span><span class="case-metric-val">$680M</span></div>
+              <div class="case-metric"><span class="case-metric-label" data-en="Circuit" data-fa="مدار">Circuit</span><span class="case-metric-val">SAG-Ball-Float</span></div>
+              <div class="case-metric"><span class="case-metric-label" data-en="Study Cost" data-fa="هزینه مطالعه">Study Cost</span><span class="case-metric-val">$72K</span></div>
+            </div>
+          </div>
+          <div class="case-card">
+            <div class="case-flag">🇮🇷</div>
+            <div class="case-title" data-en="Iron Ore — Yazd Province" data-fa="سنگ آهن — استان یزد">Iron Ore — Yazd Province</div>
+            <div class="case-sub" data-en="Scoping Study (Class 4)" data-fa="مطالعه اولیه (کلاس ۴)">Scoping Study (Class 4)</div>
+            <div class="case-metrics">
+              <div class="case-metric"><span class="case-metric-label" data-en="Throughput" data-fa="توان عملیاتی">Throughput</span><span class="case-metric-val">5 Mtpa</span></div>
+              <div class="case-metric"><span class="case-metric-label" data-en="CAPEX" data-fa="CAPEX">CAPEX</span><span class="case-metric-val">$210M</span></div>
+              <div class="case-metric"><span class="case-metric-label" data-en="Circuit" data-fa="مدار">Circuit</span><span class="case-metric-val">Crush-Mag Sep</span></div>
+              <div class="case-metric"><span class="case-metric-label" data-en="Study Cost" data-fa="هزینه مطالعه">Study Cost</span><span class="case-metric-val">$38K</span></div>
+            </div>
+          </div>
+          <div class="case-card">
+            <div class="case-flag">🇰🇿</div>
+            <div class="case-title" data-en="Gold — North Kazakhstan" data-fa="طلا — شمال قزاقستان">Gold — North Kazakhstan</div>
+            <div class="case-sub" data-en="Definitive Feasibility Study (Class 2)" data-fa="امکان‌سنجی قطعی (کلاس ۲)">Definitive Feasibility Study (Class 2)</div>
+            <div class="case-metrics">
+              <div class="case-metric"><span class="case-metric-label" data-en="Throughput" data-fa="توان عملیاتی">Throughput</span><span class="case-metric-val">3 Mtpa</span></div>
+              <div class="case-metric"><span class="case-metric-label" data-en="CAPEX" data-fa="CAPEX">CAPEX</span><span class="case-metric-val">$185M</span></div>
+              <div class="case-metric"><span class="case-metric-label" data-en="Circuit" data-fa="مدار">Circuit</span><span class="case-metric-val">SAG-Ball-CIL</span></div>
+              <div class="case-metric"><span class="case-metric-label" data-en="Study Cost" data-fa="هزینه مطالعه">Study Cost</span><span class="case-metric-val">$195K</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GLOBAL CASE STUDIES -->
+      <div class="fade-up">
+        <div class="sec-label" data-en="Global Projects" data-fa="پروژه‌های جهانی">Global Projects</div>
+        <div class="sec-title" data-en="International Case Studies" data-fa="مطالعات موردی بین‌المللی">International Case Studies</div>
+      </div>
+      <div class="case-grid fade-up" style="grid-template-columns:repeat(3,1fr);">
+        <div class="case-card">
+          <div class="case-flag">🇦🇺</div>
+          <div class="case-title" data-en="Gold-Copper — Western Australia" data-fa="طلا-مس — استرالیای غربی">Gold-Copper — Western Australia</div>
+          <div class="case-sub" data-en="Pre-Feasibility Study (Class 3)" data-fa="پیش‌امکان‌سنجی (کلاس ۳)">Pre-Feasibility Study (Class 3)</div>
+          <div class="case-metrics">
+            <div class="case-metric"><span class="case-metric-label">Throughput</span><span class="case-metric-val">8 Mtpa</span></div>
+            <div class="case-metric"><span class="case-metric-label">CAPEX</span><span class="case-metric-val">$420M</span></div>
+            <div class="case-metric"><span class="case-metric-label">Circuit</span><span class="case-metric-val">SABC-Float-CIL</span></div>
+            <div class="case-metric"><span class="case-metric-label">NPV (8%)</span><span class="case-metric-val">$280M</span></div>
+          </div>
+        </div>
+        <div class="case-card">
+          <div class="case-flag">🇿🇦</div>
+          <div class="case-title" data-en="Platinum — Limpopo, South Africa" data-fa="پلاتین — لیمپوپو، آفریقای جنوبی">Platinum — Limpopo, South Africa</div>
+          <div class="case-sub" data-en="Scoping Study (Class 4)" data-fa="مطالعه اولیه (کلاس ۴)">Scoping Study (Class 4)</div>
+          <div class="case-metrics">
+            <div class="case-metric"><span class="case-metric-label">Throughput</span><span class="case-metric-val">2 Mtpa</span></div>
+            <div class="case-metric"><span class="case-metric-label">CAPEX</span><span class="case-metric-val">$145M</span></div>
+            <div class="case-metric"><span class="case-metric-label">Circuit</span><span class="case-metric-val">MF2 Flotation</span></div>
+            <div class="case-metric"><span class="case-metric-label">IRR</span><span class="case-metric-val">22%</span></div>
+          </div>
+        </div>
+        <div class="case-card">
+          <div class="case-flag">🇵🇪</div>
+          <div class="case-title" data-en="Copper-Moly — Peru" data-fa="مس-مولیبدن — پرو">Copper-Moly — Peru</div>
+          <div class="case-sub" data-en="Definitive Feasibility Study (Class 2)" data-fa="امکان‌سنجی قطعی (کلاس ۲)">Definitive Feasibility Study (Class 2)</div>
+          <div class="case-metrics">
+            <div class="case-metric"><span class="case-metric-label">Throughput</span><span class="case-metric-val">20 Mtpa</span></div>
+            <div class="case-metric"><span class="case-metric-label">CAPEX</span><span class="case-metric-val">$1.1B</span></div>
+            <div class="case-metric"><span class="case-metric-label">Circuit</span><span class="case-metric-val">HPGR-Float</span></div>
+            <div class="case-metric"><span class="case-metric-label">NPV (8%)</span><span class="case-metric-val">$640M</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-band fade-up">
+      <h3 data-en="Start Your <em>Feasibility Study</em> Today" data-fa="مطالعه <em>امکان‌سنجی</em> خود را امروز شروع کنید">Start Your <em>Feasibility Study</em> Today</h3>
+      <p data-en="Tell us your commodity, project stage, and target study class — we'll respond within 24 hours with a fixed-fee proposal and data request checklist." data-fa="کالا، مرحله پروژه و کلاس مطالعه هدف خود را به ما بگویید — ما در ۲۴ ساعت با یک پیشنهاد با هزینه ثابت و چک‌لیست درخواست داده پاسخ خواهیم داد.">Tell us your commodity, project stage, and target study class — we'll respond within 24 hours with a fixed-fee proposal and data request checklist.</p>
+      <div class="cta-btns">
+        <button class="btn-gold"><i class="fas fa-paper-plane"></i> <span data-en="Request a Study Proposal" data-fa="درخواست پیشنهاد مطالعه">Request a Study Proposal</span></button>
+        <button class="btn-outline"><i class="fas fa-tags"></i> <span data-en="View Pricing" data-fa="مشاهده قیمت‌گذاری">View Pricing</span></button>
+        <button class="btn-outline"><i class="fas fa-calculator"></i> <span data-en="CAPEX Calculator" data-fa="ماشین‌حساب CAPEX">CAPEX Calculator</span></button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-mini">
+    <p data-en="© 2026 KDMine Consultancy. All financial metrics are reference values for illustrative purposes only." data-fa="© ۱۴۰۵ مشاوره KDMine. تمام معیارهای مالی مقادیر مرجع فقط برای اهداف تصویری هستند.">© 2026 KDMine Consultancy. All financial metrics are reference values for illustrative purposes only.</p>
+    <a href="index.html" data-en="← Back to Main Site" data-fa="← بازگشت به سایت اصلی">← Back to Main Site</a>
+  </div>
+
+  <script>
+  // ── DESIGN PARAMETERS DATA ───────────────────────────────────
+  const paramData = [
+    {group:true, param:'Throughput & Sizing'},
+    {param:'Plant Throughput',range:'1–50 Mtpa',capex:'High — linear scaling',opex:'Low — economies of scale',note:'Dominant CAPEX driver'},
+    {param:'Design Availability',range:'85–92%',capex:'Medium — redundancy',opex:'High — maintenance cost',note:'Affects equipment count'},
+    {param:'Target Grind Size P80',range:'75–150 µm',capex:'High — mill sizing',opex:'High — energy cost',note:'Finer = more energy'},
+    {group:true, param:'Metallurgical Parameters'},
+    {param:'Head Grade',range:'0.3–5 g/t Au',capex:'Low',opex:'Low',note:'Drives revenue, not cost'},
+    {param:'Recovery Rate',range:'85–96%',capex:'Medium — circuit complexity',opex:'Medium — reagent use',note:'Metallurgical test work'},
+    {param:'Ore Hardness (BWi)',range:'8–22 kWh/t',capex:'High — mill power',opex:'High — energy & media',note:'Critical for mill sizing'},
+    {group:true, param:'Site & Location'},
+    {param:'Altitude',range:'0–5,000 m',capex:'Medium — equipment derating',opex:'Medium — power cost',note:'High altitude = more power'},
+    {param:'Water Availability',range:'Low / Medium / High',capex:'High — water supply infra',opex:'Medium — pumping cost',note:'Arid sites: +15–25% CAPEX'},
+    {param:'Distance to Grid Power',range:'0–500 km',capex:'High — power line / genset',opex:'High — diesel vs grid',note:'Remote = diesel penalty'},
+    {group:true, param:'Regulatory & Environmental'},
+    {param:'Tailings Disposal Method',range:'Wet / Paste / Dry Stack',capex:'High — TSF design',opex:'Medium — pumping',note:'Dry stack: +20–40% TSF cost'},
+    {param:'Seismic Zone',range:'Low / Medium / High',capex:'Medium — structural design',opex:'Low',note:'High seismic = +10–20% civil'},
+  ];
+
+  // ── STUDY TABLE DATA ─────────────────────────────────────────
+  const studyRows = [
+    {comp:'Mine Plan',c5:'✓ Conceptual',c4:'✓ Parametric',c3:'✓ Detailed',c2:'✓ Optimised',c1:'✓ Final'},
+    {comp:'Process Flowsheet',c5:'✓ Block',c4:'✓ PFD',c3:'✓ PFD+P&ID',c2:'✓ Detailed P&ID',c1:'✓ IFC'},
+    {comp:'Equipment List',c5:'✓ Major only',c4:'✓ All major',c3:'✓ Full list',c2:'✓ Vendor quotes',c1:'✓ Firm quotes'},
+    {comp:'CAPEX Accuracy',c5:'±50%',c4:'±30%',c3:'±20%',c2:'±10%',c1:'±5%'},
+    {comp:'OPEX Accuracy',c5:'±40%',c4:'±25%',c3:'±15%',c2:'±10%',c1:'±5%'},
+    {comp:'Financial Model',c5:'✗',c4:'✓ Simple',c3:'✓ DCF',c2:'✓ Full DCF',c1:'✓ Bankable'},
+    {comp:'Sensitivity Analysis',c5:'✗',c4:'✓ Basic',c3:'✓ Tornado',c2:'✓ Monte Carlo',c1:'✓ Full risk'},
+    {comp:'Site Layout',c5:'✓ Sketch',c4:'✓ Conceptual',c3:'✓ Preliminary',c2:'✓ Detailed',c1:'✓ Final'},
+    {comp:'Infrastructure Design',c5:'✗',c4:'✓ Conceptual',c3:'✓ Preliminary',c2:'✓ Detailed',c1:'✓ Final'},
+    {comp:'Environmental Assessment',c5:'✗',c4:'✓ Screening',c3:'✓ Scoping',c2:'✓ Full EIA',c1:'✓ Approved'},
+    {comp:'NI 43-101 / JORC Ready',c5:'✗',c4:'✗',c3:'✓ PEA',c2:'✓ Full',c1:'✓ Full'},
+    {comp:'Lender / Board Ready',c5:'✗',c4:'✗',c3:'✗',c2:'✓ Yes',c1:'✓ Yes'},
+  ];
+
+  // ── FINANCIAL METRICS DATA ───────────────────────────────────
+  const finMetrics = [
+    {name:'NPV (8% discount)',val:'$320M',note:'Base case, 10 Mtpa gold'},
+    {name:'IRR (ungeared)',val:'24.8%',note:'Pre-tax, real terms'},
+    {name:'Payback Period',val:'4.2 years',note:'From first production'},
+    {name:'CAPEX (total)',val:'$500M',note:'Including contingency'},
+    {name:'AISC',val:'$985/oz',note:'All-in sustaining cost'},
+    {name:'Mine Life',val:'18 years',note:'At 10 Mtpa throughput'},
+  ];
+
+  // ── SCENARIO TABLE DATA ──────────────────────────────────────
+  const scenarioData = [
+    {metric:'Gold Price',down:'$1,600/oz',base:'$2,000/oz',up:'$2,400/oz',driver:'Commodity Price'},
+    {metric:'NPV (8%)',down:'$148M',base:'$320M',up:'$492M',driver:'Gold Price'},
+    {metric:'IRR',down:'16.2%',base:'24.8%',up:'33.1%',driver:'Gold Price'},
+    {metric:'Payback',down:'6.1 yrs',base:'4.2 yrs',up:'3.1 yrs',driver:'Gold Price'},
+    {metric:'CAPEX',down:'$600M (+20%)',base:'$500M',up:'$400M (−20%)',driver:'Cost Overrun Risk'},
+    {metric:'NPV @ CAPEX±20%',down:'$220M',base:'$320M',up:'$420M',driver:'CAPEX'},
+    {metric:'OPEX',down:'+20% ($33.6/t)',base:'$28/t',up:'−20% ($22.4/t)',driver:'Diesel & Labour'},
+    {metric:'NPV @ OPEX±20%',down:'$268M',base:'$320M',up:'$372M',driver:'OPEX'},
+    {metric:'Throughput',down:'8 Mtpa (−20%)',base:'10 Mtpa',up:'12 Mtpa (+20%)',driver:'Mill Performance'},
+    {metric:'NPV @ Throughput±20%',down:'$198M',base:'$320M',up:'$438M',driver:'Throughput'},
+  ];
+
+  // ── RENDER PARAM TABLE ───────────────────────────────────────
+  function renderParamTable() {
+    document.getElementById('paramTableBody').innerHTML = paramData.map(r => {
+      if (r.group) return `<tr class="param-group"><td colspan="5">${r.param}</td></tr>`;
+      return `<tr>
+        <td>${r.param}</td>
+        <td style="color:var(--blue);">${r.range}</td>
+        <td style="color:var(--orange);">${r.capex}</td>
+        <td style="color:var(--purple);">${r.opex}</td>
+        <td style="font-size:11px;">${r.note}</td>
+      </tr>`;
+    }).join('');
+  }
+
+  // ── RENDER STUDY TABLE ───────────────────────────────────────
+  function renderStudyTable() {
+    const style = v => {
+      if (v.startsWith('✓')) return `style="color:var(--green);"`;
+      if (v.startsWith('✗')) return `style="color:var(--red);"`;
+      if (v.includes('±')) return `style="color:var(--gold);font-weight:700;"`;
+      return '';
+    };
+    document.getElementById('studyTableBody').innerHTML = studyRows.map(r => `
+      <tr>
+        <td>${r.comp}</td>
+        <td ${style(r.c5)}>${r.c5}</td>
+        <td ${style(r.c4)}>${r.c4}</td>
+        <td ${style(r.c3)} style="background:rgba(201,168,76,0.04);">${r.c3}</td>
+        <td ${style(r.c2)}>${r.c2}</td>
+        <td ${style(r.c1)}>${r.c1}</td>
+      </tr>`).join('');
+  }
+
+  // ── RENDER FIN METRICS ───────────────────────────────────────
+  function renderFinMetrics() {
+    document.getElementById('finMetrics').innerHTML = finMetrics.map(m => `
+      <div class="fin-metric">
+        <div><div class="fin-metric-name">${m.name}</div><div class="fin-metric-note">${m.note}</div></div>
+        <div class="fin-metric-val">${m.val}</div>
+      </div>`).join('');
+  }
+
+  // ── RENDER SCENARIO TABLE ────────────────────────────────────
+  function renderScenarioTable() {
+    document.getElementById('scenarioTableBody').innerHTML = scenarioData.map(r => `
+      <tr>
+        <td>${r.metric}</td>
+        <td style="color:var(--red);">${r.down}</td>
+        <td style="color:var(--gold);font-weight:700;">${r.base}</td>
+        <td style="color:var(--green);">${r.up}</td>
+        <td style="font-size:11px;color:var(--text-muted);">${r.driver}</td>
+      </tr>`).join('');
+  }
+
+  // ── CHARTS ───────────────────────────────────────────────────
+  function buildPlantPie() {
+    new Chart(document.getElementById('plantPieChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Comminution','Leaching/Flotation','Civil & Structural','Power & Utilities','Thickening','Gold Room','Other'],
+        datasets: [{
+          data: [40,20,28,8,6,4,4],
+          backgroundColor: ['#C9A84C','#0EA5E9','#A855F7','#F97316','#22C55E','#E8C97A','#7A8BA8'],
+          borderColor: '#161E2E', borderWidth: 3
+        }]
+      },
+      options: {
+        cutout: '62%',
+        plugins: {
+          legend: { position:'right', labels:{ color:'#7A8BA8', font:{size:10}, padding:8 }},
+          tooltip: { callbacks:{ label: ctx => `${ctx.label}: ${ctx.parsed}%` }}
+        }
+      }
+    });
+  }
+
+  function buildCashflowChart() {
+    const years = ['Y-3','Y-2','Y-1','Y1','Y2','Y3','Y4','Y5','Y6','Y7','Y8','Y10','Y12','Y15','Y18'];
+    const cumCF = [-80,-200,-500,-480,-380,-220,-60,120,310,480,640,900,1100,1300,1420];
+    new Chart(document.getElementById('cashflowChart'), {
+      type: 'line',
+      data: {
+        labels: years,
+        datasets: [{
+          label: 'Cumulative Cash Flow ($M)',
+          data: cumCF,
+          borderColor: '#C9A84C',
+          backgroundColor: ctx => {
+            const v = ctx.raw;
+            return v < 0 ? 'rgba(239,68,68,0.08)' : 'rgba(34,197,94,0.08)';
+          },
+          fill: true, tension: 0.4, pointRadius: 4,
+          pointBackgroundColor: ctx => cumCF[ctx.dataIndex] < 0 ? '#EF4444' : '#22C55E',
+          segment: { borderColor: ctx => ctx.p0.parsed.y < 0 ? '#EF4444' : '#22C55E' }
+        }]
+      },
+      options: {
+        plugins: { legend:{ labels:{ color:'#7A8BA8', font:{size:10} }}},
+        scales: {
+          x: { ticks:{ color:'#7A8BA8', font:{size:10} }, grid:{ color:'rgba(255,255,255,0.04)' }},
+          y: { ticks:{ color:'#7A8BA8', font:{size:10}, callback: v => '$'+v+'M' }, grid:{ color:'rgba(255,255,255,0.04)' }}
+        }
+      }
+    });
+  }
+
+  function buildTornadoChart() {
+    const vars = ['Gold Price','Throughput','CAPEX','Head Grade','OPEX','Recovery','Discount Rate','FX Rate'];
+    const low  = [-172,-122,-100,-88,-52,-40,-28,-18];
+    const high = [ 172, 118,  100,  84,  52,  38,  24,  16];
+    new Chart(document.getElementById('tornadoChart'), {
+      type: 'bar',
+      data: {
+        labels: vars,
+        datasets: [
+          { label:'Downside (−20%)', data: low,  backgroundColor:'rgba(239,68,68,0.7)',  borderRadius:4 },
+          { label:'Upside (+20%)',   data: high, backgroundColor:'rgba(34,197,94,0.7)',  borderRadius:4 }
+        ]
+      },
+      options: {
+        indexAxis: 'y',
+        plugins: { legend:{ labels:{ color:'#7A8BA8', font:{size:11} }}},
+        scales: {
+          x: {
+            ticks:{ color:'#7A8BA8', callback: v => (v>0?'+':'')+v+'M' },
+            grid:{ color:'rgba(255,255,255,0.04)' },
+            title:{ display:true, text:'Change in NPV ($M) from Base $320M', color:'#7A8BA8', font:{size:10} }
+          },
+          y: { ticks:{ color:'#7A8BA8' }, grid:{ color:'rgba(255,255,255,0.04)' }}
+        }
+      }
+    });
+  }
+
+  // ── TAB SWITCH ───────────────────────────────────────────────
+  function switchTab(id, btn) {
+    document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.mtab').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab-'+id).classList.add('active');
+    btn.classList.add('active');
+    document.querySelectorAll('#tab-'+id+' .fade-up').forEach(el => {
+      el.classList.remove('visible');
+      setTimeout(() => obs.observe(el), 50);
+    });
+  }
+
+  // ── LANGUAGE ─────────────────────────────────────────────────
+  let currentLang = 'en';
+  function setLang(lang) {
+    currentLang = lang;
+    document.getElementById('btn-en').classList.toggle('active', lang==='en');
+    document.getElementById('btn-fa').classList.toggle('active', lang==='fa');
+    const body = document.getElementById('body');
+    if (lang==='fa') { body.classList.add('fa'); body.setAttribute('dir','rtl'); }
+    else             { body.classList.remove('fa'); body.setAttribute('dir','ltr'); }
+    document.querySelectorAll('[data-'+lang+']').forEach(el => {
+      const v = el.getAttribute('data-'+lang);
+      if (!v) return;
+      if (el.tagName==='INPUT'||el.tagName==='TEXTAREA') el.placeholder = v;
+      else el.innerHTML = v;
+    });
+  }
+
+  // ── FADE UP ──────────────────────────────────────────────────
+  const obs = new IntersectionObserver(entries =>
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.05 }
+  );
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  // ── INIT ─────────────────────────────────────────────────────
+  renderParamTable();
+  renderStudyTable();
+  renderFinMetrics();
+  renderScenarioTable();
+  buildPlantPie();
+  buildCashflowChart();
+  buildTornadoChart();
+  </script>
+</body>
+</html>
+      </div>
+      <div class="study-steps fade-up">
+        <div class="sstep"><div class="sstep-num" data-en="Phase 1" data-fa="مرحله ۱">Phase 1</div><div class="sstep-title" data-en="Scope & Data" data-fa="محدوده و داده">Scope & Data</div><div class="sstep-desc" data-en="Define study class, collect geological, metallurgical, and site data. Issue data request checklist." data-fa="تعریف کلاس مطالعه، جمع‌آوری داده‌های زمین‌شناسی، متالورژیکی و سایت. صدور چک‌لیست درخواست داده.">Define study class, collect geological, metallurgical, and site data. Issue data request checklist.</div></div>
+        <div class="sstep"><div class="sstep-num" data-en="Phase 2" data-fa="مرحله ۲">Phase 2</div><div class="sstep-title" data-en="Design & Engineering" data-fa="طراحی و مهندسی">Design & Engineering</div><div class="sstep-desc" data-en="Develop process flowsheet, equipment list, site layout, and infrastructure design to appropriate study level." data-fa="توسعه فلوشیت فرآیند، فهرست تجهیزات، طرح سایت و طراحی زیرساخت به سطح مطالعه مناسب.">

@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Equipment Selection & International Procurement | KDMine</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      --gold:#C9A84C;--gold-light:#E8C97A;--gold-dark:#A07830;
+      --dark:#080C16;--dark2:#0F1520;--dark3:#161E2E;--dark4:#1E2840;
+      --text:#E8EDF5;--text-muted:#7A8BA8;
+      --border:rgba(201,168,76,0.2);--border2:rgba(255,255,255,0.06);
+      --green:#22C55E;--blue:#0EA5E9;--purple:#A855F7;--red:#EF4444;--orange:#F97316;
+    }
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;background:var(--dark);color:var(--text);overflow-x:hidden;}
+    body.fa{font-family:'Vazirmatn',sans-serif;direction:rtl;}
+    ::-webkit-scrollbar{width:5px;}
+    ::-webkit-scrollbar-track{background:var(--dark2);}
+    ::-webkit-scrollbar-thumb{background:var(--gold-dark);border-radius:3px;}
+
+    /* LANG BAR */
+    .lang-bar{position:fixed;top:0;left:0;right:0;z-index:2000;height:36px;background:var(--gold-dark);display:flex;align-items:center;justify-content:flex-end;padding:0 5%;gap:12px;}
+    .lang-btn{padding:4px 14px;border-radius:20px;border:none;cursor:pointer;font-size:12px;font-weight:700;transition:.2s;}
+    .lang-btn.active{background:var(--dark);color:var(--gold);}
+    .lang-btn:not(.active){background:rgba(0,0,0,0.2);color:rgba(0,0,0,0.7);}
+
+    /* NAV */
+    nav{position:fixed;top:36px;left:0;right:0;z-index:1000;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:70px;background:rgba(8,12,22,0.95);backdrop-filter:blur(24px);border-bottom:1px solid var(--border2);}
+    .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+    .nav-logo-icon{width:42px;height:42px;border-radius:11px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));display:flex;align-items:center;justify-content:center;font-weight:900;font-size:17px;color:var(--dark);}
+    .nav-logo-text{font-size:21px;font-weight:800;color:#fff;}
+    .nav-logo-text span{color:var(--gold);}
+    .nav-back{display:flex;align-items:center;gap:8px;padding:9px 20px;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text);font-size:13px;font-weight:600;text-decoration:none;transition:.2s;}
+    .nav-back:hover{border-color:var(--gold);color:var(--gold);}
+
+    /* HERO */
+    .page-hero{padding:130px 5% 72px;position:relative;overflow:hidden;}
+    .hero-bg{position:absolute;inset:0;background:linear-gradient(160deg,#080C16,#0a1420,#080C16);}
+    .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(14,165,233,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(14,165,233,0.03) 1px,transparent 1px);background-size:48px 48px;}
+    .hero-glow-l{position:absolute;top:-80px;left:5%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.07),transparent 70%);}
+    .hero-glow-r{position:absolute;bottom:-80px;right:5%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(14,165,233,0.05),transparent 70%);}
+    .hero-inner{position:relative;z-index:2;max-width:900px;}
+    .breadcrumb{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-muted);margin-bottom:18px;}
+    .breadcrumb a{color:var(--gold);text-decoration:none;}
+    .breadcrumb span{opacity:.5;}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border-radius:20px;background:rgba(14,165,233,0.1);border:1px solid rgba(14,165,233,0.25);font-size:12px;font-weight:700;color:var(--blue);margin-bottom:18px;}
+    .page-hero h1{font-size:clamp(34px,5vw,62px);font-weight:900;color:#fff;letter-spacing:-2px;margin-bottom:16px;line-height:1.05;}
+    .page-hero h1 em{background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal;}
+    .page-hero p{font-size:16px;color:var(--text-muted);line-height:1.8;max-width:700px;margin-bottom:36px;}
+    .hero-kpis{display:flex;gap:36px;flex-wrap:wrap;}
+    .hkpi .num{font-size:30px;font-weight:900;color:#fff;letter-spacing:-1px;}
+    .hkpi .num em{color:var(--gold);font-style:normal;font-size:16px;}
+    .hkpi .lbl{font-size:11px;color:var(--text-muted);margin-top:3px;}
+
+    /* LAYOUT */
+    .wrap{padding:0 5% 72px;max-width:1400px;margin:0 auto;}
+    .sec-label{font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;}
+    .sec-title{font-size:28px;font-weight:900;color:#fff;letter-spacing:-.5px;margin-bottom:10px;}
+    .sec-sub{font-size:15px;color:var(--text-muted);line-height:1.75;margin-bottom:36px;max-width:720px;}
+
+    /* MAIN TABS */
+    .main-tabs{display:flex;gap:6px;margin-bottom:36px;flex-wrap:wrap;}
+    .mtab{padding:11px 22px;border-radius:12px;border:1px solid var(--border2);background:rgba(255,255,255,0.04);color:var(--text-muted);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:.2s;display:flex;align-items:center;gap:8px;}
+    .mtab.active{background:rgba(14,165,233,0.1);border-color:rgba(14,165,233,0.3);color:var(--blue);}
+    .tab-section{display:none;}
+    .tab-section.active{display:block;}
+
+    /* ── EQUIPMENT SELECTION TAB ── */
+    .eq-intro{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;margin-bottom:48px;align-items:start;}
+    .eq-intro-text p{font-size:14px;color:var(--text-muted);line-height:1.8;margin-bottom:14px;}
+    .eq-steps{display:flex;flex-direction:column;gap:10px;}
+    .eq-step{background:var(--dark3);border:1px solid var(--border2);border-radius:14px;padding:16px 18px;display:flex;align-items:flex-start;gap:14px;transition:.3s;}
+    .eq-step:hover{border-color:var(--border);}
+    .eq-step-num{width:32px;height:32px;border-radius:9px;background:rgba(201,168,76,0.12);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:var(--gold);flex-shrink:0;}
+    .eq-step-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;}
+    .eq-step-desc{font-size:12px;color:var(--text-muted);line-height:1.5;}
+
+    /* EQUIPMENT CATEGORY CARDS */
+    .eq-cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:48px;}
+    .eq-cat-card{background:var(--dark3);border:1px solid var(--border2);border-radius:20px;padding:24px;cursor:pointer;transition:.3s;}
+    .eq-cat-card:hover,.eq-cat-card.active{border-color:var(--border);background:rgba(201,168,76,0.04);}
+    .eq-cat-icon{font-size:32px;margin-bottom:12px;}
+    .eq-cat-title{font-size:15px;font-weight:800;color:#fff;margin-bottom:6px;}
+    .eq-cat-sub{font-size:12px;color:var(--text-muted);margin-bottom:14px;line-height:1.5;}
+    .eq-cat-count{font-size:11px;font-weight:700;color:var(--gold);}
+    .eq-cat-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:10px;}
+    .eq-tag{padding:3px 8px;border-radius:5px;background:rgba(255,255,255,0.04);border:1px solid var(--border2);font-size:10px;color:var(--text-muted);}
+
+    /* EQUIPMENT DETAIL TABLE */
+    .eq-table-wrap{background:var(--dark3);border:1px solid var(--border2);border-radius:20px;overflow:hidden;margin-bottom:48px;}
+    .eq-table-header{padding:18px 22px;border-bottom:1px solid var(--border2);display:flex;align-items:center;justify-content:space-between;}
+    .eq-table-title{font-size:14px;font-weight:700;color:#fff;}
+    .eq-filter-row{display:flex;gap:8px;}
+    .eq-filter{padding:6px 14px;border-radius:8px;border:1px solid var(--border2);background:var(--dark4);color:var(--text-muted);font-size:12px;font-family:inherit;cursor:pointer;transition:.2s;}
+    .eq-filter.active{border-color:var(--border);color:var(--gold);}
+    .eq-table{width:100%;border-collapse:collapse;}
+    .eq-table thead tr{background:var(--dark4);}
+    .eq-table th{padding:11px 16px;text-align:left;font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border2);}
+    .eq-table td{padding:11px 16px;font-size:12px;color:var(--text-muted);border-bottom:1px solid var(--border2);}
+    .eq-table tr:last-child td{border-bottom:none;}
+    .eq-table tr:hover td{background:rgba(255,255,255,0.02);}
+    .eq-table td:first-child{font-weight:700;color:#fff;}
+    .oem-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:5px;font-size:10px;font-weight:700;}
+    .oem-cat{background:rgba(201,168,76,0.1);color:var(--gold);}
+    .oem-proc{background:rgba(14,165,233,0.1);color:var(--blue);}
+    .oem-inf{background:rgba(34,197,94,0.1);color:var(--green);}
+
+    /* SELECTION CRITERIA */
+    .criteria-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:48px;}
+    .crit-card{background:var(--dark3);border:1px solid var(--border2);border-radius:16px;padding:20px;text-align:center;transition:.3s;}
+    .crit-card:hover{border-color:var(--border);}
+    .crit-icon{font-size:26px;margin-bottom:10px;}
+    .crit-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:6px;}
+    .crit-desc{font-size:11px;color:var(--text-muted);line-height:1.55;}
+
+    /* ── PROCUREMENT TAB ── */
+    .proc-overview{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:48px;}
+    .proc-text p{font-size:14px;color:var(--text-muted);line-height:1.8;margin-bottom:14px;}
+    .proc-chart-card{background:var(--dark3);border:1px solid var(--border2);border-radius:20px;padding:24px;}
+
+    /* PROCUREMENT TIMELINE */
+    .proc-timeline{margin-bottom:48px;}
+    .ptl-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:0;position:relative;}
+    .ptl-grid::before{content:'';position:absolute;top:28px;left:10%;right:10%;height:2px;background:linear-gradient(90deg,var(--gold),var(--blue));z-index:0;}
+    .ptl-item{text-align:center;position:relative;z-index:1;}
+    .ptl-dot{width:56px;height:56px;border-radius:50%;border:2px solid var(--gold);background:var(--dark3);display:flex;align-items:center;justify-content:center;font-size:20px;margin:0 auto 12px;}
+    .ptl-phase{font-size:11px;font-weight:700;color:var(--gold);margin-bottom:4px;}
+    .ptl-title{font-size:12px;font-weight:700;color:#fff;margin-bottom:4px;}
+    .ptl-weeks{font-size:10px;color:var(--text-muted);}
+
+    /* IMPORT DUTIES TABLE */
+    .duty-table-wrap{background:var(--dark3);border:1px solid var(--border2);border-radius:20px;overflow:hidden;margin-bottom:48px;}
+    .duty-table{width:100%;border-collapse:collapse;}
+    .duty-table thead tr{background:var(--dark4);}
+    .duty-table th{padding:11px 16px;text-align:left;font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border2);}
+    .duty-table td{padding:11px 16px;font-size:12px;color:var(--text-muted);border-bottom:1px solid var(--border2);}
+    .duty-table tr:last-child td{border-bottom:none;}
+    .duty-table tr:hover td{background:rgba(255,255,255,0.02);}
+    .duty-table td:first-child{font-weight:700;color:#fff;}
+    .duty-low{color:var(--green);font-weight:700;}
+    .duty-med{color:var(--orange);font-weight:700;}
+    .duty-high{color:var(--red);font-weight:700;}
+    .flag{font-size:16px;margin-right:6px;}
+
+    /* VENDOR COMPARISON */
+    .vendor-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:48px;}
+    .vendor-card{background:var(--dark3);border:1px solid var(--border2);border-radius:18px;padding:22px;transition:.3s;}
+    .vendor-card:hover{border-color:var(--border);}
+    .vendor-header{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+    .vendor-av{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;flex-shrink:0;}
+    .vendor-name{font-size:14px;font-weight:800;color:#fff;}
+    .vendor-origin{font-size:11px;color:var(--text-muted);}
+    .vendor-specs{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;}
+    .vs-row{display:flex;justify-content:space-between;font-size:12px;}
+    .vs-label{color:var(--text-muted);}
+    .vs-val{color:#fff;font-weight:600;}
+    .vendor-tags{display:flex;gap:5px;flex-wrap:wrap;}
+    .vendor-tag{padding:3px 8px;border-radius:5px;background:rgba(255,255,255,0.04);border:1px solid var(--border2);font-size:10px;color:var(--text-muted);}
+
+    /* LOGISTICS */
+    .logistics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:48px;}
+    .log-card{background:var(--dark3);border:1px solid var(--border2);border-radius:16px;padding:20px;transition:.3s;}
+    .log-card:hover{border-color:var(--border);}
+    .log-icon{font-size:28px;margin-bottom:10px;}
+    .log-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:6px;}
+    .log-desc{font-size:11px;color:var(--text-muted);line-height:1.6;}
+    .log-cost{font-size:14px;font-weight:800;color:var(--gold);margin-top:10px;}
+
+    /* IRAN SPECIAL */
+    .iran-band{background:linear-gradient(135deg,rgba(201,168,76,0.06),rgba(14,165,233,0.04));border:1px solid var(--border);border-radius:20px;padding:32px;margin-bottom:48px;}
+    .iran-band-header{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
+    .iran-flag{font-size:32px;}
+    .iran-title{font-size:18px;font-weight:800;color:#fff;}
+    .iran-sub{font-size:13px;color:var(--text-muted);}
+    .iran-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+    .iran-item{background:var(--dark4);border:1px solid var(--border2);border-radius:12px;padding:16px;}
+    .iran-item-title{font-size:12px;font-weight:700;color:var(--gold);margin-bottom:6px;}
+    .iran-item-desc{font-size:12px;color:var(--text-muted);line-height:1.6;}
+
+    /* CTA */
+    .cta-band{background:linear-gradient(135deg,var(--dark3),var(--dark4));border:1px solid var(--border);border-radius:24px;padding:52px;text-align:center;margin-bottom:56px;}
+    .cta-band h3{font-size:32px;font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:12px;}
+    .cta-band h3 em{background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal;}
+    .cta-band p{font-size:15px;color:var(--text-muted);margin-bottom:28px;}
+    .cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+    .btn-gold{padding:13px 28px;border-radius:11px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--dark);font-weight:700;font-size:14px;border:none;cursor:pointer;font-family:inherit;transition:.2s;display:inline-flex;align-items:center;gap:8px;}
+    .btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,0.4);}
+    .btn-outline{padding:13px 28px;border-radius:11px;border:1px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text);font-weight:600;font-size:14px;cursor:pointer;font-family:inherit;transition:.2s;display:inline-flex;align-items:center;gap:8px;}
+    .btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+
+    .footer-mini{background:var(--dark2);border-top:1px solid var(--border2);padding:28px 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;}
+    .footer-mini p{font-size:13px;color:var(--text-muted);}
+    .footer-mini a{font-size:13px;color:var(--gold);text-decoration:none;}
+
+    .fade-up{opacity:0;transform:translateY(22px);transition:opacity .5s,transform .5s;}
+    .fade-up.visible{opacity:1;transform:translateY(0);}
+
+    @media(max-width:1100px){.eq-intro{grid-template-columns:1fr;}.eq-cat-grid{grid-template-columns:1fr 1fr;}.proc-overview{grid-template-columns:1fr;}.vendor-grid{grid-template-columns:1fr 1fr;}.criteria-grid{grid-template-columns:1fr 1fr;}.logistics-grid{grid-template-columns:1fr 1fr;}.iran-grid{grid-template-columns:1fr 1fr;}.ptl-grid{grid-template-columns:repeat(3,1fr);}.ptl-grid::before{display:none;}}
+    @media(max-width:768px){.eq-cat-grid{grid-template-columns:1fr;}.vendor-grid{grid-template-columns:1fr;}.criteria-grid{grid-template-columns:1fr 1fr;}.logistics-grid{grid-template-columns:1fr 1fr;}.iran-grid{grid-template-columns:1fr;}.ptl-grid{grid-template-columns:1fr 1fr;}}
+  </style>
+</head>
+<body id="body">
+
+  <div class="lang-bar">
+    <button class="lang-btn active" id="btn-en" onclick="setLang('en')">🇬🇧 English</button>
+    <button class="lang-btn" id="btn-fa" onclick="setLang('fa')">🇮🇷 فارسی</button>
+  </div>
+
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">KD</div>
+      <span class="nav-logo-text">KD<span>Mine</span></span>
+    </a>
+    <a href="index.html" class="nav-back"><i class="fas fa-arrow-left"></i> <span data-en="Back to Home" data-fa="بازگشت به خانه">Back to Home</span></a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="page-hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-glow-l"></div>
+    <div class="hero-glow-r"></div>
+    <div class="hero-inner fade-up">
+      <div class="breadcrumb">
+        <a href="index.html" data-en="Home" data-fa="خانه">Home</a><span>/</span>
+        <span data-en="Equipment & Procurement" data-fa="تجهیزات و تأمین">Equipment & Procurement</span>
+      </div>
+      <div class="hero-badge"><i class="fas fa-truck-loading"></i> <span data-en="Mining Fleet · Process Plant · International Sourcing · Import Duties" data-fa="ناوگان معدن · کارخانه فرآوری · تأمین بین‌المللی · حقوق گمرکی">Mining Fleet · Process Plant · International Sourcing · Import Duties</span></div>
+      <h1><span data-en="Equipment" data-fa="انتخاب">Equipment</span> <em data-en="Selection" data-fa="تجهیزات">Selection</em><br/><span data-en="& International" data-fa="و تأمین">&amp; International</span> <em data-en="Procurement" data-fa="بین‌المللی">Procurement</em></h1>
+      <p data-en="From OEM selection and fleet sizing to international sourcing, import duty modelling, and logistics planning — KDMine provides end-to-end equipment cost intelligence for open-pit mining projects worldwide." data-fa="از انتخاب OEM و اندازه‌گیری ناوگان تا تأمین بین‌المللی، مدل‌سازی حقوق گمرکی واردات و برنامه‌ریزی لجستیک — KDMine هوش هزینه تجهیزات جامع برای پروژه‌های معدن روباز در سراسر جهان ارائه می‌دهد.">From OEM selection and fleet sizing to international sourcing, import duty modelling, and logistics planning — KDMine provides end-to-end equipment cost intelligence for open-pit mining projects worldwide.</p>
+      <div class="hero-kpis">
+        <div class="hkpi"><div class="num">500<em>+</em></div><div class="lbl" data-en="Equipment Items Priced" data-fa="قلم تجهیزات قیمت‌گذاری‌شده">Equipment Items Priced</div></div>
+        <div class="hkpi"><div class="num">30<em>+</em></div><div class="lbl" data-en="OEM Vendors Tracked" data-fa="فروشنده OEM ردیابی‌شده">OEM Vendors Tracked</div></div>
+        <div class="hkpi"><div class="num">45<em>+</em></div><div class="lbl" data-en="Countries Import Data" data-fa="داده واردات کشور">Countries Import Data</div></div>
+        <div class="hkpi"><div class="num">CostMine<em> DB</em></div><div class="lbl" data-en="Powered" data-fa="پشتیبانی‌شده">Powered</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- TABS -->
+    <div class="main-tabs fade-up">
+      <button class="mtab active" onclick="switchTab('selection',this)"><i class="fas fa-cogs"></i> <span data-en="Equipment Selection" data-fa="انتخاب تجهیزات">Equipment Selection</span></button>
+      <button class="mtab" onclick="switchTab('procurement',this)"><i class="fas fa-globe"></i> <span data-en="International Procurement" data-fa="تأمین بین‌المللی">International Procurement</span></button>
+      <button class="mtab" onclick="switchTab('vendors',this)"><i class="fas fa-industry"></i> <span data-en="OEM Vendor Guide" data-fa="راهنمای فروشنده OEM">OEM Vendor Guide</span></button>
+      <button class="mtab" onclick="switchTab('duties',this)"><i class="fas fa-file-invoice-dollar"></i> <span data-en="Import Duties & Logistics" data-fa="حقوق گمرکی و لجستیک">Import Duties & Logistics</span></button>
+    </div>
+
+    <!-- ══ SELECTION TAB ══ -->
+    <div class="tab-section active" id="tab-selection">
+
+      <div class="eq-intro fade-up">
+        <div class="eq-intro-text">
+          <div class="sec-label" data-en="Equipment Selection" data-fa="انتخاب تجهیزات">Equipment Selection</div>
+          <div class="sec-title" data-en="Sizing & Selection Methodology" data-fa="روش‌شناسی اندازه‌گیری و انتخاب">Sizing & Selection Methodology</div>
+          <p data-en="Equipment selection in open-pit mining begins with the mine plan. Truck and shovel fleet size is determined by the annual material movement (ore + waste), haul distances, cycle times, and availability factors. Process plant equipment is sized from the process flowsheet — throughput, grind size, recovery targets, and circuit configuration." data-fa="انتخاب تجهیزات در معدن روباز با برنامه معدن شروع می‌شود. اندازه ناوگان کامیون و بیل مکانیکی توسط جابجایی سالانه مواد (سنگ معدن + باطله)، فاصله حمل، زمان چرخه و ضرایب دسترسی تعیین می‌شود. تجهیزات کارخانه فرآوری از فلوشیت فرآیند اندازه‌گیری می‌شود — توان عملیاتی، اندازه آسیاب، اهداف بازیابی و پیکربندی مدار.">Equipment selection in open-pit mining begins with the mine plan. Truck and shovel fleet size is determined by the annual material movement (ore + waste), haul distances, cycle times, and availability factors. Process plant equipment is sized from the process flowsheet — throughput, grind size, recovery targets, and circuit configuration.</p>
+          <p data-en="KDMine uses a structured selection matrix that evaluates OEM options on capital cost, operating cost, availability, parts support, and local serviceability. For Iranian and CIS projects, we additionally assess import feasibility, sanctions compliance, and local substitute availability." data-fa="KDMine از یک ماتریس انتخاب ساختاریافته استفاده می‌کند که گزینه‌های OEM را بر اساس هزینه سرمایه، هزینه عملیاتی، دسترسی، پشتیبانی قطعات و قابلیت سرویس محلی ارزیابی می‌کند. برای پروژه‌های ایرانی و CIS، ما همچنین امکان‌سنجی واردات، انطباق با تحریم‌ها و دسترسی به جایگزین محلی را ارزیابی می‌کنیم.">KDMine uses a structured selection matrix that evaluates OEM options on capital cost, operating cost, availability, parts support, and local serviceability. For Iranian and CIS projects, we additionally assess import feasibility, sanctions compliance, and local substitute availability.</p>
+        </div>
+        <div class="eq-steps">
+          <div class="eq-step"><div class="eq-step-num">1</div><div><div class="eq-step-title" data-en="Mine Plan Input" data-fa="ورودی برنامه معدن">Mine Plan Input</div><div class="eq-step-desc" data-en="Annual material movement, haul profile, bench height, and pit geometry define fleet requirements." data-fa="جابجایی سالانه مواد، پروفیل حمل، ارتفاع پله و هندسه چاله نیازهای ناوگان را تعریف می‌کنند.">Annual material movement, haul profile, bench height, and pit geometry define fleet requirements.</div></div></div>
+          <div class="eq-step"><div class="eq-step-num">2</div><div><div class="eq-step-title" data-en="Fleet Sizing Model" data-fa="مدل اندازه‌گیری ناوگان">Fleet Sizing Model</div><div class="eq-step-desc" data-en="Truck-shovel matching model calculates required fleet size with productivity and availability factors." data-fa="مدل تطبیق کامیون-بیل مکانیکی اندازه ناوگان مورد نیاز را با ضرایب بهره‌وری و دسترسی محاسبه می‌کند.">Truck-shovel matching model calculates required fleet size with productivity and availability factors.</div></div></div>
+          <div class="eq-step"><div class="eq-step-num">3</div><div><div class="eq-step-title" data-en="OEM Shortlist" data-fa="فهرست کوتاه OEM">OEM Shortlist</div><div class="eq-step-desc" data-en="2–4 OEM options shortlisted per equipment type based on size class, regional support, and budget." data-fa="۲-۴ گزینه OEM برای هر نوع تجهیز بر اساس کلاس اندازه، پشتیبانی منطقه‌ای و بودجه فهرست کوتاه می‌شوند.">2–4 OEM options shortlisted per equipment type based on size class, regional support, and budget.</div></div></div>
+          <div class="eq-step"><div class="eq-step-num">4</div><div><div class="eq-step-title" data-en="Selection Matrix" data-fa="ماتریس انتخاب">Selection Matrix</div><div class="eq-step-desc" data-en="Weighted scoring across CAPEX, OPEX, availability, parts, lead time, and local support." data-fa="امتیازدهی وزنی در CAPEX، OPEX، دسترسی، قطعات، زمان تحویل و پشتیبانی محلی.">Weighted scoring across CAPEX, OPEX, availability, parts, lead time, and local support.</div></div></div>
+          <div class="eq-step"><div class="eq-step-num">5</div><div><div class="eq-step-title" data-en="Budget Quotation" data-fa="استعلام بودجه">Budget Quotation</div><div class="eq-step-desc" data-en="Budget quotations obtained from preferred OEMs and integrated into the CAPEX estimate." data-fa="استعلام‌های بودجه از OEM‌های ترجیحی دریافت و در برآورد CAPEX ادغام می‌شوند.">Budget quotations obtained from preferred OEMs and integrated into the CAPEX estimate.</div></div></div>
+        </div>
+      </div>
+
+      <!-- CATEGORY CARDS -->
+      <div class="fade-up">
+        <div class="sec-label" data-en="Equipment Categories" data-fa="دسته‌بندی تجهیزات">Equipment Categories</div>
+        <div class="sec-title" data-en="Mining & Process Equipment" data-fa="تجهیزات معدن و فرآوری">Mining & Process Equipment</div>
+      </div>
+      <div class="eq-cat-grid fade-up">
+        <div class="eq-cat-card">
+          <div class="eq-cat-icon">🚛</div>
+          <div class="eq-cat-title" data-en="Haulage Trucks" data-fa="کامیون‌های حمل">Haulage Trucks</div>
+          <div class="eq-cat-sub" data-en="Ultra-class (290–400t), large (150–220t), and mid-size (90–150t) off-highway trucks. Diesel and trolley-assist options." data-fa="کامیون‌های فوق‌کلاس (۲۹۰-۴۰۰ تن)، بزرگ (۱۵۰-۲۲۰ تن) و متوسط (۹۰-۱۵۰ تن). گزینه‌های دیزل و کمک تراموا.">Ultra-class (290–400t), large (150–220t), and mid-size (90–150t) off-highway trucks. Diesel and trolley-assist options.</div>
+          <div class="eq-cat-count" data-en="OEMs: CAT · Komatsu · Liebherr · BelAZ" data-fa="OEM‌ها: CAT · کوماتسو · لیبهر · BelAZ">OEMs: CAT · Komatsu · Liebherr · BelAZ</div>
+          <div class="eq-cat-tags"><span class="eq-tag">150–400t</span><span class="eq-tag">Diesel/Electric</span><span class="eq-tag">Autonomous</span></div>
+        </div>
+        <div class="eq-cat-card">
+          <div class="eq-cat-icon">🏗️</div>
+          <div class="eq-cat-title" data-en="Hydraulic Excavators & Shovels" data-fa="بیل‌های مکانیکی هیدرولیک">Hydraulic Excavators & Shovels</div>
+          <div class="eq-cat-sub" data-en="Electric rope shovels (15–65 m³), hydraulic face shovels (10–42 m³), and backhoe excavators for selective mining." data-fa="بیل‌های طناب الکتریکی (۱۵-۶۵ متر مکعب)، بیل‌های هیدرولیک (۱۰-۴۲ متر مکعب) و بیل‌های بازگشتی برای معدن‌کاری انتخابی.">Electric rope shovels (15–65 m³), hydraulic face shovels (10–42 m³), and backhoe excavators for selective mining.</div>
+          <div class="eq-cat-count" data-en="OEMs: P&H · Komatsu · Liebherr · Hitachi" data-fa="OEM‌ها: P&H · کوماتسو · لیبهر · هیتاچی">OEMs: P&H · Komatsu · Liebherr · Hitachi</div>
+          <div class="eq-cat-tags"><span class="eq-tag">10–65 m³</span><span class="eq-tag">Rope/Hydraulic</span><span class="eq-tag">Electric</span></div>
+        </div>
+        <div class="eq-cat-card">
+          <div class="eq-cat-icon">🔩</div>
+          <div class="eq-cat-title" data-en="Drill Rigs" data-fa="دستگاه‌های حفاری">Drill Rigs</div>
+          <div class="eq-cat-sub" data-en="Rotary blast hole drills (229–381mm), DTH drills, and grade control drills. Autonomous and semi-autonomous options available." data-fa="دریل‌های چرخشی (۲۲۹-۳۸۱ میلی‌متر)، دریل‌های DTH و دریل‌های کنترل عیار. گزینه‌های خودکار و نیمه‌خودکار در دسترس.">Rotary blast hole drills (229–381mm), DTH drills, and grade control drills. Autonomous and semi-autonomous options available.</div>
+          <div class="eq-cat-count" data-en="OEMs: Epiroc · Sandvik · Caterpillar · Furukawa" data-fa="OEM‌ها: اپیروک · ساندویک · کاترپیلار · فوروکاوا">OEMs: Epiroc · Sandvik · Caterpillar · Furukawa</div>
+          <div class="eq-cat-tags"><span class="eq-tag">229–381mm</span><span class="eq-tag">Rotary/DTH</span><span class="eq-tag">Autonomous</span></div>
+        </div>
+        <div class="eq-cat-card">
+          <div class="eq-cat-icon">⚙️</div>
+          <div class="eq-cat-title" data-en="Crushing & Grinding" data-fa="خردایش و آسیاب">Crushing & Grinding</div>
+          <div class="eq-cat-sub" data-en="Gyratory, jaw, and cone crushers. SAG mills (up to 40 ft), ball mills, HPGR, and vertical stirred mills for fine grinding." data-fa="خردکننده‌های ژیراتوری، فکی و مخروطی. آسیاب‌های SAG (تا ۴۰ فوت)، آسیاب‌های گلوله‌ای، HPGR و آسیاب‌های عمودی برای آسیاب ریز.">Gyratory, jaw, and cone crushers. SAG mills (up to 40 ft), ball mills, HPGR, and vertical stirred mills for fine grinding.</div>
+          <div class="eq-cat-count" data-en="OEMs: FLSmidth · Metso · Weir · Thyssenkrupp" data-fa="OEM‌ها: FLSmidth · متسو · ویر · تیسن‌کروپ">OEMs: FLSmidth · Metso · Weir · Thyssenkrupp</div>
+          <div class="eq-cat-tags"><span class="eq-tag">SAG/Ball</span><span class="eq-tag">HPGR</span><span class="eq-tag">Gyratory</span></div>
+        </div>
+        <div class="eq-cat-card">
+          <div class="eq-cat-icon">🧪</div>
+          <div class="eq-cat-title" data-en="Flotation & Leaching" data-fa="فلوتاسیون و لیچینگ">Flotation & Leaching</div>
+          <div class="eq-cat-sub" data-en="Tank cells (up to 600 m³), column cells, CIL/CIP tanks, Merrill-Crowe circuits, and SART plants for cyanide recovery." data-fa="سلول‌های مخزنی (تا ۶۰۰ متر مکعب)، سلول‌های ستونی، مخازن CIL/CIP، مدارهای Merrill-Crowe و کارخانه‌های SART برای بازیابی سیانید.">Tank cells (up to 600 m³), column cells, CIL/CIP tanks, Merrill-Crowe circuits, and SART plants for cyanide recovery.</div>
+          <div class="eq-cat-count" data-en="OEMs: Outotec · FLSmidth · Eriez · Metso" data-fa="OEM‌ها: اوتوتک · FLSmidth · اریز · متسو">OEMs: Outotec · FLSmidth · Eriez · Metso</div>
+          <div class="eq-cat-tags"><span class="eq-tag">CIL/CIP</span><span class="eq-tag">Flotation</span><span class="eq-tag">SART</span></div>
+        </div>
+        <div class="eq-cat-card">
+          <div class="eq-cat-icon">⚡</div>
+          <div class="eq-cat-title" data-en="Power & Utilities" data-fa="برق و تأسیسات">Power & Utilities</div>
+          <div class="eq-cat-sub" data-en="Diesel generator sets (1–20 MW), HV transformers, switchgear, water pumps, compressors, and HVAC for process buildings." data-fa="مجموعه ژنراتورهای دیزل (۱-۲۰ مگاوات)، ترانسفورماتورهای فشار قوی، تابلوهای برق، پمپ‌های آب، کمپرسورها و HVAC برای ساختمان‌های فرآیند.">Diesel generator sets (1–20 MW), HV transformers, switchgear, water pumps, compressors, and HVAC for process buildings.</div>
+          <div class="eq-cat-count" data-en="OEMs: Caterpillar · Cummins · ABB · Siemens" data-fa="OEM‌ها: کاترپیلار · کامینز · ABB · زیمنس">OEMs: Caterpillar · Cummins · ABB · Siemens</div>
+          <div class="eq-cat-tags"><span class="eq-tag">Diesel Gen</span><span class="eq-tag">HV/MV</span><span class="eq-tag">Solar Hybrid</span></div>
+        </div>
+      </div>
+
+      <!-- SELECTION CRITERIA -->
+      <div class="fade-up">
+        <div class="sec-label" data-en="Selection Criteria" data-fa="معیارهای انتخاب">Selection Criteria</div>
+        <div class="sec-title" data-en="How We Evaluate Equipment" data-fa="چگونه تجهیزات را ارزیابی می‌کنیم">How We Evaluate Equipment</div>
+      </div>
+      <div class="criteria-grid fade-up">
+        <div class="crit-card"><div class="crit-icon">💰</div><div class="crit-title" data-en="Capital Cost" data-fa="هزینه سرمایه">Capital Cost</div><div class="crit-desc" data-en="Ex-works price, freight, insurance, and commissioning. Vendor budget quotes vs. CostMine database." data-fa="قیمت کارخانه، حمل، بیمه و راه‌اندازی. استعلام‌های بودجه فروشنده در مقابل پایگاه داده CostMine.">Ex-works price, freight, insurance, and commissioning. Vendor budget quotes vs. CostMine database.</div></div>
+        <div class="crit-card"><div class="crit-icon">⚙️</div><div class="crit-title" data-en="Operating Cost" data-fa="هزینه عملیاتی">Operating Cost</div><div class="crit-desc" data-en="Fuel/power consumption, tyre life, maintenance intervals, and parts cost per operating hour." data-fa="مصرف سوخت/برق، عمر تایر، فواصل نگهداری و هزینه قطعات در هر ساعت کار.">Fuel/power consumption, tyre life, maintenance intervals, and parts cost per operating hour.</div></div>
+        <div class="crit-card"><div class="crit-icon">🔧</div><div class="crit-title" data-en="Parts & Support" data-fa="قطعات و پشتیبانی">Parts & Support</div><div class="crit-desc" data-en="In-country parts availability, dealer network, MARC/CMSC contract options, and training support." data-fa="دسترسی به قطعات در کشور، شبکه نمایندگی، گزینه‌های قرارداد MARC/CMSC و پشتیبانی آموزشی.">In-country parts availability, dealer network, MARC/CMSC contract options, and training support.</div></div>
+        <div class="crit-card"><div class="crit-icon">⏱️</div><div class="crit-title" data-en="Lead Time" data-fa="زمان تحویل">Lead Time</div><div class="crit-desc" data-en="OEM manufacturing lead times (6–36 months for large equipment). Critical path impact on project schedule." data-fa="زمان‌های تولید OEM (۶-۳۶ ماه برای تجهیزات بزرگ). تأثیر مسیر بحرانی بر برنامه پروژه.">OEM manufacturing lead times (6–36 months for large equipment). Critical path impact on project schedule.</div></div>
+      </div>
+
+      <!-- EQUIPMENT REFERENCE TABLE -->
+      <div class="fade-up">
+        <div class="sec-label" data-en="Reference Pricing" data-fa="قیمت‌گذاری مرجع">Reference Pricing</div>
+        <div class="sec-title" data-en="Equipment Capital Cost Reference" data-fa="مرجع هزینه سرمایه تجهیزات">Equipment Capital Cost Reference</div>
+      </div>
+      <div class="eq-table-wrap fade-up">
+        <div class="eq-table-header">
+          <div class="eq-table-title" data-en="2026 USD Reference Prices (Ex-Works, Budget Basis)" data-fa="قیمت‌های مرجع ۲۰۲۶ دلار (کارخانه، مبنای بودجه)">2026 USD Reference Prices (Ex-Works, Budget Basis)</div>
+        </div>
+        <table class="eq-table">
+          <thead><tr>
+            <th data-en="Equipment" data-fa="تجهیز">Equipment</th>
+            <th data-en="Size / Capacity" data-fa="اندازه / ظرفیت">Size / Capacity</th>
+            <th data-en="Unit Cost (USD)" data-fa="هزینه واحد (دلار)">Unit Cost (USD)</th>
+            <th data-en="Lead Time" data-fa="زمان تحویل">Lead Time</th>
+            <th data-en="Category" data-fa="دسته">Category</th>
+            <th data-en="Top OEMs" data-fa="OEM‌های برتر">Top OEMs</th>
+          </tr></thead>
+          <tbody id="eqTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ══ PROCUREMENT TAB ══ -->
+    <div class="tab-section" id="tab-procurement">
+
+      <div class="proc-overview fade-up">
+        <div class="proc-text">
+          <div class="sec-label" data-en="International Procurement" data-fa="تأمین بین‌المللی">International Procurement</div>
+          <div class="sec-title" data-en="Global Sourcing Strategy" data-fa="استراتژی تأمین جهانی">Global Sourcing Strategy</div>
+          <p data-en="International procurement for mining projects involves coordinating equipment purchases across multiple OEM countries, managing long lead times, and navigating import regulations. KDMine's procurement advisory service provides cost modelling for the full landed cost — ex-works price, freight, insurance, import duties, port handling, and inland transport." data-fa="تأمین بین‌المللی برای پروژه‌های معدنی شامل هماهنگی خریدهای تجهیزات در چندین کشور OEM، مدیریت زمان‌های تحویل طولانی و ناوبری در مقررات واردات است. خدمات مشاوره تأمین KDMine مدل‌سازی هزینه برای هزینه کامل تحویل ارائه می‌دهد — قیمت کارخانه، حمل، بیمه، حقوق گمرکی واردات، بارگیری بندر و حمل داخلی.">International procurement for mining projects involves coordinating equipment purchases across multiple OEM countries, managing long lead times, and navigating import regulations. KDMine's procurement advisory service provides cost modelling for the full landed cost — ex-works price, freight, insurance, import duties, port handling, and inland transport.</p>
+          <p data-en="For Iranian and CIS projects, our Tehran-based team provides specialist knowledge of local import channels, approved vendor lists, and alternative equipment sources from China, Russia, and Eastern Europe that comply with project requirements." data-fa="برای پروژه‌های ایرانی و CIS، تیم مستقر در تهران ما دانش تخصصی کانال‌های واردات محلی، فهرست‌های فروشنده تأییدشده و منابع تجهیزات جایگزین از چین، روسیه و اروپای شرقی که با الزامات پروژه مطابقت دارند ارائه می‌دهد.">For Iranian and CIS projects, our Tehran-based team provides specialist knowledge of local import channels, approved vendor lists, and alternative equipment sources from China, Russia, and Eastern Europe that comply with project requirements.</p>
+        </div>
+        <div class="proc-chart-card">
+          <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:16px;" data-en="Landed Cost Breakdown — Typical International Equipment" data-fa="تفکیک هزینه تحویل — تجهیزات بین‌المللی معمول">Landed Cost Breakdown — Typical International Equipment</div>
+          <canvas id="landedCostChart" style="max-height:260px;"></canvas>
+        </div>
+      </div>
+
+      <!-- PROCUREMENT TIMELINE -->
+      <div class="proc-timeline fade-up">
+        <div class="sec-label" data-en="Procurement Timeline" data-fa="خط زمانی تأمین">Procurement Timeline</div>
+        <div class="sec-title" data-en="Typical Equipment Procurement Phases" data-fa="مراحل معمول تأمین تجهیزات">Typical Equipment Procurement Phases</div>
+        <div class="sec-sub" data-en="Large mining equipment requires 18–36 months from RFQ to site delivery. Early procurement is critical to project schedule." data-fa="تجهیزات بزرگ معدنی ۱۸-۳۶ ماه از RFQ تا تحویل به سایت نیاز دارند. تأمین زودهنگام برای برنامه پروژه حیاتی است.">Large mining equipment requires 18–36 months from RFQ to site delivery. Early procurement is critical to project schedule.</div>
+        <div class="ptl-grid">
+          <div class="ptl-item"><div class="ptl-dot">📋</div><div class="ptl-phase" data-en="Phase 1" data-fa="مرحله ۱">Phase 1</div><div class="ptl-title" data-en="RFQ Preparation" data-fa="آماده‌سازی RFQ">RFQ Preparation</div><div class="ptl-weeks" data-en="Weeks 1–4" data-fa="هفته‌های ۱-۴">Weeks 1–4</div></div>
+          <div class="ptl-item"><div class="ptl-dot">📤</div><div class="ptl-phase" data-en="Phase 2" data-fa="مرحله ۲">Phase 2</div><div class="ptl-title" data-en="Vendor Tendering" data-fa="مناقصه فروشنده">Vendor Tendering</div><div class="ptl-weeks" data-en="Weeks 4–12" data-fa="هفته‌های ۴-۱۲">Weeks 4–12</div></div>
+          <div class="ptl-item"><div class="ptl-dot">🔍</div><div class="ptl-phase" data-en="Phase 3" data-fa="مرحله ۳">Phase 3</div><div class="ptl-title" data-en="Bid Evaluation" data-fa="ارزیابی پیشنهاد">Bid Evaluation</div><div class="ptl-weeks" data-en="Weeks 12–16" data-fa="هفته‌های ۱۲-۱۶">Weeks 12–16</div></div>
+          <div class="ptl-item"><div class="ptl-dot">✍️</div><div class="ptl-phase" data-en="Phase 4" data-fa="مرحله ۴">Phase 4</div><div class="ptl-title" data-en="Contract Award" data-fa="اعطای قرارداد">Contract Award</div><div class="ptl-weeks" data-en="Weeks 16–20" data-fa="هفته‌های ۱۶-۲۰">Weeks 16–20</div></div>
+          <div class="ptl-item"><div class="ptl-dot">🏭</div><div class="ptl-phase" data-en="Phase 5" data-fa="مرحله ۵">Phase 5</div><div class="ptl-title" data-en="Manufacturing" data-fa="تولید">Manufacturing</div><div class="ptl-weeks" data-en="Months 5–24" data-fa="ماه‌های ۵-۲۴">Months 5–24</div></div>
+          <div class="ptl-item"><div class="ptl-dot">🚢</div><div class="ptl-phase" data-en="Phase 6" data-fa="مرحله ۶">Phase 6</div><div class="ptl-title" data-en="Shipping & Delivery" data-fa="حمل و تحویل">Shipping & Delivery</div><div class="ptl-weeks" data-en="Months 24–30" data-fa="ماه‌های ۲۴-۳۰">Months 24–30</div></div>
+        </div>
+      </div>
+
+      <!-- IRAN SPECIAL SECTION -->
+      <div class="iran-band fade-up">
+        <div class="iran-band-header">
+          <div class="iran-flag">🇮🇷</div>
+          <div><div class="iran-title" data-en="Iran & CIS Procurement Specialist" data-fa="متخصص تأمین ایران و CIS">Iran & CIS Procurement Specialist</div><div class="iran-sub" data-en="KDMine's Tehran office provides dedicated procurementadvisory for Iranian and CIS mining projects." data-fa="دفتر تهران KDMine مشاوره تأمین اختصاصی برای پروژه‌های معدنی ایران و CIS ارائه می‌دهد.">KDMine's Tehran office provides dedicated procurement advisory for Iranian and CIS mining projects.</div></div>
+        </div>
+        <div class="iran-grid">
+          <div class="iran-item">
+            <div class="iran-item-title" data-en="🔄 Alternative OEM Sources" data-fa="🔄 منابع OEM جایگزین">🔄 Alternative OEM Sources</div>
+            <div class="iran-item-desc" data-en="Chinese OEMs (XCMG, SANY, ZOOMLION), Russian manufacturers (BELAZ, URAL), and Eastern European suppliers as alternatives to Western brands for sanctioned markets." data-fa="OEM‌های چینی (XCMG، SANY، ZOOMLION)، تولیدکنندگان روسی (BELAZ، URAL) و تأمین‌کنندگان اروپای شرقی به عنوان جایگزین برندهای غربی برای بازارهای تحریم‌شده.">Chinese OEMs (XCMG, SANY, ZOOMLION), Russian manufacturers (BELAZ, URAL), and Eastern European suppliers as alternatives to Western brands for sanctioned markets.</div>
+          </div>
+          <div class="iran-item">
+            <div class="iran-item-title" data-en="📦 Import Channel Modelling" data-fa="📦 مدل‌سازی کانال واردات">📦 Import Channel Modelling</div>
+            <div class="iran-item-desc" data-en="Full landed cost modelling via UAE (Dubai/Jebel Ali), Turkey (Istanbul/Mersin), and Oman (Sohar) transit hubs. Duty, VAT, and clearance fees included." data-fa="مدل‌سازی هزینه کامل تحویل از طریق مراکز ترانزیت امارات (دبی/جبل علی)، ترکیه (استانبول/مرسین) و عمان (صحار). حقوق گمرکی، مالیات بر ارزش افزوده و هزینه‌های ترخیص شامل می‌شود.">Full landed cost modelling via UAE (Dubai/Jebel Ali), Turkey (Istanbul/Mersin), and Oman (Sohar) transit hubs. Duty, VAT, and clearance fees included.</div>
+          </div>
+          <div class="iran-item">
+            <div class="iran-item-title" data-en="🏭 Local Manufacturing" data-fa="🏭 تولید محلی">🏭 Local Manufacturing</div>
+            <div class="iran-item-desc" data-en="Assessment of Iranian-manufactured equipment (MAPNA, Iran Khodro Industrial, ESCO) and local fabrication potential for structural steel, piping, and vessels." data-fa="ارزیابی تجهیزات ساخت ایران (مپنا، ایران خودرو صنعتی، ESCO) و پتانسیل ساخت محلی برای فولاد سازه‌ای، لوله‌کشی و مخازن.">Assessment of Iranian-manufactured equipment (MAPNA, Iran Khodro Industrial, ESCO) and local fabrication potential for structural steel, piping, and vessels.</div>
+          </div>
+          <div class="iran-item">
+            <div class="iran-item-title" data-en="💱 Currency & FX Modelling" data-fa="💱 مدل‌سازی ارز و نرخ تبدیل">💱 Currency & FX Modelling</div>
+            <div class="iran-item-desc" data-en="Multi-currency cost modelling (USD/EUR/CNY/IRR) with official and market exchange rate scenarios. Escalation adjustments for Iranian inflation indices." data-fa="مدل‌سازی هزینه چند ارزی (USD/EUR/CNY/IRR) با سناریوهای نرخ ارز رسمی و بازار. تعدیلات تعدیل برای شاخص‌های تورم ایران.">Multi-currency cost modelling (USD/EUR/CNY/IRR) with official and market exchange rate scenarios. Escalation adjustments for Iranian inflation indices.</div>
+          </div>
+          <div class="iran-item">
+            <div class="iran-item-title" data-en="📋 Bilingual Documentation" data-fa="📋 مستندات دوزبانه">📋 Bilingual Documentation</div>
+            <div class="iran-item-desc" data-en="All procurement cost reports delivered in bilingual EN/FA format with RTL layout, Persian number formatting, and Farsi executive summaries for Iranian stakeholders." data-fa="تمام گزارش‌های هزینه تأمین در قالب دوزبانه EN/FA با طرح RTL، قالب‌بندی اعداد فارسی و خلاصه‌های اجرایی فارسی برای ذینفعان ایرانی تحویل داده می‌شود.">All procurement cost reports delivered in bilingual EN/FA format with RTL layout, Persian number formatting, and Farsi executive summaries for Iranian stakeholders.</div>
+          </div>
+          <div class="iran-item">
+            <div class="iran-item-title" data-en="⚖️ Compliance Advisory" data-fa="⚖️ مشاوره انطباق">⚖️ Compliance Advisory</div>
+            <div class="iran-item-desc" data-en="Guidance on OFAC, EU, and UN sanctions compliance for equipment procurement. Identification of dual-use items and required export licences." data-fa="راهنمایی در مورد انطباق با تحریم‌های OFAC، EU و UN برای تأمین تجهیزات. شناسایی اقلام دو منظوره و مجوزهای صادرات مورد نیاز.">Guidance on OFAC, EU, and UN sanctions compliance for equipment procurement. Identification of dual-use items and required export licences.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ VENDORS TAB ══ -->
+    <div class="tab-section" id="tab-vendors">
+      <div class="fade-up">
+        <div class="sec-label" data-en="OEM Vendor Guide" data-fa="راهنمای فروشنده OEM">OEM Vendor Guide</div>
+        <div class="sec-title" data-en="Key Equipment Manufacturers" data-fa="تولیدکنندگان کلیدی تجهیزات">Key Equipment Manufacturers</div>
+        <div class="sec-sub" data-en="KDMine maintains an active vendor database covering 30+ OEMs across mining, process plant, and infrastructure equipment categories." data-fa="KDMine یک پایگاه داده فروشنده فعال شامل ۳۰+ OEM در دسته‌های تجهیزات معدن، کارخانه فرآوری و زیرساخت نگهداری می‌کند.">KDMine maintains an active vendor database covering 30+ OEMs across mining, process plant, and infrastructure equipment categories.</div>
+      </div>
+      <div class="vendor-grid fade-up" id="vendorGrid"></div>
+    </div>
+
+    <!-- ══ DUTIES TAB ══ -->
+    <div class="tab-section" id="tab-duties">
+
+      <div class="fade-up">
+        <div class="sec-label" data-en="Import Duties & Logistics" data-fa="حقوق گمرکی و لجستیک">Import Duties & Logistics</div>
+        <div class="sec-title" data-en="Country Import Duty Reference" data-fa="مرجع حقوق گمرکی واردات کشور">Country Import Duty Reference</div>
+        <div class="sec-sub" data-en="Import duties and taxes on mining equipment vary significantly by country. The table below provides reference rates for key mining jurisdictions (2026). Always verify with local customs authority." data-fa="حقوق گمرکی واردات و مالیات بر تجهیزات معدنی به طور قابل توجهی بر اساس کشور متفاوت است. جدول زیر نرخ‌های مرجع برای حوزه‌های قضایی معدنی کلیدی (۲۰۲۶) ارائه می‌دهد. همیشه با مقامات گمرک محلی تأیید کنید.">Import duties and taxes on mining equipment vary significantly by country. The table below provides reference rates for key mining jurisdictions (2026). Always verify with local customs authority.</div>
+      </div>
+
+      <div class="duty-table-wrap fade-up">
+        <table class="duty-table">
+          <thead><tr>
+            <th data-en="Country" data-fa="کشور">Country</th>
+            <th data-en="Mining Equip. Duty" data-fa="حقوق تجهیزات معدن">Mining Equip. Duty</th>
+            <th data-en="Process Plant Duty" data-fa="حقوق کارخانه فرآوری">Process Plant Duty</th>
+            <th data-en="VAT / GST" data-fa="مالیات بر ارزش افزوده">VAT / GST</th>
+            <th data-en="Exemptions Available" data-fa="معافیت‌های موجود">Exemptions Available</th>
+            <th data-en="Landed Cost Factor" data-fa="ضریب هزینه تحویل">Landed Cost Factor</th>
+            <th data-en="Notes" data-fa="یادداشت‌ها">Notes</th>
+          </tr></thead>
+          <tbody id="dutyTableBody"></tbody>
+        </table>
+      </div>
+
+      <!-- LOGISTICS CARDS -->
+      <div class="fade-up">
+        <div class="sec-label" data-en="Logistics Cost Drivers" data-fa="محرک‌های هزینه لجستیک">Logistics Cost Drivers</div>
+        <div class="sec-title" data-en="International Freight & Inland Transport" data-fa="حمل بین‌المللی و حمل داخلی">International Freight & Inland Transport</div>
+      </div>
+      <div class="logistics-grid fade-up">
+        <div class="log-card">
+          <div class="log-icon">🚢</div>
+          <div class="log-title" data-en="Ocean Freight" data-fa="حمل دریایی">Ocean Freight</div>
+          <div class="log-desc" data-en="Break-bulk or RoRo for large equipment. Container for smaller items. Port of loading to port of discharge." data-fa="بار شکسته یا RoRo برای تجهیزات بزرگ. کانتینر برای اقلام کوچکتر. از بندر بارگیری تا بندر تخلیه.">Break-bulk or RoRo for large equipment. Container for smaller items. Port of loading to port of discharge.</div>
+          <div class="log-cost" data-en="2–6% of Ex-Works" data-fa="۲-۶٪ از قیمت کارخانه">2–6% of Ex-Works</div>
+        </div>
+        <div class="log-card">
+          <div class="log-icon">✈️</div>
+          <div class="log-title" data-en="Air Freight" data-fa="حمل هوایی">Air Freight</div>
+          <div class="log-desc" data-en="Critical spare parts and instruments only. High cost but essential for minimising downtime on operating mines." data-fa="فقط قطعات یدکی و ابزارهای بحرانی. هزینه بالا اما ضروری برای به حداقل رساندن توقف در معادن در حال بهره‌برداری.">Critical spare parts and instruments only. High cost but essential for minimising downtime on operating mines.</div>
+          <div class="log-cost" data-en="8–15× Ocean Rate" data-fa="۸-۱۵ برابر نرخ دریایی">8–15× Ocean Rate</div>
+        </div>
+        <div class="log-card">
+          <div class="log-icon">🚛</div>
+          <div class="log-title" data-en="Inland Transport" data-fa="حمل داخلی">Inland Transport</div>
+          <div class="log-desc" data-en="Heavy-haul trucking for oversized loads. Route surveys, permits, and escorts required for large equipment." data-fa="کامیون‌های حمل سنگین برای بارهای بزرگ. بررسی مسیر، مجوزها و اسکورت برای تجهیزات بزرگ مورد نیاز است.">Heavy-haul trucking for oversized loads. Route surveys, permits, and escorts required for large equipment.</div>
+          <div class="log-cost" data-en="1–8% of Ex-Works" data-fa="۱-۸٪ از قیمت کارخانه">1–8% of Ex-Works</div>
+        </div>
+        <div class="log-card">
+          <div class="log-icon">🏗️</div>
+          <div class="log-title" data-en="Port Handling" data-fa="بارگیری بندر">Port Handling</div>
+          <div class="log-desc" data-en="Stevedoring, storage, and port authority fees. Highly variable by port. Congestion surcharges in peak periods." data-fa="بارگیری، انبارداری و هزینه‌های مقامات بندر. بسیار متغیر بر اساس بندر. اضافه‌بار ازدحام در دوره‌های اوج.">Stevedoring, storage, and port authority fees. Highly variable by port. Congestion surcharges in peak periods.</div>
+          <div class="log-cost" data-en="0.5–2% of Ex-Works" data-fa="۰.۵-۲٪ از قیمت کارخانه">0.5–2% of Ex-Works</div>
+        </div>
+      </div>
+
+      <!-- LANDED COST CHART -->
+      <div class="sens-card fade-up" style="background:var(--dark3);border:1px solid var(--border2);border-radius:20px;padding:28px;margin-bottom:48px;">
+        <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:16px;" data-en="📊 Landed Cost Comparison by Country — 150t Haul Truck (Ex-Works $3.2M)" data-fa="📊 مقایسه هزینه تحویل بر اساس کشور — کامیون ۱۵۰ تنی (قیمت کارخانه ۳.۲ میلیون دلار)">📊 Landed Cost Comparison by Country — 150t Haul Truck (Ex-Works $3.2M)</div>
+        <canvas id="landedBarChart" style="max-height:280px;"></canvas>
+      </div>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-band fade-up">
+      <h3 data-en="Need <em>Equipment Pricing</em> for Your Project?" data-fa="به <em>قیمت‌گذاری تجهیزات</em> برای پروژه خود نیاز دارید؟">Need <em>Equipment Pricing</em> for Your Project?</h3>
+      <p data-en="KDMine provides equipment selection matrices, OEM budget quotation support, and full landed cost modelling for any jurisdiction. Contact us for a fixed-fee proposal." data-fa="KDMine ماتریس‌های انتخاب تجهیزات، پشتیبانی استعلام بودجه OEM و مدل‌سازی هزینه کامل تحویل برای هر حوزه قضایی ارائه می‌دهد. برای یک پیشنهاد با هزینه ثابت با ما تماس بگیرید.">KDMine provides equipment selection matrices, OEM budget quotation support, and full landed cost modelling for any jurisdiction. Contact us for a fixed-fee proposal.</p>
+      <div class="cta-btns">
+        <button class="btn-gold"><i class="fas fa-paper-plane"></i> <span data-en="Request Equipment Study" data-fa="درخواست مطالعه تجهیزات">Request Equipment Study</span></button>
+        <button class="btn-outline"><i class="fas fa-database"></i> <span data-en="View Equipment Database" data-fa="مشاهده پایگاه داده تجهیزات">View Equipment Database</span></button>
+        <button class="btn-outline"><i class="fas fa-calculator"></i> <span data-en="CAPEX Calculator" data-fa="ماشین‌حساب CAPEX">CAPEX Calculator</span></button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-mini">
+    <p data-en="© 2026 KDMine Consultancy. Equipment prices are budget-basis reference values in 2026 USD. Verify with OEM for firm quotations." data-fa="© ۱۴۰۵ مشاوره KDMine. قیمت‌های تجهیزات مقادیر مرجع مبنای بودجه به دلار ۲۰۲۶ هستند. برای استعلام‌های قطعی با OEM تأیید کنید.">© 2026 KDMine Consultancy. Equipment prices are budget-basis reference values in 2026 USD. Verify with OEM for firm quotations.</p>
+    <a href="index.html" data-en="← Back to Main Site" data-fa="← بازگشت به سایت اصلی">← Back to Main Site</a>
+  </div>
+
+  <script>
+  // ── EQUIPMENT TABLE DATA ─────────────────────────────────────
+  const eqData = [
+    {name:'Haul Truck 150t',size:'150t payload',cost:'$2.8–3.5M',lead:'12–18 mo',cat:'cat',oems:'CAT 785 · Komatsu 730E · Liebherr T264'},
+    {name:'Haul Truck 220t',size:'220t payload',cost:'$4.2–5.1M',lead:'14–20 mo',cat:'cat',oems:'CAT 793 · Komatsu 830E · Hitachi EH3500'},
+    {name:'Haul Truck 290t',size:'290t payload',cost:'$5.8–7.2M',lead:'18–24 mo',cat:'cat',oems:'CAT 797 · Komatsu 960E · BelAZ 75306'},
+    {name:'Hydraulic Shovel 20m³',size:'20 m³ bucket',cost:'$6.5–8.0M',lead:'16–22 mo',cat:'cat',oems:'Komatsu PC8000 · Liebherr R9400 · Hitachi EX3600'},
+    {name:'Electric Rope Shovel 40m³',size:'40 m³ dipper',cost:'$18–24M',lead:'24–36 mo',cat:'cat',oems:'P&H 4100XPC · Komatsu 4100C'},
+    {name:'Blast Hole Drill 311mm',size:'311mm bit',cost:'$3.2–4.1M',lead:'10–14 mo',cat:'cat',oems:'Epiroc PV351 · Sandvik DR461i · CAT MD6310'},
+    {name:'Dozer D11 Class',size:'850 hp',cost:'$1.8–2.4M',lead:'8–12 mo',cat:'cat',oems:'CAT D11 · Komatsu D475 · Liebherr PR776'},
+    {name:'Motor Grader 24M',size:'275 hp',cost:'$0.55–0.75M',lead:'6–10 mo',cat:'cat',oems:'CAT 24M · Komatsu GD1000 · Volvo G990'},
+    {name:'Gyratory Crusher 60×113',size:'1,500 tph',cost:'$8–14M',lead:'18–28 mo',cat:'proc',oems:'FLSmidth NT · Metso Superior · Thyssenkrupp'},
+    {name:'SAG Mill 36ft',size:'36 ft × 18 ft',cost:'$22–32M',lead:'24–36 mo',cat:'proc',oems:'FLSmidth · Metso · CITIC HIC'},
+    {name:'Ball Mill 22ft',size:'22 ft × 36 ft',cost:'$8–14M',lead:'18–28 mo',cat:'proc',oems:'FLSmidth · Metso · CITIC HIC · NCP'},
+    {name:'Flotation Cell 300m³',size:'300 m³ tank',cost:'$1.2–1.8M',lead:'12–18 mo',cat:'proc',oems:'Outotec TankCell · FLSmidth Dorr-Oliver · Eriez'},
+    {name:'CIL Tank 15m dia',size:'15m × 15m',cost:'$0.8–1.4M',lead:'10–16 mo',cat:'proc',oems:'Outotec · FLSmidth · Local fabrication'},
+    {name:'Diesel Generator 5MW',size:'5 MW',cost:'$1.8–2.6M',lead:'8–14 mo',cat:'inf',oems:'CAT 3516 · Cummins QSK60 · MTU 20V4000'},
+    {name:'HV Transformer 33kV',size:'10–30 MVA',cost:'$0.4–1.2M',lead:'10–18 mo',cat:'inf',oems:'ABB · Siemens · Schneider · Hyundai'},
+  ];
+
+  // ── VENDOR DATA ──────────────────────────────────────────────
+  const vendors = [
+    {av:'CAT',color:'#C9A84C',name:'Caterpillar Inc.',origin:'USA 🇺🇸',type:'Mining & Construction',products:'Trucks, Dozers, Graders, Drills, Generators',strength:'Largest global dealer network',leadTime:'10–24 months',tags:['Mining Fleet','Power','Parts Network']},
+    {av:'KOM',color:'#0EA5E9',name:'Komatsu Ltd.',origin:'Japan 🇯🇵',type:'Mining Equipment',products:'Trucks, Shovels, Excavators, Drills',strength:'Strong autonomous mining (AHS) capability',leadTime:'12–24 months',tags:['Autonomous','Mining Fleet','AHS']},
+    {av:'LIE',color:'#22C55E',name:'Liebherr Group',origin:'Germany 🇩🇪',type:'Mining & Process',products:'Trucks, Excavators, Cranes, Crushers',strength:'Premium quality, strong in remote sites',leadTime:'14–28 months',tags:['Premium','Mining','Cranes']},
+    {av:'FLS',color:'#A855F7',name:'FLSmidth',origin:'Denmark 🇩🇰',type:'Process Plant',products:'Mills, Crushers, Flotation, Thickeners',strength:'Full process plant EPC capability',leadTime:'18–36 months',tags:['Process Plant','EPC','Mills']},
+    {av:'MET',color:'#F97316',name:'Metso Outotec',origin:'Finland 🇫🇮',type:'Process Plant',products:'Crushers, Mills, Flotation, Screens',strength:'Leading flotation and comminution OEM',leadTime:'16–32 months',tags:['Flotation','Comminution','Screens']},
+    {av:'EPI',color:'#EF4444',name:'Epiroc AB',origin:'Sweden 🇸🇪',type:'Drilling & Blasting',products:'Blast hole drills, DTH, Bolters, Loaders',strength:'Market leader in surface drilling',leadTime:'8–16 months',tags:['Drilling','Automation','Surface']},
+    {av:'SAN',color:'#06B6D4',name:'Sandvik AB',origin:'Sweden 🇸🇪',type:'Drilling & Cutting',products:'Drills, Loaders, Trucks, Crushers',strength:'Strong in automation and digitalisation',leadTime:'10–18 months',tags:['Automation','Drilling','Digital']},
+    {av:'ABB',color:'#E8C97A',name:'ABB Ltd.',origin:'Switzerland 🇨🇭',type:'Electrical & Automation',products:'Transformers, Drives, Switchgear, SCADA',strength:'Leading mine electrification solutions',leadTime:'10–20 months',tags:['Electrical','Automation','SCADA']},
+    {av:'CIT',color:'#7A8BA8',name:'CITIC HIC',origin:'China 🇨🇳',type:'Process Plant',products:'SAG Mills, Ball Mills, Crushers',strength:'Cost-competitive large mill manufacturer',leadTime:'18–30 months',tags:['Mills','Cost-Competitive','China']},
+  ];
+
+  // ── IMPORT DUTY DATA ─────────────────────────────────────────
+  const dutyData = [
+    {flag:'🇦🇺',country:'Australia',miningDuty:'0%',plantDuty:'0%',vat:'10% GST',exempt:'Most mining equipment exempt',factor:'1.08–1.12',note:'Free trade, low logistics cost',lvl:'low'},
+    {flag:'🇨🇦',country:'Canada',miningDuty:'0%',plantDuty:'0%',vat:'5% GST',exempt:'Full exemption for mining',factor:'1.06–1.10',note:'CUSMA benefits apply',lvl:'low'},
+    {flag:'🇺🇸',country:'USA',miningDuty:'0–2%',plantDuty:'0–3%',vat:'N/A',exempt:'Section 321 de minimis',factor:'1.05–1.09',note:'State taxes may apply',lvl:'low'},
+    {flag:'🇿🇦',country:'South Africa',miningDuty:'0%',plantDuty:'0–5%',vat:'15% VAT',exempt:'ITAC rebate permits',factor:'1.18–1.25',note:'Rebate permits required',lvl:'med'},
+    {flag:'🇨🇱',country:'Chile',miningDuty:'0–6%',plantDuty:'0–6%',vat:'19% IVA',exempt:'DL 600 investment regime',factor:'1.22–1.30',note:'IVA recoverable',lvl:'med'},
+    {flag:'🇮🇩',country:'Indonesia',miningDuty:'0–5%',plantDuty:'5–10%',vat:'11% PPN',exempt:'BKPM investment facility',factor:'1.20–1.32',note:'Local content requirements',lvl:'med'},
+    {flag:'🇰🇿',country:'Kazakhstan',miningDuty:'0–5%',plantDuty:'0–12%',vat:'12% VAT',exempt:'SEZ exemptions available',factor:'1.18–1.28',note:'EEU member — CIS sourcing',lvl:'med'},
+    {flag:'🇲🇳',country:'Mongolia',miningDuty:'5%',plantDuty:'5–15%',vat:'10% VAT',exempt:'Strategic deposit regime',factor:'1.25–1.40',note:'Remote logistics premium',lvl:'med'},
+    {flag:'🇬🇭',country:'Ghana',miningDuty:'0%',plantDuty:'0–5%',vat:'15% VAT',exempt:'Mining list exemption',factor:'1.22–1.35',note:'Port congestion risk',lvl:'med'},
+    {flag:'🇮🇷',country:'Iran',miningDuty:'4–15%',plantDuty:'4–20%',vat:'9% VAT',exempt:'Investment law exemptions',factor:'1.35–1.65',note:'Sanctions — specialist routing',lvl:'high'},
+    {flag:'🇵🇪',country:'Peru',miningDuty:'0–6%',plantDuty:'0–6%',vat:'18% IGV',exempt:'Estabilidad tributaria',factor:'1.22–1.32',note:'IGV recoverable',lvl:'med'},
+    {flag:'🇧🇷',country:'Brazil',miningDuty:'0–14%',plantDuty:'0–14%',vat:'PIS/COFINS 9.25%',exempt:'RECOF / REPETRO regime',factor:'1.30–1.50',note:'Complex tax structure',lvl:'high'},
+  ];
+
+  // ── RENDER EQUIPMENT TABLE ───────────────────────────────────
+  function renderEqTable() {
+    const catClass = {cat:'oem-cat',proc:'oem-proc',inf:'oem-inf'};
+    const catLabel = {cat:'Mining Fleet',proc:'Process Plant',inf:'Infrastructure'};
+    document.getElementById('eqTableBody').innerHTML = eqData.map(r => `
+      <tr>
+        <td>${r.name}</td>
+        <td style="color:var(--text-muted);">${r.size}</td>
+        <td style="color:var(--gold);font-weight:700;">${r.cost}</td>
+        <td>${r.lead}</td>
+        <td><span class="oem-badge ${catClass[r.cat]}">${catLabel[r.cat]}</span></td>
+        <td style="font-size:11px;">${r.oems}</td>
+      </tr>`).join('');
+  }
+
+  // ── RENDER VENDOR GRID ───────────────────────────────────────
+  function renderVendors() {
+    document.getElementById('vendorGrid').innerHTML = vendors.map(v => `
+      <div class="vendor-card">
+        <div class="vendor-header">
+          <div class="vendor-av" style="background:${v.color}22;color:${v.color};">${v.av}</div>
+          <div><div class="vendor-name">${v.name}</div><div class="vendor-origin">${v.origin} · ${v.type}</div></div>
+        </div>
+        <div class="vendor-specs">
+          <div class="vs-row"><span class="vs-label" data-en="Products" data-fa="محصولات">Products</span><span class="vs-val" style="font-size:11px;text-align:right;max-width:60%;">${v.products}</span></div>
+          <div class="vs-row"><span class="vs-label" data-en="Strength" data-fa="نقطه قوت">Strength</span><span class="vs-val" style="font-size:11px;text-align:right;max-width:60%;">${v.strength}</span></div>
+          <div class="vs-row"><span class="vs-label" data-en="Lead Time" data-fa="زمان تحویل">Lead Time</span><span class="vs-val" style="color:var(--gold);">${v.leadTime}</span></div>
+        </div>
+        <div class="vendor-tags">${v.tags.map(t=>`<span class="vendor-tag">${t}</span>`).join('')}</div>
+      </div>`).join('');
+  }
+
+  // ── RENDER DUTY TABLE ────────────────────────────────────────
+  function renderDutyTable() {
+    const lvlClass = {low:'duty-low',med:'duty-med',high:'duty-high'};
+    document.getElementById('dutyTableBody').innerHTML = dutyData.map(r => `
+      <tr>
+        <td><span class="flag">${r.flag}</span>${r.country}</td>
+        <td class="${lvlClass[r.lvl]}">${r.miningDuty}</td>
+        <td class="${lvlClass[r.lvl]}">${r.plantDuty}</td>
+        <td>${r.vat}</td>
+        <td style="font-size:11px;">${r.exempt}</td>
+        <td style="color:var(--gold);font-weight:700;">${r.factor}</td>
+        <td style="font-size:11px;">${r.note}</td>
+      </tr>`).join('');
+  }
+
+  // ── CHARTS ───────────────────────────────────────────────────
+  function buildLandedCostChart() {
+    new Chart(document.getElementById('landedCostChart'),{
+      type:'doughnut',
+      data:{
+        labels:['Ex-Works Price','Ocean Freight','Import Duty','VAT / Tax','Port Handling','Inland Transport','Insurance'],
+        datasets:[{
+          data:[72,6,8,7,2,4,1],
+          backgroundColor:['#C9A84C','#0EA5E9','#EF4444','#A855F7','#F97316','#22C55E','#E8C97A'],
+          borderColor:'#161E2E',borderWidth:3
+        }]
+      },
+      options:{
+        cutout:'60%',
+        plugins:{
+          legend:{position:'right',labels:{color:'#7A8BA8',font:{size:11},padding:8}},
+          tooltip:{callbacks:{label:ctx=>`${ctx.label}: ${ctx.parsed}%`}}
+        }
+      }
+    });
+  }
+
+  function buildLandedBarChart() {
+    new Chart(document.getElementById('landedBarChart'),{
+      type:'bar',
+      data:{
+        labels:['Australia','Canada','South Africa','Chile','Indonesia','Kazakhstan','Mongolia','Iran','Brazil'],
+        datasets:[
+          {label:'Ex-Works ($M)',data:[3.2,3.2,3.2,3.2,3.2,3.2,3.2,3.2,3.2],backgroundColor:'rgba(201,168,76,0.3)',borderRadius:4},
+          {label:'Landed Cost ($M)',data:[3.52,3.42,3.90,4.00,3.98,3.90,4.20,4.96,4.64],backgroundColor:'#C9A84C',borderRadius:4}
+        ]
+      },
+      options:{
+        plugins:{legend:{labels:{color:'#7A8BA8',font:{size:11}}}},
+        scales:{
+          x:{ticks:{color:'#7A8BA8'},grid:{color:'rgba(255,255,255,0.04)'}},
+          y:{ticks:{color:'#7A8BA8',callback:v=>'$'+v+'M'},grid:{color:'rgba(255,255,255,0.04)'}}
+        }
+      }
+    });
+  }
+
+  // ── TAB SWITCH ───────────────────────────────────────────────
+  function switchTab(id,btn){
+    document.querySelectorAll('.tab-section').forEach(s=>s.classList.remove('active'));
+    document.querySelectorAll('.mtab').forEach(t=>t.classList.remove('active'));
+    document.getElementById('tab-'+id).classList.add('active');
+    btn.classList.add('active');
+    document.querySelectorAll('#tab-'+id+' .fade-up').forEach(el=>{
+      el.classList.remove('visible');
+      setTimeout(()=>obs.observe(el),50);
+    });
+  }
+
+  // ── LANGUAGE ─────────────────────────────────────────────────
+  let currentLang='en';
+  function setLang(lang){
+    currentLang=lang;
+    document.getElementById('btn-en').classList.toggle('active',lang==='en');
+    document.getElementById('btn-fa').classList.toggle('active',lang==='fa');
+    const body=document.getElementById('body');
+    if(lang==='fa'){body.classList.add('fa');body.setAttribute('dir','rtl');}
+    else{body.classList.remove('fa');body.setAttribute('dir','ltr');}
+    document.querySelectorAll('[data-'+lang+']').forEach(el=>{
+      const v=el.getAttribute('data-'+lang);
+      if(!v)return;
+      if(el.tagName==='INPUT'||el.tagName==='TEXTAREA')el.placeholder=v;
+      else el.innerHTML=v;
+    });
+  }
+
+  // ── FADE UP ──────────────────────────────────────────────────
+  const obs=new IntersectionObserver(entries=>
+    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),
+    {threshold:0.05}
+  );
+  document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+
+  // ── INIT ─────────────────────────────────────────────────────
+  renderEqTable();
+  renderVendors();
+  renderDutyTable();
+  buildLandedCostChart();
+  buildLandedBarChart();
+  </script>
+</body>
+</html>

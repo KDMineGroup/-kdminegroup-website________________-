@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CAPEX / OPEX Estimation | KDMine</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      --gold:#C9A84C;--gold-light:#E8C97A;--gold-dark:#A07830;
+      --dark:#080C16;--dark2:#0F1520;--dark3:#161E2E;--dark4:#1E2840;
+      --text:#E8EDF5;--text-muted:#7A8BA8;
+      --border:rgba(201,168,76,0.2);--border2:rgba(255,255,255,0.06);
+      --green:#22C55E;--blue:#0EA5E9;--purple:#A855F7;--red:#EF4444;--orange:#F97316;
+    }
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;background:var(--dark);color:var(--text);overflow-x:hidden;}
+    body.fa{font-family:'Vazirmatn',sans-serif;direction:rtl;}
+    ::-webkit-scrollbar{width:5px;}
+    ::-webkit-scrollbar-track{background:var(--dark2);}
+    ::-webkit-scrollbar-thumb{background:var(--gold-dark);border-radius:3px;}
+
+    .lang-bar{position:fixed;top:0;left:0;right:0;z-index:2000;height:36px;background:var(--gold-dark);display:flex;align-items:center;justify-content:flex-end;padding:0 5%;gap:12px;}
+    .lang-btn{padding:4px 14px;border-radius:20px;border:none;cursor:pointer;font-size:12px;font-weight:700;transition:.2s;}
+    .lang-btn.active{background:var(--dark);color:var(--gold);}
+    .lang-btn:not(.active){background:rgba(0,0,0,0.2);color:rgba(0,0,0,0.7);}
+    nav{position:fixed;top:36px;left:0;right:0;z-index:1000;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:70px;background:rgba(8,12,22,0.95);backdrop-filter:blur(24px);border-bottom:1px solid var(--border2);}
+    .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+    .nav-logo-icon{width:42px;height:42px;border-radius:11px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));display:flex;align-items:center;justify-content:center;font-weight:900;font-size:17px;color:var(--dark);}
+    .nav-logo-text{font-size:21px;font-weight:800;color:#fff;}
+    .nav-logo-text span{color:var(--gold);}
+    .nav-back{display:flex;align-items:center;gap:8px;padding:9px 20px;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text);font-size:13px;font-weight:600;text-decoration:none;transition:.2s;}
+    .nav-back:hover{border-color:var(--gold);color:var(--gold);}
+
+    /* HERO */
+    .page-hero{padding:130px 5% 72px;position:relative;overflow:hidden;}
+    .hero-bg{position:absolute;inset:0;background:linear-gradient(160deg,#080C16,#0d1525,#080C16);}
+    .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.03) 1px,transparent 1px);background-size:48px 48px;}
+    .hero-glow{position:absolute;top:-80px;right:5%;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.07),transparent 70%);}
+    .hero-inner{position:relative;z-index:2;max-width:860px;}
+    .breadcrumb{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-muted);margin-bottom:18px;}
+    .breadcrumb a{color:var(--gold);text-decoration:none;}
+    .breadcrumb span{opacity:.5;}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border-radius:20px;background:rgba(201,168,76,0.1);border:1px solid var(--border);font-size:12px;font-weight:700;color:var(--gold);margin-bottom:18px;}
+    .page-hero h1{font-size:clamp(36px,5.5vw,66px);font-weight:900;color:#fff;letter-spacing:-2px;margin-bottom:16px;line-height:1.05;}
+    .page-hero h1 em{background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal;}
+    .page-hero p{font-size:16px;color:var(--text-muted);line-height:1.8;max-width:680px;margin-bottom:36px;}
+    .hero-kpis{display:flex;gap:40px;flex-wrap:wrap;}
+    .hkpi .num{font-size:32px;font-weight:900;color:#fff;letter-spacing:-1px;}
+    .hkpi .num em{color:var(--gold);font-style:normal;font-size:18px;}
+    .hkpi .lbl{font-size:11px;color:var(--text-muted);margin-top:3px;}
+
+    /* LAYOUT */
+    .wrap{padding:0 5% 72px;max-width:1400px;margin:0 auto;}
+    .sec-label{font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;}
+    .sec-title{font-size:28px;font-weight:900;color:#fff;letter-spacing:-.5px;margin-bottom:10px;}
+    .sec-sub{font-size:15px;color:var(--text-muted);line-height:1.75;margin-bottom:36px;max-width:720px;}
+
+    /* TABS */
+    .main-tabs{display:flex;gap:6px;margin-bottom:36px;flex-wrap:wrap;}
+    .mtab{padding:11px 22px;border-radius:12px;border:1px solid var(--border2);background:rgba(255,255,255,0.04);color:var(--text-muted);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:.2s;display:flex;align-items:center;gap:8px;}
+    .mtab.active{background:rgba(201,168,76,0.1);border-color:var(--border);color:var(--gold);}
+    .tab-section{display:none;}
+    .tab-section.active{display:block;}
+
+    /* ── CAPEX TAB ── */
+    .capex-overview{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:48px;}
+    .capex-text p{font-size:14px;color:var(--text-muted);line-height:1.8;margin-bottom:14px;}
+    .capex-text ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+    .capex-text li{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--text-muted);}
+    .capex-text li .dot{width:20px;height:20px;border-radius:6px;background:rgba(201,168,76,0.12);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--gold);flex-shrink:0;margin-top:1px;}
+    .capex-chart-card{background:var(--dark3);border:1px solid var(--border2);border-radius:20px;padding:24px;}
+    .capex-chart-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:16px;}
+
+    /* WBS TABLE */
+    .wbs-section{margin-bottom:48px;}
+    .wbs-table-wrap{background:var(--dark3);border:1px solid var(--border2);border-radius:20px;overflow:hidden;}
+    .wbs-table{width:100%;border-collapse:collapse;}
+    .wbs-table thead tr{background:var(--dark4);}
+    .wbs-table th{padding:12px 18px;text-align:left;font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border2);}
+    .wbs-table td{padding:11px 18px;font-size:13px;color:var(--text-muted);border-bottom:1px solid var(--border2);}
+    .wbs-table tr:last-child td{border-bottom:none;}
+    .wbs-table tr:hover td{background:rgba(255,255,255,0.02);}
+    .wbs-table td:first-child{font-weight:700;color:#fff;}
+    .wbs-table td.total{font-weight:800;color:var(--gold);}
+    .wbs-bar-wrap{width:100px;height:6px;background:var(--dark4);border-radius:3px;display:inline-block;vertical-align:middle;}
+    .wbs-bar{height:100%;border-radius:3px;background:var(--gold);}
+    .wbs-group{background:rgba(201,168,76,0.04);}
+    .wbs-group td{color:#fff;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.5px;}
+
+    /* CAPEX BREAKDOWN CARDS */
+    .breakdown-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:48px;}
+    .bk-card{background:var(--dark3);border:1px solid var(--border2);border-radius:18px;padding:22px;transition:.3s;}
+    .bk-card:hover{border-color:var(--border);}
+    .bk-icon{font-size:28px;margin-bottom:12px;}
+    .bk-title{font-size:14px;font-weight:800;color:#fff;margin-bottom:6px;}
+    .bk-desc{font-size:12px;color:var(--text-muted);line-height:1.65;margin-bottom:14px;}
+    .bk-pct{font-size:22px;font-weight:900;color:var(--gold);}
+    .bk-pct small{font-size:12px;color:var(--text-muted);font-weight:400;}
+    .bk-bar-wrap{width:100%;height:4px;background:var(--dark4);border-radius:2px;margin-top:8px;}
+    .bk-bar{height:100%;border-radius:2px;}
+
+    /* ── OPEX TAB ── */
+    .opex-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:48px;}
+    .opex-drivers{display:flex;flex-direction:column;gap:12px;}
+    .od-item{background:var(--dark3);border:1px solid var(--border2);border-radius:14px;padding:16px;display:flex;align-items:center;gap:14px;transition:.3s;}
+    .od-item:hover{border-color:var(--border);}
+    .od-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+    .od-name{font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;}
+    .od-range{font-size:11px;color:var(--text-muted);}
+    .od-pct{font-size:16px;font-weight:900;color:var(--gold);margin-left:auto;flex-shrink:0;}
+    .opex-chart-card{background:var(--dark3);border:1px solid var(--border2);border-radius:20px;padding:24px;}
+
+    /* OPEX UNIT COST TABLE */
+    .unit-table-wrap{background:var(--dark3);border:1px solid var(--border2);border-radius:20px;overflow:hidden;margin-bottom:48px;}
+    .unit-table{width:100%;border-collapse:collapse;}
+    .unit-table thead tr{background:var(--dark4);}
+    .unit-table th{padding:12px 18px;text-align:left;font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border2);}
+    .unit-table td{padding:11px 18px;font-size:13px;color:var(--text-muted);border-bottom:1px solid var(--border2);}
+    .unit-table tr:last-child td{border-bottom:none;}
+    .unit-table tr:hover td{background:rgba(255,255,255,0.02);}
+    .unit-table td:first-child{font-weight:700;color:#fff;}
+    .range-bar{display:flex;align-items:center;gap:8px;}
+    .rb-track{flex:1;height:6px;background:var(--dark4);border-radius:3px;position:relative;}
+    .rb-fill{position:absolute;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--blue),var(--gold));}
+    .rb-val{font-size:11px;color:var(--gold);font-weight:700;white-space:nowrap;}
+
+    /* SENSITIVITY */
+    .sensitivity-section{margin-bottom:48px;}
+    .sens-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+    .sens-card{background:var(--dark3);border:1px solid var(--border2);border-radius:20px;padding:24px;}
+    .sens-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+
+    /* METHODOLOGY */
+    .method-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:48px;}
+    .meth-card{background:var(--dark3);border:1px solid var(--border2);border-radius:18px;padding:22px;transition:.3s;}
+    .meth-card:hover{border-color:var(--border);}
+    .meth-step{font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+    .meth-title{font-size:14px;font-weight:800;color:#fff;margin-bottom:8px;}
+    .meth-desc{font-size:12px;color:var(--text-muted);line-height:1.65;}
+    .meth-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:12px;}
+    .meth-tag{padding:3px 8px;border-radius:5px;background:rgba(255,255,255,0.04);border:1px solid var(--border2);font-size:10px;color:var(--text-muted);}
+
+    /* DELIVERABLES */
+    .deliv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:48px;}
+    .deliv-card{background:var(--dark3);border:1px solid var(--border2);border-radius:16px;padding:18px;text-align:center;transition:.3s;}
+    .deliv-card:hover{border-color:var(--border);}
+    .deliv-icon{font-size:26px;margin-bottom:10px;}
+    .deliv-name{font-size:12px;font-weight:700;color:#fff;margin-bottom:4px;}
+    .deliv-desc{font-size:11px;color:var(--text-muted);line-height:1.5;}
+
+    /* CTA */
+    .cta-band{background:linear-gradient(135deg,var(--dark3),var(--dark4));border:1px solid var(--border);border-radius:24px;padding:52px;text-align:center;margin-bottom:56px;}
+    .cta-band h3{font-size:32px;font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:12px;}
+    .cta-band h3 em{background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal;}
+    .cta-band p{font-size:15px;color:var(--text-muted);margin-bottom:28px;}
+    .cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+    .btn-gold{padding:13px 28px;border-radius:11px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--dark);font-weight:700;font-size:14px;border:none;cursor:pointer;font-family:inherit;transition:.2s;display:inline-flex;align-items:center;gap:8px;}
+    .btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,0.4);}
+    .btn-outline{padding:13px 28px;border-radius:11px;border:1px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text);font-weight:600;font-size:14px;cursor:pointer;font-family:inherit;transition:.2s;display:inline-flex;align-items:center;gap:8px;}
+    .btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+
+    .footer-mini{background:var(--dark2);border-top:1px solid var(--border2);padding:28px 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;}
+    .footer-mini p{font-size:13px;color:var(--text-muted);}
+    .footer-mini a{font-size:13px;color:var(--gold);text-decoration:none;}
+
+    .fade-up{opacity:0;transform:translateY(22px);transition:opacity .5s,transform .5s;}
+    .fade-up.visible{opacity:1;transform:translateY(0);}
+
+    @media(max-width:1100px){.capex-overview{grid-template-columns:1fr;}.opex-grid{grid-template-columns:1fr;}.sens-grid{grid-template-columns:1fr;}.breakdown-grid{grid-template-columns:1fr 1fr;}.method-grid{grid-template-columns:1fr 1fr;}.deliv-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:768px){.breakdown-grid{grid-template-columns:1fr;}.method-grid{grid-template-columns:1fr;}.deliv-grid{grid-template-columns:1fr 1fr;}}
+  </style>
+</head>
+<body id="body">
+
+  <!-- LANG BAR -->
+  <div class="lang-bar">
+    <button class="lang-btn active" id="btn-en" onclick="setLang('en')">🇬🇧 English</button>
+    <button class="lang-btn" id="btn-fa" onclick="setLang('fa')">🇮🇷 فارسی</button>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">KD</div>
+      <span class="nav-logo-text">KD<span>Mine</span></span>
+    </a>
+    <a href="index.html" class="nav-back"><i class="fas fa-arrow-left"></i> <span data-en="Back to Home" data-fa="بازگشت به خانه">Back to Home</span></a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="page-hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-inner fade-up">
+      <div class="breadcrumb">
+        <a href="index.html" data-en="Home" data-fa="خانه">Home</a><span>/</span>
+        <span data-en="CAPEX / OPEX Estimation" data-fa="برآورد CAPEX / OPEX">CAPEX / OPEX Estimation</span>
+      </div>
+      <div class="hero-badge"><i class="fas fa-coins"></i> <span data-en="AACE Class 1–5 · Open Pit · Process Plant · Infrastructure" data-fa="AACE کلاس ۱-۵ · معدن روباز · کارخانه فرآوری · زیرساخت">AACE Class 1–5 · Open Pit · Process Plant · Infrastructure</span></div>
+      <h1><em data-en="CAPEX / OPEX" data-fa="برآورد CAPEX / OPEX">CAPEX / OPEX</em><br/><span data-en="Cost Estimation" data-fa="هزینه معدن">Cost Estimation</span></h1>
+      <p data-en="Comprehensive capital and operating cost estimation for open-pit mining projects at any stage — from order-of-magnitude scoping to bankable definitive feasibility. Powered by CostMine data, AACE methodology, and 20 years of project experience." data-fa="برآورد جامع هزینه سرمایه و عملیاتی برای پروژه‌های معدن روباز در هر مرحله — از برآورد مرتبه‌ای اولیه تا امکان‌سنجی قطعی بانکی. با داده CostMine، روش‌شناسی AACE و ۲۰ سال تجربه پروژه.">Comprehensive capital and operating cost estimation for open-pit mining projects at any stage — from order-of-magnitude scoping to bankable definitive feasibility. Powered by CostMine data, AACE methodology, and 20 years of project experience.</p>
+      <div class="hero-kpis">
+        <div class="hkpi"><div class="num">$12<em>B+</em></div><div class="lbl" data-en="CAPEX Estimated" data-fa="CAPEX برآوردشده">CAPEX Estimated</div></div>
+        <div class="hkpi"><div class="num">40<em>+</em></div><div class="lbl" data-en="Projects Worldwide" data-fa="پروژه در سراسر جهان">Projects Worldwide</div></div>
+        <div class="hkpi"><div class="num">±10<em>%</em></div><div class="lbl" data-en="Class 2 Accuracy" data-fa="دقت کلاس ۲">Class 2 Accuracy</div></div>
+        <div class="hkpi"><div class="num">AACE<em> RP</em></div><div class="lbl" data-en="18R-97 Certified" data-fa="گواهی‌شده 18R-97">18R-97 Certified</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- MAIN TABS -->
+    <div class="main-tabs fade-up">
+      <button class="mtab active" onclick="switchTab('capex',this)"><i class="fas fa-hard-hat"></i> <span data-en="CAPEX — Capital Costs" data-fa="CAPEX — هزینه‌های سرمایه">CAPEX — Capital Costs</span></button>
+      <button class="mtab" onclick="switchTab('opex',this)"><i class="fas fa-cogs"></i> <span data-en="OPEX — Operating Costs" data-fa="OPEX — هزینه‌های عملیاتی">OPEX — Operating Costs</span></button>
+      <button class="mtab" onclick="switchTab('method',this)"><i class="fas fa-drafting-compass"></i> <span data-en="Methodology" data-fa="روش‌شناسی">Methodology</span></button>
+      <button class="mtab" onclick="switchTab('deliverables',this)"><i class="fas fa-file-alt"></i> <span data-en="Deliverables" data-fa="تحویل‌دادنی‌ها">Deliverables</span></button>
+    </div>
+
+    <!-- ══ CAPEX TAB ══ -->
+    <div class="tab-section active" id="tab-capex">
+
+      <div class="capex-overview fade-up">
+        <div class="capex-text">
+          <div class="sec-label" data-en="Capital Cost Estimation" data-fa="برآورد هزینه سرمایه">Capital Cost Estimation</div>
+          <div class="sec-title" data-en="What Is CAPEX in Mining?" data-fa="CAPEX در معدن چیست؟">What Is CAPEX in Mining?</div>
+          <p data-en="Capital expenditure (CAPEX) in open-pit mining covers all one-time costs required to bring a mine from greenfield to first production. This includes direct costs (equipment, civil, structural, mechanical, electrical, piping) and indirect costs (engineering, procurement, construction management, owner's costs, and contingency)." data-fa="هزینه سرمایه (CAPEX) در معدن روباز تمام هزینه‌های یک‌باره مورد نیاز برای رساندن یک معدن از سبز به اولین تولید را پوشش می‌دهد. این شامل هزینه‌های مستقیم (تجهیزات، عمرانی، سازه‌ای، مکانیکی، الکتریکی، لوله‌کشی) و هزینه‌های غیرمستقیم (مهندسی، تدارکات، مدیریت ساخت، هزینه‌های مالک و احتیاط) می‌شود.">Capital expenditure (CAPEX) in open-pit mining covers all one-time costs required to bring a mine from greenfield to first production. This includes direct costs (equipment, civil, structural, mechanical, electrical, piping) and indirect costs (engineering, procurement, construction management, owner's costs, and contingency).</p>
+          <p data-en="KDMine prepares CAPEX estimates across all AACE classes — from Class 5 parametric models (±50%) to Class 2 definitive estimates with firm vendor quotes (±10%). Each estimate is built on a structured WBS aligned to industry standard account codes." data-fa="KDMine برآوردهای CAPEX را در تمام کلاس‌های AACE آماده می‌کند — از مدل‌های پارامتریک کلاس ۵ (±۵۰٪) تا برآوردهای قطعی کلاس ۲ با قیمت‌های قطعی فروشنده (±۱۰٪). هر برآورد بر اساس یک WBS ساختاریافته منطبق با کدهای حساب استاندارد صنعت ساخته می‌شود.">KDMine prepares CAPEX estimates across all AACE classes — from Class 5 parametric models (±50%) to Class 2 definitive estimates with firm vendor quotes (±10%). Each estimate is built on a structured WBS aligned to industry standard account codes.</p>
+          <ul>
+            <li><div class="dot">✓</div><span data-en="Mining fleet — trucks, shovels, drills, dozers, graders" data-fa="ناوگان معدن — کامیون‌ها، بیل‌های مکانیکی، دریل‌ها، بولدوزرها، گریدرها">Mining fleet — trucks, shovels, drills, dozers, graders</span></li>
+            <li><div class="dot">✓</div><span data-en="Process plant — crushing, grinding, flotation, leaching, CIL/CIP" data-fa="کارخانه فرآوری — خردایش، آسیاب، فلوتاسیون، لیچینگ، CIL/CIP">Process plant — crushing, grinding, flotation, leaching, CIL/CIP</span></li>
+            <li><div class="dot">✓</div><span data-en="Infrastructure — roads, power, water, tailings, camp" data-fa="زیرساخت — جاده‌ها، برق، آب، باطله، اردوگاه">Infrastructure — roads, power, water, tailings, camp</span></li>
+            <li><div class="dot">✓</div><span data-en="Owner's costs — pre-production, working capital, closure bond" data-fa="هزینه‌های مالک — پیش از تولید، سرمایه در گردش، اوراق بستن">Owner's costs — pre-production, working capital, closure bond</span></li>
+            <li><div class="dot">✓</div><span data-en="Contingency — AACE RP 44R-08 risk-based determination" data-fa="احتیاط — تعیین مبتنی بر ریسک AACE RP 44R-08">Contingency — AACE RP 44R-08 risk-based determination</span></li>
+          </ul>
+        </div>
+        <div class="capex-chart-card">
+          <div class="capex-chart-title" data-en="Typical CAPEX Breakdown — 10 Mtpa Open-Pit Gold Mine" data-fa="تفکیک معمول CAPEX — معدن طلای روباز ۱۰ میلیون تن در سال">Typical CAPEX Breakdown — 10 Mtpa Open-Pit Gold Mine</div>
+          <canvas id="capexPieChart" style="max-height:280px;"></canvas>
+        </div>
+      </div>
+
+      <!-- WBS TABLE -->
+      <div class="wbs-section fade-up">
+        <div class="sec-label" data-en="Work Breakdown Structure" data-fa="ساختار شکست کار">Work Breakdown Structure</div>
+        <div class="sec-title" data-en="CAPEX WBS — Reference Cost Model" data-fa="WBS CAPEX — مدل هزینه مرجع">CAPEX WBS — Reference Cost Model</div>
+        <div class="sec-sub" data-en="Reference CAPEX breakdown for a 10 Mtpa open-pit gold mine (Class 3, 2026 USD). Actual values vary by location, commodity, and project specifics." data-fa="تفکیک CAPEX مرجع برای یک معدن طلای روباز ۱۰ میلیون تن در سال (کلاس ۳، دلار ۲۰۲۶). مقادیر واقعی بر اساس موقعیت، کالا و مشخصات پروژه متفاوت است.">Reference CAPEX breakdown for a 10 Mtpa open-pit gold mine (Class 3, 2026 USD). Actual values vary by location, commodity, and project specifics.</div>
+        <div class="wbs-table-wrap">
+          <table class="wbs-table">
+            <thead><tr>
+              <th data-en="WBS Code" data-fa="کد WBS">WBS Code</th>
+              <th data-en="Description" data-fa="توضیحات">Description</th>
+              <th data-en="Cost (USD M)" data-fa="هزینه (میلیون دلار)">Cost (USD M)</th>
+              <th data-en="% of Total" data-fa="٪ از کل">% of Total</th>
+              <th data-en="Range" data-fa="محدوده">Range</th>
+            </tr></thead>
+            <tbody id="wbsBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- BREAKDOWN CARDS -->
+      <div class="fade-up">
+        <div class="sec-label" data-en="Cost Drivers" data-fa="محرک‌های هزینه">Cost Drivers</div>
+        <div class="sec-title" data-en="Key CAPEX Components" data-fa="اجزای کلیدی CAPEX">Key CAPEX Components</div>
+      </div>
+      <div class="breakdown-grid fade-up" id="capexCards"></div>
+
+    </div>
+
+    <!-- ══ OPEX TAB ══ -->
+    <div class="tab-section" id="tab-opex">
+
+      <div class="opex-grid fade-up">
+        <div>
+          <div class="sec-label" data-en="Operating Cost Estimation" data-fa="برآورد هزینه عملیاتی">Operating Cost Estimation</div>
+          <div class="sec-title" data-en="OPEX Cost Drivers" data-fa="محرک‌های هزینه OPEX">OPEX Cost Drivers</div>
+          <div class="sec-sub" data-en="Operating expenditure (OPEX) covers all recurring costs to run the mine and process plant. Expressed in $/t ore mined, $/t ore processed, or $/oz produced." data-fa="هزینه عملیاتی (OPEX) تمام هزینه‌های مکرر برای اداره معدن و کارخانه فرآوری را پوشش می‌دهد. به صورت $/t سنگ معدن استخراج‌شده، $/t سنگ معدن فرآوری‌شده یا $/oz تولیدشده بیان می‌شود.">Operating expenditure (OPEX) covers all recurring costs to run the mine and process plant. Expressed in $/t ore mined, $/t ore processed, or $/oz produced.</div>
+          <div class="opex-drivers" id="opexDrivers"></div>
+        </div>
+        <div class="opex-chart-card">
+          <div class="capex-chart-title" data-en="Typical OPEX Breakdown — $/t Ore Processed" data-fa="تفکیک معمول OPEX — $/t سنگ معدن فرآوری‌شده">Typical OPEX Breakdown — $/t Ore Processed</div>
+          <canvas id="opexChart" style="max-height:280px;"></canvas>
+        </div>
+      </div>
+
+      <!-- UNIT COST TABLE -->
+      <div class="fade-up">
+        <div class="sec-label" data-en="Benchmark Data" data-fa="داده معیار">Benchmark Data</div>
+        <div class="sec-title" data-en="OPEX Unit Cost Reference Ranges" data-fa="محدوده‌های مرجع هزینه واحد OPEX">OPEX Unit Cost Reference Ranges</div>
+        <div class="sec-sub" data-en="Industry benchmark ranges for key OPEX components (2026 USD). Source: CostMine, KDMine proprietary database." data-fa="محدوده‌های معیار صنعت برای اجزای کلیدی OPEX (دلار ۲۰۲۶). منبع: CostMine، پایگاه داده اختصاصی KDMine.">Industry benchmark ranges for key OPEX components (2026 USD). Source: CostMine, KDMine proprietary database.</div>
+      </div>
+      <div class="unit-table-wrap fade-up">
+        <table class="unit-table">
+          <thead><tr>
+            <th data-en="Cost Item" data-fa="قلم هزینه">Cost Item</th>
+            <th data-en="Unit" data-fa="واحد">Unit</th>
+            <th data-en="Low" data-fa="پایین">Low</th>
+            <th data-en="Typical" data-fa="معمول">Typical</th>
+            <th data-en="High" data-fa="بالا">High</th>
+            <th data-en="Benchmark Range" data-fa="محدوده معیار">Benchmark Range</th>
+            <th data-en="Notes" data-fa="یادداشت‌ها">Notes</th>
+          </tr></thead>
+          <tbody id="opexTableBody"></tbody>
+        </table>
+      </div>
+
+      <!-- SENSITIVITY -->
+      <div class="sensitivity-section fade-up">
+        <div class="sec-label" data-en="Sensitivity Analysis" data-fa="تحلیل حساسیت">Sensitivity Analysis</div>
+        <div class="sec-title" data-en="OPEX Sensitivity to Key Variables" data-fa="حساسیت OPEX به متغیرهای کلیدی">OPEX Sensitivity to Key Variables</div>
+        <div class="sens-grid">
+          <div class="sens-card">
+            <div class="sens-title"><i class="fas fa-gas-pump" style="color:var(--orange);"></i> <span data-en="Diesel Price Sensitivity" data-fa="حساسیت قیمت دیزل">Diesel Price Sensitivity</span></div>
+            <canvas id="dieselChart" style="max-height:200px;"></canvas>
+          </div>
+          <div class="sens-card">
+            <div class="sens-title"><i class="fas fa-bolt" style="color:var(--blue);"></i> <span data-en="Power Cost Sensitivity" data-fa="حساسیت هزینه برق">Power Cost Sensitivity</span></div>
+            <canvas id="powerChart" style="max-height:200px;"></canvas>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ══ METHODOLOGY TAB ══ -->
+    <div class="tab-section" id="tab-method">
+      <div class="fade-up">
+        <div class="sec-label" data-en="Our Approach" data-fa="رویکرد ما">Our Approach</div>
+        <div class="sec-title" data-en="Estimation Methodology" data-fa="روش‌شناسی برآورد">Estimation Methodology</div>
+        <div class="sec-sub" data-en="KDMine follows AACE International Recommended Practice 18R-97 for all cost estimates. Each engagement begins with a scope definition workshop and ends with a peer-reviewed, QA-checked deliverable." data-fa="KDMine از توصیه‌نامه عملی AACE بین‌المللی 18R-97 برای تمام برآوردهای هزینه پیروی می‌کند. هر تعامل با یک کارگاه تعریف محدوده شروع می‌شود و با یک تحویل‌دادنی بررسی‌شده توسط همتا و بررسی تضمین کیفیت پایان می‌یابد.">KDMine follows AACE International Recommended Practice 18R-97 for all cost estimates. Each engagement begins with a scope definition workshop and ends with a peer-reviewed, QA-checked deliverable.</div>
+      </div>
+      <div class="method-grid fade-up" id="methodCards"></div>
+    </div>
+
+    <!-- ══ DELIVERABLES TAB ══ -->
+    <div class="tab-section" id="tab-deliverables">
+      <div class="fade-up">
+        <div class="sec-label" data-en="What You Receive" data-fa="آنچه دریافت می‌کنید">What You Receive</div>
+        <div class="sec-title" data-en="Standard Deliverables" data-fa="تحویل‌دادنی‌های استاندارد">Standard Deliverables</div>
+        <div class="sec-sub" data-en="Every KDMine CAPEX/OPEX engagement includes a comprehensive set of deliverables — all formatted to AACE standards and ready for lender, board, or regulatory submission." data-fa="هر تعامل CAPEX/OPEX KDMine شامل مجموعه جامعی از تحویل‌دادنی‌ها است — همه قالب‌بندی‌شده طبق استانداردهای AACE و آماده برای ارائه به وام‌دهنده، هیئت مدیره یا نهادهای نظارتی.">Every KDMine CAPEX/OPEX engagement includes a comprehensive set of deliverables — all formatted to AACE standards and ready for lender, board, or regulatory submission.</div>
+      </div>
+      <div class="deliv-grid fade-up" id="delivGrid"></div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-band fade-up">
+      <h3 data-en="Start Your <em>CAPEX / OPEX</em> Estimate" data-fa="برآورد <em>CAPEX / OPEX</em> خود را شروع کنید">Start Your <em>CAPEX / OPEX</em> Estimate</h3>
+      <p data-en="Tell us your project stage and commodity — we'll respond within 24 hours with a fixed-fee proposal and data request checklist." data-fa="مرحله پروژه و کالای خود را به ما بگویید — ما در ۲۴ ساعت با یک پیشنهاد با هزینه ثابت و چک‌لیست درخواست داده پاسخ خواهیم داد.">Tell us your project stage and commodity — we'll respond within 24 hours with a fixed-fee proposal and data request checklist.</p>
+      <div class="cta-btns">
+        <button class="btn-gold" onclick="window.location.href='contact.html'"><i class="fas fa-paper-plane"></i> <span data-en="Request a Proposal" data-fa="درخواست پیشنهاد">Request a Proposal</span></button>
+        <button class="btn-outline" onclick="window.location.href='services.html'"><i class="fas fa-tags"></i> <span data-en="View Pricing" data-fa="مشاهده قیمت‌گذاری">View Pricing</span></button>
+        <button class="btn-outline" onclick="window.location.href='calculator.html'"><i class="fas fa-calculator"></i> <span data-en="Try the Calculator" data-fa="ماشین‌حساب را امتحان کنید">Try the Calculator</span></button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-mini">
+    <p data-en="© 2026 KDMine Consultancy. All cost data in 2026 USD. Reference values for guidance only." data-fa="© ۱۴۰۵ مشاوره KDMine. تمام داده‌های هزینه به دلار ۲۰۲۶. مقادیر مرجع فقط برای راهنمایی.">© 2026 KDMine Consultancy. All cost data in 2026 USD. Reference values for guidance only.</p>
+    <a href="index.html" data-en="← Back to Main Site" data-fa="← بازگشت به سایت اصلی">← Back to Main Site</a>
+  </div>
+
+  <script>
+  // ── DATA ─────────────────────────────────────────────────────
+  const wbsData = [
+    {code:'1000',desc:'Mining Fleet & Pre-Strip',cost:85,pct:17,range:'12–22%',group:true},
+    {code:'1100',desc:'Production Trucks (150t)',cost:32,pct:6.4,range:'5–9%'},
+    {code:'1200',desc:'Hydraulic Shovels / Excavators',cost:24,pct:4.8,range:'4–7%'},
+    {code:'1300',desc:'Drills, Dozers, Graders, Ancillary',cost:18,pct:3.6,range:'3–5%'},
+    {code:'1400',desc:'Pre-Strip & Mine Development',cost:11,pct:2.2,range:'1–4%'},
+    {code:'2000',desc:'Process Plant',cost:165,pct:33,range:'28–38%',group:true},
+    {code:'2100',desc:'Primary Crushing',cost:22,pct:4.4,range:'3–6%'},
+    {code:'2200',desc:'Grinding (SAG + Ball Mills)',cost:58,pct:11.6,range:'9–14%'},
+    {code:'2300',desc:'Flotation / Leaching Circuit',cost:45,pct:9.0,range:'7–12%'},
+    {code:'2400',desc:'Gold Room / Refinery',cost:18,pct:3.6,range:'2–5%'},
+    {code:'2500',desc:'Reagents, Utilities, Ancillary',cost:22,pct:4.4,range:'3–6%'},
+    {code:'3000',desc:'Infrastructure',cost:95,pct:19,range:'15–24%',group:true},
+    {code:'3100',desc:'Power Supply & Distribution',cost:38,pct:7.6,range:'6–10%'},
+    {code:'3200',desc:'Water Supply & Treatment',cost:18,pct:3.6,range:'2–5%'},
+    {code:'3300',desc:'Roads, Airstrip, Fencing',cost:22,pct:4.4,range:'3–6%'},
+    {code:'3400',desc:'Camp, Admin, Warehouse',cost:17,pct:3.4,range:'2–5%'},
+    {code:'4000',desc:'Tailings Management Facility',cost:35,pct:7,range:'5–10%',group:true},
+    {code:'5000',desc:'Indirects (EPCM, Engineering)',cost:55,pct:11,range:'8–14%',group:true},
+    {code:'6000',desc:"Owner's Costs & Pre-Production",cost:30,pct:6,range:'4–8%',group:true},
+    {code:'7000',desc:'Contingency (AACE RP 44R-08)',cost:35,pct:7,range:'5–15%',group:true},
+    {code:'TOTAL',desc:'TOTAL PROJECT CAPEX',cost:500,pct:100,range:'—',total:true}
+  ];
+
+  const capexCards = [
+    {icon:'🚛',title:'Mining Fleet',desc:'Trucks, excavators, drills, and ancillary equipment. Sized to mine plan throughput. Priced from OEM quotations or CostMine database.',pct:17,color:'#C9A84C'},
+    {icon:'⚙️',title:'Process Plant',desc:'Crushing, grinding, flotation, leaching, and gold room. Largest single CAPEX item. Equipment-factored or vendor-quoted depending on estimate class.',pct:33,color:'#0EA5E9'},
+    {icon:'🏗️',title:'Infrastructure',desc:'Power, water, roads, tailings, and camp. Highly location-dependent. Remote sites can push infrastructure to 30%+ of total CAPEX.',pct:19,color:'#22C55E'},
+    {icon:'🏭',title:'Tailings Facility',desc:'TSF design and construction. Cost driven by tailings volume, geotechnical conditions, and regulatory requirements.',pct:7,color:'#A855F7'},
+    {icon:'📐',title:'EPCM & Indirects',desc:'Engineering, procurement, construction management, and other indirect costs. Typically 8–14% of direct costs.',pct:11,color:'#F97316'},
+    {icon:'🛡️',title:'Contingency',desc:'Risk-based contingency per AACE RP 44R-08. Class 5: 30–50%. Class 3: 15–25%. Class 2: 5–10%.',pct:7,color:'#EF4444'}
+  ];
+
+  const opexDrivers = [
+    {icon:'⛽',name:'Mining (Drill & Blast, Load & Haul)',range:'$2.5–$6.0/t mined',pct:38,color:'rgba(249,115,22,0.12)'},
+    {icon:'⚙️',name:'Processing (Grinding, Reagents, Power)',range:'$8–$18/t ore',pct:32,color:'rgba(14,165,233,0.12)'},
+    {icon:'🏢',name:'G&A (General & Administrative)',range:'$1.5–$4.0/t ore',pct:12,color:'rgba(168,85,247,0.12)'},
+    {icon:'🔧',name:'Maintenance & Spare Parts',range:'$1.0–$3.0/t ore',pct:10,color:'rgba(201,168,76,0.12)'},
+    {icon:'🌿',name:'Environmental & Tailings',range:'$0.5–$2.0/t ore',pct:5,color:'rgba(34,197,94,0.12)'},
+    {icon:'👷',name:'Labour (Site & Contractor)',range:'$3.0–$9.0/t ore',pct:3,color:'rgba(239,68,68,0.12)'}
+  ];
+
+  const opexTable = [
+    {item:'Diesel Fuel',unit:'$/L',low:0.85,typ:1.05,high:1.35,note:'Delivered to site'},
+    {item:'Explosives (ANFO)',unit:'$/t',low:580,typ:650,high:780,note:'Bulk supply'},
+    {item:'Grinding Media',unit:'$/t ore',low:0.80,typ:1.20,high:2.10,note:'Ball mill'},
+    {item:'Cyanide (NaCN)',unit:'$/t ore',low:0.60,typ:1.10,high:2.20,note:'Gold leaching'},
+    {item:'Lime',unit:'$/t ore',low:0.15,typ:0.35,high:0.65,note:'pH control'},
+    {item:'Power (Grid)',unit:'$/kWh',low:0.06,typ:0.10,high:0.18,note:'Grid-connected'},
+    {item:'Power (Diesel Gen)',unit:'$/kWh',low:0.22,typ:0.32,high:0.45,note:'Remote sites'},
+    {item:'Labour (Operator)',unit:'$/hr',low:28,typ:45,high:72,note:'Site-dependent'},
+    {item:'Tyre Cost (150t truck)',unit:'$/hr',low:18,typ:28,high:42,note:'Per operating hour'},
+    {item:'Total Mining OPEX',unit:'$/t moved',low:2.50,typ:3.80,high:6.00,note:'Strip ratio 3:1'},
+    {item:'Total Processing OPEX',unit:'$/t ore',low:8.00,typ:13.50,high:22.00,note:'CIL circuit'},
+    {item:'Total Site OPEX',unit:'$/t ore',low:18,typ:28,high:45,note:'All-in site cost'}
+  ];
+
+  const methodCards = [
+    {step:'Step 1',title:'Scope Definition',desc:'Project scope workshop to define estimate class, WBS structure, data requirements, and key assumptions. Deliverables and timeline agreed.',tags:['AACE RP 18R-97','WBS','Scope Workshop']},
+    {step:'Step 2',title:'Data Collection',desc:'Structured data request checklist issued. Client provides process flowsheet, equipment list, geotechnical data, and site layout.',tags:['Data Checklist','Flowsheet','Geotech']},
+    {step:'Step 3',title:'Equipment Sizing & Pricing',desc:'Process plant equipment sized from flowsheet. Mining fleet sized from mine plan. Prices from CostMine, vendor quotes, or parametric models.',tags:['CostMine','Vendor Quotes','Parametric']},
+    {step:'Step 4',title:'Civil & Infrastructure Takeoff',desc:'Civil quantities estimated from site layout and geotechnical data. Infrastructure costs applied using location-factored unit rates.',tags:['Unit Rates','Location Factors','Quantities']},
+    {step:'Step 5',title:'Indirect Costs & Contingency',desc:'EPCM, owner\'s costs, and pre-production costs applied as percentage factors. Contingency determined per AACE RP 44R-08.',tags:['EPCM %','RP 44R-08','Contingency']},
+    {step:'Step 6',title:'QA Review & Delivery',desc:'Independent peer review by senior estimator. Benchmarked against comparable projects. Final report delivered with walkthrough call.',tags:['Peer Review','Benchmarking','QA Check']}
+  ];
+
+  const deliverables = [
+    {icon:'📊',name:'Cost Estimate Report',desc:'Full AACE-formatted cost estimate with all assumptions, methodology, and data sources documented.'},
+    {icon:'📋',name:'WBS Cost Model (Excel)',desc:'Detailed Excel cost model with WBS structure, quantity takeoffs, unit rates, and escalation factors.'},
+    {icon:'⚠️',name:'Risk Register',desc:'Project-specific risk register with probability/impact matrix and contingency justification.'},
+    {icon:'📈',name:'Sensitivity Analysis',desc:'Tornado chart showing CAPEX/OPEX sensitivity to key variables: commodity price, diesel, labour, throughput.'},
+    {icon:'🌍',name:'Location Factor Report',desc:'Location factor analysis with adjustments for regional labour, materials, logistics, and import duties.'},
+    {icon:'📅',name:'Escalation Summary',desc:'Cost escalation from base year to target year using MCCI/CEPCI indices with full methodology.'},
+    {icon:'🌐',name:'Bilingual EN/FA Version',desc:'Full Persian translation of the report with RTL formatting (add-on for Iranian/CIS projects).'},
+    {icon:'📞',name:'Walkthrough Call',desc:'1-hour video call to walk through the estimate, answer questions, and explain key assumptions.'}
+  ];
+
+  // ── RENDER WBS ───────────────────────────────────────────────
+  function renderWBS() {
+    const tbody = document.getElementById('wbsBody');
+    tbody.innerHTML = wbsData.map(r => {
+      const bw = Math.min(100, r.pct * 2.5);
+      if (r.total) return `<tr style="background:rgba(201,168,76,0.06);">
+        <td style="color:var(--gold);font-weight:900;">${r.code}</td>
+        <td class="total">${r.desc}</td>
+        <td class="total">$${r.cost}M</td>
+        <td class="total">100%</td>
+        <td>—</td></tr>`;
+      if (r.group) return `<tr class="wbs-group">
+        <td>${r.code}</td><td>${r.desc}</td>
+        <td style="color:var(--gold);">$${r.cost}M</td>
+        <td>${r.pct}%</td>
+        <td><span style="font-size:11px;">${r.range}</span></td></tr>`;
+      return `<tr>
+        <td style="padding-left:28px;color:var(--text-muted);">${r.code}</td>
+        <td style="padding-left:28px;">${r.desc}</td>
+        <td>$${r.cost}M</td>
+        <td>${r.pct}%<span class="wbs-bar-wrap" style="margin-left:8px;"><span class="wbs-bar" style="width:${bw}%;"></span></span></td>
+        <td><span style="font-size:11px;color:var(--text-muted);">${r.range}</span></td></tr>`;
+    }).join('');
+  }
+
+  // ── RENDER CAPEX CARDS ───────────────────────────────────────
+  function renderCapexCards() {
+    document.getElementById('capexCards').innerHTML = capexCards.map(c => `
+      <div class="bk-card">
+        <div class="bk-icon">${c.icon}</div>
+        <div class="bk-title">${c.title}</div>
+        <div class="bk-desc">${c.desc}</div>
+        <div class="bk-pct">${c.pct}% <small data-en="of total CAPEX" data-fa="از کل CAPEX">of total CAPEX</small></div>
+        <div class="bk-bar-wrap"><div class="bk-bar" style="width:${c.pct*2}%;background:${c.color};"></div></div>
+      </div>`).join('');
+  }
+
+  // ── RENDER OPEX DRIVERS ──────────────────────────────────────
+  function renderOpexDrivers() {
+    document.getElementById('opexDrivers').innerHTML = opexDrivers.map(d => `
+      <div class="od-item">
+        <div class="od-icon" style="background:${d.color};">${d.icon}</div>
+        <div><div class="od-name">${d.name}</div><div class="od-range">${d.range}</div></div>
+        <div class="od-pct">${d.pct}%</div>
+      </div>`).join('');
+  }
+
+  // ── RENDER OPEX TABLE ────────────────────────────────────────
+  function renderOpexTable() {
+    const max = {diesel:1.35,explo:780,media:2.10,cyan:2.20,lime:0.65,pgrid:0.18,pdiesel:0.45,labour:72,tyre:42,mining:6,proc:22,total:45};
+    document.getElementById('opexTableBody').innerHTML = opexTable.map((r,i) => {
+      const pct = Math.min(95,(r.typ/(r.high||r.typ))*85);
+      return `<tr>
+        <td>${r.item}</td><td style="color:var(--text-muted);">${r.unit}</td>
+        <td style="color:var(--green);">${r.low}</td>
+        <td style="color:#fff;font-weight:700;">${r.typ}</td>
+        <td style="color:var(--red);">${r.high}</td>
+        <td><div class="range-bar"><div class="rb-track"><div class="rb-fill" style="left:${(r.low/r.high)*100}%;width:${pct}%;"></div></div><span class="rb-val">${r.typ} ${r.unit}</span></div></td>
+        <td style="font-size:11px;color:var(--text-muted);">${r.note}</td>
+      </tr>`;
+    }).join('');
+  }
+
+  // ── RENDER METHOD CARDS ──────────────────────────────────────
+  function renderMethodCards() {
+    document.getElementById('methodCards').innerHTML = methodCards.map(m => `
+      <div class="meth-card">
+        <div class="meth-step">${m.step}</div>
+        <div class="meth-title">${m.title}</div>
+        <div class="meth-desc">${m.desc}</div>
+        <div class="meth-tags">${m.tags.map(t=>`<span class="meth-tag">${t}</span>`).join('')}</div>
+      </div>`).join('');
+  }
+
+  // ── RENDER DELIVERABLES ──────────────────────────────────────
+  function renderDeliverables() {
+    document.getElementById('delivGrid').innerHTML = deliverables.map(d => `
+      <div class="deliv-card">
+        <div class="deliv-icon">${d.icon}</div>
+        <div class="deliv-name">${d.name}</div>
+        <div class="deliv-desc">${d.desc}</div>
+      </div>`).join('');
+  }
+
+  // ── CHARTS ───────────────────────────────────────────────────
+  const chartDefaults = {
+    plugins:{legend:{labels:{color:'#7A8BA8',font:{size:11}}}},
+    scales:{}
+  };
+
+  function buildCapexPie() {
+    new Chart(document.getElementById('capexPieChart'), {
+      type:'doughnut',
+      data:{
+        labels:['Mining Fleet','Process Plant','Infrastructure','Tailings','Indirects','Owner\'s Costs','Contingency'],
+        datasets:[{
+          data:[17,33,19,7,11,6,7],
+          backgroundColor:['#C9A84C','#0EA5E9','#22C55E','#A855F7','#F97316','#E8C97A','#EF4444'],
+          borderColor:'#161E2E',borderWidth:3
+        }]
+      },
+      options:{
+        cutout:'62%',
+        plugins:{
+          legend:{position:'right',labels:{color:'#7A8BA8',font:{size:11},padding:10}},
+          tooltip:{callbacks:{label:ctx=>`${ctx.label}: ${ctx.parsed}%`}}
+        }
+      }
+    });
+  }
+
+  function buildOpexChart() {
+    new Chart(document.getElementById('opexChart'), {
+      type:'bar',
+      data:{
+        labels:['Mining','Processing','Labour','G&A','Maintenance','Environment'],
+        datasets:[{
+          label:'$/t ore',
+          data:[10.8,13.5,5.2,3.1,2.8,1.4],
+          backgroundColor:['#C9A84C','#0EA5E9','#EF4444','#A855F7','#F97316','#22C55E'],
+          borderRadius:6,borderSkipped:false
+        }]
+      },
+      options:{
+        plugins:{legend:{display:false}},
+        scales:{
+          x:{ticks:{color:'#7A8BA8'},grid:{color:'rgba(255,255,255,0.04)'}},
+          y:{ticks:{color:'#7A8BA8',callback:v=>'$'+v},grid:{color:'rgba(255,255,255,0.04)'}}
+        }
+      }
+    });
+  }
+
+  function buildDieselChart() {
+    new Chart(document.getElementById('dieselChart'), {
+      type:'line',
+      data:{
+        labels:['$0.70','$0.85','$1.00','$1.15','$1.30','$1.50'],
+        datasets:[{
+          label:'Mining OPEX ($/t ore)',
+          data:[8.2,9.4,10.8,12.1,13.5,15.6],
+          borderColor:'#F97316',backgroundColor:'rgba(249,115,22,0.08)',
+          fill:true,tension:.4,pointRadius:4,pointBackgroundColor:'#F97316'
+        }]
+      },
+      options:{
+        plugins:{legend:{labels:{color:'#7A8BA8',font:{size:10}}}},
+        scales:{
+          x:{ticks:{color:'#7A8BA8',font:{size:10}},grid:{color:'rgba(255,255,255,0.04)'},title:{display:true,text:'Diesel Price ($/L)',color:'#7A8BA8',font:{size:10}}},
+          y:{ticks:{color:'#7A8BA8',font:{size:10},callback:v=>'$'+v},grid:{color:'rgba(255,255,255,0.04)'}}
+        }
+      }
+    });
+  }
+
+  function buildPowerChart() {
+    new Chart(document.getElementById('powerChart'), {
+      type:'line',
+      data:{
+        labels:['$0.05','$0.08','$0.10','$0.14','$0.18','$0.25'],
+        datasets:[{
+          label:'Processing OPEX ($/t ore)',
+          data:[9.8,11.2,13.5,16.4,19.8,25.2],
+          borderColor:'#0EA5E9',backgroundColor:'rgba(14,165,233,0.08)',
+          fill:true,tension:.4,pointRadius:4,pointBackgroundColor:'#0EA5E9'
+        }]
+      },
+      options:{
+        plugins:{legend:{labels:{color:'#7A8BA8',font:{size:10}}}},
+        scales:{
+          x:{ticks:{color:'#7A8BA8',font:{size:10}},grid:{color:'rgba(255,255,255,0.04)'},title:{display:true,text:'Power Cost ($/kWh)',color:'#7A8BA8',font:{size:10}}},
+          y:{ticks:{color:'#7A8BA8',font:{size:10},callback:v=>'$'+v},grid:{color:'rgba(255,255,255,0.04)'}}
+        }
+      }
+    });
+  }
+
+  // ── TAB SWITCH ───────────────────────────────────────────────
+  function switchTab(id, btn) {
+    document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.mtab').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab-'+id).classList.add('active');
+    btn.classList.add('active');
+    document.querySelectorAll('#tab-'+id+' .fade-up').forEach(el => {
+      el.classList.remove('visible');
+      setTimeout(() => obs.observe(el), 50);
+    });
+  }
+
+  // ── LANGUAGE ─────────────────────────────────────────────────
+  let currentLang = 'en';
+  function setLang(lang) {
+    currentLang = lang;
+    document.getElementById('btn-en').classList.toggle('active', lang==='en');
+    document.getElementById('btn-fa').classList.toggle('active', lang==='fa');
+    const body = document.getElementById('body');
+    if (lang==='fa') { body.classList.add('fa'); body.setAttribute('dir','rtl'); }
+    else             { body.classList.remove('fa'); body.setAttribute('dir','ltr'); }
+    document.querySelectorAll('[data-'+lang+']').forEach(el => {
+      const v = el.getAttribute('data-'+lang);
+      if (!v) return;
+      if (el.tagName==='INPUT'||el.tagName==='TEXTAREA') el.placeholder = v;
+      else el.innerHTML = v;
+    });
+  }
+
+  // ── FADE UP OBSERVER ─────────────────────────────────────────
+  const obs = new IntersectionObserver(entries =>
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.05 }
+  );
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  // ── INIT ─────────────────────────────────────────────────────
+  renderWBS();
+  renderCapexCards();
+  renderOpexDrivers();
+  renderOpexTable();
+  renderMethodCards();
+  renderDeliverables();
+  buildCapexPie();
+  buildOpexChart();
+  buildDieselChart();
+  buildPowerChart();
+  </script>
+</body>
+</html>

@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Legal | KDMine</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      --gold:#C9A84C;--gold-light:#E8C97A;--gold-dark:#A07830;
+      --dark:#080C16;--dark2:#0F1520;--dark3:#161E2E;--dark4:#1E2840;
+      --text:#E8EDF5;--text-muted:#7A8BA8;
+      --border:rgba(201,168,76,0.2);--border2:rgba(255,255,255,0.06);
+      --green:#22C55E;--blue:#0EA5E9;--purple:#A855F7;--red:#EF4444;
+    }
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;background:var(--dark);color:var(--text);overflow-x:hidden;}
+    body.fa{font-family:'Vazirmatn',sans-serif;direction:rtl;}
+    ::-webkit-scrollbar{width:5px;}
+    ::-webkit-scrollbar-track{background:var(--dark2);}
+    ::-webkit-scrollbar-thumb{background:var(--gold-dark);border-radius:3px;}
+
+    /* LANG BAR */
+    .lang-bar{position:fixed;top:0;left:0;right:0;z-index:2000;height:36px;background:var(--gold-dark);display:flex;align-items:center;justify-content:flex-end;padding:0 5%;gap:12px;}
+    .lang-btn{padding:4px 14px;border-radius:20px;border:none;cursor:pointer;font-size:12px;font-weight:700;transition:.2s;}
+    .lang-btn.active{background:var(--dark);color:var(--gold);}
+    .lang-btn:not(.active){background:rgba(0,0,0,0.2);color:rgba(0,0,0,0.7);}
+
+    /* NAV */
+    nav{position:fixed;top:36px;left:0;right:0;z-index:1000;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:70px;background:rgba(8,12,22,0.95);backdrop-filter:blur(24px);border-bottom:1px solid var(--border2);}
+    .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+    .nav-logo-icon{width:42px;height:42px;border-radius:11px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));display:flex;align-items:center;justify-content:center;font-weight:900;font-size:17px;color:var(--dark);}
+    .nav-logo-text{font-size:21px;font-weight:800;color:#fff;}
+    .nav-logo-text span{color:var(--gold);}
+    .nav-back{display:flex;align-items:center;gap:8px;padding:9px 20px;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text);font-size:13px;font-weight:600;text-decoration:none;transition:.2s;}
+    .nav-back:hover{border-color:var(--gold);color:var(--gold);}
+
+    /* HERO */
+    .page-hero{padding:130px 5% 70px;position:relative;overflow:hidden;}
+    .hero-bg{position:absolute;inset:0;background:linear-gradient(160deg,#080C16,#0c0f18,#080C16);}
+    .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(239,68,68,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(239,68,68,0.02) 1px,transparent 1px);background-size:52px 52px;}
+    .hero-glow-l{position:absolute;top:-80px;left:5%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.06),transparent 70%);}
+    .hero-glow-r{position:absolute;bottom:-60px;right:5%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(239,68,68,0.04),transparent 70%);}
+    .hero-inner{position:relative;z-index:2;max-width:860px;}
+    .breadcrumb{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-muted);margin-bottom:18px;}
+    .breadcrumb a{color:var(--gold);text-decoration:none;}
+    .breadcrumb span{opacity:.5;}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border-radius:20px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);font-size:12px;font-weight:700;color:var(--red);margin-bottom:18px;}
+    .page-hero h1{font-size:clamp(32px,5vw,60px);font-weight:900;color:#fff;letter-spacing:-2px;margin-bottom:14px;line-height:1.05;}
+    .page-hero h1 em{background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal;}
+    .page-hero p{font-size:15px;color:var(--text-muted);line-height:1.8;max-width:680px;margin-bottom:28px;}
+    .last-updated{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:8px;background:var(--dark3);border:1px solid var(--border2);font-size:12px;color:var(--text-muted);}
+    .last-updated i{color:var(--gold);}
+
+    /* LAYOUT */
+    .page-body{display:grid;grid-template-columns:260px 1fr;gap:40px;max-width:1200px;margin:0 auto;padding:0 5% 80px;}
+    
+    /* STICKY TOC */
+    .toc-sidebar{position:sticky;top:120px;height:fit-content;}
+    .toc-box{background:var(--dark3);border:1px solid var(--border2);border-radius:18px;padding:20px;}
+    .toc-title{font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:2px;margin-bottom:14px;}
+    .toc-tabs{display:flex;gap:4px;margin-bottom:14px;}
+    .toc-tab{flex:1;padding:7px;border-radius:8px;border:none;background:rgba(255,255,255,0.04);color:var(--text-muted);font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;transition:.2s;text-align:center;}
+    .toc-tab.active{background:rgba(201,168,76,0.12);color:var(--gold);border:1px solid var(--border);}
+    .toc-list{display:flex;flex-direction:column;gap:2px;}
+    .toc-link{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:8px;font-size:12px;color:var(--text-muted);text-decoration:none;transition:.2s;cursor:pointer;}
+    .toc-link:hover{background:rgba(255,255,255,0.04);color:var(--text);}
+    .toc-link.active{background:rgba(201,168,76,0.08);color:var(--gold);}
+    .toc-link-num{font-size:10px;font-weight:700;color:var(--gold);opacity:.7;min-width:18px;}
+    .toc-info{margin-top:16px;padding-top:14px;border-top:1px solid var(--border2);}
+    .toc-info-item{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--text-muted);margin-bottom:6px;}
+    .toc-info-item i{color:var(--gold);font-size:10px;}
+
+    /* CONTENT */
+    .legal-content{}
+    .doc-section{display:none;}
+    .doc-section.active{display:block;}
+
+    /* DOC HEADER */
+    .doc-header{background:var(--dark3);border:1px solid var(--border2);border-radius:20px;padding:28px 32px;margin-bottom:32px;}
+    .doc-header-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:10px;}
+    .doc-type-badge{display:inline-flex;align-items:center;gap:7px;padding:5px 14px;border-radius:20px;font-size:11px;font-weight:700;}
+    .doc-version{font-size:11px;color:var(--text-muted);background:var(--dark4);padding:4px 10px;border-radius:6px;}
+    .doc-title{font-size:26px;font-weight:900;color:#fff;letter-spacing:-.5px;margin-bottom:6px;}
+    .doc-subtitle{font-size:14px;color:var(--text-muted);line-height:1.7;}
+    .doc-meta-row{display:flex;gap:20px;flex-wrap:wrap;margin-top:16px;padding-top:16px;border-top:1px solid var(--border2);}
+    .doc-meta-item{font-size:11px;color:var(--text-muted);display:flex;align-items:center;gap:6px;}
+    .doc-meta-item i{color:var(--gold);}
+
+    /* LEGAL SECTIONS */
+    .legal-sec{margin-bottom:36px;scroll-margin-top:120px;}
+    .legal-sec-header{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+    .legal-sec-num{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;}
+    .legal-sec-title{font-size:18px;font-weight:800;color:#fff;letter-spacing:-.3px;}
+    .legal-sec-body{font-size:13px;color:var(--text-muted);line-height:1.9;}
+    .legal-sec-body p{margin-bottom:12px;}
+    .legal-sec-body ul{margin:8px 0 12px 20px;display:flex;flex-direction:column;gap:6px;}
+    .legal-sec-body li{list-style:disc;}
+    .legal-sec-body strong{color:var(--text);font-weight:700;}
+    .legal-sec-body a{color:var(--gold);text-decoration:none;}
+    .legal-sec-body a:hover{text-decoration:underline;}
+
+    /* HIGHLIGHT BOXES */
+    .highlight-box{border-radius:12px;padding:16px 20px;margin:16px 0;border-left:3px solid;}
+    .highlight-box.info{background:rgba(14,165,233,0.06);border-color:var(--blue);}
+    .highlight-box.warning{background:rgba(249,115,22,0.06);border-color:#F97316;}
+    .highlight-box.important{background:rgba(201,168,76,0.06);border-color:var(--gold);}
+    .highlight-box.danger{background:rgba(239,68,68,0.06);border-color:var(--red);}
+    .highlight-box-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+    .highlight-box.info .highlight-box-title{color:var(--blue);}
+    .highlight-box.warning .highlight-box-title{color:#F97316;}
+    .highlight-box.important .highlight-box-title{color:var(--gold);}
+    .highlight-box.danger .highlight-box-title{color:var(--red);}
+    .highlight-box p{font-size:13px;color:var(--text-muted);line-height:1.7;margin:0;}
+
+    /* DATA TABLE */
+    .data-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:12px;}
+    .data-table th{background:var(--dark4);color:var(--gold);font-weight:700;padding:10px 14px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.5px;}
+    .data-table td{padding:10px 14px;border-bottom:1px solid var(--border2);color:var(--text-muted);vertical-align:top;}
+    .data-table tr:last-child td{border-bottom:none;}
+    .data-table tr:hover td{background:rgba(255,255,255,0.02);}
+
+    /* DIVIDER */
+    .legal-divider{height:1px;background:var(--border2);margin:32px 0;}
+
+    /* CONTACT CARD */
+    .contact-card{background:linear-gradient(135deg,var(--dark3),var(--dark4));border:1px solid var(--border);border-radius:18px;padding:24px;margin-top:32px;}
+    .contact-card-title{font-size:15px;font-weight:800;color:#fff;margin-bottom:6px;}
+    .contact-card-sub{font-size:13px;color:var(--text-muted);margin-bottom:16px;}
+    .contact-card-items{display:flex;flex-direction:column;gap:8px;}
+    .contact-card-item{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text-muted);}
+    .contact-card-item i{color:var(--gold);width:16px;text-align:center;}
+    .contact-card-item a{color:var(--gold);text-decoration:none;}
+
+    /* CTA */
+    .cta-band{background:linear-gradient(135deg,var(--dark3),var(--dark4));border:1px solid var(--border);border-radius:20px;padding:40px;text-align:center;margin-top:48px;}
+    .cta-band h3{font-size:22px;font-weight:900;color:#fff;margin-bottom:8px;}
+    .cta-band p{font-size:13px;color:var(--text-muted);margin-bottom:20px;}
+    .btn-gold{padding:12px 26px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--dark);font-weight:700;font-size:13px;border:none;cursor:pointer;font-family:inherit;transition:.2s;display:inline-flex;align-items:center;gap:8px;}
+    .btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,0.4);}
+    .btn-outline{padding:12px 26px;border-radius:10px;border:1px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text);font-weight:600;font-size:13px;cursor:pointer;font-family:inherit;transition:.2s;display:inline-flex;align-items:center;gap:8px;margin-left:8px;}
+    .btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+
+    .footer-mini{background:var(--dark2);border-top:1px solid var(--border2);padding:28px 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;}
+    .footer-mini p{font-size:13px;color:var(--text-muted);}
+    .footer-mini a{font-size:13px;color:var(--gold);text-decoration:none;}
+
+    .fade-up{opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s;}
+    .fade-up.visible{opacity:1;transform:translateY(0);}
+
+    @media(max-width:900px){
+      .page-body{grid-template-columns:1fr;}
+      .toc-sidebar{position:static;}
+    }
+  </style>
+</head>
+<body id="body">
+
+  <div class="lang-bar">
+    <button class="lang-btn active" id="btn-en" onclick="setLang('en')">🇬🇧 English</button>
+    <button class="lang-btn" id="btn-fa" onclick="setLang('fa')">🇮🇷 فارسی</button>
+  </div>
+
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">KD</div>
+      <span class="nav-logo-text">KD<span>Mine</span></span>
+    </a>
+    <a href="index.html" class="nav-back"><i class="fas fa-arrow-left"></i> <span data-en="Back to Home" data-fa="بازگشت به خانه">Back to Home</span></a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="page-hero">
+    <div class="hero-bg"></div><div class="hero-grid"></div>
+    <div class="hero-glow-l"></div><div class="hero-glow-r"></div>
+    <div class="hero-inner fade-up">
+      <div class="breadcrumb"><a href="index.html" data-en="Home" data-fa="خانه">Home</a><span>/</span><span data-en="Legal" data-fa="حقوقی">Legal</span></div>
+      <div class="hero-badge"><i class="fas fa-shield-alt"></i> <span data-en="Privacy Policy · Terms of Service · Cookie Policy" data-fa="سیاست حریم خصوصی · شرایط خدمات · سیاست کوکی">Privacy Policy · Terms of Service · Cookie Policy</span></div>
+      <h1><em data-en="Legal" data-fa="اسناد">Legal</em><br/><span data-en="Documents" data-fa="حقوقی">Documents</span></h1>
+      <p data-en="KDMine's legal documents governing the use of our website, services, and the handling of your personal data. All documents are available in English and Persian (Farsi)." data-fa="اسناد حقوقی KDMine که استفاده از وب‌سایت، خدمات و نحوه مدیریت داده‌های شخصی شما را تنظیم می‌کنند. تمام اسناد به زبان انگلیسی و فارسی در دسترس هستند.">KDMine's legal documents governing the use of our website, services, and the handling of your personal data. All documents are available in English and Persian (Farsi).</p>
+      <div class="last-updated"><i class="fas fa-calendar-check"></i> <span data-en="Last updated: June 2026" data-fa="آخرین به‌روزرسانی: خرداد ۱۴۰۵">Last updated: June 2026</span></div>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="page-body">
+
+    <!-- SIDEBAR TOC -->
+    <div class="toc-sidebar fade-up">
+      <div class="toc-box">
+        <div class="toc-title" data-en="Documents" data-fa="اسناد">Documents</div>
+        <div class="toc-tabs">
+          <button class="toc-tab active" onclick="switchDoc('privacy',this)" data-en="Privacy" data-fa="حریم">Privacy</button>
+          <button class="toc-tab" onclick="switchDoc('terms',this)" data-en="Terms" data-fa="شرایط">Terms</button>
+          <button class="toc-tab" onclick="switchDoc('cookies',this)" data-en="Cookies" data-fa="کوکی">Cookies</button>
+        </div>
+        <div class="toc-list" id="tocList"></div>
+        <div class="toc-info">
+          <div class="toc-info-item"><i class="fas fa-calendar"></i> <span data-en="Effective: June 1, 2026" data-fa="تاریخ اجرا: ۱ خرداد ۱۴۰۵">Effective: June 1, 2026</span></div>
+          <div class="toc-info-item"><i class="fas fa-globe"></i> <span data-en="Jurisdiction: UAE / Iran" data-fa="صلاحیت قضایی: امارات / ایران">Jurisdiction: UAE / Iran</span></div>
+          <div class="toc-info-item"><i class="fas fa-envelope"></i> <a href="mailto:legal@kdmine.com">legal@kdmine.com</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="legal-content fade-up">
+
+      <!-- ══ PRIVACY POLICY ══ -->
+      <div class="doc-section active" id="doc-privacy">
+        <div class="doc-header">
+          <div class="doc-header-top">
+            <div class="doc-type-badge" style="background:rgba(14,165,233,0.1);color:#0EA5E9;border:1px solid rgba(14,165,233,0.25);">
+              <i class="fas fa-user-shield"></i> Privacy Policy
+            </div>
+            <div class="doc-version">Version 2.1 — June 2026</div>
+          </div>
+          <div class="doc-title" data-en="Privacy Policy" data-fa="سیاست حریم خصوصی">Privacy Policy</div>
+          <div class="doc-subtitle" data-en="This Privacy Policy explains how KDMine Consultancy collects, uses, stores, and protects your personal data when you use our website or engage our services." data-fa="این سیاست حریم خصوصی توضیح می‌دهد که چگونه KDMine Consultancy داده‌های شخصی شما را هنگام استفاده از وب‌سایت یا استفاده از خدمات ما جمع‌آوری، استفاده، ذخیره و محافظت می‌کند.">This Privacy Policy explains how KDMine Consultancy collects, uses, stores, and protects your personal data when you use our website or engage our services.</div>
+          <div class="doc-meta-row">
+            <div class="doc-meta-item"><i class="fas fa-calendar"></i> Effective: June 1, 2026</div>
+            <div class="doc-meta-item"><i class="fas fa-map-marker-alt"></i> Jurisdiction: UAE / Iran</div>
+            <div class="doc-meta-item"><i class="fas fa-language"></i> Available: EN / FA</div>
+            <div class="doc-meta-item"><i class="fas fa-sync"></i> Review cycle: Annual</div>
+          </div>
+        </div>
+
+        <div class="highlight-box important">
+          <div class="highlight-box-title">Summary</div>
+          <p data-en="We collect only the data we need. We never sell your data. We use it solely to deliver our services and communicate with you. You can request deletion at any time." data-fa="ما فقط داده‌هایی که نیاز داریم را جمع‌آوری می‌کنیم. هرگز داده‌های شما را نمی‌فروشیم. از آن‌ها صرفاً برای ارائه خدمات و ارتباط با شما استفاده می‌کنیم. می‌توانید در هر زمان درخواست حذف کنید.">We collect only the data we need. We never sell your data. We use it solely to deliver our services and communicate with you. You can request deletion at any time.</p>
+        </div>
+
+        <div class="legal-sec" id="priv-1">
+          <div class="legal-sec-header">
+            <div class="legal-sec-num" style="background:rgba(14,165,233,0.1);color:#0EA5E9;">1</div>
+            <div class="legal-sec-title" data-en="Who We Are" data-fa="ما کی هستیم">Who We Are</div>
+          </div>
+          <div class="legal-sec-body">
+            <p data-en="KDMine Consultancy ('KDMine', 'we', 'us', 'our') is a specialist mining project consultancy providing cost estimation, feasibility studies, project controls, and procurement advisory services to the global mining industry, with particular expertise in open-pit mining projects in Iran and the CIS region." data-fa="KDMine Consultancy ('KDMine'، 'ما'، 'ما') یک مشاوره تخصصی پروژه‌های معدنی است که خدمات برآورد هزینه، مطالعات امکان‌سنجی، کنترل پروژه و مشاوره تدارکات را به صنعت معدن جهانی ارائه می‌دهد.">KDMine Consultancy ('KDMine', 'we', 'us', 'our') is a specialist mining project consultancy providing cost estimation, feasibility studies, project controls, and procurement advisory services to the global mining industry, with particular expertise in open-pit mining projects in Iran and the CIS region.</p>
+            <p><strong data-en="Data Controller:" data-fa="کنترل‌کننده داده:">Data Controller:</strong> KDMine Consultancy<br/>
+            <strong data-en="Contact:" data-fa="تماس:">Contact:</strong> <a href="mailto:legal@kdmine.com">legal@kdmine.com</a></p>
+          </div>
+        </div>
+
+        <div class="legal-sec" id="priv-2">
+          <div class="legal-sec-header">
+            <div class="legal-sec-num" style="background:rgba(14,165,233,0.1);color:#0EA5E9;">2</div>
+            <div class="legal-sec-title" data-en="Data We Collect" data-fa="داده‌هایی که جمع‌آوری می‌کنیم">Data We Collect</div>
+          </div>
+          <div class="legal-sec-body">
+            <p data-en="We collect the following categories of personal data:" data-fa="ما دسته‌بندی‌های زیر از داده‌های شخصی را جمع‌آوری می‌کنیم:">We collect the following categories of personal data:</p>
+            <table class="data-table">
+              <thead><tr><th>Category</th><th>Examples</th><th>Purpose</th><th>Retention</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Contact Data</strong></td><td>Name, email, phone, company</td><td>Service delivery, proposals</td><td>5 years</td></tr>
+                <tr><td><strong>Professional Data</strong></td><td>Job title, role, industry sector</td><td>Service personalisation</td><td>5 years</td></tr>
+                <tr><td><strong>Communication Data</strong></td><td>Emails, meeting notes, RFPs</td><td>Project delivery, records</td><td>7 years</td></tr>
+                <tr><td><strong>Website Usage Data</strong></td><td>IP address, browser, pages visited</td><td>Analytics, security</td><td>13 months</td></tr>
+                <tr><td><strong>Newsletter Data</strong></td><td>Email, name, role, preferences</td><td>Newsletter delivery</td><td>Until unsubscribe</td></tr>
+              </tbody>
+            </table>
+            <div class="highlight-box info">
+              <div class="highlight-box-title">No Sensitive Data</div>
+              <p data-en="KDMine does not collect or process sensitive personal data (health, biometric, financial account data, or data revealing racial/ethnic origin, political opinions, or religious beliefs)." data-fa="KDMine داده‌های شخصی حساس (سلامت، بیومتریک، داده‌های حساب مالی، یا داده‌های آشکارکننده منشأ نژادی/قومی، عقاید سیاسی یا باورهای مذهبی) را جمع‌آوری یا پردازش نمی‌کند.">KDMine does not collect or process sensitive personal data (health, biometric, financial account data, or data revealing racial/ethnic origin, political opinions, or religious beliefs).</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="legal-sec" id="priv-3">
+          <div class="legal-sec-header">
+            <div class="legal-sec-num" style="background:rgba(14,165,233,0.1);color:#0EA5E9;">3</div>
+            <div class="legal-sec-title" data-en="How We Use Your Data" data-fa="چگونه از داده‌های شما استفاده می‌کنیم">How We Use Your Data</div>
+          </div>
+          <div class="legal-sec-body">
+            <p data-en="We use your personal data for the following purposes, each with a lawful basis:" data-fa="ما از داده‌های شخصی شما برای اهداف زیر استفاده می‌کنیم، هر کدام با پایه قانونی:">We use your personal data for the following purposes, each with a lawful basis:</p>
+            <ul>
+              <li data-en="<strong>Service Delivery</strong> — To provide the consulting services you have engaged us for (Contractual necessity)" data-fa="<strong>ارائه خدمات</strong> — برای ارائه خدمات مشاوره‌ای که برای آن‌ها ما را استخدام کرده‌اید (ضرورت قراردادی)"><strong>Service Delivery</strong> — To provide the consulting services you have engaged us for (Contractual necessity)</li>
+              <li data-en="<strong>Proposals & Scoping</strong> — To prepare and send project proposals (Legitimate interest)" data-fa="<strong>پیشنهادها و محدوده‌سنجی</strong> — برای تهیه و ارسال پیشنهادهای پروژه (منافع مشروع)"><strong>Proposals & Scoping</strong> — To prepare and send project proposals (Legitimate interest)</li>
+              <li data-en="<strong>Newsletter</strong> — To send the KDMine Digest (Consent — opt-in only)" data-fa="<strong>خبرنامه</strong> — برای ارسال KDMine Digest (رضایت — فقط opt-in)"><strong>Newsletter</strong> — To send the KDMine Digest (Consent — opt-in only)</li>
+              <li data-en="<strong>Legal Compliance</strong> — To comply with applicable laws and regulations (Legal obligation)" data-fa="<strong>انطباق قانونی</strong> — برای رعایت قوانین و مقررات قابل اجرا (تعهد قانونی)"><strong>Legal Compliance</strong> — To comply with applicable laws and regulations (Legal obligation)</li>
+              <li data-en="<strong>Website Analytics</strong> — To understand how our website is used and improve it (Legitimate interest)" data-fa="<strong>تحلیل وب‌سایت</strong> — برای درک نحوه استفاده از وب‌سایت ما و بهبود آن (منافع مشروع)"><strong>Website Analytics</strong> — To understand how our website is used and improve it (Legitimate interest)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="legal-sec" id="priv-4">
+          <div class="legal-sec-header">
+            <div class="legal-sec-num" style="background:rgba(14,165,233,0.1);color:#0EA5E9;">4</div>
+            <div class="legal-sec-title" data-en="Data Sharing & Third Parties" data-fa="اشتراک‌گذاری داده و اشخاص ثالث">Data Sharing & Third Parties</div>
+          </div>
+          <div class="legal-sec-body">
+            <p data-en="We do not sell, rent, or trade your personal data. We may share data with the following categories of trusted third parties, solely for the purposes described above:" data-fa="ما داده‌های شخصی شما را نمی‌فروشیم، اجاره نمی‌دهیم یا معامله نمی‌کنیم. ممکن است داده‌ها را با دسته‌بندی‌های زیر از اشخاص ثالث معتمد، صرفاً برای اهداف توضیح داده شده در بالا به اشتراک بگذاریم:">We do not sell, rent, or trade your personal data. We may share data with the following categories of trusted third parties, solely for the purposes described above:</p>
+            <ul>
+              <li data-en="<strong>Cloud Storage Providers</strong> (Microsoft SharePoint / OneDrive) — for secure document storage" data-fa="<strong>ارائه‌دهندگان ذخیره‌سازی ابری</strong> (Microsoft SharePoint / OneDrive) — برای ذخیره‌سازی امن اسناد"><strong>Cloud Storage Providers</strong> (Microsoft SharePoint / OneDrive) — for secure document storage</li>
+              <li data-en="<strong>Email Platform</strong> (Mailchimp / similar) — for newsletter delivery only" data-fa="<strong>پلتفرم ایمیل</strong> (Mailchimp / مشابه) — فقط برای تحویل خبرنامه"><strong>Email Platform</strong> (Mailchimp / similar) — for newsletter delivery only</li>
+              <li data-en="<strong>Analytics</strong> (Google Analytics 4 — anonymised) — for website analytics" data-fa="<strong>تحلیل</strong> (Google Analytics 4 — ناشناس) — برای تحلیل وب‌سایت"><strong>Analytics</strong> (Google Analytics 4 — anonymised) — for website analytics</li>
+              <li data-en="<strong>Legal & Compliance Advisors</strong> — where required by law or legal proceedings" data-fa="<strong>مشاوران حقوقی و انطباق</strong> — در صورت نیاز قانون یا دادرسی‌های قانونی"><strong>Legal & Compliance Advisors</strong> — where required by law or legal proceedings</li>
+            </ul>
+            <div class="highlight-box warning">
+              <div class="highlight-box-title">Project Data Confidentiality</div>
+              <p data-en="All client project data is handled under strict NDA. Project data is never shared with third parties without explicit written client consent. Sub-consultants engaged on a project sign individual NDAs before receiving any project data." data-fa="تمام داده‌های پروژه مشتری تحت NDA سختگیرانه مدیریت می‌شود. داده‌های پروژه هرگز بدون رضایت کتبی صریح مشتری با اشخاص ثالث به اشتراک گذاشته نمی‌شود.">All client project data is handled under strict NDA. Project data is never shared with third parties without explicit written client consent. Sub-consultants engaged on a project sign individual NDAs before receiving any project data.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="legal-sec" id="priv-5">
+          <div class="legal-sec-header">
+            <div class="legal-sec-num" style="background:rgba(14,165,233,0.1);color:#0EA5E9;">5</div>
+            <div class="legal-sec-title" data-en="Your Rights" data-fa="حقوق شما">Your Rights</div>
+          </div>
+          <div class="legal-sec-body">
+            <p data-en="You have the following rights regarding your personal data:" data-fa="شما حقوق زیر را در مورد داده‌های شخصی خود دارید:">You have the following rights regarding your personal data:</p>
+            <ul>
+              <li data-en="<strong>Access</strong> — Request a copy of all personal data we hold about you" data-fa="<strong>دسترسی</strong> — درخواست کپی از تمام داده‌های شخصی که درباره شما نگه می‌داریم"><strong>Access</strong> — Request a copy of all personal data we hold about you</li>
+              <li data-en="<strong>Rectification</strong> — Request correction of inaccurate or incomplete data" data-fa="<strong>اصلاح</strong> — درخواست تصحیح داده‌های نادرست یا ناقص"><strong>Rectification</strong> — Request correction of inaccurate or incomplete data</li>
+              <li data-en="<strong>Erasure</strong> — Request deletion of your personal data ('right to be forgotten')" data-fa="<strong>حذف</strong> — درخواست حذف داده‌های شخصی شما ('حق فراموش شدن')"><strong>Erasure</strong> — Request deletion of your personal data ('right to be forgotten')</li>
+              <li data-en="<strong>Portability</strong> — Request your data in a machine-readable format" data-fa="<strong>قابلیت انتقال</strong> — درخواست داده‌های خود در قالب قابل خواندن توسط ماشین"><strong>Portability</strong> — Request your data in a machine-readable format</li>
+              <li data-en="<strong>Objection</strong> — Object to processing based on legitimate interest" data-fa="<strong>اعتراض</strong> — اعتراض به پردازش بر اساس منافع مشروع"><strong>Objection</strong> — Object to processing based on legitimate interest</li>
+              <li data-en="<strong>Withdraw Consent</strong> — Withdraw newsletter consent at any time via unsubscribe link" data-fa="<strong>لغو رضایت</strong> — لغو رضایت خبرنامه در هر زمان از طریق لینک لغو اشتراک"><strong>Withdraw Consent</strong> — Withdraw newsletter consent at any time via unsubscribe link</li>
+            </ul>
+            <p data-en="To exercise any of these rights, contact us at <a href='mailto:legal@kdmine.com'>legal@kdmine.com</a>. We will respond within 30 days." data-fa="برای استفاده از هر یک از این حقوق، با ما از طریق <a href='mailto:legal@kdmine.com'>legal@kdmine.com</a> تماس بگیرید. ما ظرف ۳۰ روز پاسخ خواهیم داد.">To exercise any of these rights, contact us at <a href="mailto:legal@kdmine.com">legal@kdmine.com</a>. We will respond within 30 days.</p>
+          </div>
+        </div>
+
+        <div class="legal-sec" id="priv-6">
+          <div class="legal-sec-header">
+            <div class="legal-sec-num" style="background:rgba(14,165,233,0.1);color:#0EA5E9;">6</div>
+            <div class="legal-sec-title" data-en="Data Security" data-fa="امنیت داده">Data Security</div>
+          </div>
+          <div class="legal-sec-body">
+            <p data-en="KDMine implements appropriate technical and organisational measures to protect your personal data against unauthorised access, disclosure, alteration, or destruction, including:" data-fa="KDMine اقدامات فنی و سازمانی مناسب را برای محافظت از داده‌های شخصی شما در برابر دسترسی غیرمجاز، افشا، تغییر یا تخریب اجرا می‌کند، از جمله:">KDMine implements appropriate technical and organisational measures to protect your personal data against unauthorised access, disclosure, alteration, or destruction, including:</p>
+            <ul>
+              <li data-en="Encrypted data storage (AES-256) and encrypted file transfer (TLS 1.3)" data-fa="ذخیره‌سازی داده رمزگذاری شده (AES-256) و انتقال فایل رمزگذاری شده (TLS 1.3)">Encrypted data storage (AES-256) and encrypted file transfer (TLS 1.3)</li>
+              <li data-en="Role-based access controls — data accessible only to staff who need it" data-fa="کنترل‌های دسترسی مبتنی بر نقش — داده‌ها فقط برای کارکنانی که به آن نیاز دارند قابل دسترسی است">Role-based access controls — data accessible only to staff who need it</li>
+              <li data-en="Secure client data rooms with audit logging" data-fa="اتاق‌های داده مشتری امن با ثبت حسابرسی">Secure client data rooms with audit logging</li>
+              <li data-en="Annual security review and staff data protection training" data-fa="بررسی امنیتی سالانه و آموزش حفاظت از داده کارکنان">Annual security review and staff data protection training</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-card-title" data-en="Privacy Contact" data-fa="تماس حریم خصوصی">Privacy Contact</div>
+          <div class="contact-card-sub" data-en="For any privacy-related queries, data subject requests, or to report a data breach:" data-fa="برای هرگونه سوال مربوط به حریم خصوصی، درخواست‌های موضوع داده، یا گزارش نقض داده:">For any privacy-related queries, data subject requests, or to report a data breach:</div>
+          <div class="contact-card-items">
+            <div class="contact-card-item"><i class="fas fa-envelope"></i> <a href="mailto:legal@kdmine.com">legal@kdmine.com</a></div>
+            <div class="contact-card-item"><i class="fas fa-clock"></i> <span data-en="Response within 30 days" data-fa="پاسخ ظرف ۳۰ روز">Response within 30 days</span></div>
+            <div class="contact-card-item"><i class="fas fa-language"></i> <span data-en="Available in English and Persian" data-fa="در دسترس به زبان انگلیسی و فارسی">Available in English and Persian</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ TERMS OF SERVICE ══ -->
+      <div class="doc-section" id="doc-terms">
+        <div class="doc-header">
+          <div class="doc-header-top">
+            <div class="doc-type-badge" style="background:rgba(201,168,76,0.1);color:#C9A84C;border:1px solid rgba(201,168,76,0.25);">
+              <i class="fas fa-file-contract"></i> Terms of Service
+            </div>
+            <div class="doc-version">Version 3.0 — June 2026</div>
+          </div>
+          <div class="doc-title" data-en="Terms of Service" data-fa="شرایط خدمات">Terms of Service</div>
+          <div class="doc-subtitle" data-en="These Terms of Service govern your use of the KDMine website and the provision of KDMine's professional consulting services. By using our website or engaging our services, you agree to these terms." data-fa="این شرایط خدمات استفاده شما از وب‌سایت KDMine و ارائه خدمات مشاوره حرفه‌ای KDMine را تنظیم می‌کند. با استفاده از وب‌سایت یا استفاده از خدمات ما، با این شرایط موافقت می‌کنید.">These Terms of Service govern your use of the KDMine website and the provision of KDMine's professional consulting services. By using our website or engaging our services, you agree to these terms.</div>
+          <div class="doc-meta-row">
+            <div class="doc-meta-item"><i class="fas fa-calendar"></i> Effective: June 1, 2026</div>
+            <div class="doc-meta-item"><i class="fas fa-gavel"></i> Governing Law: UAE</div>
+            <div class="doc-meta-item"><i class="fas fa-language"></i> Available: EN / FA</div>
+          </div>
+        </div>
+
+        <div class="highlight-box danger">
+          <div class="highlight-box-title">Important</div>
+          <p data-en="The information and templates on this website are provided for informational purposes only and do not constitute professional advice. Always validate outputs against your specific project data and engage qualified professionals for project-critical decisions." data-fa="اطلاعات و قالب‌های موجود در این وب‌سایت صرفاً برای اهداف اطلاعاتی ارائه شده‌اند و تشکیل مشاوره حرفه‌ای نمی‌دهند. همیشه خروجی‌ها را با داده‌های خاص پروژه خود اعتبارسنجی کنید.">The information and templates on this website are provided for informational purposes only and do not constitute professional advice. Always validate outputs against your specific project data and engage qualified professionals for project-critical decisions.</p>
+        </div>
+
+        <div class="legal-sec" id="terms-1">
+          <div class="legal-sec-header">
+            <div class="legal-sec-num" style="background:rgba(201,168,76,0.1);color:#C9A84C;">1</div>
+            <div class="legal-sec-title" data-en="Acceptance of Terms" data-fa="پذیرش شرایط">Acceptance of Terms</div>
+          </div>
+          <div class="legal-sec-body">
+            <p data-en="By accessing or using the KDMine website (kdmine.com), downloading any materials, or engaging KDMine's professional services, you confirm that you have read, understood, and agree to be bound by these Terms of Service and our Privacy Policy." data-fa="با دسترسی یا استفاده از وب‌سایت KDMine (kdmine.com)، دانلود هر گونه مواد، یا استفاده از خدمات حرفه‌ای KDMine، تأیید می‌کنید که این شرایط خدمات و سیاست حریم خصوصی ما را خوانده، درک کرده و موافقت می‌کنید که به آن‌ها پایبند باشید.">By accessing or using the KDMine website (kdmine.com), downloading any materials, or engaging KDMine's professional services, you confirm that you have read, understood, and agree to be bound by these Terms of Service and our Privacy Policy.</p>
+            <p data-en="If you are using this website on behalf of an organisation, you represent that you have the authority to bind that organisation to these terms." data-fa="اگر از این وب‌سایت به نمایندگی از یک سازمان استفاده می‌کنید، نشان می‌دهید که اختیار الزام‌آور کردن آن سازمان به این شرایط را دارید.">If you are using this website on behalf of an organisation, you represent that you have the authority to bind that organisation to these terms.</p>
+          </div>
+        </div>
+
+        <div class="legal-sec" id="terms-2">
+          <div class="legal-sec-header">
+            <div class="legal-sec-num" style="background:rgba(201,168,76,0.1);color:#C9A84C;">2</div>
+            <div class="legal-sec-title" data-en="Professional Services" data-fa="خدمات حرفه‌ای">Professional Services</div>
+          </div>
+          <div class="legal-sec-body">
+            <p data-en="All professional consulting services provided by KDMine are governed by a separate Scope of Work and Engagement Agreement signed between KDMine and the client. In the event of any conflict between these Terms of Service and a signed Engagement Agreement, the Engagement Agreement shall prevail." data-fa="تمام خدمات مشاوره حرفه‌ای ارائه شده توسط KDMine توسط یک محدوده کار و قرارداد مشارکت جداگانه امضا شده بین KDMine و مشتری اداره می‌شود.">All professional consulting services provided by KDMine are governed by a separate Scope of Work and Engagement Agreement signed between KDMine and the client. In the event of any conflict between these Terms of Service and a signed Engagement Agreement, the Engagement Agreement shall prevail.</p>
+            <ul>
+              <li data-en="All engagements are priced on a fixed-fee basis unless otherwise agreed in writing" data-fa="تمام مشارکت‌ها بر اساس هزینه ثابت قیمت‌گذاری می‌شوند مگر اینکه به صورت کتبی توافق شده باشد">All engagements are priced on a fixed-fee basis unless otherwise agreed in writing</li>
+              <li data-en="Payment terms are 30% mobilisation, 40% at draft report, 30% at final delivery" data-fa="شرایط پرداخت ۳۰٪ بسیج، ۴۰٪ در پیش‌نویس گزارش، ۳۰٪ در تحویل نهایی است">Payment terms are 30% mobilisation, 40% at draft report, 30% at final delivery</li>
+              <li data-en="Deliverables remain the property of KDMine until full payment is received" data-fa="تحویل‌دادنی‌ها تا زمان دریافت پرداخت کامل مالکیت KDMine باقی می‌مانند">Deliverables remain the property of KDMine until full payment is received</li>
+              <li data-en="KDMine retains the right to use anonymised project data for benchmarking and methodology development" data-fa="KDMine حق استفاده از داده‌های پروژه ناشناس برای معیارسنجی و توسعه روش‌شناسی را حفظ می‌کند">KDMine retains the right to use anonymised project data for benchmarking and methodology development</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="legal-sec" id="terms-3">
+          <div class="legal-sec-header">
+            <div class="legal-sec-num" style="background:rgba(201,168,76,0.1);color:#C9A84C;">3</div>
+            <div class="legal-sec-title" data-en="Limitation of Liability" data-fa="محدودیت مسئولیت">Limitation of Liability</div>
+          </div>
+          <div class="legal-sec-body">
+            <p data-en="To the maximum extent permitted by applicable law, KDMine's total liability to you for any claim arising from or related to these terms or our services shall not exceed the total fees paid by you to KDMine in the twelve (12) months preceding the claim." data-fa="تا حداکثر حد مجاز قانون قابل اجرا، کل مسئولیت KDMine در قبال شما برای هر ادعایی که از این شرایط یا خدمات ما ناشی می‌شود از کل هزینه‌های پرداخت شده توسط شما به KDMine در دوازده (۱۲) ماه قبل از ادعا تجاوز نخواهد کرد.">To the maximum extent permitted by applicable law, KDMine's total liability to you for any claim arising from or related to these terms or our services shall not exceed the total fees paid by you to KDMine in the twelve (12) months preceding the claim.</p>
+            <div class="highlight-box warning">
+              <div class="highlight-box-title">Free Templates Disclaimer</div>
+              <p data-en="Free templates and tools available on this website are provided 'as-is' without warranty of any kind. KDMine accepts no liability for decisions made on the basis of outputs from free templates. All templates should be validated against project-specific data by a qualified professional." data-fa="قالب‌ها و ابزارهای رایگان موجود در این وب‌سایت 'همانطور که هست' بدون هیچ گونه ضمانتی ارائه می‌شوند. KDMine هیچ مسئولیتی برای تصمیماتی که بر اساس خروجی‌های قالب‌های رایگان گرفته می‌شود نمی‌پذیرد.">Free templates and tools available on this website are provided 'as-is' without warranty of any kind. KDMine accepts no liability for decisions made on the basis of outputs from free templates. All templates should be validated against project-specific data by a qualified professional.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="legal-sec" id="terms-4">
+          <div class="legal-sec-header">
+            <div class="legal-sec-num" style="background:rgba(201,168,76,0.1);color:#C9A84C;">4</div>
+            <div class="legal-sec-title" data-en="Intellectual Property" data-fa="مالکیت معنوی">Intellectual Property</div>
+          </div>
+          <div class="legal-sec-body">
+            <p data-en="All content on the KDMine website — including text, graphics, logos, templates, models, and methodologies — is the intellectual property of KDMine Consultancy and is protected by applicable copyright and intellectual property laws." data-fa="تمام محتوای وب‌سایت KDMine — از جمله متن، گرافیک، لوگوها، قالب‌ها، مدل‌ها و روش‌شناسی‌ها — مالکیت معنوی KDMine Consultancy است و توسط قوانین حق چاپ و مالکیت معنوی قابل اجرا محافظت می‌شود.">All content on the KDMine website — including text, graphics, logos, templates, models, and methodologies — is the intellectual property of KDMine Consultancy and is protected by applicable copyright and intellectual property laws.</p>
+            <ul>
+              <li data-en="Free templates may be used for internal business purposes but may not be resold or redistributed" data-fa="قالب‌های رایگان ممکن است برای اهداف تجاری داخلی استفاده شوند اما نمی‌توانند فروخته مجدد یا توزیع مجدد شوند">Free templates may be used for internal business purposes but may not be resold or redistributed</li>
+              <li data-en="KDMine branding and logos may not be used without prior written consent" data-fa="برندینگ و لوگوهای KDMine بدون رضایت کتبی قبلی نمی‌توانند استفاده شوند">KDMine branding and logos may not be used without prior written consent</li>
+              <li data-en="Deliverables produced under a client engagement become the property of the client upon full payment" data-fa="تحویل‌دادنی‌های تولید شده تحت مشارکت مشتری با پرداخت کامل مالکیت مشتری می‌شوند">Deliverables produced under a client engagement become the property of the client upon full payment</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="legal-sec" id="terms-5">
+          <div class="legal-sec-header">
+            <div class="legal-sec-num" style="background:rgba(201,168,76,0.1);color:#C9A84C;">5</div>
+            <div class="legal-sec-title" data-en="Governing Law & Disputes" data-fa="قانون حاکم و اختلافات">Governing Law & Disputes</div>
+          </div>
+          <div class="legal-sec-body">
+            <p data-en="These Terms of Service are governed by and construed in accordance with the laws of the United Arab Emirates (UAE). Any disputes arising from these terms shall first be subject to good-faith negotiation. If unresolved within 30 days, disputes shall be referred to arbitration under the DIFC-LCIA Arbitration Rules." data-fa="این شرایط خدمات توسط قوانین امارات متحده عربی (امارات) اداره و تفسیر می‌شود. هر اختلافی که از این شرایط ناشی می‌شود ابتدا باید مشمول مذاکره حسن نیت باشد. اگر ظرف ۳۰ روز حل نشد، اختلافات به داوری تحت قوانین داوری DIFC-LCIA ارجاع می‌شوند.">These Terms of Service are governed by and construed in accordance with the laws of the United Arab Emirates (UAE). Any disputes arising from these terms shall first be subject to good-faith negotiation. If unresolved within 30 days, disputes shall be referred to arbitration under the DIFC-LCIA Arbitration Rules.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ COOKIE POLICY ══ -->
+      <div class="doc-section" id="doc-cookies">
+        <div class="doc-header">
+          <div class="doc-header-top">
+            <div class="doc-type-badge" style="background:rgba(168,85,247,0.1);color:#A855F7;border:1px solid rgba(168,85,247,0.25);">
+              <i class="fas fa-cookie-bite"></i> Cookie Policy
+            </div>
+            <div class="doc-version">Version 1.2 — June 2026</div>
+          </div>
+          <div class="doc-title" data-en="Cookie Policy" data-fa="سیاست کوکی">Cookie Policy</div>
+          <div class="doc-subtitle" data-en="This Cookie Policy explains how KDMine uses cookies and similar tracking technologies on our website, what data they collect, and how you can control them." data-fa="این سیاست کوکی توضیح می‌دهد که چگونه KDMine از کوکی‌ها و فناوری‌های ردیابی مشابه در وب‌سایت ما استفاده می‌کند، چه داده‌هایی جمع‌آوری می‌کنند و چگونه می‌توانید آن‌ها را کنترل کنید.">This Cookie Policy explains how KDMine uses cookies and similar tracking technologies on our website, what data they collect, and how you can control them.</div>
+          <div class="doc-meta-row">
+            <div class="doc-meta-item"><i class="fas fa-calendar"></i> Effective: June 1, 2026</div>
+            <div class="doc-meta-item"><i class="fas fa-language"></i> Available: EN / FA</div>
+          </div>
+        </div>
+
+        <div class="legal-sec" id="cookie-1">
+          <div class="legal-sec-header">
+            <div class="legal-sec-num" style="background:rgba(168,85,247,0.1);color:#A855F7;">1</div>
+            <div class="legal-sec-title" data-en="What Are Cookies?" data-fa="کوکی‌ها چیستند؟">What Are Cookies?</div>
+          </div>
+          <div class="legal-sec-body">
+            <p data-en="Cookies are small text files placed on your device when you visit a website. They allow the website to remember your preferences, analyse usage patterns, and improve your experience. Cookies cannot run programs or deliver viruses to your device." data-fa="کوکی‌ها فایل‌های متنی کوچکی هستند که هنگام بازدید از یک وب‌سایت روی دستگاه شما قرار می‌گیرند. آن‌ها به وب‌سایت اجازه می‌دهند تنظیمات برگزیده شما را به خاطر بسپارد، الگوهای استفاده را تجزیه و تحلیل کند و تجربه شما را بهبود بخشد.">Cookies are small text files placed on your device when you visit a website. They allow the website to remember your preferences, analyse usage patterns, and improve your experience. Cookies cannot run programs or deliver viruses to your device.</p>
+          </div>
+        </div>
+
+        <div class="legal-sec" id="cookie-2">
+          <div class="legal-sec-header">
+            <div class="legal-sec-num" style="background:rgba(168,85,247,0.1);color:#A855F7;">2</div>
+            <div class="legal-sec-title" data-en="Cookies We Use" data-fa="کوکی‌هایی که استفاده می‌کنیم">Cookies We Use</div>
+          </div>
+          <div class="legal-sec-body">
+            <table class="data-table">
+              <thead><tr><th>Cookie Type</th><th>Name / Provider</th><th>Purpose</th><th>Duration</th><th>Consent?</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Essential</strong></td><td>Session, CSRF token</td><td>Website security & functionality</td><td>Session</td><td>Not required</td></tr>
+                <tr><td><strong>Preferences</strong></td><td>lang_pref, theme</td><td>Remember language (EN/FA) & UI preferences</td><td>1 year</td><td>Not required</td></tr>
+                <tr><td><strong>Analytics</strong></td><td>Google Analytics 4 (_ga, _gid)</td><td>Anonymised website usage analytics</td><td>13 months</td><td>Required</td></tr>
+                <tr><td><strong>Marketing</strong></td><td>None currently</td><td>N/A — KDMine does not use marketing cookies</td><td>N/A</td><td>N/A</td></tr>
+              </tbody>
+            </table>
+            <div class="highlight-box info">
+              <div class="highlight-box-title">No Marketing Cookies</div>
+              <p data-en="KDMine does not use any advertising, retargeting, or marketing cookies. We do not share cookie data with advertising networks." data-fa="KDMine از هیچ کوکی تبلیغاتی، هدف‌گذاری مجدد یا بازاریابی استفاده نمی‌کند. ما داده‌های کوکی را با شبکه‌های تبلیغاتی به اشتراک نمی‌گذاریم.">KDMine does not use any advertising, retargeting, or marketing cookies. We do not share cookie data with advertising networks.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="legal-sec" id="cookie-3">
+          <div class="legal-sec-header">
+            <div class="legal-sec-num" style="background:rgba(168,85,247,0.1);color:#A855F7;">3</div>
+            <div class="legal-sec-title" data-en="Managing Your Cookie Preferences" data-fa="مدیریت تنظیمات کوکی شما">Managing Your Cookie Preferences</div>
+          </div>
+          <div class="legal-sec-body">
+            <p data-en="You can control and manage cookies in the following ways:" data-fa="می‌توانید کوکی‌ها را به روش‌های زیر کنترل و مدیریت کنید:">You can control and manage cookies in the following ways:</p>
+            <ul>
+              <li data-en="<strong>Cookie Banner</strong> — Accept or decline non-essential cookies via the consent banner on your first visit" data-fa="<strong>بنر کوکی</strong> — پذیرش یا رد کوکی‌های غیرضروری از طریق بنر رضایت در اولین بازدید"><strong>Cookie Banner</strong> — Accept or decline non-essential cookies via the consent banner on your first visit</li>
+              <li data-en="<strong>Browser Settings</strong> — Most browsers allow you to block or delete cookies via settings" data-fa="<strong>تنظیمات مرورگر</strong> — اکثر مرورگرها به شما اجازه می‌دهند کوکی‌ها را از طریق تنظیمات مسدود یا حذف کنید"><strong>Browser Settings</strong> — Most browsers allow you to block or delete cookies via settings</li>
+              <li data-en="<strong>Google Analytics Opt-Out</strong> — Install the <a href='https://tools.google.com/dlpage/gaoptout' target='_blank'>Google Analytics Opt-Out Browser Add-on</a>" data-fa="<strong>خروج از Google Analytics</strong> — <a href='https://tools.google.com/dlpage/gaoptout' target='_blank'>افزونه مرورگر خروج از Google Analytics</a> را نصب کنید"><strong>Google Analytics Opt-Out</strong> — Install the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank">Google Analytics Opt-Out Browser Add-on</a></li>
+            </ul>
+            <p data-en="Note: Blocking essential cookies may affect the functionality of the KDMine website, including language preference storage." data-fa="توجه: مسدود کردن کوکی‌های ضروری ممکن است بر عملکرد وب‌سایت KDMine، از جمله ذخیره‌سازی تنظیمات زبان تأثیر بگذارد.">Note: Blocking essential cookies may affect the functionality of the KDMine website, including language preference storage.</p>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-card-title" data-en="Cookie Questions" data-fa="سوالات کوکی">Cookie Questions</div>
+          <div class="contact-card-sub" data-en="For questions about our use of cookies or to withdraw consent:" data-fa="برای سوالات در مورد استفاده ما از کوکی‌ها یا لغو رضایت:">For questions about our use of cookies or to withdraw consent:</div>
+          <div class="contact-card-items">
+            <div class="contact-card-item"><i class="fas fa-envelope"></i> <a href="mailto:legal@kdmine.com">legal@kdmine.com</a></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta-band fade-up">
+        <h3 data-en="Questions About Our Legal Documents?" data-fa="سوالی درباره اسناد حقوقی ما دارید؟">Questions About Our Legal Documents?</h3>
+        <p data-en="Our team is happy to clarify any aspect of our privacy practices, terms, or data handling. Contact us in English or Persian." data-fa="تیم ما خوشحال می‌شود هر جنبه‌ای از شیوه‌های حریم خصوصی، شرایط یا مدیریت داده ما را توضیح دهد. با ما به زبان انگلیسی یا فارسی تماس بگیرید.">Our team is happy to clarify any aspect of our privacy practices, terms, or data handling. Contact us in English or Persian.</p>
+        <button class="btn-gold" onclick="location.href='mailto:legal@kdmine.com'"><i class="fas fa-envelope"></i> <span data-en="Contact Legal Team" data-fa="تماس با تیم حقوقی">Contact Legal Team</span></button>
+        <button class="btn-outline" onclick="location.href='index.html'"><i class="fas fa-home"></i> <span data-en="Back to Home" data-fa="بازگشت به خانه">Back to Home</span></button>
+      </div>
+
+    </div><!-- /legal-content -->
+  </div><!-- /page-body -->
+
+  <div class="footer-mini">
+    <p data-en="© 2026 KDMine Consultancy. All rights reserved." data-fa="© ۱۴۰۵ مشاوره KDMine. تمام حقوق محفوظ است.">© 2026 KDMine Consultancy. All rights reserved.</p>
+    <a href="index.html" data-en="← Back to Main Site" data-fa="← بازگشت به سایت اصلی">← Back to Main Site</a>
+  </div>
+
+  <script>
+  // ══ TOC DATA ══════════════════════════════════
+  const tocData = {
+    privacy: [
+      {id:'priv-1', label:'Who We Are', labelFa:'ما کی هستیم'},
+      {id:'priv-2', label:'Data We Collect', labelFa:'داده‌هایی که جمع‌آوری می‌کنیم'},
+      {id:'priv-3', label:'How We Use Your Data', labelFa:'چگونه از داده‌ها استفاده می‌کنیم'},
+      {id:'priv-4', label:'Data Sharing', labelFa:'اشتراک‌گذاری داده'},
+      {id:'priv-5', label:'Your Rights', labelFa:'حقوق شما'},
+      {id:'priv-6', label:'Data Security', labelFa:'امنیت داده'},
+    ],
+    terms: [
+      {id:'terms-1', label:'Acceptance of Terms', labelFa:'پذیرش شرایط'},
+      {id:'terms-2', label:'Professional Services', labelFa:'خدمات حرفه‌ای'},
+      {id:'terms-3', label:'Limitation of Liability', labelFa:'محدودیت مسئولیت'},
+      {id:'terms-4', label:'Intellectual Property', labelFa:'مالکیت معنوی'},
+      {id:'terms-5', label:'Governing Law', labelFa:'قانون حاکم'},
+    ],
+    cookies: [
+      {id:'cookie-1', label:'What Are Cookies?', labelFa:'کوکی‌ها چیستند؟'},
+      {id:'cookie-2', label:'Cookies We Use', labelFa:'کوکی‌هایی که استفاده می‌کنیم'},
+      {id:'cookie-3', label:'Managing Preferences', labelFa:'مدیریت تنظیمات'},
+    ],
+  };
+
+  let currentDoc = 'privacy';
+  let currentLang = 'en';
+
+  // ══ RENDER TOC ════════════════════════════════
+  function renderTOC(doc) {
+    const items = tocData[doc];
+    document.getElementById('tocList').innerHTML = items.map((item, i) => `
+      <a class="toc-link" onclick="scrollToSection('${item.id}')"
+         data-en="${item.label}" data-fa="${item.labelFa}" id="toc-${item.id}">
+        <span class="toc-link-num">${String(i+1).padStart(2,'0')}</span>
+        ${currentLang === 'fa' ? item.labelFa : item.label}
+      </a>`).join('');
+  }
+
+  // ══ SWITCH DOC ════════════════════════════════
+  function switchDoc(doc, btn) {
+    currentDoc = doc;
+    document.querySelectorAll('.doc-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.toc-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('doc-' + doc).classList.add('active');
+    btn.classList.add('active');
+    renderTOC(doc);
+    window.scrollTo({top: 300, behavior: 'smooth'});
+  }
+
+  // ══ SCROLL TO SECTION ═════════════════════════
+  function scrollToSection(id) {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({behavior: 'smooth', block: 'start'});
+      document.querySelectorAll('.toc-link').forEach(l => l.classList.remove('active'));
+      document.getElementById('toc-' + id)?.classList.add('active');
+    }
+  }
+
+  // ══ ACTIVE TOC ON SCROLL ══════════════════════
+  function updateActiveTOC() {
+    const items = tocData[currentDoc];
+    let active = items[0].id;
+    items.forEach(item => {
+      const el = document.getElementById(item.id);
+      if (el) {
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= 140) active = item.id;
+      }
+    });
+    document.querySelectorAll('.toc-link').forEach(l => l.classList.remove('active'));
+    const activeLink = document.getElementById('toc-' + active);
+    if (activeLink) activeLink.classList.add('active');
+  }
+  window.addEventListener('scroll', updateActiveTOC);
+
+  // ══ LANGUAGE ══════════════════════════════════
+  function setLang(lang) {
+    currentLang = lang;
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.getElementById('btn-fa').classList.toggle('active', lang === 'fa');
+    const body = document.getElementById('body');
+    if (lang === 'fa') { body.classList.add('fa'); body.setAttribute('dir', 'rtl'); }
+    else { body.classList.remove('fa'); body.setAttribute('dir', 'ltr'); }
+    document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+      const v = el.getAttribute('data-' + lang);
+      if (!v) return;
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = v;
+      else el.innerHTML = v;
+    });
+    renderTOC(currentDoc);
+  }
+
+  // ══ FADE UP ═══════════════════════════════════
+  const obs = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.05 }
+  );
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  // ══ INIT ══════════════════════════════════════
+  renderTOC('privacy');
+  </script>
+</body>
+</html>

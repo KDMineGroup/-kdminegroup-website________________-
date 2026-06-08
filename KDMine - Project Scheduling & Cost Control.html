@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Project Scheduling & Cost Control | KDMine</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    :root{--gold:#C9A84C;--gold-light:#E8C97A;--gold-dark:#A07830;--dark:#080C16;--dark2:#0F1520;--dark3:#161E2E;--dark4:#1E2840;--text:#E8EDF5;--text-muted:#7A8BA8;--border:rgba(201,168,76,0.2);--border2:rgba(255,255,255,0.06);--green:#22C55E;--blue:#0EA5E9;--purple:#A855F7;--red:#EF4444;--orange:#F97316;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;background:var(--dark);color:var(--text);overflow-x:hidden;}
+    body.fa{font-family:'Vazirmatn',sans-serif;direction:rtl;}
+    ::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:var(--dark2);}::-webkit-scrollbar-thumb{background:var(--gold-dark);border-radius:3px;}
+    .lang-bar{position:fixed;top:0;left:0;right:0;z-index:2000;height:36px;background:var(--gold-dark);display:flex;align-items:center;justify-content:flex-end;padding:0 5%;gap:12px;}
+    .lang-btn{padding:4px 14px;border-radius:20px;border:none;cursor:pointer;font-size:12px;font-weight:700;transition:.2s;}
+    .lang-btn.active{background:var(--dark);color:var(--gold);}
+    .lang-btn:not(.active){background:rgba(0,0,0,0.2);color:rgba(0,0,0,0.7);}
+    nav{position:fixed;top:36px;left:0;right:0;z-index:1000;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:70px;background:rgba(8,12,22,0.95);backdrop-filter:blur(24px);border-bottom:1px solid var(--border2);}
+    .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+    .nav-logo-icon{width:42px;height:42px;border-radius:11px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));display:flex;align-items:center;justify-content:center;font-weight:900;font-size:17px;color:var(--dark);}
+    .nav-logo-text{font-size:21px;font-weight:800;color:#fff;}.nav-logo-text span{color:var(--gold);}
+    .nav-back{display:flex;align-items:center;gap:8px;padding:9px 20px;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text);font-size:13px;font-weight:600;text-decoration:none;transition:.2s;}
+    .nav-back:hover{border-color:var(--gold);color:var(--gold);}
+    .page-hero{padding:130px 5% 72px;position:relative;overflow:hidden;}
+    .hero-bg{position:absolute;inset:0;background:linear-gradient(160deg,#080C16,#0a1218,#080C16);}
+    .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(14,165,233,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(14,165,233,0.03) 1px,transparent 1px);background-size:52px 52px;}
+    .hero-glow-l{position:absolute;top:-80px;left:5%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.07),transparent 70%);}
+    .hero-glow-r{position:absolute;bottom:-60px;right:5%;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(14,165,233,0.05),transparent 70%);}
+    .hero-inner{position:relative;z-index:2;max-width:900px;}
+    .breadcrumb{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-muted);margin-bottom:18px;}
+    .breadcrumb a{color:var(--gold);text-decoration:none;}.breadcrumb span{opacity:.5;}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border-radius:20px;background:rgba(14,165,233,0.1);border:1px solid rgba(14,165,233,0.25);font-size:12px;font-weight:700;color:var(--blue);margin-bottom:18px;}
+    .page-hero h1{font-size:clamp(34px,5vw,62px);font-weight:900;color:#fff;letter-spacing:-2px;margin-bottom:16px;line-height:1.05;}
+    .page-hero h1 em{background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal;}
+    .page-hero p{font-size:16px;color:var(--text-muted);line-height:1.8;max-width:700px;margin-bottom:36px;}
+    .hero-kpis{display:flex;gap:36px;flex-wrap:wrap;}
+    .hkpi .num{font-size:30px;font-weight:900;color:#fff;letter-spacing:-1px;}
+    .hkpi .num em{color:var(--gold);font-style:normal;font-size:16px;}
+    .hkpi .lbl{font-size:11px;color:var(--text-muted);margin-top:3px;}
+    .wrap{padding:0 5% 72px;max-width:1400px;margin:0 auto;}
+    .sec-label{font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;}
+    .sec-title{font-size:28px;font-weight:900;color:#fff;letter-spacing:-.5px;margin-bottom:10px;}
+    .sec-sub{font-size:15px;color:var(--text-muted);line-height:1.75;margin-bottom:36px;max-width:720px;}
+    .main-tabs{display:flex;gap:6px;margin-bottom:36px;flex-wrap:wrap;}
+    .mtab{padding:11px 22px;border-radius:12px;border:1px solid var(--border2);background:rgba(255,255,255,0.04);color:var(--text-muted);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:.2s;display:flex;align-items:center;gap:8px;}
+    .mtab.active{background:rgba(14,165,233,0.1);border-color:rgba(14,165,233,0.3);color:var(--blue);}
+    .tab-section{display:none;}.tab-section.active{display:block;}
+    /* SCHEDULE TAB */
+    .gantt-intro{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;margin-bottom:40px;align-items:start;}
+    .gantt-intro p{font-size:14px;color:var(--text-muted);line-height:1.8;margin-bottom:12px;}
+    .gantt-wrap{background:var(--dark3);border:1px solid var(--border2);border-radius:20px;padding:24px;margin-bottom:48px;overflow-x:auto;}
+    .gantt-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:20px;display:flex;align-items:center;gap:8px;}
+    .gantt-table{width:100%;border-collapse:collapse;min-width:900px;}
+    .gantt-table th{padding:8px 10px;font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border2);background:var(--dark4);}
+    .gantt-table td{padding:6px 10px;font-size:11px;color:var(--text-muted);border-bottom:1px solid var(--border2);}
+    .gantt-table tr:hover td{background:rgba(255,255,255,0.02);}
+    .gantt-table td:first-child{font-weight:700;color:#fff;min-width:180px;}
+    .gantt-bar-cell{position:relative;min-width:520px;}
+    .gantt-bar-bg{position:relative;height:20px;background:var(--dark4);border-radius:4px;overflow:hidden;}
+    .gantt-bar{position:absolute;height:100%;border-radius:4px;display:flex;align-items:center;padding:0 6px;font-size:9px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;}
+    .gantt-phase-row td{background:rgba(201,168,76,0.04);color:var(--gold);font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:.5px;}
+    .sched-kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:48px;}
+    .sched-kpi{background:var(--dark3);border:1px solid var(--border2);border-radius:14px;padding:16px;text-align:center;}
+    .sched-kpi-label{font-size:11px;color:var(--text-muted);margin-bottom:6px;}
+    .sched-kpi-val{font-size:20px;font-weight:900;color:#fff;}
+    .sched-kpi-val em{color:var(--gold);font-style:normal;font-size:13px;}
+    .sched-kpi-sub{font-size:10px;color:var(--text-muted);margin-top:3px;}
+    .cp-wrap{background:var(--dark3);border:1px solid var(--border2);border-radius:20px;padding:28px;margin-bottom:48px;}
+    .cp-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:20px;}
+    .cp-flow{display:flex;align-items:center;flex-wrap:wrap;gap:0;}
+    .cp-node{background:var(--dark4);border:2px solid var(--border2);border-radius:12px;padding:12px 14px;text-align:center;min-width:100px;transition:.3s;}
+    .cp-node.critical{border-color:var(--red);}
+    .cp-node.milestone{border-color:var(--gold);}
+    .cp-node-title{font-size:11px;font-weight:700;color:#fff;margin-bottom:3px;}
+    .cp-node-dur{font-size:10px;}
+    .cp-arrow{font-size:16px;color:var(--red);opacity:.6;margin:0 4px;}
+    .cp-legend{display:flex;gap:16px;margin-top:16px;flex-wrap:wrap;}
+    .cp-leg-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-muted);}
+    .cp-leg-dot{width:12px;height:12px;border-radius:3px;border:2px solid;}
+    /* EVM TAB */
+    .ev-intro{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:48px;}
+    .ev-text p{font-size:14px;color:var(--text-muted);line-height:1.8;margin-bottom:12px;}
+    .ev-metrics{display:flex;flex-direction:column;gap:8px;}
+    .ev-metric{background:var(--dark3);border:1px solid var(--border2);border-radius:12px;padding:13px 16px;display:flex;align-items:center;justify-content:space-between;}
+    .ev-metric-name{font-size:12px;font-weight:700;color:#fff;}
+    .ev-metric-formula{font-size:10px;color:var(--text-muted);}
+    .ev-metric-val{font-size:16px;font-weight:900;}
+    .ev-table-wrap{background:var(--dark3);border:1px solid var(--border2);border-radius:20px;overflow:hidden;margin-bottom:48px;}
+    .ev-table{width:100%;border-collapse:collapse;}
+    .ev-table thead tr{background:var(--dark4);}
+    .ev-table th{padding:11px 14px;text-align:left;font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border2);}
+    .ev-table td{padding:10px 14px;font-size:12px;color:var(--text-muted);border-bottom:1px solid var(--border2);}
+    .ev-table tr:last-child td{border-bottom:none;}
+    .ev-table tr:hover td{background:rgba(255,255,255,0.02);}
+    .ev-table td:first-child{font-weight:700;color:#fff;}
+    .ev-group td{background:rgba(14,165,233,0.04);color:var(--blue);font-weight:700;font-size:11px;text-transform:uppercase;}
+    .cc-charts{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:48px;}
+    .cc-chart-card{background:var(--dark3);border:1px solid var(--border2);border-radius:20px;padding:24px;}
+    .cc-chart-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:16px;}
+    /* REPORTING TAB */
+    .report-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:48px;}
+    .report-card{background:var(--dark3);border:1px solid var(--border2);border-radius:18px;padding:22px;transition:.3s;}
+    .report-card:hover{border-color:var(--border);}
+    .report-icon{font-size:28px;margin-bottom:12px;}
+    .report-title{font-size:14px;font-weight:800;color:#fff;margin-bottom:6px;}
+    .report-freq{font-size:10px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+    .report-desc{font-size:12px;color:var(--text-muted);line-height:1.65;margin-bottom:12px;}
+    .report-items{display:flex;flex-direction:column;gap:4px;}
+    .report-item{font-size:11px;color:var(--text-muted);display:flex;align-items:center;gap:6px;}
+    .report-item::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;}
+    .tools-table-wrap{background:var(--dark3);border:1px solid var(--border2);border-radius:20px;overflow:hidden;margin-bottom:48px;}
+    .tools-table{width:100%;border-collapse:collapse;}
+    .tools-table thead tr{background:var(--dark4);}
+    .tools-table th{padding:11px 16px;text-align:left;font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border2);}
+    .tools-table td{padding:11px 16px;font-size:12px;color:var(--text-muted);border-bottom:1px solid var(--border2);}
+    .tools-table tr:last-child td{border-bottom:none;}
+    .tools-table tr:hover td{background:rgba(255,255,255,0.02);}
+    .tools-table td:first-child{font-weight:700;color:#fff;}
+    .tool-badge{display:inline-flex;padding:3px 8px;border-radius:5px;font-size:10px;font-weight:700;}
+    .tb-primary{background:rgba(14,165,233,0.1);color:var(--blue);}
+    .tb-secondary{background:rgba(201,168,76,0.1);color:var(--gold);}
+    .tb-alt{background:rgba(168,85,247,0.1);color:var(--purple);}
+    /* DELIVERABLES TAB */
+    .deliv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:48px;}
+    .deliv-card{background:var(--dark3);border:1px solid var(--border2);border-radius:16px;padding:18px;text-align:center;transition:.3s;}
+    .deliv-card:hover{border-color:var(--border);}
+    .deliv-icon{font-size:26px;margin-bottom:10px;}
+    .deliv-name{font-size:12px;font-weight:700;color:#fff;margin-bottom:4px;}
+    .deliv-desc{font-size:11px;color:var(--text-muted);line-height:1.5;}
+    /* CTA */
+    .cta-band{background:linear-gradient(135deg,var(--dark3),var(--dark4));border:1px solid var(--border);border-radius:24px;padding:52px;text-align:center;margin-bottom:56px;}
+    .cta-band h3{font-size:32px;font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:12px;}
+    .cta-band h3 em{background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal;}
+    .cta-band p{font-size:15px;color:var(--text-muted);margin-bottom:28px;}
+    .cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+    .btn-gold{padding:13px 28px;border-radius:11px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--dark);font-weight:700;font-size:14px;border:none;cursor:pointer;font-family:inherit;transition:.2s;display:inline-flex;align-items:center;gap:8px;}
+    .btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,0.4);}
+    .btn-outline{padding:13px 28px;border-radius:11px;border:1px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text);font-weight:600;font-size:14px;cursor:pointer;font-family:inherit;transition:.2s;display:inline-flex;align-items:center;gap:8px;}
+    .btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+    .footer-mini{background:var(--dark2);border-top:1px solid var(--border2);padding:28px 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;}
+    .footer-mini p{font-size:13px;color:var(--text-muted);}
+    .footer-mini a{font-size:13px;color:var(--gold);text-decoration:none;}
+    .fade-up{opacity:0;transform:translateY(22px);transition:opacity .5s,transform .5s;}
+    .fade-up.visible{opacity:1;transform:translateY(0);}
+    @media(max-width:1100px){.gantt-intro{grid-template-columns:1fr;}.ev-intro{grid-template-columns:1fr;}.cc-charts{grid-template-columns:1fr;}.sched-kpi-grid{grid-template-columns:repeat(3,1fr);}.report-grid{grid-template-columns:1fr 1fr;}.deliv-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:768px){.sched-kpi-grid{grid-template-columns:1fr 1fr;}.report-grid{grid-template-columns:1fr;}.deliv-grid{grid-template-columns:1fr 1fr;}}
+  </style>
+</head>
+<body id="body">
+  <div class="lang-bar">
+    <button class="lang-btn active" id="btn-en" onclick="setLang('en')">🇬🇧 English</button>
+    <button class="lang-btn" id="btn-fa" onclick="setLang('fa')">🇮🇷 فارسی</button>
+  </div>
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">KD</div>
+      <span class="nav-logo-text">KD<span>Mine</span></span>
+    </a>
+    <a href="index.html" class="nav-back"><i class="fas fa-arrow-left"></i> <span data-en="Back to Home" data-fa="بازگشت به خانه">Back to Home</span></a>
+  </nav>
+
+  <div class="page-hero">
+    <div class="hero-bg"></div><div class="hero-grid"></div>
+    <div class="hero-glow-l"></div><div class="hero-glow-r"></div>
+    <div class="hero-inner fade-up">
+      <div class="breadcrumb"><a href="index.html" data-en="Home" data-fa="خانه">Home</a><span>/</span><span data-en="Project Scheduling & Cost Control" data-fa="زمان‌بندی پروژه و کنترل هزینه">Project Scheduling & Cost Control</span></div>
+      <div class="hero-badge"><i class="fas fa-calendar-alt"></i> <span data-en="Gantt · Critical Path · Earned Value · AACE TCM · PMBoK" data-fa="گانت · مسیر بحرانی · ارزش کسب‌شده · AACE TCM · PMBoK">Gantt · Critical Path · Earned Value · AACE TCM · PMBoK</span></div>
+      <h1><em data-en="Project Scheduling" data-fa="زمان‌بندی پروژه">Project Scheduling</em><br/><span data-en="& Cost" data-fa="و کنترل">&amp; Cost</span> <em data-en="Control" data-fa="هزینه">Control</em></h1>
+      <p data-en="KDMine delivers integrated project scheduling and cost control services for open-pit mining construction projects — from Level 1 milestone schedules through Level 4 resource-loaded CPM networks, combined with Earned Value Management (EVM) cost control systems aligned to AACE TCM and PMBoK standards." data-fa="KDMine خدمات یکپارچه زمان‌بندی پروژه و کنترل هزینه برای پروژه‌های ساخت معدن روباز ارائه می‌دهد — از برنامه‌های نقطه عطف سطح ۱ تا شبکه‌های CPM بارگذاری‌شده با منابع سطح ۴، همراه با سیستم‌های کنترل هزینه EVM منطبق با AACE TCM و PMBoK.">KDMine delivers integrated project scheduling and cost control services for open-pit mining construction projects — from Level 1 milestone schedules through Level 4 resource-loaded CPM networks, combined with Earned Value Management (EVM) cost control systems aligned to AACE TCM and PMBoK standards.</p>
+      <div class="hero-kpis">
+        <div class="hkpi"><div class="num">L1<em>–L4</em></div><div class="lbl" data-en="Schedule Levels" data-fa="سطوح برنامه">Schedule Levels</div></div>
+        <div class="hkpi"><div class="num">CPM<em>/PERT</em></div><div class="lbl" data-en="Network Methods" data-fa="روش‌های شبکه">Network Methods</div></div>
+        <div class="hkpi"><div class="num">EVM<em> Full</em></div><div class="lbl" data-en="Earned Value Mgmt" data-fa="مدیریت ارزش کسب‌شده">Earned Value Mgmt</div></div>
+        <div class="hkpi"><div class="num">AACE<em> TCM</em></div><div class="lbl" data-en="& PMBoK Aligned" data-fa="و منطبق با PMBoK">& PMBoK Aligned</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="main-tabs fade-up">
+      <button class="mtab active" onclick="switchTab('schedule',this)"><i class="fas fa-calendar-alt"></i> <span data-en="Project Schedule" data-fa="برنامه پروژه">Project Schedule</span></button>
+      <button class="mtab" onclick="switchTab('evm',this)"><i class="fas fa-chart-bar"></i> <span data-en="Cost Control (EVM)" data-fa="کنترل هزینه (EVM)">Cost Control (EVM)</span></button>
+      <button class="mtab" onclick="switchTab('reporting',this)"><i class="fas fa-file-alt"></i> <span data-en="Reporting & Tools" data-fa="گزارش‌دهی و ابزارها">Reporting & Tools</span></button>
+      <button class="mtab" onclick="switchTab('deliverables',this)"><i class="fas fa-box-open"></i> <span data-en="Deliverables" data-fa="تحویل‌دادنی‌ها">Deliverables</span></button>
+    </div>
+
+    <!-- ══ SCHEDULE TAB ══ -->
+    <div class="tab-section active" id="tab-schedule">
+      <div class="gantt-intro fade-up">
+        <div>
+          <div class="sec-label" data-en="Project Scheduling" data-fa="زمان‌بندی پروژه">Project Scheduling</div>
+          <div class="sec-title" data-en="From Milestone to Resource-Loaded CPM" data-fa="از نقطه عطف تا CPM بارگذاری‌شده با منابع">From Milestone to Resource-Loaded CPM</div>
+          <p data-en="KDMine develops project schedules at four levels of detail, from the board-level milestone summary (Level 1) to the fully resource-loaded, logic-linked CPM network used by the construction team (Level 4). All schedules are developed in Primavera P6 or MS Project and are integrated with the project cost estimate." data-fa="KDMine برنامه‌های پروژه را در چهار سطح جزئیات توسعه می‌دهد، از خلاصه نقطه عطف سطح هیئت مدیره (سطح ۱) تا شبکه CPM کاملاً بارگذاری‌شده با منابع و منطق‌پیوند که توسط تیم ساخت استفاده می‌شود (سطح ۴).">KDMine develops project schedules at four levels of detail, from the board-level milestone summary (Level 1) to the fully resource-loaded, logic-linked CPM network used by the construction team (Level 4). All schedules are developed in Primavera P6 or MS Project and are integrated with the project cost estimate.</p>
+          <p data-en="The critical path is identified and actively managed throughout construction. Float analysis, schedule risk analysis (SRA), and what-if scenarios are used to protect the project completion date." data-fa="مسیر بحرانی شناسایی و در طول ساخت به طور فعال مدیریت می‌شود. تحلیل فلوت، تحلیل ریسک برنامه (SRA) و سناریوهای what-if برای محافظت از تاریخ تکمیل پروژه استفاده می‌شوند.">The critical path is identified and actively managed throughout construction. Float analysis, schedule risk analysis (SRA), and what-if scenarios are used to protect the project completion date.</p>
+        </div>
+        <div style="background:var(--dark3);border:1px solid var(--border2);border-radius:18px;padding:22px;">
+          <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:16px;" data-en="Schedule Duration by Phase" data-fa="مدت برنامه بر اساس مرحله">Schedule Duration by Phase</div>
+          <canvas id="phaseDurChart" style="max-height:240px;"></canvas>
+        </div>
+      </div>
+
+      <div class="sched-kpi-grid fade-up">
+        <div class="sched-kpi"><div class="sched-kpi-label" data-en="Total Project Duration" data-fa="مدت کل پروژه">Total Project Duration</div><div class="sched-kpi-val">54<em> mo</em></div><div class="sched-kpi-sub" data-en="DFS to first production" data-fa="از DFS تا اولین تولید">DFS to first production</div></div>
+        <div class="sched-kpi"><div class="sched-kpi-label" data-en="Construction Duration" data-fa="مدت ساخت">Construction Duration</div><div class="sched-kpi-val">30<em> mo</em></div><div class="sched-kpi-sub" data-en="Mobilisation to commissioning" data-fa="از بسیج تا راه‌اندازی">Mobilisation to commissioning</div></div>
+        <div class="sched-kpi"><div class="sched-kpi-label" data-en="Critical Path Float" data-fa="فلوت مسیر بحرانی">Critical Path Float</div><div class="sched-kpi-val">0<em> days</em></div><div class="sched-kpi-sub" data-en="Zero float on critical path" data-fa="فلوت صفر روی مسیر بحرانی">Zero float on critical path</div></div>
+        <div class="sched-kpi"><div class="sched-kpi-label" data-en="Schedule Activities" data-fa="فعالیت‌های برنامه">Schedule Activities</div><div class="sched-kpi-val">2,400<em>+</em></div><div class="sched-kpi-sub" data-en="Level 4 CPM network" data-fa="شبکه CPM سطح ۴">Level 4 CPM network</div></div>
+        <div class="sched-kpi"><div class="sched-kpi-label" data-en="P80 Completion Buffer" data-fa="بافر تکمیل P80">P80 Completion Buffer</div><div class="sched-kpi-val">+3<em> mo</em></div><div class="sched-kpi-sub" data-en="Schedule risk buffer (SRA)" data-fa="بافر ریسک برنامه (SRA)">Schedule risk buffer (SRA)</div></div>
+      </div>
+
+      <div class="fade-up">
+        <div class="sec-label" data-en="Level 2 Schedule" data-fa="برنامه سطح ۲">Level 2 Schedule</div>
+        <div class="sec-title" data-en="Reference Project — 10 Mtpa Gold Mine" data-fa="پروژه مرجع — معدن طلای ۱۰ میلیون تن در سال">Reference Project — 10 Mtpa Gold Mine</div>
+      </div>
+      <div class="gantt-wrap fade-up">
+        <div class="gantt-title"><i class="fas fa-stream" style="color:var(--gold);"></i> <span data-en="Construction Schedule — Gantt View (Months from DFS Approval)" data-fa="برنامه ساخت — نمای گانت (ماه از تأیید DFS)">Construction Schedule — Gantt View (Months 1–54)</span></div>
+        <table class="gantt-table">
+          <thead><tr>
+            <th data-en="Activity" data-fa="فعالیت">Activity</th>
+            <th data-en="Duration" data-fa="مدت">Duration</th>
+            <th data-en="Start" data-fa="شروع">Start</th>
+            <th data-en="Finish" data-fa="پایان">Finish</th>
+            <th class="gantt-bar-cell" data-en="Timeline (Months 1–54)" data-fa="جدول زمانی (ماه ۱–۵۴)">Timeline (Months 1–54)</th>
+          </tr></thead>
+          <tbody id="ganttBody"></tbody>
+        </table>
+      </div>
+
+      <div class="fade-up">
+        <div class="sec-label" data-en="Critical Path" data-fa="مسیر بحرانی">Critical Path</div>
+        <div class="sec-title" data-en="CPM — Key Activities (Zero Float)" data-fa="CPM — فعالیت‌های کلیدی (فلوت صفر)">CPM — Key Activities (Zero Float)</div>
+      </div>
+      <div class="cp-wrap fade-up">
+        <div class="cp-title" data-en="🔴 Critical Path — 30 Months Construction" data-fa="🔴 مسیر بحرانی — ۳۰ ماه ساخت">🔴 Critical Path — 30 Months Construction</div>
+        <div class="cp-flow" id="cpFlow"></div>
+        <div class="cp-legend">
+          <div class="cp-leg-item"><div class="cp-leg-dot" style="border-color:var(--red);background:rgba(239,68,68,0.1);"></div> <span data-en="Critical Path (0 float)" data-fa="مسیر بحرانی (فلوت صفر)">Critical Path (0 float)</span></div>
+          <div class="cp-leg-item"><div class="cp-leg-dot" style="border-color:var(--gold);background:rgba(201,168,76,0.1);"></div> <span data-en="Key Milestone" data-fa="نقطه عطف کلیدی">Key Milestone</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ EVM TAB ══ -->
+    <div class="tab-section" id="tab-evm">
+      <div class="ev-intro fade-up">
+        <div class="ev-text">
+          <div class="sec-label" data-en="Earned Value Management" data-fa="مدیریت ارزش کسب‌شده">Earned Value Management</div>
+          <div class="sec-title" data-en="EVM Cost & Schedule Control" data-fa="کنترل هزینه و برنامه EVM">EVM Cost & Schedule Control</div>
+          <p data-en="Earned Value Management (EVM) integrates scope, schedule, and cost into a single performance measurement system. KDMine implements full EVM systems per AACE TCM and PMBoK standards, providing real-time CPI, SPI and accurate EAC forecasts." data-fa="مدیریت ارزش کسب‌شده (EVM) محدوده، برنامه و هزینه را در یک سیستم اندازه‌گیری عملکرد واحد ادغام می‌کند. KDMine سیستم‌های EVM کامل را طبق استانداردهای AACE TCM و PMBoK پیاده‌سازی می‌کند.">Earned Value Management (EVM) integrates scope, schedule, and cost into a single performance measurement system. KDMine implements full EVM systems per AACE TCM and PMBoK standards, providing real-time CPI, SPI and accurate EAC forecasts.</p>
+          <p data-en="The EVM system is built on a WBS aligned to the project estimate, enabling direct comparison of actual costs against the baseline at each WBS level." data-fa="سیستم EVM بر اساس WBS منطبق با برآورد پروژه ساخته شده است و مقایسه مستقیم هزینه‌های واقعی با خط پایه را ممکن می‌سازد.">The EVM system is built on a WBS aligned to the project estimate, enabling direct comparison of actual costs against the baseline at each WBS level.</p>
+        </div>
+        <div class="ev-metrics" id="evMetrics"></div>
+      </div>
+
+      <div class="cc-charts fade-up">
+        <div class="cc-chart-card">
+          <div class="cc-chart-title" data-en="S-Curve: PV / EV / AC — Month 18 Status" data-fa="منحنی S: PV / EV / AC — وضعیت ماه ۱۸">S-Curve: PV / EV / AC — Month 18 Status</div>
+          <canvas id="sCurveChart" style="max-height:260px;"></canvas>
+        </div>
+        <div class="cc-chart-card">
+          <div class="cc-chart-title" data-en="CPI & SPI Trend — Monthly Performance Indices" data-fa="روند CPI و SPI — شاخص‌های عملکرد ماهانه">CPI & SPI Trend — Monthly Performance Indices</div>
+          <canvas id="cpiChart" style="max-height:260px;"></canvas>
+        </div>
+      </div>
+
+      <div class="fade-up">
+        <div class="sec-label" data-en="EVM Status Report" data-fa="گزارش وضعیت EVM">EVM Status Report</div>
+        <div class="sec-title" data-en="WBS-Level EVM Metrics — Month 18" data-fa="معیارهای EVM در سطح WBS — ماه ۱۸">WBS-Level EVM Metrics — Month 18</div>
+      </div>
+      <div class="ev-table-wrap fade-up">
+        <table class="ev-table">
+          <thead><tr>
+            <th>WBS Area</th><th>BAC ($M)</th><th>PV ($M)</th><th>EV ($M)</th>
+            <th>AC ($M)</th><th>CV ($M)</th><th>SV ($M)</th><th>CPI</th><th>SPI</th><th>EAC ($M)</th>
+          </tr></thead>
+          <tbody id="evmTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ══ REPORTING TAB ══ -->
+    <div class="tab-section" id="tab-reporting">
+      <div class="fade-up">
+        <div class="sec-label" data-en="Reporting Framework" data-fa="چارچوب گزارش‌دهی">Reporting Framework</div>
+        <div class="sec-title" data-en="Project Control Reporting Suite" data-fa="مجموعه گزارش‌دهی کنترل پروژه">Project Control Reporting Suite</div>
+        <div class="sec-sub" data-en="KDMine provides a structured reporting framework covering weekly, monthly, and milestone-based project control reports — all bilingual EN/FA." data-fa="KDMine یک چارچوب گزارش‌دهی ساختاریافته ارائه می‌دهد که گزارش‌های کنترل پروژه هفتگی، ماهانه و مبتنی بر نقطه عطف را پوشش می‌دهد — همه دوزبانه EN/FA.">KDMine provides a structured reporting framework covering weekly, monthly, and milestone-based project control reports — all bilingual EN/FA.</div>
+      </div>
+      <div class="report-grid fade-up" id="reportGrid"></div>
+
+      <div class="fade-up">
+        <div class="sec-label" data-en="Software & Tools" data-fa="نرم‌افزار و ابزارها">Software & Tools</div>
+        <div class="sec-title" data-en="Project Control Software Stack" data-fa="پشته نرم‌افزار کنترل پروژه">Project Control Software Stack</div>
+      </div>
+      <div class="tools-table-wrap fade-up">
+        <table class="tools-table">
+          <thead><tr>
+            <th>Tool</th><th>Category</th><th>Use Case</th><th>Schedule Level</th><th>KDMine Status</th>
+          </tr></thead>
+          <tbody id="toolsTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ══ DELIVERABLES TAB ══ -->
+    <div class="tab-section" id="tab-deliverables">
+      <div class="fade-up">
+        <div class="sec-label" data-en="Deliverables" data-fa="تحویل‌دادنی‌ها">Deliverables</div>
+        <div class="sec-title" data-en="Scheduling & Cost Control Package" data-fa="بسته زمان‌بندی و کنترل هزینه">Scheduling & Cost Control Package</div>
+        <div class="sec-sub" data-en="KDMine's scheduling and cost control package is tailored to the project stage and client requirements. All deliverables are provided in bilingual EN/FA format." data-fa="بسته زمان‌بندی و کنترل هزینه KDMine متناسب با مرحله پروژه و نیازهای مشتری تنظیم می‌شود. تمام تحویل‌دادنی‌ها در قالب دوزبانه EN/FA ارائه می‌شوند.">KDMine's scheduling and cost control package is tailored to the project stage and client requirements. All deliverables are provided in bilingual EN/FA format.</div>
+      </div>
+      <div class="deliv-grid fade-up" id="delivGrid"></div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-band fade-up">
+      <h3 data-en="Set Up Your <em>Project Controls</em> System" data-fa="سیستم <em>کنترل پروژه</em> خود را راه‌اندازی کنید">Set Up Your <em>Project Controls</em> System</h3>
+      <p data-en="KDMine can establish a complete project controls framework — schedule, cost, EVM, and reporting — for your mining construction project." data-fa="KDMine می‌تواند یک چارچوب کنترل پروژه کامل — برنامه، هزینه، EVM و گزارش‌دهی — برای پروژه ساخت معدن شما ایجاد کند.">KDMine can establish a complete project controls framework — schedule, cost, EVM, and reporting — for your mining construction project.</p>
+      <div class="cta-btns">
+        <button class="btn-gold"><i class="fas fa-paper-plane"></i> <span data-en="Request Project Controls Proposal" data-fa="درخواست پیشنهاد کنترل پروژه">Request Project Controls Proposal</span></button>
+        <button class="btn-outline"><i class="fas fa-tags"></i> <span data-en="View Pricing" data-fa="مشاهده قیمت‌گذاری">View Pricing</span></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-mini">
+    <p data-en="© 2026 KDMine Consultancy. All schedule durations and EVM metrics are illustrative reference values only." data-fa="© ۱۴۰۵ مشاوره KDMine. تمام مدت‌های برنامه و معیارهای EVM فقط مقادیر مرجع تصویری هستند.">© 2026 KDMine Consultancy. All schedule durations and EVM metrics are illustrative reference values only.</p>
+    <a href="index.html" data-en="← Back to Main Site" data-fa="← بازگشت به سایت اصلی">← Back to Main Site</a>
+  </div>
+
+  <script>
+  // ══ DATA ══════════════════════════════════════
+  const ganttData = [
+    {phase:true,name:'PRE-CONSTRUCTION'},
+    {name:'DFS Approval & Board Decision',dur:'1 mo',start:1,end:1,color:'#C9A84C'},
+    {name:'Detailed Engineering (FEED)',dur:'8 mo',start:2,end:9,color:'#0EA5E9'},
+    {name:'Permitting & Approvals',dur:'10 mo',start:2,end:11,color:'#A855F7'},
+    {name:'Long-Lead Equipment Orders',dur:'6 mo',start:4,end:9,color:'#F97316'},
+    {phase:true,name:'EARTHWORKS & CIVIL'},
+    {name:'Site Clearing & Mobilisation',dur:'2 mo',start:12,end:13,color:'#22C55E'},
+    {name:'Pre-Strip & Waste Dump',dur:'18 mo',start:13,end:30,color:'#C9A84C'},
+    {name:'Plant Site Earthworks',dur:'8 mo',start:13,end:20,color:'#0EA5E9'},
+    {name:'Tailings Storage Facility',dur:'14 mo',start:14,end:27,color:'#EF4444'},
+    {phase:true,name:'PROCESS PLANT'},
+    {name:'Primary Crusher Installation',dur:'5 mo',start:18,end:22,color:'#C9A84C'},
+    {name:'SAG & Ball Mill Installation',dur:'8 mo',start:20,end:27,color:'#0EA5E9'},
+    {name:'CIL Circuit Construction',dur:'7 mo',start:24,end:30,color:'#22C55E'},
+    {name:'Elution & Gold Room',dur:'4 mo',start:28,end:31,color:'#F97316'},
+    {phase:true,name:'INFRASTRUCTURE'},
+    {name:'Power Supply (HV Line/Substation)',dur:'12 mo',start:10,end:21,color:'#A855F7'},
+    {name:'Process Water Supply',dur:'8 mo',start:14,end:21,color:'#0EA5E9'},
+    {name:'Camp & Administration',dur:'6 mo',start:12,end:17,color:'#22C55E'},
+    {phase:true,name:'COMMISSIONING & RAMP-UP'},
+    {name:'Mechanical Completion',dur:'2 mo',start:31,end:32,color:'#C9A84C'},
+    {name:'Commissioning & Hot Commissioning',dur:'3 mo',start:32,end:34,color:'#F97316'},
+    {name:'Ramp-Up to Design Capacity',dur:'6 mo',start:34,end:39,color:'#22C55E'},
+  ];
+
+  const cpNodes = [
+    {title:'DFS Approval',dur:'M1',type:'milestone'},
+    {title:'FEED Complete',dur:'8 mo',type:'critical'},
+    {title:'Permits Received',dur:'10 mo',type:'critical'},
+    {title:'Equipment Delivery',dur:'14 mo',type:'critical'},
+    {title:'Civil Complete',dur:'8 mo',type:'critical'},
+    {title:'Mill Install',dur:'8 mo',type:'critical'},
+    {title:'CIL Complete',dur:'7 mo',type:'critical'},
+    {title:'Mech. Complete',dur:'M32',type:'milestone'},
+    {title:'First Gold',dur:'M34',type:'milestone'},
+  ];
+
+  const evMetricsData = [
+    {name:'Budget at Completion (BAC)',formula:'Total approved budget',val:'$500M',color:'var(--blue)'},
+    {name:'Planned Value (PV)',formula:'BCWS — budgeted cost of work scheduled',val:'$210M',color:'var(--gold)'},
+    {name:'Earned Value (EV)',formula:'BCWP — budgeted cost of work performed',val:'$195M',color:'var(--green)'},
+    {name:'Actual Cost (AC)',formula:'ACWP — actual cost of work performed',val:'$208M',color:'var(--orange)'},
+    {name:'Cost Variance (CV = EV−AC)',formula:'Negative = over budget',val:'−$13M',color:'var(--red)'},
+    {name:'Schedule Variance (SV = EV−PV)',formula:'Negative = behind schedule',val:'−$15M',color:'var(--red)'},
+    {name:'Cost Performance Index (CPI)',formula:'EV / AC — target ≥ 1.0',val:'0.94',color:'var(--orange)'},
+    {name:'Schedule Performance Index (SPI)',formula:'EV / PV — target ≥ 1.0',val:'0.93',color:'var(--orange)'},
+    {name:'Estimate at Completion (EAC)',formula:'BAC / CPI',val:'$532M',color:'var(--red)'},
+  ];
+
+  const evmTableData = [
+    {group:true,area:'Direct Costs'},
+    {area:'Mining Fleet',bac:85,pv:42,ev:40,ac:44,cpi:0.91,spi:0.95},
+    {area:'Process Plant',bac:165,pv:88,ev:80,ac:87,cpi:0.92,spi:0.91},
+    {area:'Infrastructure',bac:95,pv:52,ev:50,ac:52,cpi:0.96,spi:0.96},
+    {area:'Tailings Facility',bac:35,pv:14,ev:12,ac:13,cpi:0.92,spi:0.86},
+    {group:true,area:'Indirect Costs'},
+    {area:'EPCM & Engineering',bac:55,pv:10,ev:10,ac:10,cpi:1.00,spi:1.00},
+    {area:"Owner's Costs",bac:30,pv:4,ev:3,ac:2,cpi:1.50,spi:0.75},
+    {group:true,area:'Total Project'},
+    {area:'TOTAL',bac:500,pv:210,ev:195,ac:208,cpi:0.94,spi:0.93,total:true},
+  ];
+
+  const reportData = [
+    {icon:'📅',title:'Weekly Progress Report',freq:'Weekly',desc:'Field-level progress tracking against the Level 4 schedule. Identifies emerging delays and corrective actions.',items:['% complete by WBS area','Look-ahead schedule (3-week)','Open issues & actions','Labour & equipment hours']},
+    {icon:'📊',title:'Monthly Project Control Report',freq:'Monthly',desc:'Full EVM status report with S-curve, CPI/SPI trends, EAC forecast, and variance analysis.',items:['EVM metrics (PV/EV/AC/CPI/SPI)','S-curve update','Cost forecast (EAC/ETC)','Schedule float analysis','Risk register update']},
+    {icon:'🏁',title:'Milestone Completion Report',freq:'Per Milestone',desc:'Formal milestone completion certificate with as-built schedule, cost outturn, and lessons learned.',items:['Milestone achievement sign-off','Cost vs. budget reconciliation','Schedule variance analysis','Lessons learned register']},
+    {icon:'💰',title:'Cost Report',freq:'Monthly',desc:'Detailed cost report by WBS and cost account, showing commitments, actuals, and forecast to complete.',items:['Commitments vs. budget','Actuals to date','Forecast to complete (FTC)','Contingency drawdown','Change order log']},
+    {icon:'⚠️',title:'Risk & Opportunity Report',freq:'Monthly',desc:'Updated risk register with new risks, closed risks, and mitigation status. Opportunity register included.',items:['Risk register delta','Mitigation action status','Contingency usage','Opportunity register']},
+    {icon:'📋',title:'Change Control Log',freq:'Ongoing',desc:'Formal change control register tracking all scope changes, cost impacts, and schedule impacts.',items:['Change request status','Cost impact assessment','Schedule impact assessment','Approval trail']},
+  ];
+
+  const toolsData = [
+    {tool:'Primavera P6',cat:'Scheduling',use:'Level 3–4 CPM scheduling, resource loading, baseline management',level:'L3/L4',status:'primary'},
+    {tool:'MS Project',cat:'Scheduling',use:'Level 1–2 milestone and summary schedules for client reporting',level:'L1/L2',status:'primary'},
+    {tool:'Excel (Custom)',cat:'Cost Control',use:'EVM calculations, S-curve generation, CPI/SPI trending, EAC forecasting',level:'All',status:'primary'},
+    {tool:'Power BI',cat:'Reporting',use:'Interactive project control dashboards for real-time EVM and schedule status',level:'All',status:'secondary'},
+    {tool:'TILOS',cat:'Scheduling',use:'Linear scheduling for haul road, pipeline, and conveyor construction',level:'L3/L4',status:'secondary'},
+    {tool:'Acumen Fuse',cat:'Schedule Analytics',use:'Schedule quality analysis, logic checking, and schedule risk analysis (SRA)',level:'L3/L4',status:'alt'},
+    {tool:'@RISK / Crystal Ball',cat:'Risk',use:'Monte Carlo schedule risk analysis (SRA) — P50/P80 completion dates',level:'L2/L3',status:'alt'},
+    {tool:'Procore',cat:'Document Control',use:'RFI, submittal, and document control integration with schedule milestones',level:'L3/L4',status:'secondary'},
+  ];
+
+  const delivData = [
+    {icon:'📅',name:'Level 1 Milestone Schedule',desc:'Board-level summary schedule with key milestones and phase durations. Suitable for investor presentations.'},
+    {icon:'📊',name:'Level 2 Summary Schedule',desc:'Phase-level Gantt chart with major activities, durations, and critical path. Primavera P6 or MS Project.'},
+    {icon:'🔗',name:'Level 3 CPM Schedule',desc:'Logic-linked CPM network with all major activities, predecessors, and float analysis. Baseline established.'},
+    {icon:'⚙️',name:'Level 4 Resource Schedule',desc:'Fully resource-loaded CPM schedule with labour, equipment, and material resources. Used for construction control.'},
+    {icon:'📈',name:'EVM Baseline & System',desc:'Work Breakdown Structure (WBS), performance measurement baseline (PMB), and EVM reporting system setup.'},
+    {icon:'📉',name:'Monthly EVM Report',desc:'S-curve update, CPI/SPI indices, EAC forecast, variance analysis, and corrective action register.'},
+    {icon:'🎲',name:'Schedule Risk Analysis (SRA)',desc:'Monte Carlo SRA with P50/P80 completion dates and schedule contingency recommendation.'},
+    {icon:'🌐',name:'Bilingual EN/FA Reports',desc:'All project control reports translated to Persian for Iranian regulatory and investor submissions.'},
+  ];
+
+  // ══ RENDERS ═══════════════════════════════════
+  function renderGantt() {
+    const TOTAL = 54;
+    document.getElementById('ganttBody').innerHTML = ganttData.map(r => {
+      if (r.phase) return `<tr class="gantt-phase-row"><td colspan="5">${r.name}</td></tr>`;
+      const sp = ((r.start-1)/TOTAL)*100;
+      const wp = ((r.end-r.start+1)/TOTAL)*100;
+      return `<tr>
+        <td>${r.name}</td>
+        <td style="color:var(--gold);font-weight:700;">${r.dur}</td>
+        <td style="color:var(--text-muted);">M${r.start}</td>
+        <td style="color:var(--text-muted);">M${r.end}</td>
+        <td class="gantt-bar-cell">
+          <div class="gantt-bar-bg">
+            <div class="gantt-bar" style="left:${sp}%;width:${wp}%;background:${r.color}CC;">M${r.start}–M${r.end}</div>
+          </div>
+        </td></tr>`;
+    }).join('');
+  }
+
+  function renderCriticalPath() {
+    document.getElementById('cpFlow').innerHTML = cpNodes.map((n,i) => {
+      const cls = n.type==='milestone'?'milestone':'critical';
+      const arrow = i<cpNodes.length-1?`<div class="cp-arrow">→</div>`:'';
+      return `<div class="cp-node ${cls}">
+        <div class="cp-node-title">${n.title}</div>
+        <div class="cp-node-dur" style="color:${n.type==='milestone'?'var(--gold)':'var(--red)'};">${n.dur}</div>
+      </div>${arrow}`;
+    }).join('');
+  }
+
+  function renderEvMetrics() {
+    document.getElementById('evMetrics').innerHTML = evMetricsData.map(m=>`
+      <div class="ev-metric">
+        <div><div class="ev-metric-name">${m.name}</div><div class="ev-metric-formula">${m.formula}</div></div>
+        <div class="ev-metric-val" style="color:${m.color};">${m.val}</div>
+      </div>`).join('');
+  }
+
+  function renderEvmTable() {
+    document.getElementById('evmTableBody').innerHTML = evmTableData.map(r => {
+      if(r.group) return `<tr class="ev-group"><td colspan="10">${r.area}</td></tr>`;
+      const cv=+(r.ev-r.ac).toFixed(1), sv=+(r.ev-r.pv).toFixed(1);
+      const eac=+(r.bac/r.cpi).toFixed(0);
+      const cc=r.cpi>=1?'var(--green)':r.cpi>=0.9?'var(--orange)':'var(--red)';
+      const sc=r.spi>=1?'var(--green)':r.spi>=0.9?'var(--orange)':'var(--red)';
+      const rs=r.total?'background:rgba(201,168,76,0.05);':'';
+      return `<tr style="${rs}">
+        <td style="${r.total?'color:var(--gold);font-weight:900;':''}">${r.area}</td>
+        <td style="color:var(--blue);">$${r.bac}M</td>
+        <td>$${r.pv}M</td>
+        <td style="color:var(--green);">$${r.ev}M</td>
+        <td style="color:var(--orange);">$${r.ac}M</td>
+        <td style="color:${cv>=0?'var(--green)':'var(--red)'};">${cv>=0?'+':''}$${cv}M</td>
+        <td style="color:${sv>=0?'var(--green)':'var(--red)'};">${sv>=0?'+':''}$${sv}M</td>
+        <td style="color:${cc};font-weight:700;">${r.cpi.toFixed(2)}</td>
+        <td style="color:${sc};font-weight:700;">${r.spi.toFixed(2)}</td>
+        <td style="color:${r.total?'var(--red)':'var(--text-muted)'};">$${eac}M</td>
+      </tr>`;
+    }).join('');
+  }
+
+  function renderReportGrid() {
+    document.getElementById('reportGrid').innerHTML = reportData.map(r=>`
+      <div class="report-card">
+        <div class="report-icon">${r.icon}</div>
+        <div class="report-freq">${r.freq}</div>
+        <div class="report-title">${r.title}</div>
+        <div class="report-desc">${r.desc}</div>
+        <div class="report-items">${r.items.map(i=>`<div class="report-item">${i}</div>`).join('')}</div>
+      </div>`).join('');
+  }
+
+  function renderToolsTable() {
+    const bc={primary:'tb-primary',secondary:'tb-secondary',alt:'tb-alt'};
+    const bl={primary:'Primary',secondary:'Secondary',alt:'Specialist'};
+    document.getElementById('toolsTableBody').innerHTML = toolsData.map(t=>`
+      <tr>
+        <td>${t.tool}</td>
+        <td style="font-size:11px;color:var(--text-muted);">${t.cat}</td>
+        <td style="font-size:11px;">${t.use}</td>
+        <td style="color:var(--gold);font-weight:700;font-size:11px;">${t.level}</td>
+        <td><span class="tool-badge ${bc[t.status]}">${bl[t.status]}</span></td>
+      </tr>`).join('');
+  }
+
+  function renderDelivGrid() {
+    document.getElementById('delivGrid').innerHTML = delivData.map(d=>`
+      <div class="deliv-card">
+        <div class="deliv-icon">${d.icon}</div>
+        <div class="deliv-name">${d.name}</div>
+        <div class="deliv-desc">${d.desc}</div>
+      </div>`).join('');
+  }
+
+  // ══ CHARTS ════════════════════════════════════
+
+  function buildPhaseDurChart() {
+    new Chart(document.getElementById('phaseDurChart'),{
+      type:'bar',
+      data:{
+        labels:['Pre-Construction','Earthworks','Process Plant','Infrastructure','Commissioning'],
+        datasets:[{
+          label:'Duration (months)',
+          data:[11,18,14,12,6],
+          backgroundColor:['#C9A84C','#22C55E','#0EA5E9','#A855F7','#F97316'],
+          borderRadius:6
+        }]
+      },
+      options:{
+        indexAxis:'y',
+        plugins:{legend:{display:false}},
+        scales:{
+          x:{ticks:{color:'#7A8BA8',callback:v=>v+' mo'},grid:{color:'rgba(255,255,255,0.04)'}},
+          y:{ticks:{color:'#7A8BA8',font:{size:11}},grid:{color:'rgba(255,255,255,0.04)'}}
+        }
+      }
+    });
+  }
+
+  function buildSCurveChart() {
+    const months=[0,2,4,6,8,10,12,14,16,18];
+    const pv =[0,8,22,45,78,115,148,175,195,210];
+    const ev =[0,7,20,42,72,108,138,162,180,195];
+    const ac =[0,8,21,44,75,112,144,170,190,208];
+    new Chart(document.getElementById('sCurveChart'),{
+      type:'line',
+      data:{
+        labels:months.map(m=>'M'+m),
+        datasets:[
+          {label:'PV (Planned Value)',data:pv,borderColor:'#0EA5E9',backgroundColor:'rgba(14,165,233,0.06)',fill:true,tension:0.4,pointRadius:3},
+          {label:'EV (Earned Value)', data:ev,borderColor:'#22C55E',backgroundColor:'rgba(34,197,94,0.06)', fill:true,tension:0.4,pointRadius:3},
+          {label:'AC (Actual Cost)',  data:ac,borderColor:'#F97316',backgroundColor:'rgba(249,115,22,0.04)',fill:false,tension:0.4,pointRadius:3,borderDash:[5,3]}
+        ]
+      },
+      options:{
+        plugins:{legend:{labels:{color:'#7A8BA8',font:{size:10}}}},
+        scales:{
+          x:{ticks:{color:'#7A8BA8',font:{size:10}},grid:{color:'rgba(255,255,255,0.04)'}},
+          y:{ticks:{color:'#7A8BA8',callback:v=>'$'+v+'M'},grid:{color:'rgba(255,255,255,0.04)'}}
+        }
+      }
+    });
+  }
+
+  function buildCpiChart() {
+    const months=['M2','M4','M6','M8','M10','M12','M14','M16','M18'];
+    const cpi=[1.00,0.99,0.98,0.97,0.96,0.95,0.95,0.94,0.94];
+    const spi=[1.00,1.00,0.99,0.98,0.97,0.96,0.95,0.94,0.93];
+    new Chart(document.getElementById('cpiChart'),{
+      type:'line',
+      data:{
+        labels:months,
+        datasets:[
+          {label:'CPI (Cost)',    data:cpi,borderColor:'#C9A84C',backgroundColor:'rgba(201,168,76,0.08)',fill:true,tension:0.4,pointRadius:4,pointBackgroundColor:'#C9A84C'},
+          {label:'SPI (Schedule)',data:spi,borderColor:'#0EA5E9',backgroundColor:'rgba(14,165,233,0.06)',fill:true,tension:0.4,pointRadius:4,pointBackgroundColor:'#0EA5E9'}
+        ]
+      },
+      options:{
+        plugins:{legend:{labels:{color:'#7A8BA8',font:{size:10}}}},
+        scales:{
+          x:{ticks:{color:'#7A8BA8',font:{size:10}},grid:{color:'rgba(255,255,255,0.04)'}},
+          y:{
+            min:0.85,max:1.05,
+            ticks:{color:'#7A8BA8',font:{size:10}},
+            grid:{color:'rgba(255,255,255,0.04)'},
+            title:{display:true,text:'Performance Index',color:'#7A8BA8',font:{size:10}}
+          }
+        }
+      }
+    });
+  }
+
+  // ══ TAB SWITCH ════════════════════════════════
+  function switchTab(id,btn){
+    document.querySelectorAll('.tab-section').forEach(s=>s.classList.remove('active'));
+    document.querySelectorAll('.mtab').forEach(t=>t.classList.remove('active'));
+    document.getElementById('tab-'+id).classList.add('active');
+    btn.classList.add('active');
+    document.querySelectorAll('#tab-'+id+' .fade-up').forEach(el=>{
+      el.classList.remove('visible');
+      setTimeout(()=>obs.observe(el),50);
+    });
+  }
+
+  // ══ LANGUAGE ══════════════════════════════════
+  let currentLang='en';
+  function setLang(lang){
+    currentLang=lang;
+    document.getElementById('btn-en').classList.toggle('active',lang==='en');
+    document.getElementById('btn-fa').classList.toggle('active',lang==='fa');
+    const body=document.getElementById('body');
+    if(lang==='fa'){body.classList.add('fa');body.setAttribute('dir','rtl');}
+    else{body.classList.remove('fa');body.setAttribute('dir','ltr');}
+    document.querySelectorAll('[data-'+lang+']').forEach(el=>{
+      const v=el.getAttribute('data-'+lang);
+      if(!v)return;
+      if(el.tagName==='INPUT'||el.tagName==='TEXTAREA')el.placeholder=v;
+      else el.innerHTML=v;
+    });
+  }
+
+  // ══ FADE UP ═══════════════════════════════════
+  const obs=new IntersectionObserver(
+    entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),
+    {threshold:0.05}
+  );
+  document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+
+  // ══ INIT ══════════════════════════════════════
+  renderGantt();
+  renderCriticalPath();
+  renderEvMetrics();
+  renderEvmTable();
+  renderReportGrid();
+  renderToolsTable();
+  renderDelivGrid();
+  buildPhaseDurChart();
+  buildSCurveChart();
+  buildCpiChart();
+  </script>
+</body>
+</html>

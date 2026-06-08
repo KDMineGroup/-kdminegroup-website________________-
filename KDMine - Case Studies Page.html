@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Case Studies & Project Gallery | KDMine</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      --gold:#C9A84C;--gold-light:#E8C97A;--gold-dark:#A07830;
+      --dark:#080C16;--dark2:#0F1520;--dark3:#161E2E;--dark4:#1E2840;
+      --text:#E8EDF5;--text-muted:#7A8BA8;
+      --border:rgba(201,168,76,0.2);--border2:rgba(255,255,255,0.06);
+      --green:#22C55E;--blue:#0EA5E9;--purple:#A855F7;--red:#EF4444;--orange:#F97316;
+    }
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;background:var(--dark);color:var(--text);overflow-x:hidden;}
+    body.fa{font-family:'Vazirmatn',sans-serif;direction:rtl;}
+    ::-webkit-scrollbar{width:5px;}
+    ::-webkit-scrollbar-track{background:var(--dark2);}
+    ::-webkit-scrollbar-thumb{background:var(--gold-dark);border-radius:3px;}
+
+    .lang-bar{position:fixed;top:0;left:0;right:0;z-index:2000;height:36px;background:var(--gold-dark);display:flex;align-items:center;justify-content:flex-end;padding:0 5%;gap:12px;}
+    .lang-btn{padding:4px 14px;border-radius:20px;border:none;cursor:pointer;font-size:12px;font-weight:700;transition:.2s;}
+    .lang-btn.active{background:var(--dark);color:var(--gold);}
+    .lang-btn:not(.active){background:rgba(0,0,0,0.2);color:rgba(0,0,0,0.7);}
+
+    nav{position:fixed;top:36px;left:0;right:0;z-index:1000;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:70px;background:rgba(8,12,22,0.95);backdrop-filter:blur(24px);border-bottom:1px solid var(--border2);}
+    .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+    .nav-logo-icon{width:42px;height:42px;border-radius:11px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));display:flex;align-items:center;justify-content:center;font-weight:900;font-size:17px;color:var(--dark);}
+    .nav-logo-text{font-size:21px;font-weight:800;color:#fff;}
+    .nav-logo-text span{color:var(--gold);}
+    .nav-back{display:flex;align-items:center;gap:8px;padding:9px 20px;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text);font-size:13px;font-weight:600;text-decoration:none;transition:.2s;}
+    .nav-back:hover{border-color:var(--gold);color:var(--gold);}
+
+    /* HERO */
+    .page-hero{padding:130px 5% 70px;position:relative;overflow:hidden;background:var(--dark);}
+    .hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#080C16 0%,#0F1520 50%,#080C16 100%);}
+    .hero-particles{position:absolute;inset:0;overflow:hidden;}
+    .hero-particle{position:absolute;border-radius:50%;background:var(--gold);opacity:0.06;animation:float 8s ease-in-out infinite;}
+    @keyframes float{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-30px) scale(1.1);}}
+    .hero-glow{position:absolute;top:-100px;right:-100px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.07),transparent 70%);z-index:1;}
+    .hero-inner{position:relative;z-index:2;max-width:800px;}
+    .breadcrumb{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-muted);margin-bottom:18px;}
+    .breadcrumb a{color:var(--gold);text-decoration:none;}
+    .breadcrumb span{opacity:.5;}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border-radius:20px;background:rgba(201,168,76,0.1);border:1px solid var(--border);font-size:12px;font-weight:700;color:var(--gold);margin-bottom:18px;}
+    .page-hero h1{font-size:clamp(36px,5vw,64px);font-weight:900;color:#fff;letter-spacing:-2px;margin-bottom:16px;line-height:1.06;}
+    .page-hero h1 em{background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal;}
+    .page-hero p{font-size:17px;color:var(--text-muted);line-height:1.75;max-width:640px;margin-bottom:40px;}
+    .hero-stats{display:flex;gap:48px;flex-wrap:wrap;}
+    .hs-item .num{font-size:36px;font-weight:900;color:#fff;letter-spacing:-1px;line-height:1;}
+    .hs-item .num em{color:var(--gold);font-style:normal;}
+    .hs-item .lbl{font-size:12px;color:var(--text-muted);margin-top:5px;}
+
+    /* FILTER BAR */
+    .filter-bar{background:var(--dark2);border-bottom:1px solid var(--border2);padding:20px 5%;position:sticky;top:106px;z-index:100;}
+    .filter-inner{display:flex;align-items:center;gap:12px;flex-wrap:wrap;max-width:1400px;margin:0 auto;}
+    .filter-search{display:flex;align-items:center;gap:10px;background:var(--dark3);border:1px solid var(--border2);border-radius:10px;padding:10px 16px;flex:1;min-width:220px;transition:.2s;}
+    .filter-search:focus-within{border-color:var(--gold);}
+    .filter-search i{color:var(--text-muted);font-size:13px;}
+    .filter-search input{background:none;border:none;outline:none;color:var(--text);font-size:13px;font-family:inherit;width:100%;}
+    .filter-pill{padding:9px 18px;border-radius:20px;border:1px solid var(--border2);background:transparent;color:var(--text-muted);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:.2s;white-space:nowrap;}
+    .filter-pill.active{background:rgba(201,168,76,0.1);border-color:var(--border);color:var(--gold);}
+    .filter-pill:hover:not(.active){border-color:var(--border);color:var(--text);}
+    .filter-count{font-size:12px;color:var(--text-muted);margin-left:auto;white-space:nowrap;}
+    .filter-count em{color:var(--gold);font-weight:700;font-style:normal;}
+
+    /* FEATURED CASE */
+    .featured-wrap{padding:48px 5% 0;max-width:1400px;margin:0 auto;}
+    .featured-card{background:var(--dark3);border:1px solid var(--border);border-radius:24px;overflow:hidden;display:grid;grid-template-columns:1fr 420px;margin-bottom:48px;transition:.3s;}
+    .featured-card:hover{border-color:var(--gold);box-shadow:0 20px 60px rgba(201,168,76,0.08);}
+    .fc-img{position:relative;overflow:hidden;min-height:400px;}
+    .fc-img-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .5s;}
+    .featured-card:hover .fc-img-bg{transform:scale(1.04);}
+    .fc-img-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(8,12,22,0.3),rgba(8,12,22,0.1));}
+    .fc-badge{position:absolute;top:20px;left:20px;padding:6px 14px;border-radius:20px;background:rgba(201,168,76,0.9);color:var(--dark);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;}
+    .fc-tag{position:absolute;top:20px;right:20px;padding:5px 12px;border-radius:20px;background:rgba(8,12,22,0.8);border:1px solid var(--border);color:var(--gold);font-size:11px;font-weight:700;}
+    .fc-body{padding:40px;}
+    .fc-meta{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap;}
+    .fc-commodity{padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;background:rgba(201,168,76,0.1);color:var(--gold);border:1px solid var(--border);}
+    .fc-region{font-size:12px;color:var(--text-muted);}
+    .fc-year{font-size:12px;color:var(--text-muted);}
+    .fc-title{font-size:26px;font-weight:900;color:#fff;letter-spacing:-.5px;margin-bottom:12px;line-height:1.2;}
+    .fc-desc{font-size:14px;color:var(--text-muted);line-height:1.75;margin-bottom:24px;}
+    .fc-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px;}
+    .fc-metric{background:var(--dark4);border-radius:12px;padding:14px;text-align:center;}
+    .fc-metric .mv{font-size:20px;font-weight:900;color:#fff;letter-spacing:-.5px;}
+    .fc-metric .mv em{color:var(--gold);font-style:normal;font-size:13px;}
+    .fc-metric .ml{font-size:10px;color:var(--text-muted);margin-top:3px;text-transform:uppercase;letter-spacing:.5px;}
+    .fc-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:24px;}
+    .fc-tag-item{padding:4px 10px;border-radius:6px;background:rgba(255,255,255,0.05);border:1px solid var(--border2);font-size:11px;color:var(--text-muted);}
+    .fc-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--dark);font-weight:700;font-size:13px;border:none;cursor:pointer;font-family:inherit;transition:.2s;}
+    .fc-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(201,168,76,0.4);}
+
+    /* GALLERY GRID */
+    .gallery-wrap{padding:0 5% 48px;max-width:1400px;margin:0 auto;}
+    .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+    .case-card{background:var(--dark3);border:1px solid var(--border2);border-radius:20px;overflow:hidden;transition:.3s;cursor:pointer;}
+    .case-card:hover{border-color:var(--border);transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,0.3);}
+    .cc-img{position:relative;height:200px;overflow:hidden;}
+    .cc-img-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .5s;}
+    .case-card:hover .cc-img-bg{transform:scale(1.06);}
+    .cc-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(8,12,22,0.8));}
+    .cc-badge{position:absolute;top:12px;left:12px;padding:4px 10px;border-radius:20px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;}
+    .cc-badge.copper{background:rgba(180,90,30,0.9);color:#fff;}
+    .cc-badge.gold{background:rgba(201,168,76,0.9);color:var(--dark);}
+    .cc-badge.iron{background:rgba(180,50,50,0.9);color:#fff;}
+    .cc-badge.coal{background:rgba(60,60,60,0.9);color:#fff;}
+    .cc-badge.zinc{background:rgba(30,100,180,0.9);color:#fff;}
+    .cc-badge.nickel{background:rgba(100,160,80,0.9);color:#fff;}
+    .cc-aace{position:absolute;top:12px;right:12px;padding:4px 10px;border-radius:20px;background:rgba(8,12,22,0.85);border:1px solid var(--border);font-size:10px;font-weight:700;color:var(--gold);}
+    .cc-body{padding:20px;}
+    .cc-meta{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+    .cc-region{font-size:11px;color:var(--text-muted);display:flex;align-items:center;gap:4px;}
+    .cc-year{font-size:11px;color:var(--text-muted);}
+    .cc-dot{width:3px;height:3px;border-radius:50%;background:var(--border2);}
+    .cc-title{font-size:16px;font-weight:800;color:#fff;margin-bottom:8px;line-height:1.3;}
+    .cc-desc{font-size:12px;color:var(--text-muted);line-height:1.6;margin-bottom:16px;}
+    .cc-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;}
+    .cc-m{background:var(--dark4);border-radius:8px;padding:10px;text-align:center;}
+    .cc-m .cmv{font-size:14px;font-weight:800;color:#fff;}
+    .cc-m .cml{font-size:9px;color:var(--text-muted);margin-top:2px;text-transform:uppercase;}
+    .cc-footer{display:flex;align-items:center;justify-content:space-between;}
+    .cc-tags{display:flex;gap:4px;flex-wrap:wrap;}
+    .cc-tag{padding:3px 8px;border-radius:5px;background:rgba(255,255,255,0.04);border:1px solid var(--border2);font-size:10px;color:var(--text-muted);}
+    .cc-arrow{width:32px;height:32px;border-radius:8px;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;color:var(--text-muted);transition:.2s;flex-shrink:0;}
+    .case-card:hover .cc-arrow{border-color:var(--gold);color:var(--gold);}
+
+    /* MODAL */
+    .modal-overlay{position:fixed;inset:0;z-index:3000;background:rgba(0,0,0,0.75);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:20px;}
+    .modal-overlay.open{display:flex;}
+    .modal{background:var(--dark3);border:1px solid var(--border);border-radius:24px;width:100%;max-width:820px;max-height:92vh;overflow-y:auto;}
+    .modal::-webkit-scrollbar{width:4px;}
+    .modal::-webkit-scrollbar-thumb{background:var(--border);}
+    .modal-hero{position:relative;height:280px;overflow:hidden;border-radius:24px 24px 0 0;}
+    .mh-bg{position:absolute;inset:0;background-size:cover;background-position:center;}
+    .mh-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,12,22,0.2) 0%,rgba(8,12,22,0.85) 100%);}
+    .mh-content{position:absolute;bottom:28px;left:32px;right:32px;}
+    .mh-badges{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
+    .mh-title{font-size:26px;font-weight:900;color:#fff;letter-spacing:-.5px;}
+    .modal-close{position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:10px;border:1px solid rgba(255,255,255,0.2);background:rgba(8,12,22,0.6);color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s;}
+    .modal-close:hover{border-color:var(--gold);color:var(--gold);}
+    .modal-body{padding:32px;}
+    .modal-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px;}
+    .mm-item{background:var(--dark4);border-radius:12px;padding:16px;text-align:center;}
+    .mm-item .mmv{font-size:20px;font-weight:900;color:#fff;letter-spacing:-.5px;}
+    .mm-item .mmv em{color:var(--gold);font-style:normal;font-size:13px;}
+    .mm-item .mml{font-size:10px;color:var(--text-muted);margin-top:4px;text-transform:uppercase;letter-spacing:.5px;}
+    .modal-section{margin-bottom:24px;}
+    .ms-title{font-size:13px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;}
+    .ms-text{font-size:14px;color:var(--text-muted);line-height:1.75;}
+    .ms-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    .ms-row{display:flex;justify-content:space-between;padding:8px 12px;background:var(--dark4);border-radius:8px;}
+    .ms-row .mrl{font-size:12px;color:var(--text-muted);}
+    .ms-row .mrv{font-size:12px;font-weight:700;color:#fff;}
+    .ms-row .mrv.gold{color:var(--gold);}
+    .outcome-list{display:flex;flex-direction:column;gap:8px;}
+    .outcome-item{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:var(--dark4);border-radius:8px;}
+    .outcome-icon{font-size:14px;flex-shrink:0;margin-top:1px;}
+    .outcome-text{font-size:13px;color:var(--text-muted);line-height:1.5;}
+    .modal-footer{padding:20px 32px;border-top:1px solid var(--border2);display:flex;gap:12px;flex-wrap:wrap;}
+    .mf-btn{padding:11px 22px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--dark);font-weight:700;font-size:13px;border:none;cursor:pointer;font-family:inherit;transition:.2s;display:inline-flex;align-items:center;gap:7px;}
+    .mf-btn:hover{transform:translateY(-1px);box-shadow:0 5px 16px rgba(201,168,76,0.4);}
+    .mf-btn.outline{background:transparent;border:1px solid var(--border);color:var(--text-muted);}
+    .mf-btn.outline:hover{border-color:var(--gold);color:var(--gold);transform:none;box-shadow:none;}
+
+    /* STATS BAND */
+    .stats-band{background:linear-gradient(135deg,var(--dark3),var(--dark4));border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);padding:48px 5%;margin-bottom:0;}
+    .stats-band-inner{display:grid;grid-template-columns:repeat(5,1fr);gap:24px;max-width:1400px;margin:0 auto;}
+    .sb-item{text-align:center;}
+    .sb-num{font-size:36px;font-weight:900;color:#fff;letter-spacing:-1px;line-height:1;}
+    .sb-num em{color:var(--gold);font-style:normal;}
+    .sb-lbl{font-size:12px;color:var(--text-muted);margin-top:6px;}
+
+    /* TESTIMONIALS */
+    .testimonials{padding:64px 5%;max-width:1400px;margin:0 auto;}
+    .test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+    .test-card{background:var(--dark3);border:1px solid var(--border2);border-radius:18px;padding:28px;transition:.3s;}
+    .test-card:hover{border-color:var(--border);}
+    .test-quote{font-size:32px;color:var(--gold);margin-bottom:12px;line-height:1;}
+    .test-text{font-size:14px;color:var(--text-muted);line-height:1.75;margin-bottom:20px;font-style:italic;}
+    .test-author{display:flex;align-items:center;gap:12px;}
+    .test-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-dark));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;color:var(--dark);flex-shrink:0;}
+    .test-name{font-size:14px;font-weight:700;color:#fff;}
+    .test-role{font-size:12px;color:var(--text-muted);}
+    .test-stars{display:flex;gap:2px;margin-bottom:14px;}
+    .test-stars i{color:var(--gold);font-size:12px;}
+
+    /* CTA */
+    .cta-section{background:linear-gradient(135deg,var(--dark3),var(--dark4));border-top:1px solid var(--border2);padding:80px 5%;text-align:center;}
+    .cta-section h2{font-size:clamp(28px,4vw,48px);font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:14px;}
+    .cta-section h2 em{background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal;}
+    .cta-section p{font-size:16px;color:var(--text-muted);margin-bottom:36px;max-width:560px;margin-left:auto;margin-right:auto;}
+    .cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+    .btn-gold{padding:15px 32px;border-radius:12px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--dark);font-weight:700;font-size:15px;border:none;cursor:pointer;font-family:inherit;transition:.2s;display:inline-flex;align-items:center;gap:9px;}
+    .btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(201,168,76,0.4);}
+    .btn-outline{padding:15px 32px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text);font-weight:600;font-size:15px;cursor:pointer;font-family:inherit;transition:.2s;display:inline-flex;align-items:center;gap:9px;}
+    .btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+
+    .footer-mini{background:var(--dark2);border-top:1px solid var(--border2);padding:28px 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;}
+    .footer-mini p{font-size:13px;color:var(--text-muted);}
+    .footer-mini a{font-size:13px;color:var(--gold);text-decoration:none;}
+
+    .fade-up{opacity:0;transform:translateY(24px);transition:opacity .55s,transform .55s;}
+    .fade-up.visible{opacity:1;transform:translateY(0);}
+    .load-more-btn{display:flex;align-items:center;justify-content:center;gap:10px;padding:14px 36px;border-radius:12px;border:1px solid var(--border);background:transparent;color:var(--text-muted);font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;transition:.2s;margin:32px auto 48px;}
+    .load-more-btn:hover{border-color:var(--gold);color:var(--gold);}
+
+    @media(max-width:1100px){.gallery-grid{grid-template-columns:repeat(2,1fr);}.featured-card{grid-template-columns:1fr;}.fc-img{min-height:260px;}.stats-band-inner{grid-template-columns:repeat(3,1fr);}}
+    @media(max-width:768px){.gallery-grid{grid-template-columns:1fr;}.test-grid{grid-template-columns:1fr;}.modal-metrics{grid-template-columns:repeat(2,1fr);}.ms-grid{grid-template-columns:1fr;}.stats-band-inner{grid-template-columns:repeat(2,1fr);}}
+  </style>
+</head>
+<body id="body">
+
+  <!-- LANG BAR -->
+  <div class="lang-bar">
+    <button class="lang-btn active" id="btn-en" onclick="setLang('en')">🇬🇧 English</button>
+    <button class="lang-btn" id="btn-fa" onclick="setLang('fa')">🇮🇷 فارسی</button>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">KD</div>
+      <span class="nav-logo-text">KD<span>Mine</span></span>
+    </a>
+    <a href="index.html" class="nav-back"><i class="fas fa-arrow-left"></i> <span data-en="Back to Home" data-fa="بازگشت به خانه">Back to Home</span></a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="page-hero">
+    <div class="hero-bg"></div>
+    <div class="hero-particles">
+      <div class="hero-particle" style="width:120px;height:120px;top:15%;left:70%;animation-delay:0s;"></div>
+      <div class="hero-particle" style="width:60px;height:60px;top:60%;left:85%;animation-delay:2s;"></div>
+      <div class="hero-particle" style="width:80px;height:80px;top:30%;left:90%;animation-delay:4s;"></div>
+    </div>
+    <div class="hero-glow"></div>
+    <div class="hero-inner fade-up">
+      <div class="breadcrumb">
+        <a href="index.html" data-en="Home" data-fa="خانه">Home</a><span>/</span>
+        <span data-en="Case Studies" data-fa="مطالعات موردی">Case Studies</span>
+      </div>
+      <div class="hero-badge"><i class="fas fa-folder-open"></i> <span data-en="Real Projects · Verified Outcomes" data-fa="پروژه‌های واقعی · نتایج تأیید‌شده">Real Projects · Verified Outcomes</span></div>
+      <h1><em data-en="Case Studies &" data-fa="مطالعات موردی و">Case Studies &</em><br/><span data-en="Project Gallery" data-fa="گالری پروژه‌ها">Project Gallery</span></h1>
+      <p data-en="Explore 40+ real open-pit mining cost estimation projects delivered by KDMine across 5 continents. Each case study includes CAPEX/OPEX outcomes, AACE class, accuracy achieved, and key lessons learned." data-fa="بیش از ۴۰ پروژه واقعی برآورد هزینه معدن روباز ارائه‌شده توسط KDMine در ۵ قاره را کاوش کنید. هر مطالعه موردی شامل نتایج CAPEX/OPEX، کلاس AACE، دقت حاصل‌شده و درس‌های کلیدی آموخته‌شده است.">Explore 40+ real open-pit mining cost estimation projects delivered by KDMine across 5 continents. Each case study includes CAPEX/OPEX outcomes, AACE class, accuracy achieved, and key lessons learned.</p>
+      <div class="hero-stats">
+        <div class="hs-item"><div class="num">40<em>+</em></div><div class="lbl" data-en="Projects Completed" data-fa="پروژه‌های تکمیل‌شده">Projects Completed</div></div>
+        <div class="hs-item"><div class="num">5</div><div class="lbl" data-en="Continents" data-fa="قاره">Continents</div></div>
+        <div class="hs-item"><div class="num">$12<em>B+</em></div><div class="lbl" data-en="CAPEX Estimated" data-fa="CAPEX برآوردشده">CAPEX Estimated</div></div>
+        <div class="hs-item"><div class="num">98<em>%</em></div><div class="lbl" data-en="Client Satisfaction" data-fa="رضایت مشتری">Client Satisfaction</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <div class="filter-inner">
+      <div class="filter-search">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchInput" placeholder="Search projects, commodities, regions..." oninput="filterCases()"/>
+      </div>
+      <button class="filter-pill active" data-filter="all" onclick="setFilter('all',this)" data-en="All" data-fa="همه">All</button>
+      <button class="filter-pill" data-filter="copper" onclick="setFilter('copper',this)" data-en="Copper" data-fa="مس">Copper</button>
+      <button class="filter-pill" data-filter="gold" onclick="setFilter('gold',this)" data-en="Gold" data-fa="طلا">Gold</button>
+      <button class="filter-pill" data-filter="iron" onclick="setFilter('iron',this)" data-en="Iron Ore" data-fa="سنگ آهن">Iron Ore</button>
+      <button class="filter-pill" data-filter="coal" onclick="setFilter('coal',this)" data-en="Coal" data-fa="زغال‌سنگ">Coal</button>
+      <button class="filter-pill" data-filter="nickel" onclick="setFilter('nickel',this)" data-en="Nickel" data-fa="نیکل">Nickel</button>
+      <div class="filter-count"><em id="caseCount">9</em> <span data-en="projects" data-fa="پروژه">projects</span></div>
+    </div>
+  </div>
+
+  <!-- FEATURED -->
+  <div class="featured-wrap fade-up">
+    <div class="featured-card" id="featuredCard" onclick="openModal(0)">
+      <div class="fc-img">
+        <div class="fc-img-bg" style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80');"></div>
+        <div class="fc-img-overlay"></div>
+        <div class="fc-badge">⭐ Featured Project</div>
+        <div class="fc-tag">🟤 Copper · Chile</div>
+      </div>
+      <div class="fc-body">
+        <div class="fc-meta">
+          <span class="fc-commodity">Copper Porphyry</span>
+          <span class="fc-region">🇨🇱 Atacama, Chile</span>
+          <span class="fc-dot" style="width:4px;height:4px;border-radius:50%;background:var(--border2);display:inline-block;"></span>
+          <span class="fc-year">2023–2024</span>
+        </div>
+        <div class="fc-title" data-en="Atacama Copper Project — AACE Class 3 Pre-Feasibility Estimate" data-fa="پروژه مس آتاکاما — برآورد پیش‌امکان‌سنجی کلاس ۳ AACE">Atacama Copper Project — AACE Class 3 Pre-Feasibility Estimate</div>
+        <div class="fc-desc" data-en="Delivered a comprehensive AACE Class 3 pre-feasibility cost estimate for a 120,000 tpd open-pit copper porphyry project in the Atacama Desert. The estimate covered all CAPEX and OPEX components including mining fleet, SAG/Ball mill processing plant, SX-EW circuit, tailings facility, and 85km access road." data-fa="یک برآورد هزینه پیش‌امکان‌سنجی جامع کلاس ۳ AACE برای یک پروژه مس پورفیری روباز ۱۲۰,۰۰۰ تن در روز در بیابان آتاکاما ارائه شد. این برآورد تمام اجزای CAPEX و OPEX شامل ناوگان معدن، کارخانه فرآوری SAG/Ball mill، مدار SX-EW، تأسیسات باطله و جاده دسترسی ۸۵ کیلومتری را پوشش داد.">Delivered a comprehensive AACE Class 3 pre-feasibility cost estimate for a 120,000 tpd open-pit copper porphyry project in the Atacama Desert. The estimate covered all CAPEX and OPEX components including mining fleet, SAG/Ball mill processing plant, SX-EW circuit, tailings facility, and 85km access road.</div>
+        <div class="fc-metrics">
+          <div class="fc-metric"><div class="mv">$2.4<em>B</em></div><div class="ml">Total CAPEX</div></div>
+          <div class="fc-metric"><div class="mv">$8.2<em>/t</em></div><div class="ml">OPEX</div></div>
+          <div class="fc-metric"><div class="mv">±18<em>%</em></div><div class="ml">Accuracy</div></div>
+        </div>
+        <div class="fc-tags">
+          <span class="fc-tag-item">AACE Class 3</span>
+          <span class="fc-tag-item">SAG+Ball Mill</span>
+          <span class="fc-tag-item">SX-EW</span>
+          <span class="fc-tag-item">120,000 tpd</span>
+          <span class="fc-tag-item">Greenfield</span>
+        </div>
+        <button class="fc-btn"><i class="fas fa-folder-open"></i> <span data-en="View Full Case Study" data-fa="مشاهده مطالعه موردی کامل">View Full Case Study</span></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- GALLERY -->
+  <div class="gallery-wrap">
+    <div class="gallery-grid" id="galleryGrid"></div>
+    <button class="load-more-btn" onclick="loadMore()">
+      <i class="fas fa-plus"></i>
+      <span data-en="Load More Projects" data-fa="بارگذاری پروژه‌های بیشتر">Load More Projects</span>
+    </button>
+  </div>
+
+  <!-- STATS BAND -->
+  <div class="stats-band fade-up">
+    <div class="stats-band-inner">
+      <div class="sb-item"><div class="sb-num">40<em>+</em></div><div class="sb-lbl" data-en="Projects Delivered" data-fa="پروژه‌های تحویل‌شده">Projects Delivered</div></div>
+      <div class="sb-item"><div class="sb-num">$12<em>B</em></div><div class="sb-lbl" data-en="Total CAPEX Estimated" data-fa="کل CAPEX برآوردشده">Total CAPEX Estimated</div></div>
+      <div class="sb-item"><div class="sb-num">±15<em>%</em></div><div class="sb-lbl" data-en="Avg. Estimate Accuracy" data-fa="دقت میانگین برآورد">Avg. Estimate Accuracy</div></div>
+      <div class="sb-item"><div class="sb-num">18</div><div class="sb-lbl" data-en="Countries Covered" data-fa="کشورهای پوشش‌داده‌شده">Countries Covered</div></div>
+      <div class="sb-item"><div class="sb-num">98<em>%</em></div><div class="sb-lbl" data-en="On-Time Delivery" data-fa="تحویل به‌موقع">On-Time Delivery</div></div>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <div class="testimonials fade-up">
+    <div style="text-align:center;margin-bottom:40px;">
+      <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;" data-en="Client Feedback" data-fa="بازخورد مشتریان">Client Feedback</div>
+      <div style="font-size:28px;font-weight:900;color:#fff;letter-spacing:-.5px;" data-en="What Our Clients Say" data-fa="مشتریان ما چه می‌گویند">What Our Clients Say</div>
+    </div>
+    <div class="test-grid">
+      <div class="test-card">
+        <div class="test-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <div class="test-quote">"</div>
+        <div class="test-text" data-en="KDMine delivered our AACE Class 3 estimate for the Atacama copper project within 8 weeks. The final CAPEX came in within 14% of our DFS — exceptional accuracy for a Class 3 study." data-fa="KDMine برآورد کلاس ۳ AACE ما برای پروژه مس آتاکاما را در ۸ هفته تحویل داد. CAPEX نهایی در محدوده ۱۴٪ از DFS ما قرار گرفت — دقت استثنایی برای یک مطالعه کلاس ۳.">KDMine delivered our AACE Class 3 estimate for the Atacama copper project within 8 weeks. The final CAPEX came in within 14% of our DFS — exceptional accuracy for a Class 3 study.</div>
+        <div class="test-author">
+          <div class="test-avatar">JM</div>
+          <div><div class="test-name">James Morrison</div><div class="test-role" data-en="VP Projects, Andean Copper Corp" data-fa="معاون پروژه‌ها، شرکت مس آندین">VP Projects, Andean Copper Corp</div></div>
+        </div>
+      </div>
+      <div class="test-card">
+        <div class="test-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <div class="test-quote">"</div>
+        <div class="test-text" data-en="The equipment cost database and OPEX benchmarking provided by KDMine saved us 3 months of data collection. Their CostMine-integrated approach is unmatched in the industry." data-fa="پایگاه داده هزینه تجهیزات و معیارگذاری OPEX ارائه‌شده توسط KDMine ۳ ماه از جمع‌آوری داده ما را صرفه‌جویی کرد. رویکرد یکپارچه CostMine آن‌ها در صنعت بی‌نظیر است.">The equipment cost database and OPEX benchmarking provided by KDMine saved us 3 months of data collection. Their CostMine-integrated approach is unmatched in the industry.</div>
+        <div class="test-author">
+          <div class="test-avatar">SR</div>
+          <div><div class="test-name">Sarah Reinholt</div><div class="test-role" data-en="Chief Estimator, AusGold Mining" data-fa="برآوردگر ارشد، AusGold Mining">Chief Estimator, AusGold Mining</div></div>
+        </div>
+      </div>
+      <div class="test-card">
+        <div class="test-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+        <div class="test-quote">"</div>
+        <div class="test-text" data-en="For our Iranian iron ore project, KDMine's regional cost factors and local contractor database were invaluable. They understood the Central Asian market better than any firm we've worked with." data-fa="برای پروژه سنگ آهن ایرانی ما، ضرایب هزینه منطقه‌ای و پایگاه داده پیمانکاران محلی KDMine ارزشمند بودند. آن‌ها بازار آسیای مرکزی را بهتر از هر شرکتی که با آن کار کرده‌ایم درک کردند.">For our Iranian iron ore project, KDMine's regional cost factors and local contractor database were invaluable. They understood the Central Asian market better than any firm we've worked with.</div>
+        <div class="test-author">
+          <div class="test-avatar">AK</div>
+          <div><div class="test-name">Ali Karimi</div><div class="test-role" data-en="Project Director, IMIDRO" data-fa="مدیر پروژه، ایمیدرو">Project Director, IMIDRO</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <h2 data-en="Ready to Start Your <em>Project?</em>" data-fa="آماده شروع <em>پروژه خود</em> هستید؟">Ready to Start Your <em>Project?</em></h2>
+    <p data-en="Join 40+ mining companies that trust KDMine for AACE-certified cost estimation, equipment benchmarking, and project feasibility studies." data-fa="به بیش از ۴۰ شرکت معدنی بپیوندید که به KDMine برای برآورد هزینه گواهی‌شده AACE، معیارگذاری تجهیزات و مطالعات امکان‌سنجی پروژه اعتماد می‌کنند.">Join 40+ mining companies that trust KDMine for AACE-certified cost estimation, equipment benchmarking, and project feasibility studies.</p>
+    <div class="cta-btns">
+      <button class="btn-gold" onclick="window.location.href='index.html#contact'"><i class="fas fa-calendar-check"></i> <span data-en="Start Your Project" data-fa="شروع پروژه خود">Start Your Project</span></button>
+      <button class="btn-outline" onclick="window.location.href='calculator.html'"><i class="fas fa-calculator"></i> <span data-en="Try Cost Calculator" data-fa="امتحان ماشین‌حساب هزینه">Try Cost Calculator</span></button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-mini">
+    <p data-en="© 2026 KDMine Consultancy. All project data is used with client permission." data-fa="© ۱۴۰۵ مشاوره KDMine. تمام داده‌های پروژه با اجازه مشتری استفاده می‌شود.">© 2026 KDMine Consultancy. All project data is used with client permission.</p>
+    <a href="index.html" data-en="← Back to Main Site" data-fa="← بازگشت به سایت اصلی">← Back to Main Site</a>
+  </div>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+    <div class="modal" id="caseModal">
+      <div class="modal-hero">
+        <div class="mh-bg" id="mhBg"></div>
+        <div class="mh-overlay"></div>
+        <button class="modal-close" onclick="document.getElementById('modalOverlay').classList.remove('open')"><i class="fas fa-times"></i></button>
+        <div class="mh-content">
+          <div class="mh-badges" id="mhBadges"></div>
+          <div class="mh-title" id="mhTitle"></div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-metrics" id="modalMetrics"></div>
+        <div class="modal-section">
+          <div class="ms-title" data-en="Project Overview" data-fa="مرور پروژه">Project Overview</div>
+          <div class="ms-text" id="modalDesc"></div>
+        </div>
+        <div class="modal-section">
+          <div class="ms-title" data-en="Key Parameters" data-fa="پارامترهای کلیدی">Key Parameters</div>
+          <div class="ms-grid" id="modalParams"></div>
+        </div>
+        <div class="modal-section">
+          <div class="ms-title" data-en="Outcomes & Accuracy" data-fa="نتایج و دقت">Outcomes & Accuracy</div>
+          <div class="outcome-list" id="modalOutcomes"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="mf-btn"><i class="fas fa-download"></i> <span data-en="Download Summary PDF" data-fa="دانلود خلاصه PDF">Download Summary PDF</span></button>
+        <button class="mf-btn" onclick="window.location.href='index.html#contact'" style="background:linear-gradient(135deg,var(--blue),#0369A1);"><i class="fas fa-calendar-check"></i> <span data-en="Request Similar Study" data-fa="درخواست مطالعه مشابه">Request Similar Study</span></button>
+        <button class="mf-btn outline" onclick="document.getElementById('modalOverlay').classList.remove('open')"><i class="fas fa-times"></i> <span data-en="Close" data-fa="بستن">Close</span></button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ── CASE DATA ────────────────────────────────────────────────
+    const cases = [
+      {
+        id:0, commodity:'copper', title:'Atacama Copper Project — AACE Class 3 PFS',
+        region:'🇨🇱 Chile', year:'2023–2024', aace:'Class 3',
+        capex:'$2.4B', opex:'$8.2/t', accuracy:'±18%', throughput:'120,000 tpd',
+        img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
+        desc:'Comprehensive AACE Class 3 pre-feasibility cost estimate for a 120,000 tpd open-pit copper porphyry project in the Atacama Desert. Covered all CAPEX and OPEX including mining fleet, SAG/Ball mill plant, SX-EW circuit, tailings facility, and 85km access road.',
+        tags:['AACE Class 3','SAG+Ball Mill','SX-EW','Greenfield','120,000 tpd'],
+        params:[{l:'Mine Type',v:'Open Pit'},{l:'Ore Type',v:'Cu Porphyry'},{l:'Strip Ratio',v:'2.8:1'},{l:'Mine Life',v:'28 years'},{l:'Processing',v:'Flotation + SX-EW'},{l:'Location Factor',v:'0.90'}],
+        outcomes:['✅ Final DFS CAPEX within 14% of KDMine Class 3 estimate','✅ OPEX benchmarked against 6 comparable Chilean operations','✅ Estimate completed in 8 weeks — 2 weeks ahead of schedule','✅ Identified $180M in value engineering opportunities','⚠️ Tailings facility cost revised +22% due to seismic zone requirements']
+      },
+      {
+        id:1, commodity:'gold', title:'West African Gold Mine — AACE Class 4 Scoping',
+        region:'🇬🇭 Ghana', year:'2022', aace:'Class 4',
+        capex:'$380M', opex:'$14.5/t', accuracy:'±35%', throughput:'8,000 tpd',
+        img:'https://images.unsplash.com/photo-1605792657660-596af9009e82?w=800&q=80',
+        desc:'AACE Class 4 scoping study for a 8,000 tpd open-pit gold oxide project in Ghana. CIL processing route with heap leach pre-treatment. Remote location required significant infrastructure CAPEX including 45km power line and camp facilities.',
+        tags:['AACE Class 4','CIL','Heap Leach','Remote','8,000 tpd'],
+        params:[{l:'Mine Type',v:'Open Pit'},{l:'Ore Type',v:'Au Oxide'},{l:'Grade',v:'1.8 g/t Au'},{l:'Mine Life',v:'12 years'},{l:'Processing',v:'CIL'},{l:'Location Factor',v:'1.25'}],
+        outcomes:['✅ Scoping estimate used to secure $45M exploration funding','✅ Infrastructure costs identified as 38% of total CAPEX','✅ Delivered within 4 weeks','⚠️ Power supply costs 28% higher than initial assumptions']
+      },
+      {
+        id:2, commodity:'iron', title:'Pilbara Iron Ore Expansion — AACE Class 2',
+        region:'🇦🇺 Australia', year:'2023', aace:'Class 2',
+        capex:'$1.1B', opex:'$12.8/t', accuracy:'±12%', throughput:'45 Mtpa',
+        img:'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80',
+        desc:'AACE Class 2 definitive feasibility estimate for a 45 Mtpa iron ore expansion in the Pilbara region. Included detailed equipment take-offs, vendor quotes from 12 OEMs, and full labour productivity analysis for Australian conditions.',
+        tags:['AACE Class 2','DFS','Brownfield','45 Mtpa','Pilbara'],
+        params:[{l:'Mine Type',v:'Open Pit'},{l:'Ore Type',v:'Hematite DSO'},{l:'Strip Ratio',v:'1.2:1'},{l:'Mine Life',v:'20 years'},{l:'Processing',v:'Crushing + DMS'},{l:'Location Factor',v:'1.15'}],
+        outcomes:['✅ Estimate accuracy confirmed at ±9% vs actual construction cost','✅ 12 vendor quotes obtained for major equipment','✅ Labour productivity benchmarked against 8 WA operations','✅ Project approved by board based on KDMine estimate']
+      },
+      {
+        id:3, commodity:'copper', title:'Iranian Copper Porphyry — AACE Class 4',
+        region:'🇮🇷 Iran', year:'2024', aace:'Class 4',
+        capex:'$920M', opex:'$6.8/t', accuracy:'±40%', throughput:'25,000 tpd',
+        img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80',
+        desc:'AACE Class 4 scoping estimate for a large copper porphyry deposit in central Iran. Applied Central Asian location factors and local contractor rates. Estimate used for initial investment decision and government permitting.',
+        tags:['AACE Class 4','Flotation','Central Asia','25,000 tpd','Greenfield'],
+        params:[{l:'Mine Type',v:'Open Pit'},{l:'Ore Type',v:'Cu-Mo Porphyry'},{l:'Strip Ratio',v:'3.5:1'},{l:'Mine Life',v:'22 years'},{l:'Processing',v:'Flotation'},{l:'Location Factor',v:'0.80'}],
+        outcomes:['✅ Estimate used for government investment approval','✅ Local contractor database reduced infrastructure costs 18%','✅ Delivered bilingual (EN/FA) report','⚠️ Equipment import duties added 12% to equipment CAPEX']
+      },
+      {
+        id:4, commodity:'gold', title:'Nevada Gold Heap Leach — AACE Class 3',
+        region:'🇺🇸 Nevada, USA', year:'2022–2023', aace:'Class 3',
+        capex:'$145M', opex:'$9.2/t', accuracy:'±22%', throughput:'15,000 tpd',
+        img:'https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=800&q=80',
+        desc:'AACE Class 3 pre-feasibility estimate for a 15,000 tpd gold heap leach operation in Nevada. Low capital intensity due to heap leach route. Detailed geotechnical and liner cost analysis included.',
+        tags:['AACE Class 3','Heap Leach','Nevada','15,000 tpd','Low CAPEX'],
+        params:[{l:'Mine Type',v:'Open Pit'},{l:'Ore Type',v:'Au Oxide'},{l:'Grade',v:'0.62 g/t Au'},{l:'Mine Life',v:'8 years'},{l:'Processing',v:'Heap Leach + ADR'},{l:'Location Factor',v:'1.00'}],
+        outcomes:['✅ Lowest CAPEX intensity in KDMine gold portfolio at $9,667/oz capacity','✅ Liner and pad costs benchmarked against 5 Nevada operations','✅ Permitting cost model included (NV-specific)','✅ Project financed within 6 months of estimate delivery']
+      },
+      {
+        id:5, commodity:'nickel', title:'Indonesian Nickel Laterite — AACE Class 4',
+        region:'🇮🇩 Indonesia', year:'2024', aace:'Class 4',
+        capex:'$2.8B', opex:'$18.4/t', accuracy:'±45%', throughput:'60,000 tpd',
+        img:'https://images.unsplash.com/photo-1565514020179-026b92b2d70b?w=800&q=80',
+        desc:'AACE Class 4 scoping estimate for a 60,000 tpd nickel laterite project with HPAL processing in Indonesia. High CAPEX intensity due to acid plant and autoclave circuits. Tropical climate and remote location factors applied.',
+        tags:['AACE Class 4','HPAL','Nickel Laterite','60,000 tpd','Tropical'],
+        params:[{l:'Mine Type',v:'Open Pit'},{l:'Ore Type',v:'Ni Laterite'},{l:'Ni Grade',v:'1.4%'},{l:'Mine Life',v:'25 years'},{l:'Processing',v:'HPAL + Refinery'},{l:'Location Factor',v:'1.20'}],
+        outcomes:['✅ HPAL acid plant cost benchmarked against 4 global operations','✅ Tropical climate factor +8% applied to structural steel','⚠️ Acid supply logistics identified as critical cost driver','✅ Estimate used for strategic partnership negotiations']
+      },
+      {
+        id:6, commodity:'coal', title:'Mongolian Coking Coal — AACE Class 5',
+        region:'🇲🇳 Mongolia', year:'2023', aace:'Class 5',
+        capex:'$680M', opex:'$11.2/t', accuracy:'±55%', throughput:'12 Mtpa',
+        img:'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=800&q=80',
+        desc:'AACE Class 5 order-of-magnitude estimate for a 12 Mtpa coking coal open-pit mine in the South Gobi region of Mongolia. Extreme climate factors, remote location, and cross-border rail logistics included in the estimate.',
+        tags:['AACE Class 5','Coal','Remote','12 Mtpa','Extreme Climate'],
+        params:[{l:'Mine Type',v:'Open Pit'},{l:'Ore Type',v:'Coking Coal'},{l:'Strip Ratio',v:'4.2:1'},{l:'Mine Life',v:'30 years'},{l:'Processing',v:'ROM + Crushing'},{l:'Location Factor',v:'1.30'}],
+        outcomes:['✅ Order-of-magnitude estimate delivered in 2 weeks','✅ Cross-border rail logistics cost model developed','⚠️ Extreme cold climate added 15% to civil/structural costs','✅ Used to screen project against 3 competing opportunities']
+      },
+      {
+        id:7, commodity:'iron', title:'West African Iron Ore — AACE Class 3',
+        region:'🌍 Guinea', year:'2022', aace:'Class 3',
+        capex:'$3.2B', opex:'$22.5/t', accuracy:'±20%', throughput:'30 Mtpa',
+        img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80',
+        desc:'AACE Class 3 pre-feasibility estimate for a 30 Mtpa iron ore project in Guinea, including a 210km slurry pipeline and dedicated port facility. One of the most complex infrastructure estimates in KDMine history.',
+        tags:['AACE Class 3','Iron Ore','Pipeline','Port','30 Mtpa'],
+        params:[{l:'Mine Type',v:'Open Pit'},{l:'Ore Type',v:'Itabirite'},{l:'Fe Grade',v:'38% (ROM)'},{l:'Mine Life',v:'35 years'},{l:'Processing',v:'Mag Sep + Pellet'},{l:'Location Factor',v:'1.25'}],
+        outcomes:['✅ 210km slurry pipeline cost model — first in KDMine portfolio','✅ Port facility estimate based on 3 comparable West African ports','✅ Estimate within 17% of subsequent DFS','⚠️ Community resettlement costs added $85M to project']
+      },
+      {
+        id:8, commodity:'copper', title:'Kazakhstan Copper Heap Leach — AACE Class 4',
+        region:'🇰🇿 Kazakhstan', year:'2024', aace:'Class 4',
+        capex:'$420M', opex:'$7.1/t', accuracy:'±38%', throughput:'18,000 tpd',
+        img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
+        desc:'AACE Class 4 scoping estimate for an 18,000 tpd copper oxide heap leach project in Kazakhstan. Applied CIS regional factors and local labour rates. Cold climate design requirements added significant cost to pad liner and solution management systems.',
+        tags:['AACE Class 4','Heap Leach','CIS','18,000 tpd','Cold Climate'],
+        params:[{l:'Mine Type',v:'Open Pit'},{l:'Ore Type',v:'Cu Oxide'},{l:'Cu Grade',v:'0.45%'},{l:'Mine Life',v:'15 years'},{l:'Processing',v:'Heap Leach + SX-EW'},{l:'Location Factor',v:'0.85'}],
+        outcomes:['✅ CIS-specific contractor database applied','✅ Cold climate pad design added 18% to heap leach CAPEX','✅ Bilingual report (EN/RU) delivered','⚠️ Power supply from grid required $48M substation investment']
+      }
+    ];
+
+    let activeFilter = 'all';
+    let visibleCount = 9;
+
+    // ── RENDER GALLERY ───────────────────────────────────────────
+    function renderGallery() {
+      const grid = document.getElementById('galleryGrid');
+      const query = document.getElementById('searchInput').value.toLowerCase();
+
+      const filtered = cases.filter(c => {
+        const matchFilter = activeFilter === 'all' || c.commodity === activeFilter;
+        const matchSearch = !query ||
+          c.title.toLowerCase().includes(query) ||
+          c.region.toLowerCase().includes(query) ||
+          c.commodity.toLowerCase().includes(query) ||
+          c.tags.some(t => t.toLowerCase().includes(query));
+        return matchFilter && matchSearch;
+      });
+
+      document.getElementById('caseCount').textContent = filtered.length;
+
+      // Skip index 0 (featured)
+      const galleryItems = filtered.filter(c => c.id !== 0).slice(0, visibleCount);
+
+      grid.innerHTML = galleryItems.map(c => `
+        <div class="case-card fade-up" onclick="openModal(${c.id})">
+          <div class="cc-img">
+            <div class="cc-img-bg" style="background-image:url('${c.img}');"></div>
+            <div class="cc-overlay"></div>
+            <div class="cc-badge ${c.commodity}">${c.commodity.charAt(0).toUpperCase()+c.commodity.slice(1)}</div>
+            <div class="cc-aace">${c.aace}</div>
+          </div>
+          <div class="cc-body">
+            <div class="cc-meta">
+              <span class="cc-region">${c.region}</span>
+              <span class="cc-dot"></span>
+              <span class="cc-year">${c.year}</span>
+            </div>
+            <div class="cc-title">${c.title}</div>
+            <div class="cc-desc">${c.desc.substring(0,120)}...</div>
+            <div class="cc-metrics">
+              <div class="cc-m"><div class="cmv">${c.capex}</div><div class="cml">CAPEX</div></div>
+              <div class="cc-m"><div class="cmv">${c.opex}</div><div class="cml">OPEX</div></div>
+              <div class="cc-m"><div class="cmv">${c.accuracy}</div><div class="cml">Accuracy</div></div>
+            </div>
+            <div class="cc-footer">
+              <div class="cc-tags">
+                ${c.tags.slice(0,3).map(t=>`<span class="cc-tag">${t}</span>`).join('')}
+              </div>
+              <div class="cc-arrow"><i class="fas fa-arrow-right" style="font-size:12px;"></i></div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      // Re-observe fade-up elements
+      document.querySelectorAll('.case-card.fade-up').forEach(el => {
+        obs.observe(el);
+      });
+    }
+
+    // ── FILTER ───────────────────────────────────────────────────
+    function setFilter(filter, btn) {
+      activeFilter = filter;
+      document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      renderGallery();
+    }
+
+    function filterCases() {
+      renderGallery();
+    }
+
+    // ── LOAD MORE ────────────────────────────────────────────────
+    function loadMore() {
+      visibleCount += 6;
+      renderGallery();
+    }
+
+    // ── MODAL ────────────────────────────────────────────────────
+    function openModal(id) {
+      const c = cases.find(x => x.id === id);
+      if (!c) return;
+
+      document.getElementById('mhBg').style.backgroundImage = `url('${c.img}')`;
+      document.getElementById('mhTitle').textContent = c.title;
+      document.getElementById('mhBadges').innerHTML = `
+        <span style="padding:5px 12px;border-radius:20px;background:rgba(201,168,76,0.85);color:#080C16;font-size:11px;font-weight:800;">${c.commodity.toUpperCase()}</span>
+        <span style="padding:5px 12px;border-radius:20px;background:rgba(8,12,22,0.8);border:1px solid rgba(201,168,76,0.3);color:var(--gold);font-size:11px;font-weight:700;">${c.aace}</span>
+        <span style="padding:5px 12px;border-radius:20px;background:rgba(8,12,22,0.8);border:1px solid rgba(255,255,255,0.1);color:#E8EDF5;font-size:11px;">${c.region}</span>
+        <span style="padding:5px 12px;border-radius:20px;background:rgba(8,12,22,0.8);border:1px solid rgba(255,255,255,0.1);color:#7A8BA8;font-size:11px;">${c.year}</span>
+      `;
+
+      document.getElementById('modalMetrics').innerHTML = `
+        <div class="mm-item"><div class="mmv">${c.capex}</div><div class="mml">Total CAPEX</div></div>
+        <div class="mm-item"><div class="mmv">${c.opex}</div><div class="mml">OPEX / tonne</div></div>
+        <div class="mm-item"><div class="mmv">${c.accuracy}</div><div class="mml">Accuracy</div></div>
+        <div class="mm-item"><div class="mmv">${c.throughput}</div><div class="mml">Throughput</div></div>
+      `;
+
+      document.getElementById('modalDesc').textContent = c.desc;
+
+      document.getElementById('modalParams').innerHTML = c.params.map(p => `
+        <div class="ms-row">
+          <span class="mrl">${p.l}</span>
+          <span class="mrv gold">${p.v}</span>
+        </div>
+      `).join('');
+
+      document.getElementById('modalOutcomes').innerHTML = c.outcomes.map(o => `
+        <div class="outcome-item">
+          <span class="outcome-icon">${o.startsWith('✅') ? '✅' : '⚠️'}</span>
+          <span class="outcome-text">${o.replace(/^[✅⚠️]\s*/,'')}</span>
+        </div>
+      `).join('');
+
+      document.getElementById('modalOverlay').classList.add('open');
+    }
+
+    function closeModal(e) {
+      if (e.target === document.getElementById('modalOverlay'))
+        document.getElementById('modalOverlay').classList.remove('open');
+    }
+
+    // ── LANGUAGE ─────────────────────────────────────────────────
+    let currentLang = 'en';
+    function setLang(lang) {
+      currentLang = lang;
+      document.getElementById('btn-en').classList.toggle('active', lang==='en');
+      document.getElementById('btn-fa').classList.toggle('active', lang==='fa');
+      const body = document.getElementById('body');
+      if (lang==='fa') { body.classList.add('fa'); body.setAttribute('dir','rtl'); }
+      else             { body.classList.remove('fa'); body.setAttribute('dir','ltr'); }
+      document.querySelectorAll('[data-'+lang+']').forEach(el => {
+        const v = el.getAttribute('data-'+lang);
+        if (!v) return;
+        if (el.tagName==='INPUT') el.placeholder = v;
+        else el.innerHTML = v;
+      });
+    }
+
+    // ── FADE UP ──────────────────────────────────────────────────
+    const obs = new IntersectionObserver(entries =>
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.06 }
+    );
+    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+    // ── INIT ─────────────────────────────────────────────────────
+    renderGallery();
+  </script>
+</body>
+</html>

@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Risk Analysis & Monte Carlo Simulation | KDMine</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      --gold:#C9A84C;--gold-light:#E8C97A;--gold-dark:#A07830;
+      --dark:#080C16;--dark2:#0F1520;--dark3:#161E2E;--dark4:#1E2840;
+      --text:#E8EDF5;--text-muted:#7A8BA8;
+      --border:rgba(201,168,76,0.2);--border2:rgba(255,255,255,0.06);
+      --green:#22C55E;--blue:#0EA5E9;--purple:#A855F7;--red:#EF4444;--orange:#F97316;
+    }
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;background:var(--dark);color:var(--text);overflow-x:hidden;}
+    body.fa{font-family:'Vazirmatn',sans-serif;direction:rtl;}
+    ::-webkit-scrollbar{width:5px;}
+    ::-webkit-scrollbar-track{background:var(--dark2);}
+    ::-webkit-scrollbar-thumb{background:var(--gold-dark);border-radius:3px;}
+
+    .lang-bar{position:fixed;top:0;left:0;right:0;z-index:2000;height:36px;background:var(--gold-dark);display:flex;align-items:center;justify-content:flex-end;padding:0 5%;gap:12px;}
+    .lang-btn{padding:4px 14px;border-radius:20px;border:none;cursor:pointer;font-size:12px;font-weight:700;transition:.2s;}
+    .lang-btn.active{background:var(--dark);color:var(--gold);}
+    .lang-btn:not(.active){background:rgba(0,0,0,0.2);color:rgba(0,0,0,0.7);}
+
+    nav{position:fixed;top:36px;left:0;right:0;z-index:1000;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:70px;background:rgba(8,12,22,0.95);backdrop-filter:blur(24px);border-bottom:1px solid var(--border2);}
+    .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+    .nav-logo-icon{width:42px;height:42px;border-radius:11px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));display:flex;align-items:center;justify-content:center;font-weight:900;font-size:17px;color:var(--dark);}
+    .nav-logo-text{font-size:21px;font-weight:800;color:#fff;}
+    .nav-logo-text span{color:var(--gold);}
+    .nav-back{display:flex;align-items:center;gap:8px;padding:9px 20px;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text);font-size:13px;font-weight:600;text-decoration:none;transition:.2s;}
+    .nav-back:hover{border-color:var(--gold);color:var(--gold);}
+
+    /* HERO */
+    .page-hero{padding:130px 5% 72px;position:relative;overflow:hidden;}
+    .hero-bg{position:absolute;inset:0;background:linear-gradient(160deg,#080C16,#0c1018,#080C16);}
+    .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(239,68,68,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(239,68,68,0.03) 1px,transparent 1px);background-size:50px 50px;}
+    .hero-glow-l{position:absolute;top:-80px;left:5%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.07),transparent 70%);}
+    .hero-glow-r{position:absolute;bottom:-60px;right:5%;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(239,68,68,0.05),transparent 70%);}
+    .hero-inner{position:relative;z-index:2;max-width:900px;}
+    .breadcrumb{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-muted);margin-bottom:18px;}
+    .breadcrumb a{color:var(--gold);text-decoration:none;}
+    .breadcrumb span{opacity:.5;}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border-radius:20px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);font-size:12px;font-weight:700;color:var(--red);margin-bottom:18px;}
+    .page-hero h1{font-size:clamp(34px,5vw,62px);font-weight:900;color:#fff;letter-spacing:-2px;margin-bottom:16px;line-height:1.05;}
+    .page-hero h1 em{background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal;}
+    .page-hero p{font-size:16px;color:var(--text-muted);line-height:1.8;max-width:700px;margin-bottom:36px;}
+    .hero-kpis{display:flex;gap:36px;flex-wrap:wrap;}
+    .hkpi .num{font-size:30px;font-weight:900;color:#fff;letter-spacing:-1px;}
+    .hkpi .num em{color:var(--gold);font-style:normal;font-size:16px;}
+    .hkpi .lbl{font-size:11px;color:var(--text-muted);margin-top:3px;}
+
+    /* LAYOUT */
+    .wrap{padding:0 5% 72px;max-width:1400px;margin:0 auto;}
+    .sec-label{font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;}
+    .sec-title{font-size:28px;font-weight:900;color:#fff;letter-spacing:-.5px;margin-bottom:10px;}
+    .sec-sub{font-size:15px;color:var(--text-muted);line-height:1.75;margin-bottom:36px;max-width:720px;}
+
+    /* TABS */
+    .main-tabs{display:flex;gap:6px;margin-bottom:36px;flex-wrap:wrap;}
+    .mtab{padding:11px 22px;border-radius:12px;border:1px solid var(--border2);background:rgba(255,255,255,0.04);color:var(--text-muted);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:.2s;display:flex;align-items:center;gap:8px;}
+    .mtab.active{background:rgba(239,68,68,0.1);border-color:rgba(239,68,68,0.3);color:var(--red);}
+    .tab-section{display:none;}
+    .tab-section.active{display:block;}
+
+    /* ── RISK REGISTER TAB ── */
+    .risk-intro{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;margin-bottom:48px;align-items:start;}
+    .risk-intro-text p{font-size:14px;color:var(--text-muted);line-height:1.8;margin-bottom:14px;}
+
+    /* RISK MATRIX VISUAL */
+    .matrix-wrap{background:var(--dark3);border:1px solid var(--border2);border-radius:20px;padding:28px;margin-bottom:48px;}
+    .matrix-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:20px;}
+    .risk-matrix{display:grid;grid-template-columns:40px repeat(5,1fr);grid-template-rows:repeat(5,1fr) 40px;gap:4px;max-width:520px;}
+    .rm-cell{border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;min-height:44px;}
+    .rm-label{background:transparent;color:var(--text-muted);font-size:10px;font-weight:600;}
+    .rm-low{background:rgba(34,197,94,0.15);color:var(--green);}
+    .rm-med{background:rgba(249,115,22,0.15);color:var(--orange);}
+    .rm-high{background:rgba(239,68,68,0.15);color:var(--red);}
+    .rm-crit{background:rgba(239,68,68,0.35);color:#fff;}
+    .rm-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;cursor:pointer;transition:.2s;}
+    .rm-dot:hover{transform:scale(1.2);}
+
+    /* RISK REGISTER TABLE */
+    .risk-table-wrap{background:var(--dark3);border:1px solid var(--border2);border-radius:20px;overflow:hidden;margin-bottom:48px;}
+    .risk-table{width:100%;border-collapse:collapse;}
+    .risk-table thead tr{background:var(--dark4);}
+    .risk-table th{padding:11px 14px;text-align:left;font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border2);}
+    .risk-table td{padding:10px 14px;font-size:12px;color:var(--text-muted);border-bottom:1px solid var(--border2);}
+    .risk-table tr:last-child td{border-bottom:none;}
+    .risk-table tr:hover td{background:rgba(255,255,255,0.02);}
+    .risk-table td:first-child{font-weight:700;color:#fff;}
+    .risk-badge{display:inline-flex;align-items:center;padding:3px 8px;border-radius:5px;font-size:10px;font-weight:700;}
+    .rb-low{background:rgba(34,197,94,0.1);color:var(--green);}
+    .rb-med{background:rgba(249,115,22,0.1);color:var(--orange);}
+    .rb-high{background:rgba(239,68,68,0.1);color:var(--red);}
+    .rb-crit{background:rgba(239,68,68,0.25);color:#ff6b6b;}
+    .risk-cat{display:inline-flex;padding:2px 7px;border-radius:4px;font-size:10px;background:rgba(255,255,255,0.04);border:1px solid var(--border2);color:var(--text-muted);}
+
+    /* ── MONTE CARLO TAB ── */
+    .mc-intro{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:48px;}
+    .mc-text p{font-size:14px;color:var(--text-muted);line-height:1.8;margin-bottom:14px;}
+    .mc-steps{display:flex;flex-direction:column;gap:10px;}
+    .mc-step{background:var(--dark3);border:1px solid var(--border2);border-radius:13px;padding:14px 18px;display:flex;align-items:flex-start;gap:12px;}
+    .mc-step-num{width:28px;height:28px;border-radius:8px;background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:var(--red);flex-shrink:0;}
+    .mc-step-title{font-size:12px;font-weight:700;color:#fff;margin-bottom:2px;}
+    .mc-step-desc{font-size:11px;color:var(--text-muted);line-height:1.5;}
+
+    /* INPUT DISTRIBUTIONS */
+    .dist-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:48px;}
+    .dist-card{background:var(--dark3);border:1px solid var(--border2);border-radius:16px;padding:18px;transition:.3s;}
+    .dist-card:hover{border-color:var(--border);}
+    .dist-var{font-size:13px;font-weight:700;color:#fff;margin-bottom:4px;}
+    .dist-type{font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;}
+    .dist-params{display:flex;flex-direction:column;gap:5px;margin-bottom:10px;}
+    .dist-param{display:flex;justify-content:space-between;font-size:11px;}
+    .dist-param-label{color:var(--text-muted);}
+    .dist-param-val{color:#fff;font-weight:600;}
+    .dist-bar-wrap{width:100%;height:32px;background:var(--dark4);border-radius:6px;overflow:hidden;position:relative;}
+    .dist-bar-inner{position:absolute;bottom:0;display:flex;align-items:flex-end;gap:1px;padding:0 4px;width:100%;height:100%;}
+    .dist-bar-col{flex:1;border-radius:2px 2px 0 0;}
+
+    /* MC RESULTS */
+    .mc-results-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:48px;}
+    .mc-chart-card{background:var(--dark3);border:1px solid var(--border2);border-radius:20px;padding:24px;}
+    .mc-chart-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:16px;}
+    .mc-stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:48px;}
+    .mc-stat{background:var(--dark3);border:1px solid var(--border2);border-radius:14px;padding:16px;text-align:center;}
+    .mc-stat-label{font-size:11px;color:var(--text-muted);margin-bottom:6px;}
+    .mc-stat-val{font-size:22px;font-weight:900;color:#fff;}
+    .mc-stat-val em{color:var(--gold);font-style:normal;font-size:14px;}
+    .mc-stat-sub{font-size:10px;color:var(--text-muted);margin-top:3px;}
+
+    /* ── CONTINGENCY TAB ── */
+    .cont-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:48px;}
+    .cont-text p{font-size:14px;color:var(--text-muted);line-height:1.8;margin-bottom:14px;}
+    .cont-table-wrap{background:var(--dark3);border:1px solid var(--border2);border-radius:20px;overflow:hidden;margin-bottom:48px;}
+    .cont-table{width:100%;border-collapse:collapse;}
+    .cont-table thead tr{background:var(--dark4);}
+    .cont-table th{padding:11px 16px;text-align:left;font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border2);}
+    .cont-table td{padding:11px 16px;font-size:12px;color:var(--text-muted);border-bottom:1px solid var(--border2);}
+    .cont-table tr:last-child td{border-bottom:none;}
+    .cont-table tr:hover td{background:rgba(255,255,255,0.02);}
+    .cont-table td:first-child{font-weight:700;color:#fff;}
+    .cont-group td{background:rgba(201,168,76,0.04);color:#fff;font-weight:700;font-size:11px;text-transform:uppercase;}
+
+    /* MITIGATION CARDS */
+    .mitig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:48px;}
+    .mitig-card{background:var(--dark3);border:1px solid var(--border2);border-radius:16px;padding:20px;transition:.3s;}
+    .mitig-card:hover{border-color:var(--border);}
+    .mitig-icon{font-size:26px;margin-bottom:10px;}
+    .mitig-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:6px;}
+    .mitig-desc{font-size:11px;color:var(--text-muted);line-height:1.6;}
+    .mitig-impact{font-size:12px;font-weight:700;color:var(--green);margin-top:8px;}
+
+    /* DELIVERABLES */
+    .deliv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:48px;}
+    .deliv-card{background:var(--dark3);border:1px solid var(--border2);border-radius:16px;padding:18px;text-align:center;transition:.3s;}
+    .deliv-card:hover{border-color:var(--border);}
+    .deliv-icon{font-size:26px;margin-bottom:10px;}
+    .deliv-name{font-size:12px;font-weight:700;color:#fff;margin-bottom:4px;}
+    .deliv-desc{font-size:11px;color:var(--text-muted);line-height:1.5;}
+
+    /* CTA */
+    .cta-band{background:linear-gradient(135deg,var(--dark3),var(--dark4));border:1px solid var(--border);border-radius:24px;padding:52px;text-align:center;margin-bottom:56px;}
+    .cta-band h3{font-size:32px;font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:12px;}
+    .cta-band h3 em{background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal;}
+    .cta-band p{font-size:15px;color:var(--text-muted);margin-bottom:28px;}
+    .cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+    .btn-gold{padding:13px 28px;border-radius:11px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--dark);font-weight:700;font-size:14px;border:none;cursor:pointer;font-family:inherit;transition:.2s;display:inline-flex;align-items:center;gap:8px;}
+    .btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,0.4);}
+    .btn-outline{padding:13px 28px;border-radius:11px;border:1px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text);font-weight:600;font-size:14px;cursor:pointer;font-family:inherit;transition:.2s;display:inline-flex;align-items:center;gap:8px;}
+    .btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+
+    .footer-mini{background:var(--dark2);border-top:1px solid var(--border2);padding:28px 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;}
+    .footer-mini p{font-size:13px;color:var(--text-muted);}
+    .footer-mini a{font-size:13px;color:var(--gold);text-decoration:none;}
+
+    .fade-up{opacity:0;transform:translateY(22px);transition:opacity .5s,transform .5s;}
+    .fade-up.visible{opacity:1;transform:translateY(0);}
+
+    @media(max-width:1100px){.risk-intro{grid-template-columns:1fr;}.mc-intro{grid-template-columns:1fr;}.mc-results-grid{grid-template-columns:1fr;}.cont-grid{grid-template-columns:1fr;}.dist-grid{grid-template-columns:1fr 1fr;}.mitig-grid{grid-template-columns:1fr 1fr;}.mc-stat-grid{grid-template-columns:repeat(3,1fr);}.deliv-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:768px){.dist-grid{grid-template-columns:1fr;}.mitig-grid{grid-template-columns:1fr;}.mc-stat-grid{grid-template-columns:1fr 1fr;}.deliv-grid{grid-template-columns:1fr 1fr;}}
+  </style>
+</head>
+<body id="body">
+
+  <div class="lang-bar">
+    <button class="lang-btn active" id="btn-en" onclick="setLang('en')">🇬🇧 English</button>
+    <button class="lang-btn" id="btn-fa" onclick="setLang('fa')">🇮🇷 فارسی</button>
+  </div>
+
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">KD</div>
+      <span class="nav-logo-text">KD<span>Mine</span></span>
+    </a>
+    <a href="index.html" class="nav-back"><i class="fas fa-arrow-left"></i> <span data-en="Back to Home" data-fa="بازگشت به خانه">Back to Home</span></a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="page-hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-glow-l"></div>
+    <div class="hero-glow-r"></div>
+    <div class="hero-inner fade-up">
+      <div class="breadcrumb">
+        <a href="index.html" data-en="Home" data-fa="خانه">Home</a><span>/</span>
+        <span data-en="Risk Analysis & Monte Carlo" data-fa="تحلیل ریسک و مونت کارلو">Risk Analysis & Monte Carlo</span>
+      </div>
+      <div class="hero-badge"><i class="fas fa-shield-alt"></i> <span data-en="Risk Register · Monte Carlo · Contingency · AACE RP 44R-08" data-fa="ثبت ریسک · مونت کارلو · احتیاط · AACE RP 44R-08">Risk Register · Monte Carlo · Contingency · AACE RP 44R-08</span></div>
+      <h1><em data-en="Risk Analysis" data-fa="تحلیل ریسک">Risk Analysis</em><br/><span data-en="& Monte Carlo" data-fa="و مونت کارلو">&amp; Monte Carlo</span> <em data-en="Simulation" data-fa="شبیه‌سازی">Simulation</em></h1>
+      <p data-en="KDMine provides structured project risk analysis for open-pit mining projects — from qualitative risk registers and probability-impact matrices to quantitative Monte Carlo simulation of CAPEX, OPEX, and NPV distributions. All contingency determinations follow AACE RP 44R-08." data-fa="KDMine تحلیل ریسک پروژه ساختاریافته برای پروژه‌های معدن روباز ارائه می‌دهد — از ثبت ریسک کیفی و ماتریس‌های احتمال-تأثیر تا شبیه‌سازی کمی مونت کارلو توزیع‌های CAPEX، OPEX و NPV. تمام تعیین‌های احتیاط از AACE RP 44R-08 پیروی می‌کنند.">KDMine provides structured project risk analysis for open-pit mining projects — from qualitative risk registers and probability-impact matrices to quantitative Monte Carlo simulation of CAPEX, OPEX, and NPV distributions. All contingency determinations follow AACE RP 44R-08.</p>
+      <div class="hero-kpis">
+        <div class="hkpi"><div class="num">10K<em>+</em></div><div class="lbl" data-en="Monte Carlo Iterations" data-fa="تکرار مونت کارلو">Monte Carlo Iterations</div></div>
+        <div class="hkpi"><div class="num">AACE<em> RP</em></div><div class="lbl" data-en="44R-08 Compliant" data-fa="منطبق با 44R-08">44R-08 Compliant</div></div>
+        <div class="hkpi"><div class="num">P10<em>/50/90</em></div><div class="lbl" data-en="Probabilistic Outputs" data-fa="خروجی‌های احتمالاتی">Probabilistic Outputs</div></div>
+        <div class="hkpi"><div class="num">ISO<em> 31000</em></div><div class="lbl" data-en="Risk Framework" data-fa="چارچوب ریسک">Risk Framework</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- TABS -->
+    <div class="main-tabs fade-up">
+      <button class="mtab active" onclick="switchTab('register',this)"><i class="fas fa-list-alt"></i> <span data-en="Risk Register" data-fa="ثبت ریسک">Risk Register</span></button>
+      <button class="mtab" onclick="switchTab('montecarlo',this)"><i class="fas fa-dice"></i> <span data-en="Monte Carlo" data-fa="مونت کارلو">Monte Carlo</span></button>
+      <button class="mtab" onclick="switchTab('contingency',this)"><i class="fas fa-umbrella"></i> <span data-en="Contingency" data-fa="احتیاط">Contingency</span></button>
+      <button class="mtab" onclick="switchTab('mitigation',this)"><i class="fas fa-hard-hat"></i> <span data-en="Mitigation & Deliverables" data-fa="کاهش ریسک و تحویل‌دادنی‌ها">Mitigation & Deliverables</span></button>
+    </div>
+
+    <!-- ══ RISK REGISTER TAB ══ -->
+    <div class="tab-section active" id="tab-register">
+
+      <div class="risk-intro fade-up">
+        <div class="risk-intro-text">
+          <div class="sec-label" data-en="Risk Register" data-fa="ثبت ریسک">Risk Register</div>
+          <div class="sec-title" data-en="Structured Project Risk Identification" data-fa="شناسایی ریسک پروژه ساختاریافته">Structured Project Risk Identification</div>
+          <p data-en="KDMine's risk register process follows ISO 31000 and AACE RP 44R-08. Risks are identified through structured workshops with the project team, categorised by type (technical, commercial, geopolitical, environmental), and scored on a 5×5 probability-impact matrix." data-fa="فرآیند ثبت ریسک KDMine از ISO 31000 و AACE RP 44R-08 پیروی می‌کند. ریسک‌ها از طریق کارگاه‌های ساختاریافته با تیم پروژه شناسایی می‌شوند، بر اساس نوع (فنی، تجاری، ژئوپلیتیک، محیطی) دسته‌بندی می‌شوند و در یک ماتریس احتمال-تأثیر ۵×۵ امتیازدهی می‌شوند.">KDMine's risk register process follows ISO 31000 and AACE RP 44R-08. Risks are identified through structured workshops with the project team, categorised by type (technical, commercial, geopolitical, environmental), and scored on a 5×5 probability-impact matrix.</p>
+          <p data-en="Each risk is assigned a risk owner, mitigation action, residual risk score, and contingency allocation. The register is a living document updated at each project milestone." data-fa="به هر ریسک یک مالک ریسک، اقدام کاهشی، امتیاز ریسک باقیمانده و تخصیص احتیاط اختصاص داده می‌شود. ثبت یک سند زنده است که در هر نقطه عطف پروژه به‌روزرسانی می‌شود.">Each risk is assigned a risk owner, mitigation action, residual risk score, and contingency allocation. The register is a living document updated at each project milestone.</p>
+        </div>
+        <!-- RISK PIE -->
+        <div style="background:var(--dark3);border:1px solid var(--border2);border-radius:18px;padding:22px;">
+          <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:16px;" data-en="Risk Distribution by Category" data-fa="توزیع ریسک بر اساس دسته">Risk Distribution by Category</div>
+          <canvas id="riskPieChart" style="max-height:240px;"></canvas>
+        </div>
+      </div>
+
+      <!-- RISK MATRIX -->
+      <div class="matrix-wrap fade-up">
+        <div class="matrix-title" data-en="🎯 Probability × Impact Matrix — Reference Project Risk Profile" data-fa="🎯 ماتریس احتمال × تأثیر — پروفیل ریسک پروژه مرجع">🎯 Probability × Impact Matrix — Reference Project Risk Profile</div>
+        <div style="display:flex;gap:32px;flex-wrap:wrap;align-items:flex-start;">
+          <div id="riskMatrixViz" style="min-width:300px;"></div>
+          <div style="flex:1;min-width:220px;">
+            <div style="font-size:12px;font-weight:700;color:#fff;margin-bottom:12px;" data-en="Risk Legend" data-fa="راهنمای ریسک">Risk Legend</div>
+            <div id="riskLegend" style="display:flex;flex-direction:column;gap:8px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RISK REGISTER TABLE -->
+      <div class="fade-up">
+        <div class="sec-label" data-en="Risk Register" data-fa="ثبت ریسک">Risk Register</div>
+        <div class="sec-title" data-en="Project Risk Inventory" data-fa="موجودی ریسک پروژه">Project Risk Inventory</div>
+      </div>
+      <div class="risk-table-wrap fade-up">
+        <table class="risk-table">
+          <thead><tr>
+            <th data-en="Risk ID" data-fa="شناسه ریسک">ID</th>
+            <th data-en="Risk Description" data-fa="توضیح ریسک">Risk Description</th>
+            <th data-en="Category" data-fa="دسته">Category</th>
+            <th data-en="Probability" data-fa="احتمال">Prob.</th>
+            <th data-en="Impact" data-fa="تأثیر">Impact</th>
+            <th data-en="Rating" data-fa="رتبه">Rating</th>
+            <th data-en="CAPEX Impact" data-fa="تأثیر CAPEX">CAPEX Impact</th>
+            <th data-en="Mitigation" data-fa="کاهش">Mitigation</th>
+          </tr></thead>
+          <tbody id="riskTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ══ MONTE CARLO TAB ══ -->
+    <div class="tab-section" id="tab-montecarlo">
+
+      <div class="mc-intro fade-up">
+        <div class="mc-text">
+          <div class="sec-label" data-en="Monte Carlo Simulation" data-fa="شبیه‌سازی مونت کارلو">Monte Carlo Simulation</div>
+          <div class="sec-title" data-en="Probabilistic Cost & NPV Analysis" data-fa="تحلیل هزینه و NPV احتمالاتی">Probabilistic Cost & NPV Analysis</div>
+          <p data-en="Monte Carlo simulation replaces single-point cost estimates with probability distributions for each uncertain input variable. By running 10,000+ iterations, we generate a full probability distribution of CAPEX, OPEX, and NPV outcomes — giving decision-makers a P10/P50/P90 view of project economics rather than a single deterministic number." data-fa="شبیه‌سازی مونت کارلو برآوردهای هزینه تک‌نقطه‌ای را با توزیع‌های احتمال برای هر متغیر ورودی نامطمئن جایگزین می‌کند. با اجرای ۱۰,۰۰۰+ تکرار، یک توزیع احتمال کامل از نتایج CAPEX، OPEX و NPV تولید می‌کنیم — که به تصمیم‌گیرندگان دیدگاه P10/P50/P90 از اقتصاد پروژه به جای یک عدد قطعی واحد می‌دهد.">Monte Carlo simulation replaces single-point cost estimates with probability distributions for each uncertain input variable. By running 10,000+ iterations, we generate a full probability distribution of CAPEX, OPEX, and NPV outcomes — giving decision-makers a P10/P50/P90 view of project economics rather than a single deterministic number.</p>
+          <p data-en="KDMine's Monte Carlo models are built in Excel with @RISK or Crystal Ball add-ins, or in Python for large-scale simulations. All input distributions are calibrated against project-specific data and industry benchmarks." data-fa="مدل‌های مونت کارلو KDMine در Excel با افزونه‌های @RISK یا Crystal Ball، یا در Python برای شبیه‌سازی‌های در مقیاس بزرگ ساخته می‌شوند. تمام توزیع‌های ورودی بر اساس داده‌های خاص پروژه و معیارهای صنعت کالیبره می‌شوند.">KDMine's Monte Carlo models are built in Excel with @RISK or Crystal Ball add-ins, or in Python for large-scale simulations. All input distributions are calibrated against project-specific data and industry benchmarks.</p>
+        </div>
+        <div class="mc-steps">
+          <div class="mc-step"><div class="mc-step-num">1</div><div><div class="mc-step-title" data-en="Define Input Variables" data-fa="تعریف متغیرهای ورودی">Define Input Variables</div><div class="mc-step-desc" data-en="Identify all uncertain cost and revenue inputs. Assign probability distributions (triangular, normal, lognormal) based on data quality." data-fa="شناسایی تمام ورودی‌های هزینه و درآمد نامطمئن. اختصاص توزیع‌های احتمال (مثلثی، نرمال، لگ‌نرمال) بر اساس کیفیت داده.">Identify all uncertain cost and revenue inputs. Assign probability distributions (triangular, normal, lognormal) based on data quality.</div></div></div>
+          <div class="mc-step"><div class="mc-step-num">2</div><div><div class="mc-step-title" data-en="Set Correlations" data-fa="تنظیم همبستگی‌ها">Set Correlations</div><div class="mc-step-desc" data-en="Define correlation coefficients between related variables (e.g. diesel price and OPEX, gold price and revenue)." data-fa="تعریف ضرایب همبستگی بین متغیرهای مرتبط (مثلاً قیمت دیزل و OPEX، قیمت طلا و درآمد).">Define correlation coefficients between related variables (e.g. diesel price and OPEX, gold price and revenue).</div></div></div>
+          <div class="mc-step"><div class="mc-step-num">3</div><div><div class="mc-step-title" data-en="Run 10,000 Iterations" data-fa="اجرای ۱۰,۰۰۰ تکرار">Run 10,000 Iterations</div><div class="mc-step-desc" data-en="Latin Hypercube sampling ensures efficient coverage of the full distribution space in 10,000 model runs." data-fa="نمونه‌برداری Latin Hypercube پوشش کارآمد فضای توزیع کامل را در ۱۰,۰۰۰ اجرای مدل تضمین می‌کند.">Latin Hypercube sampling ensures efficient coverage of the full distribution space in 10,000 model runs.</div></div></div>
+          <div class="mc-step"><div class="mc-step-num">4</div><div><div class="mc-step-title" data-en="Analyse Output Distribution" data-fa="تحلیل توزیع خروجی">Analyse Output Distribution</div><div class="mc-step-desc" data-en="Generate P10/P50/P90 values, probability of positive NPV, and contribution-to-variance analysis." data-fa="تولید مقادیر P10/P50/P90، احتمال NPV مثبت و تحلیل سهم در واریانس.">Generate P10/P50/P90 values, probability of positive NPV, and contribution-to-variance analysis.</div></div></div>
+          <div class="mc-step"><div class="mc-step-num">5</div><div><div class="mc-step-title" data-en="Determine Contingency" data-fa="تعیین احتیاط">Determine Contingency</div><div class="mc-step-desc" data-en="Set contingency at P70–P80 of CAPEX distribution per AACE RP 44R-08 to achieve target confidence level." data-fa="تنظیم احتیاط در P70-P80 توزیع CAPEX طبق AACE RP 44R-08 برای دستیابی به سطح اطمینان هدف.">Set contingency at P70–P80 of CAPEX distribution per AACE RP 44R-08 to achieve target confidence level.</div></div></div>
+        </div>
+      </div>
+
+      <!-- INPUT DISTRIBUTIONS -->
+      <div class="fade-up">
+        <div class="sec-label" data-en="Input Distributions" data-fa="توزیع‌های ورودی">Input Distributions</div>
+        <div class="sec-title" data-en="Key Variable Probability Distributions" data-fa="توزیع‌های احتمال متغیر کلیدی">Key Variable Probability Distributions</div>
+      </div>
+      <div class="dist-grid fade-up" id="distGrid"></div>
+
+      <!-- MC STATS -->
+      <div class="fade-up">
+        <div class="sec-label" data-en="Simulation Results" data-fa="نتایج شبیه‌سازی">Simulation Results</div>
+        <div class="sec-title" data-en="Monte Carlo Output — 10,000 Iterations" data-fa="خروجی مونت کارلو — ۱۰,۰۰۰ تکرار">Monte Carlo Output — 10,000 Iterations</div>
+      </div>
+      <div class="mc-stat-grid fade-up">
+        <div class="mc-stat"><div class="mc-stat-label" data-en="P10 CAPEX" data-fa="P10 CAPEX">P10 CAPEX</div><div class="mc-stat-val">$428<em>M</em></div><div class="mc-stat-sub" data-en="10% chance below" data-fa="۱۰٪ احتمال زیر">10% chance below</div></div>
+        <div class="mc-stat"><div class="mc-stat-label" data-en="P50 CAPEX" data-fa="P50 CAPEX">P50 CAPEX</div><div class="mc-stat-val">$512<em>M</em></div><div class="mc-stat-sub" data-en="Median estimate" data-fa="برآورد میانه">Median estimate</div></div>
+        <div class="mc-stat"><div class="mc-stat-label" data-en="P90 CAPEX" data-fa="P90 CAPEX">P90 CAPEX</div><div class="mc-stat-val">$618<em>M</em></div><div class="mc-stat-sub" data-en="90% chance below" data-fa="۹۰٪ احتمال زیر">90% chance below</div></div>
+        <div class="mc-stat"><div class="mc-stat-label" data-en="P10 NPV" data-fa="P10 NPV">P10 NPV</div><div class="mc-stat-val">$168<em>M</em></div><div class="mc-stat-sub" data-en="Downside scenario" data-fa="سناریو نزولی">Downside scenario</div></div>
+        <div class="mc-stat"><div class="mc-stat-label" data-en="P50 NPV" data-fa="P50 NPV">P50 NPV</div><div class="mc-stat-val">$310<em>M</em></div><div class="mc-stat-sub" data-en="Median NPV" data-fa="NPV میانه">Median NPV</div></div>
+        <div class="mc-stat"><div class="mc-stat-label" data-en="P90 NPV" data-fa="P90 NPV">P90 NPV</div><div class="mc-stat-val">$488<em>M</em></div><div class="mc-stat-sub" data-en="Upside scenario" data-fa="سناریو صعودی">Upside scenario</div></div>
+        <div class="mc-stat"><div class="mc-stat-label" data-en="Prob. NPV > 0" data-fa="احتمال NPV > 0">Prob. NPV &gt; 0</div><div class="mc-stat-val">94<em>%</em></div><div class="mc-stat-sub" data-en="Probability of viability" data-fa="احتمال توجیه‌پذیری">Probability of viability</div></div>
+        <div class="mc-stat"><div class="mc-stat-label" data-en="Mean IRR" data-fa="IRR میانگین">Mean IRR</div><div class="mc-stat-val">23.4<em>%</em></div><div class="mc-stat-sub" data-en="Expected return" data-fa="بازده مورد انتظار">Expected return</div></div>
+        <div class="mc-stat"><div class="mc-stat-label" data-en="Contingency (P75)" data-fa="احتیاط (P75)">Contingency (P75)</div><div class="mc-stat-val">$52<em>M</em></div><div class="mc-stat-sub" data-en="AACE RP 44R-08" data-fa="AACE RP 44R-08">AACE RP 44R-08</div></div>
+      </div>
+
+      <!-- MC CHARTS -->
+      <div class="mc-results-grid fade-up">
+        <div class="mc-chart-card">
+          <div class="mc-chart-title" data-en="CAPEX Probability Distribution (10,000 iterations)" data-fa="توزیع احتمال CAPEX (۱۰,۰۰۰ تکرار)">CAPEX Probability Distribution (10,000 iterations)</div>
+          <canvas id="mcCapexChart" style="max-height:240px;"></canvas>
+        </div>
+        <div class="mc-chart-card">
+          <div class="mc-chart-title" data-en="NPV Probability Distribution — P10/P50/P90" data-fa="توزیع احتمال NPV — P10/P50/P90">NPV Probability Distribution — P10/P50/P90</div>
+          <canvas id="mcNpvChart" style="max-height:240px;"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ CONTINGENCY TAB ══ -->
+    <div class="tab-section" id="tab-contingency">
+
+      <div class="cont-grid fade-up">
+        <div class="cont-text">
+          <div class="sec-label" data-en="Contingency Determination" data-fa="تعیین احتیاط">Contingency Determination</div>
+          <div class="sec-title" data-en="AACE RP 44R-08 Method" data-fa="روش AACE RP 44R-08">AACE RP 44R-08 Method</div>
+          <p data-en="AACE International Recommended Practice 44R-08 provides the industry standard framework for risk-based contingency determination. Contingency is not a flat percentage — it is calculated from the probability distribution of cost outcomes, typically set at P70–P80 to provide a 70–80% confidence level that the project will be completed within the approved budget." data-fa="توصیه‌نامه عملی AACE بین‌المللی 44R-08 چارچوب استاندارد صنعت برای تعیین احتیاط مبتنی بر ریسک ارائه می‌دهد. احتیاط یک درصد ثابت نیست — از توزیع احتمال نتایج هزینه محاسبه می‌شود، معمولاً در P70-P80 تنظیم می‌شود تا سطح اطمینان ۷۰-۸۰٪ برای تکمیل پروژه در بودجه تأییدشده فراهم کند.">AACE International Recommended Practice 44R-08 provides the industry standard framework for risk-based contingency determination. Contingency is not a flat percentage — it is calculated from the probability distribution of cost outcomes, typically set at P70–P80 to provide a 70–80% confidence level that the project will be completed within the approved budget.</p>
+          <p data-en="KDMine applies RP 44R-08 to all Class 2 and Class 3 estimates. For Class 4 and 5 estimates, we use the Expected Value method with risk-adjusted unit costs." data-fa="KDMine RP 44R-08 را برای تمام برآوردهای کلاس ۲ و ۳ اعمال می‌کند. برای برآوردهای کلاس ۴ و ۵، از روش ارزش مورد انتظار با هزینه‌های واحد تعدیل‌شده ریسک استفاده می‌کنیم.">KDMine applies RP 44R-08 to all Class 2 and Class 3 estimates. For Class 4 and 5 estimates, we use the Expected Value method with risk-adjusted unit costs.</p>
+        </div>
+        <div style="background:var(--dark3);border:1px solid var(--border2);border-radius:18px;padding:22px;">
+          <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:16px;" data-en="Contingency by AACE Class" data-fa="احتیاط بر اساس کلاس AACE">Contingency by AACE Class</div>
+          <canvas id="contingencyChart" style="max-height:240px;"></canvas>
+        </div>
+      </div>
+
+      <!-- CONTINGENCY TABLE -->
+      <div class="fade-up">
+        <div class="sec-label" data-en="Contingency Breakdown" data-fa="تفکیک احتیاط">Contingency Breakdown</div>
+        <div class="sec-title" data-en="WBS-Level Contingency Allocation" data-fa="تخصیص احتیاط در سطح WBS">WBS-Level Contingency Allocation</div>
+      </div>
+      <div class="cont-table-wrap fade-up">
+        <table class="cont-table">
+          <thead><tr>
+            <th data-en="WBS Area" data-fa="حوزه WBS">WBS Area</th>
+            <th data-en="Base Cost" data-fa="هزینه پایه">Base Cost</th>
+            <th data-en="Risk Score" data-fa="امتیاز ریسک">Risk Score</th>
+            <th data-en="Contingency %" data-fa="٪ احتیاط">Contingency %</th>
+            <th data-en="Contingency $" data-fa="احتیاط $">Contingency $</th>
+            <th data-en="Rationale" data-fa="دلیل">Rationale</th>
+          </tr></thead>
+          <tbody id="contingencyTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ══ MITIGATION & DELIVERABLES TAB ══ -->
+    <div class="tab-section" id="tab-mitigation">
+
+      <div class="fade-up">
+        <div class="sec-label" data-en="Risk Mitigation" data-fa="کاهش ریسک">Risk Mitigation</div>
+        <div class="sec-title" data-en="Key Mitigation Strategies" data-fa="استراتژی‌های کاهش ریسک کلیدی">Key Mitigation Strategies</div>
+        <div class="sec-sub" data-en="KDMine identifies practical mitigation actions for each high and critical risk. Mitigation reduces residual risk and lowers the required contingency." data-fa="KDMine اقدامات کاهشی عملی برای هر ریسک بالا و بحرانی شناسایی می‌کند. کاهش ریسک باقیمانده را کاهش می‌دهد و احتیاط مورد نیاز را پایین می‌آورد.">KDMine identifies practical mitigation actions for each high and critical risk. Mitigation reduces residual risk and lowers the required contingency.</div>
+      </div>
+      <div class="mitig-grid fade-up" id="mitigGrid"></div>
+
+      <!-- DELIVERABLES -->
+      <div class="fade-up">
+        <div class="sec-label" data-en="Deliverables" data-fa="تحویل‌دادنی‌ها">Deliverables</div>
+        <div class="sec-title" data-en="Risk Analysis Package" data-fa="بسته تحلیل ریسک">Risk Analysis Package</div>
+      </div>
+      <div class="deliv-grid fade-up">
+        <div class="deliv-card"><div class="deliv-icon">📋</div><div class="deliv-name" data-en="Risk Register (Excel)" data-fa="ثبت ریسک (Excel)">Risk Register (Excel)</div><div class="deliv-desc" data-en="Full risk register with ID, description, category, P×I scores, owner, and mitigation actions." data-fa="ثبت ریسک کامل با شناسه، توضیح، دسته، امتیازهای P×I، مالک و اقدامات کاهشی.">Full risk register with ID, description, category, P×I scores, owner, and mitigation actions.</div></div>
+        <div class="deliv-card"><div class="deliv-icon">🎯</div><div class="deliv-name" data-en="Risk Matrix (PDF)" data-fa="ماتریس ریسک (PDF)">Risk Matrix (PDF)</div><div class="deliv-desc" data-en="Visual 5×5 probability-impact matrix with all project risks plotted and colour-coded." data-fa="ماتریس احتمال-تأثیر ۵×۵ بصری با تمام ریسک‌های پروژه ترسیم‌شده و رنگ‌بندی‌شده.">Visual 5×5 probability-impact matrix with all project risks plotted and colour-coded.</div></div>
+        <div class="deliv-card"><div class="deliv-icon">🎲</div><div class="deliv-name" data-en="Monte Carlo Model" data-fa="مدل مونت کارلو">Monte Carlo Model</div><div class="deliv-desc" data-en="Excel/@RISK model with 10,000 iterations, input distributions, correlations, and P10/P50/P90 outputs." data-fa="مدل Excel/@RISK با ۱۰,۰۰۰ تکرار، توزیع‌های ورودی، همبستگی‌ها و خروجی‌های P10/P50/P90.">Excel/@RISK model with 10,000 iterations, input distributions, correlations, and P10/P50/P90 outputs.</div></div>
+        <div class="deliv-card"><div class="deliv-icon">🌪️</div><div class="deliv-name" data-en="Tornado Chart" data-fa="نمودار تورنادو">Tornado Chart</div><div class="deliv-desc" data-en="Contribution-to-variance tornado chart showing the top 10 risk drivers for CAPEX and NPV." data-fa="نمودار تورنادو سهم در واریانس که ۱۰ محرک ریسک برتر برای CAPEX و NPV را نشان می‌دهد.">Contribution-to-variance tornado chart showing the top 10 risk drivers for CAPEX and NPV.</div></div>
+        <div class="deliv-card"><div class="deliv-icon">📊</div><div class="deliv-name" data-en="Contingency Report" data-fa="گزارش احتیاط">Contingency Report</div><div class="deliv-desc" data-en="WBS-level contingency allocation per AACE RP 44R-08 with full methodology documentation." data-fa="تخصیص احتیاط در سطح WBS طبق AACE RP 44R-08 با مستندات روش‌شناسی کامل.">WBS-level contingency allocation per AACE RP 44R-08 with full methodology documentation.</div></div>
+        <div class="deliv-card"><div class="deliv-icon">🛡️</div><div class="deliv-name" data-en="Mitigation Plan" data-fa="برنامه کاهش ریسک">Mitigation Plan</div><div class="deliv-desc" data-en="Detailed mitigation actions for all high and critical risks with owner, timeline, and cost." data-fa="اقدامات کاهشی دقیق برای تمام ریسک‌های بالا و بحرانی با مالک، جدول زمانی و هزینه.">Detailed mitigation actions for all high and critical risks with owner, timeline, and cost.</div></div>
+        <div class="deliv-card"><div class="deliv-icon">🌐</div><div class="deliv-name" data-en="Bilingual EN/FA" data-fa="دوزبانه EN/FA">Bilingual EN/FA</div><div class="deliv-desc" data-en="Full Persian translation of risk report for Iranian regulatory and investor submissions." data-fa="ترجمه کامل فارسی گزارش ریسک برای ارائه‌های نظارتی و سرمایه‌گذار ایرانی.">Full Persian translation of risk report for Iranian regulatory and investor submissions.</div></div>
+        <div class="deliv-card"><div class="deliv-icon">📞</div><div class="deliv-name" data-en="Risk Workshop" data-fa="کارگاه ریسک">Risk Workshop</div><div class="deliv-desc" data-en="Half-day facilitated risk identification workshop with project team (virtual or on-site)." data-fa="کارگاه شناسایی ریسک نیم‌روزه با تسهیل‌گری با تیم پروژه (مجازی یا حضوری).">Half-day facilitated risk identification workshop with project team (virtual or on-site).</div></div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-band fade-up">
+      <h3 data-en="Add <em>Risk Analysis</em> to Your Study" data-fa="<em>تحلیل ریسک</em> را به مطالعه خود اضافه کنید">Add <em>Risk Analysis</em> to Your Study</h3>
+      <p data-en="KDMine's risk analysis package can be added to any CAPEX/OPEX or feasibility study engagement. Contact us for a fixed-fee proposal." data-fa="بسته تحلیل ریسک KDMine می‌تواند به هر تعامل مطالعه CAPEX/OPEX یا امکان‌سنجی اضافه شود. برای یک پیشنهاد با هزینه ثابت با ما تماس بگیرید.">KDMine's risk analysis package can be added to any CAPEX/OPEX or feas ibility study engagement. Contact us for a fixed-fee proposal.</p>
+      <div class="cta-btns">
+        <button class="btn-gold"><i class="fas fa-paper-plane"></i> <span data-en="Request Risk Study" data-fa="درخواست مطالعه ریسک">Request Risk Study</span></button>
+        <button class="btn-outline"><i class="fas fa-tags"></i> <span data-en="View Pricing" data-fa="مشاهده قیمت‌گذاری">View Pricing</span></button>
+        <button class="btn-outline"><i class="fas fa-calculator"></i> <span data-en="CAPEX Calculator" data-fa="ماشین‌حساب CAPEX">CAPEX Calculator</span></button>
+      </div>
+    </div>
+
+  </div><!-- end .wrap -->
+
+  <div class="footer-mini">
+    <p data-en="© 2026 KDMine Consultancy. Risk ratings and Monte Carlo outputs are illustrative reference values only." data-fa="© ۱۴۰۵ مشاوره KDMine. رتبه‌بندی ریسک و خروجی‌های مونت کارلو فقط مقادیر مرجع تصویری هستند.">© 2026 KDMine Consultancy. Risk ratings and Monte Carlo outputs are illustrative reference values only.</p>
+    <a href="index.html" data-en="← Back to Main Site" data-fa="← بازگشت به سایت اصلی">← Back to Main Site</a>
+  </div>
+
+  <script>
+  // ══════════════════════════════════════════════
+  // DATA
+  // ══════════════════════════════════════════════
+
+  const riskData = [
+    {id:'R01',desc:'CAPEX cost overrun due to scope growth',cat:'Technical',prob:4,impact:5,rating:'Critical',capex:'+15–25%',mit:'Fixed-price EPC contracts; detailed scope freeze'},
+    {id:'R02',desc:'Commodity price decline below breakeven',cat:'Commercial',prob:3,impact:5,rating:'High',capex:'Revenue',mit:'Hedging strategy; low-cost design optimisation'},
+    {id:'R03',desc:'Geotechnical surprises — pit wall instability',cat:'Technical',prob:3,impact:4,rating:'High',capex:'+8–18%',mit:'Infill drilling; observational method'},
+    {id:'R04',desc:'Permitting delays > 12 months',cat:'Regulatory',prob:3,impact:4,rating:'High',capex:'+5–12%',mit:'Early community engagement; parallel permitting'},
+    {id:'R05',desc:'Metallurgical recovery below design',cat:'Technical',prob:2,impact:4,rating:'Medium',capex:'Revenue −5%',mit:'Variability test work; pilot plant'},
+    {id:'R06',desc:'Labour cost escalation > 15%',cat:'Commercial',prob:3,impact:3,rating:'Medium',capex:'+4–8%',mit:'Local labour agreements; EPCM fixed-fee'},
+    {id:'R07',desc:'Water supply shortfall in arid region',cat:'Environmental',prob:2,impact:4,rating:'Medium',capex:'+6–14%',mit:'Water balance study; desalination option'},
+    {id:'R08',desc:'Import duty / sanctions on equipment',cat:'Geopolitical',prob:3,impact:3,rating:'Medium',capex:'+3–10%',mit:'Alternative OEM sourcing; duty exemption'},
+    {id:'R09',desc:'Power supply unavailability / grid failure',cat:'Technical',prob:2,impact:3,rating:'Medium',capex:'+2–6%',mit:'Diesel backup; solar hybrid feasibility'},
+    {id:'R10',desc:'Tailings dam regulatory non-compliance',cat:'Environmental',prob:2,impact:5,rating:'High',capex:'+10–20%',mit:'GISTM compliance; independent review'},
+    {id:'R11',desc:'FX rate adverse movement > 20%',cat:'Commercial',prob:3,impact:3,rating:'Medium',capex:'±8%',mit:'USD-denominated contracts; FX hedging'},
+    {id:'R12',desc:'Community opposition / social licence',cat:'Geopolitical',prob:2,impact:4,rating:'Medium',capex:'+5–15%',mit:'Community benefit agreements; IFC PS7'},
+  ];
+
+  const riskLegendData = [
+    {id:'R01',label:'CAPEX Overrun',color:'#EF4444'},
+    {id:'R02',label:'Commodity Price',color:'#F97316'},
+    {id:'R03',label:'Geotechnical',color:'#EF4444'},
+    {id:'R04',label:'Permitting',color:'#F97316'},
+    {id:'R05',label:'Metallurgy',color:'#E8C97A'},
+    {id:'R06',label:'Labour Cost',color:'#E8C97A'},
+    {id:'R07',label:'Water Supply',color:'#E8C97A'},
+    {id:'R08',label:'Import Duties',color:'#E8C97A'},
+    {id:'R10',label:'Tailings Dam',color:'#EF4444'},
+  ];
+
+  const distData = [
+    {variable:'Gold Price',type:'Triangular',p1:'Min: $1,500/oz',p2:'Mode: $2,000/oz',p3:'Max: $2,800/oz',color:'#C9A84C',bars:[2,4,7,11,16,20,18,12,7,3]},
+    {variable:'CAPEX Total',type:'Lognormal',p1:'P10: $428M',p2:'P50: $512M',p3:'P90: $618M',color:'#EF4444',bars:[1,3,6,12,18,22,17,11,6,4]},
+    {variable:'Plant Throughput',type:'Triangular',p1:'Min: 8.5 Mtpa',p2:'Mode: 10 Mtpa',p3:'Max: 11.5 Mtpa',color:'#0EA5E9',bars:[2,5,10,16,22,20,14,7,3,1]},
+    {variable:'Head Grade',type:'Normal',p1:'Mean: 1.85 g/t',p2:'Std Dev: 0.18',p3:'Range: 1.3–2.4',color:'#22C55E',bars:[1,3,7,14,20,22,16,10,5,2]},
+    {variable:'Diesel Price',type:'Triangular',p1:'Min: $0.75/L',p2:'Mode: $1.05/L',p3:'Max: $1.55/L',color:'#F97316',bars:[3,6,10,15,19,18,13,8,5,3]},
+    {variable:'Recovery Rate',type:'Beta',p1:'Min: 88%',p2:'Mode: 93%',p3:'Max: 96%',color:'#A855F7',bars:[1,2,5,10,18,24,20,12,6,2]},
+  ];
+
+  const contingencyData = [
+    {group:true, area:'Direct Costs'},
+    {area:'Mining Fleet & Pre-Strip',base:'$85M',risk:'Medium',pct:'12%',dollar:'$10.2M',rationale:'Equipment pricing uncertainty, lead time risk'},
+    {area:'Process Plant',base:'$165M',risk:'High',pct:'18%',dollar:'$29.7M',rationale:'Complex equipment, vendor quote variability'},
+    {area:'Infrastructure',base:'$95M',risk:'Medium',pct:'14%',dollar:'$13.3M',rationale:'Civil quantities, geotechnical uncertainty'},
+    {area:'Tailings Facility',base:'$35M',risk:'High',pct:'20%',dollar:'$7.0M',rationale:'Regulatory requirements, design evolution'},
+    {group:true, area:'Indirect Costs'},
+    {area:'EPCM & Engineering',base:'$55M',risk:'Low',pct:'8%',dollar:'$4.4M',rationale:'Well-defined scope, fixed-fee contract'},
+    {area:"Owner's Costs",base:'$30M',risk:'Medium',pct:'12%',dollar:'$3.6M',rationale:'Pre-production cost uncertainty'},
+    {group:true, area:'Summary'},
+    {area:'Total Base Cost',base:'$465M',risk:'—',pct:'—',dollar:'—',rationale:'Excluding contingency'},
+    {area:'Total Contingency',base:'—',risk:'Mixed',pct:'14.7%',dollar:'$68.2M',rationale:'AACE RP 44R-08, P75 confidence'},
+    {area:'TOTAL PROJECT CAPEX',base:'$500M',risk:'—',pct:'—',dollar:'$68.2M',rationale:'Including contingency (P75)',total:true},
+  ];
+
+  const mitigData = [
+    {icon:'📐',title:'Scope Freeze & Change Control',desc:'Implement formal scope freeze at Class 3 study stage. All scope changes require cost impact assessment and approval before implementation.',impact:'Reduces CAPEX overrun risk by 40–60%'},
+    {icon:'🔩',title:'Early Equipment Procurement',desc:'Place long-lead equipment orders (SAG mill, gyratory crusher) at PFS stage to lock in pricing and avoid schedule delays.',impact:'Eliminates 12–18 month schedule risk'},
+    {icon:'🌍',title:'Geotechnical Investigation',desc:'Infill drilling and laboratory testing to reduce geotechnical uncertainty. Observational method for pit wall design.',impact:'Reduces geotech contingency by 50%'},
+    {icon:'📋',title:'Parallel Permitting',desc:'Commence environmental impact assessment and community consultation in parallel with engineering to avoid permitting delays.',impact:'Saves 6–18 months on project schedule'},
+    {icon:'💧',title:'Water Balance Study',desc:'Detailed water balance model for all seasons and mine life stages. Identify water supply risks and alternative sources early.',impact:'Prevents water supply cost surprises'},
+    {icon:'🏭',title:'Alternative OEM Sourcing',desc:'Pre-qualify Chinese and Eastern European OEMs as alternatives to Western suppliers for sanctioned markets. Dual-source critical items.',impact:'Reduces import duty risk by 30–50%'},
+    {icon:'💱',title:'FX & Commodity Hedging',desc:'Implement USD-denominated contracts where possible. Evaluate gold price hedging strategy for first 2–3 years of production.',impact:'Reduces revenue volatility by 20–35%'},
+    {icon:'🤝',title:'Community Benefit Agreements',desc:'Negotiate community benefit agreements and local employment commitments before permitting to secure social licence to operate.',impact:'Prevents costly project delays'},
+    {icon:'🛡️',title:'GISTM Tailings Compliance',desc:'Design tailings storage facility to Global Industry Standard on Tailings Management (GISTM) from the outset.',impact:'Avoids costly redesign and regulatory risk'},
+  ];
+
+  // ══════════════════════════════════════════════
+  // RENDER FUNCTIONS
+  // ══════════════════════════════════════════════
+
+  function renderRiskTable() {
+    const ratingClass = {Critical:'rb-crit',High:'rb-high',Medium:'rb-med',Low:'rb-low'};
+    document.getElementById('riskTableBody').innerHTML = riskData.map(r => `
+      <tr>
+        <td style="color:var(--gold);font-size:11px;">${r.id}</td>
+        <td>${r.desc}</td>
+        <td><span class="risk-cat">${r.cat}</span></td>
+        <td style="text-align:center;">${r.prob}/5</td>
+        <td style="text-align:center;">${r.impact}/5</td>
+        <td><span class="risk-badge ${ratingClass[r.rating]}">${r.rating}</span></td>
+        <td style="font-size:11px;color:var(--orange);">${r.capex}</td>
+        <td style="font-size:11px;">${r.mit}</td>
+      </tr>`).join('');
+  }
+
+  function renderRiskMatrix() {
+    // Build a simple 5x5 SVG-style matrix using divs
+    const labels = ['5','4','3','2','1'];
+    const xlabels = ['1','2','3','4','5'];
+    const getCellClass = (row,col) => {
+      const score = (6-row)*col;
+      if(score>=16) return 'rm-crit';
+      if(score>=9)  return 'rm-high';
+      if(score>=4)  return 'rm-med';
+      return 'rm-low';
+    };
+    // Place risks on matrix
+    const riskPositions = {};
+    riskData.forEach(r => {
+      const key = `${r.prob}-${r.impact}`;
+      if(!riskPositions[key]) riskPositions[key]=[];
+      riskPositions[key].push(r.id);
+    });
+
+    let html = `<div style="display:inline-grid;grid-template-columns:28px repeat(5,52px);grid-template-rows:repeat(5,44px) 28px;gap:3px;">`;
+    // rows top to bottom = impact 5..1
+    for(let row=5;row>=1;row--){
+      html += `<div style="display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--text-muted);font-weight:700;">${row}</div>`;
+      for(let col=1;col<=5;col++){
+        const cls = getCellClass(row,col);
+        const key = `${col}-${row}`;
+        const risks = riskPositions[key]||[];
+        const dots = risks.map(id=>`<div class="rm-dot" style="background:rgba(255,255,255,0.15);color:#fff;font-size:8px;">${id.replace('R','')}</div>`).join('');
+        html += `<div class="rm-cell ${cls}" style="flex-wrap:wrap;gap:2px;">${dots||''}</div>`;
+      }
+    }
+    // x-axis labels
+    html += `<div></div>`;
+    xlabels.forEach(l => { html += `<div style="display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--text-muted);font-weight:700;">${l}</div>`; });
+    html += `</div>`;
+    html += `<div style="font-size:10px;color:var(--text-muted);margin-top:8px;text-align:center;">← Probability →</div>`;
+    html += `<div style="font-size:10px;color:var(--text-muted);margin-top:2px;text-align:center;writing-mode:horizontal-tb;">↑ Impact ↑</div>`;
+    document.getElementById('riskMatrixViz').innerHTML = html;
+
+    // Legend
+    document.getElementById('riskLegend').innerHTML = riskLegendData.map(r=>`
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div style="width:22px;height:22px;border-radius:50%;background:${r.color}33;border:1px solid ${r.color};display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:${r.color};">${r.id.replace('R','')}</div>
+        <span style="font-size:11px;color:var(--text-muted);">${r.label}</span>
+      </div>`).join('');
+  }
+
+  function renderDistGrid() {
+    document.getElementById('distGrid').innerHTML = distData.map(d => {
+      const maxBar = Math.max(...d.bars);
+      const barsHtml = d.bars.map(v=>`
+        <div class="dist-bar-col" style="height:${(v/maxBar)*100}%;background:${d.color}88;"></div>`).join('');
+      return `
+      <div class="dist-card">
+        <div class="dist-var">${d.variable}</div>
+        <div class="dist-type">${d.type} Distribution</div>
+        <div class="dist-params">
+          <div class="dist-param"><span class="dist-param-label">${d.p1.split(':')[0]}</span><span class="dist-param-val">${d.p1.split(':')[1]}</span></div>
+          <div class="dist-param"><span class="dist-param-label">${d.p2.split(':')[0]}</span><span class="dist-param-val">${d.p2.split(':')[1]}</span></div>
+          <div class="dist-param"><span class="dist-param-label">${d.p3.split(':')[0]}</span><span class="dist-param-val">${d.p3.split(':')[1]}</span></div>
+        </div>
+        <div class="dist-bar-wrap">
+          <div class="dist-bar-inner">${barsHtml}</div>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  function renderContingencyTable() {
+    document.getElementById('contingencyTableBody').innerHTML = contingencyData.map(r => {
+      if(r.group) return `<tr class="cont-group"><td colspan="6">${r.area}</td></tr>`;
+      if(r.total) return `<tr style="background:rgba(201,168,76,0.06);">
+        <td style="color:var(--gold);font-weight:900;">${r.area}</td>
+        <td style="color:var(--gold);font-weight:900;">${r.base}</td>
+        <td>—</td>
+        <td style="color:var(--gold);font-weight:900;">${r.pct}</td>
+        <td style="color:var(--gold);font-weight:900;">${r.dollar}</td>
+        <td style="font-size:11px;">${r.rationale}</td>
+      </tr>`;
+      const riskColor = {High:'var(--red)',Medium:'var(--orange)',Low:'var(--green)','—':'var(--text-muted)'};
+      return `<tr>
+        <td>${r.area}</td>
+        <td>${r.base}</td>
+        <td style="color:${riskColor[r.risk]||'var(--text-muted)'};font-weight:700;">${r.risk}</td>
+        <td style="color:var(--gold);font-weight:700;">${r.pct}</td>
+        <td style="color:#fff;font-weight:700;">${r.dollar}</td>
+        <td style="font-size:11px;">${r.rationale}</td>
+      </tr>`;
+    }).join('');
+  }
+
+  function renderMitigGrid() {
+    document.getElementById('mitigGrid').innerHTML = mitigData.map(m=>`
+      <div class="mitig-card">
+        <div class="mitig-icon">${m.icon}</div>
+        <div class="mitig-title">${m.title}</div>
+        <div class="mitig-desc">${m.desc}</div>
+        <div class="mitig-impact">✓ ${m.impact}</div>
+      </div>`).join('');
+  }
+
+  // ══════════════════════════════════════════════
+  // CHARTS
+  // ══════════════════════════════════════════════
+
+  function buildRiskPie() {
+    new Chart(document.getElementById('riskPieChart'),{
+      type:'doughnut',
+      data:{
+        labels:['Technical','Commercial','Environmental','Regulatory','Geopolitical'],
+        datasets:[{
+          data:[42,28,14,10,6],
+          backgroundColor:['#EF4444','#F97316','#22C55E','#0EA5E9','#A855F7'],
+          borderColor:'#161E2E',borderWidth:3
+        }]
+      },
+      options:{
+        cutout:'60%',
+        plugins:{
+          legend:{position:'right',labels:{color:'#7A8BA8',font:{size:11},padding:8}},
+          tooltip:{callbacks:{label:ctx=>`${ctx.label}: ${ctx.parsed}%`}}
+        }
+      }
+    });
+  }
+
+  function buildMCCapexChart() {
+    const bins = [380,400,420,440,460,480,500,520,540,560,580,600,620,640,660,680];
+    const freq = [1,2,4,7,10,14,18,16,12,8,5,3,2,1,1,1];
+    new Chart(document.getElementById('mcCapexChart'),{
+      type:'bar',
+      data:{
+        labels: bins.map(b=>'$'+b+'M'),
+        datasets:[{
+          label:'Frequency',
+          data: freq,
+          backgroundColor: bins.map(b=>{
+            if(b<=428) return 'rgba(14,165,233,0.6)';
+            if(b<=618) return 'rgba(201,168,76,0.6)';
+            return 'rgba(239,68,68,0.6)';
+          }),
+          borderRadius:3,borderSkipped:false
+        }]
+      },
+      options:{
+        plugins:{
+          legend:{display:false},
+          annotation:{annotations:{
+            p50:{type:'line',x:'$512M',borderColor:'#C9A84C',borderWidth:2}
+          }}
+        },
+        scales:{
+          x:{ticks:{color:'#7A8BA8',font:{size:9},maxRotation:45},grid:{color:'rgba(255,255,255,0.04)'}},
+          y:{ticks:{color:'#7A8BA8',font:{size:10}},grid:{color:'rgba(255,255,255,0.04)'},title:{display:true,text:'Frequency (%)',color:'#7A8BA8',font:{size:10}}}
+        }
+      }
+    });
+  }
+
+  function buildMCNpvChart() {
+    const npvBins = [50,100,150,200,250,300,350,400,450,500,550,600];
+    const npvFreq = [1,2,4,8,13,18,20,15,10,5,3,1];
+    new Chart(document.getElementById('mcNpvChart'),{
+      type:'bar',
+      data:{
+        labels: npvBins.map(b=>'$'+b+'M'),
+        datasets:[{
+          label:'NPV Distribution',
+          data: npvFreq,
+          backgroundColor: npvBins.map(b=>{
+            if(b<=168) return 'rgba(239,68,68,0.5)';
+            if(b<=488) return 'rgba(201,168,76,0.6)';
+            return 'rgba(34,197,94,0.5)';
+          }),
+          borderRadius:3,borderSkipped:false
+        }]
+      },
+      options:{
+        plugins:{legend:{display:false}},
+        scales:{
+          x:{ticks:{color:'#7A8BA8',font:{size:9},maxRotation:45},grid:{color:'rgba(255,255,255,0.04)'}},
+          y:{ticks:{color:'#7A8BA8',font:{size:10}},grid:{color:'rgba(255,255,255,0.04)'},title:{display:true,text:'Frequency (%)',color:'#7A8BA8',font:{size:10}}}
+        }
+      }
+    });
+  }
+
+  function buildContingencyChart() {
+    new Chart(document.getElementById('contingencyChart'),{
+      type:'bar',
+      data:{
+        labels:['Class 5\n±50%','Class 4\n±30%','Class 3\n±20%','Class 2\n±10%','Class 1\n±5%'],
+        datasets:[
+          {label:'Typical Contingency %',data:[35,22,15,8,4],backgroundColor:'rgba(201,168,76,0.7)',borderRadius:6},
+          {label:'Max Contingency %',data:[50,30,20,12,6],backgroundColor:'rgba(239,68,68,0.3)',borderRadius:6}
+        ]
+      },
+      options:{
+        plugins:{legend:{labels:{color:'#7A8BA8',font:{size:10}}}},
+        scales:{
+          x:{ticks:{color:'#7A8BA8',font:{size:10}},grid:{color:'rgba(255,255,255,0.04)'}},
+          y:{ticks:{color:'#7A8BA8',callback:v=>v+'%'},grid:{color:'rgba(255,255,255,0.04)'},title:{display:true,text:'Contingency (%)',color:'#7A8BA8',font:{size:10}}}
+        }
+      }
+    });
+  }
+
+  // ══════════════════════════════════════════════
+  // TAB SWITCH
+  // ══════════════════════════════════════════════
+  function switchTab(id,btn){
+    document.querySelectorAll('.tab-section').forEach(s=>s.classList.remove('active'));
+    document.querySelectorAll('.mtab').forEach(t=>t.classList.remove('active'));
+    document.getElementById('tab-'+id).classList.add('active');
+    btn.classList.add('active');
+    document.querySelectorAll('#tab-'+id+' .fade-up').forEach(el=>{
+      el.classList.remove('visible');
+      setTimeout(()=>obs.observe(el),50);
+    });
+  }
+
+  // ══════════════════════════════════════════════
+  // LANGUAGE
+  // ══════════════════════════════════════════════
+  let currentLang='en';
+  function setLang(lang){
+    currentLang=lang;
+    document.getElementById('btn-en').classList.toggle('active',lang==='en');
+    document.getElementById('btn-fa').classList.toggle('active',lang==='fa');
+    const body=document.getElementById('body');
+    if(lang==='fa'){body.classList.add('fa');body.setAttribute('dir','rtl');}
+    else{body.classList.remove('fa');body.setAttribute('dir','ltr');}
+    document.querySelectorAll('[data-'+lang+']').forEach(el=>{
+      const v=el.getAttribute('data-'+lang);
+      if(!v)return;
+      if(el.tagName==='INPUT'||el.tagName==='TEXTAREA')el.placeholder=v;
+      else el.innerHTML=v;
+    });
+  }
+
+  // ══════════════════════════════════════════════
+  // FADE UP
+  // ══════════════════════════════════════════════
+  const obs=new IntersectionObserver(entries=>
+    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),
+    {threshold:0.05}
+  );
+  document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+
+  // ══════════════════════════════════════════════
+  // INIT
+  // ══════════════════════════════════════════════
+  renderRiskTable();
+  renderRiskMatrix();
+  renderDistGrid();
+  renderContingencyTable();
+  renderMitigGrid();
+  buildRiskPie();
+  buildMCCapexChart();
+  buildMCNpvChart();
+  buildContingencyChart();
+  </script>
+</body>
+</html>

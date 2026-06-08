@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mining Cost Calculator | KDMine</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      --gold:#C9A84C;--gold-light:#E8C97A;--gold-dark:#A07830;
+      --dark:#080C16;--dark2:#0F1520;--dark3:#161E2E;--dark4:#1E2840;
+      --text:#E8EDF5;--text-muted:#7A8BA8;
+      --border:rgba(201,168,76,0.2);--border2:rgba(255,255,255,0.06);
+      --green:#22C55E;--blue:#0EA5E9;--purple:#A855F7;--red:#EF4444;--orange:#F97316;
+    }
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;background:var(--dark);color:var(--text);overflow-x:hidden;}
+    body.fa{font-family:'Vazirmatn',sans-serif;direction:rtl;}
+    ::-webkit-scrollbar{width:5px;}
+    ::-webkit-scrollbar-track{background:var(--dark2);}
+    ::-webkit-scrollbar-thumb{background:var(--gold-dark);border-radius:3px;}
+
+    .lang-bar{position:fixed;top:0;left:0;right:0;z-index:2000;height:36px;background:var(--gold-dark);display:flex;align-items:center;justify-content:flex-end;padding:0 5%;gap:12px;}
+    .lang-btn{padding:4px 14px;border-radius:20px;border:none;cursor:pointer;font-size:12px;font-weight:700;transition:.2s;}
+    .lang-btn.active{background:var(--dark);color:var(--gold);}
+    .lang-btn:not(.active){background:rgba(0,0,0,0.2);color:rgba(0,0,0,0.7);}
+
+    nav{position:fixed;top:36px;left:0;right:0;z-index:1000;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:70px;background:rgba(8,12,22,0.95);backdrop-filter:blur(24px);border-bottom:1px solid var(--border2);}
+    .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+    .nav-logo-icon{width:42px;height:42px;border-radius:11px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));display:flex;align-items:center;justify-content:center;font-weight:900;font-size:17px;color:var(--dark);}
+    .nav-logo-text{font-size:21px;font-weight:800;color:#fff;}
+    .nav-logo-text span{color:var(--gold);}
+    .nav-back{display:flex;align-items:center;gap:8px;padding:9px 20px;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text);font-size:13px;font-weight:600;text-decoration:none;transition:.2s;}
+    .nav-back:hover{border-color:var(--gold);color:var(--gold);}
+
+    /* HERO */
+    .page-hero{padding:130px 5% 50px;position:relative;overflow:hidden;background:linear-gradient(160deg,var(--dark),var(--dark2));text-align:center;}
+    .hero-glow{position:absolute;top:-80px;right:-80px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.08),transparent 70%);}
+    .hero-glow2{position:absolute;bottom:-80px;left:-60px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(14,165,233,0.05),transparent 70%);}
+    .hero-inner{position:relative;z-index:1;max-width:680px;margin:0 auto;}
+    .breadcrumb{display:flex;align-items:center;justify-content:center;gap:8px;font-size:13px;color:var(--text-muted);margin-bottom:18px;}
+    .breadcrumb a{color:var(--gold);text-decoration:none;}
+    .breadcrumb span{opacity:.5;}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border-radius:20px;background:rgba(201,168,76,0.1);border:1px solid var(--border);font-size:12px;font-weight:700;color:var(--gold);margin-bottom:18px;}
+    .page-hero h1{font-size:clamp(34px,5vw,58px);font-weight:900;color:#fff;letter-spacing:-2px;margin-bottom:14px;line-height:1.08;}
+    .page-hero h1 em{background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal;}
+    .page-hero p{font-size:16px;color:var(--text-muted);line-height:1.75;}
+
+    /* WIZARD BAR */
+    .wizard-bar{background:var(--dark2);border-bottom:1px solid var(--border2);padding:18px 5%;position:sticky;top:106px;z-index:100;}
+    .wizard-steps{display:flex;align-items:center;max-width:860px;margin:0 auto;gap:0;}
+    .ws{display:flex;align-items:center;flex:1;position:relative;}
+    .ws-connector{flex:1;height:2px;background:var(--border2);transition:.4s;}
+    .ws-connector.done{background:var(--gold);}
+    .ws-dot{width:36px;height:36px;border-radius:50%;border:2px solid var(--border2);background:var(--dark3);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:var(--text-muted);transition:.3s;flex-shrink:0;cursor:pointer;z-index:1;}
+    .ws-dot.active{border-color:var(--gold);background:rgba(201,168,76,0.15);color:var(--gold);}
+    .ws-dot.done{border-color:var(--gold);background:var(--gold);color:var(--dark);}
+    .ws-label{position:absolute;top:44px;left:50%;transform:translateX(-50%);font-size:10px;font-weight:700;color:var(--text-muted);white-space:nowrap;text-transform:uppercase;letter-spacing:.5px;}
+    .ws-dot.active + .ws-label,.ws-dot.done + .ws-label{color:var(--gold);}
+
+    /* MAIN LAYOUT */
+    .calc-layout{display:grid;grid-template-columns:1fr 380px;gap:28px;padding:48px 5%;max-width:1400px;margin:0 auto;}
+
+    /* FORM PANEL */
+    .form-panel{display:flex;flex-direction:column;gap:0;}
+    .step-panel{display:none;}
+    .step-panel.active{display:block;}
+
+    .step-header{margin-bottom:28px;}
+    .step-num{font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;}
+    .step-title{font-size:26px;font-weight:800;color:#fff;letter-spacing:-.5px;margin-bottom:8px;}
+    .step-sub{font-size:14px;color:var(--text-muted);line-height:1.65;}
+
+    /* FORM ELEMENTS */
+    .fg{margin-bottom:20px;}
+    .fg label{display:block;font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px;}
+    .fg input,.fg select,.fg textarea{width:100%;padding:13px 16px;border-radius:12px;background:var(--dark3);border:1px solid var(--border2);color:var(--text);font-size:14px;font-family:inherit;transition:.2s;outline:none;}
+    .fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--gold);background:rgba(201,168,76,0.03);}
+    .fg select option{background:var(--dark3);}
+    .fg .hint{font-size:11px;color:var(--text-muted);margin-top:6px;}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    .form-row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+
+    /* RANGE SLIDER */
+    .range-wrap{position:relative;padding-bottom:20px;}
+    .range-wrap input[type=range]{width:100%;-webkit-appearance:none;height:6px;border-radius:3px;background:var(--dark4);outline:none;cursor:pointer;}
+    .range-wrap input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-dark));cursor:pointer;box-shadow:0 2px 8px rgba(201,168,76,0.4);}
+    .range-labels{display:flex;justify-content:space-between;font-size:10px;color:var(--text-muted);margin-top:6px;}
+    .range-val{position:absolute;top:-32px;background:var(--gold);color:var(--dark);font-size:11px;font-weight:800;padding:3px 8px;border-radius:6px;transform:translateX(-50%);white-space:nowrap;transition:left .1s;}
+    .range-val::after{content:'';position:absolute;bottom:-5px;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--gold);}
+
+    /* OPTION CARDS */
+    .option-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:4px;}
+    .option-cards.cols2{grid-template-columns:repeat(2,1fr);}
+    .opt-card{border:2px solid var(--border2);border-radius:14px;padding:16px;cursor:pointer;transition:.25s;text-align:center;background:var(--dark3);}
+    .opt-card:hover{border-color:var(--border);background:rgba(201,168,76,0.03);}
+    .opt-card.selected{border-color:var(--gold);background:rgba(201,168,76,0.08);}
+    .opt-card .oc-icon{font-size:26px;margin-bottom:8px;}
+    .opt-card .oc-label{font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;}
+    .opt-card .oc-sub{font-size:11px;color:var(--text-muted);}
+
+    /* CHECKBOX ITEMS */
+    .check-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    .check-item{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:10px;background:var(--dark3);border:1px solid var(--border2);cursor:pointer;transition:.2s;}
+    .check-item:hover{border-color:var(--border);}
+    .check-item.checked{border-color:var(--gold);background:rgba(201,168,76,0.06);}
+    .check-box{width:18px;height:18px;border-radius:5px;border:2px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.2s;}
+    .check-item.checked .check-box{background:var(--gold);border-color:var(--gold);color:var(--dark);}
+    .check-item .ci-text{font-size:13px;font-weight:600;color:var(--text-muted);}
+    .check-item.checked .ci-text{color:#fff;}
+
+    /* NAV BUTTONS */
+    .step-nav{display:flex;gap:12px;margin-top:32px;}
+    .btn-prev{padding:13px 28px;border-radius:12px;border:1px solid var(--border);background:transparent;color:var(--text-muted);font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;transition:.2s;}
+    .btn-prev:hover{border-color:var(--gold);color:var(--gold);}
+    .btn-next{flex:1;padding:13px;border-radius:12px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--dark);font-size:15px;font-weight:800;border:none;cursor:pointer;font-family:inherit;transition:.2s;display:flex;align-items:center;justify-content:center;gap:10px;}
+    .btn-next:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(201,168,76,0.4);}
+    .btn-next:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+
+    /* RESULTS PANEL (sticky) */
+    .results-panel{position:sticky;top:180px;height:fit-content;}
+    .rp-card{background:var(--dark3);border:1px solid var(--border2);border-radius:22px;overflow:hidden;}
+    .rp-header{padding:20px 24px;background:linear-gradient(135deg,var(--dark4),var(--dark3));border-bottom:1px solid var(--border2);}
+    .rp-title{font-size:14px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
+    .rp-sub{font-size:12px;color:var(--text-muted);}
+    .rp-body{padding:20px 24px;}
+
+    /* LIVE ESTIMATE */
+    .live-total{text-align:center;padding:20px 0;border-bottom:1px solid var(--border2);margin-bottom:20px;}
+    .lt-label{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+    .lt-value{font-size:38px;font-weight:900;color:#fff;letter-spacing:-2px;line-height:1;}
+    .lt-value em{color:var(--gold);font-style:normal;font-size:22px;}
+    .lt-range{font-size:12px;color:var(--text-muted);margin-top:6px;}
+    .lt-class{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;background:rgba(201,168,76,0.1);border:1px solid var(--border);font-size:11px;font-weight:700;color:var(--gold);margin-top:8px;}
+
+    /* BREAKDOWN BARS */
+    .breakdown-list{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+    .bd-item{}
+    .bd-top{display:flex;justify-content:space-between;margin-bottom:5px;}
+    .bd-label{font-size:12px;font-weight:600;color:var(--text-muted);}
+    .bd-val{font-size:12px;font-weight:800;color:#fff;}
+    .bd-bar-wrap{height:6px;background:var(--dark4);border-radius:3px;overflow:hidden;}
+    .bd-bar{height:100%;border-radius:3px;transition:width .8s ease;}
+
+    /* AACE CLASS METER */
+    .class-meter{background:var(--dark4);border-radius:12px;padding:14px;margin-bottom:16px;}
+    .cm-title{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;}
+    .cm-classes{display:flex;gap:4px;}
+    .cm-cls{flex:1;height:8px;border-radius:4px;background:var(--dark3);transition:.4s;}
+    .cm-cls.active{background:var(--gold);}
+    .cm-labels{display:flex;justify-content:space-between;margin-top:6px;}
+    .cm-lbl{font-size:9px;color:var(--text-muted);font-weight:600;}
+
+    /* QUICK STATS */
+    .quick-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;}
+    .qs-item{background:var(--dark4);border-radius:10px;padding:12px;text-align:center;}
+    .qs-val{font-size:16px;font-weight:800;color:#fff;}
+    .qs-lbl{font-size:10px;color:var(--text-muted);margin-top:3px;}
+
+    /* CTA IN PANEL */
+    .rp-cta{padding:16px;background:linear-gradient(135deg,rgba(201,168,76,0.1),rgba(201,168,76,0.03));border-top:1px solid var(--border2);}
+    .rp-cta p{font-size:12px;color:var(--text-muted);margin-bottom:10px;line-height:1.5;}
+    .rp-cta-btn{width:100%;padding:12px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--dark);font-weight:700;font-size:13px;border:none;cursor:pointer;font-family:inherit;transition:.2s;}
+    .rp-cta-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(201,168,76,0.4);}
+
+    /* RESULTS FULL PAGE */
+    .results-full{display:none;padding:48px 5%;max-width:1200px;margin:0 auto;}
+    .results-full.show{display:block;}
+    .rf-hero{background:linear-gradient(135deg,var(--dark3),var(--dark4));border:1px solid var(--border);border-radius:24px;padding:40px;margin-bottom:32px;text-align:center;position:relative;overflow:hidden;}
+    .rf-hero::before{content:'';position:absolute;top:-60px;right:-60px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.1),transparent 70%);}
+    .rf-hero h2{font-size:clamp(24px,3vw,36px);font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:8px;}
+    .rf-hero p{font-size:15px;color:var(--text-muted);}
+    .rf-total{font-size:clamp(40px,6vw,72px);font-weight:900;color:#fff;letter-spacing:-3px;margin:16px 0 8px;}
+    .rf-total em{color:var(--gold);font-style:normal;}
+    .rf-range-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;border-radius:20px;background:rgba(201,168,76,0.1);border:1px solid var(--border);font-size:13px;color:var(--gold);font-weight:700;}
+    .rf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:32px;}
+    .rf-card{background:var(--dark3);border:1px solid var(--border2);border-radius:18px;padding:24px;}
+    .rf-card h4{font-size:12px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;}
+    .rf-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border2);}
+    .rf-row:last-child{border-bottom:none;}
+    .rf-row .rl{font-size:13px;color:var(--text-muted);}
+    .rf-row .rv{font-size:13px;font-weight:700;color:#fff;}
+    .rf-row .rv.gold{color:var(--gold);}
+    .chart-wrap{background:var(--dark3);border:1px solid var(--border2);border-radius:18px;padding:24px;margin-bottom:32px;}
+    .chart-title{font-size:15px;font-weight:700;color:#fff;margin-bottom:20px;}
+    .donut-row{display:flex;align-items:center;gap:40px;flex-wrap:wrap;}
+    .donut-svg{flex-shrink:0;}
+    .donut-legend{display:flex;flex-direction:column;gap:10px;flex:1;}
+    .dl-item{display:flex;align-items:center;gap:10px;}
+    .dl-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0;}
+    .dl-label{font-size:13px;color:var(--text-muted);flex:1;}
+    .dl-val{font-size:13px;font-weight:700;color:#fff;}
+    .dl-pct{font-size:11px;color:var(--text-muted);margin-left:4px;}
+    .rf-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:48px;}
+    .btn-gold{padding:14px 28px;border-radius:12px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--dark);font-weight:700;font-size:14px;border:none;cursor:pointer;font-family:inherit;transition:.2s;display:inline-flex;align-items:center;gap:8px;}
+    .btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,0.4);}
+    .btn-outline{padding:14px 28px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text);font-weight:600;font-size:14px;cursor:pointer;font-family:inherit;transition:.2s;display:inline-flex;align-items:center;gap:8px;}
+    .btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+
+    /* DISCLAIMER */
+    .disclaimer{background:rgba(239,68,68,0.05);border:1px solid rgba(239,68,68,0.15);border-radius:12px;padding:16px 20px;display:flex;gap:12px;margin-bottom:32px;}
+    .disclaimer i{color:var(--red);font-size:16px;flex-shrink:0;margin-top:2px;}
+    .disclaimer p{font-size:12px;color:var(--text-muted);line-height:1.6;}
+
+    /* FOOTER */
+    .footer-mini{background:var(--dark2);border-top:1px solid var(--border2);padding:28px 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;}
+    .footer-mini p{font-size:13px;color:var(--text-muted);}
+    .footer-mini a{font-size:13px;color:var(--gold);text-decoration:none;}
+
+    .fade-up{opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s;}
+    .fade-up.visible{opacity:1;transform:translateY(0);}
+
+    @media(max-width:1000px){
+      .calc-layout{grid-template-columns:1fr;}
+      .results-panel{position:static;}
+      .rf-grid{grid-template-columns:1fr 1fr;}
+    }
+    @media(max-width:640px){
+      .option-cards{grid-template-columns:1fr 1fr;}
+      .form-row,.form-row3{grid-template-columns:1fr;}
+      .check-grid{grid-template-columns:1fr;}
+      .rf-grid{grid-template-columns:1fr;}
+      .quick-stats{grid-template-columns:1fr 1fr;}
+    }
+  </style>
+</head>
+<body id="body">
+
+  <!-- LANG BAR -->
+  <div class="lang-bar">
+    <button class="lang-btn active" id="btn-en" onclick="setLang('en')">🇬🇧 English</button>
+    <button class="lang-btn" id="btn-fa" onclick="setLang('fa')">🇮🇷 فارسی</button>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">KD</div>
+      <span class="nav-logo-text">KD<span>Mine</span></span>
+    </a>
+    <a href="index.html" class="nav-back">
+      <i class="fas fa-arrow-left"></i>
+      <span data-en="Back to Home" data-fa="بازگشت به خانه">Back to Home</span>
+    </a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="page-hero">
+    <div class="hero-glow"></div>
+    <div class="hero-glow2"></div>
+    <div class="hero-inner fade-up">
+      <div class="breadcrumb">
+        <a href="index.html" data-en="Home" data-fa="خانه">Home</a>
+        <span>/</span>
+        <span data-en="Tools" data-fa="ابزارها">Tools</span>
+        <span>/</span>
+        <span data-en="Cost Calculator" data-fa="ماشین‌حساب هزینه">Cost Calculator</span>
+      </div>
+      <div class="hero-badge"><i class="fas fa-calculator"></i> <span data-en="AACE Class 4–5 Parametric Estimator" data-fa="برآوردگر پارامتریک AACE کلاس ۴–۵">AACE Class 4–5 Parametric Estimator</span></div>
+      <h1 data-en="Open-Pit Mining<br/><em>Cost Calculator</em>" data-fa="ماشین‌حساب هزینه<br/><em>معدن روباز</em>">Open-Pit Mining<br/><em>Cost Calculator</em></h1>
+      <p data-en="Get an instant AACE Class 4–5 CAPEX & OPEX estimate for your open-pit mining project in under 3 minutes. Based on 200+ real project benchmarks." data-fa="برآورد فوری CAPEX و OPEX کلاس ۴–۵ AACE برای پروژه معدن روباز خود را در کمتر از ۳ دقیقه دریافت کنید. بر اساس بیش از ۲۰۰ معیار پروژه واقعی.">Get an instant AACE Class 4–5 CAPEX & OPEX estimate for your open-pit mining project in under 3 minutes. Based on 200+ real project benchmarks.</p>
+    </div>
+  </div>
+
+  <!-- WIZARD BAR -->
+  <div class="wizard-bar">
+    <div class="wizard-steps" id="wizardSteps">
+      <div class="ws-dot active" id="dot1" onclick="goStep(1)">1<span class="ws-label" data-en="Project" data-fa="پروژه">Project</span></div>
+      <div class="ws-connector" id="con1"></div>
+      <div class="ws-dot" id="dot2" onclick="goStep(2)">2<span class="ws-label" data-en="Mine" data-fa="معدن">Mine</span></div>
+      <div class="ws-connector" id="con2"></div>
+      <div class="ws-dot" id="dot3" onclick="goStep(3)">3<span class="ws-label" data-en="Processing" data-fa="فرآوری">Processing</span></div>
+      <div class="ws-connector" id="con3"></div>
+      <div class="ws-dot" id="dot4" onclick="goStep(4)">4<span class="ws-label" data-en="Infrastructure" data-fa="زیرساخت">Infrastructure</span></div>
+      <div class="ws-connector" id="con4"></div>
+      <div class="ws-dot" id="dot5" onclick="goStep(5)">5<span class="ws-label" data-en="Results" data-fa="نتایج">Results</span></div>
+    </div>
+  </div>
+
+  <!-- MAIN CALCULATOR LAYOUT -->
+  <div class="calc-layout" id="calcLayout">
+
+    <!-- FORM PANEL -->
+    <div class="form-panel">
+
+      <!-- STEP 1: PROJECT INFO -->
+      <div class="step-panel active" id="step1">
+        <div class="step-header">
+          <div class="step-num" data-en="Step 1 of 4" data-fa="مرحله ۱ از ۴">Step 1 of 4</div>
+          <div class="step-title" data-en="Project Information" data-fa="اطلاعات پروژه">Project Information</div>
+          <div class="step-sub" data-en="Tell us about your project's basic parameters. These drive the top-level cost model." data-fa="پارامترهای اساسی پروژه خود را به ما بگویید. اینها مدل هزینه سطح بالا را هدایت می‌کنند.">Tell us about your project's basic parameters. These drive the top-level cost model.</div>
+        </div>
+
+        <div class="fg">
+          <label data-en="Commodity / Mineral Type" data-fa="کالا / نوع مواد معدنی">Commodity / Mineral Type</label>
+          <div class="option-cards" id="commodityCards">
+            <div class="opt-card selected" data-val="copper" onclick="selectOpt(this,'commodity')">
+              <div class="oc-icon">🟤</div>
+              <div class="oc-label" data-en="Copper" data-fa="مس">Copper</div>
+              <div class="oc-sub">Cu porphyry</div>
+            </div>
+            <div class="opt-card" data-val="gold" onclick="selectOpt(this,'commodity')">
+              <div class="oc-icon">🟡</div>
+              <div class="oc-label" data-en="Gold" data-fa="طلا">Gold</div>
+              <div class="oc-sub">Au oxide/sulphide</div>
+            </div>
+            <div class="opt-card" data-val="iron" onclick="selectOpt(this,'commodity')">
+              <div class="oc-icon">🔴</div>
+              <div class="oc-label" data-en="Iron Ore" data-fa="سنگ آهن">Iron Ore</div>
+              <div class="oc-sub">Fe magnetite/hematite</div>
+            </div>
+            <div class="opt-card" data-val="coal" onclick="selectOpt(this,'commodity')">
+              <div class="oc-icon">⚫</div>
+              <div class="oc-label" data-en="Coal" data-fa="زغال‌سنگ">Coal</div>
+              <div class="oc-sub">Thermal / coking</div>
+            </div>
+            <div class="opt-card" data-val="zinc" onclick="selectOpt(this,'commodity')">
+              <div class="oc-icon">🔵</div>
+              <div class="oc-label" data-en="Zinc / Lead" data-fa="روی / سرب">Zinc / Lead</div>
+              <div class="oc-sub">Zn-Pb polymetallic</div>
+            </div>
+            <div class="opt-card" data-val="other" onclick="selectOpt(this,'commodity')">
+              <div class="oc-icon">⚪</div>
+              <div class="oc-label" data-en="Other" data-fa="سایر">Other</div>
+              <div class="oc-sub">Nickel, lithium, etc.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fg">
+          <label data-en="Project Location / Region" data-fa="موقعیت / منطقه پروژه">Project Location / Region</label>
+          <select id="region" onchange="updateCalc()">
+            <option value="1.0" data-en="North America (Base)" data-fa="آمریکای شمالی (پایه)">North America (Base) — Factor 1.00</option>
+            <option value="1.15" data-en="Australia" data-fa="استرالیا">Australia — Factor 1.15</option>
+            <option value="0.90" data-en="South America (Chile/Peru)" data-fa="آمریکای جنوبی">South America (Chile/Peru) — Factor 0.90</option>
+            <option value="1.25" data-en="West Africa" data-fa="آفریقای غربی">West Africa — Factor 1.25</option>
+            <option value="0.80" data-en="Central Asia (Iran/Kazakhstan)" data-fa="آسیای مرکزی (ایران/قزاقستان)">Central Asia (Iran/Kazakhstan) — Factor 0.80</option>
+            <option value="1.10" data-en="Eastern Europe / CIS" data-fa="اروپای شرقی / CIS">Eastern Europe / CIS — Factor 1.10</option>
+            <option value="1.35" data-en="Remote / Greenfield (+35%)" data-fa="دورافتاده / سبز (+۳۵٪)">Remote / Greenfield (+35%) — Factor 1.35</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="fg">
+            <label data-en="AACE Estimate Class" data-fa="کلاس برآورد AACE">AACE Estimate Class</label>
+            <select id="aaceClass" onchange="updateCalc()">
+              <option value="5" data-en="Class 5 — Order of Magnitude" data-fa="کلاس ۵ — مرتبه بزرگی">Class 5 — Order of Magnitude</option>
+              <option value="4" selected data-en="Class 4 — Scoping Study" data-fa="کلاس ۴ — مطالعه اسکوپینگ">Class 4 — Scoping Study</option>
+              <option value="3" data-en="Class 3 — Pre-Feasibility" data-fa="کلاس ۳ — پیش‌امکان‌سنجی">Class 3 — Pre-Feasibility</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label data-en="Project Stage" data-fa="مرحله پروژه">Project Stage</label>
+            <select id="stage" onchange="updateCalc()">
+              <option data-en="Greenfield (New)" data-fa="سبز (جدید)">Greenfield (New)</option>
+              <option data-en="Brownfield (Expansion)" data-fa="قهوه‌ای (توسعه)">Brownfield (Expansion)</option>
+              <option data-en="Restart / Rehabilitation" data-fa="راه‌اندازی مجدد">Restart / Rehabilitation</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="step-nav">
+          <button class="btn-next" onclick="goStep(2)">
+            <span data-en="Next: Mine Parameters" data-fa="بعدی: پارامترهای معدن">Next: Mine Parameters</span>
+            <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 2: MINE PARAMETERS -->
+      <div class="step-panel" id="step2">
+        <div class="step-header">
+          <div class="step-num" data-en="Step 2 of 4" data-fa="مرحله ۲ از ۴">Step 2 of 4</div>
+          <div class="step-title" data-en="Mine Parameters" data-fa="پارامترهای معدن">Mine Parameters</div>
+          <div class="step-sub" data-en="Define the scale and characteristics of your open-pit mining operation." data-fa="مقیاس و ویژگی‌های عملیات معدن روباز خود را تعریف کنید.">Define the scale and characteristics of your open-pit mining operation.</div>
+        </div>
+
+        <div class="fg">
+          <label data-en="Annual Ore Production (Mt/year)" data-fa="تولید سالانه کانسنگ (میلیون تن/سال)">Annual Ore Production (Mt/year)</label>
+          <div class="range-wrap">
+            <div class="range-val" id="oreVal" style="left:25%">5 Mt/yr</div>
+            <input type="range" id="oreRate" min="1" max="100" value="5" step="1" oninput="updateRange('oreRate','oreVal',v=>v+' Mt/yr');updateCalc()"/>
+            <div class="range-labels"><span>1 Mt/yr</span><span>25 Mt/yr</span><span>50 Mt/yr</span><span>100 Mt/yr</span></div>
+          </div>
+        </div>
+
+        <div class="fg">
+          <label data-en="Strip Ratio (waste:ore)" data-fa="نسبت باطله‌برداری (باطله:کانسنگ)">Strip Ratio (waste:ore)</label>
+          <div class="range-wrap">
+            <div class="range-val" id="stripVal" style="left:30%">3:1</div>
+            <input type="range" id="stripRatio" min="0.5" max="15" value="3" step="0.5" oninput="updateRange('stripRatio','stripVal',v=>v+':1');updateCalc()"/>
+            <div class="range-labels"><span>0.5:1</span><span>4:1</span><span>8:1</span><span>15:1</span></div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="fg">
+            <label data-en="Mine Life (years)" data-fa="عمر معدن (سال)">Mine Life (years)</label>
+            <select id="mineLife" onchange="updateCalc()">
+              <option value="5">5 years</option>
+              <option value="10" selected>10 years</option>
+              <option value="15">15 years</option>
+              <option value="20">20 years</option>
+              <option value="25">25+ years</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label data-en="Ore Grade" data-fa="عیار کانسنگ">Ore Grade</label>
+            <select id="oreGrade" onchange="updateCalc()">
+              <option value="high" data-en="High Grade (>1% Cu / >2g/t Au)" data-fa="عیار بالا">High Grade</option>
+              <option value="med" selected data-en="Medium Grade (0.3–1% Cu / 0.5–2g/t)" data-fa="عیار متوسط">Medium Grade</option>
+              <option value="low" data-en="Low Grade (<0.3% Cu / <0.5g/t)" data-fa="عیار پایین">Low Grade</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="fg">
+          <label data-en="Haul Distance (pit to plant)" data-fa="فاصله حمل (معدن تا کارخانه)">Haul Distance (pit to plant)</label>
+          <div class="option-cards cols2">
+            <div class="opt-card selected" data-val="short" onclick="selectOpt(this,'haul')">
+              <div class="oc-icon">📏</div>
+              <div class="oc-label" data-en="Short (<2 km)" data-fa="کوتاه (<۲ کیلومتر)">Short (&lt;2 km)</div>
+            </div>
+            <div class="opt-card" data-val="med" onclick="selectOpt(this,'haul')">
+              <div class="oc-icon">📐</div>
+              <div class="oc-label" data-en="Medium (2–5 km)" data-fa="متوسط (۲–۵ کیلومتر)">Medium (2–5 km)</div>
+            </div>
+            <div class="opt-card" data-val="long" onclick="selectOpt(this,'haul')">
+              <div class="oc-icon">🗺️</div>
+              <div class="oc-label" data-en="Long (5–10 km)" data-fa="بلند (۵–۱۰ کیلومتر)">Long (5–10 km)</div>
+            </div>
+            <div class="opt-card" data-val="vlong" onclick="selectOpt(this,'haul')">
+              <div class="oc-icon">🛣️</div>
+              <div class="oc-label" data-en="Very Long (>10 km)" data-fa="خیلی بلند (>۱۰ کیلومتر)">Very Long (&gt;10 km)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-nav">
+          <button class="btn-prev" onclick="goStep(1)"><i class="fas fa-arrow-left"></i> <span data-en="Back" data-fa="بازگشت">Back</span></button>
+          <button class="btn-next" onclick="goStep(3)">
+            <span data-en="Next: Processing Plant" data-fa="بعدی: کارخانه فرآوری">Next: Processing Plant</span>
+            <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 3: PROCESSING -->
+      <div class="step-panel" id="step3">
+        <div class="step-header">
+          <div class="step-num" data-en="Step 3 of 4" data-fa="مرحله ۳ از ۴">Step 3 of 4</div>
+          <div class="step-title" data-en="Processing Plant" data-fa="کارخانه فرآوری">Processing Plant</div>
+          <div class="step-sub" data-en="Select your processing route and plant capacity. This is typically 35–55% of total CAPEX." data-fa="مسیر فرآوری و ظرفیت کارخانه خود را انتخاب کنید. این معمولاً ۳۵–۵۵٪ از کل CAPEX است.">Select your processing route and plant capacity. This is typically 35–55% of total CAPEX.</div>
+        </div>
+
+        <div class="fg">
+          <label data-en="Processing Route" data-fa="مسیر فرآوری">Processing Route</label>
+          <div class="option-cards">
+            <div class="opt-card selected" data-val="flotation" onclick="selectOpt(this,'process')">
+              <div class="oc-icon">🫧</div>
+              <div class="oc-label" data-en="Flotation" data-fa="فلوتاسیون">Flotation</div>
+              <div class="oc-sub">Cu, Zn, Pb</div>
+            </div>
+            <div class="opt-card" data-val="cil" onclick="selectOpt(this,'process')">
+              <div class="oc-icon">⚗️</div>
+              <div class="oc-label" data-en="CIL / CIP" data-fa="CIL / CIP">CIL / CIP</div>
+              <div class="oc-sub">Gold leaching</div>
+            </div>
+            <div class="opt-card" data-val="heap" onclick="selectOpt(this,'process')">
+              <div class="oc-icon">🏔️</div>
+              <div class="oc-label" data-en="Heap Leach" data-fa="لیچینگ توده‌ای">Heap Leach</div>
+              <div class="oc-sub">Cu oxide, Au</div>
+            </div>
+            <div class="opt-card" data-val="dms" onclick="selectOpt(this,'process')">
+              <div class="oc-icon">⚖️</div>
+              <div class="oc-label" data-en="DMS / Gravity" data-fa="DMS / ثقلی">DMS / Gravity</div>
+              <div class="oc-sub">Coal, iron ore</div>
+            </div>
+            <div class="opt-card" data-val="sxew" onclick="selectOpt(this,'process')">
+              <div class="oc-icon">⚡</div>
+              <div class="oc-label" data-en="SX-EW" data-fa="SX-EW">SX-EW</div>
+              <div class="oc-sub">Copper cathode</div>
+            </div>
+            <div class="opt-card" data-val="mag" onclick="selectOpt(this,'process')">
+              <div class="oc-icon">🧲</div>
+              <div class="oc-label" data-en="Magnetic Sep." data-fa="جداسازی مغناطیسی">Magnetic Sep.</div>
+              <div class="oc-sub">Iron ore, magnetite</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fg">
+          <label data-en="Plant Throughput (tph)" data-fa="ظرفیت کارخانه (تن/ساعت)">Plant Throughput (tph)</label>
+          <div class="range-wrap">
+            <div class="range-val" id="tphVal" style="left:20%">500 tph</div>
+            <input type="range" id="plantTph" min="100" max="10000" value="500" step="100" oninput="updateRange('plantTph','tphVal',v=>v+' tph');updateCalc()"/>
+            <div class="range-labels"><span>100</span><span>2,500</span><span>5,000</span><span>10,000 tph</span></div>
+          </div>
+        </div>
+
+        <div class="fg">
+          <label data-en="Grinding Circuit" data-fa="مدار آسیاب">Grinding Circuit</label>
+          <div class="option-cards cols2">
+            <div class="opt-card selected" data-val="sag_ball" onclick="selectOpt(this,'grind')">
+              <div class="oc-icon">⚙️</div>
+              <div class="oc-label">SAG + Ball Mill</div>
+              <div class="oc-sub" data-en="Standard circuit" data-fa="مدار استاندارد">Standard circuit</div>
+            </div>
+            <div class="opt-card" data-val="hpgr" onclick="selectOpt(this,'grind')">
+              <div class="oc-icon">🔩</div>
+              <div class="oc-label">HPGR + Ball Mill</div>
+              <div class="oc-sub" data-en="Energy efficient" data-fa="کارآمد انرژی">Energy efficient</div>
+            </div>
+            <div class="opt-card" data-val="crush_ball" onclick="selectOpt(this,'grind')">
+              <div class="oc-icon">💥</div>
+              <div class="oc-label">Crush + Ball Mill</div>
+              <div class="oc-sub" data-en="Lower throughput" data-fa="ظرفیت پایین‌تر">Lower throughput</div>
+            </div>
+            <div class="opt-card" data-val="none" onclick="selectOpt(this,'grind')">
+              <div class="oc-icon">🚫</div>
+              <div class="oc-label" data-en="No Grinding" data-fa="بدون آسیاب">No Grinding</div>
+              <div class="oc-sub" data-en="Heap leach / DMS" data-fa="لیچینگ / DMS">Heap leach / DMS</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-nav">
+          <button class="btn-prev" onclick="goStep(2)"><i class="fas fa-arrow-left"></i> <span data-en="Back" data-fa="بازگشت">Back</span></button>
+          <button class="btn-next" onclick="goStep(4)">
+            <span data-en="Next: Infrastructure" data-fa="بعدی: زیرساخت">Next: Infrastructure</span>
+            <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 4: INFRASTRUCTURE -->
+      <div class="step-panel" id="step4">
+        <div class="step-header">
+          <div class="step-num" data-en="Step 4 of 4" data-fa="مرحله ۴ از ۴">Step 4 of 4</div>
+          <div class="step-title" data-en="Infrastructure & Owners Costs" data-fa="زیرساخت و هزینه‌های مالک">Infrastructure & Owners Costs</div>
+          <div class="step-sub" data-en="Select the infrastructure components required for your project. These significantly impact total CAPEX." data-fa="اجزای زیرساختی مورد نیاز پروژه خود را انتخاب کنید. اینها به‌طور قابل‌توجهی بر کل CAPEX تأثیر می‌گذارند.">Select the infrastructure components required for your project. These significantly impact total CAPEX.</div>
+        </div>
+
+        <div class="fg">
+          <label data-en="Infrastructure Components Required" data-fa="اجزای زیرساختی مورد نیاز">Infrastructure Components Required</label>
+          <div class="check-grid" id="infraChecks">
+            <div class="check-item checked" data-val="power" data-cost="0.08" onclick="toggleCheck(this)">
+              <div class="check-box"><i class="fas fa-check" style="font-size:10px;"></i></div>
+              <div class="ci-text" data-en="⚡ Power Plant / Grid Connection" data-fa="⚡ نیروگاه / اتصال شبکه">⚡ Power Plant / Grid Connection</div>
+            </div>
+            <div class="check-item checked" data-val="water" data-cost="0.04" onclick="toggleCheck(this)">
+              <div class="check-box"><i class="fas fa-check" style="font-size:10px;"></i></div>
+              <div class="ci-text" data-en="💧 Water Supply & Treatment" data-fa="💧 تأمین و تصفیه آب">💧 Water Supply & Treatment</div>
+            </div>
+            <div class="check-item" data-val="road" data-cost="0.05" onclick="toggleCheck(this)">
+              <div class="check-box"></div>
+              <div class="ci-text" data-en="🛣️ Access Road Construction" data-fa="🛣️ ساخت جاده دسترسی">🛣️ Access Road Construction</div>
+            </div>
+            <div class="check-item" data-val="camp" data-cost="0.03" onclick="toggleCheck(this)">
+              <div class="check-box"></div>
+              <div class="ci-text" data-en="🏕️ Camp & Accommodation" data-fa="🏕️ اردوگاه و اقامتگاه">🏕️ Camp & Accommodation</div>
+            </div>
+            <div class="check-item checked" data-val="tailings" data-cost="0.06" onclick="toggleCheck(this)">
+              <div class="check-box"><i class="fas fa-check" style="font-size:10px;"></i></div>
+              <div class="ci-text" data-en="🏔️ Tailings Storage Facility" data-fa="🏔️ تأسیسات ذخیره باطله">🏔️ Tailings Storage Facility</div>
+            </div>
+            <div class="check-item" data-val="port" data-cost="0.07" onclick="toggleCheck(this)">
+              <div class="check-box"></div>
+              <div class="ci-text" data-en="🚢 Port / Rail Infrastructure" data-fa="🚢 بندر / زیرساخت ریلی">🚢 Port / Rail Infrastructure</div>
+            </div>
+            <div class="check-item checked" data-val="env" data-cost="0.03" onclick="toggleCheck(this)">
+              <div class="check-box"><i class="fas fa-check" style="font-size:10px;"></i></div>
+              <div class="ci-text" data-en="🌿 Environmental & Closure" data-fa="🌿 محیط‌زیست و بستن معدن">🌿 Environmental & Closure</div>
+            </div>
+            <div class="check-item" data-val="smelter" data-cost="0.15" onclick="toggleCheck(this)">
+              <div class="check-box"></div>
+              <div class="ci-text" data-en="🏭 Smelter / Refinery" data-fa="🏭 ذوب / پالایش">🏭 Smelter / Refinery</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="fg">
+            <label data-en="Owner's Cost %" data-fa="درصد هزینه مالک">Owner's Cost %</label>
+            <select id="ownerCost" onchange="updateCalc()">
+              <option value="0.05">5% of CAPEX</option>
+              <option value="0.07" selected>7% of CAPEX</option>
+              <option value="0.10">10% of CAPEX</option>
+              <option value="0.12">12% of CAPEX</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label data-en="Contingency %" data-fa="درصد احتمال">Contingency %</label>
+            <select id="contingency" onchange="updateCalc()">
+              <option value="0.10">10% (Class 3)</option>
+              <option value="0.15" selected>15% (Class 4)</option>
+              <option value="0.25">25% (Class 5)</option>
+              <option value="0.30">30% (Remote/Complex)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="step-nav">
+          <button class="btn-prev" onclick="goStep(3)"><i class="fas fa-arrow-left"></i> <span data-en="Back" data-fa="بازگشت">Back</span></button>
+          <button class="btn-next" onclick="showResults()" id="calcBtn">
+            <i class="fas fa-calculator"></i>
+            <span data-en="Calculate & Show Results" data-fa="محاسبه و نمایش نتایج">Calculate & Show Results</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RESULTS SIDEBAR -->
+    <div class="results-panel">
+      <div class="rp-card">
+        <div class="rp-header">
+          <div class="rp-title" data-en="Live Estimate" data-fa="برآورد زنده">Live Estimate</div>
+          <div class="rp-sub" data-en="Updates as you fill in parameters" data-fa="با پر کردن پارامترها به‌روز می‌شود">Updates as you fill in parameters</div>
+        </div>
+        <div class="rp-body">
+          <div class="live-total">
+            <div class="lt-label" data-en="Estimated Total CAPEX" data-fa="کل CAPEX برآوردی">Estimated Total CAPEX</div>
+            <div class="lt-value" id="liveCapex">$<em id="liveCapexNum">485</em>M</div>
+            <div class="lt-range" id="liveRange">Range: $340M – $680M</div>
+            <div class="lt-class" id="liveClass">📋 AACE Class 4 · ±30–50%</div>
+          </div>
+
+          <div class="class-meter">
+            <div class="cm-title" data-en="AACE Estimate Class" data-fa="کلاس برآورد AACE">AACE Estimate Class</div>
+            <div class="cm-classes">
+              <div class="cm-cls" id="cls5"></div>
+              <div class="cm-cls" id="cls4"></div>
+              <div class="cm-cls" id="cls3"></div>
+              <div class="cm-cls" id="cls2"></div>
+              <div class="cm-cls" id="cls1"></div>
+            </div>
+            <div class="cm-labels">
+              <span>5</span><span>4</span><span>3</span><span>2</span><span>1</span>
+            </div>
+          </div>
+
+          <div class="quick-stats">
+            <div class="qs-item">
+              <div class="qs-val" id="qsOpex">$18</div>
+              <div class="qs-lbl" data-en="OPEX $/t ore" data-fa="OPEX دلار/تن">OPEX $/t ore</div>
+            </div>
+            <div class="qs-item">
+              <div class="qs-val" id="qsLife">10 yr</div>
+              <div class="qs-lbl" data-en="MineLife" data-fa="عمر معدن">Mine Life</div>
+            </div>
+            <div class="qs-item">
+              <div class="qs-val" id="qsUnit">$97</div>
+              <div class="qs-lbl" data-en="$/t capacity" data-fa="دلار/تن ظرفیت">$/t capacity</div>
+            </div>
+            <div class="qs-item">
+              <div class="qs-val" id="qsContingency">15%</div>
+              <div class="qs-lbl" data-en="Contingency" data-fa="احتمال">Contingency</div>
+            </div>
+          </div>
+
+          <div class="breakdown-list" id="breakdownList">
+            <div class="bd-item">
+              <div class="bd-top"><span class="bd-label" data-en="Mining (Fleet + Development)" data-fa="معدن‌کاری">Mining</span><span class="bd-val" id="bdMining">$145M</span></div>
+              <div class="bd-bar-wrap"><div class="bd-bar" id="bdMiningBar" style="width:30%;background:linear-gradient(90deg,#C9A84C,#A07830);"></div></div>
+            </div>
+            <div class="bd-item">
+              <div class="bd-top"><span class="bd-label" data-en="Processing Plant" data-fa="کارخانه فرآوری">Processing Plant</span><span class="bd-val" id="bdPlant">$195M</span></div>
+              <div class="bd-bar-wrap"><div class="bd-bar" id="bdPlantBar" style="width:40%;background:linear-gradient(90deg,#0EA5E9,#0369A1);"></div></div>
+            </div>
+            <div class="bd-item">
+              <div class="bd-top"><span class="bd-label" data-en="Infrastructure" data-fa="زیرساخت">Infrastructure</span><span class="bd-val" id="bdInfra">$72M</span></div>
+              <div class="bd-bar-wrap"><div class="bd-bar" id="bdInfraBar" style="width:15%;background:linear-gradient(90deg,#A855F7,#7C3AED);"></div></div>
+            </div>
+            <div class="bd-item">
+              <div class="bd-top"><span class="bd-label" data-en="Owner's Costs + EPCM" data-fa="هزینه مالک + EPCM">Owner's + EPCM</span><span class="bd-val" id="bdOwner">$34M</span></div>
+              <div class="bd-bar-wrap"><div class="bd-bar" id="bdOwnerBar" style="width:7%;background:linear-gradient(90deg,#22C55E,#15803D);"></div></div>
+            </div>
+            <div class="bd-item">
+              <div class="bd-top"><span class="bd-label" data-en="Contingency" data-fa="احتمال">Contingency</span><span class="bd-val" id="bdCont">$63M</span></div>
+              <div class="bd-bar-wrap"><div class="bd-bar" id="bdContBar" style="width:13%;background:linear-gradient(90deg,#F97316,#C2410C);"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="rp-cta">
+          <p data-en="Want a detailed AACE Class 2–3 estimate? Our certified team can deliver a bankable study." data-fa="می‌خواهید برآورد تفصیلی کلاس ۲–۳ AACE داشته باشید؟ تیم گواهی‌شده ما می‌تواند یک مطالعه بانکی ارائه دهد.">Want a detailed AACE Class 2–3 estimate? Our certified team can deliver a bankable study.</p>
+          <button class="rp-cta-btn" onclick="window.location.href='index.html#contact'">
+            <i class="fas fa-calendar-check"></i> <span data-en="Get a Professional Estimate" data-fa="دریافت برآورد حرفه‌ای">Get a Professional Estimate</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FULL RESULTS PAGE -->
+  <div class="results-full" id="resultsFull">
+    <div class="rf-hero fade-up">
+      <div style="position:relative;z-index:1;">
+        <div style="font-size:13px;color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;" data-en="Your Estimate is Ready" data-fa="برآورد شما آماده است">Your Estimate is Ready</div>
+        <h2 data-en="Open-Pit Mining Project — CAPEX Estimate" data-fa="پروژه معدن روباز — برآورد CAPEX">Open-Pit Mining Project — CAPEX Estimate</h2>
+        <p data-en="AACE Class 4 Parametric Estimate · Generated June 2026 · KDMine Calculator" data-fa="برآورد پارامتریک کلاس ۴ AACE · تولید خرداد ۱۴۰۵ · ماشین‌حساب KDMine">AACE Class 4 Parametric Estimate · Generated June 2026 · KDMine Calculator</p>
+        <div class="rf-total">$<span id="rfTotal">485</span><em>M</em></div>
+        <div class="rf-range-badge" id="rfRangeBadge">📊 Range: $340M – $680M · AACE Class 4 (±30–50%)</div>
+      </div>
+    </div>
+
+    <div class="disclaimer fade-up">
+      <i class="fas fa-triangle-exclamation"></i>
+      <p data-en="This is an AACE Class 4–5 parametric estimate for indicative purposes only. Accuracy range is typically -30% to +50%. This estimate should NOT be used for investment decisions, project financing, or board approvals without a formal Class 2–3 study prepared by a qualified cost engineer. Contact KDMine for a bankable feasibility estimate." data-fa="این یک برآورد پارامتریک کلاس ۴–۵ AACE فقط برای اهداف نشان‌دهنده است. محدوده دقت معمولاً -۳۰٪ تا +۵۰٪ است. این برآورد نباید بدون مطالعه رسمی کلاس ۲–۳ برای تصمیمات سرمایه‌گذاری، تأمین مالی پروژه یا تأییدیه‌های هیئت مدیره استفاده شود.">This is an AACE Class 4–5 parametric estimate for indicative purposes only. Accuracy range is typically -30% to +50%. This estimate should NOT be used for investment decisions, project financing, or board approvals without a formal Class 2–3 study prepared by a qualified cost engineer. Contact KDMine for a bankable feasibility estimate.</p>
+    </div>
+
+    <!-- RESULTS GRID -->
+    <div class="rf-grid fade-up">
+      <div class="rf-card">
+        <h4 data-en="CAPEX Breakdown" data-fa="تفکیک CAPEX">CAPEX Breakdown</h4>
+        <div class="rf-row"><span class="rl" data-en="Mining (Fleet + Dev.)" data-fa="معدن‌کاری">Mining (Fleet + Dev.)</span><span class="rv gold" id="rfMining">$145M</span></div>
+        <div class="rf-row"><span class="rl" data-en="Processing Plant" data-fa="کارخانه فرآوری">Processing Plant</span><span class="rv gold" id="rfPlant">$195M</span></div>
+        <div class="rf-row"><span class="rl" data-en="Infrastructure" data-fa="زیرساخت">Infrastructure</span><span class="rv gold" id="rfInfra">$72M</span></div>
+        <div class="rf-row"><span class="rl" data-en="Owner's Costs + EPCM" data-fa="هزینه مالک + EPCM">Owner's Costs + EPCM</span><span class="rv gold" id="rfOwner">$34M</span></div>
+        <div class="rf-row"><span class="rl" data-en="Contingency" data-fa="احتمال">Contingency</span><span class="rv gold" id="rfCont">$63M</span></div>
+        <div class="rf-row" style="border-top:1px solid var(--border);margin-top:8px;padding-top:8px;"><span class="rl" style="font-weight:700;color:#fff;" data-en="Total CAPEX" data-fa="کل CAPEX">Total CAPEX</span><span class="rv" style="font-size:16px;" id="rfTotalRow">$485M</span></div>
+      </div>
+
+      <div class="rf-card">
+        <h4 data-en="OPEX Summary" data-fa="خلاصه OPEX">OPEX Summary</h4>
+        <div class="rf-row"><span class="rl" data-en="Mining Cost" data-fa="هزینه معدن‌کاری">Mining Cost</span><span class="rv" id="rfOpexMine">$8.5/t</span></div>
+        <div class="rf-row"><span class="rl" data-en="Processing Cost" data-fa="هزینه فرآوری">Processing Cost</span><span class="rv" id="rfOpexProcess">$6.2/t</span></div>
+        <div class="rf-row"><span class="rl" data-en="G&A Cost" data-fa="هزینه عمومی و اداری">G&A Cost</span><span class="rv" id="rfOpexGA">$2.1/t</span></div>
+        <div class="rf-row"><span class="rl" data-en="Tailings / Env." data-fa="باطله / محیط‌زیست">Tailings / Env.</span><span class="rv" id="rfOpexTail">$1.2/t</span></div>
+        <div class="rf-row" style="border-top:1px solid var(--border);margin-top:8px;padding-top:8px;"><span class="rl" style="font-weight:700;color:#fff;" data-en="Total OPEX" data-fa="کل OPEX">Total OPEX</span><span class="rv gold" style="font-size:16px;" id="rfOpexTotal">$18/t ore</span></div>
+        <div class="rf-row"><span class="rl" data-en="Annual OPEX" data-fa="OPEX سالانه">Annual OPEX</span><span class="rv" id="rfOpexAnnual">$90M/yr</span></div>
+      </div>
+
+      <div class="rf-card">
+        <h4 data-en="Project Metrics" data-fa="معیارهای پروژه">Project Metrics</h4>
+        <div class="rf-row"><span class="rl" data-en="CAPEX Intensity" data-fa="شدت CAPEX">CAPEX Intensity</span><span class="rv" id="rfCapexInt">$97/t ann. cap.</span></div>
+        <div class="rf-row"><span class="rl" data-en="AACE Class" data-fa="کلاس AACE">AACE Class</span><span class="rv gold" id="rfClass">Class 4</span></div>
+        <div class="rf-row"><span class="rl" data-en="Accuracy Range" data-fa="محدوده دقت">Accuracy Range</span><span class="rv" id="rfAccuracy">-30% / +50%</span></div>
+        <div class="rf-row"><span class="rl" data-en="Location Factor" data-fa="ضریب موقعیت">Location Factor</span><span class="rv" id="rfLocFactor">1.00</span></div>
+        <div class="rf-row"><span class="rl" data-en="Contingency Applied" data-fa="احتمال اعمال‌شده">Contingency Applied</span><span class="rv" id="rfContPct">15%</span></div>
+        <div class="rf-row"><span class="rl" data-en="Estimate Date" data-fa="تاریخ برآورد">Estimate Date</span><span class="rv">June 2026</span></div>
+      </div>
+    </div>
+
+    <!-- DONUT CHART -->
+    <div class="chart-wrap fade-up">
+      <div class="chart-title" data-en="CAPEX Distribution" data-fa="توزیع CAPEX">CAPEX Distribution</div>
+      <div class="donut-row">
+        <svg class="donut-svg" width="180" height="180" viewBox="0 0 180 180" id="donutSvg">
+          <circle cx="90" cy="90" r="70" fill="none" stroke="var(--dark4)" stroke-width="28"/>
+        </svg>
+        <div class="donut-legend" id="donutLegend"></div>
+      </div>
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="rf-actions fade-up">
+      <button class="btn-gold" onclick="window.print()"><i class="fas fa-download"></i> <span data-en="Download PDF Report" data-fa="دانلود گزارش PDF">Download PDF Report</span></button>
+      <button class="btn-outline" onclick="resetCalc()"><i class="fas fa-rotate-left"></i> <span data-en="Recalculate" data-fa="محاسبه مجدد">Recalculate</span></button>
+      <button class="btn-gold" onclick="window.location.href='index.html#contact'" style="background:linear-gradient(135deg,var(--blue),#0369A1);">
+        <i class="fas fa-calendar-check"></i> <span data-en="Get a Bankable Estimate" data-fa="دریافت برآورد بانکی">Get a Bankable Estimate</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-mini">
+    <p data-en="© 2026 KDMine Consultancy. Calculator results are indicative only." data-fa="© ۱۴۰۵ مشاوره KDMine. نتایج ماشین‌حساب فقط نشان‌دهنده هستند.">© 2026 KDMine Consultancy. Calculator results are indicative only.</p>
+    <a href="index.html" data-en="← Back to Main Site" data-fa="← بازگشت به سایت اصلی">← Back to Main Site</a>
+  </div>
+
+  <script>
+    // ── STATE ────────────────────────────────────────────────────
+    const state = {
+      commodity:'copper', region:1.0, aaceClass:4, stage:'greenfield',
+      oreRate:5, stripRatio:3, mineLife:10, oreGrade:'med', haul:'short',
+      process:'flotation', tph:500, grind:'sag_ball',
+      infra:['power','water','tailings','env'], ownerCost:0.07, contingency:0.15
+    };
+
+    // ── COST MODELS (USD M per Mt/yr throughput) ─────────────────
+    const processFactors = {flotation:38, cil:42, heap:18, dms:14, sxew:32, mag:22};
+    const grindAdder     = {sag_ball:1.0, hpgr:0.92, crush_ball:0.85, none:0.5};
+    const commodityMult  = {copper:1.0, gold:1.15, iron:0.75, coal:0.65, zinc:0.95, other:1.05};
+    const haulMult       = {short:1.0, med:1.08, long:1.18, vlong:1.30};
+    const infraCosts     = {power:0.08, water:0.04, road:0.05, camp:0.03, tailings:0.06, port:0.07, env:0.03, smelter:0.15};
+    const aaceAccuracy   = {5:[-50,100], 4:[-30,50], 3:[-20,30], 2:[-10,20], 1:[-5,15]};
+    const aaceLabel      = {5:'Class 5 · ±50–100%', 4:'Class 4 · ±30–50%', 3:'Class 3 · ±20–30%'};
+
+    // ── CALCULATE ────────────────────────────────────────────────
+    function calculate() {
+      const ore    = parseFloat(document.getElementById('oreRate').value);
+      const strip  = parseFloat(document.getElementById('stripRatio').value);
+      const life   = parseInt(document.getElementById('mineLife').value);
+      const tph    = parseFloat(document.getElementById('plantTph').value);
+      const region = parseFloat(document.getElementById('region').value);
+      const cls    = parseInt(document.getElementById('aaceClass').value);
+      const ownPct = parseFloat(document.getElementById('ownerCost').value);
+      const contPct= parseFloat(document.getElementById('contingency').value);
+
+      // Update state
+      state.oreRate=ore; state.stripRatio=strip; state.mineLife=life;
+      state.tph=tph; state.region=region; state.aaceClass=cls;
+      state.ownerCost=ownPct; state.contingency=contPct;
+
+      // Annual throughput in Mt
+      const annMt = tph * 8000 / 1e6;
+
+      // MINING CAPEX: fleet + pre-strip
+      const totalMaterial = ore * (1 + strip); // Mt/yr total moved
+      const miningCapex   = totalMaterial * 4.2 * haulMult[state.haul] * commodityMult[state.commodity];
+
+      // PROCESSING CAPEX
+      const procBase   = processFactors[state.process] * annMt * grindAdder[state.grind];
+      const plantCapex = procBase * commodityMult[state.commodity];
+
+      // INFRASTRUCTURE CAPEX
+      const baseCapex  = miningCapex + plantCapex;
+      let infraCapex   = 0;
+      state.infra.forEach(k => { infraCapex += infraCosts[k] * baseCapex; });
+
+      // SUBTOTAL before owners + contingency
+      const subtotal   = miningCapex + plantCapex + infraCapex;
+
+      // OWNER'S COSTS
+      const ownerCapex = subtotal * ownPct;
+
+      // CONTINGENCY
+      const contCapex  = (subtotal + ownerCapex) * contPct;
+
+      // TOTAL
+      const total      = (subtotal + ownerCapex + contCapex) * region;
+
+      // Scale each component by region
+      const mScale = region;
+      const m  = Math.round(miningCapex * mScale);
+      const p  = Math.round(plantCapex  * mScale);
+      const i  = Math.round(infraCapex  * mScale);
+      const o  = Math.round(ownerCapex  * mScale);
+      const c  = Math.round(contCapex   * mScale);
+      const t  = Math.round(total);
+
+      // OPEX ($/t ore)
+      const opexMine    = 3.5 + strip * 0.8 + (state.haul==='vlong'?3:state.haul==='long'?1.5:0);
+      const opexProcess = (processFactors[state.process] / 8) * grindAdder[state.grind];
+      const opexGA      = 1.5 + ore * 0.05;
+      const opexTail    = 0.8 + (state.infra.includes('tailings')?0.4:0);
+      const opexTotal   = opexMine + opexProcess + opexGA + opexTail;
+      const opexAnnual  = Math.round(opexTotal * ore);
+
+      // Accuracy range
+      const [lo, hi] = aaceAccuracy[cls];
+      const rangeLo  = Math.round(t * (1 + lo/100));
+      const rangeHi  = Math.round(t * (1 + hi/100));
+
+      return {m,p,i,o,c,t,opexMine,opexProcess,opexGA,opexTail,opexTotal,opexAnnual,
+              rangeLo,rangeHi,cls,contPct,region,life,ore,tph,annMt};
+    }
+
+    // ── UPDATE LIVE SIDEBAR ──────────────────────────────────────
+    function updateCalc() {
+      const r = calculate();
+      const fmt = v => v >= 1000 ? (v/1000).toFixed(1)+'B' : v+'M';
+
+      document.getElementById('liveCapexNum').textContent = r.t;
+      document.getElementById('liveRange').textContent    = `Range: $${fmt(r.rangeLo)} – $${fmt(r.rangeHi)}`;
+      document.getElementById('liveClass').textContent    = '📋 ' + aaceLabel[r.cls];
+      document.getElementById('qsOpex').textContent       = '$'+r.opexTotal.toFixed(1);
+      document.getElementById('qsLife').textContent       = r.life+' yr';
+      document.getElementById('qsUnit').textContent       = '$'+Math.round(r.t/r.annMt/1e6*1000);
+      document.getElementById('qsContingency').textContent= Math.round(r.contPct*100)+'%';
+
+      // Breakdown bars
+      const items = [{id:'bdMining',bar:'bdMiningBar',val:r.m},{id:'bdPlant',bar:'bdPlantBar',val:r.p},
+                     {id:'bdInfra',bar:'bdInfraBar',val:r.i},{id:'bdOwner',bar:'bdOwnerBar',val:r.o},
+                     {id:'bdCont',bar:'bdContBar',val:r.c}];
+      const maxV = Math.max(r.m,r.p,r.i,r.o,r.c);
+      items.forEach(it => {
+        document.getElementById(it.id).textContent = '$'+it.val+'M';
+        document.getElementById(it.bar).style.width = Math.round(it.val/maxV*100)+'%';
+      });
+
+      // Class meter
+      [5,4,3,2,1].forEach(n => {
+        document.getElementById('cls'+n).classList.toggle('active', n >= r.cls);
+      });
+    }
+
+    // ── SHOW RESULTS PAGE ────────────────────────────────────────
+    function showResults() {
+      const r = calculate();
+      const fmt = v => v >= 1000 ? (v/1000).toFixed(1)+'B' : v+'M';
+
+      // Hide calc layout, show results
+      document.getElementById('calcLayout').style.display = 'none';
+      document.getElementById('resultsFull').classList.add('show');
+      goStep(5);
+
+      // Fill results
+      document.getElementById('rfTotal').textContent    = r.t;
+      document.getElementById('rfTotalRow').textContent = '$'+r.t+'M';
+      document.getElementById('rfRangeBadge').textContent = `📊 Range: $${fmt(r.rangeLo)} – $${fmt(r.rangeHi)} · AACE Class ${r.cls} (${aaceAccuracy[r.cls][0]}% / +${aaceAccuracy[r.cls][1]}%)`;
+      document.getElementById('rfMining').textContent   = '$'+r.m+'M';
+      document.getElementById('rfPlant').textContent    = '$'+r.p+'M';
+      document.getElementById('rfInfra').textContent    = '$'+r.i+'M';
+      document.getElementById('rfOwner').textContent    = '$'+r.o+'M';
+      document.getElementById('rfCont').textContent     = '$'+r.c+'M';
+      document.getElementById('rfOpexMine').textContent    = '$'+r.opexMine.toFixed(1)+'/t';
+      document.getElementById('rfOpexProcess').textContent = '$'+r.opexProcess.toFixed(1)+'/t';
+      document.getElementById('rfOpexGA').textContent      = '$'+r.opexGA.toFixed(1)+'/t';
+      document.getElementById('rfOpexTail').textContent    = '$'+r.opexTail.toFixed(1)+'/t';
+      document.getElementById('rfOpexTotal').textContent   = '$'+r.opexTotal.toFixed(1)+'/t ore';
+      document.getElementById('rfOpexAnnual').textContent  = '$'+r.opexAnnual+'M/yr';
+      document.getElementById('rfCapexInt').textContent    = '$'+Math.round(r.t/r.annMt/1e6*1000)+'/t ann. cap.';
+      document.getElementById('rfClass').textContent       = 'Class '+r.cls;
+      document.getElementById('rfAccuracy').textContent    = aaceAccuracy[r.cls][0]+'% / +'+aaceAccuracy[r.cls][1]+'%';
+      document.getElementById('rfLocFactor').textContent   = r.region.toFixed(2);
+      document.getElementById('rfContPct').textContent     = Math.round(r.contPct*100)+'%';
+
+      // Donut chart
+      drawDonut([
+        {label:'Mining',val:r.m,color:'#C9A84C'},
+        {label:'Processing',val:r.p,color:'#0EA5E9'},
+        {label:'Infrastructure',val:r.i,color:'#A855F7'},
+        {label:"Owner's+EPCM",val:r.o,color:'#22C55E'},
+        {label:'Contingency',val:r.c,color:'#F97316'}
+      ], r.t);
+
+      // Scroll to results
+      document.getElementById('resultsFull').scrollIntoView({behavior:'smooth'});
+
+      // Trigger fade-up
+      setTimeout(()=>{
+        document.querySelectorAll('.results-full .fade-up').forEach(el=>el.classList.add('visible'));
+      },100);
+    }
+
+    // ── DONUT CHART ──────────────────────────────────────────────
+    function drawDonut(segments, total) {
+      const svg    = document.getElementById('donutSvg');
+      const legend = document.getElementById('donutLegend');
+      const cx=90, cy=90, r=70, sw=28;
+      const circ = 2*Math.PI*r;
+      let offset = -circ/4; // start at top
+
+      // Clear existing segments
+      svg.querySelectorAll('.seg').forEach(s=>s.remove());
+
+      let legendHTML = '';
+      segments.forEach(seg => {
+        const pct  = seg.val / total;
+        const dash = pct * circ;
+        const circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
+        circle.setAttribute('cx',cx); circle.setAttribute('cy',cy); circle.setAttribute('r',r);
+        circle.setAttribute('fill','none'); circle.setAttribute('stroke',seg.color);
+        circle.setAttribute('stroke-width',sw);
+        circle.setAttribute('stroke-dasharray',`${dash} ${circ-dash}`);
+        circle.setAttribute('stroke-dashoffset',-offset);
+        circle.setAttribute('class','seg');
+        circle.style.transition='stroke-dasharray .8s ease';
+        svg.appendChild(circle);
+        offset += dash;
+
+        legendHTML += `<div class="dl-item">
+          <div class="dl-dot" style="background:${seg.color};"></div>
+          <div class="dl-label">${seg.label}</div>
+          <div class="dl-val">$${seg.val}M<span class="dl-pct">${Math.round(pct*100)}%</span></div>
+        </div>`;
+      });
+      legend.innerHTML = legendHTML;
+    }
+
+    // ── RESET ────────────────────────────────────────────────────
+    function resetCalc() {
+      document.getElementById('calcLayout').style.display = 'grid';
+      document.getElementById('resultsFull').classList.remove('show');
+      goStep(1);
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+
+    // ── WIZARD NAVIGATION ────────────────────────────────────────
+    function goStep(n) {
+      document.querySelectorAll('.step-panel').forEach(p=>p.classList.remove('active'));
+      const panel = document.getElementById('step'+n);
+      if (panel) panel.classList.add('active');
+
+      for(let i=1;i<=5;i++){
+        const dot = document.getElementById('dot'+i);
+        if(!dot) continue;
+        dot.classList.remove('active','done');
+        if(i<n) dot.classList.add('done');
+        else if(i===n) dot.classList.add('active');
+      }
+      for(let i=1;i<=4;i++){
+        const con = document.getElementById('con'+i);
+        if(con) con.classList.toggle('done', i<n);
+      }
+      if(n<=4) window.scrollTo({top:document.querySelector('.wizard-bar').offsetTop-110,behavior:'smooth'});
+    }
+
+    // ── OPTION CARDS ─────────────────────────────────────────────
+    function selectOpt(el, group) {
+      el.closest('.option-cards').querySelectorAll('.opt-card').forEach(c=>c.classList.remove('selected'));
+      el.classList.add('selected');
+      state[group] = el.dataset.val;
+      updateCalc();
+    }
+
+    // ── CHECKBOXES ───────────────────────────────────────────────
+    function toggleCheck(el) {
+      el.classList.toggle('checked');
+      const val = el.dataset.val;
+      if(el.classList.contains('checked')){
+        el.querySelector('.check-box').innerHTML='<i class="fas fa-check" style="font-size:10px;"></i>';
+        if(!state.infra.includes(val)) state.infra.push(val);
+      } else {
+        el.querySelector('.check-box').innerHTML='';
+        state.infra = state.infra.filter(v=>v!==val);
+      }
+      updateCalc();
+    }
+
+    // ── RANGE SLIDERS ────────────────────────────────────────────
+    function updateRange(inputId, labelId, formatter) {
+      const input = document.getElementById(inputId);
+      const label = document.getElementById(labelId);
+      const pct   = (input.value - input.min) / (input.max - input.min);
+      label.style.left = `calc(${pct*100}% - 20px)`;
+      label.textContent = formatter(input.value);
+    }
+
+    // ── LANGUAGE ─────────────────────────────────────────────────
+    let currentLang = 'en';
+    function setLang(lang) {
+      currentLang = lang;
+      document.getElementById('btn-en').classList.toggle('active', lang==='en');
+      document.getElementById('btn-fa').classList.toggle('active', lang==='fa');
+      const body = document.getElementById('body');
+      if(lang==='fa'){body.classList.add('fa');body.setAttribute('dir','rtl');}
+      else{body.classList.remove('fa');body.setAttribute('dir','ltr');}
+      document.querySelectorAll('[data-'+lang+']').forEach(el=>{
+        const v=el.getAttribute('data-'+lang);
+        if(!v)return;
+        if(el.tagName==='INPUT') el.placeholder=v;
+        else if(el.tagName==='OPTION') el.textContent=v;
+        else el.innerHTML=v;
+      });
+    }
+
+    // ── FADE UP ──────────────────────────────────────────────────
+    const obs = new IntersectionObserver(entries=>
+      entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),
+      {threshold:0.07}
+    );
+    document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+
+    // ── INIT ─────────────────────────────────────────────────────
+    updateCalc();
+    // Init range labels
+    updateRange('oreRate','oreVal',v=>v+' Mt/yr');
+    updateRange('stripRatio','stripVal',v=>v+':1');
+    updateRange('plantTph','tphVal',v=>parseInt(v).toLocaleString()+' tph');
+  </script>
+</body>
+</html>
