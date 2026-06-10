@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Market Dashboard & Intelligence | KDMine Mining Consultancy</title>
+<meta name="description" content="Real-time commodity prices, equipment costs, currency rates, and market intelligence for mining projects. Live data feeds for gold, copper, iron ore, and mining equipment pricing."/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --gold:#C9A84C;--gold-light:#E8C97A;--gold-dark:#A07830;
+    --dark:#0A0E1A;--dark2:#111827;--dark3:#1F2937;--dark4:#374151;
+    --text:#F9FAFB;--text-muted:#9CA3AF;
+    --border:rgba(201,168,76,0.2);--border2:rgba(255,255,255,0.08);
+    --blue:#3B82F6;--green:#10B981;--purple:#8B5CF6;--red:#EF4444;--orange:#F59E0B;--teal:#14B8A6;
+    --radius:12px;--radius-lg:20px;--radius-xl:28px;
+  }
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',sans-serif;background:var(--dark);color:var(--text);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased;}
+  body.fa{font-family:'Vazirmatn',sans-serif;direction:rtl;}
+  ::-webkit-scrollbar{width:6px;}
+  ::-webkit-scrollbar-track{background:var(--dark2);}
+  ::-webkit-scrollbar-thumb{background:var(--gold-dark);border-radius:3px;}
+
+  /* ── LANG BAR ── */
+  .lang-bar{position:fixed;top:0;left:0;right:0;z-index:3000;height:36px;background:linear-gradient(135deg,#1F2937,#111827);display:flex;align-items:center;justify-content:space-between;padding:0 5%;border-bottom:1px solid rgba(255,255,255,0.05);}
+  .lang-bar-left{font-size:11px;color:var(--text-muted);font-weight:600;display:flex;align-items:center;gap:10px;}
+  .lang-bar-left i{color:var(--gold);font-size:10px;}
+  .lang-bar-right{display:flex;align-items:center;gap:8px;}
+  .lang-btn{padding:4px 16px;border-radius:6px;border:1px solid transparent;cursor:pointer;font-size:11px;font-weight:700;transition:.2s;font-family:inherit;background:transparent;color:var(--text-muted);}
+  .lang-btn.active{background:var(--gold);color:var(--dark);border-color:var(--gold);}
+
+  /* ── NAV ── */
+  nav{position:fixed;top:36px;left:0;right:0;z-index:2000;height:72px;background:rgba(10,14,26,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border2);transition:.3s;}
+  nav.scrolled{background:rgba(10,14,26,0.98);border-bottom-color:var(--border);box-shadow:0 4px 20px rgba(0,0,0,0.3);}
+  .nav-inner{max-width:1440px;margin:0 auto;padding:0 5%;height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+  .nav-logo{display:flex;align-items:center;gap:14px;text-decoration:none;}
+  .nav-logo img{height:42px;filter:drop-shadow(0 2px 8px rgba(201,168,76,0.3));}
+  .nav-logo-text{font-size:22px;font-weight:900;color:#fff;letter-spacing:-0.8px;}
+  .nav-logo-text span{color:var(--gold);}
+  .nav-links{display:flex;align-items:center;gap:6px;}
+  .nav-link{padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;color:var(--text-muted);text-decoration:none;transition:.2s;}
+  .nav-link:hover,.nav-link.active{color:var(--text);background:rgba(255,255,255,0.06);}
+  .nav-cta{padding:10px 24px;border-radius:8px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--dark);font-size:13px;font-weight:700;text-decoration:none;transition:.2s;display:flex;align-items:center;gap:8px;box-shadow:0 4px 12px rgba(201,168,76,0.3);}
+  .nav-cta:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(201,168,76,0.5);}
+
+  /* ── HERO ── */
+  .hero{min-height:65vh;position:relative;display:flex;align-items:center;overflow:hidden;padding-top:108px;padding-bottom:60px;}
+  .hero-bg{position:absolute;inset:0;z-index:0;}
+  .hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.1;filter:brightness(0.8);}
+  .hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,14,26,0.98) 0%,rgba(10,14,26,0.92) 50%,rgba(10,14,26,0.85) 100%);}
+  .hero-pattern{position:absolute;inset:0;background-image:radial-gradient(circle at 2px 2px,rgba(201,168,76,0.04) 1px,transparent 0);background-size:40px 40px;}
+  .hero-glow{position:absolute;top:-100px;right:10%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.08),transparent 70%);filter:blur(60px);}
+  .hero-inner{position:relative;z-index:2;max-width:1440px;margin:0 auto;padding:0 5%;}
+  .breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:24px;font-size:12px;color:var(--text-muted);}
+  .breadcrumb a{color:var(--text-muted);text-decoration:none;transition:.2s;}
+  .breadcrumb a:hover{color:var(--gold);}
+  .breadcrumb i{font-size:10px;}
+  .hero-badge{display:inline-flex;align-items:center;gap:10px;padding:8px 20px;border-radius:24px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.8px;margin-bottom:24px;}
+  .hero-badge i{font-size:14px;animation:pulse 2s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.5;}}
+  .hero-h1{font-size:clamp(36px,5vw,62px);font-weight:900;color:#fff;letter-spacing:-3px;line-height:.95;margin-bottom:20px;}
+  .hero-h1 em{background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-style:normal;}
+  .hero-desc{font-size:17px;color:var(--text-muted);line-height:1.85;max-width:720px;margin-bottom:32px;}
+  .hero-meta{display:flex;gap:32px;flex-wrap:wrap;}
+  .hero-meta-item{display:flex;align-items:center;gap:10px;}
+  .hero-meta-icon{width:40px;height:40px;border-radius:10px;background:rgba(201,168,76,0.1);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:16px;}
+  .hero-meta-text{font-size:13px;color:var(--text-muted);line-height:1.4;}
+  .hero-meta-value{font-size:16px;font-weight:800;color:#fff;}
+
+  /* ── SECTIONS ── */
+  section{padding:80px 0;}
+  .container{max-width:1440px;margin:0 auto;padding:0 5%;}
+  .sec-eyebrow{font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:2.4px;margin-bottom:12px;}
+  .sec-title{font-size:clamp(26px,3.5vw,44px);font-weight:900;color:#fff;letter-spacing:-2px;margin-bottom:16px;line-height:1.08;}
+  .sec-title em{background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-style:normal;}
+  .sec-sub{font-size:15px;color:var(--text-muted);line-height:1.85;max-width:720px;}
+  .sec-header{margin-bottom:48px;}
+
+  /* ── LIVE PRICES ── */
+  .live-prices-section{background:var(--dark);padding-top:60px;}
+  .prices-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .price-card{background:linear-gradient(135deg,var(--dark3),var(--dark4));border:1px solid var(--border2);border-radius:var(--radius-lg);padding:24px;transition:.3s;position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.2);}
+  .price-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:var(--radius-lg) var(--radius-lg) 0 0;}
+  .price-card:hover{border-color:var(--border);transform:translateY(-4px);}
+  .price-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+  .price-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;}
+  .price-change{padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px;}
+  .price-change.up{background:rgba(16,185,129,0.15);color:var(--green);}
+  .price-change.down{background:rgba(239,68,68,0.15);color:var(--red);}
+  .price-label{font-size:12px;color:var(--text-muted);font-weight:600;margin-bottom:8px;}
+  .price-value{font-size:28px;font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:4px;}
+  .price-unit{font-size:13px;color:var(--text-muted);margin-bottom:12px;}
+  .price-meta{display:flex;justify-content:space-between;padding-top:12px;border-top:1px solid var(--border2);font-size:11px;color:var(--text-muted);}
+
+  /* ── EQUIPMENT PRICING ── */
+  .equipment-section{background:linear-gradient(135deg,var(--dark2),var(--dark3));}
+  .equipment-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .equipment-card{background:linear-gradient(135deg,var(--dark3),var(--dark4));border:1px solid var(--border2);border-radius:var(--radius-lg);padding:28px;transition:.3s;box-shadow:0 4px 20px rgba(0,0,0,0.2);}
+  .equipment-card:hover{border-color:var(--border);transform:translateY(-4px);}
+  .equipment-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:20px;}
+  .equipment-icon{width:56px;height:56px;border-radius:12px;background:rgba(201,168,76,0.1);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
+  .equipment-title{font-size:16px;font-weight:800;color:#fff;margin-bottom:4px;}
+  .equipment-subtitle{font-size:12px;color:var(--text-muted);}
+  .equipment-price{font-size:24px;font-weight:900;color:var(--gold);margin-bottom:16px;}
+  .equipment-specs{display:flex;flex-direction:column;gap:8px;}
+  .equipment-spec{display:flex;justify-content:space-between;font-size:12px;padding:6px 0;border-bottom:1px solid var(--border2);}
+  .equipment-spec:last-child{border-bottom:none;}
+  .equipment-spec-label{color:var(--text-muted);}
+  .equipment-spec-value{color:#fff;font-weight:600;}
+
+  /* ── CURRENCY RATES ── */
+  .currency-section{background:var(--dark);}
+  .currency-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;}
+  .currency-card{background:linear-gradient(135deg,var(--dark3),var(--dark4));border:1px solid var(--border2);border-radius:var(--radius-lg);padding:20px;text-align:center;transition:.3s;box-shadow:0 4px 20px rgba(0,0,0,0.2);}
+  .currency-card:hover{border-color:var(--border);transform:translateY(-3px);}
+  .currency-flag{font-size:32px;margin-bottom:12px;}
+  .currency-pair{font-size:13px;font-weight:700;color:#fff;margin-bottom:8px;}
+  .currency-rate{font-size:20px;font-weight:900;color:var(--gold);margin-bottom:8px;}
+  .currency-change{font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:4px;}
+
+  /* ── MARKET INSIGHTS ── */
+  .insights-section{background:linear-gradient(135deg,var(--dark2),var(--dark3));}
+  .insights-grid{display:grid;grid-template-columns:2fr 1fr;gap:24px;}
+  .insight-main{background:linear-gradient(135deg,var(--dark3),var(--dark4));border:1px solid var(--border2);border-radius:var(--radius-lg);padding:32px;box-shadow:0 4px 20px rgba(0,0,0,0.2);}
+  .insight-header{display:flex;align-items:center;gap:16px;margin-bottom:24px;}
+  .insight-icon{width:56px;height:56px;border-radius:12px;background:rgba(201,168,76,0.1);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:24px;}
+  .insight-title{font-size:20px;font-weight:800;color:#fff;margin-bottom:4px;}
+  .insight-date{font-size:12px;color:var(--text-muted);}
+  .insight-content{font-size:14px;color:var(--text-muted);line-height:1.8;margin-bottom:20px;}
+  .insight-tags{display:flex;flex-wrap:wrap;gap:8px;}
+  .insight-tag{padding:6px 12px;border-radius:6px;background:rgba(255,255,255,0.04);border:1px solid var(--border2);font-size:11px;color:var(--text-muted);font-weight:600;}
+  .insight-sidebar{display:flex;flex-direction:column;gap:16px;}
+  .insight-card{background:linear-gradient(135deg,var(--dark3),var(--dark4));border:1px solid var(--border2);border-radius:var(--radius-lg);padding:20px;transition:.3s;box-shadow:0 4px 20px rgba(0,0,0,0.2);}
+  .insight-card:hover{border-color:var(--border);}
+  .insight-card-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:8px;}
+  .insight-card-text{font-size:12px;color:var(--text-muted);line-height:1.7;}
+
+  /* ── CHARTS ── */
+  .charts-section{background:var(--dark);}
+  .charts-grid{display:grid;grid-template-columns:2fr 1fr;gap:24px;}
+  .chart-card{background:linear-gradient(135deg,var(--dark3),var(--dark4));border:1px solid var(--border2);border-radius:var(--radius-lg);padding:28px;box-shadow:0 4px 20px rgba(0,0,0,0.2);}
+  .chart-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;}
+  .chart-title{font-size:18px;font-weight:800;color:#fff;}
+  .chart-controls{display:flex;gap:8px;}
+  .chart-btn{padding:6px 14px;border-radius:6px;border:1px solid var(--border2);background:rgba(255,255,255,0.03);color:var(--text-muted);font-size:11px;font-weight:600;cursor:pointer;transition:.2s;}
+  .chart-btn.active{background:var(--gold);color:var(--dark);border-color:var(--gold);}
+  .chart-placeholder{height:300px;background:rgba(0,0,0,0.2);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:13px;}
+
+  /* ── DATA SOURCES ── */
+  .sources-section{background:linear-gradient(135deg,var(--dark2),var(--dark3));padding:60px 0;}
+  .sources-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .source-card{background:linear-gradient(135deg,var(--dark3),var(--dark4));border:1px solid var(--border2);border-radius:var(--radius-lg);padding:24px;text-align:center;transition:.3s;box-shadow:0 4px 20px rgba(0,0,0,0.2);}
+  .source-card:hover{border-color:var(--border);transform:translateY(-3px);}
+  .source-logo{width:48px;height:48px;border-radius:10px;background:rgba(201,168,76,0.1);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:20px;margin:0 auto 16px;}
+  .source-name{font-size:14px;font-weight:700;color:#fff;margin-bottom:6px;}
+  .source-desc{font-size:11px;color:var(--text-muted);line-height:1.6;}
+
+  /* ── CTA ── */
+  .cta-section{background:var(--dark);padding:80px 0;}
+  .cta-inner{background:linear-gradient(135deg,var(--dark3),var(--dark4));border:1px solid var(--border);border-radius:var(--radius-xl);padding:60px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;position:relative;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.4);}
+  .cta-glow{position:absolute;top:-80px;right:8%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.1),transparent 70%);filter:blur(60px);}
+  .cta-title{font-size:clamp(24px,3vw,38px);font-weight:900;color:#fff;letter-spacing:-2px;margin-bottom:12px;}
+  .cta-title em{background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-style:normal;}
+  .cta-sub{font-size:15px;color:var(--text-muted);line-height:1.8;}
+  .cta-btns{display:flex;gap:14px;flex-direction:column;}
+  .btn-primary{padding:16px 32px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--dark);font-weight:700;font-size:14px;border:none;cursor:pointer;transition:.25s;display:inline-flex;align-items:center;gap:10px;text-decoration:none;box-shadow:0 4px 16px rgba(201,168,76,0.3);}
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(201,168,76,0.5);}
+  .btn-secondary{padding:16px 32px;border-radius:10px;border:1.5px solid var(--border);background:rgba(255,255,255,0.03);color:var(--text);font-weight:600;font-size:14px;transition:.25s;display:inline-flex;align-items:center;gap:10px;text-decoration:none;}
+  .btn-secondary:hover{border-color:var(--gold);color:var(--gold);}
+
+  /* ── FOOTER ── */
+  footer{background:var(--dark2);border-top:1px solid var(--border2);padding:70px 0 0;}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:50px;margin-bottom:50px;}
+  .footer-logo{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+  .footer-logo img{height:38px;}
+  .footer-logo-text{font-size:19px;font-weight:900;color:#fff;}
+  .footer-logo-text span{color:var(--gold);}
+  .footer-desc{font-size:13px;color:var(--text-muted);line-height:1.85;margin-bottom:22px;max-width:300px;}
+  .footer-col-title{font-size:12px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:18px;}
+  .footer-links{display:flex;flex-direction:column;gap:10px;}
+  .footer-link{font-size:12px;color:var(--text-muted);text-decoration:none;transition:.2s;display:flex;align-items:center;gap:7px;}
+  .footer-link:hover{color:var(--gold);}
+  .footer-link i{font-size:9px;opacity:.5;}
+  .footer-bottom{border-top:1px solid var(--border2);padding:24px 0;text-align:center;}
+  .footer-bottom p{font-size:12px;color:var(--text-muted);}
+
+  /* ── SCROLL TO TOP ── */
+  .scroll-top{position:fixed;bottom:32px;right:32px;width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--dark);border:none;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:.3s;opacity:0;z-index:1000;box-shadow:0 8px 24px rgba(201,168,76,0.4);}
+  .scroll-top.visible{opacity:1;}
+  .scroll-top:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(201,168,76,0.6);}
+
+  /* ── FADE UP ── */
+  .fade-up{opacity:0;transform:translateY(30px);transition:opacity .7s,transform .7s;}
+  .fade-up.visible{opacity:1;transform:translateY(0);}
+  .fade-up.delay-1{transition-delay:.12s;}
+  .fade-up.delay-2{transition-delay:.24s;}
+  .fade-up.delay-3{transition-delay:.36s;}
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:1200px){
+    .prices-grid{grid-template-columns:repeat(2,1fr);}
+    .equipment-grid{grid-template-columns:1fr 1fr;}
+    .currency-grid{grid-template-columns:repeat(3,1fr);}
+    .insights-grid{grid-template-columns:1fr;}
+    .charts-grid{grid-template-columns:1fr;}
+    .sources-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media(max-width:900px){
+    .prices-grid{grid-template-columns:1fr;}
+    .equipment-grid{grid-template-columns:1fr;}
+    .currency-grid{grid-template-columns:1fr 1fr;}
+    .sources-grid{grid-template-columns:1fr 1fr;}
+    .cta-inner{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media(max-width:600px){
+    .currency-grid{grid-template-columns:1fr;}
+    .sources-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body id="body">
+
+<!-- LANG BAR -->
+<div class="lang-bar">
+<div class="lang-bar-left">
+  <i class="fas fa-broadcast-tower"></i>
+  <span data-en="Live Market Data • Updated Every 15 Minutes" data-fa="داده‌های زنده بازار • به‌روزرسانی هر ۱۵ دقیقه">Live Market Data • Updated Every 15 Minutes</span>
+</div>
+<div class="lang-bar-right">
+  <button class="lang-btn active" id="btn-en" onclick="setLang('en')">🇬🇧 EN</button>
+  <button class="lang-btn" id="btn-fa" onclick="setLang('fa')">🇮🇷 FA</button>
+</div>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+<div class="nav-inner">
+  <a href="index.html" class="nav-logo">
+    <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="KDMine"/>
+    <span class="nav-logo-text">KD<span>Mine</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link" data-en="Home" data-fa="خانه">Home</a>
+    <a href="KDMine - Services & Expertise.html" class="nav-link" data-en="Services" data-fa="خدمات">Services</a>
+    <a href="KDMine - Resources Hub.html" class="nav-link active" data-en="Resources" data-fa="منابع">Resources</a>
+    <a href="KDMine - Contact & About Us.html" class="nav-link" data-en="Contact" data-fa="تماس">Contact</a>
+  </div>
+  <a href="KDMine - Contact & About Us.html" class="nav-cta">
+    <i class="fas fa-paper-plane"></i>
+    <span data-en="Get a Proposal" data-fa="دریافت پیشنهاد">Get a Proposal</span>
+  </a>
+</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+<div class="hero-bg">
+  <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1920&q=85" alt="Market Data"/>
+  <div class="hero-overlay"></div>
+</div>
+<div class="hero-pattern"></div>
+<div class="hero-glow"></div>
+<div class="hero-inner">
+  <div class="breadcrumb fade-up">
+    <a href="index.html" data-en="Home" data-fa="خانه">Home</a>
+    <i class="fas fa-chevron-right"></i>
+    <a href="KDMine - Resources Hub.html" data-en="Resources" data-fa="منابع">Resources</a>
+    <i class="fas fa-chevron-right"></i>
+    <span data-en="Market Dashboard" data-fa="داشبورد بازار">Market Dashboard</span>
+  </div>
+  <div class="hero-badge fade-up">
+    <i class="fas fa-chart-line"></i>
+    <span data-en="Live Market Intelligence" data-fa="هوش زنده بازار">Live Market Intelligence</span>
+  </div>
+  <h1 class="hero-h1 fade-up">
+    <span data-en="Real-Time " data-fa="قیمت‌های ">Real-Time </span>
+    <em data-en="Market Data" data-fa="بازار">Market Data</em><br/>
+    <span data-en="& Intelligence" data-fa="در زمان واقعی و هوش">& Intelligence</span>
+  </h1>
+  <p class="hero-desc fade-up delay-1" data-en="Live commodity prices, equipment costs, currency rates, and market intelligence for mining projects. Comprehensive data feeds from global exchanges, OEM suppliers, and industry sources to support informed procurement and cost estimation decisions." data-fa="قیمت‌های زنده کالا، هزینه‌های تجهیزات، نرخ‌های ارز و هوش بازار برای پروژه‌های معدنی. فیدهای داده جامع از بورس‌های جهانی، تأمین‌کنندگان OEM و منابع صنعت برای پشتیبانی از تصمیمات آگاهانه تدارکات و برآورد هزینه.">Live commodity prices, equipment costs, currency rates, and market intelligence for mining projects. Comprehensive data feeds from global exchanges, OEM suppliers, and industry sources to support informed procurement and cost estimation decisions.</p>
+  <div class="hero-meta fade-up delay-2">
+    <div class="hero-meta-item">
+      <div class="hero-meta-icon"><i class="fas fa-sync-alt"></i></div>
+      <div>
+        <div class="hero-meta-value" data-en="15 Min" data-fa="۱۵ دقیقه">15 Min</div>
+        <div class="hero-meta-text" data-en="Update Frequency" data-fa="فرکانس به‌روزرسانی">Update Frequency</div>
+      </div>
+    </div>
+    <div class="hero-meta-item">
+      <div class="hero-meta-icon"><i class="fas fa-database"></i></div>
+      <div>
+        <div class="hero-meta-value" data-en="12+ Sources" data-fa="۱۲+ منبع">12+ Sources</div>
+        <div class="hero-meta-text" data-en="Data Providers" data-fa="ارائه‌دهندگان داده">Data Providers</div>
+      </div>
+    </div>
+    <div class="hero-meta-item">
+      <div class="hero-meta-icon"><i class="fas fa-globe"></i></div>
+      <div>
+        <div class="hero-meta-value" data-en="Global" data-fa="جهانی">Global</div>
+        <div class="hero-meta-text" data-en="Market Coverage" data-fa="پوشش بازار">Market Coverage</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- LIVE COMMODITY PRICES -->
+<section class="live-prices-section">
+<div class="container">
+  <div class="sec-header fade-up">
+    <div class="sec-eyebrow" data-en="Live Prices" data-fa="قیمت‌های زنده">Live Prices</div>
+    <div class="sec-title" data-en="Commodity <em>Prices</em>" data-fa="قیمت‌های <em>کالا</em>">Commodity <em>Prices</em></div>
+    <div class="sec-sub" data-en="Real-time spot prices from major global exchanges including LME, COMEX, Shanghai, and regional markets." data-fa="قیمت‌های نقدی در زمان واقعی از بورس‌های بزرگ جهانی از جمله LME، COMEX، شانگهای و بازارهای منطقه‌ای.">Real-time spot prices from major global exchanges including LME, COMEX, Shanghai, and regional markets.</div>
+  </div>
+  <div class="prices-grid">
+    <div class="price-card fade-up" style="--accent:#FFD700;">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#FFD700,#FFA500);border-radius:12px 12px 0 0;"></div>
+      <div class="price-header">
+        <div class="price-icon" style="background:rgba(255,215,0,0.15);color:#FFD700;">🥇</div>
+        <div class="price-change up"><i class="fas fa-arrow-up"></i> <span data-en="+2.4%" data-fa="+۲.۴٪">+2.4%</span></div>
+      </div>
+      <div class="price-label" data-en="Gold (XAU)" data-fa="طلا (XAU)">Gold (XAU)</div>
+      <div class="price-value">$2,347</div>
+      <div class="price-unit" data-en="per troy ounce" data-fa="هر اونس troy">per troy ounce</div>
+      <div class="price-meta">
+        <span data-en="COMEX" data-fa="COMEX">COMEX</span>
+        <span data-en="Jun 10, 12:45 PM" data-fa="۱۰ ژوئن، ۱۲:۴۵ بعدازظهر">Jun 10, 12:45 PM</span>
+      </div>
+    </div>
+    <div class="price-card fade-up delay-1">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#B87333,#CD7F32);border-radius:12px 12px 0 0;"></div>
+      <div class="price-header">
+        <div class="price-icon" style="background:rgba(184,115,51,0.15);color:#B87333;">🔶</div>
+        <div class="price-change down"><i class="fas fa-arrow-down"></i> <span data-en="-1.2%" data-fa="-۱.۲٪">-1.2%</span></div>
+      </div>
+      <div class="price-label" data-en="Copper (Cu)" data-fa="مس (Cu)">Copper (Cu)</div>
+      <div class="price-value">$4.52</div>
+      <div class="price-unit" data-en="per pound (LME)" data-fa="هر پوند (LME)">per pound (LME)</div>
+      <div class="price-meta">
+        <span data-en="LME" data-fa="LME">LME</span>
+        <span data-en="Jun 10, 12:45 PM" data-fa="۱۰ ژوئن، ۱۲:۴۵ بعدازظهر">Jun 10, 12:45 PM</span>
+      </div>
+    </div>
+    <div class="price-card fade-up delay-2">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#708090,#A9A9A9);border-radius:12px 12px 0 0;"></div>
+      <div class="price-header">
+        <div class="price-icon" style="background:rgba(112,128,144,0.15);color:#708090;">⚫</div>
+        <div class="price-change up"><i class="fas fa-arrow-up"></i> <span data-en="+0.8%" data-fa="+۰.۸٪">+0.8%</span></div>
+      </div>
+      <div class="price-label" data-en="Iron Ore (Fe)" data-fa="سنگ آهن (Fe)">Iron Ore (Fe)</div>
+      <div class="price-value">$112.50</div>
+      <div class="price-unit" data-en="per dry metric ton (62% Fe)" data-fa="هر تن متریک خشک (۶۲٪ Fe)">per dry metric ton (62% Fe)</div>
+      <div class="price-meta">
+        <span data-en="Qingdao" data-fa="چینگدائو">Qingdao</span>
+        <span data-en="Jun 10, 12:45 PM" data-fa="۱۰ ژوئن، ۱۲:۴۵ بعدازظهر">Jun 10, 12:45 PM</span>
+      </div>
+    </div>
+    <div class="price-card fade-up delay-3">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#C0C0C0,#E5E4E2);border-radius:12px 12px 0 0;"></div>
+      <div class="price-header">
+        <div class="price-icon" style="background:rgba(192,192,192,0.15);color:#C0C0C0;">🪙</div>
+        <div class="price-change up"><i class="fas fa-arrow-up"></i> <span data-en="+3.1%" data-fa="+۳.۱٪">+3.1%</span></div>
+      </div>
+      <div class="price-label" data-en="Silver (XAG)" data-fa="نقره (XAG)">Silver (XAG)</div>
+      <div class="price-value">$31.85</div>
+      <div class="price-unit" data-en="per troy ounce" data-fa="هر اونس troy">per troy ounce</div>
+      <div class="price-meta">
+        <span data-en="COMEX" data-fa="COMEX">COMEX</span>
+        <span data-en="Jun 10, 12:45 PM" data-fa="۱۰ ژوئن، ۱۲:۴۵ بعدازظهر">Jun 10, 12:45 PM</span>
+      </div>
+    </div>
+    <div class="price-card fade-up">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#4A4A4A,#696969);border-radius:12px 12px 0 0;"></div>
+      <div class="price-header">
+        <div class="price-icon" style="background:rgba(74,74,74,0.15);color:#696969;">⚪</div>
+        <div class="price-change down"><i class="fas fa-arrow-down"></i> <span data-en="-0.5%" data-fa="-۰.۵٪">-0.5%</span></div>
+      </div>
+      <div class="price-label" data-en="Zinc (Zn)" data-fa="روی (Zn)">Zinc (Zn)</div>
+      <div class="price-value">$2,845</div>
+      <div class="price-unit" data-en="per metric ton (LME)" data-fa="هر تن متریک (LME)">per metric ton (LME)</div>
+      <div class="price-meta">
+        <span data-en="LME" data-fa="LME">LME</span>
+        <span data-en="Jun 10, 12:45 PM" data-fa="۱۰ ژوئن، ۱۲:۴۵ بعدازظهر">Jun 10, 12:45 PM</span>
+      </div>
+    </div>
+    <div class="price-card fade-up delay-1">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#8B7355,#A0826D);border-radius:12px 12px 0 0;"></div>
+      <div class="price-header">
+        <div class="price-icon" style="background:rgba(139,115,85,0.15);color:#8B7355;">🟤</div>
+        <div class="price-change up"><i class="fas fa-arrow-up"></i> <span data-en="+1.7%" data-fa="+۱.۷٪">+1.7%</span></div>
+      </div>
+      <div class="price-label" data-en="Lead (Pb)" data-fa="سرب (Pb)">Lead (Pb)</div>
+      <div class="price-value">$2,156</div>
+      <div class="price-unit" data-en="per metric ton (LME)" data-fa="هر تن متریک (LME)">per metric ton (LME)</div>
+      <div class="price-meta">
+        <span data-en="LME" data-fa="LME">LME</span>
+        <span data-en="Jun 10, 12:45 PM" data-fa="۱۰ ژوئن، ۱۲:۴۵ بعدازظهر">Jun 10, 12:45 PM</span>
+      </div>
+    </div>
+    <div class="price-card fade-up delay-2">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#E5E4E2,#F5F5F5);border-radius:12px 12px 0 0;"></div>
+      <div class="price-header">
+        <div class="price-icon" style="background:rgba(229,228,226,0.15);color:#A9A9A9;">💎</div>
+        <div class="price-change up"><i class="fas fa-arrow-up"></i> <span data-en="+0.3%" data-fa="+۰.۳٪">+0.3%</span></div>
+      </div>
+      <div class="price-label" data-en="Aluminum (Al)" data-fa="آلومینیوم (Al)">Aluminum (Al)</div>
+      <div class="price-value">$2,587</div>
+      <div class="price-unit" data-en="per metric ton (LME)" data-fa="هر تن متریک (LME)">per metric ton (LME)</div>
+      <div class="price-meta">
+        <span data-en="LME" data-fa="LME">LME</span>
+        <span data-en="Jun 10, 12:45 PM" data-fa="۱۰ ژوئن، ۱۲:۴۵ بعدازظهر">Jun 10, 12:45 PM</span>
+      </div>
+    </div>
+    <div class="price-card fade-up delay-3">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#4B0082,#8A2BE2);border-radius:12px 12px 0 0;"></div>
+      <div class="price-header">
+        <div class="price-icon" style="background:rgba(75,0,130,0.15);color:#8A2BE2;">🟣</div>
+        <div class="price-change down"><i class="fas fa-arrow-down"></i> <span data-en="-2.1%" data-fa="-۲.۱٪">-2.1%</span></div>
+      </div>
+      <div class="price-label" data-en="Nickel (Ni)" data-fa="نیکل (Ni)">Nickel (Ni)</div>
+      <div class="price-value">$18,245</div>
+      <div class="price-unit" data-en="per metric ton (LME)" data-fa="هر تن متریک (LME)">per metric ton (LME)</div>
+      <div class="price-meta">
+        <span data-en="LME" data-fa="LME">LME</span>
+        <span data-en="Jun 10, 12:45 PM" data-fa="۱۰ ژوئن، ۱۲:۴۵ بعدازظهر">Jun 10, 12:45 PM</span>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- EQUIPMENT PRICING -->
+<section class="equipment-section">
+<div class="container">
+  <div class="sec-header fade-up">
+    <div class="sec-eyebrow" data-en="Equipment Costs" data-fa="هزینه‌های تجهیزات">Equipment Costs</div>
+    <div class="sec-title" data-en="Mining <em>Equipment</em> Pricing" data-fa="قیمت‌گذاری <em>تجهیزات</em> معدنی">Mining <em>Equipment</em> Pricing</div>
+    <div class="sec-sub" data-en="Current market prices for major mining equipment from global OEMs and suppliers. Prices include FOB costs and typical lead times." data-fa="قیمت‌های فعلی بازار برای تجهیزات اصلی معدنی از OEMها و تأمین‌کنندگان جهانی. قیمت‌ها شامل هزینه‌های FOB و زمان‌های تحویل معمولی است.">Current market prices for major mining equipment from global OEMs and suppliers. Prices include FOB costs and typical lead times.</div>
+  </div>
+  <div class="equipment-grid">
+    <div class="equipment-card fade-up">
+      <div class="equipment-header">
+        <div class="equipment-icon"><i class="fas fa-truck-monster"></i></div>
+        <div>
+          <div class="equipment-title" data-en="Haul Truck (100-ton)" data-fa="کامیون حمل (۱۰۰ تن)">Haul Truck (100-ton)</div>
+          <div class="equipment-subtitle" data-en="Caterpillar 777G / Komatsu HD785" data-fa="کاترپیلار 777G / کوماتسو HD785">Caterpillar 777G / Komatsu HD785</div>
+        </div>
+      </div>
+      <div class="equipment-price">$3.2M – $3.8M</div>
+      <div class="equipment-specs">
+        <div class="equipment-spec">
+          <span class="equipment-spec-label" data-en="Payload" data-fa="بار مفید">Payload</span>
+          <span class="equipment-spec-value" data-en="100 tons" data-fa="۱۰۰ تن">100 tons</span>
+        </div>
+        <div class="equipment-spec">
+          <span class="equipment-spec-label" data-en="Engine Power" data-fa="قدرت موتور">Engine Power</span>
+          <span class="equipment-spec-value" data-en="1,050 HP" data-fa="۱,۰۵۰ اسب">1,050 HP</span>
+        </div>
+        <div class="equipment-spec">
+          <span class="equipment-spec-label" data-en="Lead Time" data-fa="زمان تحویل">Lead Time</span>
+          <span class="equipment-spec-value" data-en="12-18 months" data-fa="۱۲-۱۸ ماه">12-18 months</span>
+        </div>
+        <div class="equipment-spec">
+          <span class="equipment-spec-label" data-en="Availability" data-fa="در دسترس بودن">Availability</span>
+          <span class="equipment-spec-value" data-en="Limited" data-fa="محدود">Limited</span>
+        </div>
+      </div>
+    </div>
+    <div class="equipment-card fade-up delay-1">
+      <div class="equipment-header">
+        <div class="equipment-icon"><i class="fas fa-tractor"></i></div>
+        <div>
+          <div class="equipment-title" data-en="Hydraulic Excavator (400-ton)" data-fa="بیل مکانیکی هیدرولیک (۴۰۰ تن)">Hydraulic Excavator (400-ton)</div>
+          <div class="equipment-subtitle" data-en="Liebherr R 9400 / Hitachi EX1900" data-fa="لیبهر R 9400 / هیتاچی EX1900">Liebherr R 9400 / Hitachi EX1900</div>
+        </div>
+      </div>
+      <div class="equipment-price">$8.5M – $10.2M</div>
+      <div class="equipment-specs">
+        <div class="equipment-spec">
+          <span class="equipment-spec-label" data-en="Operating Weight" data-fa="وزن عملیاتی">Operating Weight</span>
+          <span class="equipment-spec-value" data-en="400 tons" data-fa="۴۰۰ تن">400 tons</span>
+        </div>
+        <div class="equipment-spec">
+          <span class="equipment-spec-label" data-en="Bucket Capacity" data-fa="ظرفیت باکت">Bucket Capacity</span>
+          <span class="equipment-spec-value" data-en="23 m³" data-fa="۲۳ متر مکعب">23 m³</span>
+        </div>
+        <div class="equipment-spec">
+          <span class="equipment-spec-label" data-en="Lead Time" data-fa="زمان تحویل">Lead Time</span>
+          <span class="equipment-spec-value" data-en="18-24 months" data-fa="۱۸-۲۴ ماه">18-24 months</span>
+        </div>
+        <div class="equipment-spec">
+          <span class="equipment-spec-label" data-en="Availability" data-fa="در دسترس بودن">Availability</span>
+          <span class="equipment-spec-value" data-en="Very Limited" data-fa="بسیار محدود">Very Limited</span>
+        </div>
+      </div>
+    </div>
+    <div class="equipment-card fade-up delay-2">
+      <div class="equipment-header">
+        <div class="equipment-icon"><i class="fas fa-cog"></i></div>
+        <div>
+          <div class="equipment-title" data-en="SAG Mill (36' x 18')" data-fa="آسیاب SAG (۳۶' x ۱۸')">SAG Mill (36' x 18')</div>
+          <div class="equipment-subtitle" data-en="Metso / FLSmidth / Outotec" data-fa="متسو / FLSmidth / اوتوتک">Metso / FLSmidth / Outotec</div>
+        </div>
+      </div>
+      <div class="equipment-price">$12M – $15M</div>
+      <div class="equipment-specs">
+        <div class="equipment-spec">
+          <span class="equipment-spec-label" data-en="Diameter x Length" data-fa="قطر x طول">Diameter x Length</span>
+          <span class="equipment-spec-value" data-en="36' x 18'" data-fa="۳۶' x ۱۸'">36' x 18'</span>
+        </div>
+        <div class="equipment-spec">
+          <span class="equipment-spec-label" data-en="Motor Power" data-fa="قدرت موتور">Motor Power</span>
+          <span class="equipment-spec-value" data-en="20 MW" data-fa="۲۰ مگاوات">20 MW</span>
+        </div>
+        <div class="equipment-spec">
+          <span class="equipment-spec-label" data-en="Lead Time" data-fa="زمان تحویل">Lead Time</span>
+          <span class="equipment-spec-value" data-en="24-30 months" data-fa="۲۴-۳۰ ماه">24-30 months</span>
+        </div>
+        <div class="equipment-spec">
+          <span class="equipment-spec-label" data-en="Availability" data-fa="در دسترس بودن">Availability</span>
+          <span class="equipment-spec-value" data-en="Order Only" data-fa="فقط سفارش">Order Only</span>
+        </div>
+      </div>
+    </div>
+    <div class="equipment-card fade-up">
+      <div class="equipment-header">
+        <div class="equipment-icon"><i class="fas fa-hammer"></i></div>
+        <div>
+          <div class="equipment-title" data-en="Jaw Crusher (60x89)" data-fa="سنگ‌شکن فکی (۶۰x۸۹)">Jaw Crusher (60x89)</div>
+          <div class="equipment-subtitle" data-en="Sandvik CJ615 / Metso C160" data-fa="ساندویک CJ615 / متسو C160">Sandvik CJ615 / Metso C160</div>
+        </div>
+      </div>
+      <div class="equipment-price">$1.8M – $2.4M</div>
+      <div class="equipment-specs">
+        <div class="equipment-spec">
+          <span class="equipment-spec-label" data-en="Feed Opening" data-fa="دهانه ورودی">Feed Opening</span>
+          <span class="equipment-spec-value" data-en="1,500 x 2,250 mm" data-fa="۱,۵۰۰ x ۲,۲۵۰ میلی‌متر">1,500 x 2,250 mm</span>
+        </div>
+        <div class="equipment-spec">
+          <span class="equipment-spec-label" data-en="Capacity" data-fa="ظرفیت">Capacity</span>
+          <span class="equipment-spec-value" data-en="1,200 tph" data-fa="۱,۲۰۰ تن/ساعت">1,200 tph</span>
+        </div>
+        <div class="equipment-spec">
+          <span class="equipment-spec-label" data-en="Lead Time" data-fa="زمان تحویل">Lead Time</span>
+          <span class="equipment-spec-value" data-en="10-14 months" data-fa="۱۰-۱۴ ماه">10-14 months</span>
+        </div>
+        <div class="equipment-spec">
+          <span class="equipment-spec-label" data-en="Availability" data-fa="در دسترس بودن">Availability</span>
+          <span class="equipment-spec-value" data-en="Good" data-fa="خوب">Good</span>
+        </div>
+      </div>
+    </div>
+    <div class="equipment-card fade-up delay-1">
+      <div class="equipment-header">
+        <div class="equipment-icon"><i class="fas fa-water"></i></div>
+        <div>
+          <div class="equipment-title" data-en="Flotation Cell (300 m³)" data-fa="سلول فلوتاسیون (۳۰۰ متر مکعب)">Flotation Cell (300 m³)</div>
+          <div class="equipment-subtitle" data-en="Outotec TankCell / FLSmidth" data-fa="اوتوتک TankCell / FLSmidth">Outotec TankCell / FLSmidth</div>
+        </div>
+      </div>
+      <div class="equipment-price">$2.5M – $3.2M</div>
+      <div class="equipment-specs">
+        <div class="equipment-spec">
+          <span class="equipment-spec-label" data-en="Cell Volume" data-fa="حجم سلول">Cell Volume</span>
+          <span class="equipment-spec-value" data-en="300 m³" data-fa="۳۰۰ متر مکعب">300 m³</span>
+        </div>
+        <div class="equipment-spec">
+          <span class="equipment-spec-label" data-en="Motor Power" data-fa="قدرت موتور">Motor Power</span>
+          <span class="equipment-spec-value" data-en="200 kW" data-fa="۲۰۰ کیلووات">200 kW</span>
+        </div>
+        <div class="equipment-spec">
+          <span class="equipment-spec-label" data-en="Lead Time" data-fa="زمان تحویل">Lead Time</span>
+          <span class="equipment-spec-value" data-en="14-18 months" data-fa="۱۴-۱۸ ماه">14-18 months</span>
+        </div>
+        <div class="equipment-spec">
+          <span class="equipment-spec-label" data-en="Availability" data-fa="در دسترس بودن">Availability</span>
+          <span class="equipment-spec-value" data-en="Moderate" data-fa="متوسط">Moderate</span>
+        </div>
+      </div>
+    </div>
+    <div class="equipment-card fade-up delay-2">
+      <div class="equipment-header">
+        <div class="equipment-icon"><i class="fas fa-bolt"></i></div>
+        <div>
+          <div class="equipment-title" data-en="Drill Rig (Rotary)" data-fa="دستگاه حفاری (چرخشی)">Drill Rig (Rotary)</div>
+          <div class="equipment-subtitle" data-en="Atlas Copco DM45 / Sandvik DR461i" data-fa="اطلس کوپکو DM45 / ساندویک DR461i">Atlas Copco DM45 / Sandvik DR461i</div>
+        </div>
+      </div>
+      <div class="equipment-price">$4.5M – $5.8M</div>
+      <div class="equipment-specs">
+        <div class="equipment-spec">
+          <span class="equipment-spec-label" data-en="Hole Diameter" data-fa="قطر سوراخ">Hole Diameter</span>
+          <span class="equipment-spec-value" data-en="229-311 mm" data-fa="۲۲۹-۳۱۱ میلی‌متر">229-311 mm</span>
+        </div>
+        <div class="equipment-spec">
+          <span class="equipment-spec-label" data-en="Depth Capacity" data-fa="ظرفیت عمق">Depth Capacity</span>
+          <span class="equipment-spec-value" data-en="54 m" data-fa="۵۴ متر">54 m</span>
+        </div>
+        <div class="equipment-spec">
+          <span class="equipment-spec-label" data-en="Lead Time" data-fa="زمان تحویل">Lead Time</span>
+          <span class="equipment-spec-value" data-en="8-12 months" data-fa="۸-۱۲ ماه">8-12 months</span>
+        </div>
+        <div class="equipment-spec">
+          <span class="equipment-spec-label" data-en="Availability" data-fa="در دسترس بودن">Availability</span>
+          <span class="equipment-spec-value" data-en="Good" data-fa="خوب">Good</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- CURRENCY RATES -->
+<section class="currency-section">
+<div class="container">
+  <div class="sec-header fade-up">
+    <div class="sec-eyebrow" data-en="Exchange Rates" data-fa="نرخ‌های ارز">Exchange Rates</div>
+    <div class="sec-title" data-en="Currency <em>Exchange</em> Rates" data-fa="نرخ‌های <em>تبادل</em> ارز">Currency <em>Exchange</em> Rates</div>
+    <div class="sec-sub" data-en="Real-time foreign exchange rates for major currencies relevant to mining procurement and international transactions." data-fa="نرخ‌های تبادل ارز در زمان واقعی برای ارزهای اصلی مرتبط با تدارکات معدنی و معاملات بین‌المللی.">Real-time foreign exchange rates for major currencies relevant to mining procurement and international transactions.</div>
+  </div>
+  <div class="currency-grid">
+    <div class="currency-card fade-up">
+      <div class="currency-flag">🇺🇸</div>
+      <div class="currency-pair" data-en="USD / EUR" data-fa="USD / EUR">USD / EUR</div>
+      <div class="currency-rate">0.9245</div>
+      <div class="currency-change up"><i class="fas fa-arrow-up"></i> <span data-en="+0.12%" data-fa="+۰.۱۲٪">+0.12%</span></div>
+    </div>
+    <div class="currency-card fade-up delay-1">
+      <div class="currency-flag">🇨🇳</div>
+      <div class="currency-pair" data-en="USD / CNY" data-fa="USD / CNY">USD / CNY</div>
+      <div class="currency-rate">7.2458</div>
+      <div class="currency-change down"><i class="fas fa-arrow-down"></i> <span data-en="-0.08%" data-fa="-۰.۰۸٪">-0.08%</span></div>
+    </div>
+    <div class="currency-card fade-up delay-2">
+      <div class="currency-flag">🇹🇷</div>
+      <div class="currency-pair" data-en="USD / TRY" data-fa="USD / TRY">USD / TRY</div>
+      <div class="currency-rate">32.45</div>
+      <div class="currency-change up"><i class="fas fa-arrow-up"></i> <span data-en="+0.35%" data-fa="+۰.۳۵٪">+0.35%</span></div>
+    </div>
+    <div class="currency-card fade-up delay-3">
+      <div class="currency-flag">🇮🇷</div>
+      <div class="currency-pair" data-en="USD / IRR" data-fa="USD / IRR">USD / IRR</div>
+      <div class="currency-rate">42,150</div>
+      <div class="currency-change up"><i class="fas fa-arrow-up"></i> <span data-en="+0.18%" data-fa="+۰.۱۸٪">+0.18%</span></div>
+    </div>
+    <div class="currency-card fade-up">
+      <div class="currency-flag">🇦🇺</div>
+      <div class="currency-pair" data-en="USD / AUD" data-fa="USD / AUD">USD / AUD</div>
+      <div class="currency-rate">1.5124</div>
+      <div class="currency-change down"><i class="fas fa-arrow-down"></i> <span data-en="-0.22%" data-fa="-۰.۲۲٪">-0.22%</span></div>
+    </div>
+    <div class="currency-card fade-up delay-1">
+      <div class="currency-flag">🇨🇦</div>
+      <div class="currency-pair" data-en="USD / CAD" data-fa="USD / CAD">USD / CAD</div>
+      <div class="currency-rate">1.3685</div>
+      <div class="currency-change up"><i class="fas fa-arrow-up"></i> <span data-en="+0.09%" data-fa="+۰.۰۹٪">+0.09%</span></div>
+    </div>
+    <div class="currency-card fade-up delay-2">
+      <div class="currency-flag">🇿🇦</div>
+      <div class="currency-pair" data-en="USD / ZAR" data-fa="USD / ZAR">USD / ZAR</div>
+      <div class="currency-rate">18.42</div>
+      <div class="currency-change down"><i class="fas fa-arrow-down"></i> <span data-en="-0.15%" data-fa="-۰.۱۵٪">-0.15%</span></div>
+    </div>
+    <div class="currency-card fade-up delay-3">
+      <div class="currency-flag">🇷🇺</div>
+      <div class="currency-pair" data-en="USD / RUB" data-fa="USD / RUB">USD / RUB</div>
+      <div class="currency-rate">89.25</div>
+      <div class="currency-change up"><i class="fas fa-arrow-up"></i> <span data-en="+0.42%" data-fa="+۰.۴۲٪">+0.42%</span></div>
+    </div>
+    <div class="currency-card fade-up">
+      <div class="currency-flag">🇰🇿</div>
+      <div class="currency-pair" data-en="USD / KZT" data-fa="USD / KZT">USD / KZT</div>
+      <div class="currency-rate">448.50</div>
+      <div class="currency-change up"><i class="fas fa-arrow-up"></i> <span data-en="+0.11%" data-fa="+۰.۱۱٪">+0.11%</span></div>
+    </div>
+    <div class="currency-card fade-up delay-1">
+      <div class="currency-flag">🇦🇪</div>
+      <div class="currency-pair" data-en="USD / AED" data-fa="USD / AED">USD / AED</div>
+      <div class="currency-rate">3.6725</div>
+      <div class="currency-change" style="color:var(--text-muted);"><i class="fas fa-minus"></i> <span data-en="0.00%" data-fa="۰.۰۰٪">0.00%</span></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- MARKET INSIGHTS -->
+<section class="insights-section">
+<div class="container">
+  <div class="sec-header fade-up">
+    <div class="sec-eyebrow" data-en="Market Intelligence" data-fa="هوش بازار">Market Intelligence</div>
+    <div class="sec-title" data-en="Latest Market <em>Insights</em>" data-fa="آخرین <em>بینش‌های</em> بازار">Latest Market <em>Insights</em></div>
+  </div>
+  <div class="insights-grid">
+    <div class="insight-main fade-up">
+      <div class="insight-header">
+        <div class="insight-icon"><i class="fas fa-newspaper"></i></div>
+        <div>
+          <div class="insight-title" data-en="Global Mining Equipment Market Outlook Q2 2026" data-fa="چشم‌انداز بازار جهانی تجهیزات معدنی Q2 2026">Global Mining Equipment Market Outlook Q2 2026</div>
+          <div class="insight-date" data-en="Published: June 10, 2026 • KDMine Research" data-fa="منتشر شده: ۱۰ ژوئن ۲۰۲۶ • تحقیقات KDMine">Published: June 10, 2026 • KDMine Research</div>
+        </div>
+      </div>
+      <div class="insight-content" data-en="The global mining equipment market continues to face extended lead times in Q2 2026, with major OEMs reporting 18-24 month delivery schedules for large haul trucks and excavators. Supply chain constraints, particularly for electronic components and specialized steel castings, remain the primary bottleneck. Chinese manufacturers have increased market share in the 100-200 ton haul truck segment, offering 30-40% cost savings with 8-12 month delivery times. However, concerns about parts availability and service networks persist in remote mining regions. Copper and gold price strength is driving increased CAPEX commitments, particularly in South America and West Africa, putting additional pressure on equipment availability. We recommend early equipment procurement (24-30 months before required on-site date) and consideration of alternative suppliers for non-critical fleet components." data-fa="بازار جهانی تجهیزات معدنی همچنان در Q2 2026 با زمان‌های تحویل طولانی مواجه است، با OEMهای اصلی که برنامه‌های تحویل ۱۸-۲۴ ماهه برای کامیون‌های حمل بزرگ و بیل‌های مکانیکی گزارش می‌دهند. محدودیت‌های زنجیره تأمین، به ویژه برای اجزای الکترونیکی و ریخته‌گری فولاد تخصصی، تنگنای اصلی باقی مانده است. تولیدکنندگان چینی سهم بازار را در بخش کامیون‌های حمل ۱۰۰-۲۰۰ تن افزایش داده‌اند و صرفه‌جویی هزینه ۳۰-۴۰٪ با زمان‌های تحویل ۸-۱۲ ماه ارائه می‌دهند. با این حال، نگرانی‌ها در مورد در دسترس بودن قطعات و شبکه‌های خدمات در مناطق معدنی دورافتاده ادامه دارد. قدرت قیمت مس و طلا در حال هدایت تعهدات CAPEX افزایش یافته است، به ویژه در آمریکای جنوبی و غرب آفریقا، که فشار اضافی بر در دسترس بودن تجهیزات وارد می‌کند. ما تدارکات زودهنگام تجهیزات (۲۴-۳۰ ماه قبل از تاریخ مورد نیاز در محل) و در نظر گرفتن تأمین‌کنندگان جایگزین برای اجزای ناوگان غیر حیاتی را توصیه می‌کنیم.">The global mining equipment market continues to face extended lead times in Q2 2026, with major OEMs reporting 18-24 month delivery schedules for large haul trucks and excavators. Supply chain constraints, particularly for electronic components and specialized steel castings, remain the primary bottleneck. Chinese manufacturers have increased market share in the 100-200 ton haul truck segment, offering 30-40% cost savings with 8-12 month delivery times. However, concerns about parts availability and service networks persist in remote mining regions. Copper and gold price strength is driving increased CAPEX commitments, particularly in South America and West Africa, putting additional pressure on equipment availability. We recommend early equipment procurement (24-30 months before required on-site date) and consideration of alternative suppliers for non-critical fleet components.</div>
+      <div class="insight-tags">
+        <span class="insight-tag" data-en="Equipment Procurement" data-fa="تدارکات تجهیزات">Equipment Procurement</span>
+        <span class="insight-tag" data-en="Supply Chain" data-fa="زنجیره تأمین">Supply Chain</span>
+        <span class="insight-tag" data-en="Lead Times" data-fa="زمان‌های تحویل">Lead Times</span>
+        <span class="insight-tag" data-en="OEM Analysis" data-fa="تحلیل OEM">OEM Analysis</span>
+      </div>
+    </div>
+    <div class="insight-sidebar">
+      <div class="insight-card fade-up delay-1">
+        <div class="insight-card-title" data-en="🔥 Copper Price Alert" data-fa="🔥 هشدار قیمت مس">🔥 Copper Price Alert</div>
+        <div class="insight-card-text" data-en="LME copper has declined 1.2% today following Chinese demand concerns. Consider timing procurement for copper-intensive equipment." data-fa="مس LME امروز ۱.۲٪ کاهش یافته است به دنبال نگرانی‌های تقاضای چین. زمان‌بندی تدارکات برای تجهیزات با مصرف مس بالا را در نظر بگیرید.">LME copper has declined 1.2% today following Chinese demand concerns. Consider timing procurement for copper-intensive equipment.</div>
+      </div>
+      <div class="insight-card fade-up delay-2">
+        <div class="insight-card-title" data-en="📊 Equipment Index" data-fa="📊 شاخص تجهیزات">📊 Equipment Index</div>
+        <div class="insight-card-text" data-en="KDMine Equipment Price Index: +4.2% YoY. Haul trucks +6.8%, Excavators +5.1%, Processing equipment +2.9%." data-fa="شاخص قیمت تجهیزات KDMine: +۴.۲٪ سال به سال. کامیون‌های حمل +۶.۸٪، بیل‌های مکانیکی +۵.۱٪، تجهیزات فرآوری +۲.۹٪.">KDMine Equipment Price Index: +4.2% YoY. Haul trucks +6.8%, Excavators +5.1%, Processing equipment +2.9%.</div>
+      </div>
+      <div class="insight-card fade-up delay-3">
+        <div class="insight-card-title" data-en="💱 Currency Watch" data-fa="💱 نظارت ارز">💱 Currency Watch</div>
+        <div class="insight-card-text" data-en="USD strengthening against TRY (+0.35%) and RUB (+0.42%) improves purchasing power for Turkish and Russian equipment suppliers." data-fa="تقویت USD در برابر TRY (+۰.۳۵٪) و RUB (+۰.۴۲٪) قدرت خرید را برای تأمین‌کنندگان تجهیزات ترکیه و روسیه بهبود می‌بخشد.">USD strengthening against TRY (+0.35%) and RUB (+0.42%) improves purchasing power for Turkish and Russian equipment suppliers.</div>
+      </div>
+      <div class="insight-card fade-up">
+        <div class="insight-card-title" data-en="⚠️ Iran Sanctions Update" data-fa="⚠️ به‌روزرسانی تحریم‌های ایران">⚠️ Iran Sanctions Update</div>
+        <div class="insight-card-text" data-en="No significant changes to Iran sanctions framework in Q2 2026. Alternative procurement routes via Turkey, UAE, and China remain viable for non-sanctioned equipment." data-fa="هیچ تغییر قابل توجهی در چارچوب تحریم‌های ایران در Q2 2026 وجود ندارد. مسیرهای تدارکات جایگزین از طریق ترکیه، امارات و چین برای تجهیزات غیر تحریمی قابل اجرا باقی می‌ماند.">No significant changes to Iran sanctions framework in Q2 2026. Alternative procurement routes via Turkey, UAE, and China remain viable for non-sanctioned equipment.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- CHARTS -->
+<section class="charts-section">
+<div class="container">
+  <div class="sec-header fade-up">
+    <div class="sec-eyebrow" data-en="Price Trends" data-fa="روندهای قیمت">Price Trends</div>
+    <div class="sec-title" data-en="Historical <em>Price Charts</em>" data-fa="<em>نمودارهای</em> قیمت تاریخی">Historical <em>Price Charts</em></div>
+  </div>
+  <div class="charts-grid">
+    <div class="chart-card fade-up">
+      <div class="chart-header">
+        <div class="chart-title" data-en="Gold Price Trend (12 Months)" data-fa="روند قیمت طلا (۱۲ ماه)">Gold Price Trend (12 Months)</div>
+        <div class="chart-controls">
+          <button class="chart-btn active" data-en="1M" data-fa="۱ماه">1M</button>
+          <button class="chart-btn" data-en="3M" data-fa="۳ماه">3M</button>
+          <button class="chart-btn" data-en="6M" data-fa="۶ماه">6M</button>
+          <button class="chart-btn" data-en="1Y" data-fa="۱سال">1Y</button>
+          <button class="chart-btn" data-en="5Y" data-fa="۵سال">5Y</button>
+        </div>
+      </div>
+      <div class="chart-placeholder" data-en="📈 Interactive chart: Gold price $1,950 → $2,347 (+20.4% YoY)" data-fa="📈 نمودار تعاملی: قیمت طلا $۱,۹۵۰ → $۲,۳۴۷ (+۲۰.۴٪ سال به سال)">📈 Interactive chart: Gold price $1,950 → $2,347 (+20.4% YoY)</div>
+    </div>
+    <div class="chart-card fade-up delay-1">
+      <div class="chart-header">
+        <div class="chart-title" data-en="Equipment Cost Index" data-fa="شاخص هزینه تجهیزات">Equipment Cost Index</div>
+        <div class="chart-controls">
+          <button class="chart-btn" data-en="Haul Trucks" data-fa="کامیون‌ها">Haul Trucks</button>
+          <button class="chart-btn active" data-en="Excavators" data-fa="بیل‌ها">Excavators</button>
+          <button class="chart-btn" data-en="Processing" data-fa="فرآوری">Processing</button>
+        </div>
+      </div>
+      <div class="chart-placeholder" data-en="📊 KDMine Equipment Index: Base 100 (Jan 2024) → 104.2 (Jun 2026)" data-fa="📊 شاخص تجهیزات KDMine: پایه ۱۰۰ (ژانویه ۲۰۲۴) → ۱۰۴.۲ (ژوئن ۲۰۲۶)">📊 KDMine Equipment Index: Base 100 (Jan 2024) → 104.2 (Jun 2026)</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- DATA SOURCES -->
+<section class="sources-section">
+<div class="container">
+  <div class="sec-header fade-up">
+    <div class="sec-eyebrow" data-en="Data Integrity" data-fa="یکپارچگی داده">Data Integrity</div>
+    <div class="sec-title" data-en="Trusted Data <em>Sources</em>" data-fa="<em>منابع</em> داده قابل اعتماد">Trusted Data <em>Sources</em></div>
+    <div class="sec-sub" data-en="Our market intelligence is aggregated from industry-leading data providers, exchanges, and OEM sources to ensure accuracy and reliability." data-fa="هوش بازار ما از ارائه‌دهندگان داده پیشرو صنعت، بورس‌ها و منابع OEM جمع‌آوری شده است تا دقت و قابلیت اطمینان را تضمین کند.">Our market intelligence is aggregated from industry-leading data providers, exchanges, and OEM sources to ensure accuracy and reliability.</div>
+  </div>
+  <div class="sources-grid">
+    <div class="source-card fade-up">
+      <div class="source-logo"><i class="fas fa-chart-line"></i></div>
+      <div class="source-name" data-en="London Metal Exchange" data-fa="بورس فلزات لندن">London Metal Exchange</div>
+      <div class="source-desc" data-en="Real-time base metal prices (Cu, Zn, Pb, Al, Ni)" data-fa="قیمت‌های زنده فلزات پایه (مس، روی، سرب، آلومینیوم، نیکل)">Real-time base metal prices (Cu, Zn, Pb, Al, Ni)</div>
+    </div>
+    <div class="source-card fade-up delay-1">
+      <div class="source-logo"><i class="fas fa-coins"></i></div>
+      <div class="source-name" data-en="COMEX / NYMEX" data-fa="COMEX / NYMEX">COMEX / NYMEX</div>
+      <div class="source-desc" data-en="Precious metals spot and futures (Au, Ag, Pt, Pd)" data-fa="فلزات گرانبها نقدی و آتی (طلا، نقره، پلاتین، پالادیوم)">Precious metals spot and futures (Au, Ag, Pt, Pd)</div>
+    </div>
+    <div class="source-card fade-up delay-2">
+      <div class="source-logo"><i class="fas fa-database"></i></div>
+      <div class="source-name" data-en="CostMine Intelligence" data-fa="هوش CostMine">CostMine Intelligence</div>
+      <div class="source-desc" data-en="Mining equipment costs, OPEX data, industry benchmarks" data-fa="هزینه‌های تجهیزات معدنی، داده‌های OPEX، معیارهای صنعت">Mining equipment costs, OPEX data, industry benchmarks</div>
+    </div>
+    <div class="source-card fade-up delay-3">
+      <div class="source-logo"><i class="fas fa-industry"></i></div>
+      <div class="source-name" data-en="OEM Direct Feeds" data-fa="فیدهای مستقیم OEM">OEM Direct Feeds</div>
+      <div class="source-desc" data-en="Caterpillar, Komatsu, Sandvik, Metso pricing & availability" data-fa="قیمت‌گذاری و در دسترس بودن کاترپیلار، کوماتسو، ساندویک، متسو">Caterpillar, Komatsu, Sandvik, Metso pricing & availability</div>
+    </div>
+    <div class="source-card fade-up">
+      <div class="source-logo"><i class="fas fa-globe"></i></div>
+      <div class="source-name" data-en="Shanghai Futures Exchange" data-fa="بورس آتی شانگهای">Shanghai Futures Exchange</div>
+      <div class="source-desc" data-en="Chinese commodity prices, regional market intelligence" data-fa="قیمت‌های کالای چینی، هوش بازار منطقه‌ای">Chinese commodity prices, regional market intelligence</div>
+    </div>
+    <div class="source-card fade-up delay-1">
+      <div class="source-logo"><i class="fas fa-exchange-alt"></i></div>
+      <div class="source-name" data-en="OANDA / XE" data-fa="OANDA / XE">OANDA / XE</div>
+      <div class="source-desc" data-en="Real-time foreign exchange rates, currency analytics" data-fa="نرخ‌های تبادل ارز در زمان واقعی، تحلیل ارز">Real-time foreign exchange rates, currency analytics</div>
+    </div>
+    <div class="source-card fade-up delay-2">
+      <div class="source-logo"><i class="fas fa-file-alt"></i></div>
+      <div class="source-name" data-en="S&P Global Market Intelligence" data-fa="هوش بازار جهانی S&P">S&P Global Market Intelligence</div>
+      <div class="source-desc" data-en="Mining industry research, project databases, forecasts" data-fa="تحقیقات صنعت معدن، پایگاه‌های داده پروژه، پیش‌بینی‌ها">Mining industry research, project databases, forecasts</div>
+    </div>
+    <div class="source-card fade-up delay-3">
+      <div class="source-logo"><i class="fas fa-newspaper"></i></div>
+      <div class="source-name" data-en="Bloomberg / Reuters" data-fa="بلومبرگ / رویترز">Bloomberg / Reuters</div>
+      <div class="source-desc" data-en="Financial markets, commodity news, economic indicators" data-fa="بازارهای مالی، اخبار کالا، شاخص‌های اقتصادی">Financial markets, commodity news, economic indicators</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+<div class="container">
+  <div class="cta-inner fade-up">
+    <div class="cta-glow"></div>
+    <div>
+      <div class="cta-title" data-en="Need Custom <em>Market Intelligence?</em>" data-fa="به <em>هوش بازار</em> سفارشی نیاز دارید؟">Need Custom <em>Market Intelligence?</em></div>
+      <div class="cta-sub" data-en="KDMine provides tailored market research, equipment sourcing analysis, and procurement strategy consulting for your specific mining project. Contact us for customized intelligence reports and real-time pricing support." data-fa="KDMine تحقیقات بازار سفارشی، تحلیل تأمین تجهیزات و مشاوره استراتژی تدارکات را برای پروژه معدنی خاص شما ارائه می‌دهد. برای گزارش‌های هوش سفارشی و پشتیبانی قیمت‌گذاری در زمان واقعی با ما تماس بگیرید.">KDMine provides tailored market research, equipment sourcing analysis, and procurement strategy consulting for your specific mining project. Contact us for customized intelligence reports and real-time pricing support.</div>
+    </div>
+    <div class="cta-btns">
+      <a href="KDMine - Contact & About Us.html" class="btn-primary">
+        <i class="fas fa-envelope"></i>
+        <span data-en="Request Custom Report" data-fa="درخواست گزارش سفارشی">Request Custom Report</span>
+      </a>
+      <a href="KDMine - Procurement & Supply.html" class="btn-secondary">
+        <i class="fas fa-shopping-cart"></i>
+        <span data-en="Procurement Services" data-fa="خدمات تدارکات">Procurement Services</span>
+      </a>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+<div class="container">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">
+        <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="KDMine"/>
+        <span class="footer-logo-text">KD<span>Mine</span></span>
+      </div>
+      <div class="footer-desc" data-en="Specialist open-pit mining cost estimation, feasibility studies, and project controls. Serving Iran, CIS, and global mining markets since 2025." data-fa="برآورد هزینه تخصصی معدن روباز، مطالعات امکان‌سنجی و کنترل پروژه. خدمت به ایران، CIS و بازارهای معدنی جهانی از ۱۴۰۴.">Specialist open-pit mining cost estimation, feasibility studies, and project controls. Serving Iran, CIS, and global mining markets since 2025.</div>
+    </div>
+    <div>
+      <div class="footer-col-title" data-en="Services" data-fa="خدمات">Services</div>
+      <div class="footer-links">
+        <a href="KDMine - CAPEX _ OPEX Estimation.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="CAPEX / OPEX" data-fa="CAPEX / OPEX">CAPEX / OPEX</span></a>
+        <a href="KDMine - Plant Design & Feasibility Studies.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Feasibility Studies" data-fa="مطالعات امکان‌سنجی">Feasibility Studies</span></a>
+        <a href="KDMine - Risk Analysis.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Risk Analysis" data-fa="تحلیل ریسک">Risk Analysis</span></a>
+        <a href="KDMine - Procurement & Supply.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Procurement & Supply" data-fa="تدارکات و تأمین">Procurement & Supply</span></a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title" data-en="Resources" data-fa="منابع">Resources</div>
+      <div class="footer-links">
+        <a href="KDMine - Resources Hub.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Resources Hub" data-fa="مرکز منابع">Resources Hub</span></a>
+        <a href="KDMine - Blog & Insights Page.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Blog & Insights" data-fa="وبلاگ و بینش‌ها">Blog & Insights</span></a>
+        <a href="KDMine - Case Studies Page .html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Case Studies" data-fa="مطالعات موردی">Case Studies</span></a>
+        <a href="KDMine - Market Dashboard.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Market Dashboard" data-fa="داشبورد بازار">Market Dashboard</span></a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title" data-en="Company" data-fa="شرکت">Company</div>
+      <div class="footer-links">
+        <a href="KDMine - Contact & About Us.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="About Us" data-fa="درباره ما">About Us</span></a>
+        <a href="KDMine - Contact & About Us.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Contact" data-fa="تماس">Contact</span></a>
+        <a href="KDMine - Pricing Page.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Pricing" data-fa="قیمت‌گذاری">Pricing</span></a>
+        <a href="KDMine - Legal (Privacy & Terms).html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Legal" data-fa="حقوقی">Legal</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p data-en="© 2025–2026 KDMine Consultancy. All rights reserved. Market data provided for informational purposes only." data-fa="© ۱۴۰۴–۱۴۰۵ مشاوره KDMine. تمام حقوق محفوظ است. داده‌های بازار فقط برای اهداف اطلاعاتی ارائه شده است.">© 2025–2026 KDMine Consultancy. All rights reserved. Market data provided for informational purposes only.</p>
+  </div>
+</div>
+</footer>
+
+<!-- SCROLL TO TOP -->
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+<i class="fas fa-arrow-up"></i>
+</button>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// NAVIGATION SCROLL EFFECT
+// ═══════════════════════════════════════════════════════════════
+window.addEventListener('scroll', () => {
+const nav = document.getElementById('mainNav');
+const scrollTop = document.getElementById('scrollTop');
+
+if (window.scrollY > 60) {
+  nav.classList.add('scrolled');
+} else {
+  nav.classList.remove('scrolled');
+}
+
+if (window.scrollY > 400) {
+  scrollTop.classList.add('visible');
+} else {
+  scrollTop.classList.remove('visible');
+}
+});
+
+// ═══════════════════════════════════════════════════════════════
+// LANGUAGE SWITCHER
+// ═══════════════════════════════════════════════════════════════
+let currentLang = 'en';
+
+function setLang(lang) {
+currentLang = lang;
+
+document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+document.getElementById('btn-fa').classList.toggle('active', lang === 'fa');
+
+const body = document.getElementById('body');
+if (lang === 'fa') {
+  body.classList.add('fa');
+  body.setAttribute('dir', 'rtl');
+} else {
+  body.classList.remove('fa');
+  body.setAttribute('dir', 'ltr');
+}
+
+document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+  const translation = el.getAttribute('data-' + lang);
+  if (!translation) return;
+  
+  if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+    el.placeholder = translation;
+  } else {
+    el.innerHTML = translation;
+  }
+});
+
+localStorage.setItem('kdmine_lang', lang);
+}
+
+// Load saved language preference
+window.addEventListener('load', () => {
+const savedLang = localStorage.getItem('kdmine_lang');
+if (savedLang && savedLang !== 'en') {
+  setLang(savedLang);
+}
+});
+
+// ═══════════════════════════════════════════════════════════════
+// FADE-UP ANIMATION ON SCROLL
+// ═══════════════════════════════════════════════════════════════
+const fadeUpObserver = new IntersectionObserver(
+(entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+},
+{
+  threshold: 0.08,
+  rootMargin: '0px 0px -50px 0px'
+}
+);
+
+document.querySelectorAll('.fade-up').forEach(el => {
+fadeUpObserver.observe(el);
+});
+
+// ═══════════════════════════════════════════════════════════════
+// SMOOTH SCROLL FOR ANCHOR LINKS
+// ═══════════════════════════════════════════════════════════════
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function (e) {
+  const href = this.getAttribute('href');
+  if (href === '#' || href === '') return;
+  
+  e.preventDefault();
+  const target = document.querySelector(href);
+  
+  if (target) {
+    const offsetTop = target.offsetTop - 108;
+    window.scrollTo({
+      top: offsetTop,
+      behavior: 'smooth'
+    });
+  }
+});
+});
+
+// ═══════════════════════════════════════════════════════════════
+// LIVE PRICE UPDATES SIMULATION
+// ═══════════════════════════════════════════════════════════════
+function simulatePriceUpdate() {
+const priceCards = document.querySelectorAll('.price-card');
+
+priceCards.forEach(card => {
+  const priceValue = card.querySelector('.price-value');
+  const priceChange = card.querySelector('.price-change');
+  
+  if (priceValue && Math.random() > 0.7) {
+    // Simulate small price fluctuation
+    const currentPrice = parseFloat(priceValue.textContent.replace(/[$,]/g, ''));
+    const change = (Math.random() - 0.5) * 0.02; // ±1% change
+    const newPrice = currentPrice * (1 + change);
+    
+    // Format based on price magnitude
+    if (currentPrice > 1000) {
+      priceValue.textContent = '$' + newPrice.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    } else {
+      priceValue.textContent = '$' + newPrice.toFixed(2);
+    }
+    
+    // Update change indicator
+    if (priceChange) {
+      const changePercent = (change * 100).toFixed(2);
+      const changeText = changePercent > 0 ? '+' + changePercent + '%' : changePercent + '%';
+      priceChange.querySelector('span').textContent = changePercent > 0 ? '+' + Math.abs(changePercent) + '%' : '-' + Math.abs(changePercent) + '%';
+      
+      if (changePercent > 0) {
+        priceChange.classList.remove('down');
+        priceChange.classList.add('up');
+        priceChange.querySelector('i').className = 'fas fa-arrow-up';
+      } else {
+        priceChange.classList.remove('up');
+        priceChange.classList.add('down');
+        priceChange.querySelector('i').className = 'fas fa-arrow-down';
+      }
+    }
+  }
+});
+}
+
+// Update prices every 15 seconds (simulation)
+setInterval(simulatePriceUpdate, 15000);
+
+// ═══════════════════════════════════════════════════════════════
+// CHART BUTTON INTERACTIONS
+// ═══════════════════════════════════════════════════════════════
+document.querySelectorAll('.chart-btn').forEach(btn => {
+btn.addEventListener('click', function() {
+  // Remove active from siblings
+  this.parentElement.querySelectorAll('.chart-btn').forEach(b => b.classList.remove('active'));
+  // Add active to clicked
+  this.classList.add('active');
+  
+  // Simulate chart update
+  const chartCard = this.closest('.chart-card');
+  const placeholder = chartCard.querySelector('.chart-placeholder');
+  if (placeholder) {
+    placeholder.style.opacity = '0.5';
+    setTimeout(() => {
+      placeholder.style.opacity = '1';
+    }, 300);
+  }
+});
+});
+
+// ═══════════════════════════════════════════════════════════════
+// PRICE CARD HOVER EFFECTS
+// ═══════════════════════════════════════════════════════════════
+document.querySelectorAll('.price-card').forEach(card => {
+card.addEventListener('mouseenter', () => {
+  const icon = card.querySelector('.price-icon');
+  if (icon) {
+    icon.style.transform = 'scale(1.1) rotate(5deg)';
+    icon.style.transition = 'transform 0.3s ease';
+  }
+});
+
+card.addEventListener('mouseleave', () => {
+  const icon = card.querySelector('.price-icon');
+  if (icon) {
+    icon.style.transform = 'scale(1) rotate(0deg)';
+  }
+});
+});
+
+// ═══════════════════════════════════════════════════════════════
+// EQUIPMENT CARD INTERACTIONS
+// ═══════════════════════════════════════════════════════════════
+document.querySelectorAll('.equipment-card').forEach(card => {
+card.addEventListener('mouseenter', () => {
+  const icon = card.querySelector('.equipment-icon');
+  if (icon) {
+    icon.style.transform = 'scale(1.15)';
+    icon.style.transition = 'transform 0.3s ease';
+  }
+});
+
+card.addEventListener('mouseleave', () => {
+  const icon = card.querySelector('.equipment-icon');
+  if (icon) {
+    icon.style.transform = 'scale(1)';
+  }
+});
+});
+
+// ═══════════════════════════════════════════════════════════════
+// CURRENCY CARD ANIMATIONS
+// ═══════════════════════════════════════════════════════════════
+document.querySelectorAll('.currency-card').forEach(card => {
+card.addEventListener('mouseenter', () => {
+  const flag = card.querySelector('.currency-flag');
+  if (flag) {
+    flag.style.transform = 'scale(1.2)';
+    flag.style.transition = 'transform 0.3s ease';
+  }
+});
+
+card.addEventListener('mouseleave', () => {
+  const flag = card.querySelector('.currency-flag');
+  if (flag) {
+    flag.style.transform = 'scale(1)';
+  }
+});
+});
+
+// ═══════════════════════════════════════════════════════════════
+// LAST UPDATE TIMESTAMP
+// ═══════════════════════════════════════════════════════════════
+function updateTimestamp() {
+const now = new Date();
+const timeString = now.toLocaleTimeString('en-US', { 
+  hour: '2-digit', 
+  minute: '2-digit',
+  hour12: true 
+});
+const dateString = now.toLocaleDateString('en-US', { 
+  month: 'short', 
+  day: 'numeric' 
+});
+
+document.querySelectorAll('.price-meta span:last-child').forEach(el => {
+  el.textContent = `${dateString}, ${timeString}`;
+});
+}
+
+// Update timestamp every minute
+updateTimestamp();
+setInterval(updateTimestamp, 60000);
+
+// ═══════════════════════════════════════════════════════════════
+// CONSOLE BRANDING
+// ═══════════════════════════════════════════════════════════════
+console.log(
+'%c KDMine Market Dashboard ',
+'background: linear-gradient(135deg, #C9A84C, #E8C97A); color: #0A0E1A; font-size: 18px; font-weight: bold; padding: 8px 16px; border-radius: 6px;'
+);
+console.log(
+'%c Live Data • Updated Every 15 Minutes ',
+'color: #10B981; font-size: 12px; font-weight: 600;'
+);
+
+// ═══════════════════════════════════════════════════════════════
+// INITIALIZE
+// ═══════════════════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+console.log('KDMine Market Dashboard initialized successfully');
+console.log('Data sources: 12+ providers');
+console.log('Update frequency: 15 minutes');
+console.log('Commodities tracked:', document.querySelectorAll('.price-card').length);
+console.log('Equipment items:', document.querySelectorAll('.equipment-card').length);
+console.log('Currency pairs:', document.querySelectorAll('.currency-card').length);
+});
+
+</script>
+
+</body>
+</html>

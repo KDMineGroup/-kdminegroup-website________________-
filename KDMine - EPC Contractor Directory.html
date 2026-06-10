@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>EPC Contractor Directory | KDMine Mining Intelligence</title>
+<meta name="description" content="Comprehensive directory of global EPC contractors for mining projects. Compare capabilities, project portfolios, and expertise of leading engineering firms."/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --gold:#C9A84C;--gold-light:#E8C97A;--gold-dark:#A07830;
+    --dark:#0A0E1A;--dark2:#111827;--dark3:#1F2937;--dark4:#374151;
+    --text:#F9FAFB;--text-muted:#9CA3AF;
+    --border:rgba(201,168,76,0.2);--border2:rgba(255,255,255,0.08);
+    --green:#10B981;--red:#EF4444;--blue:#3B82F6;--orange:#F59E0B;--teal:#14B8A6;--purple:#8B5CF6;
+    --radius:12px;--radius-lg:20px;--radius-xl:28px;
+  }
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',sans-serif;background:var(--dark);color:var(--text);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased;}
+  body.fa{font-family:'Vazirmatn',sans-serif;direction:rtl;}
+  ::-webkit-scrollbar{width:6px;}
+  ::-webkit-scrollbar-track{background:var(--dark2);}
+  ::-webkit-scrollbar-thumb{background:var(--gold-dark);border-radius:3px;}
+
+  /* ── LANG BAR ── */
+  .lang-bar{position:fixed;top:0;left:0;right:0;z-index:3000;height:36px;background:linear-gradient(135deg,#1F2937,#111827);display:flex;align-items:center;justify-content:space-between;padding:0 5%;border-bottom:1px solid rgba(255,255,255,0.05);}
+  .lang-bar-left{font-size:11px;color:var(--text-muted);font-weight:600;display:flex;align-items:center;gap:10px;}
+  .lang-bar-left i{color:var(--gold);font-size:10px;}
+  .lang-bar-right{display:flex;align-items:center;gap:8px;}
+  .lang-btn{padding:4px 16px;border-radius:6px;border:1px solid transparent;cursor:pointer;font-size:11px;font-weight:700;transition:.2s;font-family:inherit;background:transparent;color:var(--text-muted);}
+  .lang-btn.active{background:var(--gold);color:var(--dark);border-color:var(--gold);}
+
+  /* ── NAV ── */
+  nav{position:fixed;top:36px;left:0;right:0;z-index:2000;height:72px;background:rgba(10,14,26,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border2);transition:.3s;}
+  nav.scrolled{background:rgba(10,14,26,0.98);border-bottom-color:var(--border);box-shadow:0 4px 20px rgba(0,0,0,0.3);}
+  .nav-inner{max-width:1440px;margin:0 auto;padding:0 5%;height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+  .nav-logo{display:flex;align-items:center;gap:14px;text-decoration:none;}
+  .nav-logo img{height:42px;filter:drop-shadow(0 2px 8px rgba(201,168,76,0.3));}
+  .nav-logo-text{font-size:22px;font-weight:900;color:#fff;letter-spacing:-0.8px;}
+  .nav-logo-text span{color:var(--gold);}
+  .nav-links{display:flex;align-items:center;gap:6px;}
+  .nav-link{padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;color:var(--text-muted);text-decoration:none;transition:.2s;}
+  .nav-link:hover{color:var(--text);background:rgba(255,255,255,0.06);}
+  .nav-cta{padding:10px 24px;border-radius:8px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--dark);font-size:13px;font-weight:700;text-decoration:none;transition:.2s;display:flex;align-items:center;gap:8px;box-shadow:0 4px 12px rgba(201,168,76,0.3);}
+  .nav-cta:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(201,168,76,0.5);}
+
+  /* ── HERO ── */
+  .hero{min-height:50vh;position:relative;display:flex;align-items:center;overflow:hidden;padding-top:108px;padding-bottom:60px;background:linear-gradient(135deg,var(--dark2),var(--dark3));}
+  .hero-pattern{position:absolute;inset:0;background-image:radial-gradient(circle at 2px 2px,rgba(201,168,76,0.04) 1px,transparent 0);background-size:40px 40px;}
+  .hero-inner{position:relative;z-index:2;max-width:1440px;margin:0 auto;padding:0 5%;}
+  .breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:20px;font-size:12px;color:var(--text-muted);}
+  .breadcrumb a{color:var(--text-muted);text-decoration:none;transition:.2s;}
+  .breadcrumb a:hover{color:var(--gold);}
+  .breadcrumb i{font-size:10px;}
+  .hero-h1{font-size:clamp(32px,4.5vw,56px);font-weight:900;color:#fff;letter-spacing:-2.5px;line-height:1;margin-bottom:16px;}
+  .hero-h1 em{background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-style:normal;}
+  .hero-desc{font-size:16px;color:var(--text-muted);line-height:1.8;max-width:720px;margin-bottom:24px;}
+  .hero-stats{display:flex;gap:32px;flex-wrap:wrap;}
+  .hero-stat{display:flex;flex-direction:column;gap:4px;}
+  .hero-stat-value{font-size:28px;font-weight:900;color:var(--gold);}
+  .hero-stat-label{font-size:12px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;}
+
+  /* ── SECTIONS ── */
+  section{padding:80px 0;}
+  .container{max-width:1440px;margin:0 auto;padding:0 5%;}
+
+  /* ── SEARCH & FILTERS ── */
+  .search-section{background:var(--dark);padding-top:60px;}
+  .search-bar{display:flex;gap:12px;margin-bottom:32px;}
+  .search-input-wrapper{flex:1;position:relative;}
+  .search-input{width:100%;padding:16px 20px 16px 50px;border-radius:12px;border:1px solid var(--border2);background:linear-gradient(135deg,var(--dark3),var(--dark4));color:var(--text);font-size:14px;font-family:inherit;transition:.2s;}
+  .search-input:focus{outline:none;border-color:var(--gold);background:var(--dark3);}
+  .search-icon{position:absolute;left:18px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:16px;}
+  .search-btn{padding:16px 32px;border-radius:12px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--dark);font-size:14px;font-weight:700;border:none;cursor:pointer;transition:.2s;display:flex;align-items:center;gap:8px;}
+  .search-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,0.4);}
+  .filters-wrapper{display:flex;gap:12px;margin-bottom:32px;flex-wrap:wrap;align-items:center;}
+  .filter-label{font-size:13px;color:var(--text-muted);font-weight:600;}
+  .filter-group{display:flex;gap:8px;flex-wrap:wrap;}
+  .filter-btn{padding:10px 20px;border-radius:8px;border:1px solid var(--border2);background:rgba(255,255,255,0.03);color:var(--text-muted);font-size:13px;font-weight:600;cursor:pointer;transition:.2s;font-family:inherit;}
+  .filter-btn:hover,.filter-btn.active{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,0.1);}
+  .filter-btn.active{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--dark);border-color:var(--gold);}
+
+  /* ── EPC CARDS ── */
+  .epc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;}
+  .epc-card{background:linear-gradient(135deg,var(--dark3),var(--dark4));border:1px solid var(--border2);border-radius:var(--radius-lg);padding:32px;transition:.3s;position:relative;overflow:hidden;cursor:pointer;}
+  .epc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),var(--gold-light));}
+  .epc-card:hover{border-color:var(--border);transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,0.4);}
+  .epc-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;}
+  .epc-logo{width:80px;height:80px;border-radius:12px;background:rgba(201,168,76,0.1);display:flex;align-items:center;justify-content:center;font-size:36px;border:1px solid var(--border2);flex-shrink:0;}
+  .epc-content{flex:1;margin-left:24px;}
+  .epc-name{font-size:20px;font-weight:900;color:#fff;margin-bottom:8px;line-height:1.2;}
+  .epc-location{font-size:12px;color:var(--text-muted);margin-bottom:12px;display:flex;align-items:center;gap:6px;}
+  .epc-rating{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:8px;background:rgba(16,185,129,0.15);color:var(--green);font-size:14px;font-weight:700;}
+  .epc-rating i{color:var(--gold);}
+  .epc-desc{font-size:13px;color:var(--text-muted);line-height:1.8;margin-bottom:20px;}
+  .epc-specialties{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
+  .epc-specialty{padding:6px 14px;border-radius:8px;background:rgba(255,255,255,0.04);border:1px solid var(--border2);font-size:11px;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:.8px;}
+  .epc-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding-top:20px;border-top:1px solid var(--border2);}
+  .epc-stat{display:flex;flex-direction:column;gap:6px;}
+  .epc-stat-value{font-size:20px;font-weight:900;color:var(--gold);}
+  .epc-stat-label{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.8px;}
+  .epc-actions{display:flex;gap:12px;margin-top:20px;}
+  .epc-btn{flex:1;padding:12px 20px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:center;gap:8px;border:none;}
+  .epc-btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--dark);}
+  .epc-btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,0.4);}
+  .epc-btn-secondary{background:rgba(255,255,255,0.05);border:1px solid var(--border2);color:var(--text);}
+  .epc-btn-secondary:hover{border-color:var(--gold);color:var(--gold);}
+
+  /* ── COMPARISON TABLE ── */
+  .comparison-section{background:linear-gradient(135deg,var(--dark2),var(--dark3));}
+  .comparison-table-wrapper{background:linear-gradient(135deg,var(--dark3),var(--dark4));border:1px solid var(--border2);border-radius:var(--radius-lg);overflow-x:auto;}
+  .comparison-table{width:100%;border-collapse:collapse;}
+  .comparison-table thead{background:rgba(0,0,0,0.2);}
+  .comparison-table th{padding:16px 20px;text-align:left;font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:1.2px;border-bottom:1px solid var(--border2);white-space:nowrap;}
+  .comparison-table tbody tr{border-bottom:1px solid var(--border2);transition:.2s;}
+  .comparison-table tbody tr:hover{background:rgba(255,255,255,0.02);}
+  .comparison-table td{padding:20px;font-size:14px;color:var(--text);}
+  .table-company{display:flex;align-items:center;gap:12px;}
+  .table-company-logo{width:48px;height:48px;border-radius:8px;background:rgba(201,168,76,0.1);display:flex;align-items:center;justify-content:center;font-size:20px;border:1px solid var(--border2);}
+  .table-company-name{font-size:14px;font-weight:700;color:#fff;}
+  .table-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;}
+  .table-badge.yes{background:rgba(16,185,129,0.15);color:var(--green);}
+  .table-badge.no{background:rgba(239,68,68,0.15);color:var(--red);}
+  .table-badge.partial{background:rgba(251,191,36,0.15);color:var(--orange);}
+
+  /* ── FOOTER ── */
+  footer{background:var(--dark2);border-top:1px solid var(--border2);padding:70px 0 0;}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:50px;margin-bottom:50px;}
+  .footer-logo{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+  .footer-logo img{height:38px;}
+  .footer-logo-text{font-size:19px;font-weight:900;color:#fff;}
+  .footer-logo-text span{color:var(--gold);}
+  .footer-desc{font-size:13px;color:var(--text-muted);line-height:1.85;margin-bottom:22px;max-width:300px;}
+  .footer-col-title{font-size:12px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:18px;}
+  .footer-links{display:flex;flex-direction:column;gap:10px;}
+  .footer-link{font-size:12px;color:var(--text-muted);text-decoration:none;transition:.2s;display:flex;align-items:center;gap:7px;}
+  .footer-link:hover{color:var(--gold);}
+  .footer-link i{font-size:9px;opacity:.5;}
+  .footer-bottom{border-top:1px solid var(--border2);padding:24px 0;text-align:center;}
+  .footer-bottom p{font-size:12px;color:var(--text-muted);}
+
+  /* ── SCROLL TO TOP ── */
+  .scroll-top{position:fixed;bottom:32px;right:32px;width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--dark);border:none;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:.3s;opacity:0;z-index:1000;box-shadow:0 8px 24px rgba(201,168,76,0.4);}
+  .scroll-top.visible{opacity:1;}
+  .scroll-top:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(201,168,76,0.6);}
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:1200px){
+    .epc-grid{grid-template-columns:1fr;}
+  }
+  @media(max-width:900px){
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    .epc-stats{grid-template-columns:repeat(2,1fr);}
+  }
+  @media(max-width:600px){
+    .footer-grid{grid-template-columns:1fr;}
+    .epc-stats{grid-template-columns:1fr;}
+    .comparison-table{font-size:12px;}
+    .comparison-table th,.comparison-table td{padding:12px;}
+  }
+</style>
+</head>
+<body id="body">
+
+<!-- LANG BAR -->
+<div class="lang-bar">
+<div class="lang-bar-left">
+  <i class="fas fa-building"></i>
+  <span data-en="50+ Global EPC Contractors · $500B+ Project Portfolio" data-fa="۵۰+ پیمانکار EPC جهانی · پرتفوی پروژه ۵۰۰+ میلیارد دلار">50+ Global EPC Contractors · $500B+ Project Portfolio</span>
+</div>
+<div class="lang-bar-right">
+  <button class="lang-btn active" id="btn-en" onclick="setLang('en')">🇬🇧 EN</button>
+  <button class="lang-btn" id="btn-fa" onclick="setLang('fa')">🇮🇷 FA</button>
+</div>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+<div class="nav-inner">
+  <a href="index.html" class="nav-logo">
+    <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="KDMine"/>
+    <span class="nav-logo-text">KD<span>Mine</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link" data-en="Home" data-fa="خانه">Home</a>
+    <a href="KDMine - Services & Expertise.html" class="nav-link" data-en="Services" data-fa="خدمات">Services</a>
+    <a href="KDMine - Resources Hub.html" class="nav-link" data-en="Resources" data-fa="منابع">Resources</a>
+    <a href="KDMine - Contact & About Us.html" class="nav-link" data-en="Contact" data-fa="تماس">Contact</a>
+  </div>
+  <a href="KDMine - Contact & About Us.html" class="nav-cta">
+    <i class="fas fa-paper-plane"></i>
+    <span data-en="Get a Proposal" data-fa="دریافت پیشنهاد">Get a Proposal</span>
+  </a>
+</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+<div class="hero-pattern"></div>
+<div class="hero-inner">
+  <div class="breadcrumb">
+    <a href="index.html" data-en="Home" data-fa="خانه">Home</a>
+    <i class="fas fa-chevron-right"></i>
+    <a href="KDMine - Resources Hub.html" data-en="Resources" data-fa="منابع">Resources</a>
+    <i class="fas fa-chevron-right"></i>
+    <span data-en="EPC Directory" data-fa="فهرست EPC">EPC Directory</span>
+  </div>
+  <h1 class="hero-h1">
+    <span data-en="Global " data-fa="فهرست ">Global </span>
+    <em data-en="EPC Contractor Directory" data-fa="پیمانکاران EPC جهانی">EPC Contractor Directory</em>
+  </h1>
+  <p class="hero-desc" data-en="Comprehensive directory of leading EPC contractors specializing in mining and metallurgy projects. Compare capabilities, track records, and expertise to select the ideal partner for your greenfield or brownfield development." data-fa="فهرست جامع پیمانکاران پیشرو EPC متخصص در پروژه‌های معدن و متالورژی. مقایسه قابلیت‌ها، سوابق و تخصص برای انتخاب شریک ایده‌آل برای توسعه گرین‌فیلد یا براون‌فیلد شما.">Comprehensive directory of leading EPC contractors specializing in mining and metallurgy projects. Compare capabilities, track records, and expertise to select the ideal partner for your greenfield or brownfield development.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-value">50+</div>
+      <div class="hero-stat-label" data-en="EPC Contractors" data-fa="پیمانکار EPC">EPC Contractors</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-value">$500B+</div>
+      <div class="hero-stat-label" data-en="Project Portfolio" data-fa="پرتفوی پروژه">Project Portfolio</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-value">120+</div>
+      <div class="hero-stat-label" data-en="Countries" data-fa="کشور">Countries</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-value">2,000+</div>
+      <div class="hero-stat-label" data-en="Completed Projects" data-fa="پروژه تکمیل شده">Completed Projects</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- SEARCH & FILTERS -->
+<section class="search-section">
+<div class="container">
+  <div class="search-bar">
+    <div class="search-input-wrapper">
+      <i class="fas fa-search search-icon"></i>
+      <input type="text" class="search-input" id="searchInput" placeholder="Search contractors by name, location, or specialty..." data-en="Search contractors by name, location, or specialty..." data-fa="جستجوی پیمانکاران بر اساس نام، موقعیت یا تخصص..."/>
+    </div>
+    <button class="search-btn" onclick="searchContractors()">
+      <i class="fas fa-search"></i>
+      <span data-en="Search" data-fa="جستجو">Search</span>
+    </button>
+  </div>
+  
+  <div class="filters-wrapper">
+    <span class="filter-label" data-en="Filter by:" data-fa="فیلتر بر اساس:">Filter by:</span>
+    <div class="filter-group">
+      <button class="filter-btn active" data-filter="all" onclick="filterContractors('all')" data-en="All Contractors" data-fa="همه پیمانکاران">All Contractors</button>
+      <button class="filter-btn" data-filter="full-epc" onclick="filterContractors('full-epc')" data-en="Full EPC" data-fa="EPC کامل">Full EPC</button>
+      <button class="filter-btn" data-filter="epcm" onclick="filterContractors('epcm')" data-en="EPCM" data-fa="EPCM">EPCM</button>
+      <button class="filter-btn" data-filter="engineering" onclick="filterContractors('engineering')" data-en="Engineering Only" data-fa="فقط مهندسی">Engineering Only</button>
+      <button class="filter-btn" data-filter="regional" onclick="filterContractors('regional')" data-en="Regional Specialists" data-fa="متخصصان منطقه‌ای">Regional Specialists</button>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- EPC CARDS -->
+<section class="search-section" style="padding-top:40px;">
+<div class="container">
+  <div class="epc-grid" id="epcGrid">
+    
+    <!-- HATCH -->
+    <div class="epc-card" data-filter="full-epc epcm" data-id="hatch">
+      <div class="epc-header">
+        <div class="epc-logo">🏗️</div>
+        <div class="epc-content">
+          <div class="epc-name" data-en="Hatch Ltd." data-fa="Hatch Ltd.">Hatch Ltd.</div>
+          <div class="epc-location"><i class="fas fa-map-marker-alt"></i> <span data-en="Canada · Global" data-fa="کانادا · جهانی">Canada · Global</span></div>
+        </div>
+        <div class="epc-rating"><i class="fas fa-star"></i> 4.8</div>
+      </div>
+      <div class="epc-desc" data-en="Global multidisciplinary engineering firm with 65+ years of mining expertise. Specializes in copper, gold, iron ore, and base metals projects across all project phases from concept to commissioning." data-fa="شرکت مهندسی چند رشته‌ای جهانی با بیش از ۶۵ سال تخصص معدنی. تخصص در پروژه‌های مس، طلا، سنگ آهن و فلزات پایه در تمام مراحل پروژه از مفهوم تا راه‌اندازی.">Global multidisciplinary engineering firm with 65+ years of mining expertise. Specializes in copper, gold, iron ore, and base metals projects across all project phases from concept to commissioning.</div>
+      <div class="epc-specialties">
+        <span class="epc-specialty" data-en="Full EPC" data-fa="EPC کامل">Full EPC</span>
+        <span class="epc-specialty" data-en="EPCM" data-fa="EPCM">EPCM</span>
+        <span class="epc-specialty" data-en="Copper" data-fa="مس">Copper</span>
+        <span class="epc-specialty" data-en="Gold" data-fa="طلا">Gold</span>
+        <span class="epc-specialty" data-en="Iron Ore" data-fa="سنگ آهن">Iron Ore</span>
+      </div>
+      <div class="epc-stats">
+        <div class="epc-stat">
+          <div class="epc-stat-value">300+</div>
+          <div class="epc-stat-label" data-en="Projects" data-fa="پروژه">Projects</div>
+        </div>
+        <div class="epc-stat">
+          <div class="epc-stat-value">65+</div>
+          <div class="epc-stat-label" data-en="Countries" data-fa="کشور">Countries</div>
+        </div>
+        <div class="epc-stat">
+          <div class="epc-stat-value">9,000+</div>
+          <div class="epc-stat-label" data-en="Employees" data-fa="کارمند">Employees</div>
+        </div>
+      </div>
+      <div class="epc-actions">
+        <button class="epc-btn epc-btn-primary" onclick="viewProfile('hatch')">
+          <i class="fas fa-info-circle"></i>
+          <span data-en="View Profile" data-fa="مشاهده پروفایل">View Profile</span>
+        </button>
+        <button class="epc-btn epc-btn-secondary" onclick="requestRFP('hatch')">
+          <i class="fas fa-file-alt"></i>
+          <span data-en="Request RFP" data-fa="درخواست RFP">Request RFP</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- AUSENCO -->
+    <div class="epc-card" data-filter="full-epc epcm" data-id="ausenco">
+      <div class="epc-header">
+        <div class="epc-logo">⚙️</div>
+        <div class="epc-content">
+          <div class="epc-name" data-en="Ausenco" data-fa="Ausenco">Ausenco</div>
+          <div class="epc-location"><i class="fas fa-map-marker-alt"></i> <span data-en="Australia · Global" data-fa="استرالیا · جهانی">Australia · Global</span></div>
+        </div>
+        <div class="epc-rating"><i class="fas fa-star"></i> 4.7</div>
+      </div>
+      <div class="epc-desc" data-en="Leading EPCM provider for minerals processing and metallurgical plants. Strong track record in gold, copper, lithium, and rare earth projects with focus on sustainable mining solutions." data-fa="ارائه‌دهنده پیشرو EPCM برای کارخانه‌های فرآوری مواد معدنی و متالورژی. سابقه قوی در پروژه‌های طلا، مس، لیتیوم و عناصر کمیاب با تمرکز بر راه‌حل‌های معدنی پایدار.">Leading EPCM provider for minerals processing and metallurgical plants. Strong track record in gold, copper, lithium, and rare earth projects with focus on sustainable mining solutions.</div>
+      <div class="epc-specialties">
+        <span class="epc-specialty" data-en="EPCM" data-fa="EPCM">EPCM</span>
+        <span class="epc-specialty" data-en="Process Plants" data-fa="کارخانه فرآوری">Process Plants</span>
+        <span class="epc-specialty" data-en="Gold" data-fa="طلا">Gold</span>
+        <span class="epc-specialty" data-en="Lithium" data-fa="لیتیوم">Lithium</span>
+        <span class="epc-specialty" data-en="Sustainability" data-fa="پایداری">Sustainability</span>
+      </div>
+      <div class="epc-stats">
+        <div class="epc-stat">
+          <div class="epc-stat-value">200+</div>
+          <div class="epc-stat-label" data-en="Projects" data-fa="پروژه">Projects</div>
+        </div>
+        <div class="epc-stat">
+          <div class="epc-stat-value">40+</div>
+          <div class="epc-stat-label" data-en="Countries" data-fa="کشور">Countries</div>
+        </div>
+        <div class="epc-stat">
+          <div class="epc-stat-value">3,500+</div>
+          <div class="epc-stat-label" data-en="Employees" data-fa="کارمند">Employees</div>
+        </div>
+      </div>
+      <div class="epc-actions">
+        <button class="epc-btn epc-btn-primary" onclick="viewProfile('ausenco')">
+          <i class="fas fa-info-circle"></i>
+          <span data-en="View Profile" data-fa="مشاهده پروفایل">View Profile</span>
+        </button>
+        <button class="epc-btn epc-btn-secondary" onclick="requestRFP('ausenco')">
+          <i class="fas fa-file-alt"></i>
+          <span data-en="Request RFP" data-fa="درخواست RFP">Request RFP</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- FLUOR -->
+    <div class="epc-card" data-filter="full-epc" data-id="fluor">
+      <div class="epc-header">
+        <div class="epc-logo">🏭</div>
+        <div class="epc-content">
+          <div class="epc-name" data-en="Fluor Corporation" data-fa="Fluor Corporation">Fluor Corporation</div>
+          <div class="epc-location"><i class="fas fa-map-marker-alt"></i> <span data-en="USA · Global" data-fa="آمریکا · جهانی">USA · Global</span></div>
+        </div>
+        <div class="epc-rating"><i class="fas fa-star"></i> 4.6</div>
+      </div>
+      <div class="epc-desc" data-en="Fortune 500 EPC contractor with extensive mining and metals experience. Delivers large-scale greenfield and brownfield projects with emphasis on cost certainty and schedule performance." data-fa="پیمانکار EPC فورچون ۵۰۰ با تجربه گسترده معدن و فلزات. تحویل پروژه‌های گرین‌فیلد و براون‌فیلد در مقیاس بزرگ با تأکید بر قطعیت هزینه و عملکرد زمان‌بندی.">Fortune 500 EPC contractor with extensive mining and metals experience. Delivers large-scale greenfield and brownfield projects with emphasis on cost certainty and schedule performance.</div>
+      <div class="epc-specialties">
+        <span class="epc-specialty" data-en="Full EPC" data-fa="EPC کامل">Full EPC</span>
+        <span class="epc-specialty" data-en="Large Scale" data-fa="مقیاس بزرگ">Large Scale</span>
+        <span class="epc-specialty" data-en="All Metals" data-fa="همه فلزات">All Metals</span>
+        <span class="epc-specialty" data-en="Greenfield" data-fa="گرین‌فیلد">Greenfield</span>
+      </div>
+      <div class="epc-stats">
+        <div class="epc-stat">
+          <div class="epc-stat-value">150+</div>
+          <div class="epc-stat-label" data-en="Projects" data-fa="پروژه">Projects</div>
+        </div>
+        <div class="epc-stat">
+          <div class="epc-stat-value">100+</div>
+          <div class="epc-stat-label" data-en="Countries" data-fa="کشور">Countries</div>
+        </div>
+        <div class="epc-stat">
+          <div class="epc-stat-value">40,000+</div>
+          <div class="epc-stat-label" data-en="Employees" data-fa="کارمند">Employees</div>
+        </div>
+      </div>
+      <div class="epc-actions">
+        <button class="epc-btn epc-btn-primary" onclick="viewProfile('fluor')">
+          <i class="fas fa-info-circle"></i>
+          <span data-en="View Profile" data-fa="مشاهده پروفایل">View Profile</span>
+        </button>
+        <button class="epc-btn epc-btn-secondary" onclick="requestRFP('fluor')">
+          <i class="fas fa-file-alt"></i>
+          <span data-en="Request RFP" data-fa="درخواست RFP">Request RFP</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- SNC-LAVALIN -->
+    <div class="epc-card" data-filter="full-epc epcm engineering" data-id="snc-lavalin">
+      <div class="epc-header">
+        <div class="epc-logo">⚡</div>
+        <div class="epc-content">
+          <div class="epc-name" data-en="SNC-Lavalin (AtkinsRéalis)" data-fa="SNC-Lavalin (AtkinsRéalis)">SNC-Lavalin (AtkinsRéalis)</div>
+          <div class="epc-location"><i class="fas fa-map-marker-alt"></i> <span data-en="Canada · Global" data-fa="کانادا · جهانی">Canada · Global</span></div>
+        </div>
+        <div class="epc-rating"><i class="fas fa-star"></i> 4.5</div>
+      </div>
+      <div class="epc-desc" data-en="Integrated professional services and project management company providing end-to-end solutions for the mining and metallurgy sector with strong sustainability focus." data-fa="شرکت خدمات حرفه‌ای یکپارچه و مدیریت پروژه که راه‌حل‌های جامع برای بخش معدن و متالورژی با تمرکز قوی بر پایداری ارائه می‌دهد.">Integrated professional services and project management company providing end-to-end solutions for the mining and metallurgy sector with strong sustainability focus.</div>
+      <div class="epc-specialties">
+        <span class="epc-specialty" data-en="Engineering" data-fa="مهندسی">Engineering</span>
+        <span class="epc-specialty" data-en="EPCM" data-fa="EPCM">EPCM</span>
+        <span class="epc-specialty" data-en="Sustainability" data-fa="پایداری">Sustainability</span>
+        <span class="epc-specialty" data-en="Base Metals" data-fa="فلزات پایه">Base Metals</span>
+      </div>
+      <div class="epc-stats">
+        <div class="epc-stat">
+          <div class="epc-stat-value">250+</div>
+          <div class="epc-stat-label" data-en="Projects" data-fa="پروژه">Projects</div>
+        </div>
+        <div class="epc-stat">
+          <div class="epc-stat-value">50+</div>
+          <div class="epc-stat-label" data-en="Countries" data-fa="کشور">Countries</div>
+        </div>
+        <div class="epc-stat">
+          <div class="epc-stat-value">35,000+</div>
+          <div class="epc-stat-label" data-en="Employees" data-fa="کارمند">Employees</div>
+        </div>
+      </div>
+      <div class="epc-actions">
+        <button class="epc-btn epc-btn-primary" onclick="viewProfile('snc-lavalin')">
+          <i class="fas fa-info-circle"></i>
+          <span data-en="View Profile" data-fa="مشاهده پروفایل">View Profile</span>
+        </button>
+        <button class="epc-btn epc-btn-secondary" onclick="requestRFP('snc-lavalin')">
+          <i class="fas fa-file-alt"></i>
+          <span data-en="Request RFP" data-fa="درخواست RFP">Request RFP</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- BECHTEL -->
+    <div class="epc-card" data-filter="full-epc" data-id="bechtel">
+      <div class="epc-header">
+        <div class="epc-logo">🔧</div>
+        <div class="epc-content">
+          <div class="epc-name" data-en="Bechtel Mining & Metals" data-fa="Bechtel معدن و فلزات">Bechtel Mining & Metals</div>
+          <div class="epc-location"><i class="fas fa-map-marker-alt"></i> <span data-en="USA · Global" data-fa="آمریکا · جهانی">USA · Global</span></div>
+        </div>
+        <div class="epc-rating"><i class="fas fa-star"></i> 4.9</div>
+      </div>
+      <div class="epc-desc" data-en="World-class EPC contractor with extensive experience in mega-scale mining projects, process plants, and infrastructure development across all commodities." data-fa="پیمانکار EPC درجه جهانی با تجربه گسترده در پروژه‌های معدنی مقیاس بزرگ، کارخانه‌های فرآوری و توسعه زیرساخت در تمام کالاها.">World-class EPC contractor with extensive experience in mega-scale mining projects, process plants, and infrastructure development across all commodities.</div>
+      <div class="epc-specialties">
+        <span class="epc-specialty" data-en="Mega Projects" data-fa="پروژه‌های بزرگ">Mega Projects</span>
+        <span class="epc-specialty" data-en="Full EPC" data-fa="EPC کامل">Full EPC</span>
+        <span class="epc-specialty" data-en="All Commodities" data-fa="همه کالاها">All Commodities</span>
+        <span class="epc-specialty" data-en="Greenfield" data-fa="گرین‌فیلد">Greenfield</span>
+      </div>
+      <div class="epc-stats">
+        <div class="epc-stat">
+          <div class="epc-stat-value">400+</div>
+          <div class="epc-stat-label" data-en="Projects" data-fa="پروژه">Projects</div>
+        </div>
+        <div class="epc-stat">
+          <div class="epc-stat-value">160+</div>
+          <div class="epc-stat-label" data-en="Countries" data-fa="کشور">Countries</div>
+        </div>
+        <div class="epc-stat">
+          <div class="epc-stat-value">55,000+</div>
+          <div class="epc-stat-label" data-en="Employees" data-fa="کارمند">Employees</div>
+        </div>
+      </div>
+      <div class="epc-actions">
+        <button class="epc-btn epc-btn-primary" onclick="viewProfile('bechtel')">
+          <i class="fas fa-info-circle"></i>
+          <span data-en="View Profile" data-fa="مشاهده پروفایل">View Profile</span>
+        </button>
+        <button class="epc-btn epc-btn-secondary" onclick="requestRFP('bechtel')">
+          <i class="fas fa-file-alt"></i>
+          <span data-en="Request RFP" data-fa="درخواست RFP">Request RFP</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- WORLEYPARSONS (ADVISIAN) -->
+    <div class="epc-card" data-filter="epcm engineering" data-id="worley">
+      <div class="epc-header">
+        <div class="epc-logo">🌐</div>
+        <div class="epc-content">
+          <div class="epc-name" data-en="Worley (Advisian)" data-fa="Worley (Advisian)">Worley (Advisian)</div>
+          <div class="epc-location"><i class="fas fa-map-marker-alt"></i> <span data-en="Australia · Global" data-fa="استرالیا · جهانی">Australia · Global</span></div>
+        </div>
+        <div class="epc-rating"><i class="fas fa-star"></i> 4.6</div>
+      </div>
+      <div class="epc-desc" data-en="Global provider of professional project and asset services in energy, chemicals and resources sectors. Strong expertise in metallurgical process design and optimization." data-fa="ارائه‌دهنده جهانی خدمات حرفه‌ای پروژه و دارایی در بخش‌های انرژی، شیمیایی و منابع. تخصص قوی در طراحی و بهینه‌سازی فرآیند متالورژی.">Global provider of professional project and asset services in energy, chemicals and resources sectors. Strong expertise in metallurgical process design and optimization.</div>
+      <div class="epc-specialties">
+        <span class="epc-specialty" data-en="EPCM" data-fa="EPCM">EPCM</span>
+        <span class="epc-specialty" data-en="Process Design" data-fa="طراحی فرآیند">Process Design</span>
+        <span class="epc-specialty" data-en="Metallurgy" data-fa="متالورژی">Metallurgy</span>
+        <span class="epc-specialty" data-en="Optimization" data-fa="بهینه‌سازی">Optimization</span>
+      </div>
+      <div class="epc-stats">
+        <div class="epc-stat">
+          <div class="epc-stat-value">180+</div>
+          <div class="epc-stat-label" data-en="Projects" data-fa="پروژه">Projects</div>
+        </div>
+        <div class="epc-stat">
+          <div class="epc-stat-value">45+</div>
+          <div class="epc-stat-label" data-en="Countries" data-fa="کشور">Countries</div>
+        </div>
+        <div class="epc-stat">
+          <div class="epc-stat-value">48,000+</div>
+          <div class="epc-stat-label" data-en="Employees" data-fa="کارمند">Employees</div>
+        </div>
+      </div>
+      <div class="epc-actions">
+        <button class="epc-btn epc-btn-primary" onclick="viewProfile('worley')">
+          <i class="fas fa-info-circle"></i>
+          <span data-en="View Profile" data-fa="مشاهده پروفایل">View Profile</span>
+        </button>
+        <button class="epc-btn epc-btn-secondary" onclick="requestRFP('worley')">
+          <i class="fas fa-file-alt"></i>
+          <span data-en="Request RFP" data-fa="درخواست RFP">Request RFP</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section class="comparison-section">
+<div class="container">
+  <div style="margin-bottom:32px;">
+    <h2 style="font-size:28px;font-weight:900;color:#fff;letter-spacing:-1.5px;margin-bottom:12px;" data-en="Capability Comparison" data-fa="مقایسه قابلیت‌ها">Capability Comparison</h2>
+    <p style="font-size:14px;color:var(--text-muted);" data-en="Compare key capabilities and service offerings of leading EPC contractors" data-fa="مقایسه قابلیت‌های کلیدی و خدمات ارائه شده توسط پیمانکاران پیشرو EPC">Compare key capabilities and service offerings of leading EPC contractors</p>
+  </div>
+  <div class="comparison-table-wrapper">
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th data-en="Contractor" data-fa="پیمانکار">Contractor</th>
+          <th data-en="Full EPC" data-fa="EPC کامل">Full EPC</th>
+          <th data-en="EPCM" data-fa="EPCM">EPCM</th>
+          <th data-en="Feasibility" data-fa="امکان‌سنجی">Feasibility</th>
+          <th data-en="Process Design" data-fa="طراحی فرآیند">Process Design</th>
+          <th data-en="Procurement" data-fa="تدارکات">Procurement</th>
+          <th data-en="Construction" data-fa="ساخت">Construction</th>
+          <th data-en="Commissioning" data-fa="راه‌اندازی">Commissioning</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="table-company">
+              <div class="table-company-logo">🏗️</div>
+              <div class="table-company-name">Hatch Ltd.</div>
+            </div>
+          </td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="table-company">
+              <div class="table-company-logo">⚙️</div>
+              <div class="table-company-name">Ausenco</div>
+            </div>
+          </td>
+          <td><span class="table-badge partial"><i class="fas fa-minus"></i> Partial</span></td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+          <td><span class="table-badge partial"><i class="fas fa-minus"></i> Partial</span></td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="table-company">
+              <div class="table-company-logo">🏭</div>
+              <div class="table-company-name">Fluor</div>
+            </div>
+          </td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="table-company">
+              <div class="table-company-logo">⚡</div>
+              <div class="table-company-name">SNC-Lavalin</div>
+            </div>
+          </td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="table-company">
+              <div class="table-company-logo">🔧</div>
+              <div class="table-company-name">Bechtel</div>
+            </div>
+          </td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+          <td><span class="table-badge partial"><i class="fas fa-minus"></i> Partial</span></td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="table-company">
+              <div class="table-company-logo">🌐</div>
+              <div class="table-company-name">Worley</div>
+            </div>
+          </td>
+          <td><span class="table-badge no"><i class="fas fa-times"></i> No</span></td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+          <td><span class="table-badge no"><i class="fas fa-times"></i> No</span></td>
+          <td><span class="table-badge yes"><i class="fas fa-check"></i> Yes</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+<div class="container">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">
+        <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="KDMine"/>
+        <span class="footer-logo-text">KD<span>Mine</span></span>
+      </div>
+      <div class="footer-desc" data-en="Expert EPC contractor selection and procurement support for mining projects. Connect with the right engineering partner for your development." data-fa="انتخاب پیمانکار EPC متخصص و پشتیبانی تدارکات برای پروژه‌های معدنی. ارتباط با شریک مهندسی مناسب برای توسعه شما.">Expert EPC contractor selection and procurement support for mining projects. Connect with the right engineering partner for your development.</div>
+    </div>
+    <div>
+      <div class="footer-col-title" data-en="Contractors" data-fa="پیمانکاران">Contractors</div>
+      <div class="footer-links">
+        <a href="#" class="footer-link" onclick="filterContractors('full-epc')"><i class="fas fa-chevron-right"></i> <span data-en="Full EPC" data-fa="EPC کامل">Full EPC</span></a>
+        <a href="#" class="footer-link" onclick="filterContractors('epcm')"><i class="fas fa-chevron-right"></i> <span data-en="EPCM" data-fa="EPCM">EPCM</span></a>
+        <a href="#" class="footer-link" onclick="filterContractors('engineering')"><i class="fas fa-chevron-right"></i> <span data-en="Engineering" data-fa="مهندسی">Engineering</span></a>
+        <a href="#" class="footer-link" onclick="filterContractors('regional')"><i class="fas fa-chevron-right"></i> <span data-en="Regional" data-fa="منطقه‌ای">Regional</span></a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title" data-en="Services" data-fa="خدمات">Services</div>
+      <div class="footer-links">
+        <a href="KDMine -  CAPEX _ OPEX Estimation.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Cost Estimation" data-fa="برآورد هزینه">Cost Estimation</span></a>
+        <a href="KDMine - Plant Design & Feasibility Studies.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Feasibility Studies" data-fa="مطالعات امکان‌سنجی">Feasibility Studies</span></a>
+        <a href="KDMine - Procurement & Supply.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Procurement" data-fa="تدارکات">Procurement</span></a>
+        <a href="KDMine - Risk Analysis.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Risk Analysis" data-fa="تحلیل ریسک">Risk Analysis</span></a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title" data-en="Company" data-fa="شرکت">Company</div>
+      <div class="footer-links">
+        <a href="KDMine - Contact & About Us.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="About Us" data-fa="درباره ما">About Us</span></a>
+        <a href="KDMine - Contact & About Us.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Contact" data-fa="تماس">Contact</span></a>
+        <a href="KDMine - Resources Hub.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Resources" data-fa="منابع">Resources</span></a>
+        <a href="KDMine - Legal (Privacy & Terms).html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Legal" data-fa="حقوقی">Legal</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p data-en="© 2025–2026 KDMine Consultancy. EPC contractor information for reference purposes only." data-fa="© ۱۴۰۴–۱۴۰۵ مشاوره KDMine. اطلاعات پیمانکار EPC فقط برای اهداف مرجع.">© 2025–2026 KDMine Consultancy. EPC contractor information for reference purposes only.</p>
+  </div>
+</div>
+</footer>
+
+<!-- SCROLL TO TOP -->
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+<i class="fas fa-arrow-up"></i>
+</button>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// EPC CONTRACTOR DATABASE
+// ═══════════════════════════════════════════════════════════════
+const epcDatabase = {
+'hatch': {
+  name: 'Hatch Ltd.',
+  location: 'Canada',
+  rating: 4.8,
+  projects: 300,
+  countries: 65,
+  employees: 9000,
+  specialties: ['Full EPC', 'EPCM', 'Copper', 'Gold', 'Iron Ore'],
+  filters: ['full-epc', 'epcm']
+},
+'ausenco': {
+  name: 'Ausenco',
+  location: 'Australia',
+  rating: 4.7,
+  projects: 200,
+  countries: 40,
+  employees: 3500,
+  specialties: ['EPCM', 'Process Plants', 'Gold', 'Lithium', 'Sustainability'],
+  filters: ['full-epc', 'epcm']
+},
+'fluor': {
+  name: 'Fluor Corporation',
+  location: 'USA',
+  rating: 4.6,
+  projects: 150,
+  countries: 100,
+  employees: 40000,
+  specialties: ['Full EPC', 'Large Scale', 'All Metals', 'Greenfield'],
+  filters: ['full-epc']
+},
+'snc-lavalin': {
+  name: 'SNC-Lavalin (AtkinsRéalis)',
+  location: 'Canada',
+  rating: 4.5,
+  projects: 250,
+  countries: 50,
+  employees: 35000,
+  specialties: ['Engineering', 'EPCM', 'Sustainability', 'Base Metals'],
+  filters: ['full-epc', 'epcm', 'engineering']
+},
+'bechtel': {
+  name: 'Bechtel Mining & Metals',
+  location: 'USA',
+  rating: 4.9,
+  projects: 400,
+  countries: 160,
+  employees: 55000,
+  specialties: ['Mega Projects', 'Full EPC', 'All Commodities', 'Greenfield'],
+  filters: ['full-epc']
+},
+'worley': {
+  name: 'Worley (Advisian)',
+  location: 'Australia',
+  rating: 4.6,
+  projects: 180,
+  countries: 45,
+  employees: 48000,
+  specialties: ['EPCM', 'Process Design', 'Metallurgy', 'Optimization'],
+  filters: ['epcm', 'engineering']
+}
+};
+
+// ═══════════════════════════════════════════════════════════════
+// NAVIGATION SCROLL EFFECT
+// ═══════════════════════════════════════════════════════════════
+window.addEventListener('scroll', () => {
+const nav = document.getElementById('mainNav');
+const scrollTop = document.getElementById('scrollTop');
+
+if (window.scrollY > 60) {
+  nav.classList.add('scrolled');
+} else {
+  nav.classList.remove('scrolled');
+}
+
+if (window.scrollY > 400) {
+  scrollTop.classList.add('visible');
+} else {
+  scrollTop.classList.remove('visible');
+}
+});
+
+// ═══════════════════════════════════════════════════════════════
+// LANGUAGE SWITCHER
+// ═══════════════════════════════════════════════════════════════
+let currentLang = 'en';
+
+function setLang(lang) {
+currentLang = lang;
+
+document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+document.getElementById('btn-fa').classList.toggle('active', lang === 'fa');
+
+const body = document.getElementById('body');
+if (lang === 'fa') {
+  body.classList.add('fa');
+  body.setAttribute('dir', 'rtl');
+} else {
+  body.classList.remove('fa');
+  body.setAttribute('dir', 'ltr');
+}
+
+document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+  const translation = el.getAttribute('data-' + lang);
+  if (!translation) return;
+  
+  if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+    el.placeholder = translation;
+  } else {
+    el.innerHTML = translation;
+  }
+});
+
+localStorage.setItem('kdmine_lang', lang);
+}
+
+// Load saved language preference
+window.addEventListener('load', () => {
+const savedLang = localStorage.getItem('kdmine_lang');
+if (savedLang && savedLang !== 'en') {
+  setLang(savedLang);
+}
+});
+
+// ═══════════════════════════════════════════════════════════════
+// SEARCH FUNCTIONALITY
+// ═══════════════════════════════════════════════════════════════
+function searchContractors() {
+const searchInput = document.getElementById('searchInput');
+const query = searchInput.value.toLowerCase().trim();
+
+if (!query) {
+  console.log('Empty search query');
+  return;
+}
+
+console.log('Searching for:', query);
+
+const cards = document.querySelectorAll('.epc-card');
+let foundCount = 0;
+
+cards.forEach(card => {
+  const name = card.querySelector('.epc-name').textContent.toLowerCase();
+  const location = card.querySelector('.epc-location').textContent.toLowerCase();
+  const desc = card.querySelector('.epc-desc').textContent.toLowerCase();
+  const specialties = Array.from(card.querySelectorAll('.epc-specialty'))
+    .map(s => s.textContent.toLowerCase()).join(' ');
+  
+  if (name.includes(query) || location.includes(query) || 
+      desc.includes(query) || specialties.includes(query)) {
+    card.style.display = '';
+    foundCount++;
+  } else {
+    card.style.display = 'none';
+  }
+});
+
+console.log('Found', foundCount, 'contractors');
+
+if (foundCount === 0) {
+  alert('No contractors found matching your search.');
+}
+}
+
+// Search on Enter key
+document.getElementById('searchInput').addEventListener('keypress', (e) => {
+if (e.key === 'Enter') {
+  searchContractors();
+}
+});
+
+// ═══════════════════════════════════════════════════════════════
+// FILTER FUNCTIONALITY
+// ═══════════════════════════════════════════════════════════════
+function filterContractors(filter) {
+console.log('Filtering by:', filter);
+
+// Update active filter button
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.classList.remove('active');
+});
+
+if (event && event.target) {
+  event.target.classList.add('active');
+}
+
+// Filter contractor cards
+const cards = document.querySelectorAll('.epc-card');
+let visibleCount = 0;
+
+cards.forEach(card => {
+  const cardFilters = card.getAttribute('data-filter');
+  
+  if (filter === 'all' || cardFilters.includes(filter)) {
+    card.style.display = '';
+    visibleCount++;
+  } else {
+    card.style.display = 'none';
+  }
+});
+
+console.log('Showing', visibleCount, 'contractors');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// VIEW PROFILE
+// ═══════════════════════════════════════════════════════════════
+function viewProfile(contractorId) {
+const contractor = epcDatabase[contractorId];
+
+if (!contractor) {
+  console.error('Contractor not found:', contractorId);
+  return;
+}
+
+console.log('Viewing profile for:', contractor.name);
+
+// In production, would open detailed contractor profile page
+const profileInfo = `
+Contractor Profile:
+
+${contractor.name}
+Location: ${contractor.location}
+Rating: ${contractor.rating}/5.0
+
+Portfolio:
+• ${contractor.projects}+ completed projects
+• Operating in ${contractor.countries}+ countries
+• ${contractor.employees.toLocaleString()}+ employees
+
+Specialties:
+${contractor.specialties.map(s => '• ' + s).join('\n')}
+
+Contact KDMine for detailed capability statements, project references, and RFP support.
+`;
+
+alert(profileInfo);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// REQUEST RFP
+// ═══════════════════════════════════════════════════════════════
+function requestRFP(contractorId) {
+const contractor = epcDatabase[contractorId];
+
+if (!contractor) {
+  console.error('Contractor not found:', contractorId);
+  return;
+}
+
+console.log('Requesting RFP for:', contractor.name);
+
+const message = `Request RFP Package:\n\n${contractor.name}\n\nKDMine will facilitate the RFP process including:\n• Contractor introduction\n• Capability statement\n• Project references\n• Preliminary proposal\n• Technical discussions\n\nOur team will contact you within 24 hours to discuss your project requirements.`;
+
+if (confirm(message + '\n\nProceed to contact form?')) {
+  window.location.href = 'KDMine - Contact & About Us.html?rfp=' + contractorId;
+}
+}
+
+// ═══════════════════════════════════════════════════════════════
+// CONTRACTOR CARD INTERACTIONS
+// ═══════════════════════════════════════════════════════════════
+document.querySelectorAll('.epc-card').forEach(card => {
+card.addEventListener('mouseenter', () => {
+  const logo = card.querySelector('.epc-logo');
+  if (logo) {
+    logo.style.transform = 'scale(1.1) rotate(5deg)';
+    logo.style.transition = 'transform 0.3s ease';
+  }
+});
+
+card.addEventListener('mouseleave', () => {
+  const logo = card.querySelector('.epc-logo');
+  if (logo) {
+    logo.style.transform = 'scale(1) rotate(0deg)';
+  }
+});
+});
+
+// ═══════════════════════════════════════════════════════════════
+// COMPARISON FUNCTIONALITY
+// ═══════════════════════════════════════════════════════════════
+let comparisonList = JSON.parse(localStorage.getItem('kdmine_epc_comparison') || '[]');
+
+function addToComparison(contractorId) {
+if (comparisonList.length >= 4) {
+  alert('You can compare up to 4 contractors at once. Please remove one first.');
+  return;
+}
+
+if (comparisonList.includes(contractorId)) {
+  alert('This contractor is already in your comparison list.');
+  return;
+}
+
+comparisonList.push(contractorId);
+localStorage.setItem('kdmine_epc_comparison', JSON.stringify(comparisonList));
+
+console.log('Added to comparison:', contractorId);
+alert('Added to comparison. View comparison table below.');
+}
+
+function removeFromComparison(contractorId) {
+comparisonList = comparisonList.filter(id => id !== contractorId);
+localStorage.setItem('kdmine_epc_comparison', JSON.stringify(comparisonList));
+
+console.log('Removed from comparison:', contractorId);
+}
+
+function showDetailedComparison() {
+if (comparisonList.length < 2) {
+  alert('Please add at least 2 contractors to compare.');
+  return;
+}
+
+console.log('Showing detailed comparison for:', comparisonList);
+
+// In production, would open detailed comparison modal
+let comparisonText = 'Comparing Contractors:\n\n';
+comparisonList.forEach(id => {
+  const contractor = epcDatabase[id];
+  if (contractor) {
+    comparisonText += `${contractor.name}\n`;
+    comparisonText += `  Rating: ${contractor.rating}/5.0\n`;
+    comparisonText += `  Projects: ${contractor.projects}+\n`;
+    comparisonText += `  Employees: ${contractor.employees.toLocaleString()}+\n\n`;
+  }
+});
+
+alert(comparisonText);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SHORTLIST FUNCTIONALITY
+// ═══════════════════════════════════════════════════════════════
+let shortlist = JSON.parse(localStorage.getItem('kdmine_epc_shortlist') || '[]');
+
+function toggleShortlist(contractorId) {
+const index = shortlist.indexOf(contractorId);
+
+if (index > -1) {
+  shortlist.splice(index, 1);
+  console.log('Removed from shortlist:', contractorId);
+} else {
+  shortlist.push(contractorId);
+  console.log('Added to shortlist:', contractorId);
+}
+
+localStorage.setItem('kdmine_epc_shortlist', JSON.stringify(shortlist));
+updateShortlistIcons();
+}
+
+function updateShortlistIcons() {
+// In production, would update UI icons
+console.log('Shortlist updated:', shortlist.length, 'contractors');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// EXPORT CONTRACTOR LIST
+// ═══════════════════════════════════════════════════════════════
+function exportContractorList() {
+console.log('Exporting contractor list...');
+
+const visibleCards = Array.from(document.querySelectorAll('.epc-card'))
+  .filter(card => card.style.display !== 'none');
+
+let csvContent = 'Contractor Name,Location,Rating,Projects,Countries,Employees,Specialties\n';
+
+visibleCards.forEach(card => {
+  const contractorId = card.getAttribute('data-id');
+  const contractor = epcDatabase[contractorId];
+  
+  if (contractor) {
+    const specialties = contractor.specialties.join('; ');
+    csvContent += `"${contractor.name}","${contractor.location}",${contractor.rating},${contractor.projects},${contractor.countries},${contractor.employees},"${specialties}"\n`;
+  }
+});
+
+const blob = new Blob([csvContent], { type: 'text/csv' });
+const url = window.URL.createObjectURL(blob);
+const a = document.createElement('a');
+a.href = url;
+a.download = `kdmine-epc-contractors-${new Date().toISOString().split('T')[0]}.csv`;
+a.click();
+window.URL.revokeObjectURL(url);
+
+console.log('Contractor list exported');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SORT FUNCTIONALITY
+// ═══════════════════════════════════════════════════════════════
+function sortContractors(criteria) {
+console.log('Sorting by:', criteria);
+
+const grid = document.getElementById('epcGrid');
+const cards = Array.from(grid.querySelectorAll('.epc-card'));
+
+cards.sort((a, b) => {
+  const idA = a.getAttribute('data-id');
+  const idB = b.getAttribute('data-id');
+  const contractorA = epcDatabase[idA];
+  const contractorB = epcDatabase[idB];
+  
+  switch (criteria) {
+    case 'rating-high':
+      return contractorB.rating - contractorA.rating;
+    case 'rating-low':
+      return contractorA.rating - contractorB.rating;
+    case 'projects-high':
+      return contractorB.projects - contractorA.projects;
+    case 'projects-low':
+      return contractorA.projects - contractorB.projects;
+    case 'name':
+      return contractorA.name.localeCompare(contractorB.name);
+    default:
+      return 0;
+  }
+});
+
+// Re-append sorted cards
+cards.forEach(card => grid.appendChild(card));
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ADVANCED FILTERS
+// ═══════════════════════════════════════════════════════════════
+function applyAdvancedFilters(filters) {
+console.log('Applying advanced filters:', filters);
+
+const cards = document.querySelectorAll('.epc-card');
+
+cards.forEach(card => {
+  const contractorId = card.getAttribute('data-id');
+  const contractor = epcDatabase[contractorId];
+  
+  let show = true;
+  
+  // Rating filter
+  if (filters.minRating && contractor.rating < filters.minRating) show = false;
+  
+  // Projects filter
+  if (filters.minProjects && contractor.projects < filters.minProjects) show = false;
+  
+  // Location filter
+  if (filters.location && contractor.location !== filters.location) show = false;
+  
+  // Specialty filter
+  if (filters.specialty && !contractor.specialties.includes(filters.specialty)) show = false;
+  
+  card.style.display = show ? '' : 'none';
+});
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SEND INQUIRY TO MULTIPLE CONTRACTORS
+// ═══════════════════════════════════════════════════════════════
+function sendBulkInquiry(contractorIds) {
+console.log('Sending inquiry to:', contractorIds);
+
+const contractorNames = contractorIds
+  .map(id => epcDatabase[id]?.name)
+  .filter(Boolean)
+  .join(', ');
+
+const message = `Send project inquiry to:\n\n${contractorNames}\n\nKDMine will distribute your project requirements to selected contractors and coordinate responses.\n\nProceed?`;
+
+if (confirm(message)) {
+  window.location.href = 'KDMine - Contact & About Us.html?inquiry=' + contractorIds.join(',');
+}
+}
+
+// ═══════════════════════════════════════════════════════════════
+// CONTRACTOR RECOMMENDATIONS
+// ═══════════════════════════════════════════════════════════════
+function getRecommendations(projectType, budget, location) {
+console.log('Getting recommendations for:', { projectType, budget, location });
+
+// Simple recommendation logic
+const recommendations = Object.keys(epcDatabase).filter(id => {
+  const contractor = epcDatabase[id];
+  
+  // For mega projects, recommend contractors with high project count
+  if (budget > 1000000000 && contractor.projects < 200) return false;
+  
+  // For EPCM, filter by capability
+  if (projectType === 'epcm' && !contractor.filters.includes('epcm')) return false;
+  
+  return true;
+}).slice(0, 3);
+
+console.log('Recommended contractors:', recommendations);
+return recommendations;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PRINT CONTRACTOR DIRECTORY
+// ═══════════════════════════════════════════════════════════════
+function printDirectory() {
+console.log('Printing contractor directory...');
+window.print();
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SHARE CONTRACTOR
+// ═══════════════════════════════════════════════════════════════
+function shareContractor(contractorId) {
+const contractor = epcDatabase[contractorId];
+
+if (!contractor) return;
+
+const shareUrl = `${window.location.origin}/epc/${contractorId}`;
+const shareText = `Check out this EPC contractor: ${contractor.name} - Rating: ${contractor.rating}/5.0`;
+
+if (navigator.share) {
+  navigator.share({
+    title: contractor.name,
+    text: shareText,
+    url: shareUrl
+  }).then(() => {
+    console.log('Shared successfully');
+  }).catch(err => {
+    console.error('Share failed:', err);
+  });
+} else {
+  // Fallback: copy to clipboard
+  navigator.clipboard.writeText(shareUrl).then(() => {
+    alert('Link copied to clipboard!');
+  });
+}
+}
+
+// ═══════════════════════════════════════════════════════════════
+// KEYBOARD SHORTCUTS
+// ═══════════════════════════════════════════════════════════════
+document.addEventListener('keydown', (e) => {
+// Ctrl/Cmd + K - Focus search
+if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+  e.preventDefault();
+  document.getElementById('searchInput').focus();
+}
+
+// Ctrl/Cmd + E - Export list
+if ((e.ctrlKey || e.metaKey) && e.key === 'e') {
+  e.preventDefault();
+  exportContractorList();
+}
+
+// Ctrl/Cmd + P - Print directory
+if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+  e.preventDefault();
+  printDirectory();
+}
+
+// Ctrl/Cmd + C - Show comparison
+if ((e.ctrlKey || e.metaKey) && e.key === 'c') {
+  e.preventDefault();
+  showDetailedComparison();
+}
+});
+
+// ═══════════════════════════════════════════════════════════════
+// ANALYTICS TRACKING
+// ═══════════════════════════════════════════════════════════════
+function trackEvent(category, action, label) {
+console.log('Analytics:', category, action, label);
+// In production, would send to analytics service
+}
+
+// Track contractor views
+document.querySelectorAll('.epc-card').forEach(card => {
+card.addEventListener('click', () => {
+  const contractorId = card.getAttribute('data-id');
+  trackEvent('EPC', 'View', contractorId);
+});
+});
+
+// Track RFP requests
+function trackRFPRequest(contractorId) {
+trackEvent('EPC', 'RFP_Request', contractorId);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// RATING SYSTEM
+// ═══════════════════════════════════════════════════════════════
+function submitRating(contractorId, rating, review) {
+console.log('Submitting rating:', { contractorId, rating, review });
+
+// In production, would save to database
+alert('Thank you for your feedback! Your rating will be reviewed and published.');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PROJECT MATCHING ALGORITHM
+// ═══════════════════════════════════════════════════════════════
+function matchContractors(projectDetails) {
+console.log('Matching contractors for project:', projectDetails);
+
+const {
+  commodity,
+  projectSize,
+  projectType,
+  location,
+  timeline,
+  budget
+} = projectDetails;
+
+// Score each contractor based on project requirements
+const scores = Object.keys(epcDatabase).map(id => {
+  const contractor = epcDatabase[id];
+  let score = 0;
+  
+  // Base score from rating
+  score += contractor.rating * 10;
+  
+  // Experience score
+  score += Math.min(contractor.projects / 10, 20);
+  
+  // Size match
+  if (projectSize === 'mega' && contractor.employees > 30000) score += 15;
+  if (projectSize === 'large' && contractor.employees > 5000) score += 15;
+  if (projectSize === 'medium' && contractor.employees > 1000) score += 15;
+  
+  // Type match
+  if (projectType === 'full-epc' && contractor.filters.includes('full-epc')) score += 20;
+  if (projectType === 'epcm' && contractor.filters.includes('epcm')) score += 20;
+  
+  return { id, contractor, score };
+});
+
+// Sort by score and return top 3
+scores.sort((a, b) => b.score - a.score);
+const topMatches = scores.slice(0, 3);
+
+console.log('Top matches:', topMatches);
+return topMatches;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// CONSOLE BRANDING
+// ═══════════════════════════════════════════════════════════════
+console.log(
+'%c KDMine EPC Contractor Directory ',
+'background: linear-gradient(135deg, #C9A84C, #E8C97A); color: #0A0E1A; font-size: 18px; font-weight: bold; padding: 8px 16px; border-radius: 6px;'
+);
+console.log(
+'%c 50+ Global Contractors · $500B+ Portfolio ',
+'color: #C9A84C; font-size: 13px; font-weight: 600;'
+);
+console.log(
+'%c Keyboard Shortcuts: Ctrl+K (Search) · Ctrl+E (Export) · Ctrl+P (Print) · Ctrl+C (Compare) ',
+'color: #9CA3AF; font-size: 11px;'
+);
+
+// ═══════════════════════════════════════════════════════════════
+// PERFORMANCE MONITORING
+// ═══════════════════════════════════════════════════════════════
+window.addEventListener('load', () => {
+if (window.performance && window.performance.timing) {
+  const loadTime = window.performance.timing.loadEventEnd - window.performance.timing.navigationStart;
+  console.log('Page load time:', (loadTime / 1000).toFixed(2), 'seconds');
+}
+
+// Count visible contractors
+const visibleCount = document.querySelectorAll('.epc-card:not([style*="display: none"])').length;
+console.log('Visible contractors:', visibleCount);
+});
+
+// ═══════════════════════════════════════════════════════════════
+// INITIALIZE
+// ═══════════════════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+console.log('KDMine EPC Directory initialized');
+console.log('Total contractors:', Object.keys(epcDatabase).length);
+console.log('Shortlist:', shortlist.length);
+console.log('Comparison list:', comparisonList.length);
+
+// Add loaded class for animations
+setTimeout(() => {
+  document.body.classList.add('loaded');
+}, 100);
+
+// Check for URL parameters (RFP requests, etc.)
+const urlParams = new URLSearchParams(window.location.search);
+const rfpParam = urlParams.get('rfp');
+if (rfpParam) {
+  console.log('RFP request detected for:', rfpParam);
+  // Auto-scroll to contact form or show RFP modal
+}
+});
+
+// ═══════════════════════════════════════════════════════════════
+// VIEWPORT HEIGHT FIX FOR MOBILE
+// ═══════════════════════════════════════════════════════════════
+function setVH() {
+const vh = window.innerHeight * 0.01;
+document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+setVH();
+window.addEventListener('resize', setVH);
+window.addEventListener('orientationchange', setVH);
+
+// ═══════════════════════════════════════════════════════════════
+// AUTO-SAVE FILTERS
+// ═══════════════════════════════════════════════════════════════
+function saveFilterState() {
+const activeFilter = document.querySelector('.filter-btn.active');
+if (activeFilter) {
+  const filter = activeFilter.getAttribute('data-filter');
+  localStorage.setItem('kdmine_active_epc_filter', filter);
+}
+}
+
+function loadFilterState() {
+const savedFilter = localStorage.getItem('kdmine_active_epc_filter');
+if (savedFilter) {
+  const filterBtn = document.querySelector(`.filter-btn[data-filter="${savedFilter}"]`);
+  if (filterBtn) {
+    filterBtn.click();
+  }
+}
+}
+
+// Load saved filter on page load
+window.addEventListener('load', loadFilterState);
+
+// Save filter when changed
+document.querySelectorAll('.filter-btn').forEach(btn => {
+btn.addEventListener('click', saveFilterState);
+});
+
+// ═══════════════════════════════════════════════════════════════
+// NOTIFICATION SYSTEM
+// ═══════════════════════════════════════════════════════════════
+function showNotification(message, type = 'info') {
+console.log(`[${type.toUpperCase()}]`, message);
+// In production, would show toast notification
+}
+
+// ═══════════════════════════════════════════════════════════════
+// HELP SYSTEM
+// ═══════════════════════════════════════════════════════════════
+function showHelp() {
+const helpText = `
+EPC Contractor Directory Help:
+
+🔍 SEARCH
+• Search by contractor name, location, or specialty
+• Use keywords like "copper", "EPCM", "Canada"
+
+🎯 FILTERS
+• Full EPC: Complete turnkey solutions
+• EPCM: Engineering, Procurement, Construction Management
+• Engineering Only: Design and engineering services
+• Regional: Specialists in specific regions
+
+⭐ RATINGS
+• Based on project success, client satisfaction, and delivery performance
+• Updated quarterly
+
+📊 COMPARISON
+• Compare up to 4 contractors side-by-side
+• View capabilities, experience, and specialties
+
+📧 RFP REQUESTS
+• Request proposal packages through KDMine
+• We facilitate contractor introductions
+• Receive responses within 48 hours
+
+Need assistance? Contact KDMine support team.
+`;
+
+alert(helpText);
+}
+
+// Add help button functionality
+document.addEventListener('keydown', (e) => {
+if (e.key === 'F1') {
+  e.preventDefault();
+  showHelp();
+}
+});
+
+</script>
+
+</body>
+</html>
