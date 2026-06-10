@@ -1,1037 +1,1399 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>KDMine Consultancy | Mining Cost Estimation & Feasibility Studies</title>
-  <meta name="description" content="KDMine — Specialist open-pit mining cost estimation, feasibility studies, project controls and procurement advisory. Iran · CIS · Global."/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-  <style>
-    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-    :root{
-      --gold:#C9A84C;--gold-light:#E8C97A;--gold-dark:#A07830;--gold-dim:rgba(201,168,76,0.12);
-      --dark:#080C16;--dark2:#0F1520;--dark3:#161E2E;--dark4:#1E2840;--dark5:#243050;
-      --text:#E8EDF5;--text-muted:#7A8BA8;--text-dim:#4A5A72;
-      --border:rgba(201,168,76,0.18);--border2:rgba(255,255,255,0.06);--border3:rgba(255,255,255,0.03);
-      --blue:#0EA5E9;--green:#22C55E;--purple:#A855F7;--red:#EF4444;--orange:#F97316;--teal:#14B8A6;
-      --radius:16px;--radius-lg:24px;--radius-xl:32px;
-    }
-    html{scroll-behavior:smooth;}
-    body{font-family:'Inter',sans-serif;background:var(--dark);color:var(--text);overflow-x:hidden;line-height:1.6;}
-    body.fa{font-family:'Vazirmatn',sans-serif;direction:rtl;}
-    ::-webkit-scrollbar{width:4px;}
-    ::-webkit-scrollbar-track{background:var(--dark2);}
-    ::-webkit-scrollbar-thumb{background:var(--gold-dark);border-radius:2px;}
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>KDMine Consultancy | Mining Cost Estimation & Feasibility Studies</title>
+<meta name="description" content="KDMine — Specialist open-pit mining cost estimation, feasibility studies, project controls and procurement advisory. Iran · CIS · Global."/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --gold:#C9A84C;--gold-light:#E8C97A;--gold-dark:#A07830;--gold-dim:rgba(201,168,76,0.12);
+    --dark:#0A0E1A;--dark2:#111827;--dark3:#1F2937;--dark4:#374151;--dark5:#4B5563;
+    --text:#F9FAFB;--text-muted:#9CA3AF;--text-dim:#6B7280;
+    --border:rgba(201,168,76,0.2);--border2:rgba(255,255,255,0.08);--border3:rgba(255,255,255,0.04);
+    --blue:#3B82F6;--green:#10B981;--purple:#8B5CF6;--red:#EF4444;--orange:#F59E0B;--teal:#14B8A6;
+    --radius:12px;--radius-lg:20px;--radius-xl:28px;
+  }
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',sans-serif;background:var(--dark);color:var(--text);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased;}
+  body.fa{font-family:'Vazirmatn',sans-serif;direction:rtl;}
+  ::-webkit-scrollbar{width:6px;}
+  ::-webkit-scrollbar-track{background:var(--dark2);}
+  ::-webkit-scrollbar-thumb{background:var(--gold-dark);border-radius:3px;}
 
-    /* ── LANG BAR ── */
-    .lang-bar{position:fixed;top:0;left:0;right:0;z-index:3000;height:34px;background:linear-gradient(90deg,var(--gold-dark),#8a6520);display:flex;align-items:center;justify-content:space-between;padding:0 5%;}
-    .lang-bar-left{font-size:11px;color:rgba(0,0,0,0.6);font-weight:600;display:flex;align-items:center;gap:10px;}
-    .lang-bar-left i{font-size:10px;}
-    .lang-bar-right{display:flex;align-items:center;gap:8px;}
-    .lang-btn{padding:3px 14px;border-radius:20px;border:none;cursor:pointer;font-size:11px;font-weight:700;transition:.2s;font-family:inherit;}
-    .lang-btn.active{background:var(--dark);color:var(--gold);}
-    .lang-btn:not(.active){background:rgba(0,0,0,0.18);color:rgba(0,0,0,0.65);}
+  /* ── LANG BAR ── */
+  .lang-bar{position:fixed;top:0;left:0;right:0;z-index:3000;height:36px;background:linear-gradient(135deg,#1F2937,#111827);display:flex;align-items:center;justify-content:space-between;padding:0 5%;border-bottom:1px solid rgba(255,255,255,0.05);}
+  .lang-bar-left{font-size:11px;color:var(--text-muted);font-weight:600;display:flex;align-items:center;gap:10px;}
+  .lang-bar-left i{color:var(--gold);font-size:10px;}
+  .lang-bar-right{display:flex;align-items:center;gap:8px;}
+  .lang-btn{padding:4px 16px;border-radius:6px;border:1px solid transparent;cursor:pointer;font-size:11px;font-weight:700;transition:.2s;font-family:inherit;background:transparent;color:var(--text-muted);}
+  .lang-btn.active{background:var(--gold);color:var(--dark);border-color:var(--gold);}
+  .lang-btn:not(.active):hover{border-color:rgba(255,255,255,0.1);}
 
-    /* ── NAV ── */
-    nav{position:fixed;top:34px;left:0;right:0;z-index:2000;height:68px;background:rgba(8,12,22,0.92);backdrop-filter:blur(28px);border-bottom:1px solid var(--border2);transition:.3s;}
-    nav.scrolled{background:rgba(8,12,22,0.98);border-bottom-color:var(--border);}
-    .nav-inner{max-width:1400px;margin:0 auto;padding:0 5%;height:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;}
-    .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;flex-shrink:0;}
-    .nav-logo img{height:38px;width:auto;}
-    .nav-logo-text{font-size:20px;font-weight:900;color:#fff;letter-spacing:-.5px;}
-    .nav-logo-text span{color:var(--gold);}
-    .nav-links{display:flex;align-items:center;gap:4px;}
-    .nav-link{padding:7px 13px;border-radius:9px;font-size:13px;font-weight:600;color:var(--text-muted);text-decoration:none;transition:.2s;white-space:nowrap;position:relative;}
-    .nav-link:hover{color:#fff;background:rgba(255,255,255,0.05);}
-    .nav-link.active{color:var(--gold);}
-    .nav-dropdown{position:relative;}
-    .nav-dropdown-menu{position:absolute;top:calc(100% + 8px);left:0;background:var(--dark3);border:1px solid var(--border2);border-radius:14px;padding:8px;min-width:220px;opacity:0;pointer-events:none;transform:translateY(-6px);transition:.2s;z-index:100;box-shadow:0 20px 60px rgba(0,0,0,0.5);}
-    .nav-dropdown:hover .nav-dropdown-menu{opacity:1;pointer-events:all;transform:translateY(0);}
-    .nav-dd-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:9px;font-size:12px;color:var(--text-muted);text-decoration:none;transition:.2s;}
-    .nav-dd-item:hover{background:rgba(255,255,255,0.05);color:#fff;}
-    .nav-dd-item i{color:var(--gold);width:16px;text-align:center;font-size:11px;}
-    .nav-dd-divider{height:1px;background:var(--border2);margin:4px 0;}
-    .nav-cta{padding:9px 20px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--dark);font-size:13px;font-weight:700;text-decoration:none;transition:.2s;white-space:nowrap;display:flex;align-items:center;gap:7px;}
-    .nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(201,168,76,0.4);}
-    .nav-mobile-toggle{display:none;background:none;border:none;color:#fff;font-size:20px;cursor:pointer;padding:4px;}
+  /* ── NAV ── */
+  nav{position:fixed;top:36px;left:0;right:0;z-index:2000;height:72px;background:rgba(10,14,26,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border2);transition:.3s;}
+  nav.scrolled{background:rgba(10,14,26,0.98);border-bottom-color:var(--border);box-shadow:0 4px 20px rgba(0,0,0,0.3);}
+  .nav-inner{max-width:1440px;margin:0 auto;padding:0 5%;height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+  .nav-logo{display:flex;align-items:center;gap:14px;text-decoration:none;flex-shrink:0;}
+  .nav-logo img{height:42px;width:auto;filter:drop-shadow(0 2px 8px rgba(201,168,76,0.3));}
+  .nav-logo-text{font-size:22px;font-weight:900;color:#fff;letter-spacing:-0.8px;}
+  .nav-logo-text span{color:var(--gold);}
+  .nav-links{display:flex;align-items:center;gap:6px;}
+  .nav-link{padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;color:var(--text-muted);text-decoration:none;transition:.2s;white-space:nowrap;position:relative;}
+  .nav-link:hover{color:var(--text);background:rgba(255,255,255,0.06);}
+  .nav-link.active{color:var(--gold);}
+  .nav-dropdown{position:relative;}
+  .nav-dropdown-menu{position:absolute;top:calc(100% + 12px);left:0;background:var(--dark3);border:1px solid var(--border2);border-radius:12px;padding:10px;min-width:240px;opacity:0;pointer-events:none;transform:translateY(-8px);transition:.25s;z-index:100;box-shadow:0 20px 60px rgba(0,0,0,0.6);}
+  .nav-dropdown:hover .nav-dropdown-menu{opacity:1;pointer-events:all;transform:translateY(0);}
+  .nav-dd-item{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:8px;font-size:12px;color:var(--text-muted);text-decoration:none;transition:.2s;}
+  .nav-dd-item:hover{background:rgba(255,255,255,0.06);color:var(--text);}
+  .nav-dd-item i{color:var(--gold);width:18px;text-align:center;font-size:12px;}
+  .nav-dd-divider{height:1px;background:var(--border2);margin:6px 0;}
+  .nav-cta{padding:10px 24px;border-radius:8px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--dark);font-size:13px;font-weight:700;text-decoration:none;transition:.2s;white-space:nowrap;display:flex;align-items:center;gap:8px;box-shadow:0 4px 12px rgba(201,168,76,0.3);}
+  .nav-cta:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(201,168,76,0.5);}
+  .nav-mobile-toggle{display:none;background:none;border:none;color:#fff;font-size:22px;cursor:pointer;padding:6px;}
 
-    /* ── HERO ── */
-    .hero{min-height:100vh;position:relative;display:flex;align-items:center;overflow:hidden;}
-    .hero-bg{position:absolute;inset:0;z-index:0;}
-    .hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.22;}
-    .hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(8,12,22,0.97) 0%,rgba(8,12,22,0.85) 40%,rgba(8,12,22,0.6) 70%,rgba(8,12,22,0.4) 100%);}
-    .hero-grid-lines{position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.03) 1px,transparent 1px);background-size:60px 60px;}
-    .hero-glow1{position:absolute;top:-100px;left:-100px;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.08),transparent 65%);}
-    .hero-glow2{position:absolute;bottom:-100px;right:10%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(14,165,233,0.06),transparent 65%);}
-    .hero-inner{position:relative;z-index:2;max-width:1400px;margin:0 auto;padding:120px 5% 80px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;width:100%;}
-    .hero-left{}
-    .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:20px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.25);font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:22px;}
-    .hero-eyebrow span{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite;}
-    @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
-    .hero-h1{font-size:clamp(38px,5.5vw,72px);font-weight:900;color:#fff;letter-spacing:-3px;line-height:.95;margin-bottom:22px;}
-    .hero-h1 em{background:linear-gradient(135deg,var(--gold),var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal;}
-    .hero-h1 .line2{display:block;font-size:.65em;font-weight:400;color:var(--text-muted);letter-spacing:-1px;margin-top:6px;}
-    .hero-desc{font-size:16px;color:var(--text-muted);line-height:1.85;max-width:540px;margin-bottom:36px;}
-    .hero-desc strong{color:var(--text);font-weight:600;}
-    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:48px;}
-    .btn-primary{padding:14px 28px;border-radius:12px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--dark);font-weight:700;font-size:14px;border:none;cursor:pointer;font-family:inherit;transition:.25s;display:inline-flex;align-items:center;gap:9px;text-decoration:none;}
-    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(201,168,76,0.45);}
-    .btn-secondary{padding:14px 28px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text);font-weight:600;font-size:14px;cursor:pointer;font-family:inherit;transition:.25s;display:inline-flex;align-items:center;gap:9px;text-decoration:none;}
-    .btn-secondary:hover{border-color:var(--gold);color:var(--gold);}
-    .hero-trust{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
-    .hero-trust-item{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--text-muted);}
-    .hero-trust-item i{color:var(--gold);font-size:11px;}
-    .hero-right{position:relative;}
-    .hero-card-stack{position:relative;height:480px;}
-    .hero-card{position:absolute;background:var(--dark3);border:1px solid var(--border2);border-radius:20px;padding:20px;transition:.3s;}
-    .hero-card:hover{border-color:var(--border);transform:translateY(-4px);}
-    .hc-main{width:100%;top:0;left:0;right:0;}
-    .hc-main .hc-img{width:100%;height:200px;border-radius:14px;object-fit:cover;margin-bottom:16px;}
-    .hc-tag{font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
-    .hc-title{font-size:15px;font-weight:800;color:#fff;margin-bottom:6px;}
-    .hc-sub{font-size:12px;color:var(--text-muted);}
-    .hc-stats{display:flex;gap:12px;margin-top:14px;padding-top:14px;border-top:1px solid var(--border2);}
-    .hc-stat{text-align:center;flex:1;}
-    .hc-stat-val{font-size:18px;font-weight:900;color:#fff;}
-    .hc-stat-val em{color:var(--gold);font-style:normal;font-size:12px;}
-    .hc-stat-lbl{font-size:10px;color:var(--text-muted);}
-    .hc-float1{width:180px;bottom:80px;right:-20px;z-index:2;}
-    .hc-float2{width:160px;bottom:0;left:20px;z-index:2;}
-    .hc-float-icon{font-size:24px;margin-bottom:8px;}
-    .hc-float-val{font-size:20px;font-weight:900;color:#fff;}
-    .hc-float-val em{color:var(--gold);font-style:normal;font-size:11px;}
-    .hc-float-lbl{font-size:10px;color:var(--text-muted);margin-top:2px;}
+  /* ── HERO ── */
+  .hero{min-height:100vh;position:relative;display:flex;align-items:center;overflow:hidden;padding-top:108px;}
+  .hero-bg{position:absolute;inset:0;z-index:0;}
+  .hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.15;filter:brightness(0.8) contrast(1.1);}
+  .hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,14,26,0.98) 0%,rgba(10,14,26,0.92) 40%,rgba(10,14,26,0.75) 70%,rgba(10,14,26,0.5) 100%);}
+  .hero-grid-lines{position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.02) 1px,transparent 1px);background-size:80px 80px;opacity:0.5;}
+  .hero-glow1{position:absolute;top:-120px;left:-120px;width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.06),transparent 70%);filter:blur(40px);}
+  .hero-glow2{position:absolute;bottom:-120px;right:8%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,0.04),transparent 70%);filter:blur(40px);}
+  .hero-inner{position:relative;z-index:2;max-width:1440px;margin:0 auto;padding:0 5% 100px;display:grid;grid-template-columns:1.1fr 0.9fr;gap:80px;align-items:center;width:100%;}
+  .hero-left{}
+  .hero-eyebrow{display:inline-flex;align-items:center;gap:10px;padding:8px 20px;border-radius:24px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.8px;margin-bottom:28px;backdrop-filter:blur(10px);}
+  .hero-eyebrow span{width:8px;height:8px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite;box-shadow:0 0 12px var(--gold);}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(0.9);}}
+  .hero-h1{font-size:clamp(42px,6vw,78px);font-weight:900;color:#fff;letter-spacing:-3.5px;line-height:.92;margin-bottom:28px;text-shadow:0 2px 20px rgba(0,0,0,0.3);}
+  .hero-h1 em{background:linear-gradient(135deg,var(--gold),var(--gold-light),#FFF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal;}
+  .hero-h1 .line2{display:block;font-size:.58em;font-weight:500;color:var(--text-muted);letter-spacing:-1.2px;margin-top:10px;}
+  .hero-desc{font-size:17px;color:var(--text-muted);line-height:1.9;max-width:580px;margin-bottom:40px;}
+  .hero-desc strong{color:var(--text);font-weight:600;}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:52px;}
+  .btn-primary{padding:16px 32px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--dark);font-weight:700;font-size:14px;border:none;cursor:pointer;font-family:inherit;transition:.25s;display:inline-flex;align-items:center;gap:10px;text-decoration:none;box-shadow:0 4px 16px rgba(201,168,76,0.3);}
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(201,168,76,0.5);}
+  .btn-secondary{padding:16px 32px;border-radius:10px;border:1.5px solid var(--border);background:rgba(255,255,255,0.03);color:var(--text);font-weight:600;font-size:14px;cursor:pointer;font-family:inherit;transition:.25s;display:inline-flex;align-items:center;gap:10px;text-decoration:none;backdrop-filter:blur(10px);}
+  .btn-secondary:hover{border-color:var(--gold);color:var(--gold);background:rgba(255,255,255,0.06);}
+  .hero-trust{display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+  .hero-trust-item{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-muted);font-weight:500;}
+  .hero-trust-item i{color:var(--gold);font-size:12px;}
+  .hero-right{position:relative;}
+  .hero-card-stack{position:relative;height:520px;}
+  .hero-card{position:absolute;background:linear-gradient(135deg,var(--dark3),var(--dark4));border:1px solid var(--border2);border-radius:20px;padding:24px;transition:.3s;box-shadow:0 10px 40px rgba(0,0,0,0.4);backdrop-filter:blur(10px);}
+  .hero-card:hover{border-color:var(--border);transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,0.6);}
+  .hc-main{width:100%;top:0;left:0;right:0;}
+  .hc-main .hc-img{width:100%;height:220px;border-radius:16px;object-fit:cover;margin-bottom:18px;filter:brightness(0.95) contrast(1.05);}
+  .hc-tag{font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px;}
+  .hc-title{font-size:16px;font-weight:800;color:#fff;margin-bottom:8px;letter-spacing:-0.3px;}
+  .hc-sub{font-size:12px;color:var(--text-muted);line-height:1.6;}
+  .hc-stats{display:flex;gap:14px;margin-top:16px;padding-top:16px;border-top:1px solid var(--border2);}
+  .hc-stat{text-align:center;flex:1;}
+  .hc-stat-val{font-size:19px;font-weight:900;color:#fff;}
+  .hc-stat-val em{color:var(--gold);font-style:normal;font-size:12px;}
+  .hc-stat-lbl{font-size:10px;color:var(--text-muted);margin-top:2px;}
+  .hc-float1{width:200px;bottom:90px;right:-30px;z-index:2;}
+  .hc-float2{width:180px;bottom:0;left:30px;z-index:2;}
+  .hc-float-icon{font-size:28px;margin-bottom:10px;}
+  .hc-float-val{font-size:22px;font-weight:900;color:#fff;}
+  .hc-float-val em{color:var(--gold);font-style:normal;font-size:12px;}
+  .hc-float-lbl{font-size:10px;color:var(--text-muted);margin-top:4px;}
 
-    /* ── SECTIONS COMMON ── */
-    section{padding:96px 0;}
-    .container{max-width:1400px;margin:0 auto;padding:0 5%;}
-    .sec-eyebrow{font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;}
-    .sec-title{font-size:clamp(26px,3.5vw,44px);font-weight:900;color:#fff;letter-spacing:-1.5px;margin-bottom:14px;line-height:1.1;}
-    .sec-title em{background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal;}
-    .sec-sub{font-size:15px;color:var(--text-muted);line-height:1.8;max-width:680px;}
-    .sec-header{margin-bottom:52px;}
-    .sec-header.center{text-align:center;}
-    .sec-header.center .sec-sub{margin:0 auto;}
+  /* ── SECTIONS COMMON ── */
+  section{padding:100px 0;}
+  .container{max-width:1440px;margin:0 auto;padding:0 5%;}
+  .sec-eyebrow{font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:2.4px;margin-bottom:12px;}
+  .sec-title{font-size:clamp(28px,3.8vw,48px);font-weight:900;color:#fff;letter-spacing:-2px;margin-bottom:16px;line-height:1.08;}
+  .sec-title em{background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal;}
+  .sec-sub{font-size:16px;color:var(--text-muted);line-height:1.85;max-width:720px;}
+  .sec-header{margin-bottom:60px;}
+  .sec-header.center{text-align:center;}
+  .sec-header.center .sec-sub{margin:0 auto;}
 
-    /* ── STATS BAND ── */
-    .stats-band{background:var(--dark2);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);padding:40px 0;}
-    .stats-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;}
-    .stat-item{text-align:center;padding:20px;border-right:1px solid var(--border2);}
-    .stat-item:last-child{border-right:none;}
-    .stat-num{font-size:36px;font-weight:900;color:#fff;letter-spacing:-2px;}
-    .stat-num em{color:var(--gold);font-style:normal;font-size:20px;}
-    .stat-lbl{font-size:12px;color:var(--text-muted);margin-top:4px;}
+  /* ── STATS BAND ── */
+  .stats-band{background:linear-gradient(135deg,var(--dark2),var(--dark3));border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);padding:50px 0;}
+  .stats-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;}
+  .stat-item{text-align:center;padding:24px;border-right:1px solid var(--border2);position:relative;}
+  .stat-item:last-child{border-right:none;}
+  .stat-item::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:40px;height:3px;background:var(--gold);border-radius:0 0 3px 3px;opacity:0.6;}
+  .stat-num{font-size:40px;font-weight:900;color:#fff;letter-spacing:-2.5px;}
+  .stat-num em{color:var(--gold);font-style:normal;font-size:22px;}
+  .stat-lbl{font-size:12px;color:var(--text-muted);margin-top:6px;font-weight:500;}
 
-    /* ── SERVICES ── */
-    .services-section{background:var(--dark);}
-    .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-    .svc-card{background:var(--dark3);border:1px solid var(--border2);border-radius:var(--radius-lg);padding:28px;transition:.3s;position:relative;overflow:hidden;text-decoration:none;display:block;}
-    .svc-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent,rgba(201,168,76,0.03));opacity:0;transition:.3s;}
-    .svc-card:hover{border-color:var(--border);transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,0.35);}
-    .svc-card:hover::before{opacity:1;}
-    .svc-card-accent{position:absolute;top:0;left:0;right:0;height:3px;border-radius:var(--radius-lg) var(--radius-lg) 0 0;}
-    .svc-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px;}
-    .svc-title{font-size:16px;font-weight:800;color:#fff;margin-bottom:8px;letter-spacing:-.3px;}
-    .svc-desc{font-size:13px;color:var(--text-muted);line-height:1.7;margin-bottom:16px;}
-    .svc-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:16px;}
-    .svc-tag{font-size:10px;padding:2px 8px;border-radius:5px;background:rgba(255,255,255,0.05);color:var(--text-muted);border:1px solid var(--border2);}
-    .svc-link{font-size:12px;font-weight:700;display:flex;align-items:center;gap:5px;transition:.2s;}
+  /* ── SERVICES ── */
+  .services-section{background:var(--dark);}
+  .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .svc-card{background:linear-gradient(135deg,var(--dark3),var(--dark4));border:1px solid var(--border2);border-radius:var(--radius-lg);padding:32px;transition:.3s;position:relative;overflow:hidden;text-decoration:none;display:block;box-shadow:0 4px 20px rgba(0,0,0,0.2);}
+  .svc-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent,rgba(201,168,76,0.04));opacity:0;transition:.3s;}
+  .svc-card:hover{border-color:var(--border);transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,0.4);}
+  .svc-card:hover::before{opacity:1;}
+  .svc-card-accent{position:absolute;top:0;left:0;right:0;height:4px;border-radius:var(--radius-lg) var(--radius-lg) 0 0;}
+  .svc-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:20px;box-shadow:0 4px 16px rgba(0,0,0,0.2);}
+  .svc-title{font-size:17px;font-weight:800;color:#fff;margin-bottom:10px;letter-spacing:-.4px;}
+  .svc-desc{font-size:13px;color:var(--text-muted);line-height:1.75;margin-bottom:18px;}
+  .svc-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px;}
+  .svc-tag{font-size:10px;padding:4px 10px;border-radius:6px;background:rgba(255,255,255,0.04);color:var(--text-muted);border:1px solid var(--border2);font-weight:600;}
+  .svc-link{font-size:12px;font-weight:700;display:flex;align-items:center;gap:6px;transition:.2s;}
 
-    /* ── WHY KDMINE ── */
-    .why-section{background:var(--dark2);}
-    .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
-    .why-img-wrap{position:relative;border-radius:var(--radius-xl);overflow:hidden;}
-    .why-img-wrap img{width:100%;height:480px;object-fit:cover;display:block;}
-    .why-img-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(8,12,22,0.3),transparent);}
-    .why-img-badge{position:absolute;bottom:24px;left:24px;background:rgba(8,12,22,0.9);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:14px;padding:14px 18px;}
-    .why-img-badge-val{font-size:28px;font-weight:900;color:#fff;}
-    .why-img-badge-val em{color:var(--gold);font-style:normal;font-size:16px;}
-    .why-img-badge-lbl{font-size:11px;color:var(--text-muted);}
-    .why-points{display:flex;flex-direction:column;gap:20px;}
-    .why-point{display:flex;gap:16px;align-items:flex-start;}
-    .why-point-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
-    .why-point-title{font-size:15px;font-weight:700;color:#fff;margin-bottom:4px;}
-    .why-point-desc{font-size:13px;color:var(--text-muted);line-height:1.7;}
+  /* ── WHY KDMINE ── */
+  .why-section{background:linear-gradient(135deg,var(--dark2),var(--dark3));}
+  .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+  .why-img-wrap{position:relative;border-radius:var(--radius-xl);overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.5);}
+  .why-img-wrap img{width:100%;height:520px;object-fit:cover;display:block;filter:brightness(0.9) contrast(1.05);}
+  .why-img-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,14,26,0.4),transparent);}
+  .why-img-badge{position:absolute;bottom:28px;left:28px;background:rgba(10,14,26,0.92);backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:16px;padding:16px 22px;box-shadow:0 8px 32px rgba(0,0,0,0.6);}
+  .why-img-badge-val{font-size:30px;font-weight:900;color:#fff;}
+  .why-img-badge-val em{color:var(--gold);font-style:normal;font-size:17px;}
+  .why-img-badge-lbl{font-size:11px;color:var(--text-muted);margin-top:2px;}
+  .why-points{display:flex;flex-direction:column;gap:24px;}
+  .why-point{display:flex;gap:18px;align-items:flex-start;}
+  .why-point-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;box-shadow:0 4px 16px rgba(0,0,0,0.2);}
+  .why-point-title{font-size:16px;font-weight:700;color:#fff;margin-bottom:6px;}
+  .why-point-desc{font-size:13px;color:var(--text-muted);line-height:1.75;}
 
-    /* ── TOOLS ── */
-    .tools-section{background:var(--dark);}
-    .tools-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
-    .tool-card{background:var(--dark3);border:1px solid var(--border2);border-radius:var(--radius);padding:22px;transition:.3s;text-decoration:none;display:block;position:relative;overflow:hidden;}
-    .tool-card:hover{border-color:var(--border);transform:translateY(-3px);}
-    .tool-card-glow{position:absolute;top:-30px;right:-30px;width:100px;height:100px;border-radius:50%;opacity:.15;}
-    .tool-icon{font-size:28px;margin-bottom:12px;}
-    .tool-title{font-size:14px;font-weight:800;color:#fff;margin-bottom:5px;}
-    .tool-desc{font-size:12px;color:var(--text-muted);line-height:1.6;}
-    .tool-arrow{position:absolute;bottom:16px;right:16px;font-size:12px;color:var(--gold);opacity:0;transition:.2s;}
-    .tool-card:hover .tool-arrow{opacity:1;transform:translateX(3px);}
+  /* ── TOOLS ── */
+  .tools-section{background:var(--dark);}
+  .tools-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .tool-card{background:linear-gradient(135deg,var(--dark3),var(--dark4));border:1px solid var(--border2);border-radius:var(--radius);padding:26px;transition:.3s;text-decoration:none;display:block;position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.2);}
+  .tool-card:hover{border-color:var(--border);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.4);}
+  .tool-card-glow{position:absolute;top:-40px;right:-40px;width:120px;height:120px;border-radius:50%;opacity:.12;filter:blur(30px);}
+  .tool-icon{font-size:32px;margin-bottom:14px;}
+  .tool-title{font-size:14px;font-weight:800;color:#fff;margin-bottom:6px;}
+  .tool-desc{font-size:12px;color:var(--text-muted);line-height:1.65;}
+  .tool-arrow{position:absolute;bottom:18px;right:18px;font-size:12px;color:var(--gold);opacity:0;transition:.2s;}
+  .tool-card:hover .tool-arrow{opacity:1;transform:translateX(4px);}
 
-    /* ── FEATURED IMAGE SECTION ── */
-    .featured-section{position:relative;overflow:hidden;padding:0;}
-    .featured-img-wrap{position:relative;height:520px;}
-    .featured-img-wrap img{width:100%;height:100%;object-fit:cover;}
-    .featured-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,12,22,0.95) 0%,rgba(8,12,22,0.7) 50%,rgba(8,12,22,0.2) 100%);}
-    .featured-content{position:absolute;top:50%;left:5%;transform:translateY(-50%);max-width:580px;}
-    .featured-content .sec-eyebrow{margin-bottom:14px;}
-    .featured-content .sec-title{margin-bottom:16px;}
-    .featured-content p{font-size:15px;color:var(--text-muted);line-height:1.8;margin-bottom:28px;}
-    .featured-stats{display:flex;gap:28px;flex-wrap:wrap;}
-    .featured-stat{border-left:2px solid var(--gold);padding-left:14px;}
-    .featured-stat-val{font-size:24px;font-weight:900;color:#fff;}
-    .featured-stat-val em{color:var(--gold);font-style:normal;font-size:14px;}
-    .featured-stat-lbl{font-size:11px;color:var(--text-muted);}
+  /* ── FEATURED IMAGE SECTION ── */
+  .featured-section{position:relative;overflow:hidden;padding:0;}
+  .featured-img-wrap{position:relative;height:560px;}
+  .featured-img-wrap img{width:100%;height:100%;object-fit:cover;filter:brightness(0.85) contrast(1.1);}
+  .featured-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,14,26,0.96) 0%,rgba(10,14,26,0.75) 50%,rgba(10,14,26,0.3) 100%);}
+  .featured-content{position:absolute;top:50%;left:5%;transform:translateY(-50%);max-width:620px;}
+  .featured-content .sec-eyebrow{margin-bottom:16px;}
+  .featured-content .sec-title{margin-bottom:18px;}
+  .featured-content p{font-size:16px;color:var(--text-muted);line-height:1.85;margin-bottom:32px;}
+  .featured-stats{display:flex;gap:32px;flex-wrap:wrap;}
+  .featured-stat{border-left:3px solid var(--gold);padding-left:16px;}
+  .featured-stat-val{font-size:26px;font-weight:900;color:#fff;}
+  .featured-stat-val em{color:var(--gold);font-style:normal;font-size:15px;}
+  .featured-stat-lbl{font-size:11px;color:var(--text-muted);margin-top:2px;}
 
-    /* ── AACE CLASSES ── */
-    .aace-section{background:var(--dark2);}
-    .aace-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;}
-    .aace-card{background:var(--dark3);border:1px solid var(--border2);border-radius:var(--radius);padding:20px;text-align:center;transition:.3s;cursor:pointer;}
-    .aace-card:hover{border-color:var(--border);transform:translateY(-3px);}
-    .aace-class{font-size:28px;font-weight:900;color:#fff;margin-bottom:4px;}
-    .aace-class em{font-style:normal;}
-    .aace-name{font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;}
-    .aace-acc{font-size:12px;color:var(--text-muted);margin-bottom:10px;}
-    .aace-bar{height:4px;border-radius:2px;margin-bottom:10px;}
-    .aace-use{font-size:10px;color:var(--text-muted);line-height:1.5;}
+  /* ── AACE CLASSES ── */
+  .aace-section{background:linear-gradient(135deg,var(--dark2),var(--dark3));}
+  .aace-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;}
+  .aace-card{background:linear-gradient(135deg,var(--dark3),var(--dark4));border:1px solid var(--border2);border-radius:var(--radius);padding:24px;text-align:center;transition:.3s;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,0.2);}
+  .aace-card:hover{border-color:var(--border);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.4);}
+  .aace-class{font-size:32px;font-weight:900;color:#fff;margin-bottom:6px;}
+  .aace-class em{font-style:normal;}
+  .aace-name{font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px;}
+  .aace-acc{font-size:12px;color:var(--text-muted);margin-bottom:12px;font-weight:600;}
+  .aace-bar{height:5px;border-radius:3px;margin-bottom:12px;}
+  .aace-use{font-size:10px;color:var(--text-muted);line-height:1.6;}
 
-    /* ── REGIONS ── */
-    .regions-section{background:var(--dark);}
-    .regions-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;}
-    .region-card{border-radius:var(--radius-lg);overflow:hidden;position:relative;height:280px;cursor:pointer;transition:.3s;}
-    .region-card:hover{transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,0.4);}
-    .region-card img{width:100%;height:100%;object-fit:cover;transition:.4s;}
-    .region-card:hover img{transform:scale(1.05);}
-    .region-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(8,12,22,0.95) 100%);}
-    .region-content{position:absolute;bottom:0;left:0;right:0;padding:24px;}
-    .region-flag{font-size:24px;margin-bottom:6px;}
-    .region-name{font-size:18px;font-weight:900;color:#fff;margin-bottom:4px;}
-    .region-sub{font-size:12px;color:var(--text-muted);}
-    .region-badge{position:absolute;top:16px;right:16px;background:rgba(201,168,76,0.9);color:var(--dark);font-size:10px;font-weight:800;padding:3px 10px;border-radius:10px;}
+  /* ── REGIONS ── */
+  .regions-section{background:var(--dark);}
+  .regions-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;}
+  .region-card{border-radius:var(--radius-lg);overflow:hidden;position:relative;height:300px;cursor:pointer;transition:.3s;box-shadow:0 8px 32px rgba(0,0,0,0.3);}
+  .region-card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,0.5);}
+  .region-card img{width:100%;height:100%;object-fit:cover;transition:.4s;filter:brightness(0.85) contrast(1.1);}
+  .region-card:hover img{transform:scale(1.08);}
+  .region-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 25%,rgba(10,14,26,0.96) 100%);}
+  .region-content{position:absolute;bottom:0;left:0;right:0;padding:28px;}
+  .region-flag{font-size:28px;margin-bottom:8px;}
+  .region-name{font-size:19px;font-weight:900;color:#fff;margin-bottom:6px;}
+  .region-sub{font-size:12px;color:var(--text-muted);line-height:1.6;}
+  .region-badge{position:absolute;top:18px;right:18px;background:rgba(201,168,76,0.95);color:var(--dark);font-size:10px;font-weight:800;padding:4px 12px;border-radius:12px;box-shadow:0 4px 12px rgba(201,168,76,0.4);}
 
-    /* ── TESTIMONIALS ── */
-    .testimonials-section{background:var(--dark2);}
-    .testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-    .testi-card{background:var(--dark3);border:1px solid var(--border2);border-radius:var(--radius-lg);padding:26px;transition:.3s;}
-    .testi-card:hover{border-color:var(--border);}
-    .testi-stars{display:flex;gap:3px;margin-bottom:14px;}
-    .testi-stars i{color:var(--gold);font-size:12px;}
-    .testi-text{font-size:13px;color:var(--text-muted);line-height:1.8;margin-bottom:18px;font-style:italic;}
-    .testi-author{display:flex;align-items:center;gap:12px;}
-    .testi-avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;color:#fff;flex-shrink:0;}
-    .testi-name{font-size:13px;font-weight:700;color:#fff;}
-    .testi-role{font-size:11px;color:var(--text-muted);}
+  /* ── TESTIMONIALS ── */
+  .testimonials-section{background:linear-gradient(135deg,var(--dark2),var(--dark3));}
+  .testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .testi-card{background:linear-gradient(135deg,var(--dark3),var(--dark4));border:1px solid var(--border2);border-radius:var(--radius-lg);padding:30px;transition:.3s;box-shadow:0 4px 20px rgba(0,0,0,0.2);}
+  .testi-card:hover{border-color:var(--border);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.4);}
+  .testi-stars{display:flex;gap:4px;margin-bottom:16px;}
+  .testi-stars i{color:var(--gold);font-size:13px;}
+  .testi-text{font-size:13px;color:var(--text-muted);line-height:1.85;margin-bottom:20px;font-style:italic;}
+  .testi-author{display:flex;align-items:center;gap:14px;}
+  .testi-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:900;color:#fff;flex-shrink:0;box-shadow:0 4px 16px rgba(0,0,0,0.3);}
+  .testi-name{font-size:13px;font-weight:700;color:#fff;}
+  .testi-role{font-size:11px;color:var(--text-muted);margin-top:2px;}
 
-    /* ── BLOG PREVIEW ── */
-    .blog-section{background:var(--dark);}
-    .blog-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:20px;}
-    .blog-card{background:var(--dark3);border:1px solid var(--border2);border-radius:var(--radius-lg);overflow:hidden;transition:.3s;text-decoration:none;display:block;}
-    .blog-card:hover{border-color:var(--border);transform:translateY(-3px);}
-    .blog-card-img{height:180px;overflow:hidden;}
-    .blog-card-img img{width:100%;height:100%;object-fit:cover;transition:.4s;}
-    .blog-card:hover .blog-card-img img{transform:scale(1.05);}
-    .blog-card-body{padding:20px;}
-    .blog-cat{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
-    .blog-title{font-size:14px;font-weight:800;color:#fff;margin-bottom:6px;line-height:1.4;}
-    .blog-meta{font-size:11px;color:var(--text-muted);}
-    .blog-card.featured .blog-card-img{height:220px;}
-    .blog-card.featured .blog-title{font-size:17px;}
+  /* ── BLOG PREVIEW ── */
+  .blog-section{background:var(--dark);}
+  .blog-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:24px;}
+  .blog-card{background:linear-gradient(135deg,var(--dark3),var(--dark4));border:1px solid var(--border2);border-radius:var(--radius-lg);overflow:hidden;transition:.3s;text-decoration:none;display:block;box-shadow:0 4px 20px rgba(0,0,0,0.2);}
+  .blog-card:hover{border-color:var(--border);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.4);}
+  .blog-card-img{height:200px;overflow:hidden;}
+  .blog-card-img img{width:100%;height:100%;object-fit:cover;transition:.4s;filter:brightness(0.9) contrast(1.05);}
+  .blog-card:hover .blog-card-img img{transform:scale(1.08);}
+  .blog-card-body{padding:24px;}
+  .blog-cat{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px;}
+  .blog-title{font-size:14px;font-weight:800;color:#fff;margin-bottom:8px;line-height:1.5;}
+  .blog-meta{font-size:11px;color:var(--text-muted);}
+  .blog-card.featured .blog-card-img{height:240px;}
+  .blog-card.featured .blog-title{font-size:18px;}
 
-    /* ── CTA BAND ── */
-    .cta-section{background:var(--dark2);padding:80px 0;}
-    .cta-inner{background:linear-gradient(135deg,var(--dark3),var(--dark4));border:1px solid var(--border);border-radius:var(--radius-xl);padding:64px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;position:relative;overflow:hidden;}
-    .cta-glow{position:absolute;top:-60px;right:10%;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.08),transparent 70%);}
-    .cta-title{font-size:clamp(24px,3vw,38px);font-weight:900;color:#fff;letter-spacing:-1.5px;margin-bottom:10px;}
-    .cta-title em{background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal;}
-    .cta-sub{font-size:15px;color:var(--text-muted);max-width:560px;}
-    .cta-btns{display:flex;gap:12px;flex-direction:column;flex-shrink:0;}
+  /* ── CTA BAND ── */
+  .cta-section{background:linear-gradient(135deg,var(--dark2),var(--dark3));padding:90px 0;}
+  .cta-inner{background:linear-gradient(135deg,var(--dark3),var(--dark4));border:1px solid var(--border);border-radius:var(--radius-xl);padding:70px;display:grid;grid-template-columns:1fr auto;gap:50px;align-items:center;position:relative;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.4);}
+  .cta-glow{position:absolute;top:-80px;right:8%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.08),transparent 70%);filter:blur(60px);}
+  .cta-title{font-size:clamp(26px,3.2vw,42px);font-weight:900;color:#fff;letter-spacing:-2px;margin-bottom:12px;}
+  .cta-title em{background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal;}
+  .cta-sub{font-size:16px;color:var(--text-muted);max-width:600px;line-height:1.8;}
+  .cta-btns{display:flex;gap:14px;flex-direction:column;flex-shrink:0;}
 
-    /* ── FOOTER ── */
-    footer{background:var(--dark2);border-top:1px solid var(--border2);padding:64px 0 0;}
-    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px;}
-    .footer-brand{}
-    .footer-logo{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
-    .footer-logo img{height:36px;}
-    .footer-logo-text{font-size:18px;font-weight:900;color:#fff;}
-    .footer-logo-text span{color:var(--gold);}
-    .footer-desc{font-size:13px;color:var(--text-muted);line-height:1.8;margin-bottom:20px;max-width:280px;}
-    .footer-contacts{display:flex;flex-direction:column;gap:8px;}
-    .footer-contact-item{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-muted);}
-    .footer-contact-item i{color:var(--gold);width:14px;text-align:center;font-size:11px;}
-    .footer-contact-item a{color:var(--text-muted);text-decoration:none;transition:.2s;}
-    .footer-contact-item a:hover{color:var(--gold);}
-    .footer-col-title{font-size:12px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;}
-    .footer-links{display:flex;flex-direction:column;gap:8px;}
-    .footer-link{font-size:12px;color:var(--text-muted);text-decoration:none;transition:.2s;display:flex;align-items:center;gap:6px;}
-    .footer-link:hover{color:var(--gold);}
-    .footer-link i{font-size:9px;opacity:.5;}
-    .footer-bottom{border-top:1px solid var(--border2);padding:20px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
-    .footer-bottom p{font-size:12px;color:var(--text-muted);}
-    .footer-bottom-links{display:flex;gap:16px;}
-    .footer-bottom-link{font-size:12px;color:var(--text-muted);text-decoration:none;transition:.2s;}
-    .footer-bottom-link:hover{color:var(--gold);}
-    .footer-social{display:flex;gap:8px;margin-top:16px;}
-    .footer-social-btn{width:34px;height:34px;border-radius:9px;background:var(--dark4);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:13px;text-decoration:none;transition:.2s;}
-    .footer-social-btn:hover{border-color:var(--gold);color:var(--gold);}
+  /* ── FOOTER ── */
+  footer{background:var(--dark2);border-top:1px solid var(--border2);padding:70px 0 0;}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:50px;margin-bottom:50px;}
+  .footer-brand{}
+  .footer-logo{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+  .footer-logo img{height:38px;}
+  .footer-logo-text{font-size:19px;font-weight:900;color:#fff;}
+  .footer-logo-text span{color:var(--gold);}
+  .footer-desc{font-size:13px;color:var(--text-muted);line-height:1.85;margin-bottom:22px;max-width:300px;}
+  .footer-contacts{display:flex;flex-direction:column;gap:10px;}
+  .footer-contact-item{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--text-muted);}
+  .footer-contact-item i{color:var(--gold);width:16px;text-align:center;font-size:11px;}
+  .footer-contact-item a{color:var(--text-muted);text-decoration:none;transition:.2s;}
+  .footer-contact-item a:hover{color:var(--gold);}
+  .footer-col-title{font-size:12px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:18px;}
+  .footer-links{display:flex;flex-direction:column;gap:10px;}
+  .footer-link{font-size:12px;color:var(--text-muted);text-decoration:none;transition:.2s;display:flex;align-items:center;gap:7px;}
+  .footer-link:hover{color:var(--gold);}
+  .footer-link i{font-size:9px;opacity:.5;}
+  .footer-bottom{border-top:1px solid var(--border2);padding:24px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;}
+  .footer-bottom p{font-size:12px;color:var(--text-muted);}
+  .footer-bottom-links{display:flex;gap:18px;}
+  .footer-bottom-link{font-size:12px;color:var(--text-muted);text-decoration:none;transition:.2s;}
+  .footer-bottom-link:hover{color:var(--gold);}
+  .footer-social{display:flex;gap:10px;margin-top:18px;}
+  .footer-social-btn{width:36px;height:36px;border-radius:10px;background:var(--dark4);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:14px;text-decoration:none;transition:.2s;}
+  .footer-social-btn:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,0.1);}
 
-    /* ── SCROLL TO TOP ── */
-    .scroll-top{position:fixed;bottom:28px;right:28px;width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--dark);border:none;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:.3s;opacity:0;transform:translateY(10px);z-index:1000;}
-    .scroll-top.visible{opacity:1;transform:translateY(0);}
-    .scroll-top:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(201,168,76,0.5);}
+  /* ── SCROLL TO TOP ── */
+  .scroll-top{position:fixed;bottom:32px;right:32px;width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--dark);border:none;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:.3s;opacity:0;transform:translateY(12px);z-index:1000;box-shadow:0 8px 24px rgba(201,168,76,0.4);}
+  .scroll-top.visible{opacity:1;transform:translateY(0);}
+  .scroll-top:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(201,168,76,0.6);}
 
-    /* ── COOKIE BANNER ── */
-    .cookie-banner{position:fixed;bottom:20px;left:20px;right:20px;max-width:520px;background:var(--dark3);border:1px solid var(--border);border-radius:16px;padding:20px 24px;z-index:5000;display:flex;align-items:center;gap:16px;box-shadow:0 20px 60px rgba(0,0,0,0.5);transition:.3s;}
-    .cookie-banner.hidden{opacity:0;pointer-events:none;transform:translateY(20px);}
-    .cookie-icon{font-size:28px;flex-shrink:0;}
-    .cookie-text{flex:1;}
-    .cookie-text p{font-size:12px;color:var(--text-muted);line-height:1.6;}
-    .cookie-text a{color:var(--gold);}
-    .cookie-btns{display:flex;gap:8px;flex-shrink:0;}
-    .cookie-accept{padding:8px 16px;border-radius:8px;background:var(--gold);color:var(--dark);font-size:12px;font-weight:700;border:none;cursor:pointer;font-family:inherit;}
-    .cookie-decline{padding:8px 14px;border-radius:8px;background:transparent;border:1px solid var(--border2);color:var(--text-muted);font-size:12px;cursor:pointer;font-family:inherit;}
+  /* ── COOKIE BANNER ── */
+  .cookie-banner{position:fixed;bottom:24px;left:24px;right:24px;max-width:560px;background:linear-gradient(135deg,var(--dark3),var(--dark4));border:1px solid var(--border);border-radius:18px;padding:24px 28px;z-index:5000;display:flex;align-items:center;gap:18px;box-shadow:0 20px 60px rgba(0,0,0,0.6);transition:.3s;backdrop-filter:blur(20px);}
+  .cookie-banner.hidden{opacity:0;pointer-events:none;transform:translateY(24px);}
+  .cookie-icon{font-size:32px;flex-shrink:0;}
+  .cookie-text{flex:1;}
+  .cookie-text p{font-size:12px;color:var(--text-muted);line-height:1.7;}
+  .cookie-text a{color:var(--gold);}
+  .cookie-btns{display:flex;gap:10px;flex-shrink:0;}
+  .cookie-accept{padding:10px 20px;border-radius:8px;background:var(--gold);color:var(--dark);font-size:12px;font-weight:700;border:none;cursor:pointer;font-family:inherit;transition:.2s;}
+  .cookie-accept:hover{background:var(--gold-light);}
+  .cookie-decline{padding:10px 18px;border-radius:8px;background:transparent;border:1px solid var(--border2);color:var(--text-muted);font-size:12px;cursor:pointer;font-family:inherit;transition:.2s;}
+  .cookie-decline:hover{border-color:var(--border);color:var(--text);}
 
-    /* ── FADE UP ── */
-    .fade-up{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s;}
-    .fade-up.visible{opacity:1;transform:translateY(0);}
-    .fade-up.delay-1{transition-delay:.1s;}
-    .fade-up.delay-2{transition-delay:.2s;}
-    .fade-up.delay-3{transition-delay:.3s;}
+  /* ── FADE UP ── */
+  .fade-up{opacity:0;transform:translateY(30px);transition:opacity .7s,transform .7s;}
+  .fade-up.visible{opacity:1;transform:translateY(0);}
+  .fade-up.delay-1{transition-delay:.12s;}
+  .fade-up.delay-2{transition-delay:.24s;}
+  .fade-up.delay-3{transition-delay:.36s;}
 
-    /* ── RESPONSIVE ── */
-    @media(max-width:1200px){
-      .hero-inner{grid-template-columns:1fr;gap:40px;}
-      .hero-right{display:none;}
-      .services-grid{grid-template-columns:1fr 1fr;}
-      .tools-grid{grid-template-columns:1fr 1fr;}
-      .aace-grid{grid-template-columns:repeat(3,1fr);}
-      .footer-grid{grid-template-columns:1fr 1fr 1fr;}
-      .stats-grid{grid-template-columns:repeat(3,1fr);}
-    }
-    @media(max-width:900px){
-      .why-grid{grid-template-columns:1fr;}
-      .why-img-wrap{display:none;}
-      .regions-grid{grid-template-columns:1fr 1fr;}
-      .testimonials-grid{grid-template-columns:1fr 1fr;}
-      .blog-grid{grid-template-columns:1fr;}
-      .cta-inner{grid-template-columns:1fr;}
-      .nav-links{display:none;}
-      .nav-mobile-toggle{display:block;}
-      .footer-grid{grid-template-columns:1fr 1fr;}
-      .aace-grid{grid-template-columns:1fr 1fr;}
-    }
-    @media(max-width:600px){
-      .services-grid{grid-template-columns:1fr;}
-      .tools-grid{grid-template-columns:1fr 1fr;}
-      .regions-grid{grid-template-columns:1fr;}
-      .testimonials-grid{grid-template-columns:1fr;}
-      .stats-grid{grid-template-columns:1fr 1fr;}
-      .footer-grid{grid-template-columns:1fr;}
-      .hero-actions{flex-direction:column;}
-      .hero-actions .btn-primary,.hero-actions .btn-secondary{width:100%;justify-content:center;}
-    }
-  </style>
+  /* ── RESPONSIVE ── */
+  @media(max-width:1200px){
+    .hero-inner{grid-template-columns:1fr;gap:50px;}
+    .hero-right{display:none;}
+    .services-grid{grid-template-columns:1fr 1fr;}
+    .tools-grid{grid-template-columns:1fr 1fr;}
+    .aace-grid{grid-template-columns:repeat(3,1fr);}
+    .footer-grid{grid-template-columns:1fr 1fr 1fr;}
+    .stats-grid{grid-template-columns:repeat(3,1fr);}
+  }
+  @media(max-width:900px){
+    .why-grid{grid-template-columns:1fr;}
+    .why-img-wrap{display:none;}
+    .regions-grid{grid-template-columns:1fr 1fr;}
+    .testimonials-grid{grid-template-columns:1fr 1fr;}
+    .blog-grid{grid-template-columns:1fr;}
+    .cta-inner{grid-template-columns:1fr;}
+    .nav-links{display:none;}
+    .nav-mobile-toggle{display:block;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    .aace-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media(max-width:600px){
+    .services-grid{grid-template-columns:1fr;}
+    .tools-grid{grid-template-columns:1fr 1fr;}
+    .regions-grid{grid-template-columns:1fr;}
+    .testimonials-grid{grid-template-columns:1fr;}
+    .stats-grid{grid-template-columns:1fr 1fr;}
+    .footer-grid{grid-template-columns:1fr;}
+    .hero-actions{flex-direction:column;}
+    .hero-actions .btn-primary,.hero-actions .btn-secondary{width:100%;justify-content:center;}
+  }
+</style>
 </head>
 <body id="body">
 
 <!-- LANG BAR -->
 <div class="lang-bar">
-  <div class="lang-bar-left">
-    <i class="fas fa-map-marker-alt"></i>
-    <span data-en="Tehran · Oman · Global" data-fa="تهران · عمان · جهانی">Tehran · Oman · Global</span>
-  </div>
-  <div class="lang-bar-right">
-    <button class="lang-btn active" id="btn-en" onclick="setLang('en')">🇬🇧 EN</button>
-    <button class="lang-btn" id="btn-fa" onclick="setLang('fa')">🇮🇷 FA</button>
-  </div>
+<div class="lang-bar-left">
+  <i class="fas fa-map-marker-alt"></i>
+  <span data-en="Tehran · Oman · Global" data-fa="تهران · عمان · جهانی">Tehran · Oman · Global</span>
+</div>
+<div class="lang-bar-right">
+  <button class="lang-btn active" id="btn-en" onclick="setLang('en')">🇬🇧 EN</button>
+  <button class="lang-btn" id="btn-fa" onclick="setLang('fa')">🇮🇷 FA</button>
+</div>
 </div>
 
 <!-- NAV -->
 <nav id="mainNav">
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo">
-      <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="KDMine Logo"/>
-      <span class="nav-logo-text">KD<span>Mine</span></span>
-    </a>
-    <div class="nav-links" id="navLinks">
-      <!-- Services Dropdown -->
-      <div class="nav-dropdown">
-        <a href="#" class="nav-link" data-en="Services ▾" data-fa="خدمات ▾">Services ▾</a>
-        <div class="nav-dropdown-menu">
-          <a href="KDMine - CAPEX _ OPEX Estimation.html" class="nav-dd-item"><i class="fas fa-calculator"></i> <span data-en="CAPEX / OPEX Estimation" data-fa="برآورد CAPEX / OPEX">CAPEX / OPEX Estimation</span></a>
-          <a href="KDMine - Plant Design & Feasibility Studies.html" class="nav-dd-item"><i class="fas fa-industry"></i> <span data-en="Plant Design & Feasibility" data-fa="طراحی کارخانه و امکان‌سنجی">Plant Design & Feasibility</span></a>
-          <a href="KDMine - Risk Analysis.html" class="nav-dd-item"><i class="fas fa-shield-alt"></i> <span data-en="Risk Analysis" data-fa="تحلیل ریسک">Risk Analysis</span></a>
-          <a href="KDMine - Project Scheduling & Cost Control .html" class="nav-dd-item"><i class="fas fa-tasks"></i> <span data-en="Scheduling & Cost Control" data-fa="برنامه‌ریزی و کنترل هزینه">Scheduling & Cost Control</span></a>
-          <a href="KDMine - Equipment Selection & International Procurement.html" class="nav-dd-item"><i class="fas fa-truck"></i> <span data-en="Equipment & Procurement" data-fa="تجهیزات و تدارکات">Equipment & Procurement</span></a>
-          <div class="nav-dd-divider"></div>
-          <a href="KDMine - Services & Expertise.html" class="nav-dd-item"><i class="fas fa-list"></i> <span data-en="All Services" data-fa="همه خدمات">All Services</span></a>
-        </div>
+<div class="nav-inner">
+  <a href="index.html" class="nav-logo">
+    <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="KDMine Logo"/>
+    <span class="nav-logo-text">KD<span>Mine</span></span>
+  </a>
+  <div class="nav-links" id="navLinks">
+    <!-- Services Dropdown -->
+    <div class="nav-dropdown">
+      <a href="#" class="nav-link" data-en="Services ▾" data-fa="خدمات ▾">Services ▾</a>
+      <div class="nav-dropdown-menu">
+        <a href="KDMine - CAPEX _ OPEX Estimation.html" class="nav-dd-item"><i class="fas fa-calculator"></i> <span data-en="CAPEX / OPEX Estimation" data-fa="برآورد CAPEX / OPEX">CAPEX / OPEX Estimation</span></a>
+        <a href="KDMine - Plant Design & Feasibility Studies.html" class="nav-dd-item"><i class="fas fa-industry"></i> <span data-en="Plant Design & Feasibility" data-fa="طراحی کارخانه و امکان‌سنجی">Plant Design & Feasibility</span></a>
+        <a href="KDMine - Risk Analysis.html" class="nav-dd-item"><i class="fas fa-shield-alt"></i> <span data-en="Risk Analysis" data-fa="تحلیل ریسک">Risk Analysis</span></a>
+        <a href="KDMine - Project Scheduling & Cost Control .html" class="nav-dd-item"><i class="fas fa-tasks"></i> <span data-en="Scheduling & Cost Control" data-fa="برنامه‌ریزی و کنترل هزینه">Scheduling & Cost Control</span></a>
+        <a href="KDMine - Equipment Selection & International Procurement.html" class="nav-dd-item"><i class="fas fa-truck"></i> <span data-en="Equipment & Procurement" data-fa="تجهیزات و تدارکات">Equipment & Procurement</span></a>
+        <a href="KDMine - Procurement & Supply.html" class="nav-dd-item"><i class="fas fa-boxes"></i> <span data-en="Procurement & Supply" data-fa="تدارکات و تأمین">Procurement & Supply</span></a>
+        <div class="nav-dd-divider"></div>
+        <a href="KDMine - Services & Expertise.html" class="nav-dd-item"><i class="fas fa-list"></i> <span data-en="All Services" data-fa="همه خدمات">All Services</span></a>
       </div>
-      <!-- Tools Dropdown -->
-      <div class="nav-dropdown">
-        <a href="#" class="nav-link" data-en="Tools ▾" data-fa="ابزارها ▾">Tools ▾</a>
-        <div class="nav-dropdown-menu">
-          <a href="KDMine - Project Cost Calculator Page.html" class="nav-dd-item"><i class="fas fa-calculator"></i> <span data-en="Cost Calculator" data-fa="ماشین‌حساب هزینه">Cost Calculator</span></a>
-          <a href="KDMine - Equipment Cost Database Page.html" class="nav-dd-item"><i class="fas fa-database"></i> <span data-en="Equipment Cost DB" data-fa="پایگاه داده هزینه تجهیزات">Equipment Cost DB</span></a>
-          <a href="KDMine - Cost Index & Escalation Tool Page.html" class="nav-dd-item"><i class="fas fa-chart-line"></i> <span data-en="Cost Index & Escalation" data-fa="شاخص هزینه و تشدید">Cost Index & Escalation</span></a>
-          <a href="KDMine - AACE Standards & Methodology Page.html" class="nav-dd-item"><i class="fas fa-book"></i> <span data-en="AACE Standards" data-fa="استانداردهای AACE">AACE Standards</span></a>
-        </div>
-      </div>
-      <!-- Knowledge Dropdown -->
-      <div class="nav-dropdown">
-        <a href="#" class="nav-link" data-en="Knowledge ▾" data-fa="دانش ▾">Knowledge ▾</a>
-        <div class="nav-dropdown-menu">
-          <a href="KDMine - Resources Hub.html" class="nav-dd-item"><i class="fas fa-book-open"></i> <span data-en="Resources Hub" data-fa="مرکز منابع">Resources Hub</span></a>
-          <a href="KDMine - Blog & Insights Page.html" class="nav-dd-item"><i class="fas fa-newspaper"></i> <span data-en="Blog & Insights" data-fa="وبلاگ و بینش‌ها">Blog & Insights</span></a>
-          <a href="KDMine - Case Studies Page .html" class="nav-dd-item"><i class="fas fa-folder-open"></i> <span data-en="Case Studies" data-fa="مطالعات موردی">Case Studies</span></a>
-        </div>
-      </div>
-      <a href="KDMine - Pricing Page.html" class="nav-link" data-en="Pricing" data-fa="قیمت‌گذاری">Pricing</a>
-      <a href="KDMine - Process Overview.html" class="nav-link" data-en="Process" data-fa="فرآیند">Process</a>
-      <a href="KDMine - Contact & About Us.html" class="nav-link" data-en="About" data-fa="درباره ما">About</a>
     </div>
-    <a href="KDMine - Contact & About Us.html" class="nav-cta">
-      <i class="fas fa-paper-plane"></i>
-      <span data-en="Get a Proposal" data-fa="دریافت پیشنهاد">Get a Proposal</span>
-    </a>
-    <button class="nav-mobile-toggle" onclick="toggleMobileNav()"><i class="fas fa-bars"></i></button>
+    <!-- Tools Dropdown -->
+    <div class="nav-dropdown">
+      <a href="#" class="nav-link" data-en="Tools ▾" data-fa="ابزارها ▾">Tools ▾</a>
+      <div class="nav-dropdown-menu">
+        <a href="KDMine - Project Cost Calculator Page.html" class="nav-dd-item"><i class="fas fa-calculator"></i> <span data-en="Cost Calculator" data-fa="ماشین‌حساب هزینه">Cost Calculator</span></a>
+        <a href="KDMine - Equipment Cost Database Page.html" class="nav-dd-item"><i class="fas fa-database"></i> <span data-en="Equipment Cost DB" data-fa="پایگاه داده هزینه تجهیزات">Equipment Cost DB</span></a>
+        <a href="KDMine - Cost Index & Escalation Tool Page.html" class="nav-dd-item"><i class="fas fa-chart-line"></i> <span data-en="Cost Index & Escalation" data-fa="شاخص هزینه و تشدید">Cost Index & Escalation</span></a>
+        <a href="KDMine - AACE Standards & Methodology Page.html" class="nav-dd-item"><i class="fas fa-book"></i> <span data-en="AACE Standards" data-fa="استانداردهای AACE">AACE Standards</span></a>
+        <div class="nav-dd-divider"></div>
+        <a href="KDMine - Market Dashboard.html" class="nav-dd-item"><i class="fas fa-chart-area"></i> <span data-en="Market Dashboard" data-fa="داشبورد بازار">Market Dashboard</span></a>
+        <a href="KDMine - Equipment Procurement Database.html" class="nav-dd-item"><i class="fas fa-toolbox"></i> <span data-en="Equipment Procurement DB" data-fa="پایگاه تدارکات تجهیزات">Equipment Procurement DB</span></a>
+        <a href="KDMine - EPC Contractor Directory.html" class="nav-dd-item"><i class="fas fa-hard-hat"></i> <span data-en="EPC Contractor Directory" data-fa="فهرست پیمانکاران EPC">EPC Contractor Directory</span></a>
+      </div>
+    </div>
+    <!-- Knowledge Dropdown -->
+    <div class="nav-dropdown">
+      <a href="#" class="nav-link" data-en="Knowledge ▾" data-fa="دانش ▾">Knowledge ▾</a>
+      <div class="nav-dropdown-menu">
+        <a href="KDMine - Resources Hub.html" class="nav-dd-item"><i class="fas fa-book-open"></i> <span data-en="Resources Hub" data-fa="مرکز منابع">Resources Hub</span></a>
+        <a href="KDMine - Blog & Insights Page.html" class="nav-dd-item"><i class="fas fa-newspaper"></i> <span data-en="Blog & Insights" data-fa="وبلاگ و بینش‌ها">Blog & Insights</span></a>
+        <a href="KDMine - Case Studies Page .html" class="nav-dd-item"><i class="fas fa-folder-open"></i> <span data-en="Case Studies" data-fa="مطالعات موردی">Case Studies</span></a>
+      </div>
+    </div>
+    <a href="KDMine - Pricing Page.html" class="nav-link" data-en="Pricing" data-fa="قیمت‌گذاری">Pricing</a>
+    <a href="KDMine - Process Overview.html" class="nav-link" data-en="Process" data-fa="فرآیند">Process</a>
+    <a href="KDMine - Contact & About Us.html" class="nav-link" data-en="About" data-fa="درباره ما">About</a>
   </div>
+  <a href="KDMine - Contact & About Us.html" class="nav-cta">
+    <i class="fas fa-paper-plane"></i>
+    <span data-en="Get a Proposal" data-fa="دریافت پیشنهاد">Get a Proposal</span>
+  </a>
+  <button class="nav-mobile-toggle" onclick="toggleMobileNav()"><i class="fas fa-bars"></i></button>
+</div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg">
-    <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1800&q=80" alt="Open Pit Mine"/>
-    <div class="hero-overlay"></div>
-  </div>
-  <div class="hero-grid-lines"></div>
-  <div class="hero-glow1"></div>
-  <div class="hero-glow2"></div>
-  <div class="hero-inner">
-    <div class="hero-left fade-up">
-      <div class="hero-eyebrow">
-        <span></span>
-        <span data-en="Iran's #1 Mining Cost Consultancy" data-fa="شماره ۱ مشاوره هزینه معدن ایران">Iran's #1 Mining Cost Consultancy</span>
-      </div>
-      <h1 class="hero-h1">
-        <em data-en="Precision" data-fa="دقت">Precision</em>
-        <br/>
-        <span data-en="Cost Estimation" data-fa="برآورد هزینه">Cost Estimation</span>
-        <span class="line2" data-en="for Open-Pit Mining Projects" data-fa="برای پروژه‌های معدن روباز">for Open-Pit Mining Projects</span>
-      </h1>
-      <p class="hero-desc" data-en="KDMine delivers <strong>AACE-compliant</strong> cost estimates, feasibility studies, and project controls for mining projects across <strong>Iran, CIS, and global markets</strong>. From Class 5 scoping to Class 1 bankable studies — bilingual EN/FA." data-fa="KDMine برآوردهای هزینه منطبق با <strong>AACE</strong>، مطالعات امکان‌سنجی و کنترل پروژه برای پروژه‌های معدنی در <strong>ایران، CIS و بازارهای جهانی</strong> ارائه می‌دهد. از محدوده‌سنجی کلاس ۵ تا مطالعات قابل تأمین مالی کلاس ۱ — دوزبانه EN/FA.">KDMine delivers <strong>AACE-compliant</strong> cost estimates, feasibility studies, and project controls for mining projects across <strong>Iran, CIS, and global markets</strong>. From Class 5 scoping to Class 1 bankable studies — bilingual EN/FA.</p>
-      <div class="hero-actions">
-        <a href="KDMine - Contact & About Us.html" class="btn-primary">
-          <i class="fas fa-paper-plane"></i>
-          <span data-en="Start Your Project" data-fa="پروژه خود را شروع کنید">Start Your Project</span>
-        </a>
-        <a href="KDMine - Project Cost Calculator Page.html" class="btn-secondary">
-          <i class="fas fa-calculator"></i>
-          <span data-en="Free Cost Calculator" data-fa="ماشین‌حساب هزینه رایگان">Free Cost Calculator</span>
-        </a>
-      </div>
-      <div class="hero-trust">
-        <div class="hero-trust-item"><i class="fas fa-check-circle"></i> <span data-en="AACE Certified" data-fa="گواهی AACE">AACE Certified</span></div>
-        <div class="hero-trust-item"><i class="fas fa-check-circle"></i> <span data-en="Bilingual EN/FA" data-fa="دوزبانه EN/FA">Bilingual EN/FA</span></div>
-        <div class="hero-trust-item"><i class="fas fa-check-circle"></i> <span data-en="Fixed-Fee Pricing" data-fa="قیمت‌گذاری ثابت">Fixed-Fee Pricing</span></div>
-        <div class="hero-trust-item"><i class="fas fa-check-circle"></i> <span data-en="Since 2025" data-fa="از ۱۴۰۴">Since 2025</span></div>
-      </div>
+<div class="hero-bg">
+  <img src="https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=1920&q=90" alt="Open Pit Mining Operation"/>
+  <div class="hero-overlay"></div>
+</div>
+<div class="hero-grid-lines"></div>
+<div class="hero-glow1"></div>
+<div class="hero-glow2"></div>
+<div class="hero-inner">
+  <div class="hero-left fade-up">
+    <div class="hero-eyebrow">
+      <span></span>
+      <span data-en="Iran's #1 Mining Cost Consultancy" data-fa="شماره ۱ مشاوره هزینه معدن ایران">Iran's #1 Mining Cost Consultancy</span>
     </div>
-    <div class="hero-right fade-up delay-2">
-      <div class="hero-card-stack">
-        <div class="hero-card hc-main">
-          <img class="hc-img" src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80" alt="Mining Operations"/>
-          <div class="hc-tag" data-en="Latest Project" data-fa="آخرین پروژه">Latest Project</div>
-          <div class="hc-title" data-en="Copper Open-Pit CAPEX Estimate" data-fa="برآورد CAPEX معدن مس روباز">Copper Open-Pit CAPEX Estimate</div>
-          <div class="hc-sub" data-en="AACE Class 2 · Iran · $480M Project" data-fa="AACE کلاس ۲ · ایران · پروژه ۴۸۰ میلیون دلاری">AACE Class 2 · Iran · $480M Project</div>
-          <div class="hc-stats">
-            <div class="hc-stat"><div class="hc-stat-val">±<em>10</em>%</div><div class="hc-stat-lbl" data-en="Accuracy" data-fa="دقت">Accuracy</div></div>
-            <div class="hc-stat"><div class="hc-stat-val">14<em>wk</em></div><div class="hc-stat-lbl" data-en="Duration" data-fa="مدت">Duration</div></div>
-            <div class="hc-stat"><div class="hc-stat-val">EN<em>/FA</em></div><div class="hc-stat-lbl" data-en="Bilingual" data-fa="دوزبانه">Bilingual</div></div>
-          </div>
-        </div>
-        <div class="hero-card hc-float1">
-          <div class="hc-float-icon">📊</div>
-          <div class="hc-float-val">98<em>%</em></div>
-          <div class="hc-float-lbl" data-en="Client Satisfaction" data-fa="رضایت مشتری">Client Satisfaction</div>
-        </div>
-        <div class="hero-card hc-float2">
-          <div class="hc-float-icon">🏆</div>
-          <div class="hc-float-val">50<em>+</em></div>
-          <div class="hc-float-lbl" data-en="Projects Delivered" data-fa="پروژه تحویل شده">Projects Delivered</div>
-        </div>
-      </div>
+    <h1 class="hero-h1">
+      <em data-en="Precision" data-fa="دقت">Precision</em>
+      <br/>
+      <span data-en="Cost Estimation" data-fa="برآورد هزینه">Cost Estimation</span>
+      <span class="line2" data-en="for Open-Pit Mining Projects" data-fa="برای پروژه‌های معدن روباز">for Open-Pit Mining Projects</span>
+    </h1>
+    <p class="hero-desc" data-en="KDMine delivers <strong>AACE-compliant</strong> cost estimates, feasibility studies, and project controls for mining projects across <strong>Iran, CIS, and global markets</strong>. From Class 5 scoping to Class 1 bankable studies — bilingual EN/FA." data-fa="KDMine برآوردهای هزینه منطبق با <strong>AACE</strong>، مطالعات امکان‌سنجی و کنترل پروژه برای پروژه‌های معدنی در <strong>ایران، CIS و بازارهای جهانی</strong> ارائه می‌دهد. از محدوده‌سنجی کلاس ۵ تا مطالعات قابل تأمین مالی کلاس ۱ — دوزبانه EN/FA.">KDMine delivers <strong>AACE-compliant</strong> cost estimates, feasibility studies, and project controls for mining projects across <strong>Iran, CIS, and global markets</strong>. From Class 5 scoping to Class 1 bankable studies — bilingual EN/FA.</p>
+    <div class="hero-actions">
+      <a href="KDMine - Contact & About Us.html" class="btn-primary">
+        <i class="fas fa-paper-plane"></i>
+        <span data-en="Start Your Project" data-fa="پروژه خود را شروع کنید">Start Your Project</span>
+      </a>
+      <a href="KDMine - Project Cost Calculator Page.html" class="btn-secondary">
+        <i class="fas fa-calculator"></i>
+        <span data-en="Free Cost Calculator" data-fa="ماشین‌حساب هزینه رایگان">Free Cost Calculator</span>
+      </a>
+    </div>
+    <div class="hero-trust">
+      <div class="hero-trust-item"><i class="fas fa-check-circle"></i> <span data-en="AACE Certified" data-fa="گواهی AACE">AACE Certified</span></div>
+      <div class="hero-trust-item"><i class="fas fa-check-circle"></i> <span data-en="Bilingual EN/FA" data-fa="دوزبانه EN/FA">Bilingual EN/FA</span></div>
+      <div class="hero-trust-item"><i class="fas fa-check-circle"></i> <span data-en="Fixed-Fee Pricing" data-fa="قیمت‌گذاری ثابت">Fixed-Fee Pricing</span></div>
+      <div class="hero-trust-item"><i class="fas fa-check-circle"></i> <span data-en="Since 2025" data-fa="از ۱۴۰۴">Since 2025</span></div>
     </div>
   </div>
+  <div class="hero-right fade-up delay-2">
+    <div class="hero-card-stack">
+      <div class="hero-card hc-main">
+        <img class="hc-img" src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=700&q=85" alt="Mining Project"/>
+        <div class="hc-tag" data-en="Latest Project" data-fa="آخرین پروژه">Latest Project</div>
+        <div class="hc-title" data-en="Copper Open-Pit CAPEX Estimate" data-fa="برآورد CAPEX معدن مس روباز">Copper Open-Pit CAPEX Estimate</div>
+        <div class="hc-sub" data-en="AACE Class 2 · Iran · $480M Project" data-fa="AACE کلاس ۲ · ایران · پروژه ۴۸۰ میلیون دلاری">AACE Class 2 · Iran · $480M Project</div>
+        <div class="hc-stats">
+          <div class="hc-stat"><div class="hc-stat-val">±<em>10</em>%</div><div class="hc-stat-lbl" data-en="Accuracy" data-fa="دقت">Accuracy</div></div>
+          <div class="hc-stat"><div class="hc-stat-val">14<em>wk</em></div><div class="hc-stat-lbl" data-en="Duration" data-fa="مدت">Duration</div></div>
+          <div class="hc-stat"><div class="hc-stat-val">EN<em>/FA</em></div><div class="hc-stat-lbl" data-en="Bilingual" data-fa="دوزبانه">Bilingual</div></div>
+        </div>
+      </div>
+      <div class="hero-card hc-float1">
+        <div class="hc-float-icon">📊</div>
+        <div class="hc-float-val">98<em>%</em></div>
+        <div class="hc-float-lbl" data-en="Client Satisfaction" data-fa="رضایت مشتری">Client Satisfaction</div>
+      </div>
+      <div class="hero-card hc-float2">
+        <div class="hc-float-icon">🏆</div>
+        <div class="hc-float-val">50<em>+</em></div>
+        <div class="hc-float-lbl" data-en="Projects Delivered" data-fa="پروژه تحویل شده">Projects Delivered</div>
+      </div>
+    </div>
+  </div>
+</div>
 </section>
 
 <!-- STATS BAND -->
 <div class="stats-band">
-  <div class="container">
-    <div class="stats-grid">
-      <div class="stat-item fade-up"><div class="stat-num">50<em>+</em></div><div class="stat-lbl" data-en="Projects Delivered" data-fa="پروژه تحویل شده">Projects Delivered</div></div>
-      <div class="stat-item fade-up delay-1"><div class="stat-num">$<em>2</em>B<em>+</em></div><div class="stat-lbl" data-en="CAPEX Estimated" data-fa="CAPEX برآورد شده">CAPEX Estimated</div></div>
-      <div class="stat-item fade-up delay-2"><div class="stat-num">5</div><div class="stat-lbl" data-en="AACE Estimate Classes" data-fa="کلاس‌های برآورد AACE">AACE Estimate Classes</div></div>
-      <div class="stat-item fade-up delay-3"><div class="stat-num">3</div><div class="stat-lbl" data-en="Countries: Iran · UAE · Oman" data-fa="کشورها: ایران · امارات · عمان">Countries: Iran · UAE · Oman</div></div>
-      <div class="stat-item fade-up"><div class="stat-num">100<em>%</em></div><div class="stat-lbl" data-en="Bilingual Deliverables" data-fa="تحویل‌دادنی‌های دوزبانه">Bilingual Deliverables</div></div>
-    </div>
+<div class="container">
+  <div class="stats-grid">
+    <div class="stat-item fade-up"><div class="stat-num">50<em>+</em></div><div class="stat-lbl" data-en="Projects Delivered" data-fa="پروژه تحویل شده">Projects Delivered</div></div>
+    <div class="stat-item fade-up delay-1"><div class="stat-num">$<em>2</em>B<em>+</em></div><div class="stat-lbl" data-en="CAPEX Estimated" data-fa="CAPEX برآورد شده">CAPEX Estimated</div></div>
+    <div class="stat-item fade-up delay-2"><div class="stat-num">5</div><div class="stat-lbl" data-en="AACE Estimate Classes" data-fa="کلاس‌های برآورد AACE">AACE Estimate Classes</div></div>
+    <div class="stat-item fade-up delay-3"><div class="stat-num">3</div><div class="stat-lbl" data-en="Countries: Iran · UAE · Oman" data-fa="کشورها: ایران · امارات · عمان">Countries: Iran · UAE · Oman</div></div>
+    <div class="stat-item fade-up"><div class="stat-num">100<em>%</em></div><div class="stat-lbl" data-en="Bilingual Deliverables" data-fa="تحویل‌دادنی‌های دوزبانه">Bilingual Deliverables</div></div>
   </div>
+</div>
 </div>
 
 <!-- SERVICES -->
 <section class="services-section">
-  <div class="container">
-    <div class="sec-header fade-up">
-      <div class="sec-eyebrow" data-en="What We Do" data-fa="چه کاری انجام می‌دهیم">What We Do</div>
-      <div class="sec-title" data-en="Core <em>Services</em>" data-fa="خدمات <em>اصلی</em>">Core <em>Services</em></div>
-      <div class="sec-sub" data-en="End-to-end mining project cost and technical services — from early-stage scoping to bankable feasibility studies and ongoing project controls." data-fa="خدمات هزینه و فنی پروژه معدنی از ابتدا تا انتها — از محدوده‌سنجی مرحله اولیه تا مطالعات امکان‌سنجی قابل تأمین مالی و کنترل پروژه مداوم.">End-to-end mining project cost and technical services — from early-stage scoping to bankable feasibility studies and ongoing project controls.</div>
-    </div>
-    <div class="services-grid">
-      <a href="KDMine - CAPEX _ OPEX Estimation.html" class="svc-card fade-up">
-        <div class="svc-card-accent" style="background:linear-gradient(90deg,#C9A84C,#E8C97A);"></div>
-        <div class="svc-icon" style="background:rgba(201,168,76,0.1);color:#C9A84C;">💰</div>
-        <div class="svc-title" data-en="CAPEX & OPEX Estimation" data-fa="برآورد CAPEX و OPEX">CAPEX & OPEX Estimation</div>
-        <div class="svc-desc" data-en="AACE Class 1–5 cost estimates for open-pit mining projects. Full WBS-based models, sensitivity analysis, and contingency determination." data-fa="برآوردهای هزینه AACE کلاس ۱–۵ برای پروژه‌های معدن روباز. مدل‌های کامل مبتنی بر WBS، تحلیل حساسیت و تعیین احتیاط.">AACE Class 1–5 cost estimates for open-pit mining projects. Full WBS-based models, sensitivity analysis, and contingency determination.</div>
-        <div class="svc-tags"><span class="svc-tag">AACE 18R-97</span><span class="svc-tag">WBS</span><span class="svc-tag">Sensitivity</span></div>
-        <div class="svc-link" style="color:#C9A84C;"><span data-en="Learn More" data-fa="بیشتر بدانید">Learn More</span> <i class="fas fa-arrow-right"></i></div>
-      </a>
-      <a href="KDMine - Plant Design & Feasibility Studies.html" class="svc-card fade-up delay-1">
-        <div class="svc-card-accent" style="background:linear-gradient(90deg,#0EA5E9,#38BDF8);"></div>
-        <div class="svc-icon" style="background:rgba(14,165,233,0.1);color:#0EA5E9;">🏭</div>
-        <div class="svc-title" data-en="Plant Design & Feasibility" data-fa="طراحی کارخانه و امکان‌سنجی">Plant Design & Feasibility</div>
-        <div class="svc-desc" data-en="Process flowsheet development, equipment sizing, and bankable feasibility studies for gold, copper, and iron ore projects." data-fa="توسعه فلوشیت فرآیند، اندازه‌گیری تجهیزات و مطالعات امکان‌سنجی قابل تأمین مالی برای پروژه‌های طلا، مس و سنگ آهن.">Process flowsheet development, equipment sizing, and bankable feasibility studies for gold, copper, and iron ore projects.</div>
-        <div class="svc-tags"><span class="svc-tag">NI 43-101</span><span class="svc-tag">JORC</span><span class="svc-tag">SAG/Ball Mill</span></div>
-        <div class="svc-link" style="color:#0EA5E9;"><span data-en="Learn More" data-fa="بیشتر بدانید">Learn More</span> <i class="fas fa-arrow-right"></i></div>
-      </a>
-      <a href="KDMine - Risk Analysis.html" class="svc-card fade-up delay-2">
-        <div class="svc-card-accent" style="background:linear-gradient(90deg,#EF4444,#F87171);"></div>
-        <div class="svc-icon" style="background:rgba(239,68,68,0.1);color:#EF4444;">🎲</div>
-        <div class="svc-title" data-en="Risk Analysis" data-fa="تحلیل ریسک">Risk Analysis</div>
-        <div class="svc-desc" data-en="ISO 31000 risk registers, Monte Carlo simulation, P10/P50/P90 cost distributions, and risk-based contingency determination." data-fa="ثبت ریسک ISO 31000، شبیه‌سازی مونت کارلو، توزیع‌های هزینه P10/P50/P90 و تعیین احتیاط مبتنی بر ریسک.">ISO 31000 risk registers, Monte Carlo simulation, P10/P50/P90 cost distributions, and risk-based contingency determination.</div>
-        <div class="svc-tags"><span class="svc-tag">ISO 31000</span><span class="svc-tag">Monte Carlo</span><span class="svc-tag">P80</span></div>
-        <div class="svc-link" style="color:#EF4444;"><span data-en="Learn More" data-fa="بیشتر بدانید">Learn More</span> <i class="fas fa-arrow-right"></i></div>
-      </a>
-      <a href="KDMine - Project Scheduling & Cost Control .html" class="svc-card fade-up">
-        <div class="svc-card-accent" style="background:linear-gradient(90deg,#A855F7,#C084FC);"></div>
-        <div class="svc-icon" style="background:rgba(168,85,247,0.1);color:#A855F7;">📅</div>
-        <div class="svc-title" data-en="Scheduling & Cost Control" data-fa="برنامه‌ریزی و کنترل هزینه">Scheduling & Cost Control</div>
-        <div class="svc-desc" data-en="Project schedule development, EVM implementation, S-curve tracking, CPI/SPI reporting, and EAC forecasting." data-fa="توسعه برنامه پروژه، پیاده‌سازی EVM، ردیابی S-curve، گزارش‌دهی CPI/SPI و پیش‌بینی EAC.">Project schedule development, EVM implementation, S-curve tracking, CPI/SPI reporting, and EAC forecasting.</div>
-        <div class="svc-tags"><span class="svc-tag">EVM</span><span class="svc-tag">Primavera</span><span class="svc-tag">AACE TCM</span></div>
-        <div class="svc-link" style="color:#A855F7;"><span data-en="Learn More" data-fa="بیشتر بدانید">Learn More</span> <i class="fas fa-arrow-right"></i></div>
-      </a>
-      <a href="KDMine - Equipment Selection & International Procurement.html" class="svc-card fade-up delay-1">
-        <div class="svc-card-accent" style="background:linear-gradient(90deg,#14B8A6,#2DD4BF);"></div>
-        <div class="svc-icon" style="background:rgba(20,184,166,0.1);color:#14B8A6;">🌐</div>
-        <div class="svc-title" data-en="Equipment & Procurement" data-fa="تجهیزات و تدارکات">Equipment & Procurement</div>
-        <div class="svc-desc" data-en="International equipment sourcing, vendor comparison, landed cost analysis, and Iran/CIS procurement strategy under sanctions." data-fa="تأمین بین‌المللی تجهیزات، مقایسه فروشنده، تحلیل هزینه تحویل و استراتژی تدارکات ایران/CIS تحت تحریم.">International equipment sourcing, vendor comparison, landed cost analysis, and Iran/CIS procurement strategy under sanctions.</div>
-        <div class="svc-tags"><span class="svc-tag">Costmine</span><span class="svc-tag">Landed Cost</span><span class="svc-tag">Iran/CIS</span></div>
-        <div class="svc-link" style="color:#14B8A6;"><span data-en="Learn More" data-fa="بیشتر بدانید">Learn More</span> <i class="fas fa-arrow-right"></i></div>
-      </a>
-      <a href="KDMine - Services & Expertise.html" class="svc-card fade-up delay-2" style="background:linear-gradient(135deg,var(--dark3),var(--dark4));border-color:var(--border);">
-        <div class="svc-card-accent" style="background:linear-gradient(90deg,var(--gold),var(--gold-light));"></div>
-        <div class="svc-icon" style="background:rgba(201,168,76,0.1);color:#C9A84C;">⭐</div>
-        <div class="svc-title" data-en="All Services & Expertise" data-fa="همه خدمات و تخصص‌ها">All Services & Expertise</div>
-        <div class="svc-desc" data-en="Explore the full range of KDMine's specialist mining project services — from concept screening to detailed engineering cost control." data-fa="طیف کامل خدمات تخصصی پروژه معدنی KDMine را کاوش کنید — از غربالگری مفهوم تا کنترل هزینه مهندسی دقیق.">Explore the full range of KDMine's specialist mining project services — from concept screening to detailed engineering cost control.</div>
-        <div class="svc-tags"><span class="svc-tag">Full Portfolio</span><span class="svc-tag">All Commodities</span></div>
-        <div class="svc-link" style="color:#C9A84C;"><span data-en="View All Services" data-fa="مشاهده همه خدمات">View All Services</span> <i class="fas fa-arrow-right"></i></div>
-      </a>
-    </div>
+<div class="container">
+  <div class="sec-header fade-up">
+    <div class="sec-eyebrow" data-en="What We Do" data-fa="چه کاری انجام می‌دهیم">What We Do</div>
+    <div class="sec-title" data-en="Core <em>Services</em>" data-fa="خدمات <em>اصلی</em>">Core <em>Services</em></div>
+    <div class="sec-sub" data-en="End-to-end mining project cost and technical services — from early-stage scoping to bankable feasibility studies and ongoing project controls." data-fa="خدمات هزینه و فنی پروژه معدنی از ابتدا تا انتها — از محدوده‌سنجی مرحله اولیه تا مطالعات امکان‌سنجی قابل تأمین مالی و کنترل پروژه مداوم.">End-to-end mining project cost and technical services — from early-stage scoping to bankable feasibility studies and ongoing project controls.</div>
   </div>
+  <div class="services-grid">
+    <a href="KDMine - CAPEX _ OPEX Estimation.html" class="svc-card fade-up">
+      <div class="svc-card-accent" style="background:linear-gradient(90deg,#C9A84C,#E8C97A);"></div>
+      <div class="svc-icon" style="background:rgba(201,168,76,0.15);color:#C9A84C;">💰</div>
+      <div class="svc-title" data-en="CAPEX & OPEX Estimation" data-fa="برآورد CAPEX و OPEX">CAPEX & OPEX Estimation</div>
+      <div class="svc-desc" data-en="AACE Class 1–5 cost estimates for open-pit mining projects. Full WBS-based models, sensitivity analysis, and contingency determination." data-fa="برآوردهای هزینه AACE کلاس ۱–۵ برای پروژه‌های معدن روباز. مدل‌های کامل مبتنی بر WBS، تحلیل حساسیت و تعیین احتیاط.">AACE Class 1–5 cost estimates for open-pit mining projects. Full WBS-based models, sensitivity analysis, and contingency determination.</div>
+      <div class="svc-tags"><span class="svc-tag">AACE 18R-97</span><span class="svc-tag">WBS</span><span class="svc-tag">Sensitivity</span></div>
+      <div class="svc-link" style="color:#C9A84C;"><span data-en="Learn More" data-fa="بیشتر بدانید">Learn More</span> <i class="fas fa-arrow-right"></i></div>
+    </a>
+    <a href="KDMine - Plant Design & Feasibility Studies.html" class="svc-card fade-up delay-1">
+      <div class="svc-card-accent" style="background:linear-gradient(90deg,#3B82F6,#60A5FA);"></div>
+      <div class="svc-icon" style="background:rgba(59,130,246,0.15);color:#3B82F6;">🏭</div>
+      <div class="svc-title" data-en="Plant Design & Feasibility" data-fa="طراحی کارخانه و امکان‌سنجی">Plant Design & Feasibility</div>
+      <div class="svc-desc" data-en="Process flowsheet development, equipment sizing, and bankable feasibility studies for gold, copper, and iron ore projects." data-fa="توسعه فلوشیت فرآیند، اندازه‌گیری تجهیزات و مطالعات امکان‌سنجی قابل تأمین مالی برای پروژه‌های طلا، مس و سنگ آهن.">Process flowsheet development, equipment sizing, and bankable feasibility studies for gold, copper, and iron ore projects.</div>
+      <div class="svc-tags"><span class="svc-tag">NI 43-101</span><span class="svc-tag">JORC</span><span class="svc-tag">SAG/Ball Mill</span></div>
+      <div class="svc-link" style="color:#3B82F6;"><span data-en="Learn More" data-fa="بیشتر بدانید">Learn More</span> <i class="fas fa-arrow-right"></i></div>
+    </a>
+    <a href="KDMine - Risk Analysis.html" class="svc-card fade-up delay-2">
+      <div class="svc-card-accent" style="background:linear-gradient(90deg,#EF4444,#F87171);"></div>
+      <div class="svc-icon" style="background:rgba(239,68,68,0.15);color:#EF4444;">🎲</div>
+      <div class="svc-title" data-en="Risk Analysis" data-fa="تحلیل ریسک">Risk Analysis</div>
+      <div class="svc-desc" data-en="ISO 31000 risk registers, Monte Carlo simulation, P10/P50/P90 cost distributions, and risk-based contingency determination." data-fa="ثبت ریسک ISO 31000، شبیه‌سازی مونت کارلو، توزیع‌های هزینه P10/P50/P90 و تعیین احتیاط مبتنی بر ریسک.">ISO 31000 risk registers, Monte Carlo simulation, P10/P50/P90 cost distributions, and risk-based contingency determination.</div>
+      <div class="svc-tags"><span class="svc-tag">ISO 31000</span><span class="svc-tag">Monte Carlo</span><span class="svc-tag">P80</span></div>
+      <div class="svc-link" style="color:#EF4444;"><span data-en="Learn More" data-fa="بیشتر بدانید">Learn More</span> <i class="fas fa-arrow-right"></i></div>
+    </a>
+    <a href="KDMine - Project Scheduling & Cost Control .html" class="svc-card fade-up">
+      <div class="svc-card-accent" style="background:linear-gradient(90deg,#8B5CF6,#A78BFA);"></div>
+      <div class="svc-icon" style="background:rgba(139,92,246,0.15);color:#8B5CF6;">📅</div>
+      <div class="svc-title" data-en="Scheduling & Cost Control" data-fa="برنامه‌ریزی و کنترل هزینه">Scheduling & Cost Control</div>
+      <div class="svc-desc" data-en="Project schedule development, EVM implementation, S-curve tracking, CPI/SPI reporting, and EAC forecasting." data-fa="توسعه برنامه پروژه، پیاده‌سازی EVM، ردیابی S-curve، گزارش‌دهی CPI/SPI و پیش‌بینی EAC.">Project schedule development, EVM implementation, S-curve tracking, CPI/SPI reporting, and EAC forecasting.</div>
+      <div class="svc-tags"><span class="svc-tag">EVM</span><span class="svc-tag">Primavera</span><span class="svc-tag">AACE TCM</span></div>
+      <div class="svc-link" style="color:#8B5CF6;"><span data-en="Learn More" data-fa="بیشتر بدانید">Learn More</span> <i class="fas fa-arrow-right"></i></div>
+    </a>
+    <a href="KDMine - Equipment Selection & International Procurement.html" class="svc-card fade-up delay-1">
+      <div class="svc-card-accent" style="background:linear-gradient(90deg,#14B8A6,#2DD4BF);"></div>
+      <div class="svc-icon" style="background:rgba(20,184,166,0.15);color:#14B8A6;">🌐</div>
+      <div class="svc-title" data-en="Equipment & Procurement" data-fa="تجهیزات و تدارکات">Equipment & Procurement</div>
+      <div class="svc-desc" data-en="International equipment sourcing, vendor comparison, landed cost analysis, and Iran/CIS procurement strategy under sanctions." data-fa="تأمین بین‌المللی تجهیزات، مقایسه فروشنده، تحلیل هزینه تحویل و استراتژی تدارکات ایران/CIS تحت تحریم.">International equipment sourcing, vendor comparison, landed cost analysis, and Iran/CIS procurement strategy under sanctions.</div>
+      <div class="svc-tags"><span class="svc-tag">Costmine</span><span class="svc-tag">Landed Cost</span><span class="svc-tag">Iran/CIS</span></div>
+      <div class="svc-link" style="color:#14B8A6;"><span data-en="Learn More" data-fa="بیشتر بدانید">Learn More</span> <i class="fas fa-arrow-right"></i></div>
+    </a>
+    <a href="KDMine - Procurement & Supply.html" class="svc-card fade-up delay-2">
+      <div class="svc-card-accent" style="background:linear-gradient(90deg,#F59E0B,#FBBF24);"></div>
+      <div class="svc-icon" style="background:rgba(245,158,11,0.15);color:#F59E0B;">📦</div>
+      <div class="svc-title" data-en="Procurement & Supply" data-fa="تدارکات و تأمین">Procurement & Supply</div>
+      <div class="svc-desc" data-en="Comprehensive procurement management, supply chain optimization, vendor qualification, and real-time market intelligence for mining equipment and materials." data-fa="مدیریت جامع تدارکات، بهینه‌سازی زنجیره تأمین، صلاحیت فروشنده و هوش بازار در زمان واقعی برای تجهیزات و مواد معدنی.">Comprehensive procurement management, supply chain optimization, vendor qualification, and real-time market intelligence for mining equipment and materials.</div>
+      <div class="svc-tags"><span class="svc-tag">Market Intel</span><span class="svc-tag">Vendor Mgmt</span><span class="svc-tag">Supply Chain</span></div>
+      <div class="svc-link" style="color:#F59E0B;"><span data-en="Learn More" data-fa="بیشتر بدانید">Learn More</span> <i class="fas fa-arrow-right"></i></div>
+    </a>
+  </div>
+</div>
 </section>
 
 <!-- WHY KDMINE -->
 <section class="why-section">
-  <div class="container">
-    <div class="why-grid">
-      <div class="why-img-wrap fade-up">
-        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80" alt="Mining Engineering"/>
-        <div class="why-img-overlay"></div>
-        <div class="why-img-badge">
-          <div class="why-img-badge-val">±<em>10%</em></div>
-          <div class="why-img-badge-lbl" data-en="AACE Class 2 Accuracy" data-fa="دقت AACE کلاس ۲">AACE Class 2 Accuracy</div>
-        </div>
+<div class="container">
+  <div class="why-grid">
+    <div class="why-img-wrap fade-up">
+      <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=900&q=85" alt="Mining Engineering"/>
+      <div class="why-img-overlay"></div>
+      <div class="why-img-badge">
+        <div class="why-img-badge-val">±<em>10%</em></div>
+        <div class="why-img-badge-lbl" data-en="AACE Class 2 Accuracy" data-fa="دقت AACE کلاس ۲">AACE Class 2 Accuracy</div>
       </div>
-      <div class="fade-up delay-1">
-        <div class="sec-eyebrow" data-en="Why KDMine" data-fa="چرا KDMine">Why KDMine</div>
-        <div class="sec-title" style="margin-bottom:32px;" data-en="Built for <em>Iran's</em> Mining Industry" data-fa="ساخته شده برای صنعت معدن <em>ایران</em>">Built for <em>Iran's</em> Mining Industry</div>
-        <div class="why-points">
-          <div class="why-point">
-            <div class="why-point-icon" style="background:rgba(201,168,76,0.1);color:#C9A84C;">🎯</div>
-            <div>
-              <div class="why-point-title" data-en="AACE-Compliant Methodology" data-fa="روش‌شناسی منطبق با AACE">AACE-Compliant Methodology</div>
-              <div class="why-point-desc" data-en="All estimates follow AACE International 18R-97 recommended practice — from Class 5 order-of-magnitude to Class 1 definitive estimates." data-fa="تمام برآوردها از توصیه‌نامه AACE International 18R-97 پیروی می‌کنند — از برآورد مرتبه بزرگی کلاس ۵ تا برآوردهای قطعی کلاس ۱.">All estimates follow AACE International 18R-97 recommended practice — from Class 5 order-of-magnitude to Class 1 definitive estimates.</div>
-            </div>
+    </div>
+    <div class="fade-up delay-1">
+      <div class="sec-eyebrow" data-en="Why KDMine" data-fa="چرا KDMine">Why KDMine</div>
+      <div class="sec-title" style="margin-bottom:36px;" data-en="Built for <em>Iran's</em> Mining Industry" data-fa="ساخته شده برای صنعت معدن <em>ایران</em>">Built for <em>Iran's</em> Mining Industry</div>
+      <div class="why-points">
+        <div class="why-point">
+          <div class="why-point-icon" style="background:rgba(201,168,76,0.15);color:#C9A84C;">🎯</div>
+          <div>
+            <div class="why-point-title" data-en="AACE-Compliant Methodology" data-fa="روش‌شناسی منطبق با AACE">AACE-Compliant Methodology</div>
+            <div class="why-point-desc" data-en="All estimates follow AACE International 18R-97 recommended practice — from Class 5 order-of-magnitude to Class 1 definitive estimates." data-fa="تمام برآوردها از توصیه‌نامه AACE International 18R-97 پیروی می‌کنند — از برآورد مرتبه بزرگی کلاس ۵ تا برآوردهای قطعی کلاس ۱.">All estimates follow AACE International 18R-97 recommended practice — from Class 5 order-of-magnitude to Class 1 definitive estimates.</div>
           </div>
-          <div class="why-point">
-            <div class="why-point-icon" style="background:rgba(14,165,233,0.1);color:#0EA5E9;">🌐</div>
-            <div>
-              <div class="why-point-title" data-en="Iran & CIS Specialist" data-fa="متخصص ایران و CIS">Iran & CIS Specialist</div>
-              <div class="why-point-desc" data-en="Deep knowledge of Iranian DOE permitting, local contractor markets, sanctions-compliant procurement, and Rial/USD cost modelling." data-fa="دانش عمیق از مجوزدهی سازمان محیط زیست ایران، بازارهای پیمانکار محلی، تدارکات منطبق با تحریم و مدل‌سازی هزینه ریال/دلار.">Deep knowledge of Iranian DOE permitting, local contractor markets, sanctions-compliant procurement, and Rial/USD cost modelling.</div>
-            </div>
+        </div>
+        <div class="why-point">
+          <div class="why-point-icon" style="background:rgba(59,130,246,0.15);color:#3B82F6;">🌐</div>
+          <div>
+            <div class="why-point-title" data-en="Iran & CIS Specialist" data-fa="متخصص ایران و CIS">Iran & CIS Specialist</div>
+            <div class="why-point-desc" data-en="Deep knowledge of Iranian DOE permitting, local contractor markets, sanctions-compliant procurement, and Rial/USD cost modelling." data-fa="دانش عمیق از مجوزدهی سازمان محیط زیست ایران، بازارهای پیمانکار محلی، تدارکات منطبق با تحریم و مدل‌سازی هزینه ریال/دلار.">Deep knowledge of Iranian DOE permitting, local contractor markets, sanctions-compliant procurement, and Rial/USD cost modelling.</div>
           </div>
-          <div class="why-point">
-            <div class="why-point-icon" style="background:rgba(34,197,94,0.1);color:#22C55E;">🔓</div>
-            <div>
-              <div class="why-point-title" data-en="Fully Transparent Models" data-fa="مدل‌های کاملاً شفاف">Fully Transparent Models</div>
-              <div class="why-point-desc" data-en="All Excel models delivered fully unlocked — no black boxes, no hidden formulas. Every assumption documented and auditable." data-fa="تمام مدل‌های اکسل کاملاً باز تحویل داده می‌شوند — بدون جعبه سیاه، بدون فرمول‌های پنهان. هر فرض مستند و قابل حسابرسی.">All Excel models delivered fully unlocked — no black boxes, no hidden formulas. Every assumption documented and auditable.</div>
-            </div>
+        </div>
+        <div class="why-point">
+          <div class="why-point-icon" style="background:rgba(16,185,129,0.15);color:#10B981;">🔓</div>
+          <div>
+            <div class="why-point-title" data-en="Fully Transparent Models" data-fa="مدل‌های کاملاً شفاف">Fully Transparent Models</div>
+            <div class="why-point-desc" data-en="All Excel models delivered fully unlocked — no black boxes, no hidden formulas. Every assumption documented and auditable." data-fa="تمام مدل‌های اکسل کاملاً باز تحویل داده می‌شوند — بدون جعبه سیاه، بدون فرمول‌های پنهان. هر فرض مستند و قابل حسابرسی.">All Excel models delivered fully unlocked — no black boxes, no hidden formulas. Every assumption documented and auditable.</div>
           </div>
-          <div class="why-point">
-            <div class="why-point-icon" style="background:rgba(168,85,247,0.1);color:#A855F7;">📋</div>
-            <div>
-              <div class="why-point-title" data-en="Fixed-Fee, No Surprises" data-fa="هزینه ثابت، بدون غافلگیری">Fixed-Fee, No Surprises</div>
-              <div class="why-point-desc" data-en="Every engagement is priced on a fixed-fee basis with a detailed scope of work. You know the cost before we start." data-fa="هر مشارکت بر اساس هزینه ثابت با محدوده کار دقیق قیمت‌گذاری می‌شود. قبل از شروع هزینه را می‌دانید.">Every engagement is priced on a fixed-fee basis with a detailed scope of work. You know the cost before we start.</div>
-            </div>
+        </div>
+        <div class="why-point">
+          <div class="why-point-icon" style="background:rgba(139,92,246,0.15);color:#8B5CF6;">📋</div>
+          <div>
+            <div class="why-point-title" data-en="Fixed-Fee, No Surprises" data-fa="هزینه ثابت، بدون غافلگیری">Fixed-Fee, No Surprises</div>
+            <div class="why-point-desc" data-en="Every engagement is priced on a fixed-fee basis with a detailed scope of work. You know the cost before we start." data-fa="هر مشارکت بر اساس هزینه ثابت با محدوده کار دقیق قیمت‌گذاری می‌شود. قبل از شروع هزینه را می‌دانید.">Every engagement is priced on a fixed-fee basis with a detailed scope of work. You know the cost before we start.</div>
           </div>
-          <div class="why-point">
-            <div class="why-point-icon" style="background:rgba(249,115,22,0.1);color:#F97316;">🗣️</div>
-            <div>
-              <div class="why-point-title" data-en="Bilingual EN/FA Deliverables" data-fa="تحویل‌دادنی‌های دوزبانه EN/FA">Bilingual EN/FA Deliverables</div>
-              <div class="why-point-desc" data-en="All reports, models, and presentations in both English and Persian — essential for Iranian regulatory submissions and investor presentations." data-fa="تمام گزارش‌ها، مدل‌ها و ارائه‌ها به زبان انگلیسی و فارسی — ضروری برای ارائه‌های نظارتی ایرانی و ارائه‌های سرمایه‌گذار.">All reports, models, and presentations in both English and Persian — essential for Iranian regulatory submissions and investor presentations.</div>
-            </div>
+        </div>
+        <div class="why-point">
+          <div class="why-point-icon" style="background:rgba(245,158,11,0.15);color:#F59E0B;">🗣️</div>
+          <div>
+            <div class="why-point-title" data-en="Bilingual EN/FA Deliverables" data-fa="تحویل‌دادنی‌های دوزبانه EN/FA">Bilingual EN/FA Deliverables</div>
+            <div class="why-point-desc" data-en="All reports, models, and presentations in both English and Persian — essential for Iranian regulatory submissions and investor presentations." data-fa="تمام گزارش‌ها، مدل‌ها و ارائه‌ها به زبان انگلیسی و فارسی — ضروری برای ارائه‌های نظارتی ایرانی و ارائه‌های سرمایه‌گذار.">All reports, models, and presentations in both English and Persian — essential for Iranian regulatory submissions and investor presentations.</div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 </section>
 
 <!-- FEATURED IMAGE SECTION -->
 <div class="featured-section fade-up">
-  <div class="featured-img-wrap">
-    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1800&q=80" alt="Mining Excavation"/>
-    <div class="featured-overlay"></div>
-    <div class="featured-content">
-      <div class="sec-eyebrow" data-en="Our Expertise" data-fa="تخصص ما">Our Expertise</div>
-      <div class="sec-title" data-en="From <em>Scoping</em> to<br/>Bankable Studies" data-fa="از <em>محدوده‌سنجی</em> تا<br/>مطالعات قابل تأمین مالی">From <em>Scoping</em> to<br/>Bankable Studies</div>
-      <p data-en="KDMine has delivered cost estimates and feasibility studies for gold, copper, iron ore, and phosphate projects across Iran and the wider CIS region. Our Costmine-benchmarked data ensures market-accurate results." data-fa="KDMine برآوردهای هزینه و مطالعات امکان‌سنجی برای پروژه‌های طلا، مس، سنگ آهن و فسفات در سراسر ایران و منطقه گسترده‌تر CIS ارائه داده است.">KDMine has delivered cost estimates and feasibility studies for gold, copper, iron ore, and phosphate projects across Iran and the wider CIS region. Our Costmine-benchmarked data ensures market-accurate results.</p>
-      <div class="featured-stats">
-        <div class="featured-stat"><div class="featured-stat-val">$2B<em>+</em></div><div class="featured-stat-lbl" data-en="CAPEX Estimated" data-fa="CAPEX برآورد شده">CAPEX Estimated</div></div>
-        <div class="featured-stat"><div class="featured-stat-val">5<em> classes</em></div><div class="featured-stat-lbl" data-en="AACE Coverage" data-fa="پوشش AACE">AACE Coverage</div></div>
-        <div class="featured-stat"><div class="featured-stat-val">4<em> metals</em></div><div class="featured-stat-lbl" data-en="Au · Cu · Fe · P" data-fa="طلا · مس · آهن · فسفات">Au · Cu · Fe · P</div></div>
-      </div>
+<div class="featured-img-wrap">
+  <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1920&q=85" alt="Mining Excavation"/>
+  <div class="featured-overlay"></div>
+  <div class="featured-content">
+    <div class="sec-eyebrow" data-en="Our Expertise" data-fa="تخصص ما">Our Expertise</div>
+    <div class="sec-title" data-en="From <em>Scoping</em> to<br/>Bankable Studies" data-fa="از <em>محدوده‌سنجی</em> تا<br/>مطالعات قابل تأمین مالی">From <em>Scoping</em> to<br/>Bankable Studies</div>
+    <p data-en="KDMine has delivered cost estimates and feasibility studies for gold, copper, iron ore, and phosphate projects across Iran and the wider CIS region. Our Costmine-benchmarked data ensures market-accurate results." data-fa="KDMine برآوردهای هزینه و مطالعات امکان‌سنجی برای پروژه‌های طلا، مس، سنگ آهن و فسفات در سراسر ایران و منطقه گسترده‌تر CIS ارائه داده است.">KDMine has delivered cost estimates and feasibility studies for gold, copper, iron ore, and phosphate projects across Iran and the wider CIS region. Our Costmine-benchmarked data ensures market-accurate results.</p>
+    <div class="featured-stats">
+      <div class="featured-stat"><div class="featured-stat-val">$2B<em>+</em></div><div class="featured-stat-lbl" data-en="CAPEX Estimated" data-fa="CAPEX برآورد شده">CAPEX Estimated</div></div>
+      <div class="featured-stat"><div class="featured-stat-val">5<em> classes</em></div><div class="featured-stat-lbl" data-en="AACE Coverage" data-fa="پوشش AACE">AACE Coverage</div></div>
+      <div class="featured-stat"><div class="featured-stat-val">4<em> metals</em></div><div class="featured-stat-lbl" data-en="Au · Cu · Fe · P" data-fa="طلا · مس · آهن · فسفات">Au · Cu · Fe · P</div></div>
     </div>
   </div>
+</div>
 </div>
 
 <!-- TOOLS -->
 <section class="tools-section">
-  <div class="container">
-    <div class="sec-header fade-up">
-      <div class="sec-eyebrow" data-en="Online Tools" data-fa="ابزارهای آنلاین">Online Tools</div>
-      <div class="sec-title" data-en="Free <em>Tools</em> & Calculators" data-fa="ابزارها و ماشین‌حساب‌های <em>رایگان</em>">Free <em>Tools</em> & Calculators</div>
-      <div class="sec-sub" data-en="Professional-grade online tools for mining cost estimation — free to use, no registration required." data-fa="ابزارهای آنلاین درجه حرفه‌ای برای برآورد هزینه معدن — رایگان برای استفاده، بدون نیاز به ثبت‌نام.">Professional-grade online tools for mining cost estimation — free to use, no registration required.</div>
-    </div>
-    <div class="tools-grid">
-      <a href="KDMine - Project Cost Calculator Page.html" class="tool-card fade-up">
-        <div class="tool-card-glow" style="background:#C9A84C;"></div>
-        <div class="tool-icon">🧮</div>
-        <div class="tool-title" data-en="Project Cost Calculator" data-fa="ماشین‌حساب هزینه پروژه">Project Cost Calculator</div>
-        <div class="tool-desc" data-en="Quick CAPEX/OPEX estimate based on throughput, commodity, and location inputs." data-fa="برآورد سریع CAPEX/OPEX بر اساس توان عملیاتی، کالا و ورودی‌های مکان.">Quick CAPEX/OPEX estimate based on throughput, commodity, and location inputs.</div>
-        <i class="fas fa-arrow-right tool-arrow"></i>
-      </a>
-      <a href="KDMine - Equipment Cost Database Page.html" class="tool-card fade-up delay-1">
-        <div class="tool-card-glow" style="background:#0EA5E9;"></div>
-        <div class="tool-icon">🗄️</div>
-        <div class="tool-title" data-en="Equipment Cost Database" data-fa="پایگاه داده هزینه تجهیزات">Equipment Cost Database</div>
-        <div class="tool-desc" data-en="80+ equipment types with Costmine-benchmarked capital and operating costs." data-fa="بیش از ۸۰ نوع تجهیز با هزینه‌های سرمایه‌ای و عملیاتی معیارسنجی شده توسط Costmine.">80+ equipment types with Costmine-benchmarked capital and operating costs.</div>
-        <i class="fas fa-arrow-right tool-arrow"></i>
-      </a>
-      <a href="KDMine - Cost Index & Escalation Tool Page.html" class="tool-card fade-up delay-2">
-        <div class="tool-card-glow" style="background:#22C55E;"></div>
-        <div class="tool-icon">📈</div>
-        <div class="tool-title" data-en="Cost Index & Escalation" data-fa="شاخص هزینه و تشدید">Cost Index & Escalation</div>
-        <div class="tool-desc" data-en="USBM, CEPCI, and Mining Cost Index escalation tool for historical and forecast cost adjustment." data-fa="ابزار تشدید شاخص USBM، CEPCI و شاخص هزینه معدن برای تعدیل هزینه تاریخی و پیش‌بینی.">USBM, CEPCI, and Mining Cost Index escalation tool for historical and forecast cost adjustment.</div>
-        <i class="fas fa-arrow-right tool-arrow"></i>
-      </a>
-      <a href="KDMine - AACE Standards & Methodology Page.html" class="tool-card fade-up delay-3">
-        <div class="tool-card-glow" style="background:#A855F7;"></div>
-        <div class="tool-icon">📚</div>
-        <div class="tool-title" data-en="AACE Standards Guide" data-fa="راهنمای استانداردهای AACE">AACE Standards Guide</div>
-        <div class="tool-desc" data-en="Interactive guide to AACE 18R-97 estimate classification with accuracy ranges and methodology requirements." data-fa="راهنمای تعاملی طبقه‌بندی برآورد AACE 18R-97 با محدوده‌های دقت و الزامات روش‌شناسی.">Interactive guide to AACE 18R-97 estimate classification with accuracy ranges and methodology requirements.</div>
-        <i class="fas fa-arrow-right tool-arrow"></i>
-      </a>
-      <a href="KDMine - Resources Hub.html" class="tool-card fade-up">
-        <div class="tool-card-glow" style="background:#F97316;"></div>
-        <div class="tool-icon">📥</div>
-        <div class="tool-title" data-en="Free Excel Templates" data-fa="قالب‌های اکسل رایگان">Free Excel Templates</div>
-        <div class="tool-desc" data-en="18+ professional Excel templates — CAPEX, OPEX, DCF, Risk, EVM, and more. Fully unlocked, bilingual EN/FA." data-fa="بیش از ۱۸ قالب اکسل حرفه‌ای — CAPEX، OPEX، DCF، ریسک، EVM و بیشتر. کاملاً باز، دوزبانه EN/FA.">18+ professional Excel templates — CAPEX, OPEX, DCF, Risk, EVM, and more. Fully unlocked, bilingual EN/FA.</div>
-        <i class="fas fa-arrow-right tool-arrow"></i>
-      </a>
-      <a href="KDMine - Blog & Insights Page.html" class="tool-card fade-up delay-1">
-        <div class="tool-card-glow" style="background:#14B8A6;"></div>
-        <div class="tool-icon">📰</div>
-        <div class="tool-title" data-en="Blog & Insights" data-fa="وبلاگ و بینش‌ها">Blog & Insights</div>
-        <div class="tool-desc" data-en="Technical articles on mining cost estimation, procurement, risk analysis, and Iranian mining sector updates." data-fa="مقالات فنی درباره برآورد هزینه معدن، تدارکات، تحلیل ریسک و به‌روزرسانی‌های بخش معدن ایران.">Technical articles on mining cost estimation, procurement, risk analysis, and Iranian mining sector updates.</div>
-        <i class="fas fa-arrow-right tool-arrow"></i>
-      </a>
-      <a href="KDMine - Case Studies Page .html" class="tool-card fade-up delay-2">
-        <div class="tool-card-glow" style="background:#EF4444;"></div>
-        <div class="tool-icon">📂</div>
-        <div class="tool-title" data-en="Case Studies" data-fa="مطالعات موردی">Case Studies</div>
-        <div class="tool-desc" data-en="Real project case studies showing KDMine's methodology, deliverables, and outcomes across different commodity types." data-fa="مطالعات موردی پروژه واقعی که روش‌شناسی، تحویل‌دادنی‌ها و نتایج KDMine را در انواع مختلف کالا نشان می‌دهد.">Real project case studies showing KDMine's methodology, deliverables, and outcomes across different commodity types.</div>
-        <i class="fas fa-arrow-right tool-arrow"></i>
-      </a>
-      <a href="KDMine - Pricing Page.html" class="tool-card fade-up delay-3">
-        <div class="tool-card-glow" style="background:#C9A84C;"></div>
-        <div class="tool-icon">💎</div>
-        <div class="tool-title" data-en="Transparent Pricing" data-fa="قیمت‌گذاری شفاف">Transparent Pricing</div>
-        <div class="tool-desc" data-en="Fixed-fee pricing packages for all service tiers — from express scoping studies to full bankable feasibility reports." data-fa="بسته‌های قیمت‌گذاری ثابت برای تمام سطوح خدمات — از مطالعات محدوده‌سنجی سریع تا گزارش‌های امکان‌سنجی کامل قابل تأمین مالی.">Fixed-fee pricing packages for all service tiers — from express scoping studies to full bankable feasibility reports.</div>
-        <i class="fas fa-arrow-right tool-arrow"></i>
-      </a>
-    </div>
+<div class="container">
+  <div class="sec-header fade-up">
+    <div class="sec-eyebrow" data-en="Online Tools" data-fa="ابزارهای آنلاین">Online Tools</div>
+    <div class="sec-title" data-en="Free <em>Tools</em> & Calculators" data-fa="ابزارها و ماشین‌حساب‌های <em>رایگان</em>">Free <em>Tools</em> & Calculators</div>
+    <div class="sec-sub" data-en="Professional-grade online tools for mining cost estimation — free to use, no registration required." data-fa="ابزارهای آنلاین درجه حرفه‌ای برای برآورد هزینه معدن — رایگان برای استفاده، بدون نیاز به ثبت‌نام.">Professional-grade online tools for mining cost estimation — free to use, no registration required.</div>
   </div>
+  <div class="tools-grid">
+    <a href="KDMine - Project Cost Calculator Page.html" class="tool-card fade-up">
+      <div class="tool-card-glow" style="background:#C9A84C;"></div>
+      <div class="tool-icon">🧮</div>
+      <div class="tool-title" data-en="Project Cost Calculator" data-fa="ماشین‌حساب هزینه پروژه">Project Cost Calculator</div>
+      <div class="tool-desc" data-en="Quick CAPEX/OPEX estimate based on throughput, commodity, and location inputs." data-fa="برآورد سریع CAPEX/OPEX بر اساس توان عملیاتی، کالا و ورودی‌های مکان.">Quick CAPEX/OPEX estimate based on throughput, commodity, and location inputs.</div>
+      <i class="fas fa-arrow-right tool-arrow"></i>
+    </a>
+    <a href="KDMine - Equipment Cost Database Page.html" class="tool-card fade-up delay-1">
+      <div class="tool-card-glow" style="background:#3B82F6;"></div>
+      <div class="tool-icon">🗄️</div>
+      <div class="tool-title" data-en="Equipment Cost Database" data-fa="پایگاه داده هزینه تجهیزات">Equipment Cost Database</div>
+      <div class="tool-desc" data-en="80+ equipment types with Costmine-benchmarked capital and operating costs." data-fa="بیش از ۸۰ نوع تجهیز با هزینه‌های سرمایه‌ای و عملیاتی معیارسنجی شده توسط Costmine.">80+ equipment types with Costmine-benchmarked capital and operating costs.</div>
+      <i class="fas fa-arrow-right tool-arrow"></i>
+    </a>
+    <a href="KDMine - Cost Index & Escalation Tool Page.html" class="tool-card fade-up delay-2">
+      <div class="tool-card-glow" style="background:#10B981;"></div>
+      <div class="tool-icon">📈</div>
+      <div class="tool-title" data-en="Cost Index & Escalation" data-fa="شاخص هزینه و تشدید">Cost Index & Escalation</div>
+      <div class="tool-desc" data-en="USBM, CEPCI, and Mining Cost Index escalation tool for historical and forecast cost adjustment." data-fa="ابزار تشدید شاخص USBM، CEPCI و شاخص هزینه معدن برای تعدیل هزینه تاریخی و پیش‌بینی.">USBM, CEPCI, and Mining Cost Index escalation tool for historical and forecast cost adjustment.</div>
+      <i class="fas fa-arrow-right tool-arrow"></i>
+    </a>
+    <a href="KDMine - AACE Standards & Methodology Page.html" class="tool-card fade-up delay-3">
+      <div class="tool-card-glow" style="background:#8B5CF6;"></div>
+      <div class="tool-icon">📚</div>
+      <div class="tool-title" data-en="AACE Standards Guide" data-fa="راهنمای استانداردهای AACE">AACE Standards Guide</div>
+      <div class="tool-desc" data-en="Interactive guide to AACE 18R-97 estimate classification with accuracy ranges and methodology requirements." data-fa="راهنمای تعاملی طبقه‌بندی برآورد AACE 18R-97 با محدوده‌های دقت و الزامات روش‌شناسی.">Interactive guide to AACE 18R-97 estimate classification with accuracy ranges and methodology requirements.</div>
+      <i class="fas fa-arrow-right tool-arrow"></i>
+    </a>
+    <a href="KDMine - Market Dashboard.html" class="tool-card fade-up">
+      <div class="tool-card-glow" style="background:#F59E0B;"></div>
+      <div class="tool-icon">📊</div>
+      <div class="tool-title" data-en="Market Dashboard" data-fa="داشبورد بازار">Market Dashboard</div>
+      <div class="tool-desc" data-en="Live commodity prices, currency rates, and mining market intelligence with real-time data feeds." data-fa="قیمت‌های زنده کالا، نرخ ارز و هوش بازار معدن با فیدهای داده در زمان واقعی.">Live commodity prices, currency rates, and mining market intelligence with real-time data feeds.</div>
+      <i class="fas fa-arrow-right tool-arrow"></i>
+    </a>
+    <a href="KDMine - Equipment Procurement Database.html" class="tool-card fade-up delay-1">
+      <div class="tool-card-glow" style="background:#14B8A6;"></div>
+      <div class="tool-icon">🔧</div>
+      <div class="tool-title" data-en="Equipment Procurement DB" data-fa="پایگاه تدارکات تجهیزات">Equipment Procurement DB</div>
+      <div class="tool-desc" data-en="Comprehensive database of mining equipment suppliers, specifications, and procurement lead times." data-fa="پایگاه داده جامع از تأمین‌کنندگان تجهیزات معدنی، مشخصات و زمان‌های تحویل تدارکات.">Comprehensive database of mining equipment suppliers, specifications, and procurement lead times.</div>
+      <i class="fas fa-arrow-right tool-arrow"></i>
+    </a>
+    <a href="KDMine - EPC Contractor Directory.html" class="tool-card fade-up delay-2">
+      <div class="tool-card-glow" style="background:#EF4444;"></div>
+      <div class="tool-icon">👷</div>
+      <div class="tool-title" data-en="EPC Contractor Directory" data-fa="فهرست پیمانکاران EPC">EPC Contractor Directory</div>
+      <div class="tool-desc" data-en="Verified EPC contractors for mining projects with capability ratings, past performance, and contact details." data-fa="پیمانکاران EPC تأیید شده برای پروژه‌های معدنی با رتبه‌بندی قابلیت، عملکرد گذشته و جزئیات تماس.">Verified EPC contractors for mining projects with capability ratings, past performance, and contact details.</div>
+      <i class="fas fa-arrow-right tool-arrow"></i>
+    </a>
+    <a href="KDMine - Resources Hub.html" class="tool-card fade-up delay-3">
+      <div class="tool-card-glow" style="background:#F97316;"></div>
+      <div class="tool-icon">📥</div>
+      <div class="tool-title" data-en="Free Excel Templates" data-fa="قالب‌های اکسل رایگان">Free Excel Templates</div>
+      <div class="tool-desc" data-en="18+ professional Excel templates — CAPEX, OPEX, DCF, Risk, EVM, and more. Fully unlocked, bilingual EN/FA." data-fa="بیش از ۱۸ قالب اکسل حرفه‌ای — CAPEX، OPEX، DCF، ریسک، EVM و بیشتر. کاملاً باز، دوزبانه EN/FA.">18+ professional Excel templates — CAPEX, OPEX, DCF, Risk, EVM, and more. Fully unlocked, bilingual EN/FA.</div>
+      <i class="fas fa-arrow-right tool-arrow"></i>
+    </a>
+  </div>
+</div>
 </section>
 
 <!-- AACE CLASSES -->
 <section class="aace-section">
-  <div class="container">
-    <div class="sec-header center fade-up">
-      <div class="sec-eyebrow" data-en="AACE 18R-97" data-fa="AACE 18R-97">AACE 18R-97</div>
-      <div class="sec-title" data-en="Estimate <em>Classification</em>" data-fa="طبقه‌بندی <em>برآورد</em>">Estimate <em>Classification</em></div>
-      <div class="sec-sub" data-en="KDMine delivers all five AACE estimate classes — from early-stage concept screening to definitive bankable estimates." data-fa="KDMine هر پنج کلاس برآورد AACE را ارائه می‌دهد — از غربالگری مفهوم مرحله اولیه تا برآوردهای قطعی قابل تأمین مالی.">KDMine delivers all five AACE estimate classes — from early-stage concept screening to definitive bankable estimates.</div>
+<div class="container">
+  <div class="sec-header center fade-up">
+    <div class="sec-eyebrow" data-en="AACE 18R-97" data-fa="AACE 18R-97">AACE 18R-97</div>
+    <div class="sec-title" data-en="Estimate <em>Classification</em>" data-fa="طبقه‌بندی <em>برآورد</em>">Estimate <em>Classification</em></div>
+    <div class="sec-sub" data-en="KDMine delivers all five AACE estimate classes — from early-stage concept screening to definitive bankable estimates." data-fa="KDMine هر پنج کلاس برآورد AACE را ارائه می‌دهد — از غربالگری مفهوم مرحله اولیه تا برآوردهای قطعی قابل تأمین مالی.">KDMine delivers all five AACE estimate classes — from early-stage concept screening to definitive bankable estimates.</div>
+  </div>
+  <div class="aace-grid fade-up">
+    <div class="aace-card" onclick="location.href='KDMine - AACE Standards & Methodology Page.html'">
+      <div class="aace-class">5</div>
+      <div class="aace-name" data-en="Concept Screening" data-fa="غربالگری مفهوم">Concept Screening</div>
+      <div class="aace-acc" data-en="-50% to +100%" data-fa="-۵۰٪ تا +۱۰۰٪">-50% to +100%</div>
+      <div class="aace-bar" style="background:linear-gradient(90deg,#EF4444,#F87171);width:25%;"></div>
+      <div class="aace-use" data-en="Investment decision, opportunity screening" data-fa="تصمیم سرمایه‌گذاری، غربالگری فرصت">Investment decision, opportunity screening</div>
     </div>
-    <div class="aace-grid fade-up">
-      <div class="aace-card" onclick="location.href='KDMine - AACE Standards & Methodology Page.html'">
-        <div class="aace-class">5</div>
-        <div class="aace-name" data-en="Concept Screening" data-fa="غربالگری مفهوم">Concept Screening</div>
-        <div class="aace-acc" data-en="-50% to +100%" data-fa="-۵۰٪ تا +۱۰۰٪">-50% to +100%</div>
-        <div class="aace-bar" style="background:linear-gradient(90deg,#EF4444,#F87171);width:20%;"></div>
-        <div class="aace-use" data-en="Investment decision, opportunity screening" data-fa="تصمیم سرمایه‌گذاری، غربالگری فرصت">Investment decision, opportunity screening</div>
-      </div>
-      <div class="aace-card" onclick="location.href='KDMine - AACE Standards & Methodology Page.html'">
-        <div class="aace-class">4</div>
-        <div class="aace-name" data-en="Study / Scoping" data-fa="مطالعه / محدوده‌سنجی">Study / Scoping</div>
-        <div class="aace-acc" data-en="-30% to +50%" data-fa="-۳۰٪ تا +۵۰٪">-30% to +50%</div>
-        <div class="aace-bar" style="background:linear-gradient(90deg,#F97316,#FB923C);width:40%;"></div>
-        <div class="aace-use" data-en="Concept study, pre-feasibility screening" data-fa="مطالعه مفهومی، غربالگری پیش‌امکان‌سنجی">Concept study, pre-feasibility screening</div>
-      </div>
-      <div class="aace-card" onclick="location.href='KDMine - AACE Standards & Methodology Page.html'" style="border-color:rgba(201,168,76,0.3);">
-        <div class="aace-class" style="color:var(--gold);">3</div>
-        <div class="aace-name" style="color:var(--gold);" data-en="Budget / Preliminary" data-fa="بودجه / مقدماتی">Budget / Preliminary</div>
-        <div class="aace-acc" data-en="-20% to +30%" data-fa="-۲۰٪ تا +۳۰٪">-20% to +30%</div>
-        <div class="aace-bar" style="background:linear-gradient(90deg,var(--gold),var(--gold-light));width:60%;"></div>
-        <div class="aace-use" data-en="Pre-feasibility study, budget authorisation" data-fa="مطالعه پیش‌امکان‌سنجی، مجوز بودجه">Pre-feasibility study, budget authorisation</div>
-      </div>
-      <div class="aace-card" onclick="location.href='KDMine - AACE Standards & Methodology Page.html'">
-        <div class="aace-class">2</div>
-        <div class="aace-name" data-en="Control / Feasibility" data-fa="کنترل / امکان‌سنجی">Control / Feasibility</div>
-        <div class="aace-acc" data-en="-15% to +20%" data-fa="-۱۵٪ تا +۲۰٪">-15% to +20%</div>
-        <div class="aace-bar" style="background:linear-gradient(90deg,#22C55E,#4ADE80);width:80%;"></div>
-        <div class="aace-use" data-en="Feasibility study, project sanction" data-fa="مطالعه امکان‌سنجی، تصویب پروژه">Feasibility study, project sanction</div>
-      </div>
-      <div class="aace-card" onclick="location.href='KDMine - AACE Standards & Methodology Page.html'">
-        <div class="aace-class">1</div>
-        <div class="aace-name" data-en="Definitive / Bankable" data-fa="قطعی / قابل تأمین مالی">Definitive / Bankable</div>
-        <div class="aace-acc" data-en="-10% to +15%" data-fa="-۱۰٪ تا +۱۵٪">-10% to +15%</div>
-        <div class="aace-bar" style="background:linear-gradient(90deg,#0EA5E9,#38BDF8);width:100%;"></div>
-        <div class="aace-use" data-en="Detailed design, lender / investor report" data-fa="طراحی دقیق، گزارش وام‌دهنده / سرمایه‌گذار">Detailed design, lender / investor report</div>
-      </div>
+    <div class="aace-card" onclick="location.href='KDMine - AACE Standards & Methodology Page.html'">
+      <div class="aace-class">4</div>
+      <div class="aace-name" data-en="Study / Scoping" data-fa="مطالعه / محدوده‌سنجی">Study / Scoping</div>
+      <div class="aace-acc" data-en="-30% to +50%" data-fa="-۳۰٪ تا +۵۰٪">-30% to +50%</div>
+      <div class="aace-bar" style="background:linear-gradient(90deg,#F59E0B,#FBBF24);width:45%;"></div>
+      <div class="aace-use" data-en="Concept study, pre-feasibility screening" data-fa="مطالعه مفهومی، غربالگری پیش‌امکان‌سنجی">Concept study, pre-feasibility screening</div>
+    </div>
+    <div class="aace-card" onclick="location.href='KDMine - AACE Standards & Methodology Page.html'" style="border-color:rgba(201,168,76,0.35);">
+      <div class="aace-class" style="color:var(--gold);">3</div>
+      <div class="aace-name" style="color:var(--gold);" data-en="Budget / Preliminary" data-fa="بودجه / مقدماتی">Budget / Preliminary</div>
+      <div class="aace-acc" data-en="-20% to +30%" data-fa="-۲۰٪ تا +۳۰٪">-20% to +30%</div>
+      <div class="aace-bar" style="background:linear-gradient(90deg,var(--gold),var(--gold-light));width:65%;"></div>
+      <div class="aace-use" data-en="Pre-feasibility study, budget authorisation" data-fa="مطالعه پیش‌امکان‌سنجی، مجوز بودجه">Pre-feasibility study, budget authorisation</div>
+    </div>
+    <div class="aace-card" onclick="location.href='KDMine - AACE Standards & Methodology Page.html'">
+      <div class="aace-class">2</div>
+      <div class="aace-name" data-en="Control / Feasibility" data-fa="کنترل / امکان‌سنجی">Control / Feasibility</div>
+      <div class="aace-acc" data-en="-15% to +20%" data-fa="-۱۵٪ تا +۲۰٪">-15% to +20%</div>
+      <div class="aace-bar" style="background:linear-gradient(90deg,#10B981,#34D399);width:85%;"></div>
+      <div class="aace-use" data-en="Feasibility study, project sanction" data-fa="مطالعه امکان‌سنجی، تصویب پروژه">Feasibility study, project sanction</div>
+    </div>
+    <div class="aace-card" onclick="location.href='KDMine - AACE Standards & Methodology Page.html'">
+      <div class="aace-class">1</div>
+      <div class="aace-name" data-en="Definitive / Bankable" data-fa="قطعی / قابل تأمین مالی">Definitive / Bankable</div>
+      <div class="aace-acc" data-en="-10% to +15%" data-fa="-۱۰٪ تا +۱۵٪">-10% to +15%</div>
+      <div class="aace-bar" style="background:linear-gradient(90deg,#3B82F6,#60A5FA);width:100%;"></div>
+      <div class="aace-use" data-en="Detailed design, lender / investor report" data-fa="طراحی دقیق، گزارش وام‌دهنده / سرمایه‌گذار">Detailed design, lender / investor report</div>
     </div>
   </div>
+</div>
 </section>
 
 <!-- REGIONS -->
 <section class="regions-section">
-  <div class="container">
-    <div class="sec-header fade-up">
-      <div class="sec-eyebrow" data-en="Our Markets" data-fa="بازارهای ما">Our Markets</div>
-      <div class="sec-title" data-en="Where We <em>Operate</em>" data-fa="کجا <em>فعالیت می‌کنیم</em>">Where We <em>Operate</em></div>
-      <div class="sec-sub" data-en="KDMine has deep expertise in Iran and the CIS region, with growing presence in Oman and broader MENA markets." data-fa="KDMine تخصص عمیقی در ایران و منطقه CIS دارد، با حضور رو به رشد در عمان و بازارهای گسترده‌تر MENA.">KDMine has deep expertise in Iran and the CIS region, with growing presence in Oman and broader MENA markets.</div>
+<div class="container">
+  <div class="sec-header fade-up">
+    <div class="sec-eyebrow" data-en="Our Markets" data-fa="بازارهای ما">Our Markets</div>
+    <div class="sec-title" data-en="Where We <em>Operate</em>" data-fa="کجا <em>فعالیت می‌کنیم</em>">Where We <em>Operate</em></div>
+    <div class="sec-sub" data-en="KDMine has deep expertise in Iran and the CIS region, with growing presence in Oman and broader MENA markets." data-fa="KDMine تخصص عمیقی در ایران و منطقه CIS دارد، با حضور رو به رشد در عمان و بازارهای گسترده‌تر MENA.">KDMine has deep expertise in Iran and the CIS region, with growing presence in Oman and broader MENA markets.</div>
+  </div>
+  <div class="regions-grid fade-up">
+    <div class="region-card">
+      <img src="https://images.unsplash.com/photo-1596451190630-186aff535bf2?w=800&q=85" alt="Iran Mining"/>
+      <div class="region-overlay"></div>
+      <div class="region-badge" data-en="Primary Market" data-fa="بازار اصلی">Primary Market</div>
+      <div class="region-content">
+        <div class="region-flag">🇮🇷</div>
+        <div class="region-name" data-en="Iran" data-fa="ایران">Iran</div>
+        <div class="region-sub" data-en="Tehran HQ · DOE Permitting · Farsi Deliverables · Local Procurement" data-fa="دفتر مرکزی تهران · مجوز سازمان محیط زیست · تحویل فارسی · تدارکات محلی">Tehran HQ · DOE Permitting · Farsi Deliverables · Local Procurement</div>
+      </div>
     </div>
-    <div class="regions-grid fade-up">
-      <div class="region-card">
-        <img src="https://images.unsplash.com/photo-1596451190630-186aff535bf2?w=700&q=80" alt="Iran Mining"/>
-        <div class="region-overlay"></div>
-        <div class="region-badge" data-en="Primary Market" data-fa="بازار اصلی">Primary Market</div>
-        <div class="region-content">
-          <div class="region-flag">🇮🇷</div>
-          <div class="region-name" data-en="Iran" data-fa="ایران">Iran</div>
-          <div class="region-sub" data-en="Tehran HQ · DOE Permitting · Farsi Deliverables · Local Procurement" data-fa="دفتر مرکزی تهران · مجوز سازمان محیط زیست · تحویل فارسی · تدارکات محلی">Tehran HQ · DOE Permitting · Farsi Deliverables · Local Procurement</div>
-        </div>
+    <div class="region-card">
+      <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=85" alt="Oman"/>
+      <div class="region-overlay"></div>
+      <div class="region-content">
+        <div class="region-flag">🇴🇲</div>
+        <div class="region-name" data-en="Oman" data-fa="عمان">Oman</div>
+        <div class="region-sub" data-en="Regional Hub · MENA Projects · Procurement Gateway" data-fa="مرکز منطقه‌ای · پروژه‌های MENA · دروازه تدارکات">Regional Hub · MENA Projects · Procurement Gateway</div>
       </div>
-      <div class="region-card">
-        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=700&q=80" alt="Oman"/>
-        <div class="region-overlay"></div>
-        <div class="region-content">
-          <div class="region-flag">🇴🇲</div>
-          <div class="region-name" data-en="Oman" data-fa="عمان">Oman</div>
-          <div class="region-sub" data-en="Regional Hub · MENA Projects · Procurement Gateway" data-fa="مرکز منطقه‌ای · پروژه‌های MENA · دروازه تدارکات">Regional Hub · MENA Projects · Procurement Gateway</div>
-        </div>
-      </div>
-      <div class="region-card">
-        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80" alt="CIS Region"/>
-        <div class="region-overlay"></div>
-        <div class="region-content">
-          <div class="region-flag">🌍</div>
-          <div class="region-name" data-en="CIS & Global" data-fa="CIS و جهانی">CIS & Global</div>
-          <div class="region-sub" data-en="Kazakhstan · Uzbekistan · Turkmenistan · Global Remote" data-fa="قزاقستان · ازبکستان · ترکمنستان · جهانی از راه دور">Kazakhstan · Uzbekistan · Turkmenistan · Global Remote</div>
-        </div>
+    </div>
+    <div class="region-card">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=85" alt="CIS Region"/>
+      <div class="region-overlay"></div>
+      <div class="region-content">
+        <div class="region-flag">🌍</div>
+        <div class="region-name" data-en="CIS & Global" data-fa="CIS و جهانی">CIS & Global</div>
+        <div class="region-sub" data-en="Kazakhstan · Uzbekistan · Turkmenistan · Global Remote" data-fa="قزاقستان · ازبکستان · ترکمنستان · جهانی از راه دور">Kazakhstan · Uzbekistan · Turkmenistan · Global Remote</div>
       </div>
     </div>
   </div>
+</div>
 </section>
 
 <!-- TESTIMONIALS -->
 <section class="testimonials-section">
-  <div class="container">
-    <div class="sec-header center fade-up">
-      <div class="sec-eyebrow" data-en="Client Feedback" data-fa="بازخورد مشتریان">Client Feedback</div>
-      <div class="sec-title" data-en="What Our <em>Clients</em> Say" data-fa="مشتریان ما چه <em>می‌گویند</em>">What Our <em>Clients</em> Say</div>
+<div class="container">
+  <div class="sec-header center fade-up">
+    <div class="sec-eyebrow" data-en="Client Feedback" data-fa="بازخورد مشتریان">Client Feedback</div>
+    <div class="sec-title" data-en="What Our <em>Clients</em> Say" data-fa="مشتریان ما چه <em>می‌گویند</em>">What Our <em>Clients</em> Say</div>
+  </div>
+  <div class="testimonials-grid fade-up">
+    <div class="testi-card">
+      <div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+      <div class="testi-text" data-en='"KDMine delivered our Class 2 CAPEX estimate for the Sarcheshmeh expansion on time and within budget. The bilingual report was exactly what we needed for our board presentation."' data-fa='"KDMine برآورد CAPEX کلاس ۲ ما برای توسعه سرچشمه را به موقع و در محدوده بودجه تحویل داد. گزارش دوزبانه دقیقاً همان چیزی بود که برای ارائه هیئت مدیره نیاز داشتیم."'>"KDMine delivered our Class 2 CAPEX estimate for the Sarcheshmeh expansion on time and within budget. The bilingual report was exactly what we needed for our board presentation."</div>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:linear-gradient(135deg,#C9A84C,#A07830);">A</div>
+        <div>
+          <div class="testi-name">Ahmad Karimi</div>
+          <div class="testi-role" data-en="Project Director · National Iranian Copper Industries" data-fa="مدیر پروژه · صنایع مس ایران">Project Director · National Iranian Copper Industries</div>
+        </div>
+      </div>
     </div>
-    <div class="testimonials-grid fade-up">
-      <div class="testi-card">
-        <div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-        <div class="testi-text" data-en='"KDMine delivered our Class 2 CAPEX estimate for the Sarcheshmeh expansion on time and within budget. The bilingual report was exactly what we needed for our board presentation."' data-fa='"KDMine برآورد CAPEX کلاس ۲ ما برای توسعه سرچشمه را به موقع و در محدوده بودجه تحویل داد. گزارش دوزبانه دقیقاً همان چیزی بود که برای ارائه هیئت مدیره نیاز داشتیم."'>"KDMine delivered our Class 2 CAPEX estimate for the Sarcheshmeh expansion on time and within budget. The bilingual report was exactly what we needed for our board presentation."</div>
-        <div class="testi-author">
-          <div class="testi-avatar" style="background:linear-gradient(135deg,#C9A84C,#A07830);">A</div>
-          <div>
-            <div class="testi-name">Ahmad Karimi</div>
-            <div class="testi-role" data-en="Project Director · National Iranian Copper Industries" data-fa="مدیر پروژه · صنایع مس ایران">Project Director · National Iranian Copper Industries</div>
-          </div>
+    <div class="testi-card">
+      <div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+      <div class="testi-text" data-en='"The Monte Carlo risk analysis KDMine produced for our gold project gave us the confidence to proceed to feasibility. Their P80 contingency recommendation proved accurate during construction."' data-fa='"تحلیل ریسک مونت کارلو که KDMine برای پروژه طلای ما تولید کرد به ما اطمینان داد تا به امکان‌سنجی ادامه دهیم. توصیه احتیاط P80 آن‌ها در طول ساخت و ساز دقیق بود."'>"The Monte Carlo risk analysis KDMine produced for our gold project gave us the confidence to proceed to feasibility. Their P80 contingency recommendation proved accurate during construction."</div>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:linear-gradient(135deg,#3B82F6,#2563EB);">S</div>
+        <div>
+          <div class="testi-name">Sarah Mitchell</div>
+          <div class="testi-role" data-en="VP Finance · Caspian Gold Resources" data-fa="معاون مالی · منابع طلای خزر">VP Finance · Caspian Gold Resources</div>
         </div>
       </div>
-      <div class="testi-card">
-        <div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-        <div class="testi-text" data-en='"The Monte Carlo risk analysis KDMine produced for our gold project gave us the confidence to proceed to feasibility. Their P80 contingency recommendation proved accurate during construction."' data-fa='"تحلیل ریسک مونت کارلو که KDMine برای پروژه طلای ما تولید کرد به ما اطمینان داد تا به امکان‌سنجی ادامه دهیم. توصیه احتیاط P80 آن‌ها در طول ساخت و ساز دقیق بود."'>"The Monte Carlo risk analysis KDMine produced for our gold project gave us the confidence to proceed to feasibility. Their P80 contingency recommendation proved accurate during construction."</div>
-        <div class="testi-author">
-          <div class="testi-avatar" style="background:linear-gradient(135deg,#0EA5E9,#0284C7);">S</div>
-          <div>
-            <div class="testi-name">Sarah Mitchell</div>
-            <div class="testi-role" data-en="VP Finance · Caspian Gold Resources" data-fa="معاون مالی · منابع طلای خزر">VP Finance · Caspian Gold Resources</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-card">
-        <div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-        <div class="testi-text" data-en='"Outstanding procurement advisory for our Iranian iron ore project. KDMine navigated the sanctions environment expertly and sourced all major equipment within our budget and timeline."' data-fa='"مشاوره تدارکات برجسته برای پروژه سنگ آهن ایرانی ما. KDMine محیط تحریم را به طور ماهرانه‌ای هدایت کرد و تمام تجهیزات اصلی را در محدوده بودجه و جدول زمانی ما تأمین کرد."'>"Outstanding procurement advisory for our Iranian iron ore project. KDMine navigated the sanctions environment expertly and sourced all major equipment within our budget and timeline."</div>
-        <div class="testi-author">
-          <div class="testi-avatar" style="background:linear-gradient(135deg,#22C55E,#16A34A);">R</div>
-          <div>
-            <div class="testi-name">Reza Hosseini</div>
-            <div class="testi-role" data-en="CEO · Kaveh Steel Development" data-fa="مدیرعامل · توسعه فولاد کاوه">CEO · Kaveh Steel Development</div>
-          </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+      <div class="testi-text" data-en='"Outstanding procurement advisory for our Iranian iron ore project. KDMine navigated the sanctions environment expertly and sourced all major equipment within our budget and timeline."' data-fa='"مشاوره تدارکات برجسته برای پروژه سنگ آهن ایرانی ما. KDMine محیط تحریم را به طور ماهرانه‌ای هدایت کرد و تمام تجهیزات اصلی را در محدوده بودجه و جدول زمانی ما تأمین کرد."'>"Outstanding procurement advisory for our Iranian iron ore project. KDMine navigated the sanctions environment expertly and sourced all major equipment within our budget and timeline."</div>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:linear-gradient(135deg,#10B981,#059669);">R</div>
+        <div>
+          <div class="testi-name">Reza Hosseini</div>
+          <div class="testi-role" data-en="CEO · Kaveh Steel Development" data-fa="مدیرعامل · توسعه فولاد کاوه">CEO · Kaveh Steel Development</div>
         </div>
       </div>
     </div>
   </div>
+</div>
 </section>
 
 <!-- BLOG PREVIEW -->
 <section class="blog-section">
-  <div class="container">
-    <div class="sec-header fade-up" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px;">
-      <div>
-        <div class="sec-eyebrow" data-en="Latest Insights" data-fa="آخرین بینش‌ها">Latest Insights</div>
-        <div class="sec-title" data-en="From the <em>Blog</em>" data-fa="از <em>وبلاگ</em>">From the <em>Blog</em></div>
-      </div>
-      <a href="KDMine - Blog & Insights Page.html" class="btn-secondary" style="margin-bottom:14px;">
-        <span data-en="View All Articles" data-fa="مشاهده همه مقالات">View All Articles</span> <i class="fas fa-arrow-right"></i>
-      </a>
+<div class="container">
+  <div class="sec-header fade-up" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:20px;">
+    <div>
+      <div class="sec-eyebrow" data-en="Latest Insights" data-fa="آخرین بینش‌ها">Latest Insights</div>
+      <div class="sec-title" data-en="From the <em>Blog</em>" data-fa="از <em>وبلاگ</em>">From the <em>Blog</em></div>
     </div>
-    <div class="blog-grid fade-up">
-      <a href="KDMine - Blog & Insights Page.html" class="blog-card featured">
-        <div class="blog-card-img">
-          <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=700&q=80" alt="Mining Cost"/>
-        </div>
-        <div class="blog-card-body">
-          <div class="blog-cat" style="color:#C9A84C;" data-en="Cost Estimation" data-fa="برآورد هزینه">Cost Estimation</div>
-          <div class="blog-title" data-en="AACE 18R-97: Complete Guide to Mining Cost Estimate Classification" data-fa="AACE 18R-97: راهنمای کامل طبقه‌بندی برآورد هزینه معدن">AACE 18R-97: Complete Guide to Mining Cost Estimate Classification</div>
-          <div class="blog-meta">May 2026 · 12 min read</div>
-        </div>
-      </a>
-      <a href="KDMine - Blog & Insights Page.html" class="blog-card">
-        <div class="blog-card-img">
-          <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=500&q=80" alt="Procurement"/>
-        </div>
-        <div class="blog-card-body">
-          <div class="blog-cat" style="color:#A855F7;" data-en="Procurement" data-fa="تدارکات">Procurement</div>
-          <div class="blog-title" data-en="Equipment Sourcing for Iranian Mining Projects Under Sanctions" data-fa="تأمین تجهیزات برای پروژه‌های معدنی ایران تحت تحریم">Equipment Sourcing for Iranian Mining Projects Under Sanctions</div>
-          <div class="blog-meta">Apr 2026 · 9 min read</div>
-        </div>
-      </a>
-      <a href="KDMine - Blog & Insights Page.html" class="blog-card">
-        <div class="blog-card-img">
-          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&q=80" alt="Risk Analysis"/>
-        </div>
-        <div class="blog-card-body">
-          <div class="blog-cat" style="color:#EF4444;" data-en="Risk Analysis" data-fa="تحلیل ریسک">Risk Analysis</div>
-          <div class="blog-title" data-en="Monte Carlo Simulation for Mining CAPEX: Step-by-Step Guide" data-fa="شبیه‌سازی مونت کارلو برای CAPEX معدن: راهنمای گام‌به‌گام">Monte Carlo Simulation for Mining CAPEX: Step-by-Step Guide</div>
-          <div class="blog-meta">Apr 2026 · 15 min read</div>
-        </div>
-      </a>
-    </div>
+    <a href="KDMine - Blog & Insights Page.html" class="btn-secondary" style="margin-bottom:16px;">
+      <span data-en="View All Articles" data-fa="مشاهده همه مقالات">View All Articles</span> <i class="fas fa-arrow-right"></i>
+    </a>
   </div>
+  <div class="blog-grid fade-up">
+    <a href="KDMine - Blog & Insights Page.html" class="blog-card featured">
+      <div class="blog-card-img">
+        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=85" alt="Mining Cost Analysis"/>
+      </div>
+      <div class="blog-card-body">
+        <div class="blog-cat" style="color:#C9A84C;" data-en="Cost Estimation" data-fa="برآورد هزینه">Cost Estimation</div>
+        <div class="blog-title" data-en="AACE 18R-97: Complete Guide to Mining Cost Estimate Classification" data-fa="AACE 18R-97: راهنمای کامل طبقه‌بندی برآورد هزینه معدن">AACE 18R-97: Complete Guide to Mining Cost Estimate Classification</div>
+        <div class="blog-meta">May 2026 · 12 min read</div>
+      </div>
+    </a>
+    <a href="KDMine - Blog & Insights Page.html" class="blog-card">
+      <div class="blog-card-img">
+        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=85" alt="Procurement Strategy"/>
+      </div>
+      <div class="blog-card-body">
+        <div class="blog-cat" style="color:#8B5CF6;" data-en="Procurement" data-fa="تدارکات">Procurement</div>
+        <div class="blog-title" data-en="Equipment Sourcing for Iranian Mining Projects Under Sanctions" data-fa="تأمین تجهیزات برای پروژه‌های معدنی ایران تحت تحریم">Equipment Sourcing for Iranian Mining Projects Under Sanctions</div>
+        <div class="blog-meta">Apr 2026 · 9 min read</div>
+      </div>
+    </a>
+    <a href="KDMine - Blog & Insights Page.html" class="blog-card">
+      <div class="blog-card-img">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=85" alt="Risk Analysis"/>
+      </div>
+      <div class="blog-card-body">
+        <div class="blog-cat" style="color:#EF4444;" data-en="Risk Analysis" data-fa="تحلیل ریسک">Risk Analysis</div>
+        <div class="blog-title" data-en="Monte Carlo Simulation for Mining CAPEX: Step-by-Step Guide" data-fa="شبیه‌سازی مونت کارلو برای CAPEX معدن: راهنمای گام‌به‌گام">Monte Carlo Simulation for Mining CAPEX: Step-by-Step Guide</div>
+        <div class="blog-meta">Apr 2026 · 15 min read</div>
+      </div>
+    </a>
+  </div>
+</div>
 </section>
 
 <!-- CTA -->
 <section class="cta-section">
-  <div class="container">
-    <div class="cta-inner fade-up">
-      <div class="cta-glow"></div>
-      <div>
-        <div class="cta-title" data-en="Ready to Start Your <em>Mining Project?</em>" data-fa="آماده شروع <em>پروژه معدنی</em> خود هستید؟">Ready to Start Your <em>Mining Project?</em></div>
-        <div class="cta-sub" data-en="Contact KDMine today for a no-obligation scoping discussion. We respond within 48 hours with a tailored fixed-fee proposal for your project." data-fa="امروز با KDMine تماس بگیرید برای یک بحث محدوده‌سنجی بدون تعهد. ما ظرف ۴۸ ساعت با یک پیشنهاد هزینه ثابت متناسب برای پروژه شما پاسخ می‌دهیم.">Contact KDMine today for a no-obligation scoping discussion. We respond within 48 hours with a tailored fixed-fee proposal for your project.</div>
-      </div>
-      <div class="cta-btns">
-        <a href="KDMine - Contact & About Us.html" class="btn-primary"><i class="fas fa-paper-plane"></i> <span data-en="Get a Proposal" data-fa="دریافت پیشنهاد">Get a Proposal</span></a>
-        <a href="KDMine - Process Overview.html" class="btn-secondary"><i class="fas fa-route"></i> <span data-en="Our Process" data-fa="فرآیند ما">Our Process</span></a>
-      </div>
+<div class="container">
+  <div class="cta-inner fade-up">
+    <div class="cta-glow"></div>
+    <div>
+      <div class="cta-title" data-en="Ready to Start Your <em>Mining Project?</em>" data-fa="آماده شروع <em>پروژه معدنی</em> خود هستید؟">Ready to Start Your <em>Mining Project?</em></div>
+      <div class="cta-sub" data-en="Contact KDMine today for a no-obligation scoping discussion. We respond within 48 hours with a tailored fixed-fee proposal for your project." data-fa="امروز با KDMine تماس بگیرید برای یک بحث محدوده‌سنجی بدون تعهد. ما ظرف ۴۸ ساعت با یک پیشنهاد هزینه ثابت متناسب برای پروژه شما پاسخ می‌دهیم.">Contact KDMine today for a no-obligation scoping discussion. We respond within 48 hours with a tailored fixed-fee proposal for your project.</div>
+    </div>
+    <div class="cta-btns">
+      <a href="KDMine - Contact & About Us.html" class="btn-primary"><i class="fas fa-paper-plane"></i> <span data-en="Get a Proposal" data-fa="دریافت پیشنهاد">Get a Proposal</span></a>
+      <a href="KDMine - Process Overview.html" class="btn-secondary"><i class="fas fa-route"></i> <span data-en="Our Process" data-fa="فرآیند ما">Our Process</span></a>
     </div>
   </div>
+</div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="footer-logo">
-          <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="KDMine"/>
-          <span class="footer-logo-text">KD<span>Mine</span></span>
-        </div>
-        <div class="footer-desc" data-en="Specialist open-pit mining cost estimation, feasibility studies, and project controls. Serving Iran, CIS, and global mining markets since 2025." data-fa="برآورد هزینه تخصصی معدن روباز، مطالعات امکان‌سنجی و کنترل پروژه. خدمت به ایران، CIS و بازارهای معدنی جهانی از ۱۴۰۴.">Specialist open-pit mining cost estimation, feasibility studies, and project controls. Serving Iran, CIS, and global mining markets since 2025.</div>
-        <div class="footer-contacts">
-          <div class="footer-contact-item"><i class="fas fa-envelope"></i> <a href="mailto:info@kdmine.com">info@kdmine.com</a></div>
-          <div class="footer-contact-item"><i class="fas fa-globe"></i> <a href="https://www.kdmine.com">www.kdmine.com</a></div>
-          <div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i> <span data-en="Tehran, Iran · Oman" data-fa="تهران، ایران · عمان">Tehran, Iran · Oman</span></div>
-          <div class="footer-contact-item"><i class="fas fa-calendar"></i> <span data-en="Est. 2025" data-fa="تأسیس ۱۴۰۴">Est. 2025</span></div>
-        </div>
-        <div class="footer-social">
-          <a href="#" class="footer-social-btn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="#" class="footer-social-btn"><i class="fab fa-telegram-plane"></i></a>
-          <a href="mailto:info@kdmine.com" class="footer-social-btn"><i class="fas fa-envelope"></i></a>
-        </div>
+<div class="container">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <img src="https://cdn.grapesjs.com/workspaces/cmgvbwak408ja13nsemkia83b/assets/7e057c43-5d96-4c3a-a8fc-8bd5f6589a93__kavianpremiumbadgelogo.svg" alt="KDMine"/>
+        <span class="footer-logo-text">KD<span>Mine</span></span>
       </div>
-      <div>
-        <div class="footer-col-title" data-en="Services" data-fa="خدمات">Services</div>
-        <div class="footer-links">
-          <a href="KDMine - CAPEX _ OPEX Estimation.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="CAPEX / OPEX Estimation" data-fa="برآورد CAPEX / OPEX">CAPEX / OPEX Estimation</span></a>
-          <a href="KDMine - Plant Design & Feasibility Studies.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Plant Design & Feasibility" data-fa="طراحی کارخانه و امکان‌سنجی">Plant Design & Feasibility</span></a>
-          <a href="KDMine - Risk Analysis.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Risk Analysis" data-fa="تحلیل ریسک">Risk Analysis</span></a>
-          <a href="KDMine - Project Scheduling & Cost Control .html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Scheduling & Cost Control" data-fa="برنامه‌ریزی و کنترل هزینه">Scheduling & Cost Control</span></a>
-          <a href="KDMine - Equipment Selection & International Procurement.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Equipment & Procurement" data-fa="تجهیزات و تدارکات">Equipment & Procurement</span></a>
-          <a href="KDMine - Services & Expertise.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="All Services" data-fa="همه خدمات">All Services</span></a>
-        </div>
+      <div class="footer-desc" data-en="Specialist open-pit mining cost estimation, feasibility studies, and project controls. Serving Iran, CIS, and global mining markets since 2025." data-fa="برآورد هزینه تخصصی معدن روباز، مطالعات امکان‌سنجی و کنترل پروژه. خدمت به ایران، CIS و بازارهای معدنی جهانی از ۱۴۰۴.">Specialist open-pit mining cost estimation, feasibility studies, and project controls. Serving Iran, CIS, and global mining markets since 2025.</div>
+      <div class="footer-contacts">
+        <div class="footer-contact-item"><i class="fas fa-envelope"></i> <a href="mailto:info@kdmine.com">info@kdmine.com</a></div>
+        <div class="footer-contact-item"><i class="fas fa-globe"></i> <a href="https://www.kdmine.com">www.kdmine.com</a></div>
+        <div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i> <span data-en="Tehran, Iran · Oman" data-fa="تهران، ایران · عمان">Tehran, Iran · Oman</span></div>
+        <div class="footer-contact-item"><i class="fas fa-calendar"></i> <span data-en="Est. 2025" data-fa="تأسیس ۱۴۰۴">Est. 2025</span></div>
       </div>
-      <div>
-        <div class="footer-col-title" data-en="Tools" data-fa="ابزارها">Tools</div>
-        <div class="footer-links">
-          <a href="KDMine - Project Cost Calculator Page.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Cost Calculator" data-fa="ماشین‌حساب هزینه">Cost Calculator</span></a>
-          <a href="KDMine - Equipment Cost Database Page.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Equipment Cost DB" data-fa="پایگاه داده تجهیزات">Equipment Cost DB</span></a>
-          <a href="KDMine - Cost Index & Escalation Tool Page.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Cost Index Tool" data-fa="ابزار شاخص هزینه">Cost Index Tool</span></a>
-          <a href="KDMine - AACE Standards & Methodology Page.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="AACE Standards" data-fa="استانداردهای AACE">AACE Standards</span></a>
-          <a href="KDMine - Resources Hub.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Free Templates" data-fa="قالب‌های رایگان">Free Templates</span></a>
-        </div>
-      </div>
-      <div>
-        <div class="footer-col-title" data-en="Knowledge" data-fa="دانش">Knowledge</div>
-        <div class="footer-links">
-          <a href="KDMine - Blog & Insights Page.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Blog & Insights" data-fa="وبلاگ و بینش‌ها">Blog & Insights</span></a>
-          <a href="KDMine - Case Studies Page .html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Case Studies" data-fa="مطالعات موردی">Case Studies</span></a>
-          <a href="KDMine - Resources Hub.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Resources Hub" data-fa="مرکز منابع">Resources Hub</span></a>
-          <a href="KDMine - Careers Page.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Careers" data-fa="مشاغل">Careers</span></a>
-        </div>
-      </div>
-      <div>
-        <div class="footer-col-title" data-en="Company" data-fa="شرکت">Company</div>
-        <div class="footer-links">
-          <a href="KDMine - Contact & About Us.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="About Us" data-fa="درباره ما">About Us</span></a>
-          <a href="KDMine - Process Overview.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Our Process" data-fa="فرآیند ما">Our Process</span></a>
-          <a href="KDMine - Pricing Page.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Pricing" data-fa="قیمت‌گذاری">Pricing</span></a>
-          <a href="KDMine - Contact & About Us.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Contact" data-fa="تماس">Contact</span></a>
-          <a href="KDMine - Legal (Privacy & Terms).html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Legal" data-fa="حقوقی">Legal</span></a>
-        </div>
+      <div class="footer-social">
+        <a href="#" class="footer-social-btn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" class="footer-social-btn"><i class="fab fa-telegram-plane"></i></a>
+        <a href="mailto:info@kdmine.com" class="footer-social-btn"><i class="fas fa-envelope"></i></a>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p data-en="© 2025–2026 KDMine Consultancy. All rights reserved. | Tehran, Iran · Oman" data-fa="© ۱۴۰۴–۱۴۰۵ مشاوره KDMine. تمام حقوق محفوظ است. | تهران، ایران · عمان">© 2025–2026 KDMine Consultancy. All rights reserved. | Tehran, Iran · Oman</p>
-      <div class="footer-bottom-links">
-        <a href="KDMine - Legal (Privacy & Terms).html" class="footer-bottom-link" data-en="Privacy Policy" data-fa="سیاست حریم خصوصی">Privacy Policy</a>
-        <a href="KDMine - Legal (Privacy & Terms).html" class="footer-bottom-link" data-en="Terms of Service" data-fa="شرایط خدمات">Terms of Service</a>
-        <a href="KDMine - Legal (Privacy & Terms).html" class="footer-bottom-link" data-en="Cookie Policy" data-fa="سیاست کوکی">Cookie Policy</a>
+    <div>
+      <div class="footer-col-title" data-en="Services" data-fa="خدمات">Services</div>
+      <div class="footer-links">
+        <a href="KDMine - CAPEX _ OPEX Estimation.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="CAPEX / OPEX Estimation" data-fa="برآورد CAPEX / OPEX">CAPEX / OPEX Estimation</span></a>
+        <a href="KDMine - Plant Design & Feasibility Studies.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Plant Design & Feasibility" data-fa="طراحی کارخانه و امکان‌سنجی">Plant Design & Feasibility</span></a>
+        <a href="KDMine - Risk Analysis.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Risk Analysis" data-fa="تحلیل ریسک">Risk Analysis</span></a>
+        <a href="KDMine - Project Scheduling & Cost Control .html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Scheduling & Cost Control" data-fa="برنامه‌ریزی و کنترل هزینه">Scheduling & Cost Control</span></a>
+        <a href="KDMine - Equipment Selection & International Procurement.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Equipment & Procurement" data-fa="تجهیزات و تدارکات">Equipment & Procurement</span></a>
+        <a href="KDMine - Services & Expertise.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="All Services" data-fa="همه خدمات">All Services</span></a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title" data-en="Tools" data-fa="ابزارها">Tools</div>
+      <div class="footer-links">
+        <a href="KDMine - Project Cost Calculator Page.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Cost Calculator" data-fa="ماشین‌حساب هزینه">Cost Calculator</span></a>
+        <a href="KDMine - Equipment Cost Database Page.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Equipment Cost DB" data-fa="پایگاه داده تجهیزات">Equipment Cost DB</span></a>
+        <a href="KDMine - Cost Index & Escalation Tool Page.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Cost Index Tool" data-fa="ابزار شاخص هزینه">Cost Index Tool</span></a>
+        <a href="KDMine - AACE Standards & Methodology Page.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="AACE Standards" data-fa="استانداردهای AACE">AACE Standards</span></a>
+        <a href="KDMine - Resources Hub.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Free Templates" data-fa="قالب‌های رایگان">Free Templates</span></a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title" data-en="Knowledge" data-fa="دانش">Knowledge</div>
+      <div class="footer-links">
+        <a href="KDMine - Blog & Insights Page.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Blog & Insights" data-fa="وبلاگ و بینش‌ها">Blog & Insights</span></a>
+        <a href="KDMine - Case Studies Page .html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Case Studies" data-fa="مطالعات موردی">Case Studies</span></a>
+        <a href="KDMine - Resources Hub.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Resources Hub" data-fa="مرکز منابع">Resources Hub</span></a>
+        <a href="KDMine - Careers Page.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Careers" data-fa="مشاغل">Careers</span></a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title" data-en="Company" data-fa="شرکت">Company</div>
+      <div class="footer-links">
+        <a href="KDMine - Contact & About Us.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="About Us" data-fa="درباره ما">About Us</span></a>
+        <a href="KDMine - Process Overview.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Our Process" data-fa="فرآیند ما">Our Process</span></a>
+        <a href="KDMine - Pricing Page.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Pricing" data-fa="قیمت‌گذاری">Pricing</span></a>
+        <a href="KDMine - Contact & About Us.html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Contact" data-fa="تماس">Contact</span></a>
+        <a href="KDMine - Legal (Privacy & Terms).html" class="footer-link"><i class="fas fa-chevron-right"></i> <span data-en="Legal" data-fa="حقوقی">Legal</span></a>
       </div>
     </div>
   </div>
+  <div class="footer-bottom">
+    <p data-en="© 2025–2026 KDMine Consultancy. All rights reserved. | Tehran, Iran · Oman" data-fa="© ۱۴۰۴–۱۴۰۵ مشاوره KDMine. تمام حقوق محفوظ است. | تهران، ایران · عمان">© 2025–2026 KDMine Consultancy. All rights reserved. | Tehran, Iran · Oman</p>
+    <div class="footer-bottom-links">
+      <a href="KDMine - Legal (Privacy & Terms).html" class="footer-bottom-link" data-en="Privacy Policy" data-fa="سیاست حریم خصوصی">Privacy Policy</a>
+      <a href="KDMine - Legal (Privacy & Terms).html" class="footer-bottom-link" data-en="Terms of Service" data-fa="شرایط خدمات">Terms of Service</a>
+      <a href="KDMine - Legal (Privacy & Terms).html" class="footer-bottom-link" data-en="Cookie Policy" data-fa="سیاست کوکی">Cookie Policy</a>
+    </div>
+  </div>
+</div>
 </footer>
 
 <!-- SCROLL TO TOP -->
 <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-  <i class="fas fa-arrow-up"></i>
+<i class="fas fa-arrow-up"></i>
 </button>
 
 <!-- COOKIE BANNER -->
 <div class="cookie-banner" id="cookieBanner">
-  <div class="cookie-icon">🍪</div>
-  <div class="cookie-text">
-    <p data-en="We use cookies to improve your experience. See our <a href='KDMine - Legal (Privacy & Terms).html'>Cookie Policy</a>." data-fa="ما از کوکی‌ها برای بهبود تجربه شما استفاده می‌کنیم. <a href='KDMine - Legal (Privacy & Terms).html'>سیاست کوکی</a> ما را ببینید.">We use cookies to improve your experience. See our <a href="KDMine - Legal (Privacy & Terms).html">Cookie Policy</a>.</p>
-  </div>
-  <div class="cookie-btns">
-    <button class="cookie-accept" onclick="acceptCookies()" data-en="Accept" data-fa="پذیرش">Accept</button>
-    <button class="cookie-decline" onclick="declineCookies()" data-en="Decline" data-fa="رد">Decline</button>
-  </div>
+<div class="cookie-icon">🍪</div>
+<div class="cookie-text">
+  <p data-en="We use cookies to improve your experience. See our <a href='KDMine - Legal (Privacy & Terms).html'>Cookie Policy</a>." data-fa="ما از کوکی‌ها برای بهبود تجربه شما استفاده می‌کنیم. <a href='KDMine - Legal (Privacy & Terms).html'>سیاست کوکی</a> ما را ببینید.">We use cookies to improve your experience. See our <a href="KDMine - Legal (Privacy & Terms).html">Cookie Policy</a>.</p>
+</div>
+<div class="cookie-btns">
+  <button class="cookie-accept" onclick="acceptCookies()" data-en="Accept" data-fa="پذیرش">Accept</button>
+  <button class="cookie-decline" onclick="declineCookies()" data-en="Decline" data-fa="رد">Decline</button>
+</div>
 </div>
 
 <script>
-// ── NAV SCROLL ────────────────────────────────
+// ═══════════════════════════════════════════════════════════════
+// NAVIGATION SCROLL EFFECT
+// ═══════════════════════════════════════════════════════════════
 window.addEventListener('scroll', () => {
-  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60);
-  document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 400);
+const nav = document.getElementById('mainNav');
+const scrollTop = document.getElementById('scrollTop');
+
+// Add scrolled class to nav
+if (window.scrollY > 60) {
+  nav.classList.add('scrolled');
+} else {
+  nav.classList.remove('scrolled');
+}
+
+// Show/hide scroll to top button
+if (window.scrollY > 400) {
+  scrollTop.classList.add('visible');
+} else {
+  scrollTop.classList.remove('visible');
+}
 });
 
-// ── MOBILE NAV ────────────────────────────────
+// ═══════════════════════════════════════════════════════════════
+// MOBILE NAVIGATION TOGGLE
+// ═══════════════════════════════════════════════════════════════
 function toggleMobileNav() {
-  const links = document.getElementById('navLinks');
-  const isOpen = links.style.display === 'flex';
-  links.style.display = isOpen ? 'none' : 'flex';
+const links = document.getElementById('navLinks');
+const isOpen = links.style.display === 'flex';
+
+if (isOpen) {
+  links.style.display = 'none';
+} else {
+  links.style.display = 'flex';
   links.style.flexDirection = 'column';
   links.style.position = 'absolute';
-  links.style.top = '102px';
+  links.style.top = '108px';
   links.style.left = '0';
   links.style.right = '0';
-  links.style.background = 'rgba(8,12,22,0.98)';
-  links.style.padding = '16px 5%';
-  links.style.borderBottom = '1px solid rgba(255,255,255,0.06)';
+  links.style.background = 'rgba(10,14,26,0.98)';
+  links.style.padding = '20px 5%';
+  links.style.borderBottom = '1px solid rgba(255,255,255,0.08)';
   links.style.zIndex = '999';
+  links.style.backdropFilter = 'blur(20px)';
+  links.style.boxShadow = '0 10px 40px rgba(0,0,0,0.5)';
+}
 }
 
-// ── LANGUAGE ──────────────────────────────────
+// Close mobile nav when clicking outside
+document.addEventListener('click', (e) => {
+const links = document.getElementById('navLinks');
+const toggle = document.querySelector('.nav-mobile-toggle');
+
+if (links.style.display === 'flex' && 
+    !links.contains(e.target) && 
+    !toggle.contains(e.target)) {
+  links.style.display = 'none';
+}
+});
+
+// ═══════════════════════════════════════════════════════════════
+// LANGUAGE SWITCHER
+// ═══════════════════════════════════════════════════════════════
 let currentLang = 'en';
+
 function setLang(lang) {
-  currentLang = lang;
-  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-  document.getElementById('btn-fa').classList.toggle('active', lang === 'fa');
-  const body = document.getElementById('body');
-  if (lang === 'fa') { body.classList.add('fa'); body.setAttribute('dir', 'rtl'); }
-  else { body.classList.remove('fa'); body.setAttribute('dir', 'ltr'); }
-  document.querySelectorAll('[data-' + lang + ']').forEach(el => {
-    const v = el.getAttribute('data-' + lang);
-    if (!v) return;
-    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = v;
-    else el.innerHTML = v;
-  });
+currentLang = lang;
+
+// Update button states
+document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+document.getElementById('btn-fa').classList.toggle('active', lang === 'fa');
+
+// Update body direction and font
+const body = document.getElementById('body');
+if (lang === 'fa') {
+  body.classList.add('fa');
+  body.setAttribute('dir', 'rtl');
+} else {
+  body.classList.remove('fa');
+  body.setAttribute('dir', 'ltr');
 }
 
-// ── FADE UP ───────────────────────────────────
-const obs = new IntersectionObserver(
-  entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
-  { threshold: 0.07 }
-);
-document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
-
-// ── COOKIE BANNER ─────────────────────────────
-window.addEventListener('load', () => {
-  if (!localStorage.getItem('kdmine_cookie')) {
-    setTimeout(() => document.getElementById('cookieBanner').classList.remove('hidden'), 1500);
+// Update all translatable elements
+document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+  const translation = el.getAttribute('data-' + lang);
+  if (!translation) return;
+  
+  // Handle input placeholders
+  if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+    el.placeholder = translation;
   } else {
-    document.getElementById('cookieBanner').classList.add('hidden');
+    el.innerHTML = translation;
   }
 });
+
+// Save preference
+localStorage.setItem('kdmine_lang', lang);
+}
+
+// Load saved language preference
+window.addEventListener('load', () => {
+const savedLang = localStorage.getItem('kdmine_lang');
+if (savedLang && savedLang !== 'en') {
+  setLang(savedLang);
+}
+});
+
+// ═══════════════════════════════════════════════════════════════
+// FADE-UP ANIMATION ON SCROLL
+// ═══════════════════════════════════════════════════════════════
+const fadeUpObserver = new IntersectionObserver(
+(entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+},
+{
+  threshold: 0.08,
+  rootMargin: '0px 0px -50px 0px'
+}
+);
+
+// Observe all fade-up elements
+document.querySelectorAll('.fade-up').forEach(el => {
+fadeUpObserver.observe(el);
+});
+
+// ═══════════════════════════════════════════════════════════════
+// COOKIE BANNER
+// ═══════════════════════════════════════════════════════════════
+window.addEventListener('load', () => {
+const cookieBanner = document.getElementById('cookieBanner');
+const cookieConsent = localStorage.getItem('kdmine_cookie');
+
+if (!cookieConsent) {
+  // Show banner after 2 seconds
+  setTimeout(() => {
+    cookieBanner.classList.remove('hidden');
+  }, 2000);
+} else {
+  cookieBanner.classList.add('hidden');
+}
+});
+
 function acceptCookies() {
-  localStorage.setItem('kdmine_cookie', 'accepted');
-  document.getElementById('cookieBanner').classList.add('hidden');
+localStorage.setItem('kdmine_cookie', 'accepted');
+document.getElementById('cookieBanner').classList.add('hidden');
+
+// Initialize analytics here if needed
+console.log('Cookies accepted - Analytics can be initialized');
 }
+
 function declineCookies() {
-  localStorage.setItem('kdmine_cookie', 'declined');
-  document.getElementById('cookieBanner').classList.add('hidden');
+localStorage.setItem('kdmine_cookie', 'declined');
+document.getElementById('cookieBanner').classList.add('hidden');
+
+console.log('Cookies declined - Only essential cookies will be used');
 }
+
+// ═══════════════════════════════════════════════════════════════
+// SMOOTH SCROLL FOR ANCHOR LINKS
+// ═══════════════════════════════════════════════════════════════
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function (e) {
+  const href = this.getAttribute('href');
+  if (href === '#' || href === '') return;
+  
+  e.preventDefault();
+  const target = document.querySelector(href);
+  
+  if (target) {
+    const offsetTop = target.offsetTop - 108; // Account for fixed nav
+    window.scrollTo({
+      top: offsetTop,
+      behavior: 'smooth'
+    });
+  }
+});
+});
+
+// ═══════════════════════════════════════════════════════════════
+// LAZY LOAD IMAGES
+// ═══════════════════════════════════════════════════════════════
+const imageObserver = new IntersectionObserver(
+(entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const img = entry.target;
+      if (img.dataset.src) {
+        img.src = img.dataset.src;
+        img.removeAttribute('data-src');
+      }
+      imageObserver.unobserve(img);
+    }
+  });
+},
+{
+  rootMargin: '50px'
+}
+);
+
+// Observe all images with data-src
+document.querySelectorAll('img[data-src]').forEach(img => {
+imageObserver.observe(img);
+});
+
+// ═══════════════════════════════════════════════════════════════
+// PRELOAD CRITICAL RESOURCES
+// ═══════════════════════════════════════════════════════════════
+function preloadImage(url) {
+const img = new Image();
+img.src = url;
+}
+
+// Preload hero image
+preloadImage('https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=1920&q=90');
+
+// ═══════════════════════════════════════════════════════════════
+// PERFORMANCE MONITORING
+// ═══════════════════════════════════════════════════════════════
+window.addEventListener('load', () => {
+// Log page load time
+if (window.performance && window.performance.timing) {
+  const loadTime = window.performance.timing.loadEventEnd - window.performance.timing.navigationStart;
+  console.log('Page load time:', (loadTime / 1000).toFixed(2), 'seconds');
+}
+});
+
+// ═══════════════════════════════════════════════════════════════
+// DROPDOWN MENU ACCESSIBILITY
+// ═══════════════════════════════════════════════════════════════
+document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+const trigger = dropdown.querySelector('.nav-link');
+const menu = dropdown.querySelector('.nav-dropdown-menu');
+
+// Keyboard navigation
+trigger.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    menu.style.opacity = menu.style.opacity === '1' ? '0' : '1';
+    menu.style.pointerEvents = menu.style.pointerEvents === 'all' ? 'none' : 'all';
+  }
+});
+
+// Close on Escape
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    menu.style.opacity = '0';
+    menu.style.pointerEvents = 'none';
+  }
+});
+});
+
+// ═══════════════════════════════════════════════════════════════
+// FORM VALIDATION (if forms are added later)
+// ═══════════════════════════════════════════════════════════════
+function validateEmail(email) {
+const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+return re.test(email);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ANALYTICS TRACKING (placeholder for future implementation)
+// ═══════════════════════════════════════════════════════════════
+function trackEvent(category, action, label) {
+// Placeholder for analytics tracking
+console.log('Event tracked:', { category, action, label });
+
+// Example: Google Analytics
+// if (typeof gtag !== 'undefined') {
+//   gtag('event', action, {
+//     'event_category': category,
+//     'event_label': label
+//   });
+// }
+}
+
+// Track CTA clicks
+document.querySelectorAll('.btn-primary, .nav-cta').forEach(btn => {
+btn.addEventListener('click', () => {
+  trackEvent('CTA', 'click', btn.textContent.trim());
+});
+});
+
+// Track service card clicks
+document.querySelectorAll('.svc-card').forEach(card => {
+card.addEventListener('click', () => {
+  const title = card.querySelector('.svc-title').textContent;
+  trackEvent('Service', 'view', title);
+});
+});
+
+// ═══════════════════════════════════════════════════════════════
+// PARALLAX EFFECT FOR HERO BACKGROUND
+// ═══════════════════════════════════════════════════════════════
+window.addEventListener('scroll', () => {
+const scrolled = window.pageYOffset;
+const heroImg = document.querySelector('.hero-bg img');
+
+if (heroImg && scrolled < window.innerHeight) {
+  heroImg.style.transform = `translateY(${scrolled * 0.4}px)`;
+}
+});
+
+// ═══════════════════════════════════════════════════════════════
+// COUNTER ANIMATION FOR STATS
+// ═══════════════════════════════════════════════════════════════
+function animateCounter(element, target, duration = 2000) {
+const start = 0;
+const increment = target / (duration / 16);
+let current = start;
+
+const timer = setInterval(() => {
+  current += increment;
+  if (current >= target) {
+    element.textContent = target;
+    clearInterval(timer);
+  } else {
+    element.textContent = Math.floor(current);
+  }
+}, 16);
+}
+
+// Observe stats and animate when visible
+const statsObserver = new IntersectionObserver(
+(entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !entry.target.dataset.animated) {
+      const numElement = entry.target.querySelector('.stat-num');
+      if (numElement) {
+        const text = numElement.textContent;
+        const number = parseInt(text.replace(/[^\d]/g, ''));
+        
+        if (!isNaN(number)) {
+          numElement.dataset.original = numElement.innerHTML;
+          animateCounter(numElement, number);
+          entry.target.dataset.animated = 'true';
+        }
+      }
+    }
+  });
+},
+{ threshold: 0.5 }
+);
+
+document.querySelectorAll('.stat-item').forEach(stat => {
+statsObserver.observe(stat);
+});
+
+// ═══════════════════════════════════════════════════════════════
+// PRINT STYLES HANDLER
+// ═══════════════════════════════════════════════════════════════
+window.addEventListener('beforeprint', () => {
+// Expand all collapsed sections for printing
+document.querySelectorAll('.nav-dropdown-menu').forEach(menu => {
+  menu.style.display = 'block';
+});
+});
+
+window.addEventListener('afterprint', () => {
+// Restore collapsed state
+document.querySelectorAll('.nav-dropdown-menu').forEach(menu => {
+  menu.style.display = '';
+});
+});
+
+// ═══════════════════════════════════════════════════════════════
+// CONSOLE BRANDING
+// ═══════════════════════════════════════════════════════════════
+console.log(
+'%c KDMine Consultancy ',
+'background: linear-gradient(135deg, #C9A84C, #E8C97A); color: #0A0E1A; font-size: 20px; font-weight: bold; padding: 10px 20px; border-radius: 8px;'
+);
+console.log(
+'%c Precision Cost Estimation for Mining Projects ',
+'color: #C9A84C; font-size: 14px; font-weight: 600;'
+);
+console.log(
+'%c Iran · CIS · Global | www.kdmine.com ',
+'color: #9CA3AF; font-size: 12px;'
+);
+
+// ═══════════════════════════════════════════════════════════════
+// ERROR HANDLING
+// ═══════════════════════════════════════════════════════════════
+window.addEventListener('error', (e) => {
+console.error('Global error caught:', e.error);
+// You can send errors to a logging service here
+});
+
+// ═══════════════════════════════════════════════════════════════
+// SERVICE WORKER REGISTRATION (for PWA - optional)
+// ═══════════════════════════════════════════════════════════════
+if ('serviceWorker' in navigator) {
+window.addEventListener('load', () => {
+  // Uncomment to enable service worker
+  // navigator.serviceWorker.register('/sw.js')
+  //   .then(reg => console.log('Service Worker registered:', reg))
+  //   .catch(err => console.log('Service Worker registration failed:', err));
+});
+}
+
+// ═══════════════════════════════════════════════════════════════
+// INITIALIZE
+// ═══════════════════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+console.log('KDMine website initialized successfully');
+
+// Add loaded class to body for CSS animations
+setTimeout(() => {
+  document.body.classList.add('loaded');
+}, 100);
+});
+
 </script>
+
 </body>
 </html>
